@@ -2,8 +2,8 @@
 category: 프로그래밍
 title: 컴파일러
 alias: compiler
-icon: null
 visible: true
+icon: null
 ---
 # 컴파일러
 [컴파일러](https://ko.wikipedia.org/wiki/컴파일러)(compiler)는 하나의 프로그래밍 언어를 다른 언어로 변환(일명 컴파일; compile)하는 언어 처리 소프트웨어이다.
