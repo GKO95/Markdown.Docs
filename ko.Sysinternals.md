@@ -19,7 +19,7 @@ Sysinternals는 필요한 개별 프로그램만 [다운로드](https://learn.mi
 ### Sysinternals Live
 [Sysinternals Live](https://live.sysinternals.com/)는 원활한 인터넷 접속만 유지된다면 다운로드 없이 유틸리티를 사용할 수 있도록 한다. [명령 프롬프트](https://ko.wikipedia.org/wiki/Cmd.exe)에 다음 명령어를 입력하여 실행한다.
 
-```
+```terminal
 \\live.sysinternals.com\tools\<프로그램명>.exe
 ```
 
