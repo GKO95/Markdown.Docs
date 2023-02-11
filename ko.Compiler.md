@@ -14,7 +14,7 @@ icon: null
 
 아래는 C++ 프로그래밍 언어의 `.CPP` 확장자 소스 코드(左)가 [MSVC](https://ko.wikipedia.org/wiki/마이크로소프트_비주얼_C++) 컴파일러에 의해 기계어로 구성된 `.EXE` 실행 파일(右)로 컴파일 된 예시이다.
 
-![C++ 프로그래밍 소스 코드, 그리고 <a href="https://ko.wikipedia.org/wiki/X86-64">x64 아키텍처</a> 기계어로 컴파일된 이진 실행 파일](/images/programming_compiler_example.png)
+![C++ 프로그래밍 소스 코드, 그리고 <a href="https://ko.wikipedia.org/wiki/X86-64">x64 아키텍처</a> 기계어로 컴파일된 이진 실행 파일](./images/programming_compiler_example.png)
 
 ### 기계어
 [기계어](https://ko.wikipedia.org/wiki/기계어)(maachine code)는 컴퓨터 [프로세서](ko.Processor)(central processing unit; CPU)의 연산 및 동작을 직접 제어할 수 있는 `0`과 `1`만으로 구성된 [이진 코드](https://ko.wikipedia.org/wiki/이진_코드)(binary code)이다. CPU에는 [x86](https://ko.wikipedia.org/wiki/X86), [ARM](https://ko.wikipedia.org/wiki/ARM_아키텍처) 등 다양한 [아키텍처](https://ko.wikipedia.org/wiki/명령어_집합)(architecture)가 있는데, 각각 연산 및 동작을 수행하기 위한 이진 코드가 설계상 이유로 서로 다르므로 동일한 운영체제라도 호환성 문제가 발생한다.

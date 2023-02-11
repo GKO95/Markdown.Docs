@@ -31,7 +31,7 @@ icon: null
 
 아래는 인터프리트의 2번 전략을 활용하는 [파이썬](ko.Python) 프로그래밍 언어의 `.PY` 확장자 스크립트 파일(左)에 작성된 소스 코드(右上)와 인터프리터로 실행된 [프로세스](ko.Process)(右下) 예시이다.
 
-![파이썬 스크립트 파일의 소스 코드와 런타임 프로세스](/images/programming_interpreter_example.png)
+![파이썬 스크립트 파일의 소스 코드와 런타임 프로세스](./images/programming_interpreter_example.png)
 
 ### 바이트코드
 [바이트코드](https://ko.wikipedia.org/wiki/바이트코드)(bytecode)는 소스 코드에서 기계어로 변환하는데 징검다리 역할을 하는 [중간 언어](https://ko.wikipedia.org/wiki/중간_표현)(intermediate language)이다. 수행할 연산 혹은 동작을 나타내는 [명령 코드](https://ko.wikipedia.org/wiki/명령_코드)(opcode)가 한 [바이트](https://ko.wikipedia.org/wiki/바이트)(byte) 내에서 표현되기 때문에 바이트코드("바이트" + <sub>명령</sub>"코드")라는 명칭에서 유래되었다. 기계어와 유사하지만 바이트코드는 CPU 아키텍처에 의존하지 않고 소프트웨어에서 처리된다.
