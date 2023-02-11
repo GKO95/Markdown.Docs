@@ -23,7 +23,7 @@ NotMyFault 유틸리티는 증상을 트러블슈팅하기 보다는 일부러 �
 
 시스템 콘솔로 충돌을 일으키려면 아래의 명령어를 입력한다: `crash_type_num`에는 1-8 범위의 숫자가 입력되는데, 이들은 다이얼로그 창에 나열된 시스템 충돌 원인들을 순서에 대응한다. 예를 들어 Stack overflow로 충돌을 일으키려면 숫자 6을 기입한다.
 
-```terminal
+```console
 notmyfaultc crash crash_type_num
 ```
 
@@ -41,7 +41,7 @@ notmyfaultc crash crash_type_num
 
 시스템 콘솔로 시스템 혹은 드라이버 응답 없음을 일으키려면 아래의 명령어를 입력한다: `hang_type_num`에는 Hang with IRP의 1번 그리고 Hang with DPC의 2번만 입력할 수 있다.
 
-```terminal
+```console
 notmyfaultc hang hang_type_num
 ```
 
