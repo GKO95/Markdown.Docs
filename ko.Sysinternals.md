@@ -26,7 +26,7 @@ Sysinternals는 필요한 개별 프로그램만 [다운로드](https://learn.mi
 ## 유틸리티 목록
 다음은 시스템 구성요소 대상에 따라 Sysinternals 유틸리티 프로그램들을 분류한 목록이다.
 
-<table style="table-layout: fixed; width: 100%">
+<table style="table-layout: fixed; width: 100%; margin: auto;">
 <thead>
 <tr><th>파일 및 디스크</th><th><a href="ko.Network">네트워크</a></th><th><a href="ko.Process">프로세스</a></th><th>보안</th><th>시스템 정보</th><th>기타</th></tr>
 </thead>

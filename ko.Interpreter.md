@@ -12,7 +12,7 @@ icon: null
 
 아래는 일부 프로그래밍 언어의 인터프리터가 무엇으로부터 빌드되었는지 나열한다.
 
-<table style="table-layout: fixed; width: 50%;">
+<table style="table-layout: fixed; width: 50%; margin: auto;">
 <thead><tr><th>프로그래밍 언어</th><th>인터프리터</th><th>인터프리터 빌드 언어</th></tr></thead>
 <tbody>
 <tr><td style="text-align: center;"><a href="ko.Java">자바</a></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/자바_가상_머신">Java Virtual Machine</a> (JVM)</td><td style="text-align: center;"><a href="ko.Cpp">C++</a></td></tr>

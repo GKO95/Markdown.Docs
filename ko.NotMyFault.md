@@ -10,7 +10,7 @@ icon: sysinternals.png
 
 > 명령어 버전의 유티릴티는 뒤에 알파벳 'c'가 붙는 `notmyfaultc.exe` 프로그램으로 충돌 및 프리징 증상을 일으킨다.
 
-<table style="table-layout: fixed; width: 100%">
+<table style="table-layout: fixed; width: 100%; margin: auto;">
 <thead><tr><th>시스템 충돌</th><th>응답 없음</th><th>메모리 누수</th></tr></thead>
 <tbody><tr style="overflow: auto;"><td style="overflow: inherit;"><img src="./images/sysinternals_notmyfault_crash.png" alt="NotMyFault 시스템 충돌 탭"/></td><td style="overflow: inherit;"><img src="./images/sysinternals_notmyfault_hang.png" alt="NotMyFault 응답 없음 탭"/></td><td style="overflow: inherit;"><img src="./images/sysinternals_notmyfault_leak.png" alt="NotMyFault 메모리 누수 탭"/></td>
 </tr></tbody>
@@ -30,7 +30,7 @@ notmyfaultc crash crash_type_num
 ## 응답 없음
 총 세 가지의 응답 없음 증상을 일으키는 선택지가 있으며, 증상에 대한 설명은 아래 표를 참고한다.
 
-<table style="width: 80%;">
+<table style="width: 80%; margin: auto;">
 <thead><tr><th>선택지</th><th>대상</th><th>증상</th></tr></thead>
 <tbody>
 <tr><td style="text-align: center; width: 20%">Hang with <a href="https://en.wikipedia.org/wiki/I/O_request_packet">IRP</a></td><td style="text-align: center; width: 20%">드라이버</td><td><code>myfault.sys</code> 드라이버를 먹통으로 만들어 시스템 충돌도 일으킬 수 없다.</td></tr>
