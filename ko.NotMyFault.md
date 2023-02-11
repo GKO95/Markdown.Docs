@@ -12,7 +12,7 @@ icon: sysinternals.png
 
 <table style="table-layout: fixed; width: 100%">
 <thead><tr><th>시스템 충돌</th><th>응답 없음</th><th>메모리 누수</th></tr></thead>
-<tbody><tr style="overflow: auto;"><td style="overflow: inherit;"><img src="/images/sysinternals_notmyfault_crash.png" alt="NotMyFault 시스템 충돌 탭"/></td><td style="overflow: inherit;"><img src="/images/sysinternals_notmyfault_hang.png" alt="NotMyFault 응답 없음 탭"/></td><td style="overflow: inherit;"><img src="/images/sysinternals_notmyfault_leak.png" alt="NotMyFault 메모리 누수 탭"/></td>
+<tbody><tr style="overflow: auto;"><td style="overflow: inherit;"><img src="./images/sysinternals_notmyfault_crash.png" alt="NotMyFault 시스템 충돌 탭"/></td><td style="overflow: inherit;"><img src="./images/sysinternals_notmyfault_hang.png" alt="NotMyFault 응답 없음 탭"/></td><td style="overflow: inherit;"><img src="./images/sysinternals_notmyfault_leak.png" alt="NotMyFault 메모리 누수 탭"/></td>
 </tr></tbody>
 </table>
 
