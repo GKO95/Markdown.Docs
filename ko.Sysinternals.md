@@ -27,9 +27,8 @@ Sysinternals는 필요한 개별 프로그램만 [다운로드](https://learn.mi
 다음은 시스템 구성요소 대상에 따라 Sysinternals 유틸리티 프로그램들을 분류한 목록이다.
 
 <table style="table-layout: fixed; width: 100%; margin: auto;">
-<thead>
-<tr><th>파일 및 디스크</th><th><a href="ko.Network">네트워크</a></th><th><a href="ko.Process">프로세스</a></th><th>보안</th><th>시스템 정보</th><th>기타</th></tr>
-</thead>
+<caption style="caption-side: top;">Sysinternals 구성 유틸리티 프로그램</caption>
+<thead><tr><th style="text-align: center;">파일 및 디스크</th><th style="text-align: center;"><a href="ko.Network">네트워크</a></th><th style="text-align: center;"><a href="ko.Process">프로세스</a></th><th style="text-align: center;">보안</th><th style="text-align: center;">시스템 정보</th><th style="text-align: center;">기타</th></tr></thead>
 <tbody>
 <tr style="vertical-align: top; overflow-wrap: break-word;">
 <td><ul><li>AccessChk</li><li>AccessEnum</li><li>CacheSet</li><li>Contig</li><li>Disk2vhd</li><li>DiskExt</li><li>DiskMon</li><li>DiskView</li><li>Disk Usage</li><li>EFSDump</li><li>FindLinks</li><li>LDMDump</li><li>MoveFile</li><li>NTFSInfo</li><li>PendMoves</li><li>SDelete</li><li>Sigcheck</li><li>Streams</li><li>Sync</li><li>VolumeID</li></ul></td>
