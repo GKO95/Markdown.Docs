@@ -10,7 +10,7 @@ icon: powershell.png
 
 > 기본적으로 설치된 "윈도우 파워셸(Windows PowerShell)"은 윈도우 운영체제에서만 지원되는 [.NET 프레임워크](ko.Csharp#net-프레임워크)로 개발된 파워셸 `5.x` 빌드를 가리킨다.
 
-![<a href="https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701">윈도우 터미널</a>의 파워셸 7.3.1에서 <a href="#cmdlet">cmdlet</a>을 실행하는 예제](./images/powershell_example.png)
+![[윈도우 터미널](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701)의 파워셸 7.3.1에서 [cmdlet](#cmdlet)을 실행하는 예제](./images/powershell_example.png)
 
 ### 명령 프롬프트
 [명령 프롬프트](https://ko.wikipedia.org/wiki/Cmd.exe), 일명 cmd.exe은 윈도우 운영체제에 오래 전부터 존재하던 또 다른 셸 환경으로 `.BAT` 혹은 `.CMD` 확장자의 [배치 파일](https://ko.wikipedia.org/wiki/배치_파일)(batch file) 스크립트를 실행하여 작업을 수행할 수 있다. 비록 파워셸이란 보다 강력한 스크립트 도구가 있어도 윈도우를 구성하는 수많은 자동화 시스템이 오랜 시간동안 누적된 cmd.exe 스크립트의 결과물이기 때문에 절대로 대체될 수 없는 존재이다.
@@ -23,7 +23,7 @@ icon: powershell.png
 > [자동 변수](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_automatic_variables)(automatic variables)란, 파워셸에 대한 상태 정보가 저장된 읽기 전용 변수이며 파워셸에서 자체적으로 생성하고 관리한다.
 
 <table style="table-layout: fixed; width: 100%; margin: auto;">
-<caption>파워셸의 객체 지향 데이터와 이에 속한 맴버</caption>
+<caption style="caption-side: top;">파워셸의 객체 지향 데이터와 이에 속한 맴버</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead style="text-align: left;">
 <tr><th>
