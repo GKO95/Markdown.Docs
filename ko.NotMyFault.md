@@ -13,8 +13,16 @@ icon: sysinternals.png
 <table style="table-layout: fixed; width: 100%; margin: auto;">
 <caption style="caption-side: top;">NotMyFault 어플리케이션 화면</caption>
 <thead><tr><th style="text-align: center;">시스템 충돌</th><th style="text-align: center;">응답 없음</th><th style="text-align: center;">메모리 누수</th></tr></thead>
-<tbody><tr style="overflow: auto;"><td style="overflow: inherit;"><img src="./images/sysinternals_notmyfault_crash.png" alt="NotMyFault 시스템 충돌 탭"/></td><td style="overflow: inherit;"><img src="./images/sysinternals_notmyfault_hang.png" alt="NotMyFault 응답 없음 탭"/></td><td style="overflow: inherit;"><img src="./images/sysinternals_notmyfault_leak.png" alt="NotMyFault 메모리 누수 탭"/></td>
-</tr></tbody>
+<tbody><tr style="overflow: auto;"><td style="overflow: inherit;">
+
+![NotMyFault 시스템 충돌 탭](./images/sysinternals_notmyfault_crash.png)
+</td><td style="overflow: inherit;">
+
+![NotMyFault 응답 없음 탭](./images/sysinternals_notmyfault_hang.png)
+</td><td style="overflow: inherit;">
+
+![NotMyFault 메모리 누수 탭](./images/sysinternals_notmyfault_leak.png)
+</td></tr></tbody>
 </table>
 
 NotMyFault 유틸리티는 증상을 트러블슈팅하기 보다는 일부러 증상을 일으켜 트러블슈팅을 연습할 수 있도록 하는 프로그램이다.
