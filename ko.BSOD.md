@@ -108,6 +108,17 @@ icon: windows.svg
 
     [Sysinternals](ko.Sysinternals) 유틸리티 중에서 몇 가지 방식으로 시스템 충돌을 일으킬 수 있는 프로그램이다. 비록 시스템 응답이 없는 상태에서 적합하지 않으나, 일반적인 상황에서 BSOD를 일으킬 때는 유용하다.
 
+# BSOD 덤프 설정
+시스템 충돌로 BSOD가 나타나면 [자동 메모리 덤프](ko.Dump#자동-메모리-덤프)(혹은 [커널 메모리 덤프](ko.Dump#커널-메모리-덤프))를 생성하고 재부팅을 하는 게 기본 동작이다. 상황에 따라 덤프 유형이나 BSOD 동작을 달리 설정해야 하는 경우가 생긴다. 해당 설정은 아래의 레지스트리 키에서 변경이 가능하며, 적용을 하기 위해서는 반드시 재부팅이 필요하다.
+
+```terminal
+HKLM\SYSTEM\CurrentControlSet\Control\CrashControl
+```
+
+만일 아래 그림과 같이 GUI 창으로 BSOD 유형 및 동작을 설정하려면 View advanced system settings을 검색 (혹은 `systempropertiesadvanced.exe` 실행)한 다음, "시작 및 복구(Startup and Recovery)" 그룹 내의 설정 버튼을 클릭한다. 허나, 레지스트리 편집기에 비해 설정할 수 있는 항목이 제한적인 단점을 지닌다.
+
+![시작 및 복구 다이얼로그 창](/images/bsod_startup_recovery.png)
+
 # 참조
 * [Forcing a System Crash from the Keyboard - Windows dirvers &#124; Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/forcing-a-system-crash-from-the-keyboard)
 * [Forcing a System Crash from the Debugger - Windows drivers &#124; Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/forcing-a-system-crash-from-the-debugger)
