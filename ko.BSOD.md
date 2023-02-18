@@ -117,11 +117,16 @@ HKLM\SYSTEM\CurrentControlSet\Control\CrashControl
 
 해당 레지스트리 키에서 설정할 수 있는 값들은 다음과 같다:
 
+### `CrashControl`: 메모리 덤프
+커널, 전체, 그리고 활성 메모리 덤프와 관련된 설정이다.
+
 <table style="width: 95%; margin: auto;">
 <caption style="caption-side: top;"><code>CrashControl</code> 레지스트리: 메모리 덤프</caption>
 <colgroup><col style="width: 25%;"/><col style="width: 15%;"/><col style="width: 60%;"/></colgroup>
 <thead><tr><th style="text-align: center;">레지스트리 값</th><th style="text-align: center;">종류</th><th style="text-align: center;">설명</th></tr></thead>
 <tbody><tr>
+<td><code>AlwaysKeepMemoryDump</code></td><td style="text-align: center;">REG_DWORD</td><td>드라이브 여유 공간이 25 GB 미만이어도 메모리 덤프를 유지한다(반면, 삭제될 시 이벤트 ID 1008 기록).<br/><ul><li>0x0: 비활성</li><li>0x1: 활성</li></ul></td>
+</tr><tr>
 <td><code>CrashDumpEnabled</code></td><td style="text-align: center;">REG_DWORD</td><td>메모리 덤프 유형을 선택한다.<br/><ul><li>0x0: (없음)</li><li>0x1: <a href="ko.Dump#전체-메모리-덤프">전체 메모리 덤프</a> <i>혹은</i> <a href="ko.Dump#활성-메모리-덤프">활성 메모리 덤프</a></li><li>0x2: <a href="ko.Dump#커널-메모리-덤프">커널 메모리 덤프</a></li><li>0x3: <a href="ko.Dump#작은-메모리-덤프">작은 메모리 덤프</a></li><li>0x7: <a href="ko.Dump#자동-메모리-덤프">자동 메모리 덤프</a></li></ul></td>
 </tr><tr>
 <td><code>DumpFile</code></td><td style="text-align: center;">REG_EXPAND_SZ</td><td>메모리 덤프 파일의 경로 및 이름을 지정한다(기본값: <code>%SystemRoot%\MEMORY.DMP</code>).</td>
@@ -129,8 +134,15 @@ HKLM\SYSTEM\CurrentControlSet\Control\CrashControl
 <td><code>DumpFilters</code></td><td style="text-align: center;">REG_MULTI_SZ</td><td>페이징 파일로 덤프를 수집하기 위해 필요한 필터 드라이버의 목록이다.<br/><ul><li><code>dumpfve.sys</code>: BitLocker Drive Encryption Crashdump Filter Driver</li></ul></td>
 </tr><tr>
 <td><code>FilterPages</code></td><td style="text-align: center;">REG_DWORD</td><td>트러블슈팅에 불필요한 페이지를 메모리 덤프에서 제외시킨다.<br/><ul><li>0x0: 비활성</li><li>0x1: 활성 (활성 메모리 덤프를 위한 필요 조건)</li></ul></td>
+</tr><tr>
+<td><code>Overwrite</code></td><td style="text-align: center;">REG_DWORD</td><td>기존의 메모리 덤프를 덮어씌운다.<br/><ul><li>0x0: 비활성</li><li>0x1: 활성</li></ul></td>
+</tr><tr>
+<td><code>PageFileTooSmall</code></td><td style="text-align: center;">REG_QWORD</td><td>페이징 파일 크기 부족으로 덤프 수집을 실패할 시 생성된다.</td>
 </tr></tbody>
 </table>
+
+### `CrashControl`: 작은 메모리 덤프
+본 레지스트리 값은 작은 메모리 덤프와 관련된 설정이다.
 
 <table style="width: 95%; margin: auto;">
 <caption style="caption-side: top;"><code>CrashControl</code> 레지스트리: 작은 메모리 덤프</caption>
@@ -143,33 +155,45 @@ HKLM\SYSTEM\CurrentControlSet\Control\CrashControl
 </tr></tbody>
 </table>
 
+### `CrashControl`: 덤프 로그
+덤프 수집에 대한 정보를 담고 있는 `DumpStack.log`를 설정한다.
+
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;"><code>CrashControl</code> 레지스트리: 덤프 로그</caption>
+<colgroup><col style="width: 25%;"/><col style="width: 15%;"/><col style="width: 60%;"/></colgroup>
+<thead><tr><th style="text-align: center;">레지스트리 값</th><th style="text-align: center;">종류</th><th style="text-align: center;">설명</th></tr></thead>
+<tbody><tr>
+<td><code>DumpLogLevel</code></td><td style="text-align: center;">REG_DWORD</td><td><code>DumpStack.log</code> 활성 시, 덤프 수집에 대한 성능 수치를 함께 기록한다.<br/><ul><li>0x0: 비활성</li><li>0x1: 활성</li></ul></td>
+</tr><tr>
+<td><code>EnableLogFile</code></td><td style="text-align: center;">REG_DWORD</td><td>덤프 수집 과정에서 <code>DumpStack.log</code> 로그 파일을 생성한다.<br/><ul><li>0x0: 비활성</li><li>0x1: 활성</li></ul></td>
+</tr></tbody>
+</table>
+
+### `CrashControl`: 블루스크린
+시스템 충돌 및 블루스크린이 발생할 때의 동작을 설정한다.
+
 <table style="width: 95%; margin: auto;">
 <caption style="caption-side: top;"><code>CrashControl</code> 레지스트리: 시스템 충돌</caption>
 <colgroup><col style="width: 25%;"/><col style="width: 15%;"/><col style="width: 60%;"/></colgroup>
 <thead><tr><th style="text-align: center;">레지스트리 값</th><th style="text-align: center;">종류</th><th style="text-align: center;">설명</th></tr></thead>
 <tbody><tr>
-<td><code>AlwaysKeepMemoryDump</code></td><td style="text-align: center;">REG_DWORD</td><td>드라이브 여유 공간이 25 GB 미만이어도 메모리 덤프를 유지한다(반면, 삭제될 시 이벤트 ID 1008 기록).<br/><ul><li>0x0: 비활성</li><li>0x1: 활성</li></ul></td>
-</tr><tr>
 <td><code>AutoReboot</code></td><td style="text-align: center;">REG_DWORD</td><td>덤프 수집이 100% 완료되면 시스템 재부팅을 자동으로 실행한다.<br/><ul><li>0x0: 비활성</li><li>0x1: 활성</li></ul></td>
 </tr><tr>
-<td><code>LogEvent</code></td><td style="text-align: center;">REG_DWORD</td><td>시스템 충돌이 발생하면 이벤트 ID 1001 BugCheck를 기록한다.<br/><ul><li>0x0: 비활성</li><li>0x1: 활성</li></ul></td>
-</tr><tr>
-<td><code>Overwrite</code></td><td style="text-align: center;">REG_DWORD</td><td>기존의 메모리 덤프를 덮어씌운다.<br/><ul><li>0x0: 비활성</li><li>0x1: 활성</li></ul></td>
-</tr><tr>
-<td><code>PageFileTooSmall</code></td><td style="text-align: center;">REG_QWORD</td><td>페이징 파일 크기 부족으로 덤프 수집을 실패할 시 생성된다.</td>
-</tr></tbody>
-</table>
-
-<table style="width: 95%; margin: auto;">
-<caption style="caption-side: top;"><code>CrashControl</code> 레지스트리: 블루스크린 화면</caption>
-<colgroup><col style="width: 25%;"/><col style="width: 15%;"/><col style="width: 60%;"/></colgroup>
-<thead><tr><th style="text-align: center;">레지스트리 값</th><th style="text-align: center;">종류</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody><tr>
 <td><code>DisplayParameters</code></td><td style="text-align: center;">REG_DWORD</td><td>BSOD 좌측 상단에 네 개의 <code>KeBugcheckEx()</code> 매개변수를 표시한다.<br/><ul><li>0x0: 비활성</li><li>0x1: 활성</li></ul></td>
 </tr><tr>
 <td><code>DisableEmoticon</code></td><td style="text-align: center;">REG_DWORD</td><td>BSOD에서 <code>:(</code> 이모티콘을 표시하지 않는다.<br/><ul><li>0x0: 비활성</li><li>0x1: 활성</li></ul></td>
+</tr><tr>
+<td><code>LogEvent</code></td><td style="text-align: center;">REG_DWORD</td><td>BSOD가 발생하면 이벤트 ID 1001 BugCheck를 기록한다.<br/><ul><li>0x0: 비활성</li><li>0x1: 활성</li></ul></td>
 </tr></tbody>
 </table>
+
+### `CrashControl`: 전용 덤프
+전용 덤프(dedicated dump)는 가상 메모리로 사용이 불가한, 오로지 덤프 수집만을 위해 존재하는 페이징 파일을 가리킨다. 윈도우 7 이전까지는 OS 드라이브에 용량이 부족할 시, 타 드라이브에 메모리 덤프를 수집하려면 전용 덤프가 유일한 해법이었다. 비록 전용 덤프의 활용도가 축소되었으나, 아래의 두 가지 특징을 지닌다.
+
+1. 페이징 파일이 설정되어도 최우선으로 사용된다.
+2. 전용 덤프를 위한 디스크 용량이 부족하면 생성되지 않는다.
+
+다음은 전용 덤프를 설정하기 위해 필요한 레지스트리 값이다.
 
 <table style="width: 95%; margin: auto;">
 <caption style="caption-side: top;"><code>CrashControl</code> 레지스트리: 전용 덤프</caption>
@@ -178,14 +202,16 @@ HKLM\SYSTEM\CurrentControlSet\Control\CrashControl
 <tbody><tr>
 <td><code>DedicatedDumpFile</code></td><td style="text-align: center;">REG_SZ</td><td>덤프 전용의 페이징 파일 경로 및 이름을 지정한다.</td>
 </tr><tr>
-<td><code>DumpFileSize</code></td><td style="text-align: center;">REG_DWORD</td><td>덤프 전용의 페이징 파일 크기를 MB 단위로 지정한다.</td>
+<td><code>DumpFileSize</code></td><td style="text-align: center;">REG_DWORD</td><td>덤프 전용의 페이징 파일 크기를 <a href="https://ko.wikipedia.org/wiki/메가바이트">MB</a> 단위로 지정한다.<br/><ul><li>0x0: 시스템이 관리하는 크기 (기본값)</li></ul></td>
 </tr></tbody>
 </table>
+
+> 저장될 덤프 파일의 경로 및 이름은 `DumpFile` 레지스트리 값을 그대로 사용한다.
 
 ## 시작 및 복구
 만일 아래 그림과 같이 GUI 창으로 BSOD 유형 및 동작을 설정하려면 View advanced system settings 검색 (혹은 `systempropertiesadvanced.exe` 실행) 이후, "시작 및 복구(Startup and Recovery)" 그룹 내의 설정 버튼을 클릭한다. 허나, 레지스트리 편집기에 비해 설정할 수 있는 항목이 제한적인 단점을 지닌다.
 
-![시작 및 복구 다이얼로그 창](/images/bsod_startup_recovery.png)
+![시작 및 복구 다이얼로그 창](./images/bsod_startup_recovery.png)
 
 # 참조
 * [Forcing a System Crash from the Keyboard - Windows dirvers &#124; Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/forcing-a-system-crash-from-the-keyboard)
