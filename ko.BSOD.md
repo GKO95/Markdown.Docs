@@ -170,10 +170,10 @@ HKLM\SYSTEM\CurrentControlSet\Control\CrashControl
 </table>
 
 ### `CrashControl`: 블루스크린
-시스템 충돌 및 블루스크린이 발생할 때의 동작을 설정한다.
+시스템 충돌로 블루스크린이 나타날 때의 동작을 설정한다.
 
 <table style="width: 95%; margin: auto;">
-<caption style="caption-side: top;"><code>CrashControl</code> 레지스트리: 시스템 충돌</caption>
+<caption style="caption-side: top;"><code>CrashControl</code> 레지스트리: 블루스크린</caption>
 <colgroup><col style="width: 25%;"/><col style="width: 15%;"/><col style="width: 60%;"/></colgroup>
 <thead><tr><th style="text-align: center;">레지스트리 값</th><th style="text-align: center;">종류</th><th style="text-align: center;">설명</th></tr></thead>
 <tbody><tr>
@@ -188,10 +188,10 @@ HKLM\SYSTEM\CurrentControlSet\Control\CrashControl
 </table>
 
 ### `CrashControl`: 전용 덤프
-전용 덤프(dedicated dump)는 가상 메모리로 사용이 불가한, 오로지 덤프 수집만을 위해 존재하는 페이징 파일을 가리킨다. 윈도우 7 이전까지는 OS 드라이브에 용량이 부족할 시, 타 드라이브에 메모리 덤프를 수집하려면 전용 덤프가 유일한 해법이었다. 비록 전용 덤프의 활용도가 축소되었으나, 아래의 두 가지 특징을 지닌다.
+전용 덤프(dedicated dump)는 가상 메모리로 사용이 불가한, 오로지 덤프 수집만을 위해 존재하는 페이징 파일을 가리킨다. 윈도우 7 이전까지만 해도 OS 드라이브에 용량이 부족할 시, 타 드라이브에 메모리 덤프를 수집하려면 전용 덤프가 유일한 방법이었다. 비록 전용 덤프의 활용도가 축소되었으나, 아래의 두 가지 특징을 지닌다.
 
-1. 페이징 파일이 설정되어도 최우선으로 사용된다.
-2. 전용 덤프를 위한 디스크 용량이 부족하면 생성되지 않는다.
+1. 페이징 파일이 존재하여도 메모리 덤프를 수집할 때에는 전용 덤프가 사용된다.
+2. 전용 덤프를 구성할 디스크 용량이 부족하면 아예 반영이 되지 않는다.
 
 다음은 전용 덤프를 설정하기 위해 필요한 레지스트리 값이다.
 
