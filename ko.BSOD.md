@@ -49,7 +49,7 @@ icon: windows.svg
 
         우측 `CTRL`를 누르는 동시에 `SCROLL LOCK` 키를 두 번 클릭하여 시스템 충돌을 발생시키려면 사용하고 있는 키보드에 따라 지정된 레지스트리 키로 이동한 다음, 아래와 같이 `CrashOnCtrlScroll`이란 새로운 DWORD (32-bit) 레지스트리 값을 생성한다.
 
-        <table style="width: 80%; margin: auto;"><caption><code>CTRL+SCROLL</code> 단축키 강제 블루스크린 설정</caption><colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup><thead><tr><th style="text-align: center;">키보드</th><th style="text-align: center;">레지스트리 키</th></tr></thead><tbody><tr><td style="text-align: center;">PS/2</td><td><code>HKLM\SYSTEM\CurrentControlSet\Services\i8042prt\Parameters</code></td></tr><tr><td style="text-align: center;">USB</td><td><code>HKLM\SYSTEM\CurrentControlSet\Services\kbdhid\Parameters</code></td></tr><tr><td style="text-align: center;">하이퍼-V</td><td><code>HKLM\SYSTEM\CurrentControlSet\Services\hyperkbd\Parameters</code></td></tr></tbody></table>
+        <table style="width: 80%;"><caption style="caption-side: top;"><code>CTRL+SCROLL</code> 단축키 강제 블루스크린 설정</caption><colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup><thead><tr><th style="text-align: center;">키보드</th><th style="text-align: center;">레지스트리 키</th></tr></thead><tbody><tr><td style="text-align: center;">PS/2</td><td><code>HKLM\SYSTEM\CurrentControlSet\Services\i8042prt\Parameters</code></td></tr><tr><td style="text-align: center;">USB</td><td><code>HKLM\SYSTEM\CurrentControlSet\Services\kbdhid\Parameters</code></td></tr><tr><td style="text-align: center;">하이퍼-V</td><td><code>HKLM\SYSTEM\CurrentControlSet\Services\hyperkbd\Parameters</code></td></tr></tbody></table>
 
         ![<code>CrashOnCtrlScroll</code> 레지스트리 값](./images/bsod_force_keyboard.png)
 
@@ -57,7 +57,7 @@ icon: windows.svg
 
         현재 대부분의 키보드는 `SCROLL LOCK` 키가 없어 블루스크린을 강제할 대안의 단축키가 필요하다. 만일 `CrashOnCtrlScroll` 레지스트리 값이 이미 존재하면 대안 단축키가 인식되지 않으므로 삭제하도록 한다. 사용하고 있는 키보드에 따라 아래 레지스트리 키로 이동한 다음, 아래와 같이 두 DWORD (32-bit) 레지스트리 값을 생성한다.
 
-        <table style="width: 80%; margin: auto;"><caption>대안 키보드 단축키 강제 블루스크린 설정</caption><colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup><thead><tr><th style="text-align: center;">키보드</th><th style="text-align: center;">레지스트리 키</th></tr></thead><tbody><tr><td style="text-align: center;">PS/2</td><td><code>HKLM\SYSTEM\CurrentControlSet\Services\i8042prt\crashdump</code></td></tr><tr><td style="text-align: center;">USB</td><td><code>HKLM\SYSTEM\CurrentControlSet\Services\kbdhid\crashdump</code></td></tr><tr><td style="text-align: center;">하이퍼-V</td><td><code>HKLM\SYSTEM\CurrentControlSet\Services\hyperkbd\crashdump</code></td></tr></tbody></table>
+        <table style="width: 80%;"><caption style="caption-side: top;">대안 키보드 단축키 강제 블루스크린 설정</caption><colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup><thead><tr><th style="text-align: center;">키보드</th><th style="text-align: center;">레지스트리 키</th></tr></thead><tbody><tr><td style="text-align: center;">PS/2</td><td><code>HKLM\SYSTEM\CurrentControlSet\Services\i8042prt\crashdump</code></td></tr><tr><td style="text-align: center;">USB</td><td><code>HKLM\SYSTEM\CurrentControlSet\Services\kbdhid\crashdump</code></td></tr><tr><td style="text-align: center;">하이퍼-V</td><td><code>HKLM\SYSTEM\CurrentControlSet\Services\hyperkbd\crashdump</code></td></tr></tbody></table>
 
         * `Dump1Keys`: 첫 번째 단축키 조합으로 좌측/우측 `SHIFT`, `CTRL`, 혹은 `ALT` 키 중 택한다.
         * `Dump2Key`: 두 번째 단축키 조합으로 두 번 클릭할 버튼을 지정한다. 레지스트리 값에 들어갈 데이터로 배열에 기입된 키보드 스캔 코드의 인덱스를 입력한다.
@@ -120,7 +120,7 @@ HKLM\SYSTEM\CurrentControlSet\Control\CrashControl
 ### `CrashControl`: 메모리 덤프
 커널, 전체, 그리고 활성 메모리 덤프와 관련된 설정이다.
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%;">
 <caption style="caption-side: top;"><code>CrashControl</code> 레지스트리: 메모리 덤프</caption>
 <colgroup><col style="width: 25%;"/><col style="width: 15%;"/><col style="width: 60%;"/></colgroup>
 <thead><tr><th style="text-align: center;">레지스트리 값</th><th style="text-align: center;">종류</th><th style="text-align: center;">설명</th></tr></thead>
@@ -144,7 +144,7 @@ HKLM\SYSTEM\CurrentControlSet\Control\CrashControl
 ### `CrashControl`: 작은 메모리 덤프
 본 레지스트리 값은 작은 메모리 덤프와 관련된 설정이다.
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%;">
 <caption style="caption-side: top;"><code>CrashControl</code> 레지스트리: 작은 메모리 덤프</caption>
 <colgroup><col style="width: 25%;"/><col style="width: 15%;"/><col style="width: 60%;"/></colgroup>
 <thead><tr><th style="text-align: center;">레지스트리 값</th><th style="text-align: center;">종류</th><th style="text-align: center;">설명</th></tr></thead>
@@ -158,7 +158,7 @@ HKLM\SYSTEM\CurrentControlSet\Control\CrashControl
 ### `CrashControl`: 덤프 로그
 덤프 수집에 대한 정보를 담고 있는 `DumpStack.log`를 설정한다.
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%;">
 <caption style="caption-side: top;"><code>CrashControl</code> 레지스트리: 덤프 로그</caption>
 <colgroup><col style="width: 25%;"/><col style="width: 15%;"/><col style="width: 60%;"/></colgroup>
 <thead><tr><th style="text-align: center;">레지스트리 값</th><th style="text-align: center;">종류</th><th style="text-align: center;">설명</th></tr></thead>
@@ -172,7 +172,7 @@ HKLM\SYSTEM\CurrentControlSet\Control\CrashControl
 ### `CrashControl`: 블루스크린
 시스템 충돌로 블루스크린이 나타날 때의 동작을 설정한다.
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%;">
 <caption style="caption-side: top;"><code>CrashControl</code> 레지스트리: 블루스크린</caption>
 <colgroup><col style="width: 25%;"/><col style="width: 15%;"/><col style="width: 60%;"/></colgroup>
 <thead><tr><th style="text-align: center;">레지스트리 값</th><th style="text-align: center;">종류</th><th style="text-align: center;">설명</th></tr></thead>
@@ -195,7 +195,7 @@ HKLM\SYSTEM\CurrentControlSet\Control\CrashControl
 
 다음은 전용 덤프를 설정하기 위해 필요한 레지스트리 값이다.
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%;">
 <caption style="caption-side: top;"><code>CrashControl</code> 레지스트리: 전용 덤프</caption>
 <colgroup><col style="width: 25%;"/><col style="width: 15%;"/><col style="width: 60%;"/></colgroup>
 <thead><tr><th style="text-align: center;">레지스트리 값</th><th style="text-align: center;">종류</th><th style="text-align: center;">설명</th></tr></thead>

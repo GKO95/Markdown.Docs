@@ -10,7 +10,7 @@ icon: sysinternals.png
 
 > 명령어 버전의 유티릴티는 뒤에 알파벳 'c'가 붙는 `notmyfaultc.exe` 프로그램으로 충돌 및 프리징 증상을 일으킨다.
 
-<table style="table-layout: fixed; width: 100%; margin: auto;">
+<table style="table-layout: fixed; width: 100%;">
 <caption style="caption-side: top;">NotMyFault 어플리케이션 화면</caption>
 <thead><tr><th style="text-align: center;">시스템 충돌</th><th style="text-align: center;">응답 없음</th><th style="text-align: center;">메모리 누수</th></tr></thead>
 <tbody><tr style="overflow: auto;"><td style="overflow: inherit;">
@@ -39,7 +39,7 @@ notmyfaultc crash crash_type_num
 ## 응답 없음
 총 세 가지의 응답 없음 증상을 일으키는 선택지가 있으며, 증상에 대한 설명은 아래 표를 참고한다.
 
-<table style="width: 80%; margin: auto;">
+<table style="width: 80%;">
 <caption style="caption-side: top;">NotMyFault 응답 없음 선택지</caption>
 <thead><tr><th style="text-align: center;">선택지</th><th style="text-align: center;">대상</th><th style="text-align: center;">증상</th></tr></thead>
 <tbody>

@@ -22,7 +22,7 @@ icon: powershell.png
 
 > [자동 변수](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_automatic_variables)(automatic variables)란, 파워셸에 대한 상태 정보가 저장된 읽기 전용 변수이며 파워셸에서 자체적으로 생성하고 관리한다.
 
-<table style="table-layout: fixed; width: 100%; margin: auto;">
+<table style="table-layout: fixed; width: 100%;">
 <caption style="caption-side: top;">파워셸의 객체 지향 데이터와 이에 속한 맴버</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead style="text-align: left;">
@@ -88,8 +88,8 @@ Cmdlet          Add-AppxVolume                                     2.0.1.0    Ap
 
 파워셸 cmdlet에 대한 도움말은 [`Get-Help`](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/get-help)로 해당 명령어에 대한 설명, 매개변수 및 사용 예시 등을 확인할 수 있다. 그 외에 alias 및 매개변수로 도움말을 찾아보는 방법도 존재한다. 허나, 최신 버전의 파워셸은 도움말 파일이 기본적으로 없는 관계로 별도 설치가 필요할 수 있다.
 
-<table style="table-layout: fixed; width: 100%; margin: auto;">
-<caption>Cmdlet 도움말 호출 방식</caption>
+<table style="table-layout: fixed; width: 100%;">
+<caption style="caption-side: top;">Cmdlet 도움말 호출 방식</caption>
 <thead><tr><th style="text-align: center;"><code>Get-Help</code> Cmdlet</th><th style="text-align: center;"><code>Help</code> Alias</th><th style="text-align: center;"><code>-?</code> 매개변수</th></tr></thead>
 <tbody>
 <tr style="vertical-align: top; overflow-wrap: break-word;"><td>
@@ -230,7 +230,7 @@ Write-Output "Hello World!"
 
     파워셸에서 기본적으로 텍스트 및 객체 출력을 콘솔로 표시하는 cmdlet들은 `Write-Output`을 명시할 필요가 없다. 아래는 일부 cmdlet 및 텍스트만을 입력하는 것이 파워셸에서는 구문적으로 어떻게 간주되는지 보여준다.
 
-    <table style="width: 50%; margin: auto;"><caption><code>Write-Output</code> cmdlet의 암묵적 활용</caption><colgroup><col style="width: 30%;"/><col style="width: 70%;"/></colgroup><thead style="text-align: center;"><tr><th style="text-align: center;">Cmdlet</th><th style="text-align: center;">동일 구문</th></tr></thead><tbody><tr><td><code>Get-Process</code></td><td><code>Get-Process | Write-Output</code></td></tr><tr><td><code>"Hello World!"</code></td><td><code>echo "Hello World!"</code></td></tr></tbody></table>
+    <table style="width: 50%;"><caption style="caption-side: top;"><code>Write-Output</code> cmdlet의 암묵적 활용</caption><colgroup><col style="width: 30%;"/><col style="width: 70%;"/></colgroup><thead style="text-align: center;"><tr><th style="text-align: center;">Cmdlet</th><th style="text-align: center;">동일 구문</th></tr></thead><tbody><tr><td><code>Get-Process</code></td><td><code>Get-Process | Write-Output</code></td></tr><tr><td><code>"Hello World!"</code></td><td><code>echo "Hello World!"</code></td></tr></tbody></table>
 
 * **[`Write-Host`](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/write-host)**
 
