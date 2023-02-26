@@ -6,7 +6,7 @@ visible: true
 icon: sysinternals.png
 ---
 # Sysinternals
-[Sysinternals](https://ko.wikipedia.org/wiki/Sysinternals)는 [Mark Russinovich](https://ko.wikipedia.org/wiki/마크_러시노비치) [소프트웨어 엔지니어](https://ko.wikipedia.org/wiki/소프트웨어_공학자)가 1996년부터 호스팅한 웹사이트이며 [윈도우 NT](ko.WindowsNT) 및 어플리케이션을 관리, 검사, 그리고 트러블슈팅 하는데 유용한 리소스 및 유틸리티 프로그램을 소개한다. 지금도 꾸준히 사용되고 있는 Sysinternals는 분야와 목적에 따라 70개가 넘는 개별 프로그램들이 존재한다.
+[Sysinternals](https://ko.wikipedia.org/wiki/Sysinternals)는 [Mark Russinovich](https://ko.wikipedia.org/wiki/마크_러시노비치) [소프트웨어 엔지니어](https://ko.wikipedia.org/wiki/소프트웨어_공학자)가 1996년부터 호스팅한 웹사이트이며 [윈도우 NT](ko.WindowsNT.md) 및 어플리케이션을 관리, 검사, 그리고 트러블슈팅 하는데 유용한 리소스 및 유틸리티 프로그램을 소개한다. 지금도 꾸준히 사용되고 있는 Sysinternals는 분야와 목적에 따라 70개가 넘는 개별 프로그램들이 존재한다.
 
 > Sysinternals [소프트웨어 라이선스 약관](https://learn.microsoft.com/en-us/sysinternals/license-terms)에 명시된 바로는 [마이크로소프트 기술지원](https://support.microsoft.com/) 대상이 아니므로 유의해서 사용하도록 합니다!
 
@@ -28,15 +28,15 @@ Sysinternals는 필요한 개별 프로그램만 [다운로드](https://learn.mi
 
 <table style="table-layout: fixed; width: 100%;">
 <caption style="caption-side: top;">Sysinternals 구성 유틸리티 프로그램</caption>
-<thead><tr><th style="text-align: center;">파일 및 디스크</th><th style="text-align: center;"><a href="ko.Network">네트워크</a></th><th style="text-align: center;"><a href="ko.Process">프로세스</a></th><th style="text-align: center;">보안</th><th style="text-align: center;">시스템 정보</th><th style="text-align: center;">기타</th></tr></thead>
+<thead><tr><th style="text-align: center;">파일 및 디스크</th><th style="text-align: center;"><a href="ko.Network.md">네트워크</a></th><th style="text-align: center;"><a href="ko.Process.md">프로세스</a></th><th style="text-align: center;">보안</th><th style="text-align: center;">시스템 정보</th><th style="text-align: center;">기타</th></tr></thead>
 <tbody>
 <tr style="vertical-align: top; overflow-wrap: break-word;">
 <td><ul><li>AccessChk</li><li>AccessEnum</li><li>CacheSet</li><li>Contig</li><li>Disk2vhd</li><li>DiskExt</li><li>DiskMon</li><li>DiskView</li><li>Disk Usage</li><li>EFSDump</li><li>FindLinks</li><li>LDMDump</li><li>MoveFile</li><li>NTFSInfo</li><li>PendMoves</li><li>SDelete</li><li>Sigcheck</li><li>Streams</li><li>Sync</li><li>VolumeID</li></ul></td>
 <td><ul><li>AdExplorer</li><li>AdInsight</li><li>AdRestore</li><li>PipeList</li><li>PsFile</li><li>PsPing</li><li>ShareEnum</li><li>TCPView</li><li>WhoIs</li></ul></td>
-<td><ul><li>Autoruns</li><li>Handle</li><li>ListDLLs</li><li>PortMon</li><li><a href="ko.ProcDump">ProcDump</a></li><li><a href="ko.Process_Explorer">Process Explorer</a></li><li><a href="ko.Process_Monitor">Process Monitor</a></li><li>PsExec</li><li>PsGetSid</li><li>PsKill</li><li>PsList</li><li>PsService</li><li>PsSuspend</li><li>PsTools</li><li>ShellRunas</li><li><a href="ko.VMMap">VMMap</a></li></ul></td>
+<td><ul><li>Autoruns</li><li>Handle</li><li>ListDLLs</li><li>PortMon</li><li><a href="ko.ProcDump.md">ProcDump</a></li><li><a href="ko.Process_Explorer.md">Process Explorer</a></li><li><a href="ko.Process_Monitor.md">Process Monitor</a></li><li>PsExec</li><li>PsGetSid</li><li>PsKill</li><li>PsList</li><li>PsService</li><li>PsSuspend</li><li>PsTools</li><li>ShellRunas</li><li><a href="ko.VMMap.md">VMMap</a></li></ul></td>
 <td><ul><li>Autologon</li><li>LogonSessions</li><li>PsLoggedOn</li><li>PsLogList</li><li>Sysmon</li></ul></td>
-<td><ul><li>ClockRes</li><li>Coreinfo</li><li>LiveKD</li><li>LoadOrder</li><li>PsInfo</li><li><a href="ko.RAMMap">RAMMap</a></li><li>WinObj</li></ul></td>
-<td><ul><li>BgInfo</li><li>BlueScreen</li><li>CpuStres</li><li>Ctrl2Cap</li><li>DebugView</li><li>Desktops</li><li><a href="ko.Hex2dec">Hex2dec</a></li><li>Junction</li><li><a href="ko.NotMyFault">NotMyFault</a></li><li>PsPasswd</li><li>PsShutdown</li><li>RDCMan</li><li>RegDelNull</li><li>RegHide</li><li>RegJump</li><li>Registry Usage</li><li>Strings</li><li>Testlimit</li><li>ZoomIt</li></ul></td>
+<td><ul><li>ClockRes</li><li>Coreinfo</li><li>LiveKD</li><li>LoadOrder</li><li>PsInfo</li><li><a href="ko.RAMMap.md">RAMMap</a></li><li>WinObj</li></ul></td>
+<td><ul><li>BgInfo</li><li>BlueScreen</li><li>CpuStres</li><li>Ctrl2Cap</li><li>DebugView</li><li>Desktops</li><li><a href="ko.Hex2dec.md">Hex2dec</a></li><li>Junction</li><li><a href="ko.NotMyFault.md">NotMyFault</a></li><li>PsPasswd</li><li>PsShutdown</li><li>RDCMan</li><li>RegDelNull</li><li>RegHide</li><li>RegJump</li><li>Registry Usage</li><li>Strings</li><li>Testlimit</li><li>ZoomIt</li></ul></td>
 </tr>
 </tbody>
 </table>

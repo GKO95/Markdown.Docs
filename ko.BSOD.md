@@ -8,7 +8,7 @@ icon: windows.svg
 # 블루스크린
 ![윈도우 10 블루스크린 화면: [0xD1 DRIVER_IRQL_NOT_LESS_OR_EQUAL](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0xd1--driver-irql-not-less-or-equal)](./images/bsod_bugcheck_d1.png)
 
-[블루스크린](https://ko.wikipedia.org/wiki/블루스크린), 일명 BSOD(Blue Screen of Death; 죽음의 파란 화면)는 시스템을 망가뜨릴 수 있는 손상이 가해지는 것을 방지하기 위한 화면이며, 블루스크린 원인을 알려주는 [버그 확인 코드](#버그-확인-코드)를 표시하고 분석에 필요한 [메모리 덤프](ko.Dump#커널-모드-덤프) 파일을 생성한다. 시스템은 아래의 사유가 발생하면 블루스크린이 나타난다.
+[블루스크린](https://ko.wikipedia.org/wiki/블루스크린), 일명 BSOD(Blue Screen of Death; 죽음의 파란 화면)는 시스템을 망가뜨릴 수 있는 손상이 가해지는 것을 방지하기 위한 화면이며, 블루스크린 원인을 알려주는 [버그 확인 코드](#버그-확인-코드)를 표시하고 분석에 필요한 [메모리 덤프](ko.Dump.md#커널-모드-덤프) 파일을 생성한다. 시스템은 아래의 사유가 발생하면 블루스크린이 나타난다.
 
 > [윈도우 참가자 프로그램](https://support.microsoft.com/en-us/windows/windows-참가자-프로그램에-참여하기-ef20bb3d-40f4-20cc-ba3c-a72c844b563c)(Windows Insider Program)을 통해 사용할 수 있는 Preview 버전의 윈도우 운영체제는 "초록색" 블루스크린이 나타난다.
 
@@ -22,14 +22,14 @@ icon: windows.svg
 
 다음은 상기 블루스크린으로부터 생성된 덤프 파일을 확인한 내용이며, 버그 확인 코드 아래에 표시된 네 개의 전달인자로부터 문제가 발생한 메모리 주소 등의 시스템 충돌 관련 정보를 알 수 있다.
 
-![버그 확인 코드 0xD1에 대한 [WinDbg](ko.WinDbg) 덤프 분석 내용](./images/windbg_bugcheck_d1.png)
+![버그 확인 코드 0xD1에 대한 [WinDbg](ko.WinDbg.md) 덤프 분석 내용](./images/windbg_bugcheck_d1.png)
 
 ## 강제 시스템 충돌
 간혹 시스템이 아무런 반응이 없는 [프리징](https://ko.wikipedia.org/wiki/프리징_(컴퓨팅)) 상태에 걸리면, 해당 증상의 원인 분석에 필요한 덤프 파일을 생성하기 위해 블루스크린이 강요된다. 다음은 블루스크린을 강제로 발생기키는 방법을 소개한다.
 
 * **NMI**
 
-    [마스크 불가능 인터럽트](https://en.wikipedia.org/wiki/Non-maskable_interrupt)(Non-maskable Interrupt; NMI)는 가장 최우선적으로 처리되어 시스템이 절대 무시할 수 없는 [인터럽트](ko.Processor#인터럽트) 신호이다. 흔히 서버용 PC는 NMI 버튼이 존재하여, 누를 시 버그 확인 코드 [0x80 NMI_HARDWARE_FAILURE](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0x80--nmi-hardware-failure)가 발생한다. 블루스크린을 일으키기에 가장 확실한 방법이지만, 일반적으로 [PowerEdge R720](https://www.dell.com/support/manuals/ko-kr/poweredge-r720/720720xdom-v3/전면-패널-구조-및-표시등?guid=guid-23ecb1eb-0086-4839-80a9-9f5f3e679dbf)과 같은 서버용 컴퓨터에서 트러블슈팅 용도로 존재한다.
+    [마스크 불가능 인터럽트](https://en.wikipedia.org/wiki/Non-maskable_interrupt)(Non-maskable Interrupt; NMI)는 가장 최우선적으로 처리되어 시스템이 절대 무시할 수 없는 [인터럽트](ko.Processor.md#인터럽트) 신호이다. 흔히 서버용 PC는 NMI 버튼이 존재하여, 누를 시 버그 확인 코드 [0x80 NMI_HARDWARE_FAILURE](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0x80--nmi-hardware-failure)가 발생한다. 블루스크린을 일으키기에 가장 확실한 방법이지만, 일반적으로 [PowerEdge R720](https://www.dell.com/support/manuals/ko-kr/poweredge-r720/720720xdom-v3/전면-패널-구조-및-표시등?guid=guid-23ecb1eb-0086-4839-80a9-9f5f3e679dbf)과 같은 서버용 컴퓨터에서 트러블슈팅 용도로 존재한다.
 
     * **Debug-VM**
 
@@ -80,7 +80,7 @@ icon: windows.svg
               0x00,0x7B,0x79,0x70 };
             ```
 
-    키보드로 블루스크린이 강제되지 않은 경우가 있으며, 이는 키보드보다 높은 [IRQL](ko.Processor#IRQL)에 의한 시스템 장애를 겪고 있음을 시사한다. 다시 말해, IRQL이 상대적으로 낮은 USB 키보드는 일부 시스템 프리징 증상에서 BSOD를 일으킬 수 없으므로 PS/2 키보드를 사용하기를 권장한다.
+    키보드로 블루스크린이 강제되지 않은 경우가 있으며, 이는 키보드보다 높은 [IRQL](ko.Processor.md#IRQL)에 의한 시스템 장애를 겪고 있음을 시사한다. 다시 말해, IRQL이 상대적으로 낮은 USB 키보드는 일부 시스템 프리징 증상에서 BSOD를 일으킬 수 없으므로 PS/2 키보드를 사용하기를 권장한다.
 
 * **전원 버튼**
 
@@ -100,16 +100,16 @@ icon: windows.svg
     
     전원 버튼을 7초 동안 누르고 있으면 버그 확인 코드 [0x1C8 MANUALLY_INITIATED_POWER_BUTTON_HOLD](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0x1c8--manually-initiated-power-button-hold)가 반환되지만, 10초 이상 누르면 UEFI 재설정이 되므로 그 전에 전원 버튼에 손을 떼도록 한다. 해당 레지스트리 값을 새로 생성해야 한다면 재부팅이 필요할 수 있다.
 
-* **[WinDbg](ko.WinDbg)**
+* **[WinDbg](ko.WinDbg.md)**
 
-    [윈도우 NT](ko.WindowsNT) 운영체제를 [디버깅](https://ko.wikipedia.org/wiki/디버그)하는 프로그램으로 커널 모드에서 [`.crash`](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/-crash--force-system-crash-) 명령어를 입력하여 시스템 강제 충돌을 일으킬 수 있다. `KeBugCheck()` 루틴으로부터 버그 확인 코드 0xE2 MANUALLY_INITIATED_CRASH가 반환되는데, 만일 시스템 충돌이 발생하지 않으면 중단점 탈출을 시도한다.
+    [윈도우 NT](ko.WindowsNT.md) 운영체제를 [디버깅](https://ko.wikipedia.org/wiki/디버그)하는 프로그램으로 커널 모드에서 [`.crash`](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/-crash--force-system-crash-) 명령어를 입력하여 시스템 강제 충돌을 일으킬 수 있다. `KeBugCheck()` 루틴으로부터 버그 확인 코드 0xE2 MANUALLY_INITIATED_CRASH가 반환되는데, 만일 시스템 충돌이 발생하지 않으면 중단점 탈출을 시도한다.
 
-* **[NotMyFault](ko.NotMyFault)**
+* **[NotMyFault](ko.NotMyFault.md)**
 
-    [Sysinternals](ko.Sysinternals) 유틸리티 중에서 몇 가지 방식으로 시스템 충돌을 일으킬 수 있는 프로그램이다. 비록 시스템 응답이 없는 상태에서 적합하지 않으나, 일반적인 상황에서 BSOD를 일으킬 때는 유용하다.
+    [Sysinternals](ko.Sysinternals.md) 유틸리티 중에서 몇 가지 방식으로 시스템 충돌을 일으킬 수 있는 프로그램이다. 비록 시스템 응답이 없는 상태에서 적합하지 않으나, 일반적인 상황에서 BSOD를 일으킬 때는 유용하다.
 
 # BSOD 덤프 설정
-시스템 충돌로 BSOD가 나타나면 [자동 메모리 덤프](ko.Dump#자동-메모리-덤프)(혹은 [커널 메모리 덤프](ko.Dump#커널-메모리-덤프))를 생성하고 재부팅을 하는 게 기본 동작이다. 상황에 따라 덤프 유형이나 BSOD 동작을 달리 설정해야 하는 경우가 생긴다. 해당 설정은 아래의 레지스트리 키에서 변경이 가능하며, 적용을 하기 위해서는 반드시 재부팅이 필요하다.
+시스템 충돌로 BSOD가 나타나면 [자동 메모리 덤프](ko.Dump.md#자동-메모리-덤프)(혹은 [커널 메모리 덤프](ko.Dump.md#커널-메모리-덤프))를 생성하고 재부팅을 하는 게 기본 동작이다. 상황에 따라 덤프 유형이나 BSOD 동작을 달리 설정해야 하는 경우가 생긴다. 해당 설정은 아래의 레지스트리 키에서 변경이 가능하며, 적용을 하기 위해서는 반드시 재부팅이 필요하다.
 
 ```terminal
 HKLM\SYSTEM\CurrentControlSet\Control\CrashControl
@@ -127,7 +127,7 @@ HKLM\SYSTEM\CurrentControlSet\Control\CrashControl
 <tbody><tr>
 <td><code>AlwaysKeepMemoryDump</code></td><td style="text-align: center;">REG_DWORD</td><td>드라이브 여유 공간이 25 GB 미만이어도 메모리 덤프를 유지한다(반면, 삭제될 시 이벤트 ID 1008 기록).<br/><ul><li>0x0: 비활성</li><li>0x1: 활성</li></ul></td>
 </tr><tr>
-<td><code>CrashDumpEnabled</code></td><td style="text-align: center;">REG_DWORD</td><td>메모리 덤프 유형을 선택한다.<br/><ul><li>0x0: (없음)</li><li>0x1: <a href="ko.Dump#전체-메모리-덤프">전체 메모리 덤프</a> <i>혹은</i> <a href="ko.Dump#활성-메모리-덤프">활성 메모리 덤프</a></li><li>0x2: <a href="ko.Dump#커널-메모리-덤프">커널 메모리 덤프</a></li><li>0x3: <a href="ko.Dump#작은-메모리-덤프">작은 메모리 덤프</a></li><li>0x7: <a href="ko.Dump#자동-메모리-덤프">자동 메모리 덤프</a></li></ul></td>
+<td><code>CrashDumpEnabled</code></td><td style="text-align: center;">REG_DWORD</td><td>메모리 덤프 유형을 선택한다.<br/><ul><li>0x0: (없음)</li><li>0x1: <a href="ko.Dump.md#전체-메모리-덤프">전체 메모리 덤프</a> <i>혹은</i> <a href="ko.Dump.md#활성-메모리-덤프">활성 메모리 덤프</a></li><li>0x2: <a href="ko.Dump.md#커널-메모리-덤프">커널 메모리 덤프</a></li><li>0x3: <a href="ko.Dump.md#작은-메모리-덤프">작은 메모리 덤프</a></li><li>0x7: <a href="ko.Dump.md#자동-메모리-덤프">자동 메모리 덤프</a></li></ul></td>
 </tr><tr>
 <td><code>DumpFile</code></td><td style="text-align: center;">REG_EXPAND_SZ</td><td>메모리 덤프 파일의 경로 및 이름을 지정한다(기본값: <code>%SystemRoot%\MEMORY.DMP</code>).</td>
 </tr><tr>

@@ -6,9 +6,9 @@ visible: true
 icon: powershell.png
 ---
 # 파워셸
-[파워셸](https://learn.microsoft.com/en-us/powershell/scripting/overview)(PowerShell)은 [마이크로소프트](https://www.microsoft.com)에서 개발한 [크로스 플랫폼](https://ko.wikipedia.org/wiki/크로스_플랫폼)을 지원하는 [.NET](https://ko.wikipedia.org/wiki/닷넷) 기반의 [명령 줄](https://ko.wikipedia.org/wiki/명령_줄_인터페이스) [셸](https://ko.wikipedia.org/wiki/셸)이자 [스크립트 언어](https://ko.wikipedia.org/wiki/스크립트_언어)이다. 작업 자동화 및 구성 관리에 특화되었으며, [윈도우](https://learn.microsoft.com/en-us/powershell/windows/get-started)나 [애저](https://learn.microsoft.com/en-us/powershell/azure/)와 같은 마이크로소프트 제품 이외에도 [AWS](https://aws.amazon.com/powershell/), [VMware](https://core.vmware.com/vmware-powercli), [구글 클라우드](https://cloud.google.com/powershell/) 등의 [서드 파티](https://ko.wikipedia.org/wiki/서드_파티_개발자#서드파티) 제품에도 활용이 가능하다. [윈도우 8](ko.WindowsNT) 이상의 운영체제에서는 파워셸이 기본적으로 설치되어 있어 곧바로 실행될 수 있다.
+[파워셸](https://learn.microsoft.com/en-us/powershell/scripting/overview)(PowerShell)은 [마이크로소프트](https://www.microsoft.com)에서 개발한 [크로스 플랫폼](https://ko.wikipedia.org/wiki/크로스_플랫폼)을 지원하는 [.NET](https://ko.wikipedia.org/wiki/닷넷) 기반의 [명령 줄](https://ko.wikipedia.org/wiki/명령_줄_인터페이스) [셸](https://ko.wikipedia.org/wiki/셸)이자 [스크립트 언어](https://ko.wikipedia.org/wiki/스크립트_언어)이다. 작업 자동화 및 구성 관리에 특화되었으며, [윈도우](https://learn.microsoft.com/en-us/powershell/windows/get-started)나 [애저](https://learn.microsoft.com/en-us/powershell/azure/)와 같은 마이크로소프트 제품 이외에도 [AWS](https://aws.amazon.com/powershell/), [VMware](https://core.vmware.com/vmware-powercli), [구글 클라우드](https://cloud.google.com/powershell/) 등의 [서드 파티](https://ko.wikipedia.org/wiki/서드_파티_개발자#서드파티) 제품에도 활용이 가능하다. [윈도우 8](ko.WindowsNT.md) 이상의 운영체제에서는 파워셸이 기본적으로 설치되어 있어 곧바로 실행될 수 있다.
 
-> 기본적으로 설치된 "윈도우 파워셸(Windows PowerShell)"은 윈도우 운영체제에서만 지원되는 [.NET 프레임워크](ko.Csharp#net-프레임워크)로 개발된 파워셸 `5.x` 빌드를 가리킨다.
+> 기본적으로 설치된 "윈도우 파워셸(Windows PowerShell)"은 윈도우 운영체제에서만 지원되는 [.NET 프레임워크](ko.Csharp.md#net-프레임워크)로 개발된 파워셸 `5.x` 빌드를 가리킨다.
 
 ![[윈도우 터미널](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701)의 파워셸 7.3.1에서 [cmdlet](#cmdlet)을 실행하는 예제](./images/powershell_example.png)
 
@@ -18,7 +18,7 @@ icon: powershell.png
 자세한 내용은 마이크로소프트 [Windows Command Line](https://devblogs.microsoft.com/commandline/rumors-of-cmds-death-have-been-greatly-exaggerated/) 게시글을 참고한다.
 
 ## 객체 지향
-파워셸은 [객체 지향](https://ko.wikipedia.org/wiki/객체_지향_프로그래밍)(object-oriented) 성격이 짙은 스크립트 언어이며, 처리되는 입출력 데이터가 전부 [객체](ko.Csharp#클래스)(object)이다. 그 예시로 파워셸 버전을 확인할 수 있는 [`$PSVersionTable`](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_powershell_editions#edition-in-psversiontable) 자동 변수를 불러오면 `PSVersion`, `PSEdition` 등의 다양한 정보가 출력되는 데, 이들은 [C#](ko.Csharp) 프로그래밍 언어에서 객체의 맴버를 접근하듯이 `.` 기호를 통해 정보를 선택적으로 호출할 수 있다.
+파워셸은 [객체 지향](https://ko.wikipedia.org/wiki/객체_지향_프로그래밍)(object-oriented) 성격이 짙은 스크립트 언어이며, 처리되는 입출력 데이터가 전부 [객체](ko.Csharp.md#클래스)(object)이다. 그 예시로 파워셸 버전을 확인할 수 있는 [`$PSVersionTable`](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_powershell_editions#edition-in-psversiontable) 자동 변수를 불러오면 `PSVersion`, `PSEdition` 등의 다양한 정보가 출력되는 데, 이들은 [C#](ko.Csharp.md) 프로그래밍 언어에서 객체의 맴버를 접근하듯이 `.` 기호를 통해 정보를 선택적으로 호출할 수 있다.
 
 > [자동 변수](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_automatic_variables)(automatic variables)란, 파워셸에 대한 상태 정보가 저장된 읽기 전용 변수이며 파워셸에서 자체적으로 생성하고 관리한다.
 
@@ -120,7 +120,7 @@ Cmdlet은 사용자가 파워셸 또는 .NET을 활용하여 직접 제작하거
 
 > 비록 파이프라인 기능은 [UNIX](https://ko.wikipedia.org/wiki/유닉스)에서 비롯되었으나 윈도우 등의 다른 운영체제에서도 이를 채용하였으며, 파워셸에서는 .NET 런타임과 객체 지향을 통합하여 작업 효율성을 더욱 높였다.
 
-아래 파이프라인 예시는 `Get-Process` cmdlet가 반환하는 현재 시스템에서 실행 중인 [프로세스](ko.Process)들을 반영하는 객체의 유형 및 맴버들을 `Get-Member` cmdlet으로 나열한다.
+아래 파이프라인 예시는 `Get-Process` cmdlet가 반환하는 현재 시스템에서 실행 중인 [프로세스](ko.Process.md)들을 반영하는 객체의 유형 및 맴버들을 `Get-Member` cmdlet으로 나열한다.
 
 ```powershell
 Get-Process | Get-Member
@@ -153,7 +153,7 @@ WS                         AliasProperty  WS = WorkingSet64
 # 스크립트
 파워셸 스크립트는 `.PS1` 확장자 파일에 작성된다. [마이크로소프트](https://www.microsoft.com)는 스크립트를 작성하는 도구로 [파워셸 확장도구](https://code.visualstudio.com/docs/languages/powershell)가 설치된 [비주얼 스튜디오 코드](https://ko.wikipedia.org/wiki/비주얼_스튜디오_코드)<sub>([다운로드](https://code.visualstudio.com/download))</sub>, 일명 VS Code를 권장한다.
 
-> 그 외에 [파워셸 통합 스크립팅 환경](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/ise/introducing-the-windows-powershell-ise)(Integrated Scripting Environment; ISE)도 있지만 [.NET 프레임워크](ko.Csharp#net-프레임워크)로 빌드된 [윈도우 파워셸](#파워셸)(Windows PowerShell)만 지원한다.
+> 그 외에 [파워셸 통합 스크립팅 환경](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/ise/introducing-the-windows-powershell-ise)(Integrated Scripting Environment; ISE)도 있지만 [.NET 프레임워크](ko.Csharp.md#net-프레임워크)로 빌드된 [윈도우 파워셸](#파워셸)(Windows PowerShell)만 지원한다.
 
 본 장은 파워셸로 스크립트를 작성하기 위해 알아야 할 구문들과 개념들을 위주로 설명한다. 만일 작성한 `sample.ps1` 스크립트를 파워셸에서 실행하려면 아래와 같이 [온점 연산자](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_operators#dot-sourcing-operator-)(dot sourcing operator) `.`를 함께 입력하는 걸 권장하며, 자세한 내용은 [범위](#범위)(scope)에서 설명할 예정이다.
 

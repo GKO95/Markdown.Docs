@@ -6,7 +6,7 @@ visible: true
 icon: sysinternals.png
 ---
 # 프로세스 모니터
-[프로세스 모니터](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon)(Process Monitor)는 파일 시스템, [레지스트리](ko.Registry), 그리고 [프로세스](ko.Process) 및 [스레드](ko.Process#스레드) 활동 이력을 실시간으로 모니터링하는 [Sysinternals](ko.Sysinternals) 유틸리티 프로그램이다. 비정상적인 시스템 또는 프로그램 동작이 의심될 경우, 프로세스 모니터로부터 캡처된 로그를 정상적으로 동작한 시스템 또는 프로그램과 비교하는 방식으로 트러블슈팅을 진행할 수 있다.
+[프로세스 모니터](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon)(Process Monitor)는 파일 시스템, [레지스트리](ko.Registry.md), 그리고 [프로세스](ko.Process.md) 및 [스레드](ko.Process.md#스레드) 활동 이력을 실시간으로 모니터링하는 [Sysinternals](ko.Sysinternals.md) 유틸리티 프로그램이다. 비정상적인 시스템 또는 프로그램 동작이 의심될 경우, 프로세스 모니터로부터 캡처된 로그를 정상적으로 동작한 시스템 또는 프로그램과 비교하는 방식으로 트러블슈팅을 진행할 수 있다.
 
 ![프로세스 모니터 유틸리티 프로그램](./images/sysinternals_procmon.png)
 
