@@ -24,7 +24,7 @@ ProcDump의 덤프 수집에는 두 가지의 치명적인 단점이 있다:
 ## 덤프 종류
 ProcDump는 아래의 덤프 종류를 생성할 수 있다.
 
-<table style="width: 80%;">
+<table style="width: 80%; margin: auto;">
 <caption style="caption-side: top;">ProcDump 덤프 유형 설정 매개변수</caption>
 <colgroup><col style="width: 10%;"/><col style="width: 20%;"/><col style="width: 70%;"/></colgroup>
 <thead><tr><th style="text-align: center;">매개변수</th><th style="text-align: center;">덤프 종류</th><th style="text-align: center;">설명</th></tr></thead>
@@ -58,7 +58,7 @@ ProcDump에서 덤프를 생성하는 조건을 다음과 같이 설정할 수 �
 ### 성능 카운터
 어플리케이션의 리소스 사용량을 성능 카운터 기준에서 지정한 한계치를 초과하거나 미달하면 덤프를 수집하도록 할 수 있다.
 
-<table style="width: 70%;">
+<table style="width: 70%; margin: auto;">
 <caption style="caption-side: top;">ProcDump 덤프 생성 기준의 성능 카운터</caption>
 <colgroup><col style="width: 20%;"/><col style="width: 10%;"/><col style="width: 10%;"/><col style="width: 60%;"/></colgroup>
 <thead><tr><th rowspan="2" style="text-align: center;">성능 카운터</th><th colspan="2" style="text-align: center;">매개변수</th><th rowspan="2" style="text-align: center;">비고</th></tr><tr><th style="text-align: center;">초과</th><th style="text-align: center;">미달</th></tr></thead>

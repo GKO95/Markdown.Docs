@@ -14,7 +14,7 @@ icon: sysinternals.png
 
 VMMap은 선택된 단 하나의 프로세스에서 커널 공간을 제외한 가상 주소 공간, 즉 사용자 공간을 어떻게 사용하고 있는지 보여준다. 만일 64비트 프로세스라면 128 TB([윈도우 서버 2012](https://ko.wikipedia.org/wiki/윈도우_서버_2012)까지는 8 TB)의 사용자 공간이 VMMap에 표시된다. 아래는 창 상단에 위치한 세 개의 그래프가 각각 무엇을 의미하는지 설명한다.
 
-<table style="width: 90%;">
+<table style="width: 90%; margin: auto;">
 <caption style="caption-side: top;">VMMap 요약 그래프에 대한 개요</caption>
 <colgroup><col style="width: 25%"/><col style="width: 75%"/></colgroup>
 <thead><tr><th style="text-align: center;">그래프</th><th style="text-align: center;">설명</th></tr></thead>
@@ -43,7 +43,7 @@ VMMap은 선택된 단 하나의 프로세스에서 커널 공간을 제외한 �
 
     > 힙 메모리 관리자 또는 [.NET](https://ko.wikipedia.org/wiki/닷넷) 런타임으로부터 할당된 메모리는 별도 메모리 유형으로 분류된다.
 
-<table style="width: 70%;;">
+<table style="width: 70%; margin: auto;">
 <caption style="caption-side: top;">개인 메모리 하위 유형</caption>
 <colgroup><col style="width: 25%;"/><col style="width: 75%;"/></colgroup>
 <thead><tr><th style="text-align: center;">개인 메모리</th><th style="text-align: center;">설명</th></tr></thead>
@@ -63,7 +63,7 @@ VMMap은 선택된 단 하나의 프로세스에서 커널 공간을 제외한 �
 
     아래는 공유 가능한 메모리에 속하는 하위 유형의 메모리들을 소개한다:
 
-<table style="width: 70%;">
+<table style="width: 70%; margin: auto;">
 <caption style="caption-side: top;">굥유 가능한 메모리 하위 유형</caption>
 <colgroup><col style="width: 25%;"/><col style="width: 75%;"/></colgroup>
 <thead><tr><th style="text-align: center;">공유 가능한 메모리</th><th style="text-align: center;">설명</th></tr></thead>

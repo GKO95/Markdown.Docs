@@ -17,7 +17,7 @@ WER은 왓슨 서버로 전송되는 덤프와 별개로 로컬 시스템에서 
 HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps
 ```
 
-<table style="width: 90%;">
+<table style="width: 90%; margin: auto;">
 <caption style="caption-side: top;">WER 레지스트리 값 설정</caption>
 <colgroup><col style="width: 15%;"/><col style="width: 45%;"/><col style="width: 15%;"/><col style="width: 25%;"/></colgroup>
 <thead><tr><th style="text-align: center;">레지스트리 값</th><th style="text-align: center;">설명</th><th style="text-align: center;">레지스트리 종류</th><th style="text-align: center;">기본값</th></tr></thead>
