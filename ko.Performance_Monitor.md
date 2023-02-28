@@ -10,7 +10,7 @@ icon: windows.svg
 
 ![성능 모니터의 프로세서별 사용량(%) 예시](./images/perfmon_graph_sample.png)
 
-성능 모니터는 [윈도우](ko.WindowsNT.md) 운영체제에 기본적으로 설치된 프로그램이며, 모니터링 이외에도 이상 현상이 목격되었을 시 시스템 성능을 기록 및 진단하기 위해 사용된다. 시스템 성능 진단에는 유용하나, 증상의 [근본적인 원인 분석](https://en.wikipedia.org/wiki/Root_cause_analysis)(root cause analysis; RCA)에는 적합하지 않아 [Windows Performance Toolkit](ko.WPT.md) 프로그램이 활용되기도 한다.
+성능 모니터는 [윈도우](ko.Windows.md) 운영체제에 기본적으로 설치된 프로그램이며, 모니터링 이외에도 이상 현상이 목격되었을 시 시스템 성능을 기록 및 진단하기 위해 사용된다. 시스템 성능 진단에는 유용하나, 증상의 [근본적인 원인 분석](https://en.wikipedia.org/wiki/Root_cause_analysis)(root cause analysis; RCA)에는 적합하지 않아 [Windows Performance Toolkit](ko.WPT.md) 프로그램이 활용되기도 한다.
 
 ## 데이터 수집기 집합
 [데이터 수집기 집합](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-r2-and-2008/cc749337(v=ws.11))(Data Collector Sets)은 시스템 관련 정보를 수집하는 다수의 데이터 수집기들을 하나의 집합으로 정리하여 파일 형태의 [로그](https://ko.wikipedia.org/wiki/로그파일)로 저장하거나 검토할 수 있도록 한다.
@@ -74,7 +74,7 @@ icon: windows.svg
 성능 모니터에 표시될 수 있는 데이터 개수는 카운터당 1,000개로 제한된다. 개수를 초과한다 하여도 성능 데이터가 손실되는 건 아니지만 수치가 그래프에 온전히 반영되지 않을 수 있다. 이러한 경우 그래프 구간을 확대할 시 데이터 평균화에 의해 나타나지 않았던 양상이 목격될 수도 있다. 그러므로 성능 모니터에 표시된 그래프의 과도한 의존은 잘못된 분석을 야기한다.
 
 # Logman
-[`logman.exe`](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/logman)는 [이벤트 추적 세션](ko.ETW.md) 및 [성능 로그](#성능-데이터-수집)를 생성하기 위해 여럿 [성능 모니터](#성능-모니터)의 함수를 명령어로 지원하는 [윈도우](ko.WindowsNT.md)에 기본적으로 내장된 프로그램이다.
+[`logman.exe`](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/logman)는 [이벤트 추적 세션](ko.ETW.md) 및 [성능 로그](#성능-데이터-수집)를 생성하기 위해 여럿 [성능 모니터](#성능-모니터)의 함수를 명령어로 지원하는 [윈도우](ko.Windows.md)에 기본적으로 내장된 프로그램이다.
 
 ![<code>logman.exe</code> 프로그램 예시 화면](./images/perfmon_logman_intro.png)
 

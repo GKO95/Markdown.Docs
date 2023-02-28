@@ -43,7 +43,7 @@ icon: windows.svg
 
 보호 링은 시스템 운영체제의 [권한](https://en.wikipedia.org/wiki/Privilege_(computing))(privilege) 구조를 이루는 계층으로써, CPU 구조가 하드웨어적으로 어떤 [모드](https://en.wikipedia.org/wiki/CPU_modes)에 있는지에 따라 권한에 의해 제한된 일부 명령어들 활용 가능여부가 결정된다. 해당 명령어들은 CPU 및 메모리와 같은 하드웨어를 직접적으로 상호작용하므로 자칫 잘못하면 시스템에 치명적인 문제를 야기한다.
 
-[윈도우 NT](ko.WindowsNT.md) 운영체제는 만일을 대비해 x86 프로세서가 제공하는 네 개의 링 계층 중에서 오로지 Ring 0 그리고 Ring 3만 사용한다:
+[윈도우](ko.Windows.md) 운영체제는 만일을 대비해 x86 프로세서가 제공하는 네 개의 링 계층 중에서 오로지 Ring 0 그리고 Ring 3만 사용한다:
 
 * **[커널 모드](https://ko.wikipedia.org/wiki/보호_링#수퍼바이저_모드)(kernel mode)**
 
@@ -60,7 +60,7 @@ icon: windows.svg
 
 스케줄링된 프로세스는 [퀀텀](https://en.wikipedia.org/wiki/Preemption_(computing)#Time_slice)(quantum)이란 일회성 시간제 티켓을 부여받는데, 이는 CPU가 프로세스를 처리하는 데 주어진 고정된 시간이다. 처리 도중에 프로세스의 퀀텀이 소진될 시, CPU는 해당 작업을 완료여부와 상관없이 즉각 중단하고 [실행 큐](#프로세서-실행-큐)에서 스케줄링 대기 중인 다음 프로세스를 처리한다. 한편, 작업이 마무리되지 못한 프로세스는 다시 실행 큐로 되돌아가 스케줄링이 되기를 기다린다.
 
-> [윈도우 NT](ko.WindowsNT.md) 운영체제는 [선점형](https://ko.wikipedia.org/wiki/스케줄링_(컴퓨팅)#비선점형과_선점형) [라운드 로빈](https://ko.wikipedia.org/wiki/라운드_로빈_스케줄링)(pre-emptive round-robin) 스캐줄링 알고리즘을 사용한다.
+> [윈도우](ko.Windows.md) 운영체제는 [선점형](https://ko.wikipedia.org/wiki/스케줄링_(컴퓨팅)#비선점형과_선점형) [라운드 로빈](https://ko.wikipedia.org/wiki/라운드_로빈_스케줄링)(pre-emptive round-robin) 스캐줄링 알고리즘을 사용한다.
 
 ### 프로세서 실행 큐
 각 프로세서 코어마다 처리될 스레드가 대기하는 [실행 큐](https://en.wikipedia.org/wiki/Run_queue)(run queue)가 존재하며, [우선순위](#스케줄링-우선순위)가 높은 순서대로 나열된다. 실행 큐에 대기할 수 있는 프로세스 개수에는 제한이 없으나, 이로 인해 [문맥 교환](#문맥-교환)이 빈번하게 일어나면 성능 저하의 요인으로 작용할 수 있다. 멀티프로세서 시스템의 경우, 실행 큐에 대기 중인 프로세스 개수는 프로세서 코어의 [논리 프로세서](#논리-프로세서) 개수만큼 나누어 계산하도록 한다.

@@ -11,7 +11,7 @@ icon: windows.svg
 > 본 문서에서 `.EXE` 및 `.DLL` 확장자와 같은 이진 파일은 "모듈"이라고도 지칭한다.
 
 ## 윈도우 심볼
-마이크로소프트 [윈도우 NT](ko.WindowsNT.md)는 관측할 수 있는 정보의 유형과 제약에 따라 심볼을 세 가지로 나눈다.
+마이크로소프트 [윈도우](ko.Windows.md)는 관측할 수 있는 정보의 유형과 제약에 따라 심볼을 세 가지로 나눈다.
 
 <table style="table-layout: fixed; width: 60%; margin: auto;">
 <caption style="caption-side: top;">윈도우 운영체제 심볼 종류</caption>

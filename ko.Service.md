@@ -31,7 +31,7 @@ icon: windows.svg
 서비스 제어 관리자는 보호된 서비스를 시작하기 전에 자격 유효성을 검증하며, 비보호 프로세스 및 관리자 권한으로도 보호된 서비스를 중지할 수 없다.
 
 ## 서비스 제어 관리자
-[서비스 제어 관리자](https://ko.wikipedia.org/wiki/서비스_제어_관리자)(Service Control Manager; SCM), 일명 [`services.exe`](https://www.file.net/process/services.exe.html) 프로그램은 [윈도우 NT](ko.WindowsNT.md)에서 서비스를 구동 및 관리하는 프로세스이다. 시스템이 부팅되어 운영체제가 초기화되는 과정에서 실행되는 프로세스이지만, 사용자가 서비스와 상호작용하기 위해 설계된 게 아니다.
+[서비스 제어 관리자](https://ko.wikipedia.org/wiki/서비스_제어_관리자)(Service Control Manager; SCM), 일명 [`services.exe`](https://www.file.net/process/services.exe.html) 프로그램은 [윈도우](ko.Windows.md)에서 서비스를 구동 및 관리하는 프로세스이다. 시스템이 부팅되어 운영체제가 초기화되는 과정에서 실행되는 프로세스이지만, 사용자가 서비스와 상호작용하기 위해 설계된 게 아니다.
 
 만일 서비스를 직접 실행 및 중단해야 하는 등의 작업이 필요할 시, 서비스와 상호작용에 필연적인 API를 활용한 아래 프로세스를 사용할 수 있다.
 

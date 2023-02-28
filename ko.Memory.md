@@ -55,7 +55,7 @@ icon: windows.svg
 
 * **시스템이 관리하는 크기(System manged size)**
 
-    [세션 관리자 서브시스템](https://ko.wikipedia.org/wiki/세션_관리자_하위_시스템) `smss.exe`에 의해 페이징 파일의 크기가 결정된다. 특히 [자동 메모리 덤프](ko.Dump.md#자동-메모리-덤프)와 시너지를 발휘하여 페이징 파일 크기를 효율적으로 관리하되 상황에 따라 크기를 유연하게 확장할 수 있다:
+    [세션 관리자](https://ko.wikipedia.org/wiki/세션_관리자_하위_시스템) `smss.exe`에 의해 페이징 파일의 크기가 결정된다. 특히 [자동 메모리 덤프](ko.Dump.md#자동-메모리-덤프)와 시너지를 발휘하여 페이징 파일 크기를 효율적으로 관리하되 상황에 따라 크기를 유연하게 확장할 수 있다:
 
     1. 커밋된 메모리 사용률이 90%에 도달하면 시스템은 페이징 파일을 RAM의 3배(최대 16 GB)까지 확장할 수 있다. 예를 들어, 4 GB와 8 GB 메모리의 시스템은 각각 페이징 파일이 12 GB와 16 GB까지 늘어날 수 있다. 그러나 페이징 파일이 확장될 수 있는 크기는 해당 드라이브 용량의 1/8로 제한된다.
     
@@ -167,7 +167,7 @@ RAM 중에서 사용 중인 영역이 있으면 이와 반대로 사용 가능�
 ![프로세스 탐색기로 확인된 페이징 및 비페이징 풀의 사용량과 한도](./images/sysinternals_procexp_memory.png)
 
 ### Driver Locked 메모리
-[운영체제 구성요소](ko.WindowsNT.md#운영체제-구성요소) 또는 장치 드라이버에서 직접적으로 관리되는 페이징될 수 없는 메모리 영역이다. 문맥상 비페이징 풀과 유사하지만, 중요한 데이터의 빠른 접근성을 위해 장치 드라이버에 특별히 최적화되어 상대적으로 빠른 대신 더 많은 리소스가 요구된다. [하이퍼-V](ko.HyperV.md) 또는 [VMware](https://www.vmware.com/)와 같은 하이퍼바이저의 가상 머신에 배정한 RAM 메모리가 호스트 머신에서는 Driver Locked 메모리로 할당된다.
+[운영체제 구성요소](ko.Windows.md#운영체제-구성요소) 또는 장치 드라이버에서 직접적으로 관리되는 페이징될 수 없는 메모리 영역이다. 문맥상 비페이징 풀과 유사하지만, 중요한 데이터의 빠른 접근성을 위해 장치 드라이버에 특별히 최적화되어 상대적으로 빠른 대신 더 많은 리소스가 요구된다. [하이퍼-V](ko.HyperV.md) 또는 [VMware](https://www.vmware.com/)와 같은 하이퍼바이저의 가상 머신에 배정한 RAM 메모리가 호스트 머신에서는 Driver Locked 메모리로 할당된다.
 
 # 같이 보기
 * [Pushing the Limits of Windows: Physical Memory](https://techcommunity.microsoft.com/t5/windows-blog-archive/pushing-the-limits-of-windows-physical-memory/ba-p/723674)

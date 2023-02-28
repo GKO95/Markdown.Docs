@@ -10,7 +10,7 @@ icon: sysinternals.png
 
 ![VMMap 유틸리티 프로그램](/images/sysinternals_vmmap.png)
 
-> 본 프로그램을 이해하려면 [윈도우 NT](ko.WindowsNT.md) 운영체제를 [컴퓨터 구조론](https://ko.wikipedia.org/wiki/컴퓨터_구조) 관점에서의 개념이 확립되어야 한다.
+> 본 프로그램을 이해하려면 [윈도우](ko.Windows.md) 운영체제를 [컴퓨터 구조론](https://ko.wikipedia.org/wiki/컴퓨터_구조) 관점에서의 개념이 확립되어야 한다.
 
 VMMap은 선택된 단 하나의 프로세스에서 커널 공간을 제외한 가상 주소 공간, 즉 사용자 공간을 어떻게 사용하고 있는지 보여준다. 만일 64비트 프로세스라면 128 TB([윈도우 서버 2012](https://ko.wikipedia.org/wiki/윈도우_서버_2012)까지는 8 TB)의 사용자 공간이 VMMap에 표시된다. 아래는 창 상단에 위치한 세 개의 그래프가 각각 무엇을 의미하는지 설명한다.
 
