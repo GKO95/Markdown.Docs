@@ -81,14 +81,16 @@ icon: windows.svg
 
 ![프로세스의 수명 주기를 상태와 함께 표시한 다이어그램](./images/process_states_diagram.jpg)
 
+
+
 <table style="width: 100%; margin: auto;">
 <caption style="caption-side: top;">프로세스 상태 및 전환</caption>
 <colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup>
 <thead><tr><th style="text-align: center;">프로세스 상태</th><th style="text-align: center;">설명</th></tr></thead>
 <tbody><tr><td style="text-align: center;">생성<br/>(Created)</td><td>프로세스가 처음으로 생성되었을 때의 상태이며, 곧바로 준비 상태로 전환된다.</td></tr>
-<tr><td style="text-align: center;">준비<br/>(Ready)</td><td>프로세서가 즉시 실행할 수 있는 준비된 상태이다.<ul><li style="margin: 5px 0;"><span style="padding: 0px 5px; border: 2px darkgray solid; border-radius: 5px; background-color: #80808040;">→ 실행</span>: 스케줄링에 의해 프로세스를 처리할 프로세서가 지정 및 배치되면서 전환된다.</li></ul></td></tr>
-<tr><td style="text-align: center;">실행<br/>(Running)</td><td>프로세서에 의해 현재 실행되고 있는 상태이다.<ul><li style="margin: 5px 0;"><span style="padding: 0px 5px; border: 2px darkgray solid; border-radius: 5px; background-color: #80808040;">→ 준비</span>: 퀀텀 소진, <a href="https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-sleep"><code>Sleep</code></a> 함수, 혹은 우선순위에 밀리면 준비 상태로 전환된다.</li><li style="margin: 5px 0;"><span style="padding: 0px 5px; border: 2px darkgray solid; border-radius: 5px; background-color: #80808040;">→ 대기</span>: <a href="https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-waitforsingleobject"><code>WaitingForSingleObject</code></a> 또는 <code>Sleep</code> 함수로 대기 중인 프로세스는 타 프로세스의 도움을 받거나 커널 동작을 기다려야 한다.</li></ul></td></tr>
-<tr><td style="text-align: center;">대기<br/>(Waiting)</td><td>특정 이벤트가 발생하기 전까지는 프로세서로부터 실행될 수 없는 유예 상태이다.<ul><li style="margin: 5px 0;"><span style="padding: 0px 5px; border: 2px darkgray solid; border-radius: 5px; background-color: #80808040;">→ 준비</span>: 대기 상태에서 탈출한 프로세스를 처리할 잔여 프로세서가 없을 시 전환된다.</li><li style="margin: 5px 0;"><span style="padding: 0px 5px; border: 2px darkgray solid; border-radius: 5px; background-color: #80808040;">→ 실행</span>: 대기 상태에서 탈출한 프로세스를 처리할 잔여 프러세서가 있거나, 혹은 높은 우선순위에 의해 곧바로 처리될 시 전환된다.</li></ul></td></tr>
+<tr><td style="text-align: center;">준비<br/>(Ready)</td><td>프로세서가 즉시 실행할 수 있는 준비된 상태이다.<ul style="list-style-type: '→ ';"><li style="margin: 5px 0;"><b>실행</b>: 스케줄링에 의해 프로세스를 처리할 프로세서가 지정 및 배치되면서 전환된다.</li></ul></td></tr>
+<tr><td style="text-align: center;">실행<br/>(Running)</td><td>프로세서에 의해 현재 실행되고 있는 상태이다.<ul style="list-style-type: '→ ';"><li style="margin: 5px 0;"><b>준비</b>: 퀀텀 소진, <a href="https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-sleep"><code>Sleep</code></a> 함수, 혹은 우선순위에 밀리면 준비 상태로 전환된다.</li><li style="margin: 5px 0;"><b>대기</b>: <a href="https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-waitforsingleobject"><code>WaitingForSingleObject</code></a> 또는 <code>Sleep</code> 함수로 대기 중인 프로세스는 타 프로세스의 도움을 받거나 커널 동작을 기다려야 한다.</li></ul></td></tr>
+<tr><td style="text-align: center;">대기<br/>(Waiting)</td><td>특정 이벤트가 발생하기 전까지는 프로세서로부터 실행될 수 없는 유예 상태이다.<ul style="list-style-type: '→ ';"><li style="margin: 5px 0;"><b>준비</b>: 대기 상태에서 탈출한 프로세스를 처리할 잔여 프로세서가 없을 시 전환된다.</li><li style="margin: 5px 0;"><b>실행</b>: 대기 상태에서 탈출한 프로세스를 처리할 잔여 프러세서가 있거나, 혹은 높은 우선순위에 의해 곧바로 처리될 시 전환된다.</li></ul></td></tr>
 <tr><td style="text-align: center;">종료<br/>(Terminated)</td><td>외부에 의해 강제로, 혹은 코드에 의해 종료되었을 시 전환되는 상태이다.</td></tr></tbody>
 </table>
 
