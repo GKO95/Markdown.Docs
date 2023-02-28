@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 890.24 526.7">
+ <defs>
+  <marker id="Arrow1Mend" refY="0" refX="0" overflow="visible" orient="auto">
+   <path d="m0 0 5-5-17.5 5 17.5 5-5-5z" fill-rule="evenodd" transform="matrix(-.4 0 0 -.4 -4 0)" stroke="#000" stroke-width="1pt"/>
+  </marker>
+ </defs>
+ <g transform="translate(-35.256 -116.42)">
+  <g stroke-linejoin="round" stroke="#000" stroke-linecap="round" stroke-width="2">
+   <path marker-end="url(#Arrow1Mend)" d="m78 576h840" fill="none"/>
+   <path marker-end="url(#Arrow1Mend)" d="m78 576v-213" fill="none"/>
+   <g fill="#fff">
+    <path d="m178 476h96v100h-96v-100"/>
+    <path d="m274 476h95v100h-95v-100"/>
+    <path d="m442 476h93v100h-93v-100"/>
+   </g>
+  </g>
+  <g stroke-linejoin="round" stroke="#000" stroke-linecap="round" stroke-width="2" fill="#39f">
+   <path d="m78 476h100v100h-100v-100"/>
+   <path d="m369 476h73v100h-73v-100"/>
+   <path d="m535 476h74v100h-74v-100"/>
+   <path marker-end="url(#Arrow1Mend)" d="m139.3 626h-61.3"/>
+   <path marker-end="url(#Arrow1Mend)" d="m547.7 626h61.3"/>
+  </g>
+  <g font-family="Liberation Sans" fill="#000000" xml:space="preserve" >
+   <text font-size="26px" y="632.72217" x="152.1626">Elapsed real time for program P1</text>
+   <g font-size="26px" transform="rotate(-45)" >
+    <text y="400.681" x="-267.54639">Program P1 started</text>
+    <text y="471.39169" x="-196.83572">P1 preempted for P2</text>
+    <text y="539.27393" x="-128.95346">P2 preempted for P3</text>
+    <text y="606.4491" x="-61.778324">P1 brought back on CPU</text>
+    <text y="658.06787" x="-10.159528">P1 requested I/O. Put in wait. P2 on CPU</text>
+    <text y="723.8288" x="57.683434">After I/O for P1 done, P1 brought on CPU</text>
+    <text y="776.15472" x="107.92731">Program P1 completed</text>
+   </g>
+   <g font-size="36px" >
+    <text transform="rotate(-90)" y="65.392578" x="-563.55566">CPU</text>
+    <text y="613.86719" x="724.5293">Time</text>
+    <text y="538.56836" x="203.39453">P2</text>
+    <text y="538.38379" x="105.36816">P1</text>
+    <text y="538.39258" x="298.78027">P3</text>
+    <text y="538.38379" x="382.86816">P1</text>
+    <text y="538.56836" x="465.89453">P2</text>
+    <text y="538.38379" x="549.36816">P1</text>
+   </g>
+  </g>
+ </g>
+</svg>
