@@ -2,7 +2,7 @@
 category: 프로그래밍
 title: 파이썬
 alias: python
-visible: true
+visible: false
 icon: python.svg
 ---
 # 소개
