@@ -3,7 +3,6 @@ category: 프로그래밍
 title: C
 alias: null
 visible: false
-icon: c.svg
 ---
 # 소개
 > *참조: [Microsoft Docs C 언어 설명서 (한국어)](https://learn.microsoft.com/en-us/cpp/c-language/)*

@@ -3,7 +3,6 @@ category: 윈도우
 title: 성능 모니터
 alias: perfmon
 visible: true
-icon: windows.svg
 ---
 # 성능 모니터
 [성능 모니터](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-r2-and-2008/cc749249(v=ws.11))(Performance Monitor; 일명 Perfmon)는 시스템 및 어플리케이션의 성능 데이터를 수집하여 수치적 모니터링을 제공하는 도구이다.

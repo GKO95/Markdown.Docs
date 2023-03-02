@@ -3,7 +3,6 @@ category: 마이크로소프트
 title: NotMyFault
 alias: null
 visible: true
-icon: sysinternals.png
 ---
 # NotMyFault
 [NotMyFault](https://learn.microsoft.com/en-us/sysinternals/downloads/notmyfault), 직역하자면 "제가 한 게 아니에요"는 시스템 [충돌](ko.BSOD.md), [응답 없음](https://ko.wikipedia.org/wiki/프리징_(컴퓨팅)), 그리고 [메모리 누수](https://ko.wikipedia.org/wiki/메모리_누수)를 의도적으로 일으키는 [Sysinternals](ko.Sysinternals.md) 유틸리티 프로그램이다. 재미있는 사실은 이러한 문제를 일으키는 범인은 정말 따로 존재하는 데 바로 `myfault.sys` 드라이버이다. GUI 또는 명령어로 실행할 수 있는 프로그램이며, 반드시 관리자 권한으로 실행되어야 한다.

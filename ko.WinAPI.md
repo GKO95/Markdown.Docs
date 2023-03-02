@@ -3,7 +3,6 @@ category: 윈도우
 title: 윈도우 API
 alias: WinAPI
 visible: true
-icon: windows.svg
 ---
 # 윈도우 API
 [윈도우 API](https://ko.wikipedia.org/wiki/윈도우_API)(일명 WinAPI)는 [사용자 모드](ko.Processor.md#보호-링)에서 윈도우에서 제공하는 기능들을 활용할 수 있도록 하는 [어플리케이션 프로그래밍 인터페이스](https://ko.wikipedia.org/wiki/API)이다. 이들은 마이크로소프트 공식 문서가 존재하여 개발자가 참고할 수 있으며 대표적으로 [`CreateProcess`](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-createprocessw), [`CreateFile`](https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-createfilew) 등의 함수가 해당한다. 윈도우 개발 당시에 가장 널리 사용된 저급 [C](ko.C.md) 프로그래밍 언어로 작성되었으므로 윈도우 API는 타 프로그래밍 언어에서도 불러와 활용이 가능하다.

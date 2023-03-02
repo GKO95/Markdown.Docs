@@ -3,7 +3,6 @@ category: 프로그래밍
 title: 러스트
 alias: rust
 visible: true
-icon: rust.svg
 ---
 # 소개
 > *출처: [The Rust Programming Language <sub>(영문)</sub>](https://doc.rust-lang.org/book/)*

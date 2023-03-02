@@ -3,7 +3,6 @@ category: 마이크로소프트
 title: ProcDump
 alias: null
 visible: true
-icon: sysinternals.png
 ---
 # ProcDump
 [ProcDump](https://learn.microsoft.com/en-us/sysinternals/downloads/procdump)는 [프로세스](ko.Process)의 [사용자 모드 덤프](ko.Dump.md#사용자-모드-덤프)를 수집하는 [CLI](https://ko.wikipedia.org/wiki/명령_줄_인터페이스) 기반의 [Sysinternals](ko.Sysinternals.md) 유틸리티 프로그램이다.

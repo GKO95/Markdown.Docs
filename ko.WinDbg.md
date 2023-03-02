@@ -3,7 +3,6 @@ category: 윈도우
 title: 윈도우 디버거
 alias: windbg
 visible: true
-icon: icon-windbg.png
 ---
 # WinDbg
 [WinDbg](https://ko.wikipedia.org/wiki/WinDbg), 일명 윈도우 디버거(Windows Debugger)는 윈도우 운영체제에서 구동되는 [사용자 모드](ko.Windows.md#보호-링)의 어플리케이션이나 [커널 모드](ko.Windows.md#보호-링)의 덤프 등을 [디버깅](https://ko.wikipedia.org/wiki/디버그)하여 트러블슈팅에 활용되는 프로그램이다.
