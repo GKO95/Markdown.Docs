@@ -251,15 +251,11 @@ NameError: name 'variable' is not defined
 ### 숫자 자료형
 [숫자 자료형](https://docs.python.org/3/library/stdtypes.html?#numeric-types-int-float-complex)(numeric data type)은 숫자로 표현되는 데이터들을 가리키며, 총 세 가지로 세분화된다.
 
-<table style="table-layout: fixed; width: 60%;">
-<thead><tr><th><a href="https://docs.python.org/3/library/functions.html#int"><code>int</code></a></th><th><a href="https://docs.python.org/3/library/functions.html#float"><code>float</code></a></th><th><a href="https://docs.python.org/3/library/functions.html#complex"><code>complex</code></a></th></tr></thead>
-<tbody>
-<tr style="text-align: center;">
-<td>소수점이 없는 정수</td>
-<td>소수점을 포한한 64비트 실수</td>
-<td>실수와 허수로 구성된 복소수</td>
-</tr>
-</tbody>
+<table style="table-layout: fixed; width: 75%; margin: auto;">
+<caption style="caption-side: top;">파이썬 숫자 자료형</caption>
+<colgroup><col/><col/><col/></colgroup>
+<thead><tr><th style="text-align: center;"><a href="https://docs.python.org/3/library/functions.html#int"><code>int</code></a></th><th style="text-align: center;"><a href="https://docs.python.org/3/library/functions.html#float"><code>float</code></a></th><th style="text-align: center;"><a href="https://docs.python.org/3/library/functions.html#complex"><code>complex</code></a></th></tr></thead>
+<tbody><tr style="text-align: center;"><td>소수점이 없는 정수</td><td>소수점을 포한한 64비트 실수</td><td>실수와 허수로 구성된 복소수</td></tr></tbody>
 </table>
 
 위의 숫자 자료형들은 산술 연산이 가능하다: 가장 기본적인 `+`, `-`, `*`, `/` 사칙 연산자부터 나눗셈의 몫 `//`과 나머지 `%` 그리고 제곱 `**`을 구할 수 있다. 산술 연산을 쉽게 읽을 수 있도록 숫자와 산술 연산자 사이에 공백을 넣어도 연산에는 아무런 영향을 주지 않으므로 무관한다.
@@ -271,14 +267,11 @@ NameError: name 'variable' is not defined
 ### 논리 자료형
 [논리 자료형](https://docs.python.org/3/library/stdtypes.html?#boolean-operations-and-or-not)(Boolean data type)은 문장이 참인지 거짓인지 판별하는 논리 조건에 사용되는 데이터 유형이다.
 
-<table style="table-layout: fixed; width: 60%;">
-<thead><tr><th><a href="https://docs.python.org/3/library/constants.html#True"><code>True</code></a></th><th><a href="https://docs.python.org/3/library/constants.html#False"><code>False</code></a></th></tr></thead>
-<tbody>
-<tr style="text-align: center;">
-<td>논리가 참일 때 반환; 0이 아닌 정수로 대체 가능</td>
-<td>논리가 거짓일 때 반환; 정수 0으로 대체 가능</td>
-</tr>
-</tbody>
+<table style="table-layout: fixed; width: 75%; margin: auto;">
+<caption style="caption-side: top;">파이썬 숫자 자료형</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;"><a href="https://docs.python.org/3/library/constants.html#True"><code>True</code></a></th><th style="text-align: center;"><a href="https://docs.python.org/3/library/constants.html#False"><code>False</code></a></th></tr></thead>
+<tbody><tr style="text-align: center;"><td>논리가 참일 때 반환; 0이 아닌 정수로 대체 가능</td><td>논리가 거짓일 때 반환; 정수 0으로 대체 가능</td></tr></tbody>
 </table>
 
 대표적인 논리 조건으로써 두 데이터를 대조하는 [비교 연산자](https://docs.python.org/3/library/stdtypes.html?#comparisons)(relational operator)가 있다: 초과 `>`와 미만 `<`, 이상 `>=`과 이하 `<=`, 그리고 동일 `==`와 다름 `!=` 관계 부합 여부에 따라 논리적 참 혹은 거짓이 반환된다. 혹은 일치 여부를 확인하는 `is` 연산자와 같이 기호가 아닌 단어일 수도 있다.
