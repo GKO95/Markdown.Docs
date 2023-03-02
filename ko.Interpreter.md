@@ -1,8 +1,6 @@
 ---
 category: 프로그래밍
 title: 인터프리터
-alias: interpreter
-visible: true
 ---
 # 인터프리터
 [인터프리터](https://ko.wikipedia.org/wiki/인터프리터)(interpreter)는 소스 코드를 [CPU](ko.Processor.md)가 직접 수행할 수 있는 [기계어](ko.Compiler.md#기계어)로 [컴파일](ko.Compiler.md)하지 않고서도 곧바로 실행할 수 있도록 하는 소프트웨어이다. 이러한 특성은 소스 코드가 어떤 시스템에서도 동일하게 실행될 수 있는 [크로스 플랫폼](https://ko.wikipedia.org/wiki/크로스_플랫폼)(cross platform) 성질을 보여준다. 소스 코드로부터 수행되어야 할 동작을 인터프리터가 대신 실행하기 때문에 기계어로의 컴파일이 불필요하다.

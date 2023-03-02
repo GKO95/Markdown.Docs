@@ -1,8 +1,6 @@
 ---
-category: 마이크로소프트
+category: Sysinternals
 title: RAMMap
-alias: null
-visible: true
 ---
 # RAMMap
 [RAMMap](https://learn.microsoft.com/en-us/sysinternals/downloads/rammap)는 시스템이 [물리 메모리](ko.Memory.md), 즉 [RAM](https://ko.wikipedia.org/wiki/랜덤_액세스_메모리)을 어떻게 활용하고 있는지 분석하는 [Sysinternals](ko.Sysinternals.md) 유틸리티 프로그램이다. 일반 사용자들에게는 흔히 "RAM 정리 프로그램"으로 알려져 있으나, 이는 RAMMap에서 제공하는 기능 중 하나인 Empty Working Set으로부터 비롯된 오해이다.

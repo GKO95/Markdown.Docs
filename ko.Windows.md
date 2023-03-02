@@ -1,8 +1,6 @@
 ---
-category: 윈도우
-title: 윈도우
-alias: Windows
-visible: true
+category: 마이크로소프트
+title: 윈도우 NT
 ---
 # 윈도우 NT
 [윈도우 NT](https://ko.wikipedia.org/wiki/윈도우_NT)(Windows NT)는 [마이크로소프트](https://ko.wikipedia.org/wiki/마이크로소프트)에서 개발한 [윈도우](https://ko.wikipedia.org/wiki/마이크로소프트_윈도우)(Windows) 계열 중 하나이며, 전세계적으로 가장 널리 사용되고 있는 현역 [운영체제](https://ko.wikipedia.org/wiki/운영체제)(operating system; OS)이다. 본래 NT는 기존 운영체제인 [MS-DOS](https://ko.wikipedia.org/wiki/MS-DOS)를 대체할 "신기술(New Technology)"을 염두하여 붙인 이름이지만, 현재는 아무런 의미가 없는 제품군 명칭으로 자리잡았다. 이름은 다소 생소할 수 있으나 사실상 배포되고 있는 거의 모든 윈도우 제품이 윈도우 NT 계열에 해당한다.

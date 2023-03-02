@@ -1,8 +1,6 @@
 ---
-category: 마이크로소프트
+category: Sysinternals
 title: Hex2dec
-alias: null
-visible: true
 ---
 # Hex2dec
 [Hex2dec](https://learn.microsoft.com/en-us/sysinternals/downloads/hex2dec)은 [십육진수](https://ko.wikipedia.org/wiki/십육진법)(hexadecimal)를 [십진수](https://ko.wikipedia.org/wiki/십진법)(decimal)로, 또는 그 반대로 [기수법](https://ko.wikipedia.org/wiki/기수법)을 변환시켜주는 [CLI](https://ko.wikipedia.org/wiki/명령_줄_인터페이스) 기반의 [Sysinternals](ko.Sysinternals.md) 유틸리티 프로그램이다.

@@ -1,8 +1,6 @@
 ---
 category: 윈도우
 title: 부팅
-alias: boot
-visible: true
 ---
 # 부팅
 [부팅](https://ko.wikipedia.org/wiki/부팅)(booting)은 버튼과 같은 하드웨어 혹은 소프트웨어 명령으로 컴퓨터를 켜는 절차이다. 부팅 초기에 전력을 공급받은 컴퓨터의 [메모리](ko.Memory.md)는 [휘발성](https://ko.wikipedia.org/wiki/휘발성_메모리)에 의해 아무런 소프트웨어도 로드되지 않은 상태로 [CPU](ko.Processor.md)는 어떠한 작업도 수행할 수 없는 데, 시스템 하드웨어나 CPU 펌웨어 혹은 또 다른 프로세서의 도움으로 CPU가 실행할 작업을 메모리에 주입시키는 작업이 필요하다.

@@ -1,8 +1,6 @@
 ---
 category: 윈도우
 title: 메모리
-alias: memory
-visible: true
 ---
 # 메모리
 [주기억장치](https://ko.wikipedia.org/wiki/주기억장치)(primary storage), 일명 메모리(memory)는 시스템에서 즉각적으로 사용할 데이터를 저장하는 하드웨어로 대표적인 예시가 [RAM](https://ko.wikipedia.org/wiki/랜덤_액세스_메모리)이다. 데이터를 저장하는 또 다른 하드웨어로 [HDD](https://ko.wikipedia.org/wiki/하드_디스크_드라이브) 및 [SSD](https://ko.wikipedia.org/wiki/솔리드_스테이트_드라이브), [CD](https://ko.wikipedia.org/wiki/콤팩트_디스크) 또는 [DVD](https://ko.wikipedia.org/wiki/DVD), [플래시 메모리](https://ko.wikipedia.org/wiki/플래시_메모리)와 같은 [보조기억장치](ko.Storage.md)(secondaty storage)가 존재하나, 이 둘은 확연한 차이점을 지닌다.

@@ -1,8 +1,6 @@
 ---
 category: 윈도우
 title: 윈도우 관리 도구
-alias: WMI
-visible: true
 ---
 # WMI
 [윈도우 관리 도구](https://learn.microsoft.com/en-us/windows/win32/wmisdk/wmi-start-page)(Windows Management Instrumentation; WMI)는 [마이크로소프트](https://www.microsoft.com) 버전의 [웹 기반 기업 관리](#웹-기반-기업-관리) 도구이다.

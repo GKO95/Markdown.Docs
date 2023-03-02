@@ -1,8 +1,6 @@
 ---
 category: 윈도우
 title: 윈도우 서비스
-alias: service
-visible: true
 ---
 # 윈도우 서비스
 [윈도우 서비스](https://ko.wikipedia.org/wiki/윈도우_서비스)(Windows Service)는 [서비스 제어 관리자](#서비스-제어-관리자)로부터 관리받는 프로그램이다.

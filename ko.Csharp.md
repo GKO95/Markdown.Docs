@@ -1,8 +1,6 @@
 ---
 category: 프로그래밍
 title: C#
-alias: Csharp
-visible: false
 ---
 # 소개
 > *참조: [Microsoft Docs C# 언어 설명서](https://learn.microsoft.com/en-us/dotnet/csharp/)*

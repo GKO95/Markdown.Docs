@@ -1,8 +1,6 @@
 ---
 category: 윈도우
 title: 프로세서
-alias: processor
-visible: true
 ---
 # 프로세서
 [프로세서](https://ko.wikipedia.org/wiki/중앙_처리_장치)(processor), 흔히 컴퓨터에서 중앙 처리 장치(central processing unit; CPU)로 알려진 하드웨어는 프로그램의 [기계어](https://ko.wikipedia.org/wiki/기계어)를 처리하는 [전자회로](https://ko.wikipedia.org/wiki/전자_회로)이다. 프로그램을 실행하기 위해 필요한 시스템의 다양한 작업들은 [명령어 집합](https://ko.wikipedia.org/wiki/명령어_집합)(instruction set)에 의해 정의되어 있으며, 대표적으로 [x86](https://ko.wikipedia.org/wiki/X86)과 [ARM](https://ko.wikipedia.org/wiki/ARM_아키텍처) 계열 명령어 집합 아키텍처가 있다. 그리고 프로세서에서 처리할 수 있는 명령어 집합이 무엇인지에 따라 시스템 아키텍처가 함께 결정된다.

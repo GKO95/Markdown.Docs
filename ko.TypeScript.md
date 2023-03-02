@@ -1,8 +1,6 @@
 ---
 category: 프로그래밍
 title: 타입스크립트
-alias: typescript
-visible: true
 ---
 # 소개
 [타입스크립트](https://ko.wikipedia.org/wiki/타입스크립트)(TypeScript)는 마이크로소프트에서 개발한 [자바스크립트](ko.JavaScript.md) ECMAScript 2015의 상위 프로그래밍 언어이다. 간단히 말해, 타입스크립트의 철학이 투영된 자바스크립이다. [동적 프로그래밍 언어](https://ko.wikipedia.org/wiki/동적_프로그래밍_언어)(dynamic programming language)인 자바스크립트는 데이터의 자료형 검사 및 오류 검증을 어플리케이션이 실행되고 있는 "런타임(runtime)" 도중에 처리하는데, 이는 코드가 방대하거나 복잡할수록 개발과 트러블슈팅이 매우 어려워진다. 이러한 과제를 해결하는 방안으로 자바스크립트를 위한 [정적 프로그램 분석](https://ko.wikipedia.org/wiki/정적_프로그램_분석)(static program analysis)을 제공하는 게 타입스크립트의 설계 목적이다.

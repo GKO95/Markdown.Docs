@@ -1,8 +1,6 @@
 ---
 category: 윈도우
 title: 프로세스
-alias: process
-visible: true
 ---
 # 프로세스
 [프로세스](https://ko.wikipedia.org/wiki/프로세스)(process)는 운영체제에서 프로그램(예를 들어, `.EXE` 확장자 파일 유형)을 실행하기 위해 필요한 데이터와 리소스를 담는 컨테이너이다. 프로세스와 프로그램(일명 [어플리케이션](https://ko.wikipedia.org/wiki/응용_소프트웨어); application)은 엄연히 다른 존재이다. 아래는 [파일 탐색기](https://ko.wikipedia.org/wiki/파일_탐색기) 프로그램에서 창을 세 개 열어 각각 문서(Documents), 다운로드(Download), 그리고 사진(Pictures) 디렉토리로 이동한 것을 [작업 관리자](https://ko.wikipedia.org/wiki/작업_관리자_(윈도우))로 보여준다.

@@ -1,8 +1,6 @@
 ---
 category: 윈도우
-title: 블루스크린
-alias: bsod
-visible: true
+title: BSOD
 ---
 # 블루스크린
 ![윈도우 10 블루스크린 화면: [0xD1 DRIVER_IRQL_NOT_LESS_OR_EQUAL](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0xd1--driver-irql-not-less-or-equal)](./images/bsod_bugcheck_d1.png)
