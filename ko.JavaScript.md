@@ -1,6 +1,7 @@
 ---
 category: 프로그래밍
 title: 자바스크립트
+updated: false
 ---
 # 소개
 > *참조: [JavaScript &#124; MDN Web Docs (영문)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)*
