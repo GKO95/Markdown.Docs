@@ -17,7 +17,7 @@ title: 타입스크립트
 ### 비주얼 스튜디오
 비주얼 스튜디오에서는 타입스크립트 프로젝트 생성을 지원하며, 그 안에는 이미 컴파일러와 같은 필요한 패키지들이 로컬 경로에 들어있는 것을 확인할 수 있다.
 
-![비주얼 스튜디오 타입스크립트 프로젝트 생성](./images/ts_vs_project.png)
+![비주얼 스튜디오 타입스크립트 프로젝트 생성](./images/visual_studio_typescript.png)
 
 ### 비주얼 스튜디오 코드
 타입스크립트 컴파일러 `tsc`는 아래의 명령어로 직접 npm [패키지](https://www.npmjs.com/package/typescript)를 설치해야 한다. 만일 컴파일러를 시스템 전역에 일괄적으로 사용하려면 `--location=global` 옵션을 추가한다.
@@ -34,7 +34,7 @@ VS Code에서 타입스크립트를 작업하면 `tsconfig.json`이란 파일로
 
 위의 과정으로 타입스크립트의 빌드 환경설정을 구성하여도, 빌드로부터 생성된 자바스크립트를 디버깅(`Ctrl+F5`) 혹은 실행(`F5`)을 설정하는데 사용되는 `launch.json` 파일은 VS Code의 좌측 탭의 "Run and Debug" 혹은 단축키 `Shift+Ctrl+D`를 누르면 나타나는 "create a launch.json file" 링크를 클릭하여 생성할 수 있다. 이때 자바스크립트를 실행할 디버거를 Node.js으로 선택한다.
 
-![VS Code에서 <code>launch.json</code> 파일 생성하기](./images/ts_vscode_launch.png)
+![VS Code에서 <code>launch.json</code> 파일 생성하기](./images/vscode_typescript_launch.png)
 
 프로그램 실행 (혹은 디버깅)을 한다고 해서 빌드가 함께 되는 것이 아니다. 이 두 절차를 연동시키기 위해 `launch.json` 안에 `"preLaunchTask": "tsc: build - tsconfig.json"`을 추가한다. 그러면 프로그램 실행 (혹은 디버깅) 전에 타입스크립트 컴파일이 우선 진행되어 타입스크립트를 Node.js이 처리할 수 있는 자바스크립트로 변환시킨다.
 
@@ -46,6 +46,6 @@ VS Code에서 타입스크립트를 작업하면 `tsconfig.json`이란 파일로
 ## 자료형 추론
 [자료형 추론](https://en.wikipedia.org/wiki/Type_inference)(type inference)이란, 프로그래밍 언어의 표현식으로부터 [자료형](/docs/ko.JavaScript#자료형)을 자동으로 감지하는 기능이며 타입스크립트의 핵심이다. 타입스크립트는 자바스크립트 코드에 추가사항 필요 없이도 추론을 통해 어떠한 자료형에 해당하는지 명시할 수 있다. 아래의 이미지는 타입스크립트 기반의 VS Code 편집기에서 작업하는 자바스크립트 파일에 타입스크립트에서 제공하는 자료형 추론을 보여준다.
 
-![VS Code 편집기의 자바스크립트 자료형 추론](./images/ts_vscode_inference.png)
+![VS Code 편집기의 자바스크립트 자료형 추론](./images/vscode_typescript_inference.png)
 
 > 자바스크립트에는 `: <type>`이란 자료형 주석(type annotation) 구문이 존재하지 않으며, 추론된 표현식을 자바스크립트에 입력하면 유효하지 않은 구문으로 실행되지 않는다.

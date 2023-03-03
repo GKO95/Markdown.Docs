@@ -40,7 +40,7 @@ Node.js에서 가장 주목할 특징은 [비동기 입출력](https://ko.wikipe
 ### 비주얼 스튜디오
 [비주얼 스튜디오](https://ko.wikipedia.org/wiki/마이크로소프트_비주얼_스튜디오)<sub>([다운로드](https://visualstudio.microsoft.com/downloads/))</sub>는 마이크로소프트에서 개발한 IDE이다. 비주얼 스튜디오의 세 가지 에디션 중에서 무료 버전인 커뮤니티 에디션으로도 충분하다. 자바스크립트 언어 개발을 위해서면 "Node.js development"를 선택한다. 단, Node.js은 포함되지 않으므로 별도 설치가 필요하다. 한국어 지원을 원하면 "Language packs" 탭에서 한국어도 함께 선택한다.
 
-![비주얼 스튜디오 자바스크립트 프로그래밍을 위한 구성요소](/images/visual_studio_javascript.png)
+![비주얼 스튜디오 자바스크립트 프로그래밍을 위한 구성요소](./images/visual_studio_javascript.png)
 
 비주얼 스튜디오를 실행하면 아래와 같은 시작화면이 나타난다. 새로운 프로젝트를 생성하려면 오른쪽 하단의 "Create a new project" 버튼을 클릭한다.
 
@@ -59,7 +59,7 @@ Node.js에서 가장 주목할 특징은 [비동기 입출력](https://ko.wikipe
 ### 비주얼 스튜디오 코드
 [비주얼 스튜디오 코드](https://ko.wikipedia.org/wiki/비주얼_스튜디오_코드)<sub>([다운로드](https://code.visualstudio.com/download))</sub>, 일명 VS Code는 마이크로소프트에서 개발한 무료 소스 코드 편집기이다. 비록 기술적으로 IDE는 아니지만, 확장도구를 설치하여 컴파일러 혹은 인터프리터를 불러오면 코드 실행 및 디버깅이 모두 가능한 IDE 역할을 수행한다. 자바스립트의 경우에는 자동 코드 완성(일명 IntelliSense), 코드 탐색기, 디버거 등이 이미 탑재되어 있어 다른 프로그래밍 언어처럼 별도의 확장도구 설치가 불필요하다.
 
-![VS Code에서 Node.js 작업 환경 예시](/images/js_vscode.png)
+![VS Code에서 Node.js 작업 환경 예시](./images/vscode_javascript.png)
 
 VS Code는 두 가지의 실행 방법이 있다: 일반 실행 모드(`Ctrl+F5`)와 디버그 모드(`F5`)이다. [디버그](https://ko.wikipedia.org/wiki/디버그)(debug)는 프로그램에 발생한 문제를 해결하는 행위로, IDE에서 각 줄의 코드마다 어떠한 변화가 생겼는지 혹은 얼만큼의 시스템 리소스를 소모하는지 등을 확인할 수 있는 정보를 제공한다. 디버깅 목적이 아니면 일반 실행 모드를 사용하는 것을 권장한다. 최초 실행 당시에는 상단에 `Select Environment` 문구가 나타나면 Node.js을 선택하도록 한다.
 

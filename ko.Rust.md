@@ -36,7 +36,7 @@ title: 러스트
 # 프로젝트
 러스트 프로그래밍 언어는 [`cargo`](https://doc.rust-lang.org/rust-by-example/cargo.html)라는 공식 패키지 관리 도구를 통해 프로젝트를 관리한다.
 
-![VS Code에서 러스트 프로그래밍의 프로젝트](./images/rust_vscode_toml.png)
+![VS Code에서 러스트 프로그래밍의 프로젝트](./images/vscode_rust_toml.png)
 
 프로젝트를 [빌드](https://ko.wikipedia.org/wiki/소프트웨어_빌드)하거나 실행하기 위해 각각 `cargo build` 그리고 `cargo run` 명령어를 사용된다. 러스트 프로그래밍 언어의 독특한 기능 중 하나는 결과물을 생성하지 않은 채 컴파일이 가능한지 여부를 `cargo check` 명령어로 확인할 수 있다. 이는 소스 코드를 컴파일하는 데 소모되는 시간이 생략되므로 코드 유효성을 확인하기에 매우 유용하다.
 

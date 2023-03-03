@@ -91,7 +91,7 @@ title: 윈도우 NT
 
 윈도우 10 모바일 운영체제에서 안드로이드 앱을 실행할 수 있도록 추진된 [아스토리아 프로젝트](https://en.wikipedia.org/wiki/Windows_10_Mobile#Project_Astoria)(이후 Windows Subsystem for Android로 소개)를 발판으로 POSIX/UNIX가 아닌 "순수" 리눅스 어플리케이션을 지원하고자 [우분투](https://ko.wikipedia.org/wiki/우분투)(Ubuntu) 배포판을 개발한 [캐노니컬](https://ko.wikipedia.org/wiki/캐노니컬)과 합작한 결과물이다.
 
-![WSL2로 설치된 <a href="https://ko.wikipedia.org/wiki/데비안">데비안</a> 배포판의 터미널과 파일 탐색기](./images/wsl_debian_example.png)
+![WSL2로 설치된 <a href="https://ko.wikipedia.org/wiki/데비안">데비안</a> 배포판의 터미널과 파일 탐색기](./images/wsl_terminal_debian.png)
 
 WSL은 두 종류의 아키텍처 설계가 있어 각각 장단점을 가진다. 자세한 내용은 [마이크로소프트 문서](https://learn.microsoft.com/en-us/windows/wsl/compare-versions)를 참고한다.
 
