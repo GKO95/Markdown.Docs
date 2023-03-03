@@ -9,8 +9,6 @@ updated: false
 ## 인터프리터
 파이썬 프로그래밍 언어는 [인터프리트 언어](ko.Interpreter.md)(interpreted language)이다. 버전은 크게 파이썬 2와 파이썬 3으로 분류되는데, 전자는 2020년 1월 1일부로 서비스가 종료되었다. 파이썬 1이라는 것도 존재하나, 가장 최신 버전 1.6.1이 2000년에 출시된 점을 고려하면 호환성과 실용성이 매우 떨어진다. 그러므로 본문은 파이썬 3을 위주로 프로그래밍을 설명한다.
 
-파이썬 버전은 `X.Y.Z` 서식으로 매겨진다:
-
 <table style="width: 80%; margin: auto;">
 <caption style="caption-side: top;">파이썬 <code>X.Y.Z</code> 버전</caption>
 <colgroup><col style="width: 20%;"/><col style="width: 50%;"/><col style="width: 30%;"/></colgroup>
