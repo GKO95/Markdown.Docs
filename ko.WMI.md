@@ -3,7 +3,7 @@ category: 윈도우
 title: 윈도우 관리 도구
 ---
 # WMI
-[윈도우 관리 도구](https://learn.microsoft.com/en-us/windows/win32/wmisdk/wmi-start-page)(Windows Management Instrumentation; WMI)는 [마이크로소프트](https://www.microsoft.com) 버전의 [웹 기반 기업 관리](#웹-기반-기업-관리) 도구이다.
+[윈도우 관리 도구](https://learn.microsoft.com/en-us/windows/win32/wmisdk/wmi-start-page)(Windows Management Instrumentation; WMI)는 [윈도우](ko.Windows.md) 기반의 운영체제에서 동작하는 [마이크로소프트](https://www.microsoft.com) 버전의 [웹 기반 기업 관리](#웹-기반-기업-관리) 도구이다.
 
 ## 웹 기반 기업 관리
 [웹 기반 기업 관리](https://en.wikipedia.org/wiki/Web-Based_Enterprise_Management)(Web-Based Enterprise Management), 일명 WBEM은 컴퓨터가 다른 네트워크에 위치하지만 하나의 시스템을 구성하는 [분산 컴퓨팅](https://ko.wikipedia.org/wiki/분산_컴퓨팅) 환경에서의 관리를 단일화하기 위한 [시스템 관리](https://en.wikipedia.org/wiki/Systems_management) 표준 기술로써 관리 정보를 접근한는 데 활용된다.
