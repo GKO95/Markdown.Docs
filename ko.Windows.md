@@ -1,5 +1,5 @@
 ---
-category: 마이크로소프트
+category: 운영체제
 title: 윈도우 NT
 ---
 # 윈도우 NT

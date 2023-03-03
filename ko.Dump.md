@@ -1,5 +1,5 @@
 ---
-category: 윈도우
+category: 디버깅
 title: 덤프
 ---
 # 사용자 모드 덤프

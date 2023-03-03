@@ -1,5 +1,5 @@
 ---
-category: 윈도우
+category: 디버깅
 title: 심볼
 ---
 # 디버그 심볼

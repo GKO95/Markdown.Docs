@@ -1,5 +1,5 @@
 ---
-category: 윈도우
+category: 운영체제
 title: 메모리
 ---
 # 메모리

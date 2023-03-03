@@ -1,5 +1,5 @@
 ---
-category: 윈도우
+category: 운영체제
 title: 프로세서
 ---
 # 프로세서

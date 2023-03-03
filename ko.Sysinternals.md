@@ -1,5 +1,5 @@
 ---
-category: 마이크로소프트
+category: 소프트웨어
 title: Sysinternals
 ---
 # Sysinternals
