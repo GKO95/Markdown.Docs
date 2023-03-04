@@ -167,14 +167,32 @@ VS Code는 두 가지의 실행 방법이 있다: 일반 실행 모드(`Ctrl+F5`
 
     출력 함수가 실행될 시, `print()`의 소괄호 `()` 안에 있는 데이터가 터미널에 나타난다.
 
+<table style="table-layout: fixed; width: 80%; margin: auto;">
+<caption style="caption-side: top;">파이썬 콘솔 입출력 예시</caption>
+<colgroup><col style="width: 50%;"><col style="width: 50%;"></colgroup>
+<thead><tr><th style="text-align: center;">일반적인 문장</th><th style="text-align: center;">간결화된 문장</th></tr></thead>
+<tbody>
+<tr style="vertical-align: top; overflow-wrap: break-word;"><td>
+
 ```python
 variable = input("입력: ")
-print("출력:", variable)      # 동일: print("출력:", input("입력: "))
+print("출력:", variable) 
 ```
+</td><td>
+
+```python
+print("출력:", input("입력: "))
+```
+</td></tr>
+<tr><td colspan="2">
+
 ```terminal
 입력: Hello World!
 출력: Hello World!
 ```
+</td></tr>
+</tbody>
+</table>
 
 하나의 `print()` 함수에서 두 개 이상의 데이터를 한꺼번에 출력하려면 쉼표 `,`를 사용하여 연속적으로 데이터를 나열할 수 있다. 단, 각 쉼표가 위치한 곳에는 항상 공백이 놓여진다. 그 외의 다른 방법은 [문자열 자료형](#문자열-자료형)을 설명하는 부분에서 소개한다.
 
@@ -441,16 +459,12 @@ True_return if condition else False_return
 
 ```python
 match argument:
-
     case pattern1:
         ...
-
     case pattern2:
         ...
-
     case pattern3:
         ...
-
     case _:
         ...
 ```
