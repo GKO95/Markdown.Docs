@@ -1,13 +1,12 @@
 ---
 category: 프로그래밍
 title: 파이썬
-updated: false
 ---
-# 소개
+# 파이썬
 [파이썬](https://www.python.org/)(Python)은 웹 프로그래밍, 과학연구, 인공지능을 포함한 수많은 영역에서 응용 가능한 [다중 패러다임](https://ko.wikipedia.org/wiki/다중_패러다임_프로그래밍_언어) [고급 프로그래밍 언어](https://ko.wikipedia.org/wiki/고급_프로그래밍_언어)이다. 파이썬은 다른 프로그래밍 언어에 비해 매우 간편하여 프로그래밍 입문자에게 적합하고 커뮤니티가 매우 건재하다. 또한 [넘파이](ko.NumPy.md), [텐서플로우](ko.TensorFlow.md), [OpenCV](ko.OpenCV.md) 등의 다양한 [서드 파티](https://ko.wikipedia.org/wiki/서드_파티_개발자#서드파티) 라이브러리 생태계가 잘 갖춰져 있어 광범위한 활용도를 보여주는 강력한 프로그래밍 언어이다.
 
 ## 인터프리터
-파이썬 프로그래밍 언어는 [인터프리트 언어](ko.Interpreter.md)(interpreted language)이다. 버전은 크게 파이썬 2와 파이썬 3으로 분류되는데, 전자는 2020년 1월 1일부로 서비스가 종료되었다. 파이썬 1이라는 것도 존재하나, 가장 최신 버전 1.6.1이 2000년에 출시된 점을 고려하면 호환성과 실용성이 매우 떨어진다. 그러므로 본문은 파이썬 3을 위주로 프로그래밍을 설명한다.
+파이썬은 [인터프리트 언어](ko.Interpreter.md)(interpreted language)이다. 버전은 크게 파이썬 2와 파이썬 3으로 분류되는데, 전자는 2020년 1월 1일부로 서비스가 종료되었다. 파이썬 1이라는 것도 존재하나, 가장 최신 버전 1.6.1이 2000년에 출시된 점을 고려하면 호환성과 실용성이 매우 떨어진다. 그러므로 본문은 파이썬 3을 위주로 프로그래밍을 설명한다.
 
 <table style="width: 80%; margin: auto;">
 <caption style="caption-side: top;">파이썬 <code>X.Y.Z</code> 버전</caption>
@@ -17,21 +16,21 @@ updated: false
 <tr><td style="text-align: center;"><code>Y</code> 마이너 버전</td><td>새로운 기능이 추가될 때마다 증가하는 업데이트</td><td>마이너 버전 하위호환 보장</td></tr>
 <tr><td style="text-align: center;"><code>Z</code> 마이크로 버전</td><td>버그 수정 및 유지관리 패치</td><td>안정성 척도</td></tr></tbody>
 </table>
-    
+
 프로젝트에 활용될 [서드 파티](https://ko.wikipedia.org/wiki/서드_파티_개발자#서드파티) 라이브러리나 소프트웨어 연동에서 발생할 수 있는 호환성 문제를 사전에 방지하기 위해 인터프리터 버전을 신중히 선택해야 한다. 만일 단순히 프로그래밍 언어 공부가 목적이면 가장 최신 버전을 설치하여도 무방하다. 단, 인터프리터는 개발 환경 관리를 위해 버전 업데이트 기능이 자체적으로 결여되어 있다. 새로 출시된 버전을 설치하려면 해당 인터프리터를 별도로 설치해야 한다.
 
 아래는 대표적인 파이썬 인터프리터 일부를 나열한다.
 
-* **[C파이썬](https://ko.wikipedia.org/wiki/C파이썬)**: [C](ko.C.md) 프로그래밍 언어로 개발된 가장 널리 쓰이는 최초의 파이썬 인터프리터
+* [C파이썬](https://ko.wikipedia.org/wiki/C파이썬): [C](ko.C.md) 프로그래밍 언어로 개발된 가장 널리 쓰이는 최초의 파이썬 인터프리터
 * [자이썬](https://ko.wikipedia.org/wiki/자이썬): [Java](ko.Java.md) 프로그래밍 언어로 개발된 파이썬 인터프리터
 * [아이언파이썬](https://ko.wikipedia.org/wiki/IronPython): [C#](ko.Csharp.md) 프로그래밍 언어로 개발된 파이썬 인터프리터
 
 ### 인터프리터 설치
-파이썬을 실행하기 위해서는 두 가지 프로그램이 필요하다: (1) 인터프리터<sub>([다운로드](https://www.python.org/downloads/))</sub> 그리고 (2) [통합 개발 환경](#통합-개발-환경)이다. 리눅스와 macOS는 기본적으로 파이썬 2와 3 인터프리터가 설치되어 있으나, 다른 특정 버전을 원하면 새로 설치해야 한다. 본 장에서는 파이썬 인터프리터와 IDE의 설치 및 연동을 통해 파이썬과 같은 인터프리터 언어가 어떻게 동작하는지 이해를 돕는다.
+파이썬을 실행하기 위해서는 두 가지 프로그램이 필요하다: (1) 인터프리터<sub>([다운로드](https://www.python.org/downloads/))</sub> 그리고 (2) [통합 개발 환경](#통합-개발-환경)(일명 IDE)이다. 리눅스와 macOS는 기본적으로 파이썬 2와 3 인터프리터가 설치되어 있으나, 다른 특정 버전을 원하면 새로 설치해야 한다. 본 장에서는 파이썬 인터프리터와 IDE의 설치 및 연동을 통해 파이썬과 같은 인터프리터 언어가 어떻게 동작하는지 이해를 돕는다.
 
 ![파이썬 3 공식 웹사이트 인터프리터 다운로드 목록](./images/python_interpreter_download.png)
 
-윈도우 운영체제에서 인터프리터를 설치하는 방법에는 두 가지가 있다:
+윈도우 운영체제에서 인터프리터를 설치하는 방법은 두 가지가 있다:
 
 1. 압축파일 (embeddable zip file): 파이썬 인터프리터를 구성하는 파일 전체가 압축된 상태로 존재한다.
 2. 설치 프로그램 (executable installer): 인터프리터를 설치하는 `.EXE` 확장자 프로그램이다.
@@ -67,7 +66,7 @@ updated: false
 여기서 `Download debug binaries (requires VS 2015 or later)`는 "디버깅 라이브러리 다운로드" 여부를 묻는데, 이를 필요로 하는 경우로써 [OpenCV](/docs/ko.OpenCV) 라이브러리를 생성할 때가 있다. 하지만 파이썬을 프로그래밍 입문 언어로 배우는 초급자의 입장에서 위의 선택사항들은 공부에 지장을 주지 않아 무시하여도 된다.
 
 ## 통합 개발 환경
-[통합 개발 환경](https://ko.wikipedia.org/wiki/통합_개발_환경)(integrated development environment; IDE)은 최소한 프로그래밍 언어의 소스 코드 편집, 프로그램 빌드, 그리고 디버깅 기능을 제공하는 소프트웨어 개발 프로그램이다. 인터프리터는 파이썬 코드를 실행하는 소프트웨어이지만, 파이썬 코드 편집기가 아니다. 그러므로 파이썬 코드를 편집하고 곧바로 프로그램으로 실행하여 문제가 발생하면 검토할 수 있는 IDE가 절대적으로 필요하다.
+[통합 개발 환경](https://ko.wikipedia.org/wiki/통합_개발_환경)(integrated development environment; IDE)은 최소한 프로그래밍 언어의 소스 코드 편집, 프로그램 빌드, 그리고 디버깅 기능을 제공하는 소프트웨어 개발 도구이다. 인터프리터는 파이썬 코드를 실행하는 소프트웨어이지만, 파이썬 코드 편집기가 아니다. 그러므로 파이썬 코드를 편집하고 실행하여 문제가 발생하면 검토할 수 있는 IDE가 절대적으로 필요하다.
 
 ### 비주얼 스튜디오 코드
 [비주얼 스튜디오 코드](https://ko.wikipedia.org/wiki/비주얼_스튜디오_코드)<sub>([다운로드](https://code.visualstudio.com/download))</sub>, 일명 VS Code는 마이크로소프트에서 개발한 무료 소스 코드 편집기이다. 비록 기술적으로 IDE는 아니지만, 파이썬 확장도구<sub>([다운로드](https://marketplace.visualstudio.com/items?itemName=ms-python.python))</sub>를 설치하여 인터프리터를 불러오면 파이썬 실행 및 디버깅이 모두 가능한 IDE 역할을 수행한다. 확장도구를 설치하였으면 `F1` 키를 눌러 `Python: Select Interpreter`을 입력한다. 컴퓨터에 설치된 파이썬 인터프리터가 자동으로 나열되며 사용할 인터프리터를 선택한다.
@@ -86,8 +85,8 @@ VS Code는 두 가지의 실행 방법이 있다: 일반 실행 모드(`Ctrl+F5`
     값을 반환하는 구문적 존재를 가리킨다. 표현식에 대한 결과를 도출하는 것을 평가(evaluate)라고 부른다.
     
     ```python
-  2 + 3           # 숫자 5를 반환
-  2 < 3           # 논리 참을 반환
+    2 + 3           # 숫자 5를 반환
+    2 < 3           # 논리 참을 반환
     ```
 
 * **[아톰](https://docs.python.org/3/reference/expressions.html?highlight=asterisk#atoms)(atom)**
@@ -95,8 +94,8 @@ VS Code는 두 가지의 실행 방법이 있다: 일반 실행 모드(`Ctrl+F5`
     표현식을 구성하는 가장 기본적인 요소이며, 대표적으로 [식별자](#식별자)(identifier)와 [리터럴](https://docs.python.org/3/reference/expressions.html?highlight=asterisk#literals)(literal)이 있다.
 
     ```python
-  variable        # 식별자
-  2               # 정수 리터럴
+    variable        # 식별자
+    2               # 정수 리터럴
     ```
 
 * **[문장](https://ko.wikipedia.org/wiki/문_(프로그래밍))(statement)**
@@ -107,8 +106,8 @@ VS Code는 두 가지의 실행 방법이 있다: 일반 실행 모드(`Ctrl+F5`
     * 백슬래시 `\`: 하나의 긴 문장을 연속의 여러 줄로 나누어서 나타내기 위해 사용된다.
 
     ```python
-  variable = 2 + 3           # 숫자 5를 "variable" 변수에 초기화
-  if 2 < 3: statement        # 논리가 참이면 "statement" 문장 실행
+    variable = 2 + 3           # 숫자 5를 "variable" 변수에 초기화
+    if 2 < 3: statement        # 논리가 참이면 "statement" 문장 실행
     ```
 
 ### `pass` 문
@@ -538,10 +537,10 @@ else:
 ```
 
 # 이터러블
-[이터러블](https://docs.python.org/3/library/stdtypes.html#typeiter)(iterable; 반복 가능한)은 저장된 여러 데이터 항목을 하나씩 반환할 수 있는 [컨테이너 객체](#클래스)를 가리킨다. 이터러블의 특징인 `__iter__()` 메소드는 이터레이터(iterator) 객체를 반환하고, 그리고 이터레이터는 `__next__()` 메소드를 통해 [`for`](#for-반복문) 반복문에 전달될 다음 데이터 항목을 반환한다. 다시 말해 이터러블 객체의 핵심은 순차적으로 데이터를 반환할 수 있다는 점이며, 다수의 데이터를 하나의 변수로 저장하는 성질은 이를 구현하기 위한 일환이다.
+[이터러블](https://docs.python.org/3/library/stdtypes.html#typeiter)(iterable; 반복 가능한)은 저장된 여러 데이터 항목을 하나씩 반환할 수 있는 [컨테이너 객체](#클래스)를 가리킨다. 이터러블의 `__iter__()` 메소드는 이터레이터(iterator) 객체를 반환하는데, 여기서 이터레이터는 `__next__()` 메소드를 통해 [`for`](#for-반복문) 반복문에 전달될 다음 데이터 항목을 반환한다. 다시 말해, 이터러블 객체의 핵심은 저장된 다수의 데이터를 순차적으로 반환할 수 있다는 점이다.
 
 ## 시퀀스 객체
-[시퀀스](https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range)(sequence)는 [슬라이싱](#슬라이싱)과 같은 추가 기능이 활성화된 이터러블 객체이며, 대괄호 `[]`를 사용하여 저장된 데이터 불러오거나 수정이 가능하다. 대표적인 시퀀스 객체 중 하나로 [문자열](#문자열-자료형)이 있다.
+[시퀀스](https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range)(sequence)는 [슬라이싱](#슬라이싱) 등의 추가 기능이 탑재된 이터러블 객체이며, 대괄호 `[]`를 사용하여 저장된 데이터 불러오거나 수정이 가능하다. 대표적인 시퀀스 객체 중 하나가 [문자열](#문자열-자료형)이다.
 
 ```python
 variable = "Hello World!" 
@@ -554,23 +553,19 @@ e
 ### 슬라이싱
 [슬라이싱](https://docs.python.org/3/glossary.html#term-slice)(slicing; 자르다)은 시퀀스 객체 원본으로부터 원하는 부분만 추출하는 기능이다.
 
-<table style="width: 80%; margin: auto;">
-<caption style="caption-side: top;">이터러블 슬라이싱 구문</caption>
-<colgroup><col style="width: 35%;"/><col style="width: 65%;"/></colgroup>
-<thead><tr><th style="text-align: center;">구문</th><th style="text-align: center;">예시</th></tr></thead>
-<tbody>
-<tr style="text-align: center;"><td><code>seq[start : end : interval]</code></td><td><code>start</code>부터 <code>end</code> 이전까지 <code>interval</code>만큼의 간격으로 데이터를 추출하며, 모든 인수를 채울 필요는 없다.</td></tr></tbody>
-</table>
+* `sequence[start : end : interval]`
 
-```python
-print("Hello World!"[2:8])         # 출력: 'llo Wo'
-print("Hello World!"[2: ])         # 출력: 'llo World!'
-print("Hello World!"[ :8])         # 출력: 'Hello Wo'
-print("Hello World!"[2:8:2])       # 출력: 'oW'
-```
+    `start`부터 `end` 이전까지 `interval`만큼의 간격으로 데이터를 추출하며, 모든 인수를 채울 필요는 없다.
+
+    ```python
+    print("Hello World!"[2:8:2])
+    ```
+    ```terminal
+    ow
+    ```
 
 ### 시퀀스 언패킹
-[시퀀스 언패킹](https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences)(sequence unpacking)은 시퀀스 객체의 요소들을 분할하는 것을 가리킨다. 하나의 시퀀스를 여러 변수에 할당하는 방식으로 언패킹하며, 변수의 접두부에는 별표 `*`를 기입하여 나머지 요소를 한꺼번에 받을 수 있다.
+[시퀀스 언패킹](https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences)(sequence unpacking)은 시퀀스 객체의 요소들을 분할하는 작업이다. 하나의 시퀀스를 여러 변수에 할당하는 방식으로 언패킹을 활용할 수 있으며, 변수의 접두부에는 별표 `*`를 기입하면 나머지 요소를 한꺼번에 받을 수 있다.
 
 ```python
 variable1, *variable2, variable3 = "Python"
@@ -582,26 +577,22 @@ variable3 = n
 ```
 
 ## 범위 객체
-[범위](https://docs.python.org/3/library/stdtypes.html#ranges)(range) 시퀀스 객체는 시작할 숫자, 끝을 맺을 숫자 그리고 순서 간격을 지정하여 일련의 숫자들을 순서에 맞게 저장하는 객체이며, `range()` 함수로부터 생성된다.
+[범위](https://docs.python.org/3/library/stdtypes.html#ranges)(range) 시퀀스 객체는 시작과 끝, 그리고 나열되는 숫자간 간격을 지정하여 일련의 숫자들을 저장하는 객체이며, `range()` 함수로부터 생성된다.
 
-<table style="width: 80%; margin: auto;">
-<caption style="caption-side: top;">범위 객체 구문</caption>
-<colgroup><col style="width: 35%;"/><col style="width: 65%;"/></colgroup>
-<thead><tr><th style="text-align: center;">구문</th><th style="text-align: center;">예시</th></tr></thead>
-<tbody>
-<tr style="text-align: center;"><td><code>range(start, end, interval)</code></td><td><code>start</code>부터 <code>end</code> 이전까지 <code>interval</code>만큼의 간격으로 순서대로 숫자를 나열한 범위 객체를 생성한다.</td></tr></tbody>
-</table>
+* `range(start, end, interval)`
 
-```python
-for element in range(3, 10, 2):
-    print(element)
-```
-```terminal
-3
-5
-7
-9
-```
+    `start`부터 `end` 이전까지 `interval`만큼의 간격으로 순서대로 숫자를 나열한 범위 객체를 생성한다.
+
+    ```python
+    for element in range(3, 10, 2):
+        print(element)
+    ```
+    ```terminal
+    3
+    5
+    7
+    9
+    ```
 
 ## 리스트 객체
 [리스트](https://docs.python.org/3/library/stdtypes.html#lists)(list) 시퀀스 객체는 자료형과 관계없이 데이터를 나열한 순서대로 인덱스(index) 위치에 저장한다. 리스트의 데이터 할당은 대괄호 `[]` 내에 항목을 순서대로 쉼표로 나누어 나열한다. 대괄호는 0번부터 시작하는 인덱스 위치의 요소(element)를 호출할 때에도 사용된다.
@@ -630,50 +621,45 @@ variable[1] = "Hello World!"   # IndexError: list assignment index out of range
 * **시퀀스 연결 `+`**
 
     ```python
-  print([value1, value2] + [value2, value3, value4])
-  # 출력: [value1, value2, value2, value3, value4]
+    [value1, value2] + [value2, value3, value4]
+    # 결과: [value1, value2, value2, value3, value4]
     ```
 
 * **시퀀스 반복 `*`**
 
     ```python
-  print([value1, value2] * 3)
-  # 출력: [value1, value2, value1, value2, value1, value2]
+    [value1, value2] * 3
+    # 결과: [value1, value2, value1, value2, value1, value2]
     ```
 
 * **시퀀스 항목 존재여부 `in`**
 
     ```python
-  print(value1 in [value1, value2])
-  # 출력: True
+    value1 in [value1, value2]
+    # 결과: True
     ```
 
 ### 리스트 컴프리헨션
-[리스트 컴프리헨션](https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions)(list comprehension)은 `for` 반복문 (그리고 `if` 조건문)을 활용한 프로그램적 규칙에 따라 리스트를 생성한다.
+[리스트 컴프리헨션](https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions)(list comprehension)은 `for` 반복문 (그리고 [`if`](#if-조건문) 조건문)을 활용한 프로그램적 규칙에 따라 리스트를 생성한다.
 
-<table style="width: 80%; margin: auto;">
-<caption style="caption-side: top;">리스트 컴프리핸션 구문</caption>
-<colgroup><col style="width: 35%;"/><col style="width: 65%;"/></colgroup>
-<thead><tr><th style="text-align: center;">구문</th><th style="text-align: center;">예시</th></tr></thead>
-<tbody>
-<tr style="text-align: center;"><td><code>[element for variable in sequence if condition]</code></td><td>리스트 객체의 <code>element</code> 요소는 <code>sequence</code> 시퀀스 객체 내에서 <code>condition</code> 조건에 부합한 항목을 넘겨받은 <code>variable</code> 변수로부터 할당받는다.</td></tr></tbody>
-</table>
+* `[element for variable in sequence if condition]`
 
-```python
-variable = [var**2 for var in range(5)]
-variable = [var**2 for var in range(5) if (var ** 2) % 2 == 0]
-```
-```terminal
-[0, 1, 4, 9, 16]
-[0, 4, 16]
-```
+    리스트 객체의 `element` 요소는 `sequence` 시퀀스 객체 내에서 `condition` 조건에 부합한 항목을 넘겨받은 `variable` 변수로부터 할당받는다.
+
+    ```python
+    variable = [var**2 for var in range(5)]
+    variable = [var**2 for var in range(5) if (var ** 2) % 2 == 0]
+    ```
+    ```terminal
+    [0, 1, 4, 9, 16]
+    [0, 4, 16]
+    ```
 
 ## 튜플 객체
-[튜플](https://docs.python.org/3/library/stdtypes.html#tuples)(tuple) 시퀀스 객체는 리스트와 마찬가지로 항목을 순서대로 저장하는 데이터이나, 초기화 후에는 값을 변경할 수 없다. 이러한 시퀀스 객체의 속성을 [불변](https://docs.python.org/3/library/stdtypes.html#immutable-sequence-types)(immutable)이라고 한다. 튜플을 초기화 할 때 소괄호 `()`를 사용하거나 괄호 없이 사용할 수도 있다.
+[튜플](https://docs.python.org/3/library/stdtypes.html#tuples)(tuple) 시퀀스 객체는 리스트와 마찬가지로 항목을 순서대로 저장하는 데이터이지만 초기화 이후에는 값 변경이 불가하다. 이러한 객체의 속성을 [불변](https://docs.python.org/3/library/stdtypes.html#immutable-sequence-types)(immutable)이라고 한다. 튜플을 초기화 할 때 소괄호 `()`를 사용하거나 괄호 없이 사용할 수도 있다.
 
 ```python
 variable = (value1, value2, value3)
-
 ''' 동일:
 variable = value1, value2, value3
 '''
@@ -705,8 +691,8 @@ print(variable[key2])                # 출력: value2
 
 ```python
 variable = {key1: value1, key2: value2}
-
 variable[key3] = value3
+
 print(variable)                      # 출력: {key1: value1, key2: value2, key3: value3}
 ```
 
@@ -724,10 +710,9 @@ print({**variable, key3: value3})    # 출력: {key1: value1, key2: value2, key3
 
 ```python
 variable = {value1, value2}
-
 variable.add(value3)
-print(variable)                 # {value1, value2, value3}
 
+print(variable)                 # {value1, value2, value3}
 print(variable[0])              # TypeError: 'variable' object is not subscriptable
 ```
 
@@ -743,20 +728,6 @@ print(variable[0])              # TypeError: 'variable' object is not subscripta
 <tr><td style="text-align: center;"><code>|</code></td><td style="text-align: center;">합집합</td><td>두 집합의 합을 반환한다.</td></tr><tr><td style="text-align: center;"><code>&</code></td><td style="text-align: center;">교집합</td><td>두 집합에 존재하는 요소만 반환한다.</td></tr><tr><td style="text-align: center;"><code>-</code></td><td style="text-align: center;">여집합</td><td>피감수 집합에만 존재하며 감수 집합에 없는 요소를 반환한다.</td></tr><tr><td style="text-align: center;"><code>^</code></td><td style="text-align: center;">대칭차</td><td>한 집합에는 존재하나 둘 다 속하지 않는 요소를 반환한다.</td></tr>
 </tbody>
 </table>
-
-```python
-variable1 = {1, 2, 3, 4, 5, 6}
-variable2 = {4, 5, 6, 7, 8, 9}
-
-print(variable1 | variable2)    # 출력: {1, 2, 3, 4, 5, 6, 7, 8, 9}
-
-print(variable1 & variable2)    # 출력: {4, 5, 6}
-
-print(variable1 - variable2)    # 출력: {1, 2, 3}
-print(variable1 - variable2)    # 출력: {7, 8, 9}
-
-print(variable1 ^ variable2)    # 출력: {1, 2, 3, 7, 8, 9}
-```
 
 ## 제너레이터 함수
 [제너레이터](https://docs.python.org/3/glossary.html#term-generator)(generator)는 [`yield`](https://docs.python.org/3/reference/simple_stmts.html#yield) 키워드와 반복문을 통해 요소들을 프로그램적으로 직접 생성할 수 있는 [함수](#함수)이다. 요소들이 메모리에 저장되는 것이 아니라 코드를 통해 생성되는 것이기 때문에, 제너레이터 함수는 메모리 제한이 없는 점에서 무한한 개수의 데이터를 담을 수 있는 이점을 가진다.
@@ -816,28 +787,28 @@ function()
 * `function()`은 함수에 정의된 코드를 실행한다.
 
     ```python
-  def function():
-      print("Hello World!")
+    def function():
+        print("Hello World!")
 
-  variable = function()
-  print("반환:", variable)
+    variable = function()
+    print("반환:", variable)
     ```
     ```terminal
-  Hello World!
-  반환: None
+    Hello World!
+    반환: None
     ```
 
 * `function`은 함수 자체를 가리킨다.
 
     ```python
-  def function():
-      print("Hello World!")
+    def function():
+        print("Hello World!")
 
-  variable = function
-  print("반환:", variable)
+    variable = function
+    print("반환:", variable)
     ```
     ```terminal
-  반환: <function function at 0x0000027FB6A57160>
+    반환: <function function at 0x0000027FB6A57160>
     ```
 
 ### `return` 반환문
@@ -864,14 +835,14 @@ Hello World!
     함수나 [클래스](#클래스) 내부에서 정의된 변수이다. 지역 변수에 저장된 데이터는 함수 (또는 클래스) 밖에서는 소멸되므로 외부에서 사용할 수 없다. 지역 변수의 특징을 활용하면 함수 (또는 클래스) 외부에서 정의된 변수 이름을 그대로 가져와 함수 (또는 클래스) 내부에서 동일한 이름이지만 전혀 다른 존재의 변수를 새롭게 정의할 수 있다.
 
     ```python
-  variable = "Hello World!"
+    variable = "Hello World!"
 
-  def function():
-      variable = "Python"
-      return variable
+    def function():
+        variable = "Python"
+        return variable
 
-  print(function())             # 출력: Python
-  print(variable)               # 출력: Hello World!
+    print(function())             # 출력: Python
+    print(variable)               # 출력: Hello World!
     ```
 
 * **전역 변수(global variable)**
@@ -879,29 +850,29 @@ Hello World!
     함수나 클래스에 속하지 않은 외부에 정의된 변수이다. 전역 변수는 어느 함수 (또는 클래스)에서도 호출만으로 지역 변수와 함께 사용할 수 있다. 단, 변수의 충돌로 인한 예상치 못한 결과와 오류를 방지하기 위해 가급적 전역 변수의 사용은 피하도록 한다.
 
     ```python
-  variable = "Hello World!"
+    variable = "Hello World!"
 
-  def function():
-      print(variable)
+    def function():
+        print(variable)
 
-  function()                    # 출력: Hello World!
+    function()                    # 출력: Hello World!
   
-  variable = "Python"
-  function()                    # 출력: Python
+    variable = "Python"
+    function()                    # 출력: Python
     ```
 
     함수 (또는 클래스) 내에서 해당 변수가 지역 변수가 아니라 전역 변수임을 확실하게 명시하려면 `global` 키워드를 사용한다. 하지만 가장 안전한 방법은 전역 변수를 함수의 인자로 전달하는 것이다.
 
     ```python
-  variable = "Hello World!"
+    variable = "Hello World!"
 
-  def function():
-      global variable
-      variable  = "Python"
-      return variable
+    def function():
+        global variable
+        variable  = "Python"
+        return variable
 
-  print(function())             # 출력: Python
-  print(variable)               # 출력: Python
+    print(function())             # 출력: Python
+    print(variable)               # 출력: Python
     ```
 
 ## 매개변수 및 전달인자
@@ -954,7 +925,10 @@ function(param1 = 3, param2 = "Hello World!")    # 출력: {param1: 3, param2: '
 # 람다 표현식: arg1 및 arg2로 인자를 전달받아 "2 * arg1 + arg2" 표현식을 반환한다.
 variable = lambda arg1, arg2: 2 * arg1 + arg2
 
-variable(2, 3)    # 출력: 7
+print(variable(2, 3))
+```
+```terminal
+7
 ```
 
 ## 순수 함수 
@@ -967,37 +941,11 @@ variable(2, 3)    # 출력: 7
 
 * **`map()` 함수**
 
-    이터러블 객체와 매개변수를 갖는 함수를 인자로 갖는 고차 함수이다. `map()` 함수는 이터러블 객체를 매개변수 함수의 인자로 전달하여 얻은 결과값으로 구성된, 즉 함수로 맵핑(mapping)된 리스트를 반환한다. `SyntaxError`와 같은 오류를 방지하려면 리스트나 튜플과 같은 이터러블 객체로 변환해야 한다.
-
-    ```python 
-  lst1 = [1, 2, 3, 4, 5]
-  lst2 = [0, 9, 8, 7, 6, 5]
-    
-  variable1 = map(lambda arg1, arg2: arg1 ** 2 + arg2, lst1, lst2)
-  variable2 = map(lambda arg2, arg1: arg1 ** 2 + arg2, lst2, lst1)
-    
-  print(list(variable1))
-  print(list(variable2))
-    ```
-    ```terminal
-  [1, 13, 17, 23, 31]
-  [1, 83, 67, 53, 41]
-    ```
+    이터러블 객체와 매개변수를 갖는 함수를 인자로 갖는 고차 함수이다. 이터러블 객체를 매개변수 함수의 인자로 전달하여 얻은 결과값으로 구성된, 즉 함수로 맵핑(mapping)된 리스트를 반환한다. `SyntaxError`와 같은 오류를 방지하려면 리스트나 튜플과 같은 이터러블 객체로 변환해야 한다.
 
 * **`filter()` 함수**
 
     이터러블 객체와 조건 함수(일명 술어; predicate)를 인자로 갖는 고차 함수이다. 술어의 조건에 만족하는 데이터만 필터링되어 구성된 이터러블 객체를 반환한다. `SyntaxError`와 같은 오류를 방지하려면 리스트나 튜플과 같은 이터러블 객체로 변환해야 한다.
-
-    ```python
-  lst = [1, 2, 3, 4, 5]
-
-  variable = filter(lambda arg: arg % 2 is 0, lst)
-
-  print(list(variable))
-    ```
-    ```terminal
-  [2, 4]
-    ```
 
 ## 데코레이터
 데코레이터(decorator)는 함수의 기능을 수정하기 위해 사용되는 함수이며, 값을 반환하는 게 아니라 함수 자체를 반환한다. 데코레이터 고차 함수의 작업으로 반환된 함수를 차후에 사용하기 위해 이를 받아줄 변수가 필요하다.
@@ -1015,9 +963,9 @@ def decorator(func):
         """
     return modified_function
 
-# 함수 수정하기(데코레이팅)
+# 함수 수정하기(데코레이팅): "variable"라는 변수에 할당된 함수
 variable = decorator(function) 
-variable()                  # 실제로는 "variable"라는 이름의 변수에 할당된 함수이다.
+variable()
                 
 # 함수 수정하기(데코레이팅): 함수 이름 유지
 function = decorator(function)
@@ -1040,7 +988,8 @@ def decorator(func):
 
 # 함수 수정하기: @ 기호 사용
 @decorator
-def function():        # "function()"의 본래 함수
+# "function()"의 본래 함수
+def function():
     ...
 
 # 함수 이름은 그대로 유지된다.
@@ -1072,22 +1021,20 @@ def factorial(arg):
 ```
 
 # 클래스
-[클래스](https://docs.python.org/3/tutorial/classes.html)(class)는 객체를 생성하는데 사용된다. 
+객체(object 혹은 instance)는 데이터를 저장할 수 있는 변수와 처리할 수 있는 함수를 하나로 묶은 데이터이다. 객체의 변수와 함수는 각각 속성(attribute)과 메소드(method)라고 불리며, 이를 통틀어 맴버(member)라고 칭하고 다음과 같이 접근한다.
 
-> 객체(object 혹은 instance)는 데이터를 저장할 수 있는 변수와 처리할 수 있는 함수를 하나로 묶은 데이터이다. 객체의 변수와 함수는 각각 속성(attribute)과 메소드(method)라고 불리며, 이를 통틀어 맴버(member)라고 칭하고 다음과 같이 접근한다.
->
-> * **속성**: `instance.attribute`
-> * **메소드**: `instance.method()`
->
-> 현재까지 다룬 내용 중에서 객체에 해당되는 데이터로는 문자열 객체와 시퀀스 객체가 있다.
->
-> ```python
-> variable = [0, 3, 5, 9]
-> print(variable.index(5))
-> # "variable" 리스트 객체의 "index()" 메소드를 사용하여 값 5에 대한 위치를 반환한다.
-> ```
+* **속성**: `instance.attribute`
+* **메소드**: `instance.method()`
 
-클래스는 `class` 키워드를 사용하여 속성 및 메소드와 함께 정의된다. 클래스로부터 객체를 생성하는 것을 "객체화(instantiation)"라 부르는데, 이때 클래스에 정의된 맴버들은 [캡슐화](https://ko.wikipedia.org/wiki/캡슐화)(encapsulation)되어 다음 특징을 갖는다:
+현재까지 다룬 내용 중에서 객체에 해당되는 데이터로는 문자열 객체와 시퀀스 객체가 있다.
+
+```python
+variable = [0, 3, 5, 9]
+print(variable.index(5))
+# "variable" 리스트 객체의 "index()" 메소드를 사용하여 값 5에 대한 위치를 반환한다.
+```
+
+그리고 이러한 객체를 생성하는 데이터가 바로 [클래스](https://docs.python.org/3/tutorial/classes.html)(class)이다. 클래스는 `class` 키워드를 사용하여 속성 및 메소드와 함께 정의된다. 클래스로부터 객체를 생성하는 것을 "객체화(instantiation)"라 부르는데, 이때 클래스에 정의된 맴버들은 [캡슐화](https://ko.wikipedia.org/wiki/캡슐화)(encapsulation)되어 다음 특징을 갖는다:
 
 1. 변수와 함수가 하나의 객체로 결합된다.
 2. 우연치 않은 수정을 방지하기 위해 변수 및 함수에 대한 직접적인 접근을 외부로부터 제한할 수 있다.
@@ -1116,9 +1063,14 @@ class CLASS:
 # 클래스 객체화
 instance = CLASS()
 
-instance.method(2, 3)        # 출력: 2 + 3 = 5
-print(instance.attr1)        # 출력: 2
-print(instance.variable)     # AttributeError: 'CLASS' object has no attribute 'variable'
+instance.method(2, 3)
+print(instance.attr1)
+print(instance.variable)
+```
+```terminal
+5
+2
+AttributeError: 'CLASS' object has no attribute 'variable'
 ```
 
 ### `__init__()` 메소드
@@ -1169,13 +1121,17 @@ class CLASS:
 
 # 클래스 객체화
 instance1 = CLASS(value2)
-print(f"{instance1.attr1}, {instance1.attr2}")    # 출력: 2, 3
-
 CLASS.method1(7)
-print(f"{CLASS.attr1}, {CLASS.attr2}")            # 출력: 2, 7
-
 instance2 = CLASS.method2(1)
-print(f"{instance2.attr1}, {instance2.attr2}")    # 출력: 2, 8
+
+print(f"{instance1.attr1}, {instance1.attr2}")
+# 출력: 2, 3
+
+print(f"{CLASS.attr1}, {CLASS.attr2}")
+# 출력: 2, 7
+
+print(f"{instance2.attr1}, {instance2.attr2}")
+# 출력: 2, 8
 ```
 
 ## 정적 메소드
@@ -1193,7 +1149,10 @@ class CLASS:
         return arg1 + arg2 - arg3
 
 
-print(CLASS.method(2, 3, 1))        # 출력: 4
+print(CLASS.method(2, 3, 1))
+```
+```terminal
+4
 ```
 
 ## 매직 메소드
@@ -1229,7 +1188,10 @@ instance3 = instance1 + instance2
 instance3 = instance1.__add__(instance2)
 '''
 
-print(instance3.attr)            # 출력: Hello World!
+print(instance3.attr)
+```
+```terminal
+Hello World!
 ```
 
 ## 상속
@@ -1363,10 +1325,10 @@ del instance.method      # Deleter 프로퍼티 호출
 ```
 
 # 예외 처리
-[예외](https://docs.python.org/3/tutorial/errors.html#exceptions)(exception)는 잘못된 코딩이나 입력으로 인해 프로그램상 실행 불가능 코드 오류이다. 인터프리터에서 걸러지는 오류가 아니기에 정상적인 프로그램이 실행될 수 있으나, 예외가 발생하면 프로그램은 즉시 중단된다. 예외 처리는 실행된 프로그램이 예외로 인해 프로그램 실행이 중단되는 것을 방지하여 안정적으로 실행되는 것을 주목표로 한다.
+[예외](https://docs.python.org/3/tutorial/errors.html#exceptions)(exception)는 잘못된 코드 및 입력에 의해 프로그램상 실행 불가한 오류이다. [인터프리터](#인터프리터)는 런타임에 코드를 차례대로 읽어내며 실행하기 때문에, 막상 파이썬 [프로세스](ko.Process.md)가 실행되어도 도중에 예외가 발생하여 중단될 수 있다. 예외 처리는 실행된 프로그램이 예외로 인해 프로세스가 종료되는 걸 방지하여 안정적으로 실행될 수 있도록 한다.
 
 ## `try`-`except` 예외 처리문
-[`try`](https://docs.python.org/3/reference/compound_stmts.html#try)-[`except`](https://docs.python.org/3/reference/compound_stmts.html#except) 쌍은 예외를 감지하고 발생한 예외 유형에 따라 기입된 코드를 실행하여 처리된다. 예외 처리된 파이썬 프로세스는 도중에 중단되지 않고 계속 실행된다.
+[`try`](https://docs.python.org/3/reference/compound_stmts.html#try)-[`except`](https://docs.python.org/3/reference/compound_stmts.html#except) 예외 처리문 쌍은 감지된 예외의 유형에 따라 기입된 코드를 실행한다. 예외 처리된 파이썬 프로세스는 종료되지 않으며, 마치 아무런 일이 없었다는 듯이 이어서 실행한다.
 
 * **`try` 문**
 
@@ -1397,7 +1359,7 @@ except:               # 예외 유형: 모든 유형의 예외 처리
 </table>
 
 ## `raise` 문
-[`raise`](https://docs.python.org/3/reference/simple_stmts.html#raise) 문은 의도적으로 예외를 발생시키는데 사용된다. 자체 제작 함수나 클래스에서 설계되지 않은 방식으로 접근하거나 사용하려는 경우, 해당 문으로 오류를 일으켜서 프로세스 실행을 즉시 중단시키는 용도로 활용된다.
+[`raise`](https://docs.python.org/3/reference/simple_stmts.html#raise) 문은 의도적으로 예외를 발생시키는데 사용된다. 자체 제작 [함수](#함수)나 [클래스](#클래스)에서 설계되지 않은 방식으로 접근하거나 사용하려는 경우, 해당 문으로 오류를 일으켜서 프로세스 실행을 즉시 중단시키는 용도로 활용된다.
 
 ```python
 # 명시적 예외 발생: 위의 'except' 문 내에서도 단독으로 사용할 수 있다.
@@ -1408,10 +1370,7 @@ raise "예외에 대한 설명 기입"
 ```
 
 # 파일 관리
-여러 데이터를 파이썬 프로세스에 전달하거나, 혹은 데이터를 외부로 출력하기 위해 파일을 불러와 read 혹은 write 하여 처리할 수 있다. 본 장은 파이썬에서 파일을 관리하는 방법에 대하여 소개한다.
-
-## 파일 열기 및 닫기
-파이썬에서 파일을 열고 닫으려면 [`open()`](https://docs.python.org/3/library/functions.html#open) 함수와 [`close()`](https://docs.python.org/3/distutils/apiref.html#distutils.text_file.TextFile.close) 메소드를 사용한다.
+파이썬 [프로세스](ko.Process.md)에 여러 데이터를 전달하거나 외부로 데이터 또는 로그를 출력하기 위해 파일을 불러와 작업할 수 있다. 이러한 작업을 위해 파이썬은 처리하고자 하는 파일을 열고 닫는 행위를 아래와 같이 명시해야 한다.
 
 ```python
 # 파일 열기: 읽기 전용
@@ -1421,16 +1380,15 @@ file = open("filename.txt", "r")
 file.close()
 ```
 
-`open()` 함수에는 열고자 하는 파일경로 외에도 파일을 열기 위한 옵션을 설정할 수 있다.
+* [`open()`](https://docs.python.org/3/library/functions.html#open) 함수
 
-<table style="width: 40%; margin: auto;">
-<caption><code>open()</code> 함수 플래그</caption>
-<colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup>
-<thead><tr><th style="text-align: center;">전달인자</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody><tr><td style="text-align: center;"><code>r</code></td><td>읽기 모드 (기본값)</td></tr><tr><td style="text-align: center;"><code>w</code></td><td>덮어쓰기 모드 (새로 쓰기)</td></tr><tr><td style="text-align: center;"><code>a</code></td><td>덧붙이기 모드 (내용 추가)</td></tr><tr><td style="text-align: center;"><code>rb</code></td><td>바이너리 읽기 모드 (비텍스트 파일)</td></tr><tr><td style="text-align: center;"><code>wb</code></td><td>바이너리 쓰기 모드 (비텍스트 파일)</td></tr></tbody>
-</table>
+    열고자 하는 파일경로 외에도 파일을 열기 위한 옵션을 설정할 수 있다.
 
-`close()` 메소드로 더 이상 사용하지 않는 파일을 닫아주는 습관은 리소스 낭비를 줄여주므로 매우 중요하다. 예외가 발생하여도 정상적으로 파일을 닫을 수 있도록 [`try`](#tryexcept-예외-처리문)/[`except`](#tryexcept-예외-처리문) 예외 처리문 혹은 [`with`](#with-문) 문을 함께 사용할 것을 권장한다.
+    <table style="width: 60%; margin: auto;"><caption><code>open()</code> 함수 플래그</caption><colgroup><col style="width: 15%;"/><col style="width: 45%;"/><col style="width: 40%;"/></colgroup><thead><tr><th style="text-align: center;">전달인자</th><th style="text-align: center;">설명</th><th style="text-align: center;">비고: 파일 존재 여부</th></tr></thead><tbody><tr><td style="text-align: center;"><code>r</code></td><td>읽기 모드 (기본값)</td><td>파일 부재 시 오류 반환</td></tr><tr><td style="text-align: center;"><code>x</code></td><td>생성 모드</td><td>파일 존재 시 오류 반환</td></tr><tr><td style="text-align: center;"><code>w</code></td><td>덮어쓰기 모드</td><td>파일 부재 시 새로 생성</td></tr><tr><td style="text-align: center;"><code>a</code></td><td>덧붙이기 모드</td><td>파일 부재 시 새로 생성</td></tr><tr><td style="text-align: center;"><code>rb</code></td><td>바이너리 읽기 모드</td><td>파일 부재 시 오류 반환</td></tr><tr><td style="text-align: center;"><code>wb</code></td><td>바이너리 쓰기 모드</td><td>파일 부재 시 새로 생성</td></tr></tbody></table>
+
+* [`close()`](https://docs.python.org/3/distutils/apiref.html#distutils.text_file.TextFile.close) 메소드
+
+    더 이상 사용하지 않는 파일을 닫아주는 습관은 리소스 낭비를 줄여주므로 매우 중요하다. 예외가 발생하여도 정상적으로 파일을 닫을 수 있도록 [`try`](#tryexcept-예외-처리문)/[`except`](#tryexcept-예외-처리문) 예외 처리문 혹은 [`with`](#with-문) 문을 함께 사용할 것을 권장한다.
 
 ### `with` 문
 [`with`](https://docs.python.org/3/reference/compound_stmts.html#the-with-statement) 문은 해당 코드 블록 안에서만 사용할 수 있는 임시 변수를 생성한다. `with` 문으로 파일을 열었을 경우, 코드 블록이 종료되면 파일은 자동적으로 닫힌다.
@@ -1440,7 +1398,7 @@ with open("filename.txt") as file:
     ...
 ```
 
-이를 가능케 하는 [문맥 관리자](https://docs.python.org/3/library/stdtypes.html#typecontextmanager)(context manager)는 `with` 문을 지원하는 인터페이스 역할을 담당한다. 함수나 메소드에 문맥 관리자를 설정하는 방법은 두 가지가 있다:
+이를 가능케 하는 [문맥 관리자](https://docs.python.org/3/library/stdtypes.html#typecontextmanager)(context manager)는 `with` 문을 지원하는 인터페이스 역할을 맡는다. 함수나 메소드에 문맥 관리자를 설정하는 방법은 다음과 같다:
 
 1. `__enter__()`와 `__exit__()` 메소드
     
@@ -1463,19 +1421,19 @@ with open("filename.txt") as file:
 2. [`contextlib`](https://docs.python.org/3/library/contextlib.html) 모듈
     
     ```python
-   from contextlib import contextmanager
-   
-   # 컨텍스트 관리자 2 
-   class CLASS:
-       def __init__(self):
-           ...
-       
-       # "with" 문 지원 함수 혹은 메소드
-       @contextmanager
-       def method(self):
-           self.attr = expression
-           yield self.attr
-           ...
+    from contextlib import contextmanager
+    
+    # 컨텍스트 관리자 2 
+    class CLASS:
+        def __init__(self):
+            ...
+
+        # "with" 문 지원 함수 혹은 메소드
+        @contextmanager
+        def method(self):
+            self.attr = expression
+            yield self.attr
+            ...
     ```
 
 문맥 관리자는 `return` 혹은 `yield` 문으로 반환/양도된 데이터를 `with` 문에서 처리할 수 있는 리소스로 제공한다. 해당 리소스는 `as` 키워드로 별도의 명칭을 지정하지 않는 이상 암묵적으로 처리 대상으로 지목된다.
@@ -1491,30 +1449,25 @@ with instance.method():
 
 대표적인 컨텍스트 관리자의 실제 적용 예시로는 머신러닝 프레임워크의 일부인 [텐서보드](/docs/ko.TensorFlow#텐서보드)(TensorBoard)에서 확인할 수 있다.
 
-### 절대경로 및 상대경로
-컴퓨터에는 두 종류의 경로 탐색법이 존재한다.
-
-* **절대경로(absolute path)**: 시스템의 루트경로(예. 윈도우의 `C:\` 혹은 리눅스의 `/`)로부터 시작하여 탐색하는 방식이다.
-* **상대경로(relative path)**: 실행되고 있는 프로세스의 현 위치를 기준으로 경로를 탐색하는 방식이다.
-
-경로를 지정할 때에는 백슬래시 두 개 `\\`로 폴더 및 파일을 구분한다. 하나만 사용하면 [탈출 문자](#탈출-문자)가 되어 원치 않은 텍스트 연산이 수행될 수 있다.
-
-```python
-file = open("path\\filename.txt")
-```
-
 ## 파일 읽기
-파이썬에서 텍스트 기반 파일을 열었으면 `read()` 메소드로 파일 내용을 읽을 수 있다. 메소드의 인자로 정수를 건네면 파일로부터 지정한 바이트만큼 읽는다. 하나의 파일에서 `read()` 메소드는 여러 번 사용할 수 있으며, 마지막으로 읽은 부분에서부터 이어서 읽는다. 메소드에 인자를 전달하지 않으면 내용의 나머지 전부를 읽는다.
+파이썬에서 텍스트 기반 파일을 열었으면 [`read()`](https://docs.python.org/3/tutorial/inputoutput.html#methods-of-file-objects) 메소드로 파일 내용을 읽을 수 있다. 메소드의 인자로 정수를 건네면 파일로부터 지정한 바이트만큼 읽는다. 하나의 파일에서 `read()` 메소드는 여러 번 사용할 수 있으며, 마지막으로 읽은 부분에서부터 이어서 읽는다. 메소드에 인자를 전달하지 않으면 내용의 나머지 전부를 읽는다.
 
 ```python
-with open("path\\filename.txt") as file:
-    print(file.read(16))    # 내용 시작 부분에서부터 16 바이트를 읽는다.
-    print(file.read(4))     # 16 바이트 이후로부터 4 바이트를 읽는다.
-    print(file.read())      # 4 바이트 이후로부터 나머지 바이트를 읽는다.
-    print(file.read())      # 더 이상 읽을 내용이 없어 아무런 텍스트를 반환하지 않는다.
+with open("path\\filename.txt", "r") as file:
+    # 내용 시작 부분에서부터 16 바이트를 읽는다.
+    print(file.read(16))
+    
+    # 16 바이트 이후로부터 4 바이트를 읽는다.
+    print(file.read(4))
+
+    # 4 바이트 이후로부터 나머지 바이트를 읽는다.
+    print(file.read())
+
+    # 더 이상 읽을 내용이 없어 아무런 텍스트를 반환하지 않는다.
+    print(file.read())
 ```
 
-`readlines()` 메소드는 각 줄의 내용을 하나의 요소로 갖는 [리스트 객체](#리스트-객체)를 반환한다. 메소드의 인자로 정수를 건네면 파일로부터 지정한 바이트만큼 읽는다. 그러나 한 줄만 읽는 `readline()` 메소드와 혼돈하지 않도록 주의한다.
+[`readlines()`](https://docs.python.org/3/tutorial/inputoutput.html#methods-of-file-objects) 메소드는 각 줄의 내용을 하나의 요소로 갖는 [리스트 객체](#리스트-객체)를 반환한다. 메소드의 인자로 정수를 건네면 파일로부터 지정한 바이트만큼 읽는다. 그러나 한 줄만 읽는 `readline()` 메소드와 혼돈하지 않도록 주의한다.
 
 ```
 <filename.txt>
@@ -1524,7 +1477,7 @@ with open("path\\filename.txt") as file:
 ```
 
 ```python
-with open("path\\filename.txt") as file:
+with open("path\\filename.txt", "r") as file:
     print(file.readlines())
     print(file.readline())
 ```
@@ -1542,7 +1495,7 @@ for variable in file:
 ```
 
 ## 파일 쓰기
-파이썬에서 텍스트 기반 파일을 열었으면 `write()` 메소드로 파일 내용을 작성할 수 있다. 파일을 작성하는 모드에는 두 가지가 존재하며, 아래의 가상의 텍스트 파일을 예시로 든다:
+파이썬에서 텍스트 기반 파일을 열었으면 [`write()`](https://docs.python.org/3/tutorial/inputoutput.html#methods-of-file-objects) 메소드로 파일 내용을 작성할 수 있다. 파일을 작성하는 모드에는 두 가지가 존재하며, 아래의 가상의 텍스트 파일을 예시로 든다:
 
 ```
 <filename.txt>
@@ -1554,8 +1507,8 @@ for variable in file:
 1. 덮어쓰기(overwrite) 모드 `w`는 기존의 모든 내용들을 삭제하여 처음부터 새로 작성한다.
     
     ```python
-   with open("path\\filename.txt", "w") as file:
-       file.write("텍스트 덮어쓰기!")
+    with open("path\\filename.txt", "w") as file:
+        file.write("텍스트 덮어쓰기!")
     ```
     ```
     <filename.txt>
@@ -1565,8 +1518,8 @@ for variable in file:
 2. 덧붙여 쓰기(append) 모드 `a`는 기존의 모든 내용들을 유지한 채 맨 끝 단락에서부터 작성한다.
 
     ```python
-   with open("path\\filename.txt", "a") as file:
-       file.write("텍스트 덧붙여 쓰기!")
+    with open("path\\filename.txt", "a") as file:
+        file.write("텍스트 덧붙여 쓰기!")
     ```
     ```
     <filename.txt>
@@ -1577,44 +1530,32 @@ for variable in file:
 
 성공적으로 파일 작성을 완료하였으면 `write()` 메소드는 작성된 내용의 바이트 개수를 반환한다.
 
-### 파일 생성
-파이썬 파일의 `write()` 메소드는 기존 파일을 작성할 뿐만 아니라, 해당하는 이름의 파일을 찾을 수가 없다면 새로운 파일을 생성한다.
-
-```python
-with open("path\\NEW_filename.txt", "w") as file:
-    file.write("새 파일 생성!")
-```
-```
-<NEW_filename.txt>
-새 파일 생성!
-```
-
 # 모듈
 [모듈](https://docs.python.org/3/tutorial/modules.html)(module)은 부가적인 기능 및 데이터를 제공하는 파이썬 소스 코드이며, 이들은 일반 스크립트와 마찬가지로 `.PY` 확장자를 갖는다. 파이썬 모듈을 불러오는 방법에는 두 가지가 있다:
 
-* [`import`](https://docs.python.org/3/reference/simple_stmts.html#the-import-statement) 키워드에 모듈명을 기입하여 모듈에 정의된 모든 변수, 함수, 그리고 클래스를 불러온다.
+1. [`import`](https://docs.python.org/3/reference/simple_stmts.html#the-import-statement) 키워드에 모듈명을 기입하여 모듈에 정의된 모든 [변수](#변수), [함수](#함수), 그리고 [클래스](#클래스)를 불러온다.
 
     ```python
-  # 모듈 불러오기
-  import module
+    # 모듈 불러오기
+    import module
 
-  # 모듈에 정의된 함수 호출
-  module.function()
+    # 모듈에 정의된 함수 호출
+    module.function()
     ```
 
-* [`from`](https://docs.python.org/3/reference/simple_stmts.html#from) 키워드로 모듈명을 기입한 다음 `import` 키워드로 불러오고자 하는 변수, 함수, 혹은 클래스를 지정한다.
+1. [`from`](https://docs.python.org/3/reference/simple_stmts.html#from) 키워드로 모듈명을 기입한 다음 `import` 키워드로 불러오고자 하는 변수, 함수, 혹은 클래스를 지정한다.
 
     > 만일 모든 변수, 함수, 그리고 클래스를 불러오려면 `from module import *`로 작성한다.
 
     ```python
-  # 모듈 불러오기: 선택적
-  from module import variable, function, classes
+    # 모듈 불러오기: 선택적
+    from module import variable, function, classes
 
-  # 모듈에 정의된 함수 호출
-  function()
+    # 모듈에 정의된 함수 호출
+    function()
     ```
 
-불러온 모듈이나 변수, 함수, 그리고 클래스는 `as` 키워드를 통해 별칭을 지정할 수 있다. 이는 복잡하거나 긴 모듈명을 간단한 이름으로 호출하거나, 혹은 기존 데이터의 식별자와 중복되어 발생할 수 있는 문제를 방지하기 위해 사용된다.
+불러온 모듈이나 변수, 함수, 그리고 클래스는 `as` 키워드를 통해 별칭을 지정할 수 있다. 이는 복잡하거나 긴 모듈명을 간단한 이름으로 호출하거나, 혹은 기존 데이터의 식별자와 중첩하여 발생할 수 있는 네이밍 충돌 문제를 방지하기 위해 사용된다.
 
 ```python
 # 모듈 별칭 지정
@@ -1625,7 +1566,7 @@ from module import variable as alias1, function as alias2
 ```
 
 ### 진입점
-[진입점](https://ko.wikipedia.org/wiki/엔트리_포인트)(entry point)는 프로그램이 시작되는 부분을 의미하지만, 파이썬 프로그래밍 언어는 단일 스크립트에서 상단에서부터 순차적으로 실행하므로 진입점에 대한 개념이 무색하다. 그 대신에 구동되고 있는 파이썬 프로세스가 해당 스크립트로부터 실행된 것인지, 아니면 모듈로써 불러온 것인지 판별이 가능하다.
+[진입점](https://ko.wikipedia.org/wiki/엔트리_포인트)(entry point)는 프로그램이 시작되는 부분을 의미하지만, 파이썬 프로그래밍 언어는 단일 스크립트의 상단에서부터 코드를 순차적으로 실행하므로 진입점에 대한 개념이 무색하다. 하지만 구동되고 있는 파이썬 [프로세스](ko.Process.md)가 해당 스크립트로부터 실행된 것인지, 아니면 모듈로써 불러온 것인지 판별할 수 있다.
 
 ```python
 # 진입점
@@ -1633,26 +1574,26 @@ if __name__ == "__main__":
     ...
 ```
 
-> 절대로 비교 연산자 `==`는 논리 연산자 `is`로 대체되어서는 안된다.
+> 절대로 `==` 비교 연산자는 `is` 논리 연산자로 대체되어서는 안된다.
 
-`import` 문으로 불러온 모듈이 정의된 변수, 함수, 그리고 클래스를 제공하기 위해서는 스크립트 내부에 작성된 코드를 실행해야 한다. 예를 들어, 정의와 상관없는 `print()` 출력 함수가 모듈에 작성되어 있으면 터미널에 해당 텍스트가 나타난다. 하지만 위의 조건문 하에 스크립트 코드를 작성하면 모듈로 불러올 때에는 실행되지 않는다. 그리고 파이썬 프로그래밍 언어에서는 이를 "진입점"이라고 부른다.
+위의 조건문 하에 코드를 작성하면 모듈로 불러올 때에는 실행되지 않는 특성이 있어, 파이썬에서는 해당 부분을 "진입점"이라고 부른다.
 
 ## 패키지
-[패키지](https://docs.python.org/3/tutorial/modules.html#packages)(package)는 여러 모듈들을 하나의 공간으로 분류하는 일종의 [네임스페이스](https://ko.wikipedia.org/wiki/이름공간)(namespace)이다.
-
-> 파이썬의 패키지는 폴더 형태를 취하고 있으며, 이는 인터프리터 설치 경로로부터 `.\Lib\site-packages`에서 찾아볼 수 있다.
-
-모든 파이썬 패키지는 `__init__.py`라는 특수한 파이썬 파일을 반드시 가져야 한다. 비록 안에는 아무런 내용이 없더라도, 파이썬 인터프리터가 이를 패키지로 인식하도록 하는 중요한 역할을 한다.
+[패키지](https://docs.python.org/3/tutorial/modules.html#packages)(package)는 여러 모듈들의 집합을 하나의 공간으로 분류하는 일종의 [네임스페이스](https://ko.wikipedia.org/wiki/이름공간)(namespace)이다.
 
 ```python
 import package.module
 ```
 
+> 파이썬의 패키지는 폴더 형태를 취하고 있으며, 이는 인터프리터 설치 경로로부터 `.\Lib\site-packages`에서 찾아볼 수 있다.
+
+모든 파이썬 패키지는 `__init__.py`라는 특수한 파이썬 파일이 반드시 존재한다. 비록 안에는 아무런 내용이 없더라도, 파이썬 인터프리터가 이를 패키지로 인식하도록 하는 중요한 역할을 한다.
+
 ### PyPI
-[PyPI](https://pypi.org/)(Python Package Index; 파이썬 패키지 목록)는 온라인 패키지 저장소로 파이썬 커뮤니티에서 제작한 상당수의 패키지를 보유한다. PyPI로부터 패키지를 설치하려면 [pip](#pip) 소프트웨어가 필요하다.
+파이썬 패키지 목록, 일명 [PyPI](https://pypi.org/)(Python Package Index)는 온라인 패키지 저장소로 파이썬 커뮤니티에서 제작한 상당수의 패키지를 보유한다. PyPI로부터 패키지를 설치하려면 [pip](#pip) 소프트웨어가 필요하다.
 
 ### pip
-[pip](https://pip.pypa.io/en/stable/)는 파이썬 패키지 관리 소프트웨어이며 기본적으로 파이썬 인터프리터와 함께 설치된다. pip는 [GUI](https://ko.wikipedia.org/wiki/그래픽_사용자_인터페이스)가 갖춰진 프로그램이 아니므로 패키지 설치 및 관리는 [명령 프롬프트](https://ko.wikipedia.org/wiki/Cmd.exe) 또는 [파워셸](https://ko.wikipedia.org/wiki/파워셸)과 같은 터미널에서 처리되어야 한다.
+[pip](https://pip.pypa.io/en/stable/)는 파이썬 패키지 관리 소프트웨어이며 기본적으로 파이썬 인터프리터와 함께 설치된다. [GUI](https://ko.wikipedia.org/wiki/그래픽_사용자_인터페이스) 프로그램이 아니므로 패키지 설치 및 관리는 [명령 프롬프트](https://ko.wikipedia.org/wiki/Cmd.exe) 또는 [파워셸](https://ko.wikipedia.org/wiki/파워셸)과 같은 [터미널](https://ko.wikipedia.org/wiki/명령_줄_인터페이스)에서 처리되어야 한다.
 
 <table style="width: 50%; margin: auto;">
 <caption><code>pip</code> 명령어</caption>
@@ -1661,65 +1602,60 @@ import package.module
 <tbody><tr><td style="text-align: center;"><code>install</code></td><td>패키지 설치</td><td><code>pip install &lt;패키지&gt;</code></td></tr><tr><td style="text-align: center;"><code>uninstall</code></td><td>패키지 제거</td><td><code>pip uninstall &lt;패키지&gt;</code></td></tr><tr><td style="text-align: center;"><code>list</code></td><td>설치된 패키지 나열</td><td><code>pip list</code></td></tr></tbody>
 </table>
 
-[윈도우 OS](https://ko.wikipedia.org/wiki/마이크로소프트_윈도우)에서 pip를 사용할 경우, 단독적인 `pip`가 아닌 `python -m pip` 명령어를 사용하는 것을 권장한다(macOS 및 리눅스 제외).
+[윈도우 OS](https://ko.wikipedia.org/wiki/마이크로소프트_윈도우)에서 pip를 사용할 경우, 단독적인 `pip`가 아닌 `python -m pip` 명령어를 사용하는 것을 권장한다(macOS 및 리눅스 제외). 이는 컴퓨터 환경설정에서 지정된 파이썬 인터프리터의 pip를 접속한다는 것을 의미하므로 인터프리터 간의 패키지 관리에 혼돈을 줄일 수 있다.
 
 ```terminal
 python -m pip
 ```
 
-특히 원도우 10 이상의 운영체제를 사용하는 경우 `python`을 입력하는 것만으로 마이크로소프트 스토어로 이동하게 되는데, 해결 방법은 두 가지가 있다.
+원도우 10 이상의 운영체제에서 `python`을 터미널에 입력하면 마이크로소프트 스토어로 이동하는 데, 두 가지 해결 방법이 있다.
 
-1. `python`을 `py`로 대체 ([Python Launcher](https://docs.python.org/3/using/windows.html#python-launcher-for-windows) 프로그램 사용)
-2. 컴퓨터에서 "설정 → 앱 → 앱 및 기능 → 앱 실행 별칭 관리"에서 `python.exe` 및 `python3.exe`을 해제 (본질적 문제 해결)
+1. `python`을 `py`로 대체하여 [Python Launcher](https://docs.python.org/3/using/windows.html#python-launcher-for-windows) 프로그램을 사용
+2. 시스템 설정의 "앱 실행 별칭(App execution aliases)"에서 `python.exe` 및 `python3.exe`을 해제
 
-위의 명령어는 컴퓨터 환경설정에서 지정된 파이썬 인터프리터의 pip를 접속한다는 것을 의미한다. 이를 통해 인터프리터 간의 패키지 관리에 혼돈을 줄일 수 있다. 만일 32비트 파이썬 3.8 인터프리터가 설치되었다면 Python Launcher로 다음과 같이 접근한다.  
+만일 32비트 파이썬 3.8 인터프리터가 설치되었다면 Python Launcher로 다음과 같이 접근한다.  
 
 ```terminal
 py -3.8-32 -m pip
 ```
 
 # 가상환경
-[가상환경](https://docs.python.org/3/glossary.html#term-virtual-environment)(virtual environment)은 각 파이썬 프로젝트마다 런타임 환경을 고립시켜 타 프로젝트에 영향을 주지 않도록 한다. [pip](#pip)로 설치한 [패키지](#패키지)들은 전부 인터프리터 경로에 설치되는데, 파이썬 프로젝트마다 서로 다른 버전의 패키지가 요구될 때 매우 골치아픈 상황이 발생한다. 바로 다른 버전의 동일한 패키지 설치가 불가하기 때문이다. 가상환경은 패키지를 프로젝트에 국한된 런타임 환경에 설치하므로 패키지 관리가 훨씬 용이하다.
+만일 서로 다른 버전의 [패키지](#패키지)가 요구되는 다수의 프로젝트가 존재할 시, 상이하는 여러 버전의 패키지 설치가 불가하므로 다른 프로젝트를 작업할 때마다 버전을 새로 설치해야 하는 불편함이 존재한다. [가상환경](https://docs.python.org/3/glossary.html#term-virtual-environment)(virtual environment)은 파이썬 프로젝트의 런타임 환경을 다른 파이썬 프로젝트에 영향을 미치지 않도록 고립시키기 때문에, 문단에서 상시한 패키지 버전 충돌 문제가 나타나지 않으며 관리가 용이하다.
 
-본 장은 파이썬 3에 기본적으로 제공하는 [`venv`](https://docs.python.org/3/library/venv.html) 가상환경 패키지를 위주로 설명한다.
-
-### 가상환경 생성
-파이썬 프로젝트란, 단순히 개발 중인 파이썬 스크립트가 위치한 폴더를 가리킨다. 터미널에서 가상환경을 설정하려는 경로로 이동해 아래 명령어를 입력한다.
+다음은 명령은 파이썬 3에 기본적으로 제공하는 [`venv`](https://docs.python.org/3/library/venv.html) 패키지를 활용하여 가상환경을 생성한다. 
 
 ```terminal
 py -m venv .venv
 ```
 
-이는 `.venv`라는 폴더를 생성하는데, 가상환경을 통해 설치한 패키지들은 전부 해당 폴더에 저장된다.
+위의 명령은 프로젝트 경로에 `.venv`라는 폴더를 생성하며, 가상환경을 통해 설치한 패키지들은 전부 해당 폴더에 저장된다.
 
 ### 가상환경 활성
-가상환경에 패키지를 설치하려면 우선 사용 중인 터미널에 가상환경을 활성시켜야 한다. 그렇지 않으면 설치한 패키지들은 가상환경이 아닌 시스템에 설치된 인터프리터 경로에 패키지가 설치된다.
+가상환경에 패키지를 설치하려면 사용 중인 [터미널](https://ko.wikipedia.org/wiki/명령_줄_인터페이스)에 가상환경을 활성시켜야 한다. 가상환경을 활성화하지 않은 채 패키지를 설치하면 시스템 전역의 인터프리터에 패키지를 설치하게 된다.
 
 * **[명령 프롬프트](https://ko.wikipedia.org/wiki/Cmd.exe)**
 
     ```terminal
-  .venv\Scripts\activate.bat
+    .venv\Scripts\activate.bat
     ```
 
-* **[파워셸](https://ko.wikipedia.org/wiki/파워셸)**
+* **[PowerShell](https://ko.wikipedia.org/wiki/파워셸)**
 
-    ```terminal
-  .venv/Scripts/Activate.ps1
+    ```powershell
+    .venv/Scripts/activate.ps1
     ```
 
-* **[유닉스 셸](https://ko.wikipedia.org/wiki/유닉스_셸)**
+* **[Bash](https://ko.wikipedia.org/wiki/배시_(유닉스_셸))**
 
-    ```terminal
-  source .venv/bin/activate
+    ```bash
+    source .venv/bin/activate
     ```
-
-명령줄 좌측에 `(.venv)`라는 표시가 나타났으면 가상환경 접속에 성공한 것이다.
 
 ### 가상환경 비활성
-터미널에 가상환경을 비활성화하려면 아래의 명령어를 입력한다.
+터미널에 활성화된 가상환경을 비활성화하려면 아래의 명령어를 입력한다.
 
 ```terminal
 deactivate
 ```
 
-이는 `.venv\Scripts\deactivate` 명령어를 입력하는 것과 동일하다. 그러므로 프로젝트 경로를 다른 위치로 옮기면 `deactivate` 명령어가 동작하지 않아 손수 경로를 찾아 `deactivate` 파일을 실행해야 한다.
+이는 `.venv\Scripts\deactivate` 명령어를 입력하는 것과 동일하다. 만일 프로젝트 경로를 다른 위치로 옮기면 `deactivate` 명령어가 동작하지 않아 손수 경로를 찾아 `deactivate` 파일을 실행해야 한다.
