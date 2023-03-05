@@ -84,7 +84,6 @@ MNEMONIC    OPERAND     ; 명령어 집합을 표현하는 기초적인 문장 �
 
 ![x86-64 아키텍처의 프로세서 레지스터<sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:Table_of_x86_Registers_svg.svg">위키미디어</a></i></sub>](./images/processor_x64_registers.svg)
 
-## 레지스터 구조
 위의 그림에서 볼 수 있듯이 x86-64(일명 x64) 아키텍처에 여러 레지스터가 존재하는 걸 확인할 수 있다. 그 중에서 `RAX` 안에 `EAX`가 들어있는 등의 구조를 여럿 찾아볼 수 있는데, 우선 이들이 무엇을 의미하는지 파악해야 한다. 가장 기초적인 범용 레지스터(general purpose register) A, B, C, 그리고 D를 위주로 살펴본다.
 
 <table style="width: 80%; margin: auto;">
