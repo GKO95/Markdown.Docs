@@ -49,14 +49,23 @@ section .data
 message db "Hello World", 10, 0    ; ASCII 10 (new line '\n') and 0 (null terminator '\0')
 ```
 
+여기서 세미콜론 `;`은 주석(comment)을 나타내며 프로그램의 소스 코드로 취급하지 않아 실행되지 않는다.
+
 ### 진입점
 [진입점](https://ko.wikipedia.org/wiki/엔트리_포인트)(entry point)은 프로그램이 시작되는 지점이다. C 런타임 라이브러리는 `_main` 함수를 기본 진입점으로 지정하였지만, [링커](https://ko.wikipedia.org/wiki/링커_(컴퓨팅))에게 진입점을 명시한다면 어떠한 이름을 지정해도 상관없다. 그리고 프로그램을 실행할 수 있도록 진입점은 외부에서도 접근이 가능한 [전역 함수](ko.C.md#함수)(global function)로 선언되어야 한다.
 
 > `_main`에서의 밑줄은 사용자가 정의한 심볼과 네이밍 충돌을 방지하기 위한 관습으로, GCC 컴파일러는 C 언어 심볼에 해당 관습을 기본으로 적용한다.
 
-### 주석
-주석(comment)은 프로그램의 소스 코드로 취급하지 않아 실행되지 않는 영역이다. 흔히 코드에 대한 간단한 정보를 기입하기 위해 사용된다.
+## 문장
+[문장](https://ko.wikipedia.org/wiki/문_(프로그래밍))(statement)은 실질적으로 무언가를 실행하는 구문적 존재를 가리킨다. 어셈블리 언어는 스크립트 줄마다 한 개의 문장만 기입될 수 있다.
 
 ```nasm
-int 0x80    ; 여기서부터 소스 코드로 인식되지 않아 실행되지 않는다.
+MNEMONIC    OPERAND     ; 명령어 집합을 표현하는 기초적인 문장 구성
 ```
+위의 문장은 하나의 [명령어 집합](https://ko.wikipedia.org/wiki/명령어_집합)<sub>([참고 자료](http://sparksandflames.com/files/x86InstructionChart.html))</sub>을 나타내며, 이를 구성하는 요소들은 다음 역할을 지닌다:
+
+* [니모닉](https://ko.wikipedia.org/wiki/기억술#치환법(변환법))(mnemonic): 기계어 연산자(일명 opcode)를 프로그래머가 쉽게 알아볼 수 있도록 영문으로 명시된 심볼적 명칭이다(`ADD`, `MOV`, 등).
+* [피연산자](https://ko.wikipedia.org/wiki/피연산자#컴퓨터_과학)(operand): 니모닉으로부터 연산될 데이터들이며, `RET`와 같이 일부 경우에는 피연산자가 요구되지 않는다.
+
+### 레이블
+[레이블](https://ko.wikipedia.org/wiki/레이블_(컴퓨터_과학))(label)은 [메모리 주소](ko.C.md#포인터)를 명칭으로 호출할 수 있도록 하며, [C](ko.C.md)/[C++](ko.Cpp.md) 언어의 `goto` 이동문에 사용되는 [레이블](ko.C.md#goto-이동문)과 동일하다. 다시 말해, 레이블은 `.data` 혹은 `.bss` 영역에서 다루어지는 [변수](ko.C.md#변수)가 절대 아니다. 본 장의 예시에서 `_main`은 진입점을 가리키는 레이블에 해당한다.
