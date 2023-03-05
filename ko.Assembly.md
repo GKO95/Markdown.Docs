@@ -84,51 +84,37 @@ MNEMONIC    OPERAND     ; 명령어 집합을 표현하는 기초적인 문장 �
 
 ![x86-64 아키텍처의 프로세서 레지스터<sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:Table_of_x86_Registers_svg.svg">위키미디어</a></i></sub>](./images/processor_x64_registers.svg)
 
-위의 그림에서 볼 수 있듯이 x86-64(일명 x64) 아키텍처에 여러 레지스터가 존재하는 걸 확인할 수 있다. 그 중에서 `RAX` 안에 `EAX`가 들어있는 등의 구조를 여럿 찾아볼 수 있는데, 우선 이들이 무엇을 의미하는지 파악해야 한다. 가장 기초적인 범용 레지스터(general purpose register) A, B, C, 그리고 D를 위주로 살펴본다.
+위의 그림은 x86-64(일명 x64) 아키텍처의 다양한 레지스터를 보여주며, 그 중에는 레지스터(예. 64비트 `RAX`) 안에 또 다른 레지스터(예. 32비트 `EAX`)가 들어있는 구조를 찾아볼 수 있다. 이는 사실상 하드웨어적으로는 하나의 메모리이지만, `EAX`는 메모리의 전체 64비트 중에서 하위 32비트만을 활용하는 레지스터이다.
 
-<table style="width: 80%; margin: auto;">
-<caption style="caption-side: top;">x86-64 프로세서의 범용 레지스터 구조</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup>
-<thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead>
-<tbody style="text-align: center;">
-<tr><td colspan="4"><code>R?(X)</code></td></tr>
-<tr><td>-</td><td colspan="3"><code>E?(X)</code></td></tr>
-<tr><td colspan="2">-</td><td colspan="2"><code>?(X)</code></td></tr>
-<tr><td colspan="2">-</td><td><code>?H</code></td><td><code>?L</code></td></tr>
-</tbody>
-</table>
+* **[범용 레지스터](https://en.wikipedia.org/wiki/Processor_register#GPR)(General-Purpose Register; GPR)**
 
-* **16비트 아키텍처**
+    초창기 16비트 아키텍처 당시에도, 범용 레지스터 `A`, `B`, `C`, 그리고 `D`는 편의상 8비트 단위로 관리되어야 하는 경우가 존재하였다. 상위(High) 및 하위(Low) 8비트 명칭을 접미사 `H`와 `L`로 분류하며, 이 둘을 종합한 레지스터는 16비트로 "확장되었다(e**X**tended)"고 하여 접미사 `X`가 붙는다.
 
-    레지스터에 따라 구체적인 구조와 명칭하는 방법이 다소 상이할 수 있다:
+    32비트 및 64비트의 접두사 `E`와 `R`은 각각 "확장되다(**E**xtended)"와 "레지스터(**R**egister)"의 앞글자를 인용한 것이다.
 
-    * *범용 레지스터 A, B, C, D*
+    <table style="width: 80%; margin: auto;"><caption style="caption-side: top;">x86-64 프로세서의 GPR 구조</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>R?X</code></td></tr><tr><td>-</td><td colspan="3"><code>E?X</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>?X</code></td></tr><tr><td colspan="2">-</td><td><code>?H</code></td><td><code>?L</code></td></tr></tbody></table>
 
-        비록 16비트 워드이지만, 편의상 8비트 단위로 관리되어야 하는 경우가 존재한다. 상위(High) 및 하위(Low) 8비트 명칭을 접미사 `H`와 `L`로 분류하며, 이 둘을 종합한 레지스터는 16비트로 "확장되었다(e**X**tended)"고 하여 접미사 `X`가 붙는다.
+    x86-64 아키텍처의 64비트 모드에서만 사용할 수 있는 범용 레지스터 `R8` ~ `R15`는 본래 64비트를 위해 설계되었으므로, 하위 비트의 레지스터를 부르는 명칭을 달리 택하였다: 접미사에 `DWORD`, `WORD`, 그리고 `BYTE` 자료형의 앞글자를 따서 분별한다.
 
-    * *64비트 전용 범용 레지스터 `R8` ~ `R15`*
+    <table style="width: 80%; margin: auto;"><caption style="caption-side: top;">x86-64 프로세서의 64비트 전용 GPR 구조</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>?</code></td></tr><tr><td>-</td><td colspan="3"><code>?D</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>?W</code></td></tr><tr><td colspan="3">-</td><td><code>?B</code></td></tr></tbody></table>
 
-        본래 64비트 아키텍처를 대상으로 설계된 레지스터이므로, 8비트와 16비트 구성을 각각 바이트(byte)와 워드(word)의 앞글자를 따와 `R8B` (~ `R15B`) 그리고 `R8W` (~ `R15W`)라고 칭한다.
+* **[주소](ko.C.md#포인터) 레지스터(Address Register)**
 
-    * *그 외 레지스터*
+    RAM의 메모리 주소를 다루는 레지스터인 관계로 범용 레지스터와 달리 16비트 전체가 의미있는 데이터를 나타내는 경우가 대다수이다. 그러한 이유로 하위 8비트에 대한 레지스터는 x86-64의 64비트 모드가 아닌 이상 사용되지 않는다.
 
-        나머지 레지스터는 일반적으로 (워드와 동일한 크기의) 메모리 주소를 다루는 경향이 많아, 16비트 전체가 의미있는 데이터를 나타내는 경우가 대다수이다. 그러므로 16비트 레지스터는 `IP`, `SP`, `BP`처럼 접미사나 접두사가 붙지 않으며, 일부는 하위 8비트에 대해서만 접미사 `L`을 붙여 호출할 수 있다.
+    포인터 레지스터는 스택과 관련된 메모리 주소를 다루며, 스택 프레임의 기반 주소(base address)의 `B`와 현재 스택 주소(stack address)의 `S`가 존재한다.
 
-* **32비트 아키텍처**
+    <table style="width: 80%; margin: auto;"><caption style="caption-side: top;">x86-64 프로세서의 포인터 레지스터 구조</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>R?P</code></td></tr><tr><td>-</td><td colspan="3"><code>E?P</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>?P</code></td></tr><tr><td colspan="3">(64비트 모드에서만 지원)</td><td><code>?PL</code></td></tr></tbody></table>
 
-    레지스터에 따라 구체적인 구조와 명칭하는 방법이 다소 상이할 수 있다:
+    인덱스 레지스터는 배열 혹은 문자열을 처리하는 데 원천 주소(source address) `S`와 목적 주소(destination address) `D`가 존재한다.
 
-    * *32비트 범용 레지스터 및 그 외 레지스터*
+    <table style="width: 80%; margin: auto;"><caption style="caption-side: top;">x86-64 프로세서의 인덱스 레지스터 구조</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>R?I</code></td></tr><tr><td>-</td><td colspan="3"><code>E?I</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>?I</code></td></tr><tr><td colspan="3">(64비트 모드에서만 지원)</td><td><code>?IL</code></td></tr></tbody></table>
 
-        16비트로 레지스터에서 32비트로 "확장되었다(**E**xtended)"는 의미로 접두사 `E`가 붙는다.
+* **특수 레지스터(Special-Purpose Register)**
 
-    * *64비트 전용 범용 레지스터 `R8` ~ `R15`*
+    특수한 목적을 가진 레지스터는 몇 가지 종류가 존재하지만, 대표적으로 다음으로 실행할 명령어의 주소를 가리키는 [IP](https://ko.wikipedia.org/wiki/프로그램_카운터)(instruction pointer)가 있다.
 
-        본래 64비트 아키텍처를 대상으로 설계된 레지스터이므로, 32비트 구성을 `DWORD`(doubleword) 자료형의 앞글자를 따와 `R8D` (~ `R15D`)라고 칭한다.
-
-* **64비트 아키텍처**
-
-    레지스터(**R**egister)를 의미하는 접두사 `R`이 모든 레지스터 이름 앞에 붙는다.
+    <table style="width: 80%; margin: auto;"><caption style="caption-side: top;">x86-64 프로세서의 IP 레지스터 구조</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>RIP</code></td></tr><tr><td>-</td><td colspan="3"><code>EIP</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>IP</code></td></tr></tbody></table>
 
 # 명령어
 > *참고: [Intel x86 Assembler Instruction Set Opcode Table](http://sparksandflames.com/files/x86InstructionChart.html)*
