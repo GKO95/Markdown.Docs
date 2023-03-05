@@ -307,7 +307,7 @@ NameError: name 'variable' is not defined
 <colgroup><col style="width: 50%;"><col style="width: 50%;"></colgroup>
 <thead><tr><th style="text-align: center;">문자열 연결</th><th style="text-align: center;">서식화된 문자열 리터럴</th></tr></thead>
 <tbody>
-<tr style="vertical-align: top; overflow-wrap: break-word;"><td>
+<tr style="vertical-align: top;"><td>
 
 ```python
 A, B = 10.0, 파이썬
@@ -902,38 +902,56 @@ Hello World!
 
 다음은 매개변수에 사용되는 연산자로 전달인자을 받는데 유연성을 제공한다. 이들은 프로그래밍 구문상 명확한 구별이 가능해야 하므로 반드시 일반 매개변수 뒤에 위치해야 한다.
 
-<table style="width: 80%; margin: auto;">
-<caption style="caption-side: top;"></caption>
-<colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup>
-<thead><tr><th style="text-align: center">연산자</th><th style="text-align: center">구문</th><th style="text-align: center">설명</th></tr></thead>
-<tbody>
-<tr><td style="text-align: center;"><code>=</code></td><td style="text-align: center;"><code>arg = value</code></td><td>전달인자가 없으면 기본값 <code>value</code>가 대신 매개변수에 할당된다.</td></tr><tr><td style="text-align: center;"><code>*</code></td><td style="text-align: center;"><code>*args</code></td><td><a href="#시퀀스-언패킹">시퀀스 언패킹</a>으로 여러 개의 전달인자들을 하나의 튜플로 전달받는다.</td></tr><tr><td style="text-align: center;"><code>**</code></td><td style="text-align: center;"><code>**kwargs</code></td><td><a href="#딕셔너리-언패킹">딕셔너리 언패킹</a>으로 여러 개의 <code>key = value</code> 형식 전달인자들을 하나의 딕셔너리로 전달받는다.</td></tr></tbody>
-</table>
+<table style="width: 100%; margin: auto;">
+
+<colgroup><col style="width: 33.3%;"/><col style="width: 33.3%;"/><col style="width: 33.3%;"/></colgroup>
+<thead><tr><th style="text-align: center;"><code>arg =  value</code></th><th style="text-align: center;"><code>*args</code></th><th style="text-align: center;"><code>**kwargs</code></th></tr></thead>
+<tbody><tr>
+<td>전달인자가 없으면 기본값 <code>value</code>가 대신 매개변수에 할당된다</td><td><a href="#시퀀스-언패킹">시퀀스 언패킹</a>으로 여러 개의 전달인자들을 하나의 튜플로 전달받는다.</td><td><a href="#딕셔너리 언패킹">딕셔너리 언패킹</a>으로 여러 개의 <code>key = value</code> 형식 전달인자들을 하나의 딕셔너리로 전달받는다.</td>
+</tr><tr style="vertical-align: top;"><td>
 
 ```python
-''' 예시. arg = value '''
 def function(arg = "Python"):
     print(arg)
-    
-function()                    # 출력: Python
-function("Hello World!")      # 출력: Hello World!
+
+funtion()
+funtion("Hello World!")
 ```
-----
+</td><td>
+
 ```python
-''' 예시. *args '''
 def function(*args):
     print(args)
-    
-function(1, 2, 3, 4)          # 출력: (1, 2, 3, 4)
+
+funtion(1, 2, 3, 4)
 ```
-----
+</td><td>
+
 ```python
-''' 예시. **kwargs '''
 def function(**kwargs):
     print(kwargs)
-    
-function(param1 = 3, param2 = "Hello World!")    # 출력: {param1: 3, param2: 'Hello World!'}
+
+function(arg1 = 3, arg2 = "ABC")
 ```
+</td></tr>
+<tr style="vertical-align: top;"><td>
+
+```terminal
+Python
+Hello World!
+```
+</td><td>
+
+```terminal
+(1, 2, 3, 4)
+```
+</td><td>
+
+```terminal
+{arg1: 3, arg2: 'ABC'}
+```
+</td></tr></tbody>
+</table>
 
 ## 람다 표현식
 [람다 표현식](https://docs.python.org/3/tutorial/controlflow.html#lambda-expressions)(lambda expression), 일명 람다 함수(lambda function) 혹은 익명 함수(anonymous function)는 이름이 없는 (즉, 익명) 함수로써 단일 표현식으로만 값을 반환한다. 익명 함수는 `lambda` 키워드로 생성되어 흔히 일회용 함수 또는 [고차 함수](#고차-함수)의 전달인자로 사용된다. 비록 식별자가 필요하지 않는 익명 함수일지라도, 람다 표현식은 재호출을 위해 일반 함수처럼 식별자를 가질 수 있다.
