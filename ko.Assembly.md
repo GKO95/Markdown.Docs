@@ -88,31 +88,37 @@ MNEMONIC    OPERAND     ; 명령어 집합을 표현하는 기초적인 문장 �
 
 * **[범용 레지스터](https://en.wikipedia.org/wiki/Processor_register#GPR)(General-Purpose Register; GPR)**
 
-    초창기 16비트 아키텍처 당시에도, 범용 레지스터 `A`, `B`, `C`, 그리고 `D`는 편의상 8비트 단위로 관리되어야 하는 경우가 존재하였다. 상위(High) 및 하위(Low) 8비트 명칭을 접미사 `H`와 `L`로 분류하며, 이 둘을 종합한 레지스터는 16비트로 "확장되었다(e**X**tended)"고 하여 접미사 `X`가 붙는다.
+    초창기 16비트 아키텍처 당시에도 범용 레지스터 `A`, `B`, `C`, 그리고 `D`는 편의상 8비트 단위로 관리 혹은 처리되어야 하는 경우가 존재하였다. 상위(High) 및 하위(Low) 8비트 명칭을 접미사 `H`와 `L`로 분류하며, 이 둘을 종합한 레지스터는 16비트로 "확장되었다(e**X**tended)"고 하여 접미사 `X`가 붙는다.
 
-    32비트 및 64비트의 접두사 `E`와 `R`은 각각 "확장되다(**E**xtended)"와 "레지스터(**R**egister)"의 앞글자를 인용한 것이다.
+    해당 범용 레지스터들은 32비트 및 64비트 프로세서의 등장으로 각각 접두사 `E`(**E**xtended의 앞글자)와 `R`(**R**egister의 앞글자)"를 붙여 명칭한다.
 
     <table style="width: 80%; margin: auto;"><caption style="caption-side: top;">x86-64 프로세서의 GPR 구조</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>R?X</code></td></tr><tr><td>-</td><td colspan="3"><code>E?X</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>?X</code></td></tr><tr><td colspan="2">-</td><td><code>?H</code></td><td><code>?L</code></td></tr></tbody></table>
 
-    x86-64 아키텍처의 64비트 모드에서만 사용할 수 있는 범용 레지스터 `R8` ~ `R15`는 본래 64비트를 위해 설계되었으므로, 하위 비트의 레지스터를 부르는 명칭을 달리 택하였다: 접미사에 `DWORD`, `WORD`, 그리고 `BYTE` 자료형의 앞글자를 따서 분별한다.
+    x86-64 아키텍처의 64비트 모드에서만 사용할 수 있는 범용 레지스터 `R8` ~ `R15`는 본래 64비트를 위해 설계되었으므로, 하위 비트의 레지스터를 부르는 명칭을 달리 택하였다: 접미사에 `DWORD` (32비트), `WORD` (16비트), 그리고 `BYTE` (8비트) 자료형의 앞글자를 따서 분별한다.
 
     <table style="width: 80%; margin: auto;"><caption style="caption-side: top;">x86-64 프로세서의 64비트 전용 GPR 구조</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>?</code></td></tr><tr><td>-</td><td colspan="3"><code>?D</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>?W</code></td></tr><tr><td colspan="3">-</td><td><code>?B</code></td></tr></tbody></table>
 
 * **[주소](ko.C.md#포인터) 레지스터(Address Register)**
 
-    RAM의 메모리 주소를 다루는 레지스터인 관계로 범용 레지스터와 달리 16비트 전체가 의미있는 데이터를 나타내는 경우가 대다수이다. 그러한 이유로 하위 8비트에 대한 레지스터는 x86-64의 64비트 모드가 아닌 이상 사용되지 않는다.
+    RAM의 메모리 주소를 위주로 다루는 GPR로써 워드 전체가 의미있는 데이터를 나타내는 경우가 대다수이다. 그러한 이유로 범용 레지스터처럼 16비트 레지스터를 상위 및 하위 8비트로 나누려는 데 의미를 두지 않았다.
 
-    포인터 레지스터는 스택과 관련된 메모리 주소를 다루며, 스택 프레임의 기반 주소(base address)의 `B`와 현재 스택 주소(stack address)의 `S`가 존재한다.
+    포인터 레지스터는 [스택](https://ko.wikipedia.org/wiki/스택) 연산(푸쉬 및 팝)을 위한 메모리 주소를 다루며, 명칭 뒤에 포인터(pointer)를 의미하는 `P`가 있는 게 특징이다:
+
+    * `SP` (Stack Pointer): 스택의 최상위 주소를 가리키는 레지스터
+    * `BP` (Base Pointer): [함수](ko.C.md#함수)의 [스택 프레임](https://en.wikipedia.org/wiki/Call_stack#Structure)(stack frame), 일명 호출 스택(call stacK)의 기반 메모리 주소를 가리키는 레지스터
 
     <table style="width: 80%; margin: auto;"><caption style="caption-side: top;">x86-64 프로세서의 포인터 레지스터 구조</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>R?P</code></td></tr><tr><td>-</td><td colspan="3"><code>E?P</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>?P</code></td></tr><tr><td colspan="3">(64비트 모드에서만 지원)</td><td><code>?PL</code></td></tr></tbody></table>
 
-    인덱스 레지스터는 배열 혹은 문자열을 처리하는 데 원천 주소(source address) `S`와 목적 주소(destination address) `D`가 존재한다.
+    인덱스 레지스터는 배열 혹은 문자열의 메모리 주소를 다루며, 명칭 뒤에 인덱스(index)를 의미하는 `I`가 있는 게 특징이다:
+
+    * `SI` (Source Index): 배열 혹은 문자열의 원천 주소를 담는 레지스터
+    * `DI` (Destination Index): 배욜 혹은 문자열의 목적 주소를 담는 레지스터
 
     <table style="width: 80%; margin: auto;"><caption style="caption-side: top;">x86-64 프로세서의 인덱스 레지스터 구조</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>R?I</code></td></tr><tr><td>-</td><td colspan="3"><code>E?I</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>?I</code></td></tr><tr><td colspan="3">(64비트 모드에서만 지원)</td><td><code>?IL</code></td></tr></tbody></table>
 
 * **특수 레지스터(Special-Purpose Register)**
 
-    특수한 목적을 가진 레지스터는 몇 가지 종류가 존재하지만, 대표적으로 다음으로 실행할 명령어의 주소를 가리키는 [IP](https://ko.wikipedia.org/wiki/프로그램_카운터)(instruction pointer)가 있다.
+    특수한 목적을 가진 레지스터 중에서 [IP](https://ko.wikipedia.org/wiki/프로그램_카운터) (instruction pointer) 레지스터는 다음으로 실행할 명령어가 위치하는 메모리 주소를 가리킨다.
 
     <table style="width: 80%; margin: auto;"><caption style="caption-side: top;">x86-64 프로세서의 IP 레지스터 구조</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>RIP</code></td></tr><tr><td>-</td><td colspan="3"><code>EIP</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>IP</code></td></tr></tbody></table>
 
