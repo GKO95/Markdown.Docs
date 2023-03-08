@@ -94,12 +94,6 @@ MNEMONIC    OPERAND     ; 명령어 집합을 표현하는 기초적인 문장 �
 
     <table style="width: 80%; margin: auto;"><caption style="caption-side: top;">x86-64 프로세서의 GPR 구조</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>R?X</code></td></tr><tr><td>-</td><td colspan="3"><code>E?X</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>?X</code></td></tr><tr><td colspan="2">-</td><td><code>?H</code></td><td><code>?L</code></td></tr></tbody></table>
 
-    x86-64 아키텍처의 64비트 모드에서만 사용할 수 있는 범용 레지스터 `R8` ~ `R15`는 본래 64비트를 위해 설계되었으므로, 하위 비트의 레지스터를 부르는 명칭을 달리 택하였다: 접미사에 `DWORD` (32비트), `WORD` (16비트), 그리고 `BYTE` (8비트) 자료형의 앞글자를 따서 분별한다.
-
-    <table style="width: 80%; margin: auto;"><caption style="caption-side: top;">x86-64 프로세서의 64비트 전용 GPR 구조</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>?</code></td></tr><tr><td>-</td><td colspan="3"><code>?D</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>?W</code></td></tr><tr><td colspan="3">-</td><td><code>?B</code></td></tr></tbody></table>
-
-* **[주소](ko.C.md#포인터) 레지스터**
-
     RAM의 메모리 주소를 위주로 다루는 [GPR](#범용-레지스터)로써 워드 전체가 의미있는 데이터를 나타내는 경우가 대다수이다. 그러한 이유로 범용 레지스터처럼 16비트 레지스터를 상위 및 하위 8비트로 나누려는 데 의미를 두지 않았다.
 
     포인터 레지스터는 [스택](https://ko.wikipedia.org/wiki/스택) 연산(푸쉬 및 팝)을 위한 메모리 주소를 다루며, 명칭 뒤에 포인터(pointer)를 의미하는 `P`가 있는 게 특징이다:
@@ -116,6 +110,10 @@ MNEMONIC    OPERAND     ; 명령어 집합을 표현하는 기초적인 문장 �
 
     <table style="width: 80%; margin: auto;"><caption style="caption-side: top;">x86-64 프로세서의 인덱스 레지스터 구조</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>R?I</code></td></tr><tr><td>-</td><td colspan="3"><code>E?I</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>?I</code></td></tr><tr><td colspan="3">(64비트 모드에서만 지원)</td><td><code>?IL</code></td></tr></tbody></table>
 
+    x86-64 아키텍처의 64비트 모드에서만 사용할 수 있는 범용 레지스터 `R8` ~ `R15`는 본래 64비트를 위해 설계되었으므로, 하위 비트의 레지스터를 부르는 명칭을 달리 택하였다: 접미사에 `DWORD` (32비트), `WORD` (16비트), 그리고 `BYTE` (8비트) 자료형의 앞글자를 따서 분별한다.
+
+    <table style="width: 80%; margin: auto;"><caption style="caption-side: top;">x86-64 프로세서의 64비트 전용 GPR 구조</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>?</code></td></tr><tr><td>-</td><td colspan="3"><code>?D</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>?W</code></td></tr><tr><td colspan="3">-</td><td><code>?B</code></td></tr></tbody></table>
+
 * **특수 레지스터**
 
     특수한 목적을 가진 레지스터 중에서 [IP](https://ko.wikipedia.org/wiki/프로그램_카운터) (instruction pointer) 레지스터는 다음으로 실행할 명령어가 위치하는 메모리 주소를 가리킨다.
@@ -123,7 +121,70 @@ MNEMONIC    OPERAND     ; 명령어 집합을 표현하는 기초적인 문장 �
     <table style="width: 80%; margin: auto;"><caption style="caption-side: top;">x86-64 프로세서의 IP 레지스터 구조</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>RIP</code></td></tr><tr><td>-</td><td colspan="3"><code>EIP</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>IP</code></td></tr></tbody></table>
 
 ## 범용 레지스터
-[범용 레지스터](https://en.wikipedia.org/wiki/Processor_register#GPR)(General-Purpose Register; GPR)는 목적이 특정되지 않아 다양한 용도를 지닌 레지스터이다. 물론 이들 또한 설계된 목적이 존재하며, 예들 들어 `RAX`는 원래 산술 및 논리 연산에 사용되는 레지스터이다. 하지만 함수 내 [`return`](ko.C.md#return-반환문) 문에 의해 반환되는 값을 저장하는 역할도 맡는 등 광범위한 작업 유형에도 제약없이 유연하게 활용될 수 있다.
+[범용 레지스터](https://en.wikipedia.org/wiki/Processor_register#GPR)(General-Purpose Register; GPR)는 목적이 특정되지 않아 다양한 용도를 지닌 레지스터이다. 물론 이들 또한 설계상 의도된 목적이 존재하며, 아래에서 GPR에 대하여 간략하게 소개할 예정이다. 광범위한 작업 유형에도 제약없이 유연하게 활용될 수 있으며, [RAM](ko.Memory.md)을 통한 데이터 저장 및 호출 횟수가 줄어들어 향상된 성능을 초래한다.
+
+1. `RAX` (Accumulator Register)
+
+    산술 및 논리 연산에 활용되는 레지스터이지만, 그 외에도 함수 내 [`return`](ko.C.md#return-반환문) 문에 의해 반환되는 값을 저장하는 목적으로도 사용된다.
+
+    <table style="width: 90%; margin: auto;">
+    <caption style="caption-side: top;"><code>RAX</code> 레지스터 역할</caption>
+    <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+    <thead><tr><th style="text-align: center;">산술 및 논리 연산</th><th style="text-align: center;">함수 반환문</th></tr></thead>
+    <tbody><tr style="vertical-align: top;"><td>
+    
+    ```nasm
+    mov rax, 5
+    add rax, 2
+    ```
+    </td><td>
+    
+    ```nasm
+    mov rax, 5
+    ret
+    ```
+    </td></tr></tbody>
+    </table>
+
+1. `RBX` (Base Register)
+
+    배열, 문자열, 구조체 등의 데이터 기반 혹은 오프셋 메모리 주소를 저장하는 포인터 레지스터이다. 비록 범용 레지스터이지만, 관습적으로 메모리 주소가 아닌 값을 저장하는 건 적절하지 않다. 그러므로 해당 메모리 주소가 참조하는 값은 `RAX`나 `RDX`와 같은 타 범용 레지스터로 전달하는 걸 권장한다.
+
+    <table style="width: 90%; margin: auto;">
+    <caption style="caption-side: top;"><code>RBX</code> 레지스터 역할</caption>
+    <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+    <thead><tr><th style="text-align: center;">데이터 기반 포인터</th><th style="text-align: center;">데이터 오프셋 포인터</th></tr></thead>
+    <tbody><tr style="vertical-align: top;"><td>
+    
+    ```nasm
+    mov rbx, array
+    mov rax, [rbx]
+    ```
+    </td><td>
+    
+    ```nasm
+    mov rbx, array + 8
+    mov rax, [rbx]
+    ```
+    </td></tr></tbody>
+    </table>
+
+1. `RCX` (Counter Register)
+
+    반복문의 카운터로 활용되며, 대표적인 예시 중 하나인 `loop` 명령어는 암묵적으로 `RCX`의 값을 하나씩 감소시켜 영이 아닐 경우 레이블로 이동한다.
+
+    ```nasm
+    mov rcx, 10
+    xor rax, rax
+    
+    label:
+    add rax, rcx
+    loop label
+    ```
+
+1. `RDX` (Data Register)
+
+    `RAX`의 연산을 보조하는 (특히 곱셈 연산) 등의 데이터 레지스터이다. 또는 함수의 세 번째 전달인자를 받는 역할도 담당한다(첫 번째와 두 번째 전달인자 레지스터는 각각 `RDI` 그리고 `RSI`).
 
 # 명령어
 > *참고: [Intel x86 Assembler Instruction Set Opcode Table](http://sparksandflames.com/files/x86InstructionChart.html)*
