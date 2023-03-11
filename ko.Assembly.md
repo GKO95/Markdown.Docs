@@ -91,7 +91,12 @@ MNEMONIC    OPERAND     ; 명령어 집합을 표현하는 기초적인 문장 �
 
 * **기본 범용 레지스터(Primary General-Purpose Register)**
 
-    GPR 중에서 가장 기본적이면서 활발히 사용되는 `A`, `B`, `C`, 그리고 `D` 레지스터이다. 16비트 아키텍처 당시에도 이들은 8비트 단위로 처리되어야 하는 경우가 흔하여, 상위(High) 및 하위(Low) 8비트 명칭을 접미사 `H`와 `L`로 분류하였다. 그리고 이 둘을 종합한 레지스터는 16비트로 "확장되었다(e**X**tended)"고 하여 접미사 `X`가 붙는다. 32비트 및 64비트 프로세서의 등장으로 각각 접두사 `E`(**E**xtended의 앞글자)와 `R`(**R**egister의 앞글자)"를 붙여 명칭한다.
+    GPR 중에서 가장 기본적이면서 활발히 사용되는 `A`, `C`, `D`, 그리고 `B` 레지스터이다. 16비트 아키텍처 당시에도 이들은 8비트 단위로 처리되어야 하는 경우가 흔하여, 상위(High) 및 하위(Low) 8비트 명칭을 접미사 `H`와 `L`로 분류하였다. 그리고 이 둘을 종합한 레지스터는 16비트로 "확장되었다(e**X**tended)"고 하여 접미사 `X`가 붙는다. 32비트 및 64비트 프로세서의 등장으로 각각 접두사 `E`(**E**xtended의 앞글자)와 `R`(**R**egister의 앞글자)"를 붙여 명칭한다.
+
+    * `A` (Accumulator): 산술 및 논리 연산에 활용되는 레지스터이다.
+    * `C` (Counter): 반복문의 카운터로 활용되며, `loop` 등의 일부 명령어는 카운터의 영값 여부에 따라 반복 실행한다.
+    * `D` (Data): 산술 및 논리 연산을 보조하는 데이터 레지스터이며, 특히 정수의 곱셈이나 나눗셈 등에 흔히 활용된다.
+    * `B` (Base): 배열, 문자열, 구조체 등의 데이터 기반 혹은 오프셋 메모리 주소를 저장하는 포인터 레지스터이다.
 
     <table style="width: 80%; margin: auto;"><caption style="caption-side: top;">x86-64 프로세서의 기본 GPR 명칭</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>R?X</code></td></tr><tr><td>-</td><td colspan="3"><code>E?X</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>?X</code></td></tr><tr><td colspan="2">-</td><td><code>?H</code></td><td><code>?L</code></td></tr></tbody></table>
 
@@ -101,8 +106,8 @@ MNEMONIC    OPERAND     ; 명령어 집합을 표현하는 기초적인 문장 �
 
     포인터 레지스터는 [스택](https://ko.wikipedia.org/wiki/스택) 연산(푸쉬 및 팝)을 위한 메모리 주소를 다루며, 명칭 뒤에 포인터(pointer)를 의미하는 `P`가 있는 게 특징이다:
 
-    * `SP` (Stack Pointer): 스택의 최상위 주소를 가리키는 레지스터
-    * `BP` (Base Pointer): [함수](ko.C.md#함수)의 [스택 프레임](https://en.wikipedia.org/wiki/Call_stack#Structure)(stack frame), 일명 호출 스택(call stacK)의 기반 메모리 주소를 가리키는 레지스터
+    * `SP` (Stack Pointer): 스택의 최상위 주소를 가리키는 레지스터이다.
+    * `BP` (Base Pointer): [함수](ko.C.md#함수)의 [스택 프레임](https://en.wikipedia.org/wiki/Call_stack#Structure)(stack frame), 일명 호출 스택(call stacK)의 기반 메모리 주소를 가리키는 레지스터이다.
 
     <table style="width: 80%; margin: auto;"><caption style="caption-side: top;">x86-64 프로세서의 포인터 레지스터 명칭</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>R?P</code></td></tr><tr><td>-</td><td colspan="3"><code>E?P</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>?P</code></td></tr><tr><td colspan="3">(64비트 모드에서만 지원)</td><td><code>?PL</code></td></tr></tbody></table>
 
@@ -112,8 +117,8 @@ MNEMONIC    OPERAND     ; 명령어 집합을 표현하는 기초적인 문장 �
 
     인덱스 레지스터는 배열 혹은 문자열의 메모리 주소를 다루며, 명칭 뒤에 인덱스(index)를 의미하는 `I`가 있는 게 특징이다:
 
-    * `SI` (Source Index): 배열 혹은 문자열의 원천 주소를 담는 레지스터
-    * `DI` (Destination Index): 배욜 혹은 문자열의 목적 주소를 담는 레지스터
+    * `SI` (Source Index): 배열 혹은 문자열의 원천 주소를 담는 레지스터이다.
+    * `DI` (Destination Index): 배욜 혹은 문자열의 목적 주소를 담는 레지스터이다.
 
     <table style="width: 80%; margin: auto;"><caption style="caption-side: top;">x86-64 프로세서의 인덱스 레지스터 명칭</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>R?I</code></td></tr><tr><td>-</td><td colspan="3"><code>E?I</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>?I</code></td></tr><tr><td colspan="3">(64비트 모드에서만 지원)</td><td><code>?IL</code></td></tr></tbody></table>
 
@@ -137,19 +142,30 @@ MNEMONIC    OPERAND     ; 명령어 집합을 표현하는 기초적인 문장 �
     일종의 [상태 레지스터](https://ko.wikipedia.org/wiki/상태_레지스터), 즉 현 프로세서 상태를 담고 있는 레지스터이다. 흔히 산술 연산의 결과나 당시 CPU 작업에 걸린 [제약](ko.Processor.md#보호-링)을 반영한다.
 
 ## 호출 규약
-[호출 규약](https://ko.wikipedia.org/wiki/호출_규약)(calling convention)은 함수의 호출자로부터 인자를 매개변수를 통해 전달 받는 방식, 그리고 결과물을 반환하는 방식을 규정한다. 호출자(caller)와 피호출자(callee) 간 데이터 전달은 일반적으로 레지스터나 스택 프레임의 도움으로 처리된다. 올바른 호출 규약의 사용은 신뢰할 수 있는 프로그램 실행을 보장하기 때문에 매 함수 호출 시 준수되어야 한다.
-
-본 부문에서는 두 개 아키텍처, [x86](#x86-아키텍처) 그리고 [x64](#x64-아키텍처)의 호출 규약을 소개한다.
+[호출 규약](https://ko.wikipedia.org/wiki/호출_규약)(calling convention)은 함수가 [매개변수](ko.C.md#매개변수-및-전달인자)를 통해 인자를 전달받고 [`return`](ko.C.md#return-반환문) 문으로 결과를 반환하는 방식을 규정하며, 일반적으로 [ABI](https://ko.wikipedia.org/wiki/응용_프로그램_이진_인터페이스)의 일부로 간주된다. 호출자(caller)와 피호출자(callee) 간 데이터 전달은 일반적으로 레지스터나 스택 프레임의 도움으로 처리된다. 올바른 호출 규약의 사용은 신뢰할 수 있는 프로그램 실행을 보장하기 때문에 매 함수 호출 시 준수되어야 한다.
 
 ### x86 아키텍처
 > *참고: [x86 Architecture - Windows driver | Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/x86-architecture)*
 
-[x86 호출 규약](https://ko.wikipedia.org/wiki/X86_호출_규약)
+[x86 호출 규약](https://ko.wikipedia.org/wiki/X86_호출_규약)에는 C 프로그래밍 언어의 기본 호출 규약인 [`__cdecl`](https://learn.microsoft.com/en-us/cpp/cpp/cdecl)(C Declaration의 줄임말)이 가장 널리 사용되고 있다. 일반적으로 선언 당시에 별도로 호출 규약을 명시하지 않아도 되지만, 만일 해야 할 경우가 있으면 아래와 같이 작성한다.
 
-### x64 아키텍처
-> *참고: [x64 Architecture - Windows driver | Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/x64-architecture)*
+```c
+void __cdecl function(int argc, char** argv) { return; }
+```
 
-[x64 호출 규약](https://en.wikipedia.org/wiki/X86_calling_conventions#x86-64_calling_conventions)
+그 외에도 마이크로소프트의 [WinAPI](ko.WinAPI.md) 함수에 적용된 [`__stdcall`](https://learn.microsoft.com/en-us/cpp/cpp/stdcall) 등 다양한 호출 규약이 존재하며, 이들은 아래와 같이 함수에서 선언되어야 한다.
+
+```c
+void __stdcall function(int argc, char** argv) { return; }
+```
+
+다음은 `__cdecl` 호출 규약이 가지는 특징을 나열한다:
+
+1. 전달인자를 스택을 통해 전달하며, 오른쪽에서부터 왼쪽 순서대로 스택에 푸쉬한다; 위의 예시에서는 `argv`-`argc` 순서로 스택에 쌓이게 된다.
+1. 정수나 메모리 주소는 `EAX` 레지스터, 부동소수점은 `ST0 x87` 레지스터를 통해 반환된다.
+1. 휘발성 및 비휘발성 레지스터는 다음과 같이 나뉘어진다.
+
+    <table style="width: 80%; margin: auto;"><!--<caption style="caption-side: top;">휘발성 및 비휘발성 레지스터 비교</caption>--><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">휘발성(volitile)</th><th style="text-align: center;">비휘발성(non-volitile)</th></tr></thead><tbody><tr><td style="text-align: center;">호출자에 의해 저장(caller-saved)</td><td style="text-align: center;">피호출자에 의해 저장(callee-saved)</td></tr><tr><td>저장된 정보는 다른 함수로 인해 쉽게 덮어씌어질 수 있으며, 만일 복원하려면 호출자가 당시 값을 저장해야 한다.</td><td>피호출자가 반환된 이후에도, 해당 함수를 호출한 당시 호출자의 레지스터 값들은 피호출자에 의해 복원되어야 한다.</td></tr><tr><td style="text-align: center;"><code>EAX</code>, <code>ECX</code>, <code>EDX</code></td><td style="text-align: center;">나머지 레지스터</td></tr></tbody></table>
 
 # 명령어
 > *참고: [Intel x86 Assembler Instruction Set Opcode Table](http://sparksandflames.com/files/x86InstructionChart.html)*
