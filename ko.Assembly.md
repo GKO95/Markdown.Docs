@@ -167,5 +167,7 @@ void __stdcall function(int argc, char** argv) { return; }
 
     <table style="width: 80%; margin: auto;"><!--<caption style="caption-side: top;">휘발성 및 비휘발성 레지스터 비교</caption>--><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">휘발성(volitile)</th><th style="text-align: center;">비휘발성(non-volitile)</th></tr></thead><tbody><tr><td style="text-align: center;">호출자에 의해 저장(caller-saved)</td><td style="text-align: center;">피호출자에 의해 저장(callee-saved)</td></tr><tr><td>저장된 정보는 다른 함수로 인해 쉽게 덮어씌어질 수 있으며, 만일 복원하려면 호출자가 당시 값을 저장해야 한다.</td><td>피호출자가 반환된 이후에도, 해당 함수를 호출한 당시 호출자의 레지스터 값들은 피호출자에 의해 복원되어야 한다.</td></tr><tr><td style="text-align: center;"><code>EAX</code>, <code>ECX</code>, <code>EDX</code></td><td style="text-align: center;">나머지 레지스터</td></tr></tbody></table>
 
+호출 규약 `__cdecl`와 `__stdcall` 사이에는 호출된 함수를 정리(clean-up)하는 주체가 누구인지 달라진다: 전자는 호출자에게, 그리고 후자는 피호출자에게 책임을 묻는다. 여기서 스택 정리란, 위에서 언급한 휘발성 및 비휘발성 레지스터와 전혀 다른 개념이다.
+
 # 명령어
 > *참고: [Intel x86 Assembler Instruction Set Opcode Table](http://sparksandflames.com/files/x86InstructionChart.html)*
