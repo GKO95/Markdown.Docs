@@ -144,6 +144,10 @@ MNEMONIC    OPERAND     ; 명령어 집합을 표현하는 기초적인 문장 �
 ## 호출 규약
 [호출 규약](https://ko.wikipedia.org/wiki/호출_규약)(calling convention)은 함수가 [매개변수](ko.C.md#매개변수-및-전달인자)를 통해 인자를 전달받고 [`return`](ko.C.md#return-반환문) 문으로 결과를 반환하는 방식을 규정하며, 일반적으로 [ABI](https://ko.wikipedia.org/wiki/응용_프로그램_이진_인터페이스)의 일부로 간주된다. 호출자(caller)와 피호출자(callee) 간 데이터 전달은 일반적으로 레지스터나 스택 프레임의 도움으로 처리된다. 올바른 호출 규약의 사용은 신뢰할 수 있는 프로그램 실행을 보장하기 때문에 매 함수 호출 시 준수되어야 한다.
 
+본 부문에 대한 설명을 진행하기 전, 우선 휘발성(volitile) 및 비휘발성(non-volitile) 레지스터가 무엇인지 소개한다.
+
+<table style="width: 80%; margin: auto;"><caption style="caption-side: top;">휘발성 및 비휘발성 레지스터 비교</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">휘발성(volitile)</th><th style="text-align: center;">비휘발성(non-volitile)</th></tr></thead><tbody><tr><td style="text-align: center;">호출자에 의해 저장(caller-saved)</td><td style="text-align: center;">피호출자에 의해 저장(callee-saved)</td></tr><tr><td>저장된 정보는 다른 함수로 인해 쉽게 덮어씌어질 수 있으며, 만일 복원하려면 호출자가 당시 값을 저장해야 한다.</td><td>피호출자가 반환된 이후에도, 해당 함수를 호출한 당시 호출자의 레지스터 값들은 피호출자에 의해 복원되어야 한다.</td></tr></tbody></table>
+
 ### x86 아키텍처
 > *참고: [x86 Architecture - Windows driver | Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/x86-architecture)*
 
@@ -161,13 +165,26 @@ void __stdcall function(int argc, char** argv) { return; }
 
 다음은 `__cdecl` 호출 규약이 가지는 특징을 나열한다:
 
-1. 전달인자를 스택을 통해 전달하며, 오른쪽에서부터 왼쪽 순서대로 스택에 푸쉬한다; 위의 예시에서는 `argv`-`argc` 순서로 스택에 쌓이게 된다.
-1. 정수나 메모리 주소는 `EAX` 레지스터, 부동소수점은 `ST0 x87` 레지스터를 통해 반환된다.
-1. 휘발성 및 비휘발성 레지스터는 다음과 같이 나뉘어진다.
+1. 전달인자를 스택을 통해 전달하며, 오른쪽에서부터 왼쪽 순서대로 스택에 푸쉬한다.
 
-    <table style="width: 80%; margin: auto;"><!--<caption style="caption-side: top;">휘발성 및 비휘발성 레지스터 비교</caption>--><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">휘발성(volitile)</th><th style="text-align: center;">비휘발성(non-volitile)</th></tr></thead><tbody><tr><td style="text-align: center;">호출자에 의해 저장(caller-saved)</td><td style="text-align: center;">피호출자에 의해 저장(callee-saved)</td></tr><tr><td>저장된 정보는 다른 함수로 인해 쉽게 덮어씌어질 수 있으며, 만일 복원하려면 호출자가 당시 값을 저장해야 한다.</td><td>피호출자가 반환된 이후에도, 해당 함수를 호출한 당시 호출자의 레지스터 값들은 피호출자에 의해 복원되어야 한다.</td></tr><tr><td style="text-align: center;"><code>EAX</code>, <code>ECX</code>, <code>EDX</code></td><td style="text-align: center;">나머지 레지스터</td></tr></tbody></table>
+1. 정수나 메모리 주소는 `EAX` 레지스터, 부동소수점은 `ST0 x87` 레지스터를 통해 반환된다.
+
+<table style="width: 80%; margin: auto;"><caption style="caption-side: top;"><code>__cdecl</code> 및 <code>__stdcall</code> 호출 규약의 휘발성 및 비휘발성 레지스터</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">휘발성(volitile)</th><th style="text-align: center;">비휘발성(non-volitile)</th></tr></thead><tbody><tr><td style="text-align: center;"><code>EAX</code>, <code>ECX</code>, <code>EDX</code></td><td style="text-align: center;">나머지 레지스터</td></tr></tbody></table>
 
 호출 규약 `__cdecl`와 `__stdcall` 사이에는 호출된 함수를 정리(clean-up)하는 주체가 누구인지 달라진다: 전자는 호출자에게, 그리고 후자는 피호출자에게 책임을 묻는다. 여기서 스택 정리란, 위에서 언급한 휘발성 및 비휘발성 레지스터와 전혀 다른 개념이다.
+
+### x64 아키텍처
+> *참고: [x64 Architecture - Windows driver | Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/x64-architecture)*
+
+[x64 호출 규약](https://en.wikipedia.org/wiki/X86_calling_conventions#x86-64_calling_conventions)은 크게 두 종류가 있으며, [윈도우 OS](ko.Windows.md) 혹은 [유닉스 계열](https://ko.wikipedia.org/wiki/유닉스_계열) 운영체제에 따라 각각 Microsoft x64 호출 규약 및 System V AMD64 ABI가 사용된다. x86 아키텍처와 달리, 레지스터 개수가 늘어나면서 레지스터 활용도가 상당히 늘어났으며, 본 부분은 Microsft x64 호출 규약을 위주로 설명한다.
+
+1. 첫 네 개의 인자는 레지스터를 통해 피호출자로 전달된다(정수, 구조체, 또는 포인터: `RCX`, `RDX`, `R8`, `R9`; 부동소수점: `XMM0`, `XMM1`, `XMM2`, `XMM3`). 이때, 호출자는 반환 메모리 주소 위에 *무조건* 32바이트의 그림자 공간(shadow space)을 할당해야 하는 데, 이는 방금 언급한 네 개의 레지스터를 반영한 공간이다.
+
+1. 레지스터에서 수용할 수 없는 나머지 인자(즉, 다섯 개 이상의 경우에만 해당)들은 오른쪽에서부터 왼쪽 순서대로 그림자 공간 위에 푸쉬한다.
+
+1. 정수나 메모리 주소는 `RAX` 레지스터, 부동소수점은 `XMM0` 레지스터를 통해 반환된다. 그러나 반환되는 데이터가 64비트 미만일 경우, 상위 비트는 영으로 정리되지 않은 채 하위 레지스터(즉, `EAX`, `AX` 등)를 활용한다.
+
+<table style="width: 80%; margin: auto;"><caption style="caption-side: top;">Microsoft x64 호출 규약의 휘발성 및 비휘발성 레지스터</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">휘발성(volitile)</th><th style="text-align: center;">비휘발성(non-volitile)</th></tr></thead><tbody><tr><td style="text-align: center;"><code>RAX</code>, <code>RCX</code>, <code>RDX</code>, <code>R8</code>, <code>R9</code>, <code>R10</code>, <code>R11</code></td><td style="text-align: center;"><code>RBX</code>, <code>RBP</code>, <code>RDI</code>, <code>RSI</code>, <code>RSP</code>, <code>R12</code>, <code>R13</code>, <code>R14</code>, <code>R15</code></td></tr></tbody></table>
 
 # 명령어
 > *참고: [Intel x86 Assembler Instruction Set Opcode Table](http://sparksandflames.com/files/x86InstructionChart.html)*
