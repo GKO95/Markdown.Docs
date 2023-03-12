@@ -166,8 +166,8 @@ WS                         AliasProperty  WS = WorkingSet64
     줄바꿈, [주석](#주석), 빈칸, 혹은 이들의 조합에 의해 구분되는 파워셸에서 가장 작은 단위의 어휘 요소이다. 대표적으로 [키워드](https://learn.microsoft.com/en-us/powershell/scripting/lang-spec/chapter-02#231-keywords), [변수](#변수), [리터럴](https://ko.wikipedia.org/wiki/리터럴) 등이 있다.
 
     ```powershell
-  $variable       # 변수
-  2               # 정수 리터럴
+    $variable       # 변수
+    2               # 정수 리터럴
     ```
 
 * **[표현식](https://learn.microsoft.com/en-us/powershell/scripting/lang-spec/chapter-07)(expression)**
@@ -175,8 +175,8 @@ WS                         AliasProperty  WS = WorkingSet64
     값을 반환하는 구문적 존재를 가리킨다. 표현식에 대한 결과를 도출하는 것을 평가(evaluate)라고 부른다.
     
     ```powershell
-  2 + 3           # 숫자 5를 반환
-  2 -lt 3         # 논리 참을 반환
+    2 + 3           # 숫자 5를 반환
+    2 -lt 3         # 논리 참을 반환
     ```
 
 * **[문장](https://learn.microsoft.com/en-us/powershell/scripting/lang-spec/chapter-08)(statement)**
@@ -186,8 +186,8 @@ WS                         AliasProperty  WS = WorkingSet64
     * 세미콜론 `;`: 여려 문장을 하나의 줄에 한꺼번에 기입하기 위해 사용된다.
 
     ```powershell
-  $variable = 2 + 3          # 숫자 5를 "variable" 변수에 초기화
-  if (2 -lt 3) { statement } # 논리가 참이면 "statement" 문장 실행
+    $variable = 2 + 3          # 숫자 5를 "variable" 변수에 초기화
+    if (2 -lt 3) { statement } # 논리가 참이면 "statement" 문장 실행
     ```
 
 ### 주석
@@ -208,26 +208,46 @@ Write-Output "Hello World!"
     아래 예시는 `"Hello World!"` 텍스트 출력이 [`Get-Memeber`](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/get-member)의 입력으로 전달되어 텍스트의 객체 유형 및 속성이 나열된 것이다.
 
     ```powershell
-  Write-Output "Hello World!" | Get-Member
+    Write-Output "Hello World!" | Get-Member
     ```
     ```terminal
-     TypeName: System.String
-  
-  Name                 MemberType
-  ----                 ----------
-  Clone                Method
-  CompareTo            Method
-  Contains             Method
-  CopyTo               Method
-  EndsWith             Method
-  EnumerateRunes       Method
-  Equals               Method
-  …
+        TypeName: System.String
+    
+    Name                 MemberType
+    ----                 ----------
+    Clone                Method
+    CompareTo            Method
+    Contains             Method
+    CopyTo               Method
+    EndsWith             Method
+    EnumerateRunes       Method
+    Equals               Method
+    ...
     ```
 
-    파워셸에서 기본적으로 텍스트 및 객체 출력을 콘솔로 표시하는 cmdlet들은 `Write-Output`을 명시할 필요가 없다. 아래는 일부 cmdlet 및 텍스트만을 입력하는 것이 파워셸에서는 구문적으로 어떻게 간주되는지 보여준다.
+    파워셸에서 기본적으로 텍스트 및 객체 출력을 콘솔로 표시하는 cmdlet들은 `Write-Output` 또는 `echo`를 명시할 필요가 없다. 아래는 일부 cmdlet 및 텍스트만을 입력하는 것이 파워셸에서는 구문적으로 어떻게 간주되는지 보여준다.
 
-    <table style="width: 50%; margin: auto;"><caption style="caption-side: top;"><code>Write-Output</code> cmdlet의 암묵적 활용</caption><colgroup><col style="width: 30%;"/><col style="width: 70%;"/></colgroup><thead style="text-align: center;"><tr><th style="text-align: center;">Cmdlet</th><th style="text-align: center;">동일 구문</th></tr></thead><tbody><tr><td><code>Get-Process</code></td><td><code>Get-Process | Write-Output</code></td></tr><tr><td><code>"Hello World!"</code></td><td><code>echo "Hello World!"</code></td></tr></tbody></table>
+    <table style="width: 80%; margin: auto;"><caption style="caption-side: top;"><code>Write-Output</code> cmdlet의 암묵적 활용</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">명령</th><th style="text-align: center;">동일</th></tr></thead><tbody><tr style="vertical-align: center;"><td>
+
+    ```powershell
+    Get-Process
+    ```
+    </td><td>
+    
+    ```powershell
+    Get-Process | Write-Outputecho
+    ```
+    </td></tr><tr style="vertical-align: center;"><td>
+
+    ```powershell
+    "Hello, World!"
+    ```
+    </td><td>
+    
+    ```powershell
+    echo "Hello, World!"
+    ```
+    </td></tr></tbody></table>
 
 * **[`Write-Host`](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/write-host)**
 
@@ -236,11 +256,11 @@ Write-Output "Hello World!"
     아래 예시는 `"Hello World!"` 텍스트가 콘솔로 그대로 출력되면서 [`Get-Memeber`](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/get-member)로 전달된 입력으로 없으면서 나타나는 현상이다.
 
     ```powershell
-  Write-Host "Hello World!" | Get-Member
+    Write-Host "Hello World!" | Get-Member
     ```
     ```terminal
-  Hello World!
-  Get-Member: You must specify an object for the Get-Member cmdlet.
+    Hello World!
+    Get-Member: You must specify an object for the Get-Member cmdlet.
     ```
 
 ## 콘솔 입력
@@ -251,11 +271,55 @@ Write-Output "Hello World!"
     콘솔에 입력된 한 줄의 텍스트를 읽는다. `-Prompt` 매개변수를 통해 사용자로부터 콘솔 입력을 대기할 때 문구를 표시한다.
 
     ```powershell
-  Read-Host -Prompt "Write anything here" | Write-Output
+    Read-Host -Prompt "Write anything here" | Write-Output
     ```
     ```terminal
-  Write anything here: Hello World!
-  Hello World!
+    Write anything here: Hello World!
+    Hello World!
     ```
 
 > [탈출 문자](https://ko.wikipedia.org/wiki/이스케이프_문자)(escape character)는 [억음 부호](https://ko.wikipedia.org/wiki/억음_부호) <code>&grave;</code>를 사용하여 문자열로부터 탈출해 텍스트 내에서 특정 연산을 수행한다: <code>&grave;n</code> 탈출 문자를 사용하여 문자열 줄바꿈을 구현한다.
+
+## 변수
+[변수](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_variables)(variable)는 데이터를 저장할 수 있는 공간이며, 변수명에는 달러 기호 `$`가 접두사로 붙는다. 변수명은 알파벳, 숫자, 그리고 특수문자로 구성될 수 있으며 대소문자 구분이 없다. 만일 띄어쓰기, 대시, 해시 기호 등의 특수문자를 사용하려면 중괄호 `{}`를 사용하도록 한다. 파워셸 변수는 자료형과 무관하게 `=` 기호를 사용하여 아무런 데이터를 할당받을 수 있다.
+
+<table style="table-layout: fixed; width: 80%; margin: auto;">
+<caption style="caption-side: top;">파워셸 변수명 지정 예시</caption>
+<colgroup><col style="width: 50%;"><col style="width: 50%;"></colgroup>
+<thead><tr><th style="text-align: center;">일반</th><th style="text-align: center;">특수문자 적극 활용</th></tr></thead>
+<tbody>
+<tr style="vertical-align: top; overflow-wrap: break-word;"><td>
+
+```powershell
+$variable = "Hello, World!"
+$variable
+```
+</td><td>
+
+```powershell
+${var: 1-1.Sample} = "Hello, World!"
+${var: 1-1.Sample}
+```
+</td></tr>
+<tr><td colspan="2">
+
+```terminal
+Hello, World!
+```
+</td></tr>
+</tbody>
+</table>
+
+파워셸은 세 가지 유형의 변수를 제공한다:
+
+* **사용자 생성 변수(User-created variables)**
+
+    사용자에 의해 생성되고 관리되는 변수이며, 현 파워셸 창이 닫힐 때까지만 유효하다. 즉, 변수가 사용된 파워셸 창이 닫히면 전부 제거된다. 위에서 보여준 예시의 `$variable` 및 `${var: 1-1.Sample}` 또한 사용자 생성 변수이다.
+
+* **자동 변수(Automatic variables)**
+
+    파워셸 상태를 저장한 변수이며, 파워셸에 의해 생성되고 관리되기 때문에 사용자가 변경할 수 없는 "읽기 전용"이라고 간주할 수 있다. 위에서 언급한 적이 있던 파워셸 버전을 확인하는 `$PSVersionTable`도 자동 변수 중 하나이다.
+
+* **설정 변수(Preference variables)**
+
+    사용자의 파워셸 설정을 저장하는 변수이며, 파워셸에 의해 기본값을 할당받으며 생성되지만 사용자가 원하는 값으로 변경할 수 있다. 예를 들어, 파워셸 터미널 세션이 저장할 수 있는 명령어 이력의 최대 개수를 `$MaximumHistoryCount` 설정 변수로 지정할 수 있다.
