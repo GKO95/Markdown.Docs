@@ -167,14 +167,32 @@ VS Code는 두 가지의 실행 방법이 있다: 일반 실행 모드(`Ctrl+F5`
 
     출력 함수가 실행될 시, `print()`의 소괄호 `()` 안에 있는 데이터가 터미널에 나타난다.
 
+<table style="table-layout: fixed; width: 80%; margin: auto;">
+<caption style="caption-side: top;">파이썬 콘솔 입출력 예시</caption>
+<colgroup><col style="width: 50%;"><col style="width: 50%;"></colgroup>
+<thead><tr><th style="text-align: center;">일반적인 문장</th><th style="text-align: center;">간결화된 문장</th></tr></thead>
+<tbody>
+<tr style="vertical-align: top; overflow-wrap: break-word;"><td>
+
 ```python
 variable = input("입력: ")
-print("출력:", variable)      # 동일: print("출력:", input("입력: "))
+print("출력:", variable) 
 ```
+</td><td>
+
+```python
+print("출력:", input("입력: "))
+```
+</td></tr>
+<tr><td colspan="2">
+
 ```terminal
 입력: Hello World!
 출력: Hello World!
 ```
+</td></tr>
+</tbody>
+</table>
 
 하나의 `print()` 함수에서 두 개 이상의 데이터를 한꺼번에 출력하려면 쉼표 `,`를 사용하여 연속적으로 데이터를 나열할 수 있다. 단, 각 쉼표가 위치한 곳에는 항상 공백이 놓여진다. 그 외의 다른 방법은 [문자열 자료형](#문자열-자료형)을 설명하는 부분에서 소개한다.
 
@@ -289,7 +307,7 @@ NameError: name 'variable' is not defined
 <colgroup><col style="width: 50%;"><col style="width: 50%;"></colgroup>
 <thead><tr><th style="text-align: center;">문자열 연결</th><th style="text-align: center;">서식화된 문자열 리터럴</th></tr></thead>
 <tbody>
-<tr style="vertical-align: top; overflow-wrap: break-word;"><td>
+<tr style="vertical-align: top;"><td>
 
 ```python
 A, B = 10.0, 파이썬
@@ -441,16 +459,12 @@ True_return if condition else False_return
 
 ```python
 match argument:
-
     case pattern1:
         ...
-
     case pattern2:
         ...
-
     case pattern3:
         ...
-
     case _:
         ...
 ```
@@ -604,7 +618,7 @@ print(variable)                # 출력: [value1, value2, value3, value4, ...]
 print(variable[0])             # 출력: value1
 ```
 
-개별 요소를 재할당하여 데이터를 변경할 수 있다. 리스트 범위를 벗어난 요소를 호출할 수 없으므로, 이러한 경우 오류가 발생한다. 그래도 파이썬의 리스트를 비교적 유연한 편으로 `append()` 혹은 `insert()` 메소드를 통해 언제든지 확장할 수 있다. 리스트의 메소드는 [여기](https://docs.python.org/3/tutorial/datastructures.html#more-on-lists)에서 더 찾아볼 수 있다.
+개별 요소를 재할당하여 데이터를 변경할 수 있다. 리스트 범위를 벗어난 요소를 호출하면 오류가 발생한다. 그래도 파이썬의 리스트를 비교적 유연한 편으로 `append()` 혹은 `insert()` 메소드를 통해 언제든지 확장할 수 있다. 리스트의 메소드는 [여기](https://docs.python.org/3/tutorial/datastructures.html#more-on-lists)에서 더 찾아볼 수 있다.
 
 ```python
 variable = []
@@ -616,28 +630,31 @@ print(variable)                # 출력: ['Python']
 variable[1] = "Hello World!"   # IndexError: list assignment index out of range
 ```
 
-리스트는 고유의 연산을 통해 항목을 추가하거나 곱할 수가 있다. 아래의 연산들은 리스트 객체에만 제한되지 않으며, 차후에 소개될 다른 시퀀스 객체에도 적용이 가능하다.
+리스트는 특정 연산자를 통해 항목을 추가하거나 반복시킬 수 있다. 아래의 연산은 리스트 객체에만 제한되지 않으며, 차후에 소개될 다른 시퀀스 객체에도 적용이 가능하다.
 
-* **시퀀스 연결 `+`**
+<table style="width: 80%; margin: auto;">
+<colgroup><col style="width: 33.3%;"/><col style="width: 33.3%;"/><col style="width: 33.3%;"/></colgroup>
+<thead><tr><th style="text-align: center;">시퀀스 연결</th><th style="text-align: center;">시퀀스 반복</th><th style="text-align: center;">시퀀스 항목 여부</th></tr></thead>
+<tbody><tr><td>
 
-    ```python
-    [value1, value2] + [value2, value3, value4]
-    # 결과: [value1, value2, value2, value3, value4]
-    ```
+```python
+[1, 2] + [2, 3, 4]
+# 결과: [1, 2, 2, 3, 4]
+```
+</td><td>
 
-* **시퀀스 반복 `*`**
+```python
+[1, 2] * 3
+# 결과: [1, 2, 1, 2, 1, 2]
+```
+</td><td>
 
-    ```python
-    [value1, value2] * 3
-    # 결과: [value1, value2, value1, value2, value1, value2]
-    ```
-
-* **시퀀스 항목 존재여부 `in`**
-
-    ```python
-    value1 in [value1, value2]
-    # 결과: True
-    ```
+```python
+2 in [1, 2, 3]
+# 결과: True
+```
+</td></tr></tbody>
+</table>
 
 ### 리스트 컴프리헨션
 [리스트 컴프리헨션](https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions)(list comprehension)은 `for` 반복문 (그리고 [`if`](#if-조건문) 조건문)을 활용한 프로그램적 규칙에 따라 리스트를 생성한다.
@@ -676,7 +693,7 @@ tpl[1] = value4               # TypeError: 'variable' object does not support it
 ```
 
 ## 딕셔너리 객체
-[딕셔너리](https://docs.python.org/3/tutorial/datastructures.html#dictionaries)(dictionary)는 인덱싱 역할의 키(key)와 해당 인덱스에 할당되는 값(value) 쌍을 하나의 요소로 갖는 (시퀀스가 아닌) 이터러블 객체이다. 딕셔너리는 중괄호 `{}` 안에 `key: value`을 나열하여 초기화한다. 딕셔너리의 값은 대괄호 안에 해당하는 키를 기입하여 호출한다.
+[딕셔너리](https://docs.python.org/3/tutorial/datastructures.html#dictionaries)(dictionary)는 인덱싱 역할의 키(key)와 그에 할당된 값(value)이 하나의 쌍을 이루는 (시퀀스가 아닌) 이터러블 객체이다. 딕셔너리는 중괄호 `{}` 안에 `key: value`을 나열하여 초기화하며, 대괄호 안에 해당하는 키를 기입하므로써 값을 호출한다.
 
 > 단, 리스트와 딕셔너리 등의 가변(mutable) 이터러블 객체는 키로 사용될 수 없다.
 
@@ -687,7 +704,7 @@ print(variable[key1])                # 출력: value1
 print(variable[key2])                # 출력: value2
 ```
 
-개별 요소를 재할당하여 데이터를 변경할 수 있다. 딕셔너리 범위를 벗어난 요소를 호출할 수 없으므로, 이러한 경우 오류가 발생한다. 그래도 파이썬의 딕셔너리는 비교적 유연한 편으로 새로운 키와 함께 값을 할당하는 것만으로 확장이 가능하다.
+개별 요소를 재할당하여 데이터를 변경할 수 있으나, 키를 바꾸려면 아예 새로운 `key: value` 쌍을 딕셔너리에 할당해야 한다. 파이썬의 딕셔너리는 비교적 유연한 편으로 새로운 키와 함께 값을 할당하는 것만으로 확장이 가능하다.
 
 ```python
 variable = {key1: value1, key2: value2}
@@ -697,7 +714,7 @@ print(variable)                      # 출력: {key1: value1, key2: value2, key3
 ```
 
 ### 딕셔너리 언패킹
-딕셔너리 언패킹(dictionary unpacking)은 딕셔너리 객체의 요소들을 분할하는 것을 가리킨다. 단, 언패킹된 `key: value` 쌍을 활용할 수 있는 곳은 딕셔너리에 한정되므로 결국 타 딕셔너리와 결합하는 용도로 사용된다. 언패킹할 딕셔너리 접두부에 두 개의 별표 `**`를 기입한다.
+딕셔너리 언패킹(dictionary unpacking)은 딕셔너리 객체의 요소들을 나열하는 것을 가리킨다. 허나, 언패킹된 `key: value` 쌍은 오로지 딕셔너리에서만 활용할 수 있으므로, 결국 타 딕셔너리의 요소를 결합하거나 제거하는 등의 용도로 사용된다. 언패킹할 딕셔너리 접두부에는 두 개의 별표(`**`)를 기입한다.
 
 ```python
 variable = {key1: value1, key2: value2}
@@ -885,38 +902,56 @@ Hello World!
 
 다음은 매개변수에 사용되는 연산자로 전달인자을 받는데 유연성을 제공한다. 이들은 프로그래밍 구문상 명확한 구별이 가능해야 하므로 반드시 일반 매개변수 뒤에 위치해야 한다.
 
-<table style="width: 80%; margin: auto;">
-<caption style="caption-side: top;"></caption>
-<colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup>
-<thead><tr><th style="text-align: center">연산자</th><th style="text-align: center">구문</th><th style="text-align: center">설명</th></tr></thead>
-<tbody>
-<tr><td style="text-align: center;"><code>=</code></td><td style="text-align: center;"><code>arg = value</code></td><td>전달인자가 없으면 기본값 <code>value</code>가 대신 매개변수에 할당된다.</td></tr><tr><td style="text-align: center;"><code>*</code></td><td style="text-align: center;"><code>*args</code></td><td><a href="#시퀀스-언패킹">시퀀스 언패킹</a>으로 여러 개의 전달인자들을 하나의 튜플로 전달받는다.</td></tr><tr><td style="text-align: center;"><code>**</code></td><td style="text-align: center;"><code>**kwargs</code></td><td><a href="#딕셔너리-언패킹">딕셔너리 언패킹</a>으로 여러 개의 <code>key = value</code> 형식 전달인자들을 하나의 딕셔너리로 전달받는다.</td></tr></tbody>
-</table>
+<table style="width: 100%; margin: auto;">
+
+<colgroup><col style="width: 33.3%;"/><col style="width: 33.3%;"/><col style="width: 33.3%;"/></colgroup>
+<thead><tr><th style="text-align: center;"><code>arg =  value</code></th><th style="text-align: center;"><code>*args</code></th><th style="text-align: center;"><code>**kwargs</code></th></tr></thead>
+<tbody><tr>
+<td>전달인자가 없으면 기본값 <code>value</code>가 대신 매개변수에 할당된다</td><td><a href="#시퀀스-언패킹">시퀀스 언패킹</a>으로 여러 개의 전달인자들을 하나의 튜플로 전달받는다.</td><td><a href="#딕셔너리 언패킹">딕셔너리 언패킹</a>으로 여러 개의 <code>key = value</code> 형식 전달인자들을 하나의 딕셔너리로 전달받는다.</td>
+</tr><tr style="vertical-align: top;"><td>
 
 ```python
-''' 예시. arg = value '''
 def function(arg = "Python"):
     print(arg)
-    
-function()                    # 출력: Python
-function("Hello World!")      # 출력: Hello World!
+
+funtion()
+funtion("Hello World!")
 ```
-----
+</td><td>
+
 ```python
-''' 예시. *args '''
 def function(*args):
     print(args)
-    
-function(1, 2, 3, 4)          # 출력: (1, 2, 3, 4)
+
+funtion(1, 2, 3, 4)
 ```
-----
+</td><td>
+
 ```python
-''' 예시. **kwargs '''
 def function(**kwargs):
     print(kwargs)
-    
-function(param1 = 3, param2 = "Hello World!")    # 출력: {param1: 3, param2: 'Hello World!'}
+
+function(arg1 = 3, arg2 = "ABC")
 ```
+</td></tr>
+<tr style="vertical-align: top;"><td>
+
+```terminal
+Python
+Hello World!
+```
+</td><td>
+
+```terminal
+(1, 2, 3, 4)
+```
+</td><td>
+
+```terminal
+{arg1: 3, arg2: 'ABC'}
+```
+</td></tr></tbody>
+</table>
 
 ## 람다 표현식
 [람다 표현식](https://docs.python.org/3/tutorial/controlflow.html#lambda-expressions)(lambda expression), 일명 람다 함수(lambda function) 혹은 익명 함수(anonymous function)는 이름이 없는 (즉, 익명) 함수로써 단일 표현식으로만 값을 반환한다. 익명 함수는 `lambda` 키워드로 생성되어 흔히 일회용 함수 또는 [고차 함수](#고차-함수)의 전달인자로 사용된다. 비록 식별자가 필요하지 않는 익명 함수일지라도, 람다 표현식은 재호출을 위해 일반 함수처럼 식별자를 가질 수 있다.
@@ -1008,7 +1043,7 @@ def function():
 수정될 함수로부터 가장 가까운 데코레이터가 우선적으로 적용된다. 그러므로 `function()` 함수는 먼저 `@decorator2` 다음 `@decorator1` 데코레이터 순서로 적용된다.
 
 ## 재귀 함수 
-[재귀 함수](https://ko.wikipedia.org/wiki/재귀_(컴퓨터_과학))(recursive function)는 스스로를 호출하는 함수이다. 재귀 함수는 반드시 스스로를 호출하는 반복으로부터 탈출하는 기저 조건(base case)이 필요하다. 기저 조건이 없으면 무한 재귀가 발생하는데 프로그램 실행에 기여하는 [메모리](/docs/ko.C#스택-영역)가 부족하여 런타임 오류가 발생한다.
+[재귀 함수](https://ko.wikipedia.org/wiki/재귀_(컴퓨터_과학))(recursive function)는 스스로를 호출하는 함수이다. 재귀 함수는 반드시 스스로를 호출하는 반복으로부터 탈출하는 기저 조건(base case)이 필요하다. 기저 조건이 없으면 무한 재귀가 발생하는데 프로그램 실행에 기여하는 [메모리](ko.Memory)가 부족하여 런타임 오류가 발생한다.
 
 ```python
 # 예제: 펙토리얼 "!"
