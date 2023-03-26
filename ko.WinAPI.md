@@ -3,19 +3,23 @@ category: 윈도우
 title: 윈도우 API
 ---
 # 윈도우 API
-[윈도우 API](https://ko.wikipedia.org/wiki/윈도우_API)(일명 WinAPI)는 [사용자 모드](ko.Processor.md#보호-링)에서 윈도우에서 제공하는 기능들을 활용할 수 있도록 하는 [어플리케이션 프로그래밍 인터페이스](https://ko.wikipedia.org/wiki/API)이다. 이들은 마이크로소프트 공식 문서가 존재하여 개발자가 참고할 수 있으며 대표적으로 [`CreateProcess`](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-createprocessw), [`CreateFile`](https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-createfilew) 등의 함수가 해당한다. 윈도우 개발 당시에 가장 널리 사용된 저급 [C](ko.C.md) 프로그래밍 언어로 작성되었으므로 윈도우 API는 타 프로그래밍 언어에서도 불러와 활용이 가능하다.
+> 흔히 32비트의 [x86](https://ko.wikipedia.org/wiki/X86)에서 비롯된 Win32 API로 알려졌으나, [x64](https://ko.wikipedia.org/wiki/X86-64) 및 [ARM64](https://ko.wikipedia.org/wiki/ARM_아키텍처)도 지원하면서 특정 아키텍처에 종속되지 않는 명칭으로 변경하였다.
 
-> 이전에는 32비트 윈도우 운영체제의 프로그래밍 인터페이스인 Win32 API로 알려졌으나, 마이크로소프트는 특정 아키텍처에 종속되지 않는 명칭으로 변경한 것이다. 
+[윈도우 API](https://ko.wikipedia.org/wiki/윈도우_API)(일명 WinAPI)는 [사용자 모드](ko.Processor.md#보호-링)에서 윈도우가 제공하는 기능들을 활용할 수 있도록 하는 [어플리케이션 프로그래밍 인터페이스](https://ko.wikipedia.org/wiki/API)(application programming interface; API)이다. 개발자는 마이크로소프트 공식 문서를 참고하여 윈도우가 제공하는 리소스를 적극적으로 활용할 수 있다. WinAPI는 [C](ko.C.md) 프로그래밍 언어로 작성되었으나 타 프로그래밍 언어를 통해서도 사용이 가능하다.
 
-윈도우에서 다루는 [함수](https://ko.wikipedia.org/wiki/함수_(컴퓨터_과학))(혹은 서브루틴; subroutine)는 API 함수 외에도 다음 유형들이 존재한다:
+다음은 WinAPI가 [시스템 서비스](ko.Windows.md#시스템-서비스)를 호출하는 과정을 순서대로 나열한다.
 
-* **루틴(routines)**
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;">WinAPI <code>CreateFileW</code> 함수의 시스템 서비스 호출 과정</caption>
+<colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 20%;"/><col style="width: 20%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;">순서</th><th style="text-align: center;">구성</th><th style="text-align: center;">구성명</th><th style="text-align: center;">함수</th><th style="text-align: center;">설명</th></tr></thead>
+<tbody>
+<tr><td style="text-align: center;">1</td><td style="text-align: center;"><code>Kernel32.dll</code></td><td style="text-align: center;"><a href="ko.Subsystem.md#환경-서브시스템">환경 서브시스템 DLL</a></td><td style="text-align: center;"><a href="https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-createfilew"><code>CreateFileW</code></a></td><td>시스템 서비스를 호출하는 WinAPI 함수</td></tr>
+<tr><td style="text-align: center;">2</td><td style="text-align: center;"><code>Ntdll.dll</code></td><td style="text-align: center;"><a href="ko.Windows.md#ntdlldll">Native API 라이브러리</a></td><td style="text-align: center;"><a href="https://learn.microsoft.com/en-us/windows/win32/api/winternl/nf-winternl-ntcreatefile"><code>NtCreateFile</code></a></td><td>WinAPI로부터 요청한 사용자 모드의 루틴 진입점</td></tr>
+<tr><td style="text-align: center;">3</td><td style="text-align: center;"><code>Ntoskrnl.exe</code></td><td style="text-align: center;">Executive</td><td style="text-align: center;"><a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-zwcreatefile"><code>ZwCreateFile</code></a></td><td>WinAPI로부터 요청한 커널 모드의 루틴</td></tr></tbody>
+</table>
 
-    [커널 모드](ko.Processor.md#보호-링)에서만 호출될 수 있는 윈도우 운영체제 함수이다. 마이크로소프트 공식 문서를 참고하여 루틴에 대한 설명을 확인할 수 있으나, 이들은 [장치 드라이버](https://ko.wikipedia.org/wiki/장치_드라이버) 개발자 위주로 내용을 다룬다. 대표적인 예시로 윈도우 시스템 공간에 힙 영역의 [풀 메모리](ko.Memory.md#메모리-풀)를 할당하는 [`ExAllocatePoolWithTag`](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-exallocatepoolwithtag) 루틴이 있다.
-
-* **[시스템 서비스](https://ko.wikipedia.org/wiki/시스템_호출)(system services)**
-
-    운영체제에서 제공하는 기능을 사용자 모드에서 호출할 수 있도록 하는 함수이다. 시스템 서비스 실행 시 [프로세서](ko.Processor.md)의 특수한 명령에 의해 [스레드](ko.Process.md#스레드)는 커널 모드에 진입하여 루틴을 처리하고, 완료되면 사용자 모드로 되돌아가는 원리로 동작한다. 윈도우 API로 `CreateProcess` 함수를 호출하면 `NtCreateUserProcess` 시스템 서비스로 이어져 [프로세스](ko.Process.md)를 생성하는 루틴들이 처리된다. 시스템 서비스에 대하여 공개된 공식 마이크로소프트 참고 문서가 존재하지 않는다.
+사실상 `NtCreateFile`과 `ZwCreateFile`은 동일한 함수이지만, 전자는 선언된 진입점에 불과하고 실제 코드를 수행하는 건 후자이다. `Zw` 접두사의 루틴은 (WinAPI가 아닌) [드라이버 API](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/)로써 [장치 드라이버](ko.Driver.md#장치-드라이버) 개발자가 호출하여 사용할 수 있다.
 
 ## 컴포넌트 오브젝트 모델
 > *참조: [The Component Object Model - Win32 apps &#124; Microsoft Learn](https://learn.microsoft.com/en-us/windows/win32/com/the-component-object-model)*
@@ -37,5 +41,5 @@ title: 윈도우 API
 [C#](ko.Csharp.md) 프로그래밍 언어의 [인터페이스](ko.Csharp.md#인터페이스) 및 [클래스](en.Csharp.md#클래스)에 대한 지식은 개념의 유사성으로 COM을 이해하는데 도움이 된다: COM 클래스는 도입된 COM 인터페이스의 텅 빈 가상 메소드에 실질적인 함수 코드(일명 컴포넌트, 혹은 COM 오브젝트)를 정의하는데, 해당 컴포넌트를 사용하기 위해서는 오로지 COM 인터페이스로만 접근될 수 있다. 그리고 COM 오브젝트 호출하는 자를 COM 클라이언트, 그리고 제공하는 자를 COM 서버라고 지칭한다.
 
 # 같이 보기
-* [Windows API index](https://learn.microsoft.com/en-us/windows/win32/apiindex/windows-api-list)
+* [Windows API Index](https://learn.microsoft.com/en-us/windows/win32/apiindex/api-index-portal)
 * [COM Technical Overview](https://learn.microsoft.com/en-us/windows/win32/com/com-technical-overview)
