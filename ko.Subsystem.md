@@ -31,13 +31,32 @@ title: 서브시스템
 1. 커널 운영자(Executive)로부터 최소 하나 이상의 시스템 서비스를 호출한다.
 1. [ALPC](https://ko.wikipedia.org/wiki/로컬_프로시저_호출)를 통해 해당 환경 서브시스템 프로세스에게 일부 작업 처리를 요청한다.
 
-환경 서브시스템은 세션 관리자 `Smss.exe` 프로세스에 의해 실행되며, 이들 목록은 `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\SubSystems` 레지스트리 키에서 찾아볼 수 있다. 여기서 `Required` 값에은 윈도우 NT가 부팅될 시 불러올 서브시스템들을 나열한다.
+환경 서브시스템은 세션 관리자 `Smss.exe`에 의해 관리되며, `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\SubSystems` 레지스트리 키에 설정되어 있다. `Required` 값은 생성되는 각 세션마다 반드시 초기화되는 환경 서브시스템을 나열하며, `Option` 값의 서브시스템은 필요에 따라 초기화된다.
 
 > `Debug` 레지스트리 값에는 아무런 환경 서브시스템가 기입되어 있지 않고 윈도우 XP 이후부터 필요가 없어졌으나 호환성을 위해 유지되고 있다.
 
 ![세션 관리자가 실행하는 서브시스템 정보에 대한 레지스트리](./images/windows_subsystems_registry.png)
 
-### Windows Subsystem for Linux
+## 윈도우 서브시스템
+윈도우 서브시스템(Windows subsystem)은 윈도우 NT의 핵심 요소 중 하나이며, 현재로써 유일하게 남은 환경 서브시스템이다. 프로그램 창을 포함한 화면 및 장치 입출력(마우스 커서 움직임, 키보드 자판 입력 등)을 처리하고 관리하는 기초적이지만 필수적인 역할을 수행하며, 다른 환경 서브시스템도 이러한 기능을 사용하려면 반드시 윈도우 서브시스템을 거쳐야 한다.
+
+윈도우 서브시스템은 `Csrss.exe` 프로세스와 서브시스템 DLL 외의도 다음 구성원이 존재한다.
+
+* `Csrss.exe`는 해당하는 세션에 다음 네 개의 DLL을 로드한다: `Basesrv.dll`, `Winsrv.dll`, `Sxssrv.dll` 그리고 `Csrsrv.dll`. 이들은 프로세스 및 스레드 생성과 종료를 처리하거나 윈도우 메시지를 전달하는 등의 세션 운영에 필요한 기초적인 기능들을 제공한다.
+
+* `Win32k.sys`은 윈도우 서브시스템에서 핵심되는 기능이라고 소개한 장치 입력 및 프로그램 창을 처리하는 데 사용되는 커널 모드 장치 드라이버이다. 아래는 해당 장치 드라이버에 포함된 구성들을 소개한다.
+
+    <table style="width: 95%; margin: auto;"><caption style="caption-side: top;"><code>Win32k.sys</code> 장치 드라이버의 구성</caption><colgroup><col style="width: 30%;"/><col style="width: 70%;"/></colgroup><thead><tr><th style="text-align: center;">구성</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/창_관리자">창 관리자</a><br/>(Windows Manager)</td><td>바탕화면, 프로그램 창을 포함한 GUI 요소들을 생성하고 화면에 표시한다(콘솔 제외). 마우스 및 키보드 등의 장치 입력을 수신받아 GUI 요소에 상호작용 이벤트 처리에도 관여한다.</td></tr><tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/그래픽_장치_인터페이스">그랙픽 장치 인터페이스</a><br/>(Graphics Device Interface; GDI)</td><td>직선, 곡선, 도형 등의 그래픽 요소의 생성 및 조작, 폰트 렌더링, 색상 관리 등을 담당하는 함수나 서비스르 제공한다.</td></tr></tbody></table>
+
+* `Conhost.exe`, 일명 "콘솔 호스트 프로세스"는 윈도우 7부터 소개되어 콘솔 창을 생성 및 관리를 담당한다. 본래 `Csrss.exe` 직접 처리하였으나, 로컬 시스템 계정으로 실행된 서브시스템 프로세스로부터 일반 사용자에게 부여되어서 안 될 권한이 주어질 수 있는 보안 문제를 야기할 수 있어 소개되었다.
+
+    > 한편, 윈도우 8부터 소개된 콘솔 드라이버 `Condrv.sys`의 역할은 키보드 입출력을 곧바로 `Conhost.exe`로 전달한다. 이전에는 `Csrss.exe` 및 `Win32k.sys`를 거쳐 이벤트를 전달하는 형식으로 키보드 입력이 반영되었던 절차를 대폭 간소화하여 성능 개선에 이바지한다.
+
+* [데스크탑 창 관리자](https://ko.wikipedia.org/wiki/데스크톱_창_관리자)(Desktop Windows Manager; `Dwm.exe`)는 데스크탑의 모든 그래픽 요소들을 관리하는 윈도우 운영체제의 구성 중 하나이다. 여기서 "데스크탑"이란, 사용자가 컴퓨터를 시작할 때 화면에 접하는 GUI를 가리키며 파일 탐색기, 작업 표시줄, 시작 메뉴 등으로 이루어져 있다.
+
+위와 같은 구성과 기능을 갖춘 윈도우 서브시스템은 결국 모든 세션에서 반드시 필요한 존재로, 작업 관리자에서는 열린 세션 개수만큼 `Csrss.exe`가 실행되고 있는 걸 찾아볼 수 있다. 심지어 [윈도우 서비스](ko.Service.md) 전용인 ID 0의 세션도 콘솔 작업이 동반되므로 윈도우 서브시스템이 필요하다. 또한 대부분의 핵심 기능들은 커널 모드에서 동작하므로, 윈도우 어플리케이션을 실행하는 거 자체에서는 문맥 교환이 거의 이루어지지 않는다.
+
+## Windows Subsystem for Linux
 [WSL](https://ko.wikipedia.org/wiki/리눅스용_윈도우_하위_시스템)(Windows Subsystem for Linux), 일명 리눅스용 윈도우 서브시스템은 아래에 서술된 기존 환경 서브시스템이 가진 기술적 문제들을 극복하기 위해 새롭게 설계된 서브시스템이다.
 
 1. 윈도우 [PE](https://ko.wikipedia.org/wiki/PE_포맷) 실행 파일, 즉 `.EXE` 확장자로 새로 빌드되어야 윈도우 운영체제에서 서브시스템 정보를 추출하고 실행할 수 있다.
