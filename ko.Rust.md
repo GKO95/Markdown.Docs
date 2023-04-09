@@ -25,18 +25,72 @@ title: 러스트
 ### 통합 개발 환경
 [통합 개발 환경](https://ko.wikipedia.org/wiki/통합_개발_환경)(integrated development environment; IDE)은 최소한 프로그래밍 언어의 소스 코드 편집, 프로그램 빌드, 그리고 디버깅 기능을 제공하는 소프트웨어 개발 프로그램이다. 툴체인은 러스트 코드를 컴퓨터가 실행할 수 있도록 하는 개발 도구이지만 러스트 코드 편집기는 아니다. 러스트 코드를 작성하고 프로그램으로 실행하여 문제가 발생하면 검토할 수 있는 IDE가 절대적으로 필요하다.
 
-* [비주얼 스튜디오 코드](https://ko.wikipedia.org/wiki/비주얼_스튜디오_코드)<sub>([다운로드](https://code.visualstudio.com/download))</sub>, 일명 VS Code는 마이크로소프트에서 개발한 무료 소스 코드 편집기이다. 비록 기술적으로 IDE는 아니지만, rust-analyzer 확장도구<sub>([다운로드](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer))</sub>를 설치하면 코드 자동완성, 자료형 정의, 구문 하이라이트 등의 기능들을 제공한다.
+* [비주얼 스튜디오 코드](https://ko.wikipedia.org/wiki/비주얼_스튜디오_코드)<sub>([다운로드](https://code.visualstudio.com/download))</sub>, 일명 VS Code는 마이크로소프트에서 개발한 무료 소스 코드 편집기이다. 비록 기술적으로 IDE는 아니지만, rust-analyzer 확장도구<sub>([다운로드](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer))</sub>를 설치하면 코드 자동완성, 자료형 정의, 구문 하이라이트 등의 기능들을 제공한다. 코드 디버깅을 하려면 아래를 함께 설치한다.
 
-    > 본 문서는 VS Code를 기준으로 러스트 프로그래밍을 소개한다.
+    * [마이크로소프트 C++](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) (윈도우 운영체제)
+    * [CodeLLDB](https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb) (macOS 또는 리눅스 운영체제)
 
 ## 프로젝트
+러스트 프로그래밍 언어는 [`cargo`](https://doc.rust-lang.org/rust-by-example/cargo.html)라는 공식 패키지 관리 도구를 통해 프로젝트를 관리한다.
+
 ![VS Code에서 러스트 프로그래밍의 프로젝트](./images/vscode_rust.png)
 
-러스트 프로그래밍 언어는 [`cargo`](https://doc.rust-lang.org/rust-by-example/cargo.html)라는 공식 패키지 관리 도구를 통해 프로젝트를 관리한다. 아래의 명령을 통해 `cargo` 도구는 프로젝트를 컴파일 및 실행한다.
+<table style="width: 70%; margin: auto;">
+<caption style="caption-side: top;"><code>cargo</code> 도구의 프로젝트 관리 명령</caption>
+<colgroup><col style="width: 25%;"/><col style="width: 75%;"/></colgroup>
+<thead><tr><th style="text-align: center;">명령어</th><th style="text-align: center;">설명</th></tr></thead>
+<tbody>
+<tr><td style="text-align: center;"><code>cargo build</code></td><td>프로젝트 빌드</td></tr>
+<tr><td style="text-align: center;"><code>cargo run</code></td><td>프로젝트 (빌드 및) 실행</td></tr>
+<tr><td style="text-align: center;"><code>cargo clean</code></td><td>프로젝트 빌드 결과물 제거 및 정리</td></tr>
+<tr><td style="text-align: center;"><code>cargo check</code></td><td>프로젝트 유효성 검사; 컴파일 생략으로 소모 시간을 단축하나 결과물 부재</td></tr>
+</tbody>
+</table>
 
-* `cargo build`: 프로젝트 빌드
-* `cargo run`: 프로젝트 (빌드 및) 실행
-* `cargo check`: 프로젝트 코드 유효성 검사 (소모 시간은 단축되지만, 컴파일을 하지 않아 결과물 부재)
+VS Code 편집기에 rust-analyzer 확장도구를 사용하면 `main()` 진입점 위에 "▶ Run | Debug" CodeLens 표시가 나타난다. 이는 `cargo`를 대신하여 프로젝트를 컴파일 및 실행하는 데 활용될 수 있다. 그러나 `CTRL+F5` 또는 `F5` 단축키로 빌드 및 실행이 불가하므로, `.vscode` 폴더에 추가할 두 개의 JSON 파일을 공유한다.
+
+```json
+// 파일명: launch.json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Rust Launch",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/target/debug/${workspaceFolderBasename}.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "console": "integratedTerminal",
+            "preLaunchTask": "Rust: rustc.exe build active file"
+        }
+    ]
+}
+```
+```json
+// 파일명: tasks.json
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cargo",
+			"command": "run",
+			"problemMatcher": [
+				"$rustc"
+			],
+			"label": "Rust: rustc.exe build active file",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		}
+	]
+}
+```
+
+러스트 프로그래밍은 기본적으로 디버그 모드에서 프로젝트를 빌드하고 실행하며, 컴파일 부산물들은 `.\target\debug` 폴더 안에 위치한다. 만일 정식 배포를 위해 최적화된 프로그램으로 빌드하기 위헤 명령어에 `--release` 플래그를 추가하면 `.\target\release` 폴더에 프로그램이 생성된다.
 
 ### 크레이트
 [크레이트](https://doc.rust-lang.org/rust-by-example/crates.html)(crate; 화물상자)는 컴파일로 생성된 가장 작은 단위의 결과물이며, 간단히 말해 `.RS` 소스 파일(일명 크레이트 파일; crate file)로부터 생성된 실행 및 라이브러리 파일이다. 크레이트 파일 중에서 러스트 프로그래밍 컴파일의 근본이 되는 소스 파일을 크레이트 루트(crate root)이라고 부른다.
