@@ -30,9 +30,9 @@ title: 러스트
     > 본 문서는 VS Code를 기준으로 러스트 프로그래밍을 소개한다.
 
 ## 프로젝트
-러스트 프로그래밍 언어는 [`cargo`](https://doc.rust-lang.org/rust-by-example/cargo.html)라는 공식 패키지 관리 도구를 통해 프로젝트를 관리한다.
-
 ![VS Code에서 러스트 프로그래밍의 프로젝트](./images/vscode_rust.png)
+
+러스트 프로그래밍 언어는 [`cargo`](https://doc.rust-lang.org/rust-by-example/cargo.html)라는 공식 패키지 관리 도구를 통해 프로젝트를 관리한다. 아래의 명령을 통해 `cargo` 도구는 프로젝트를 컴파일 및 실행한다.
 
 * `cargo build`: 프로젝트 빌드
 * `cargo run`: 프로젝트 (빌드 및) 실행
@@ -47,9 +47,9 @@ title: 러스트
 <caption style="caption-side: top;">이진 및 라이브러리 크레이트 비교</caption>
 <colgroup><col style="width: 16%;"/><col style="width: 44%;"/><col style="width: 44%;"/></colgroup>
 <thead><tr><th></th><th style="text-align: center;">이진 크레이트 (binary crate)</th><th style="text-align: center;">라이브러리 크레이트 (library crate)</th></tr></thead>
-<tbody><td>설명</td><td style="text-align: center;"><code>.EXE</code> 실행 프로그램</td><td style="text-align: center;"><code>.RLIB</code> 라이브러리 파일</td></tbody>
-<tbody><td>크레이트 루트</td><td style="text-align: center;"><code>src/main.rs</code></td><td style="text-align: center;"><code>src/lib.rs</code></td></tbody>
-<tbody><td><code>main</code> 진입점</td><td style="text-align: center;">⭕</td><td style="text-align: center;">❌</td></tbody>
+<tbody><td style="text-align: center;">설명</td><td style="text-align: center;"><code>.EXE</code> 실행 프로그램</td><td style="text-align: center;"><code>.RLIB</code> 라이브러리 파일</td></tbody>
+<tbody><td style="text-align: center;">크레이트 루트</td><td style="text-align: center;"><code>src/main.rs</code></td><td style="text-align: center;"><code>src/lib.rs</code></td></tbody>
+<tbody><td style="text-align: center;"><code>main</code> 진입점</td><td style="text-align: center;">⭕</td><td style="text-align: center;">❌</td></tbody>
 </table>
 
 러스트 프로그래밍에서 크레이트를 이야기하면 흔히 "라이브러리 크레이트"를 가리키며, 이는 일반 프로그래밍 언어에서의 "[라이브러리](ko.C.md#라이브러리)"와 혼용되어 언급되기도 한다.
@@ -64,7 +64,7 @@ cargo new <프로젝트명>
 ```
 
 # 구문
-[구문](https://ko.wikipedia.org/wiki/구문_(프로그래밍_언어))(syntax)은 프로그래밍 언어에서 문자 및 기호들의 조합이 올바른 문장 또는 표현식을 구성하였는지 정의하는 규칙이다.
+[구문](https://ko.wikipedia.org/wiki/구문_(프로그래밍_언어))(syntax)은 프로그래밍 언어에서 문자 및 기호들의 조합이 올바른 문장 또는 표현식을 구성하였는지 정의하는 규칙이다. 각 프로그래밍 언어마다 규정하는 구문이 다르며, 이를 준수하지 않을 시 해당 프로그램은 빌드되지 않거나, 실행이 되어도 오류 및 의도치 않은 동작을 수행한다.
 
 다음은 러스트 프로그래밍 언어에서 구문에 관여하는 요소들을 소개한다:
 
@@ -94,3 +94,40 @@ cargo new <프로젝트명>
     let variable = 2 + 3;      // 숫자 5를 "variable" 변수에 초기화
     if 2 < 3 { statement; }    // 논리가 참이면 "statement" 문장 실행
     ```
+
+### 주석
+[주석](https://doc.rust-lang.org/reference/comments.html)(comment)은 프로그램의 소스 코드로 취급하지 않아 실행되지 않는 영역이다. 흔히 코드에 대한 간단한 정보를 기입하기 위해 사용되는 데, 크게 비문서 주석(non-doc comments) 그리고 문서 주석(doc comments)로 나뉘어진다.
+
+<table style="table-layout: fixed; width: 90%; margin: auto;">
+<caption style="caption-side: top;">러스트 주석 종류</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;">비문서 주석(non-doc comments)</th><th style="text-align: center;">문서 주석(doc comments)</th></tr></thead>
+<tbody>
+<tr><td>일반적인 <a href="ko.C.md">C</a>/<a href="ko.C.md">C++</a> 언어 형식의 <a href="ko.C.md#주석">주석</a>과 동일하다.</td><td>문서 주석은 한줄(<code>///</code>) 그리고 블록(<code>/** */</code>)으로 입력할 수 있으며, 데이터에 대한 간략한 설명을 기입하는 데 사용된다.</td></tr>
+<tr style="vertical-align: top; overflow-wrap: break-word;"><td>
+
+```rust
+/*
+블록 주석:
+코드 여러 줄을 차지하는 주석이다.
+*/
+
+// 한줄 주석: 코드 한 줄을 차지하는 주석이다.
+```
+</td><td>
+
+```rust
+/**
+블록 문서 주석:
+코드 여러 줄을 차지하는 주석이다.
+*/
+
+/// 한줄 문서 주석: 코드 한 줄을 차지하는 주석이다.
+```
+</td></tr>
+</tbody>
+</table>
+
+일반 주석과 달리, 사용자가 정의한 데이터에 기입된 문서 주석은 `doc`이란 특수한 속성에 저장되어 정의된 데이터에 대한 설명을 정의한 소스 코드를 찾아가지 않고서도 곧바로 내용을 살펴볼 수 있다.
+
+![VS Code에서의 문서 주석 활용 예시](./images/rust_doccomments.png)
