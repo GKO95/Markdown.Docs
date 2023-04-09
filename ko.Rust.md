@@ -17,7 +17,7 @@ title: 러스트
 여기서 러스트 프로그래밍 언어의 툴체인(toolchain)이란, 소프트웨어 제품 개발에 활용되는 프로그래밍 도구들의 집합을 가리키며 대표적으로 다음 세 개의 프로그램이 있다.
 
 * `rustc`: 러스트 [컴파일러](ko.Compiler.md)(compiler)
-* [`cargo`](https://doc.rust-lang.org/rust-by-example/cargo.html): 러스트 패키지 관리자
+* [`cargo`](#프로젝트): 러스트 패키지 관리자; 프로젝트를 컴파일 및 실행한다.
 * `rustup`: 러스트 툴체인 관리자, 즉 위의 `rustc` 및 `cargo` 프로그램을 다른 버전으로 설치 및 선택한다.
 
 설치가 완료되면 `%UserProfile%`에 두 경로가 생성된다: `.rustup` 그리고 `.cargo` 폴더이다. 전자는 러스트 툴체인이 실질적으로 설치되는 공간으로, 설치된 툴체인은 `toolchains` 하위폴더에 저장된다. 이렇게 설치된 여러 툴체인들 중에서 원하는 버전으로 경로를 바꿔가며 사용하는 번거로움을 해소하기 위해, 후자 폴더에 위치한 `rustc` 또는 `cargo` 등 명령어 프로그램들은 `rustup`에서 선택한 버전으로 연동된다. 그러므로 콘솔창은 `.cargo` 폴더에서 벗어나지 않고서도 다양한 버전의 툴체인을 활용할 수 있게 된다.
@@ -32,9 +32,11 @@ title: 러스트
 ## 프로젝트
 러스트 프로그래밍 언어는 [`cargo`](https://doc.rust-lang.org/rust-by-example/cargo.html)라는 공식 패키지 관리 도구를 통해 프로젝트를 관리한다.
 
-![VS Code에서 러스트 프로그래밍의 프로젝트](./images/vscode_rust_toml.png)
+![VS Code에서 러스트 프로그래밍의 프로젝트](./images/vscode_rust.png)
 
-프로젝트를 [빌드](https://ko.wikipedia.org/wiki/소프트웨어_빌드)하거나 실행하기 위해 각각 `cargo build` 그리고 `cargo run` 명령어를 사용된다. 러스트 프로그래밍 언어의 독특한 기능 중 하나는 결과물을 생성하지 않은 채 컴파일이 가능한지 여부를 `cargo check` 명령어로 확인할 수 있다. 이는 소스 코드를 컴파일하는 데 소모되는 시간이 생략되므로 코드 유효성을 확인하기에 매우 유용하다.
+* `cargo build`: 프로젝트 빌드
+* `cargo run`: 프로젝트 (빌드 및) 실행
+* `cargo check`: 프로젝트 코드 유효성 검사 (소모 시간은 단축되지만, 컴파일을 하지 않아 결과물 부재)
 
 ### 크레이트
 [크레이트](https://doc.rust-lang.org/rust-by-example/crates.html)(crate; 화물상자)는 컴파일로 생성된 가장 작은 단위의 결과물이며, 간단히 말해 `.RS` 소스 파일(일명 크레이트 파일; crate file)로부터 생성된 실행 및 라이브러리 파일이다. 크레이트 파일 중에서 러스트 프로그래밍 컴파일의 근본이 되는 소스 파일을 크레이트 루트(crate root)이라고 부른다.
@@ -62,3 +64,33 @@ cargo new <프로젝트명>
 ```
 
 # 구문
+[구문](https://ko.wikipedia.org/wiki/구문_(프로그래밍_언어))(syntax)은 프로그래밍 언어에서 문자 및 기호들의 조합이 올바른 문장 또는 표현식을 구성하였는지 정의하는 규칙이다.
+
+다음은 러스트 프로그래밍 언어에서 구문에 관여하는 요소들을 소개한다:
+
+* **[표현식](https://ko.wikipedia.org/wiki/식_(프로그래밍))(expression)**
+    
+    값을 반환하는 구문적 존재를 가리킨다. 표현식에 대한 결과를 도출하는 것을 평가(evaluate)라고 부른다.
+    
+    ```rust
+    2 + 3           // 숫자 5를 반환
+    2 < 3           // 논리 참을 반환
+    ```
+
+* **[토큰](https://doc.rust-lang.org/reference/tokens.html)(token)**
+
+    표현식을 구성하는 가장 기본적인 요소이며, 대표적으로 [키워드](https://doc.rust-lang.org/reference/keywords.html)(keyword), [식별자](#식별자)(identifier)와 [리터럴](https://doc.rust-lang.org/reference/tokens.html#literals)(literal) 등이 있다.
+
+    ```rust
+    variable        // 식별자
+    2               // 정수 리터럴
+    ```
+
+* **[문장](https://ko.wikipedia.org/wiki/문_(프로그래밍))(statement)**
+    
+    실질적으로 무언가를 실행하는 구문적 존재를 가리킨다: 흔히 하나 이상의 표현식으로 구성되지만, [`break`](#break-문) 및 [`continue`](#continue-문)와 같이 독립적으로 사용되는 문장도 있다. 러스트 프로그래밍 언어는 [세미콜론](https://ko.wikipedia.org/wiki/새줄_문자)(semicolon) `;`을 기준으로 문장을 분별한다. 
+
+    ```rust
+    let variable = 2 + 3;      // 숫자 5를 "variable" 변수에 초기화
+    if 2 < 3 { statement; }    // 논리가 참이면 "statement" 문장 실행
+    ```
