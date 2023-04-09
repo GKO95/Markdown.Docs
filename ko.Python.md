@@ -5,7 +5,6 @@ title: 파이썬
 # 파이썬
 [파이썬](https://www.python.org/)(Python)은 웹 프로그래밍, 과학연구, 인공지능을 포함한 수많은 영역에서 응용 가능한 [다중 패러다임](https://ko.wikipedia.org/wiki/다중_패러다임_프로그래밍_언어) [고급 프로그래밍 언어](https://ko.wikipedia.org/wiki/고급_프로그래밍_언어)이다. 파이썬은 다른 프로그래밍 언어에 비해 매우 간편하여 프로그래밍 입문자에게 적합하고 커뮤니티가 매우 건재하다. 또한 [넘파이](ko.NumPy.md), [텐서플로우](ko.TensorFlow.md), [OpenCV](ko.OpenCV.md) 등의 다양한 [서드 파티](https://ko.wikipedia.org/wiki/서드_파티_개발자#서드파티) 라이브러리 생태계가 잘 갖춰져 있어 광범위한 활용도를 보여주는 강력한 프로그래밍 언어이다.
 
-## 인터프리터
 파이썬은 [인터프리트 언어](ko.Interpreter.md)(interpreted language)이다. 버전은 크게 파이썬 2와 파이썬 3으로 분류되는데, 전자는 2020년 1월 1일부로 서비스가 종료되었다. 파이썬 1이라는 것도 존재하나, 가장 최신 버전 1.6.1이 2000년에 출시된 점을 고려하면 호환성과 실용성이 매우 떨어진다. 그러므로 본문은 파이썬 3을 위주로 프로그래밍을 설명한다.
 
 <table style="width: 80%; margin: auto;">
@@ -25,7 +24,7 @@ title: 파이썬
 * [자이썬](https://ko.wikipedia.org/wiki/자이썬): [Java](ko.Java.md) 프로그래밍 언어로 개발된 파이썬 인터프리터
 * [아이언파이썬](https://ko.wikipedia.org/wiki/IronPython): [C#](ko.Csharp.md) 프로그래밍 언어로 개발된 파이썬 인터프리터
 
-### 인터프리터 설치
+## 설치
 파이썬을 실행하기 위해서는 두 가지 프로그램이 필요하다: (1) 인터프리터<sub>([다운로드](https://www.python.org/downloads/))</sub> 그리고 (2) [통합 개발 환경](#통합-개발-환경)(일명 IDE)이다. 리눅스와 macOS는 기본적으로 파이썬 2와 3 인터프리터가 설치되어 있으나, 다른 특정 버전을 원하면 새로 설치해야 한다. 본 장에서는 파이썬 인터프리터와 IDE의 설치 및 연동을 통해 파이썬과 같은 인터프리터 언어가 어떻게 동작하는지 이해를 돕는다.
 
 ![파이썬 3 공식 웹사이트 인터프리터 다운로드 목록](./images/python_interpreter_download.png)
@@ -65,15 +64,14 @@ title: 파이썬
 
 여기서 `Download debug binaries (requires VS 2015 or later)`는 "디버깅 라이브러리 다운로드" 여부를 묻는데, 이를 필요로 하는 경우로써 [OpenCV](/docs/ko.OpenCV) 라이브러리를 생성할 때가 있다. 하지만 파이썬을 프로그래밍 입문 언어로 배우는 초급자의 입장에서 위의 선택사항들은 공부에 지장을 주지 않아 무시하여도 된다.
 
-## 통합 개발 환경
+### 통합 개발 환경
 [통합 개발 환경](https://ko.wikipedia.org/wiki/통합_개발_환경)(integrated development environment; IDE)은 최소한 프로그래밍 언어의 소스 코드 편집, 프로그램 빌드, 그리고 디버깅 기능을 제공하는 소프트웨어 개발 도구이다. 인터프리터는 파이썬 코드를 실행하는 소프트웨어이지만, 파이썬 코드 편집기가 아니다. 그러므로 파이썬 코드를 편집하고 실행하여 문제가 발생하면 검토할 수 있는 IDE가 절대적으로 필요하다.
 
-### 비주얼 스튜디오 코드
-[비주얼 스튜디오 코드](https://ko.wikipedia.org/wiki/비주얼_스튜디오_코드)<sub>([다운로드](https://code.visualstudio.com/download))</sub>, 일명 VS Code는 마이크로소프트에서 개발한 무료 소스 코드 편집기이다. 비록 기술적으로 IDE는 아니지만, 파이썬 확장도구<sub>([다운로드](https://marketplace.visualstudio.com/items?itemName=ms-python.python))</sub>를 설치하여 인터프리터를 불러오면 파이썬 실행 및 디버깅이 모두 가능한 IDE 역할을 수행한다. 확장도구를 설치하였으면 `F1` 키를 눌러 `Python: Select Interpreter`을 입력한다. 컴퓨터에 설치된 파이썬 인터프리터가 자동으로 나열되며 사용할 인터프리터를 선택한다.
+* [비주얼 스튜디오 코드](https://ko.wikipedia.org/wiki/비주얼_스튜디오_코드)<sub>([다운로드](https://code.visualstudio.com/download))</sub>, 일명 VS Code는 마이크로소프트에서 개발한 무료 소스 코드 편집기이다. 비록 기술적으로 IDE는 아니지만, 파이썬 확장도구<sub>([다운로드](https://marketplace.visualstudio.com/items?itemName=ms-python.python))</sub>를 설치하여 인터프리터를 불러오면 파이썬 실행 및 디버깅이 모두 가능한 IDE 역할을 수행한다. 확장도구를 설치하였으면 `F1` 키를 눌러 `Python: Select Interpreter`을 입력한다. 컴퓨터에 설치된 파이썬 인터프리터가 자동으로 나열되며 사용할 인터프리터를 선택한다.
 
-![VS Code에서 파이썬 3 작업 환경 예시](./images/vscode_python.png)
+    ![VS Code에서 파이썬 3 작업 환경 예시](./images/vscode_python.png)
 
-VS Code는 두 가지의 실행 방법이 있다: 일반 실행 모드(`Ctrl+F5`)와 디버그 모드(`F5`)이다. [디버그](https://ko.wikipedia.org/wiki/디버그)(debug)는 프로그램에 발생한 문제를 해결하는 행위로, IDE에서 각 줄의 코드마다 어떠한 변화가 생겼는지 혹은 얼만큼의 시스템 리소스를 소모하는지 등을 확인할 수 있는 정보를 제공한다. 디버깅 목적이 아니면 일반 실행 모드를 사용하는 것을 권장한다.
+    VS Code는 두 가지의 실행 방법이 있다: 일반 실행 모드(`Ctrl+F5`)와 디버그 모드(`F5`)이다. [디버그](https://ko.wikipedia.org/wiki/디버그)(debug)는 프로그램에 발생한 문제를 해결하는 행위로, IDE에서 각 줄의 코드마다 어떠한 변화가 생겼는지 혹은 얼만큼의 시스템 리소스를 소모하는지 등을 확인할 수 있는 정보를 제공한다. 디버깅 목적이 아니면 일반 실행 모드를 사용하는 것을 권장한다.
 
 # 구문
 [구문](https://ko.wikipedia.org/wiki/구문_(프로그래밍_언어))(syntax)은 프로그래밍 언어에서 문자 및 기호들의 조합이 올바른 문장 또는 표현식을 구성하였는지 정의하는 규칙이다. 특히 파이썬은 가독성을 매우 중요하게 여기어 "[파이썬의 선](https://peps.python.org/pep-0020/)(Zen of Python)"이란 프로그래밍 철학을 추구하고, 이에 부합한 구문을 파이썬다운(Pythonic) 코드라고 칭한다.
