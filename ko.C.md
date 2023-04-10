@@ -70,3 +70,35 @@ C [런타임 라이브러리](https://ko.wikipedia.org/wiki/런타임_라이브�
 ```
 
 ![비주얼 스튜디오 프로젝트에 <code>CRT_SECURE_NO_WARNINGS</code> 매크로 설정](./images/visual_studio_crt_warnings.png)
+
+# 구문
+[구문](https://ko.wikipedia.org/wiki/구문_(프로그래밍_언어))(syntax)은 프로그래밍 언어에서 문자 및 기호들의 조합이 올바른 문장 또는 표현식을 구성하였는지 정의하는 규칙이다. 각 프로그래밍 언어마다 규정하는 구문이 다르며, 이를 준수하지 않을 시 해당 프로그램은 빌드되지 않거나, 실행이 되어도 오류 및 의도치 않은 동작을 수행한다.
+
+다음은 C 프로그래밍 언어에서 구문에 관여하는 요소들을 소개한다:
+
+* **[표현식](https://ko.wikipedia.org/wiki/식_(프로그래밍))(expression)**
+    
+    값을 반환하는 구문적 존재를 가리킨다. 표현식에 대한 결과를 도출하는 것을 평가(evaluate)라고 부른다.
+    
+    ```c
+    2 + 3           // 숫자 5를 반환
+    2 < 3           // 논리 참을 반환
+    ```
+
+* **[토큰](https://learn.microsoft.com/en-us/cpp/c-language/c-tokens)(token)**
+
+    표현식을 구성하는 가장 기본적인 요소이며, 대표적으로 [키워드](https://learn.microsoft.com/en-us/cpp/c-language/c-keywords)(keyword), [식별자](#식별자)(identifier), [상수](https://learn.microsoft.com/en-us/cpp/c-language/c-constants)(constant), [문자열 리터럴](https://learn.microsoft.com/en-us/cpp/c-language/c-string-literals)(string literal) 등이 있다.
+
+    ```c
+    variable        // 식별자
+    2               // 상수
+    ```
+
+* **[문장](https://ko.wikipedia.org/wiki/문_(프로그래밍))(statement)**
+    
+    실질적으로 무언가를 실행하는 구문적 존재를 가리킨다: 흔히 하나 이상의 표현식으로 구성되지만, [`break`](#break-문) 및 [`continue`](#continue-문)와 같이 독립적으로 사용되는 문장도 있다. 러스트 프로그래밍 언어는 [세미콜론](https://ko.wikipedia.org/wiki/새줄_문자)(semicolon) `;`을 기준으로 문장을 분별한다. 
+
+    ```c
+    int variable = 2 + 3;      // 숫자 5를 "variable" 변수에 초기화
+    if (2 < 3) statement;      // 논리가 참이면 "statement" 문장 실행
+    ```
