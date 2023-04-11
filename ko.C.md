@@ -102,3 +102,28 @@ C [런타임 라이브러리](https://ko.wikipedia.org/wiki/런타임_라이브�
     int variable = 2 + 3;      // 숫자 5를 "variable" 변수에 초기화
     if (2 < 3) statement;      // 논리가 참이면 "statement" 문장 실행
     ```
+
+### 주석
+[주석](https://doc.rust-lang.org/reference/comments.html)(comment)은 프로그램의 소스 코드로 취급하지 않아 실행되지 않는 영역이다. 흔히 코드에 대한 간단한 정보를 기입하기 위해 사용되는 데, C 언어에는 한줄 주석(line comments) 그리고 블록 주석(block comments)이 존재한다.
+
+<table style="table-layout: fixed; width: 80%; margin: auto;">
+<caption style="caption-side: top;">C 언어 주석 종류</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;">한줄 주석(line comment)</th><th style="text-align: center;">블록 주석(block comment)</th></tr></thead>
+<tbody>
+<tr style="vertical-align: top; overflow-wrap: break-word;"><td>
+
+```c
+// 한줄 주석: 코드 한 줄을 차지하는 주석이다.
+```
+</td><td>
+
+```c
+/*
+블록 주석:
+코드 여러 줄을 차지하는 주석이다.
+*/
+```
+</td></tr>
+</tbody>
+</table>
