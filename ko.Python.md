@@ -1436,19 +1436,19 @@ with open("filename.txt") as file:
 1. `__enter__()`와 `__exit__()` 메소드
     
     ```python
-   # 컨텍스트 관리자 1
-   class CLASS:
-       def __init__(self):
-           pass
+    # 컨텍스트 관리자 1
+    class CLASS:
+        def __init__(self):
+            pass
        
-       # "with" 문 시작 시 실행
-       def __enter__(self):
-           self.attr = expression
-           return self.attr
+        # "with" 문 시작 시 실행
+        def __enter__(self):
+            self.attr = expression
+            return self.attr
        
-       # "with" 문 종료 시 실행
-       def __exit__(self):
-           ...
+        # "with" 문 종료 시 실행
+        def __exit__(self):
+            ...
     ```
 
 2. [`contextlib`](https://docs.python.org/3/library/contextlib.html) 모듈
