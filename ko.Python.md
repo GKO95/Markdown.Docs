@@ -109,21 +109,18 @@ VS Code는 두 가지의 실행 방법이 있다: 일반 실행 모드(`Ctrl+F5`
     variable = 2 + 3           # 숫자 5를 "variable" 변수에 초기화
     if 2 < 3: statement        # 논리가 참이면 "statement" 문장 실행
     ```
-
-### `pass` 문
-[`pass`](https://docs.python.org/3/tutorial/controlflow.html#pass-statements) 혹은 `...` (일명 [ellipsis](https://ko.wikipedia.org/wiki/줄임표)) 키워드는 실행될 때 아무런 작업을 수행하지 않는 문장이다. 차후에 소개할 [조건문](#조건) 및 [반복문](#반복) 등에 아무런 코드를 작성하지 않으면 실행할 코드가 없다는 사유로 오류가 발생하는데, 이러한 상황에서 `pass` 키워드는 임시 코드로 사용된다.
+    
+    특히 [`pass`](https://docs.python.org/3/tutorial/controlflow.html#pass-statements) 혹은 `...` (일명 [ellipsis](https://ko.wikipedia.org/wiki/줄임표)) 키워드는 실행될 때 아무런 작업을 수행하지 않는 문장이다. 차후에 소개할 [조건문](#조건) 및 [반복문](#반복) 등에 아무런 코드를 작성하지 않으면 실행할 코드가 없다는 사유로 오류가 발생하는데, 이러한 상황에서 `pass` 키워드는 임시 코드로 사용된다.
 
 ### 식별자
 [식별자](https://docs.python.org/3/reference/expressions.html#atom-identifiers)(identifier), 일명 네임(name)은 프로그램의 데이터들을 구별하기 위해 사용되는, 즉 프로그래머가 데이터에 직접 붙여준 이름이다. 파이썬에서 식별자 작명에는 다음 규칙을 준수해야 한다:
 
 1. 오직 알파벳, 숫자, 밑줄 `_`만 허용 (그 외 특수문자 및 공백 사용 불가)
-2. 식별자 첫 문자로 숫자 불허
+2. 식별자의 첫 문자는 숫자가 될 수 없음
 3. 대소문자 구분 필수
-4. 예약어 금지
+4. [예약어](https://ko.wikipedia.org/wiki/예약어) 금지
 
-> [예약어](https://ko.wikipedia.org/wiki/예약어)(reserved identifier)는 프로그래밍 언어에서 정해진 용도가 있어 개발자가 다른 용도로 사용할 수 없는 식별자이다. 위에서 언급한 [`pass`](#pass-문) 문도 예약어에 해당한다.
-
-## 주석
+### 주석
 [주석](https://peps.python.org/pep-0008/#comments)(comment)은 프로그램의 소스 코드로 취급하지 않아 실행되지 않는 영역이다. 흔히 코드에 대한 간단한 정보를 기입하기 위해 사용되는 데, 파이썬에는 두 가지의 주석이 존재한다.
 
 <table style="table-layout: fixed; width: 80%; margin: auto;">
