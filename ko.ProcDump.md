@@ -27,7 +27,7 @@ ProcDump는 아래의 덤프 종류를 생성할 수 있다.
 <thead><tr><th style="text-align: center;">매개변수</th><th style="text-align: center;">덤프 종류</th><th style="text-align: center;">설명</th></tr></thead>
 <tbody>
 <tr><td style="text-align: center;"><code>-ma</code></td><td style="text-align: center;"><a href="ko.Dump.md#전체-덤프">전체 덤프</a></td><td>프로세스의 <a href="ko.Process.md#가상-주소-공간">사용자 공간</a> 전체를 수집한다.</td></tr>
-<tr><td style="text-align: center;"><code>-mm</code></td><td style="text-align: center;"><a href="ko.Dump.md#미니-덤프">미니 덤프</a></td><td>프로세스의 사용자 공간 중에서 <a href="ko.Process.md#스레드">스레드</a> 및 레지스트리 위주로 수집하며, ProcDump의 기본 덤프이다.</td></tr>
+<tr><td style="text-align: center;"><code>-mm</code></td><td style="text-align: center;"><a href="ko.Dump.md#미니-덤프">미니 덤프</a></td><td>프로세스의 사용자 공간 중에서 <a href="ko.Process.md#스레드">스레드</a> 및 레지스터 위주로 수집하며, ProcDump의 기본 덤프이다.</td></tr>
 <tr><td style="text-align: center;"><code>-mp</code></td><td style="text-align: center;">미니플러스 덤프<br/>(MiniPlus Dump)</td><td>프로세스의 프로그램 이미지를 제외한 사용자 공간 전체를 수집한다. 덤프에서 제외된 프로그램 이미지 정보는 해당 프로그램 파일이 위치한 경로를 디버깅 도구(예. <a href="ko.WinDbg.md">WinDbg</a>)에 명시하여 보충할 수 있다.</td></tr>
 <tr><td style="text-align: center;"><code>-mk</code></td><td style="text-align: center;">커널 덤프</td><td>프로세스에 관여한 커널 스택의 덤프를 추가로 생성한다. 단, 해당 덤프는 절대로 <a href="ko.Dump.md#커널-메모리-덤프">커널 메모리 덤프</a>가 아니다.</td></tr></tbody></table>
 
