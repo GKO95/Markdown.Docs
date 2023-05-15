@@ -19,11 +19,11 @@ C 프로그래밍 언어는 [컴파일 언어](ko.Compiler.md)(compiled language
 ## 설치
 C 프로그래밍 언어에 필요한 컴파일러는 흔히 소스 코드 편집, 프로그램 빌드, 그리고 디버깅 기능을 제공하는 [통합 개발 환경](https://ko.wikipedia.org/wiki/통합_개발_환경)(integrated development environment; IDE)을 설치하면 대체로 권장되는 컴파일러가 함께 설치된다.
 
-* 비주얼 스튜디오 <sub>(윈도우, macOS)</sub>
-* 엑스코드 <sub>(macOS)</sub>
+* [비주얼 스튜디오](https://visualstudio.microsoft.com/) <sub>(윈도우, macOS)</sub>
+* [엑스코드](https://developer.apple.com/xcode/) <sub>(macOS)</sub>
 * [CLion](https://www.jetbrains.com/clion/) <sub>(윈도우, macOS, 리눅스)</sub>
 
-> [비주얼 스튜디오 코드]()(Visual Studio Code; VS Code)는 엄연히 말해 IDE가 아닌 "텍스트 편집기" 프로그램이다. 외부 컴파일러를 불러올 수 있지만 과정이 복잡하여 가능하면 위의 IDE 중 하나를 사용하는 걸 권장한다.
+> [비주얼 스튜디오 코드](https://code.visualstudio.com/)(Visual Studio Code; VS Code)는 엄연히 말해 IDE가 아닌 "텍스트 편집기" 프로그램이다. 외부 컴파일러를 불러올 수 있지만 과정이 복잡하여 가능하면 위의 IDE 중 하나를 사용하는 걸 권장한다.
 
 ## 프로젝트
 다음은 비주얼 스튜디오 2022을 위주로 C 언어 프로젝트 구축에 대하여 설명한다.
