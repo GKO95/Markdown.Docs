@@ -14,10 +14,12 @@ WinDbg는 흔히 어플리케이션 충돌이나 [블루스크린](ko.BSOD.md)�
 ## 환경 변수 설정
 WinDbg로부터 원활한 디버깅 작업을 진행하려면 아래와 같이 시스템 환경 변수를 설정하기를 권장한다.
 
-1. 환경 변수 `_NT_SYMBOL_PATH`에 [심볼](ko.Symbol.md)(symbol) 서버 및 캐시 경로를 지정한다.
-1. 환경 변수 `_NT_DEBUGGER_EXTENSION_PATH`에 WinDbg에 활용되는 디버깅 확장도구(예를 들어 [MEX](https://www.microsoft.com/en-us/download/details.aspx?id=53304))가 위치한 폴더 경로를 명시한다. 아래 예시는 확장도구가 `%localappdata%\DBG\EngineExtensions\`에 존재한다고 가정한다.
-
-    ![환경 변수<code>_NT_DEBUGGER_EXTENSION_PATH</code>의 예시](./images/windbg_environment_extension.png)
+<table style="width: 80%; margin: auto;">
+<caption style="caption-side: top;">WinDbg 관련 환경 변수</caption>
+<colgroup><col style="width: 30%;"/><col style="width: 70%;"/></colgroup>
+<thead><tr><th style="text-align: center;">환경 변수</th><th style="text-align: center;">설명</th></tr></thead>
+<tbody><tr><td style="text-align: center;"><code>_NT_SYMBOL_PATH</code></td><td><a href="ko.Symbol.md">심볼</a>(symbol) 서버 및 캐시 경로를 지정한다.</td></tr><tr><td style="text-align: center;"><code>_NT_DEBUGGER_EXTENSION_PATH</code></td><td>WinDbg 디버깅 확장도구가 위치한 폴더 경로를 명시한다: <a href="https://www.microsoft.com/en-us/download/details.aspx?id=53304">MEX</a> 확장도구 등</td></tr></tbody>
+</table>
 
 # 같이 보기
 * [Debugger Commands - Windows drivers &#124; Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/debugger-commands)
