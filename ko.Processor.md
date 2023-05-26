@@ -154,4 +154,4 @@ DPC는 필연적이지만 나중에 처리되어도 무관한 낮은 우선순�
 
 > 과거 운영체제는 인터럽트 핸들러를 1차(First-Level Interrupt Handler; FLIH)와 2차(SLIH)로 나누었으며, 여기서 후자가 윈도우 운영체제의 DPC에 해당한다.
 
-그러나 단일 및 누적 DPC 작업 처리 시간이 각각 20초와 120초를 초과하면 시스템은 이를 비정상 동작으로 인지하여 [버그 확인 코드](ko.BSOD.md#버그-확인-코드) [0x133 DPC_WATCHDOG_VIOLATION](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0x133-dpc-watchdog-violation)이 발생한다.
+그러나 단일 및 누적 DPC 작업 처리 시간이 각각 20초와 120초를 초과하면 시스템은 이를 비정상 동작으로 인지하여 [중지코드](ko.BSOD.md#버그-검사-코드) [0x133 DPC_WATCHDOG_VIOLATION](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0x133-dpc-watchdog-violation)이 발생한다.
