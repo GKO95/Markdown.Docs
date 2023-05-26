@@ -36,6 +36,10 @@ title: BSOD
         Debug-VM -Name "<VM name>" -InjectNonMaskableInterrupt
         ```
 
+    * **대역 외 관리**
+
+        [대역 외 관리](https://en.wikipedia.org/wiki/Out-of-band_management)(Out-of-band management; OOBM)는 네트워크 인프라구조를 구성하는 장비들을 원격으로 접근하고 관리할 수 있도록 하는 솔루션이다. 흔히 서버 장비들을 대상으로 사용되며, NMI 신호 주입 외에도 CPU 및 메모리 사용량 모니터링 등을 제공한다. 대표적으로 [iLO](https://en.wikipedia.org/wiki/HP_Integrated_Lights-Out) ([HP](https://ko.wikipedia.org/wiki/휴렛_팩커드_엔터프라이즈)), [iDRAC](https://en.wikipedia.org/wiki/Dell_DRAC) ([Dell](https://ko.wikipedia.org/wiki/델)), [XClarity Controller](https://www.lenovo.com/kr/ko/data-center/software/systems-management/xclarity-controller/) ([Lenovo](https://ko.wikipedia.org/wiki/레노버)) 등이 있다.
+
 * **[키보드](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/forcing-a-system-crash-from-the-keyboard)**
 
     키보드로부터 커널에 `KeBugCheck()` 루틴을 호출하므로써 윈도우 운영체제에 중지코드 [0xE2 MANUALLY_INITIATED_CRASH](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0xe2--manually-initiated-crash)를 발생시키는 방법이다. [PS/2](https://ko.wikipedia.org/wiki/PS/2_단자) 혹은 [USB](https://ko.wikipedia.org/wiki/USB) 키보드를 사용할 수 있으나, [IRQL](ko.Processor.md#IRQL)이 상대적으로 높은 PS/2 키보드를 사용하는 걸 권장한다. 강제 블루스크린을 설정하는 방법은 아래의 둘 중 오로지 하나만이 적용되며 재부팅이 요구된다.
@@ -102,7 +106,7 @@ title: BSOD
     [Sysinternals](ko.Sysinternals.md) 유틸리티 중에서 몇 가지 방식으로 시스템 충돌을 일으킬 수 있는 프로그램이다. 비록 시스템 응답이 없는 상태에서 적합하지 않으나, 일반적인 상황에서 BSOD를 일으킬 때는 유용하다.
 
 # BSOD 덤프 설정
-BSOD가 발생하면 시스템은 기본적으로 [자동 메모리 덤프](ko.Dump.md#자동-메모리-덤프)(혹은 [커널 메모리 덤프](ko.Dump.md#커널-메모리-덤프))를 생성하고 재부팅한다. 하지만 상황에 따라 덤프 유형이나 BSOD 동작을 달리 설정해야 하는 경우가 존재한다. 아래 레지스트리 키에서 덤프를 설정할 수 있으며 변경 사항을 적용하려면 반드시 재부팅이 필요하다.
+[BSOD](#블루스크린)가 발생하면 시스템은 기본적으로 [자동 메모리 덤프](ko.Dump.md#자동-메모리-덤프)(혹은 [커널 메모리 덤프](ko.Dump.md#커널-메모리-덤프))를 생성하고 재부팅한다. 하지만 상황에 따라 덤프 유형이나 BSOD 동작을 달리 설정해야 하는 경우가 존재한다. 아래 레지스트리 키에서 덤프를 설정할 수 있으며 변경 사항을 적용하려면 반드시 재부팅이 필요하다.
 
 ```terminal
 HKLM\SYSTEM\CurrentControlSet\Control\CrashControl
@@ -127,7 +131,7 @@ HKLM\SYSTEM\CurrentControlSet\Control\CrashControl
 <tr><td><code>LogEvent</code></td><td style="text-align: center;">REG_DWORD</td><td>BSOD가 발생하면 이벤트 ID 1001 BugCheck를 기록한다.<br/><ul><li>0x0: 비활성</li><li>0x1: 활성</li></ul></td></tr>
 <tr><td><code>MinidumpDir</code></td><td style="text-align: center;">REG_EXPAND_SZ</td><td>작은 메모리 덤프를 저장할 경로를 지정한다(기본값: <code>%SystemRoot%\Minidump</code>)</td></tr>
 <tr><td><code>MinidumpsCount</code></td><td style="text-align: center;">REG_DWORD</td><td>지정된 경로에 저장될 수 있는 작은 메모리 덤프의 최대 개수이다.</td></tr>
-<tr><td><s><code>NMICrashDump</code></s></td><td style="text-align: center;"><s>REG_DWORD</s></td><td>(<a href="https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/generate-a-kernel-or-complete-crash-dump#use-nmi">Deprecated</a>) <s><a href="https://en.wikipedia.org/wiki/Non-maskable_interrupt">NMI</a> 신호를 주입하여 BSOD를 일으킬 수 있도록 한다.</s><br/><ul><li><i>윈도우 8 및 서버 2012부터 해당 값은 필요하지 않으며 아무런 영향을 주지 않는다.</i></li></ul></td></tr>
+<tr><td><s><code>NMICrashDump</code></s></td><td style="text-align: center;"><s>REG_DWORD</s></td><td>(<a href="https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/nmi-hardware-failure-error">Deprecated</a>) <s><a href="https://en.wikipedia.org/wiki/Non-maskable_interrupt">NMI</a> 신호를 주입하여 BSOD를 일으킬 수 있도록 한다.</s><br/><ul><li><i>윈도우 8 및 서버 2012부터 해당 값은 필요하지 않으며 아무런 영향을 주지 않는다.</i></li></ul></td></tr>
 <tr><td><code>Overwrite</code></td><td style="text-align: center;">REG_DWORD</td><td>기존의 메모리 덤프를 덮어씌운다.<br/><ul><li>0x0: 비활성</li><li>0x1: 활성</li></ul></td></tr>
 <tr><td><code>PageFileTooSmall</code></td><td style="text-align: center;">REG_QWORD</td><td>페이징 파일 크기 부족으로 덤프 수집을 실패할 시 생성된다. 이를 토대로 재부팅이 되면 덤프 수집에 필요한 크기만큼 페이징 파일을 확장시킨다.</td></tr>
 </tbody>
