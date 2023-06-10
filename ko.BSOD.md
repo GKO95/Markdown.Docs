@@ -112,10 +112,10 @@ title: BSOD
 HKLM\SYSTEM\CurrentControlSet\Control\CrashControl
 ```
 
-`CrashControl` 레지스트리 키에서 설정할 수 있는 값들은 알파벳 순서대로 나열하였다:
+CrashControl 레지스트리 키에서 설정할 수 있는 값들은 알파벳 순서대로 나열하였다:
 
 <table style="width: 95%; margin: auto;">
-<caption style="caption-side: top;"><code>CrashControl</code> 레지스트리 키 구성</caption>
+<caption style="caption-side: top;">CrashControl 레지스트리 키 구성</caption>
 <colgroup><col style="width: 25%;"/><col style="width: 15%;"/><col style="width: 60%;"/></colgroup>
 <thead><tr><th style="text-align: center;">레지스트리 값</th><th style="text-align: center;">종류</th><th style="text-align: center;">설명</th></tr></thead>
 <tbody><tr><td><code>AlwaysKeepMemoryDump</code></td><td style="text-align: center;">REG_DWORD</td><td>드라이브 여유 공간이 25 GB 미만이어도 메모리 덤프를 유지한다(반면, 삭제될 시 이벤트 ID 1008 기록).<br/><ul><li>0x0: 비활성</li><li>0x1: 활성</li></ul></td></tr>
@@ -137,7 +137,7 @@ HKLM\SYSTEM\CurrentControlSet\Control\CrashControl
 </tbody>
 </table>
 
-`CrashDump` 레지스트리 키의 값들은 아래 "시작 및 복구(Startup and Recovery)" GUI 창에서도 변경이 가능하지만, 레지스트리 편집기에 비해 설정할 수 있는 항목들이 제한적이다. 해당 창을 열려면 View advanced system settings을 검색(혹은 `systempropertiesadvanced.exe` 실행)하여 찾을 수 있다.
+CrashControl 레지스트리 키의 값들은 아래 "시작 및 복구(Startup and Recovery)" GUI 창에서도 변경이 가능하지만, 레지스트리 편집기에 비해 설정할 수 있는 항목들이 제한적이다. 해당 창을 열려면 View advanced system settings을 검색(혹은 `systempropertiesadvanced.exe` 실행)하여 찾을 수 있다.
 
 ![시작 및 복구 다이얼로그 창](./images/bsod_startup_recovery.png)
 
@@ -222,7 +222,7 @@ Dump completed successfully.
 다음은 전용 덤프를 설정하기 위해 필요한 레지스트리 값이다.
 
 <table style="width: 95%; margin: auto;">
-<caption style="caption-side: top;"><code>CrashControl</code> 레지스트리: 전용 덤프</caption>
+<caption style="caption-side: top;">CrashControl 레지스트리: 전용 덤프</caption>
 <colgroup><col style="width: 25%;"/><col style="width: 15%;"/><col style="width: 60%;"/></colgroup>
 <thead><tr><th style="text-align: center;">레지스트리 값</th><th style="text-align: center;">종류</th><th style="text-align: center;">설명</th></tr></thead>
 <tbody><tr>
@@ -233,3 +233,15 @@ Dump completed successfully.
 </table>
 
 단, 저장될 덤프 파일의 경로 및 이름은 `DumpFile` 레지스트리 값을 그대로 사용한다.
+
+# BSOD 동작 원리
+본 장은 [윈도우 NT](ko.Windows.md) 운영체제에서 [BSOD](#블루스크린)가 나타나 [메모리 덤프](ko.Dump.md#커널-모드-덤프)가 생성되는 원리를 설정 초기화, 시스템 충돌, 그리고 덤프 생성 단계로 나누어 설명한다. 자세한 내용은 [마크 러시노비치](https://ko.wikipedia.org/wiki/마크_러시노비치)([Sysinternals](ko.Sysinternals.md)의 창시자)를 포함한 [마이크로소프트](https://www.microsoft.com/) 엔지니어들이 저자로 참여한 [*Windows Internals*](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) 도서를 읽어볼 것을 권장한다.
+
+## 설정 초기화
+세션 관리자(Session Manager; smss.exe)는 시스템이 부팅되는 시점에 `HKLM\SYSTEM\CurrentControlSet\Control\CrashControl` (이하 CrashControl) 레지스트리 키의 값들을 읽어 BSOD가 발생할 경우 어떠한 동작을 취할 것인지, 그리고 덤프는 어떻게 수집할 것인지 설정을 시스템에 적용한다.
+
+> 위의 이유로 CrashControl 레지스트리 키의 변경 사항을 시스템에 적용하려면 재부팅이 불가피하다.
+
+![세션 관리자가 CrashControl 레지스트리 키의 값을 읽어오는 작업이 기록된 프로세스 모니터 로그](./images/smss_crashcontrol_query.png)
+
+위의 그림은 [프로세스 모니터](ko.Process_Monitor.md)로 수집된 시스템 부팅 과정에서 smss.exe가 CrashControl의 값들을 읽어오는 작업(즉, RegQueryValue)에 하이라이트를 하였다. [BSOD 덤프 설정](#bsod-덤프-설정)에서 소개한 `AutoReboot`, `CrashDumpEnabled`, `DedicatedDumpFile` 등을 찾아볼 수 있다.
