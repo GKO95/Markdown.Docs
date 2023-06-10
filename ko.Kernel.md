@@ -34,7 +34,7 @@ title: 커널
 마이크로소프트의 [윈도우 NT](ko.Windows.md)가 하이브리드 커널의 영향을 받은 대표적인 운영체제이다.
 
 # NT 커널
-[윈도우 NT](ko.Windows.md) 운영체제의 커널 이미지 `ntoskrnl.exe`는 아래와 같이 구성된다.
+[윈도우 NT](ko.Windows.md) 운영체제의 커널 이미지 `ntoskrnl.exe`(모듈명: `nt`)는 아래와 같이 구성된다.
 
 <table style="width: 95%; margin: auto;">
 <caption style="caption-side: top;">윈도우 커널 이미지의 구성</caption>
@@ -44,4 +44,42 @@ title: 커널
 <tr><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Architecture_of_Windows_NT#Kernel">Kernel</a></td><td colspan="10" style="text-align: center;">-</td></tr></tbody>
 </table>
 
-Executive는 특정 작업을 수행하는 여러 구성원들로 이루어진 상위 계층이다. 사용자 모드에서 [시스템 서비스](ko.WinAPI.md#시스템-서비스)를 호출하면 해당 작업에 대응하는 구성원의 루틴이 실행된다. 아래 접두사로부터 어떤 목적의 커널 서비스인지 분별할 수 있다.
+Executive는 특정 작업을 수행하는 여러 구성원들로 이루어진 `ntoskrnl.exe`의 상위 계층이다. 한편, Kernel 계층은 모듈에서 필요로 하는 기초적인 커널 함수들을 제공하는 하위 계층이며 [마이크로커널](#마이크로커널)의 역할을 담당한다.
+
+아래는 `nt` 모듈의 함수 접두사가 각각 어떤 목적으로 사용되는 지 식별하는 도표이다. 일부 함수는 접두사에 `p`가 추가된 경우가 있는데, 이는 해당 목적 혹은 구성원에서만 사용되는 내부 전용 함수를 의미한다.
+
+<table style="width: 60%; margin: auto;">
+<caption style="caption-side: top;">NT 함수 접두사</caption>
+<colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup>
+<thead><tr><th style="text-align: center;">접두사</th><th style="text-align: center;">의미</th></tr></thead>
+<tbody>
+<tr><td style="text-align: center;"><code>Cc</code></td><td>파일 시스템 캐시</td></tr>
+<tr><td style="text-align: center;"><code>Cm</code></td><td><a href="#구성-관리자">구성 관리자</a>, 커널 모드의 윈도우 레지스트리</td></tr>
+<tr><td style="text-align: center;"><code>Csr</code></td><td>Csrss.exe <a href="ko.Subsystem.md#윈도우-서브시스템">윈도우 서브시스템</a> 프로세스와 통신하는 함수</td></tr>
+<tr><td style="text-align: center;"><code>Dbg</code></td><td>디버깅 보조 함수: 소프트웨어로 구현된 중단점 등</td></tr>
+<tr><td style="text-align: center;"><code>Ex</code></td><td><a href="https://en.wikipedia.org/wiki/Architecture_of_Windows_NT#Executive">Executive</a></td></tr>
+<tr><td style="text-align: center;"><code>FsRtl</code></td><td>파일 시스템 런타임 라이브러리</td></tr>
+<tr><td style="text-align: center;"><code>Hal</code></td><td><a href="#하드웨어-추상-계층">하드웨어 추상 계층</a>(Hardware Abstraction Layer)</td></tr>
+<tr><td style="text-align: center;"><code>Io</code></td><td><a href="#입출력-관리자">입출력 관리자</a></td></tr>
+<tr><td style="text-align: center;"><code>Ke</code></td><td>핵심 <a href="https://en.wikipedia.org/wiki/Architecture_of_Windows_NT#Kernel">Kernel</a> 루틴</td></tr>
+<tr><td style="text-align: center;"><code>Ki</code></td><td>Kernel 내부 전용</td></tr>
+<tr><td style="text-align: center;"><code>Ks</code></td><td>커널 스트리밍</td></tr>
+<tr><td style="text-align: center;"><code>Kx</code></td><td>인터럽트 처리, 세마포어, 스핀락, 멀티스레딩 및 문맥 교환 함수</td></tr>
+<tr><td style="text-align: center;"><code>Ky</code></td><td>트랩 프레임을 생성하고 <code>Kx</code> 접두함수를 호출하는 내부 및 부분 함수</td></tr>
+<tr><td style="text-align: center;"><code>Ldr</code></td><td><a href="https://ko.wikipedia.org/wiki/PE_포맷">PE 포맷</a> 로더</td></tr>
+<tr><td style="text-align: center;"><code>Lpc</code></td><td><a href="https://ko.wikipedia.org/wiki/로컬_프로시저_호출">로컬 프로시저 호출</a>(LPC)</td></tr>
+<tr><td style="text-align: center;"><code>Lsa</code></td><td><a href="https://ko.wikipedia.org/wiki/로컬_보안_인증_하위_시스템_서비스">로컬 보안 인증</a>(LSASS)</td></tr>
+<tr><td style="text-align: center;"><code>Mm</code></td><td><a href="#메모리-관리자">메모리 관리자</a></td></tr>
+<tr><td style="text-align: center;"><code>Mi</code></td><td>메모리 관리자 내부 전용</td></tr>
+<tr><td style="text-align: center;"><code>Nls</code></td><td>네이티브 언어 지원(Native Language Support)</td></tr>
+<tr><td style="text-align: center;"><code>Ob</code></td><td><a href="#객체-관리자">객체 관리자</a></td></tr>
+<tr><td style="text-align: center;"><code>Pfx</code></td><td>접두어 관리</td></tr>
+<tr><td style="text-align: center;"><code>Po</code></td><td><a href="#PnP-관리자">PnP</a> 및 <a href="#전력-관리자">전력 관리</a></td></tr>
+<tr><td style="text-align: center;"><code>Ps</code></td><td><a href="ko.Process.md">프로세스</a> 및 <a href="ko.Process.md#스레드">스레드</a> 관리</td></tr>
+<tr><td style="text-align: center;"><code>Rtl</code></td><td><a href="https://ko.wikipedia.org/wiki/런타임_라이브러리">런타임 라이브러리</a>; 커널에 직접적으로 가담하지 않지만 네이티브 어플리케이션에서 사용할 수 있는 다양한 유틸리티 함수를 제공한다.</td></tr>
+<tr><td style="text-align: center;"><code>Se</code></td><td>보안 관리자, 그리고 Win32 API의 <a href="https://en.wikipedia.org/wiki/Access_token">접근 토큰</a></td></tr>
+<tr><td style="text-align: center;"><code>Vf</code></td><td><a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/driver-verifier">드라이버 검증 도구</a>(Driver Verifier)</td></tr>
+<tr><td style="text-align: center;"><code>Vi</code></td><td>드라이버 검증 도구 내부 전용</td></tr>
+<tr><td style="text-align: center;"><code>Nt</code> / <code>Zw</code></td><td>네이티브 <a href="ko.WinAPI.md#시스템-서비스">시스템 서비스</a> API 함수; 두 접두사의 함수는 유사한 (혹은 동일한) 작업을 하지만 커널 모드에서 추가 검증 여부 차이가 존재한다.</td></tr>
+</tbody>
+</table>
