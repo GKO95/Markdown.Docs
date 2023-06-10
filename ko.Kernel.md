@@ -80,6 +80,6 @@ Executive는 특정 작업을 수행하는 여러 구성원들로 이루어진 `
 <tr><td style="text-align: center;"><code>Se</code></td><td>보안 관리자, 그리고 Win32 API의 <a href="https://en.wikipedia.org/wiki/Access_token">접근 토큰</a></td></tr>
 <tr><td style="text-align: center;"><code>Vf</code></td><td><a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/driver-verifier">드라이버 검증 도구</a>(Driver Verifier)</td></tr>
 <tr><td style="text-align: center;"><code>Vi</code></td><td>드라이버 검증 도구 내부 전용</td></tr>
-<tr><td style="text-align: center;"><code>Nt</code> / <code>Zw</code></td><td>네이티브 <a href="ko.WinAPI.md#시스템-서비스">시스템 서비스</a> API 함수; 두 접두사의 함수는 유사한 (혹은 동일한) 작업을 하지만 커널 모드에서 추가 검증 여부 차이가 존재한다.</td></tr>
+<tr><td style="text-align: center;"><code>Nt</code>/<code>Zw</code></td><td>네이티브 <a href="ko.WinAPI.md#시스템-서비스">시스템 서비스</a> API 함수; 두 접두사의 함수는 유사한 (혹은 동일한) 작업을 하지만 커널 모드에서 추가 검증 여부 차이가 존재한다.</td></tr>
 </tbody>
 </table>
