@@ -24,6 +24,11 @@ title: 윈도우 API
 
 시스템 서비스를 호출한 [스레드](ko.Process.md#스레드)는 [syscall](https://ko.wikipedia.org/wiki/X86_호출_규약#syscall) 명령에 의해 사용자 모드에서 커널 모드로 전환되어, 제약에 걸렸던 모든 [프로세서](ko.Processor.md) 명령어들을 활용할 수 있게 된다. 그리고 커널 모드에서 작업이 완료되면 다시 사용자 모드로 돌아가는 원리로 동작한다.
 
+### `Nt`와 `Zw` 접두사 시스템 서비스 비교
+> *출처: [Using Nt and Zw Versions of the Native System Services Routines - Windows drivers | Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/using-nt-and-zw-versions-of-the-native-system-services-routines)*
+
+위의 예시에서 `NtCreateFile`을 소개하였으나, 그 외에도 [`ZwCreateFile`](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/ntifs/nf-ntifs-ntcreatefile)이란 시스템 서비스 API도 존재한다. `Nt`는 "네이티브(native)" 용어에서 유래되었으나, `Zw`는 다른 API 함수명과 혼돈을 방지하기 위해 선택된 알파벳 조합이다. 두 버전은 유사한 (혹은 동일한) 작업을 수행하며, 둘 다 사용자 및 커널 모드에서 호출할 수 있다. 차이점은 커널 모드에서 매개변수로 전달된 인자의 유효성 검증 여부이다.
+
 ## 컴포넌트 오브젝트 모델
 > *참조: [The Component Object Model - Win32 apps &#124; Microsoft Learn](https://learn.microsoft.com/en-us/windows/win32/com/the-component-object-model)*
 
