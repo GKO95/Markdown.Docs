@@ -34,17 +34,17 @@ title: 커널
 마이크로소프트의 [윈도우 NT](ko.Windows.md)가 하이브리드 커널의 영향을 받은 대표적인 운영체제이다.
 
 # NT 커널
-[윈도우 NT](ko.Windows.md) 운영체제의 커널 이미지 `ntoskrnl.exe`(모듈명: `nt`)는 아래와 같이 구성된다.
+[윈도우 NT](ko.Windows.md) 운영체제의 커널 이미지 `ntoskrnl.exe`는 아래와 같이 구성된다.
 
 <table style="width: 95%; margin: auto;">
 <caption style="caption-side: top;">윈도우 커널 이미지의 구성</caption>
 <colgroup><col style="width: 15%;"/><col style="width: 15%;"/><col/><col/><col/><col/><col/><col/><col/><col/><col/><col/></colgroup>
 <thead><tr><th style="text-align: center;">이미지</th><th style="text-align: center;">계층</th><th colspan="10" style="text-align: center;">구성</th></tr></thead>
-<tbody><tr><td rowspan="3" style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/Ntoskrnl.exe"><code>ntoskrnl.exe</code></a></td><td rowspan="2" style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Architecture_of_Windows_NT#Executive">Executive</td><td colspan="10" style="text-align: center;">시스템 서비스 담당자</td></tr><tr><td style="text-align: center;">입출력 관리자</td><td style="text-align: center;">캐시 관리자</td><td style="text-align: center;">보안 참조 모니터</td><td style="text-align: center;">전력 관리자</td><td style="text-align: center;">PnP 관리자</td><td style="text-align: center;">메모리 관리자</td><td style="text-align: center;">프로세스 관리자</td><td style="text-align: center;">객체 관리자</td><td style="text-align: center;">구성 관리자</td><td style="text-align: center;">ALPC</td></tr>
-<tr><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Architecture_of_Windows_NT#Kernel">Kernel</a></td><td colspan="10" style="text-align: center;">-</td></tr></tbody>
+<tbody><tr><td rowspan="3" style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/Ntoskrnl.exe"><code>ntoskrnl.exe</code></a><br/>(모듈명: <code>nt</code>)</td><td rowspan="2" style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Architecture_of_Windows_NT#Executive">Executive</td><td colspan="10" style="text-align: center;">시스템 서비스 담당자</td></tr><tr><td style="text-align: center;">입출력 관리자</td><td style="text-align: center;">캐시 관리자</td><td style="text-align: center;">보안 참조 모니터</td><td style="text-align: center;">전력 관리자</td><td style="text-align: center;">PnP 관리자</td><td style="text-align: center;">메모리 관리자</td><td style="text-align: center;">프로세스 관리자</td><td style="text-align: center;">객체 관리자</td><td style="text-align: center;">구성 관리자</td><td style="text-align: center;">ALPC</td></tr>
+<tr><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Architecture_of_Windows_NT#Kernel">Kernel</a></td><td colspan="10" style="text-align: center;">스케줄링, 동기화, 인터럽트 등 기초적인 핵심 함수 제공</td></tr></tbody>
 </table>
 
-Executive는 특정 작업을 수행하는 여러 구성원들로 이루어진 `ntoskrnl.exe`의 상위 계층이다. 한편, Kernel 계층은 모듈에서 필요로 하는 기초적인 커널 함수들을 제공하는 하위 계층이며 [마이크로커널](#마이크로커널)의 역할을 담당한다.
+Executive는 특정 작업을 수행하는 여러 구성원들로 이루어진 `ntoskrnl.exe`의 상위 계층이다. 한편, Kernel 계층은 모듈에서 필요로 하는 기초적인 커널 함수들을 제공하는 하위 계층이며 [마이크로커널](#마이크로커널)의 역할을 담당한다. 이러한 구조의 정립으로 Kernel은 단순히 OS 매커니즘을 구현하고, Executive는 이를 활용하여 실질적인 정책 결정에 기여한다.
 
 아래는 `nt` 모듈의 함수 접두사가 각각 어떤 목적으로 사용되는 지 식별하는 도표이다. 일부 함수는 접두사에 `p`가 추가된 경우가 있는데, 이는 해당 목적 혹은 구성원에서만 사용되는 내부 전용 함수를 의미한다.
 
