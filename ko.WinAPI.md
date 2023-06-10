@@ -17,14 +17,10 @@ title: 윈도우 API
 <colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 20%;"/><col style="width: 20%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">순서</th><th style="text-align: center;">바이너리</th><th style="text-align: center;">이름</th><th style="text-align: center;">함수</th><th style="text-align: center;">설명</th></tr></thead>
 <tbody>
-<tr><td style="text-align: center;">1</td><td style="text-align: center;"><code>Kernel32.dll</code></td><td style="text-align: center;"><a href="ko.Subsystem.md#환경-서브시스템">환경 서브시스템 DLL</a></td><td style="text-align: center;"><a href="https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-createfilew"><code>CreateFileW</code></a></td><td>시스템 서비스를 호출하는 WinAPI 함수; 그 외에 <code>User32.dll</code>, <code>Gdi32.dll</code> 등이 해당</td></tr>
-<tr><td style="text-align: center;">2</td><td style="text-align: center;"><code>Ntdll.dll</code></td><td style="text-align: center;"><a href="ko.Windows.md#ntdlldll">Native API 라이브러리</a></td><td style="text-align: center;"><a href="https://learn.microsoft.com/en-us/windows/win32/api/winternl/nf-winternl-ntcreatefile"><code>NtCreateFile</code></a></td><td>WinAPI로부터 요청한 사용자 모드의 루틴 진입점</td></tr>
-<tr><td style="text-align: center;">3</td><td style="text-align: center;"><code>Ntoskrnl.exe</code></td><td style="text-align: center;"><a href="ko.Kernel.md#nt-커널">Executive</a></td><td style="text-align: center;"><a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-zwcreatefile"><code>ZwCreateFile</code></a></td><td>WinAPI로부터 요청한 커널 모드의 루틴</td></tr></tbody>
+<tr><td style="text-align: center;">1</td><td style="text-align: center;"><code>Kernel32.dll</code></td><td style="text-align: center;"><a href="ko.Subsystem.md#환경-서브시스템">환경 서브시스템 DLL</a></td><td style="text-align: center;"><a href="https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-createfilew"><code>KERNEL32!CreateFileW</code></a></td><td>시스템 서비스를 호출하는 WinAPI 함수; 그 외에 <code>User32.dll</code>, <code>Gdi32.dll</code> 등이 해당</td></tr>
+<tr><td style="text-align: center;">2</td><td style="text-align: center;"><code>Ntdll.dll</code></td><td style="text-align: center;"><a href="ko.Windows.md#ntdlldll">Native API 라이브러리</a></td><td style="text-align: center;"><a href="https://learn.microsoft.com/en-us/windows/win32/api/winternl/nf-winternl-ntcreatefile"><code>ntdll!NtCreateFile</code></a></td><td>WinAPI로부터 요청한 사용자 모드의 루틴 진입점</td></tr>
+<tr><td style="text-align: center;">3</td><td style="text-align: center;"><code>Ntoskrnl.exe</code></td><td style="text-align: center;"><a href="ko.Kernel.md#nt-커널">Executive</a></td><td style="text-align: center;"><a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/ntifs/nf-ntifs-ntcreatefile"><code>nt!NtCreateFile</code></a></td><td>WinAPI로부터 요청한 커널 모드의 루틴</td></tr></tbody>
 </table>
-
-`NtCreateFile` 그리고 `ZwCreateFile`은 사실상 동일한 함수이다:
-* `Nt` 접두사는 [네이티브](ko.Subsystem.md#네이티브-이미지)(native)를 의미하며, 어떠한 [환경 서브시스템](ko.Subsystem.md#환경-서브시스템)에도 종속되지 않은 사용자 모드에서 호출할 수 있는 최저급 진입점에 불과하다.
-* `Zw` 접두사는 실질적인 코드가 정의된 루틴이며, (WinAPI가 아닌) [드라이버 API](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/)로써 [장치 드라이버](ko.Driver.md#장치-드라이버) 개발자가 호출하여 사용할 수 있다.
 
 시스템 서비스를 호출한 [스레드](ko.Process.md#스레드)는 [syscall](https://ko.wikipedia.org/wiki/X86_호출_규약#syscall) 명령에 의해 사용자 모드에서 커널 모드로 전환되어, 제약에 걸렸던 모든 [프로세서](ko.Processor.md) 명령어들을 활용할 수 있게 된다. 그리고 커널 모드에서 작업이 완료되면 다시 사용자 모드로 돌아가는 원리로 동작한다.
 
