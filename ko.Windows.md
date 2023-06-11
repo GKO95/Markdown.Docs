@@ -30,7 +30,7 @@ title: 윈도우 NT
 # 윈도우 아키텍처
 아래 그림은 윈도우 7 (또는 윈도우 서버 2008 R2) 운영체제의 아키텍처를 나타낸 다이어그램이다.
 
-![윈도우 7 및 서버 2008 R2 아키텍처<br/><sub><i>출처: <a href="https://www.oreilly.com/library/view/windows-internals-sixth/9780735671294/">Windows Internals, 6th Edition</a> / 파일: <a href="https://github.com/LordNoteworthy/windows-internals/blob/master/windows-internals-6th-ed.md">LordNoteworthy/windows-internals</a></i></sub>](./images/windows_architecture_overview.png)
+![윈도우 7 및 서버 2008 R2 아키텍처 (Windows Internals, 6th Edition)](https://raw.githubusercontent.com/LordNoteworthy/windows-internals/master/windows-internals-6th-ed/assets/windows-architecture.png)
 
 다음은 일부 윈도우 아키텍처 구성 중에서 개별 문서로 작성된 것을 나열한다:
 

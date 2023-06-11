@@ -259,7 +259,7 @@ BSOD가 발생할 때 덤프를 디스크에 저장하기 위해 필요한 스�
 ## 시스템 충돌
 시스템 내부적으로 오류나 문제가 발생하면 [`KeBugCheckEx`](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-kebugcheckex) 루틴이 호출되면서 시스템의 모든 작업이 중지된다. 당시 [물리 메모리](ko.Memory.md)에 들어있는 데이터를 디스크의 페이징 파일로 옮기는, 즉 덤핑(dumping)을 진행하는데 일반적인 파일 입출력과 다른 스토리지 스택을 거쳐 저장한다.
 
-![일반 파일 시스템과 충돌 덤프의 입출력 경로 비교<sub><i>출처: <a href="https://crashdmp.files.wordpress.com/2013/02/new_chart.png">WordPress.com</a></i></sub>](./images/bsod_crashdmp_io.png)
+![일반 파일 시스템과 충돌 덤프의 입출력 경로 비교](https://crashdmp.files.wordpress.com/2013/02/new_chart.png)
 
 <table style="width: 60%; margin: auto;">
 <caption style="caption-side: top;">파일 시스템과 충돌 덤프의 I/O <a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/driver-stacks">드라이버 스택</a></caption>

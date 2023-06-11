@@ -5,7 +5,7 @@ title: 프로세서
 # 프로세서
 [프로세서](https://ko.wikipedia.org/wiki/중앙_처리_장치)(processor), 흔히 컴퓨터에서 중앙 처리 장치(central processing unit; CPU)로 알려진 하드웨어는 프로그램의 [기계어](https://ko.wikipedia.org/wiki/기계어)를 처리하는 [전자회로](https://ko.wikipedia.org/wiki/전자_회로)이다. 프로그램을 실행하기 위해 필요한 시스템의 다양한 작업들은 [명령어 집합](https://ko.wikipedia.org/wiki/명령어_집합)(instruction set)에 의해 정의되어 있으며, 대표적으로 [x86](https://ko.wikipedia.org/wiki/X86)과 [ARM](https://ko.wikipedia.org/wiki/ARM_아키텍처) 계열 명령어 집합 아키텍처가 있다. 그리고 프로세서에서 처리할 수 있는 명령어 집합이 무엇인지에 따라 시스템 아키텍처가 함께 결정된다.
 
-![단일 프로세서 중앙 처리 장치<sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:ABasicComputer.svg">위키미디어</a></i></sub>](./images/processor_core_single.svg)
+![단일 프로세서 중앙 처리 장치](https://upload.wikimedia.org/wikipedia/commons/3/3a/ABasicComputer.svg)
 
 ## 프로세서 코어
 프로세서 코어(processor core)는 CPU에서 실질적인 연산을 도맡는 전자회로 하드웨어이며, CPU 칩 안에는 한 개 이상의 코어로 구성된다. 실제 연산이 이루어지는 부품인 관계로 흔히 각 코어를 CPU에 번호를 붙여 칭하는 경우가 대다수이다. 예를 들어 헥사코어 CPU에는 프로세서 코어가 여섯 개가 들어있어 CPU #0 - 5까지 나열되며, 동시에 최대 여섯 개의 [스레드](ko.Process.md#스레드)를 처리할 수 있다.
@@ -26,7 +26,7 @@ title: 프로세서
 ## 프로세서 시간
 [프로세서 시간](https://ko.wikipedia.org/wiki/CPU_타임)(processor time)은 순전히 한 개의 프로그램만을 처리하기 위해 CPU가 할애한 시간이다. [스케줄링](#스케줄링)이나 입출력 요청 대기 등의 작업에 의해 항시 프로세서에서 처리되지 않는다. 아래 그림에서 P1 프로그램만을 처리하는 데 CPU를 사용한 시간은 파란색 블록의 총 너비로 계산된다.
 
-![P1 프로그램에 대한 단일 코어 CPU 시간<sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:CpuTimeonSingleCpuMultiTaskingSystem.svg">위키미디어</a></i></sub>](./images/processor_cpu_time.svg)
+![P1 프로그램에 대한 단일 코어 CPU 시간](https://upload.wikimedia.org/wikipedia/commons/9/91/CpuTimeonSingleCpuMultiTaskingSystem.svg)
 
 > CPU 시간은 곧 CPU 사용량(%)을 반영하기도 한다: 일정한 간격으로 샘플링되는 구간동안 해당 프로그램이 CPU에서 얼마나 오래 처리되었는지를 토대로 계산된다.
 
@@ -36,7 +36,7 @@ title: 프로세서
 ## 보호 링
 [보호 링](https://ko.wikipedia.org/wiki/보호_링)(protection ring)은 데이터와 기능을 결함과 위협적인 행위로부터 보호하는 메커니즘이다.
 
-![x86 프로세서의 보호 링 다이어그램<sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:Priv_rings.svg">위키미디어</a></i></sub>](./images/processor_protection_ring.svg)
+![x86 프로세서의 보호 링 다이어그램](https://upload.wikimedia.org/wikipedia/commons/2/2f/Priv_rings.svg)
 
 보호 링은 시스템 운영체제의 [권한](https://en.wikipedia.org/wiki/Privilege_(computing))(privilege) 구조를 이루는 계층으로써, CPU 구조가 하드웨어적으로 어떤 [모드](https://en.wikipedia.org/wiki/CPU_modes)에 있는지에 따라 권한에 의해 제한된 일부 명령어들 활용 가능여부가 결정된다. 해당 명령어들은 CPU 및 메모리와 같은 하드웨어를 직접적으로 상호작용하므로 자칫 잘못하면 시스템에 치명적인 문제를 야기한다.
 
@@ -76,9 +76,7 @@ title: 프로세서
 ## 프로세스 상태
 [프로세스 상태](https://en.wikipedia.org/wiki/Process_state)(process state)는 현재 프로세스가 어떠한 상태에 있는지를 가리키며, 크게 세 가지로 분류된다: 준비(ready), 실행(running), 그리고 대기(waiting) 상태가 있다. 윈도우 운영체제는 프로세스 상태에 따라 어떻게 처리할 지 결정한다. 다음은 프로세스 상태의 설명 및 전환되는 경우를 소개한다.
 
-![프로세스의 수명 주기를 상태와 함께 표시한 다이어그램](./images/process_states_diagram.jpg)
-
-
+![프로세스의 수명 주기를 상태와 함께 표시한 다이어그램](https://www.researchgate.net/profile/Xiangyu-Lin-2/publication/346492253/figure/fig3/AS:963825763368962@1606805377750/Process-state-transition.png)
 
 <table style="width: 100%; margin: auto;">
 <caption style="caption-side: top;">프로세스 상태 및 전환</caption>
@@ -120,7 +118,7 @@ title: 프로세서
 # 인터럽트
 [인터럽트](https://ko.wikipedia.org/wiki/인터럽트)(interrupt; 간혹 "트랩"이라고도 언급)는 마우스 움직임이나 키보드 입력과 같은 시스템에서 발생한 일종의 비동기 사건, 즉 이벤트(event)가 최우선으로 처리될 수 있도록 [프로세서](#프로세서)에 요청되는 신호이다. 아래 그림은 인터럽트가 프로세서로부터 처리되는, 즉 인터럽트 서비스(interrupt service) 과정을 간략히 보여준다.
 
-![인터럽트의 종류 및 처리 과정<sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:Interrupt_Process.PNG">위키미디어</a></i></sub>](./images/processor_interrupt_diagram.png)
+![인터럽트의 종류 및 처리 과정](https://upload.wikimedia.org/wikipedia/commons/c/cf/Interrupt_Process.PNG)
 
 인터럽트를 전달받은 프로세서는 이벤트를 처리하기 위해 현재 실행 중이던 [스레드](ko.Process.md#스레드)를 잠시 중단시키고 재개되어야 할 시점의 스레드 [상태](https://en.wikipedia.org/wiki/State_(computer_science))(state)를 저장한다. 각 인터럽트마다 대응되는 함수를 [인터럽트 핸들러](https://ko.wikipedia.org/wiki/인터럽트_핸들러)(interrupt handler) 또는 인터럽트 서비스 루틴(interrupt service routine; ISR)이라고 부르는데, 프로세서에 의해 실행되는 ISR이 바로 이벤트를 처리하는 역할을 한다.
 

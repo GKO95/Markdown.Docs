@@ -82,7 +82,7 @@ MNEMONIC    OPERAND     ; 명령어 집합을 표현하는 기초적인 문장 �
 
 비록 RAM도 매우 빠른 속도의 데이터 접근성을 자랑하지만, 레지스터는 아예 CPU 내부에 탑재되어 있어 접근 속도가 순식간이다. 그러한 만큼 어셈블리 언어는 레지스터를 활발히 사용하기 때문에 각 레지스터의 역할이 무엇인지 인지해야 한다.
 
-![x86-64 아키텍처의 프로세서 레지스터<sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:Table_of_x86_Registers_svg.svg">위키미디어</a></i></sub>](./images/processor_x64_registers.svg)
+![x86-64 아키텍처의 프로세서 레지스터](https://upload.wikimedia.org/wikipedia/commons/1/15/Table_of_x86_Registers_svg.svg)
 
 위의 그림은 x86-64(일명 x64) 아키텍처의 다양한 레지스터를 보여주며, 그 중에는 레지스터(예. 64비트 `RAX`) 안에 또 다른 레지스터(예. 32비트 `EAX`)가 들어있는 구조를 찾아볼 수 있다. 이는 사실상 하드웨어적으로는 하나의 메모리이지만, `EAX`는 메모리의 전체 64비트 중에서 하위 32비트만을 활용하는 레지스터이다.
 

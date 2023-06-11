@@ -5,7 +5,7 @@ title: 부팅
 # 부팅
 [부팅](https://ko.wikipedia.org/wiki/부팅)(booting)은 버튼과 같은 하드웨어 혹은 소프트웨어 명령으로 컴퓨터를 켜는 절차이다. 부팅 초기에 전력을 공급받은 컴퓨터의 [메모리](ko.Memory.md)는 [휘발성](https://ko.wikipedia.org/wiki/휘발성_메모리)에 의해 아무런 소프트웨어도 로드되지 않은 상태로 [CPU](ko.Processor.md)는 어떠한 작업도 수행할 수 없는 데, 시스템 하드웨어나 CPU 펌웨어 혹은 또 다른 프로세서의 도움으로 CPU가 실행할 작업을 메모리에 주입시키는 작업이 필요하다.
 
-![윈도우 NT 운영체제의 부팅 절차 트러블슈팅 (예시. 윈도우 10)](./images/boot_sequence_windows.png)
+![윈도우 NT 운영체제의 부팅 절차 트러블슈팅 (예시. 윈도우 10)](https://i0.wp.com/www.msnoob.com/wp-content/uploads/2019/01/boot-sequence.png?fit=1167%2C1107&ssl=1)
 
 ### 부트스트랩
 [부트스트랩](https://ko.wikipedia.org/wiki/부트스트랩_(컴퓨팅))(bootstrap)은 외부로부터 아무런 도움을 받지 않고 자체적으로 실행하는 절차를 가리킨다. 부트스트랩 어원의 유래는 다음과 같다:
@@ -28,7 +28,7 @@ title: 부팅
 
 BIOS가 부트 장치를 탐색하는 과정은 다음과 같다:
 
-![BIOS 부팅 과정](./images/boot_process_bios.png)
+![BIOS 부팅 과정](https://upload.wikimedia.org/wikipedia/commons/2/20/Legacy_BIOS_boot_process_fixed.png)
 
 1. [비휘발성 BIOS 메모리](https://en.wikipedia.org/wiki/Nonvolatile_BIOS_memory)([CMOS](https://ko.wikipedia.org/wiki/CMOS) 혹은 [NVRAM](https://ko.wikipedia.org/wiki/비휘발성_메모리) 사용)에 저장된 부트 장치들의 집합을 열거한다.
 1. 열거된 부트 장치의 [부트 섹터](https://ko.wikipedia.org/wiki/부트_섹터)(boot sector)를 우선순위에 따라 불러오는 데, 만일 인식이 불가하면 다음 부트 장치로 넘어간다.
@@ -41,7 +41,7 @@ BIOS가 부트 장치를 탐색하는 과정은 다음과 같다:
 
 > [윈도우 NT](ko.WindowsNT.md)의 경우에는 비스타부터 소개된 "[윈도우 부트 관리자](https://ko.wikipedia.org/wiki/윈도우_비스타_시작_프로세스)(Windows Boot Manager)"가 존재한다.
 
-![UEFI 부팅 과정](./images/boot_process_uefi.png)
+![UEFI 부팅 과정](https://upload.wikimedia.org/wikipedia/commons/1/17/UEFI_boot_process.png)
 
 시스템에 전원이 들어오면 부트 관리자는 [NVRAM](https://ko.wikipedia.org/wiki/비휘발성_메모리)에 저장된 설정을 확인하고, 이를 기반으로 특정 운영체제 부트로더 혹은 커널을 실행한다. UEFI는 컴퓨터 아키텍처마다 표준화된 파일 경로에 의존하여 부트로더를 스스로 찾아낼 수 있는데, USB 플래시 드라이브와 같은 장치로도 간편한 부팅을 가능케 한다.
 

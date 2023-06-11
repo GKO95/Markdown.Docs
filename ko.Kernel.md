@@ -12,7 +12,7 @@ title: 커널
 ## 아키텍처
 운영체제 설계에 따라 커널은 크게 세 가지의 아키텍처로 설계될 수 있다.
 
-![커널 설계에 따른 아키텍처<sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:OS-structure2.svg">위키미디어</a></i></sub>](./images/kernel_structures.svg)
+![커널 설계에 따른 아키텍처](https://upload.wikimedia.org/wikipedia/commons/d/d0/OS-structure2.svg)
 
 본 부문에서 자주 인용될 "서비스"란, 호출 가능한 커널 루틴 혹은 그 집합을 의미한다.
 

@@ -23,7 +23,7 @@ title: 프로세스
 ## 가상 주소 공간
 [가상 주소 공간](https://ko.wikipedia.org/wiki/가상_주소_공간)(virtual address space; VAS)은 프로세스마다 데이터를 저장할 수 있는 가상의 [메모리](ko.Memory.md) 공간이다. 여기서 "가상"이 갖는 의미는 매우 중요하며, 아래의 성질들을 충족시킨다.
 
-![가상 주소 공간과 물리 메모리의 관계<sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:Virtual_address_space_and_physical_address_space_relationship.svg">위키미디어</a></i></sub>](./images/process_vas.png)
+![가상 주소 공간과 물리 메모리의 관계](https://upload.wikimedia.org/wikipedia/commons/3/32/Virtual_address_space_and_physical_address_space_relationship.svg)
 
 1. **독립성**
 

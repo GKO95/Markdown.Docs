@@ -14,7 +14,7 @@ title: 네트워크
 
 데이터를 여러 패킷으로 나누면 전송 효율성과 신뢰성 향상에 기여할 수 있다. 데이터 전송에 사용 중인 [통신 채널](https://ko.wikipedia.org/wiki/채널_(통신))(동축 케이블, 광케이블, 라디오, 적외선 등) 경로는 해당 데이터가 완전히 전송될 때까지 다른 데이터가 이동할 수 없다. 그러므로 데이터를 패킷으로 작게 나누어 다양한 경로의 채널로 이동하는 [패킷 교환](https://ko.wikipedia.org/wiki/패킷_교환)(packet switching) 기법을 활용하면 통신 혼잡을 방지할 수 있다. 덕분에 네트워크에 연결된 하나의 컴퓨터가 다수의 다른 컴퓨터랑 동시다발적 통신이 가능하다.
 
-![호스트 간에 네트워크를 거친 패킷 교환<sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:Packet_Switching.gif">위키미디어</a></i></sub>](./images/network_packet_switching.gif)
+![호스트 간에 네트워크를 거친 패킷 교환](https://upload.wikimedia.org/wikipedia/commons/f/f6/Packet_Switching.gif)
 
 ## 네트워크 노드
 [네트워크 노드](https://ko.wikipedia.org/wiki/노드_(네트워크))(network node)는 네트워크를 통해 전달되는 패킷의 재분배점 혹은 [통신 도착점](https://en.wikipedia.org/wiki/Communication_endpoint)(communication endpoint)이다. 물리적 네트워크 노드는 둘 중 하나로 분류된다:
@@ -39,7 +39,7 @@ title: 네트워크
 
 총 일곱 개의 추상 계층으로 나뉘어져 있으며, 이들은 다음과 같이 나열된다.
 
-![OSI 모형: 계층 번호가 작을수록 네트워크 통신망과 가깝다. <sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:Osi_model_trad.jpg">위키미디어</a></i></sub>](./images/network_osi_model.jpg)
+![OSI 모형: 계층 번호가 작을수록 네트워크 통신망과 가깝다.](https://upload.wikimedia.org/wikipedia/commons/f/ff/Osi_model_trad.jpg)
 
 <table style="width: 80%; margin: auto;">
 <caption style="caption-side: top;">OSI 모형 네트워크 계층</caption>
@@ -138,7 +138,7 @@ TCP의 연결지향형을 구현하기 위한 일환으로, 만일 클라이언�
 
 > 네트워크에서 자주 언급되는 TCP/IP, 일명 [인터넷 프로토콜 스위트](https://ko.wikipedia.org/wiki/인터넷_프로토콜_스위트)(Internet protocol suite)는 [전송 제어 프로토콜](#전송-제어-프로토콜)(TCP)과 인터넷 프로토콜(IP)의 조합을 가리킨다.
 
-![IP의 네트워크 계층 패킷 구조<sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:UDP_encapsulation.svg">위키미디어</a></i></sub>](./images/network_udp_encapsulation.svg)
+![IP의 네트워크 계층 패킷 구조](https://upload.wikimedia.org/wikipedia/commons/3/3b/UDP_encapsulation.svg)
 
 간단한 역사를 설명하자면, 인터넷 프로토콜 스위트의 개발은 미국 국방부에서 투자한 "전송 제어 프로그램(Transmission Control Program)"로부터 시작되었으며, 초창기에는 [연결지향형](https://en.wikipedia.org/wiki/Connection-oriented_communication)(connection-oriented) [데이터그램 프로토콜](#사용자-데이터그램-프로토콜) 구현이 목표였다. 그러나 [비연결형](https://en.wikipedia.org/wiki/Connectionless_communication)(connectionless) 성질의 데이터그램을 연결지향형으로 만드는 건 난해한 과제였으며, 결국 이를 지원하는 [새로운 프로토콜](#전송-제어-프로토콜)이 설계되었다.
 
@@ -159,7 +159,7 @@ TCP의 연결지향형을 구현하기 위한 일환으로, 만일 클라이언�
 ### 네트워크 브리지
 [네트워크 브리지](https://ko.wikipedia.org/wiki/네트워크_브리지)(network bridge)는 다수의 네트워크 세그먼트를 하나의 네트워크로 만드는 징검다리(bridge) 역할을 하며, 데이터 링크 계층에서 작업을 수행한다.
 
-![OSI 모형으로 나타낸 2-포트 심플 브리지 다이어그램](./images/network_bridge_simple.png)
+![OSI 모형으로 나타낸 2-포트 심플 브리지 다이어그램](https://upload.wikimedia.org/wikipedia/commons/e/e8/Network_Bridging.png)
 
 위의 그림과 같은 두 개의 LAN을 연결하는 네트워크 브리지가 있다고 가정한다: 브리지는 프레임의 목적지 MAC 주소를 읽는데, 만일 목적지 호스트가 다른 네트워크 세그먼트에 있다면 프레임을 그쪽으로 넘겨준다. 허나, 목적지 호스트가 동일 네트워크 세그먼트에 있으면 다른 네트워크 세그먼트로 넘어가는 것을 방지한다.
 
