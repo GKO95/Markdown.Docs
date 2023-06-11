@@ -235,7 +235,7 @@ Dump completed successfully.
 단, 저장될 덤프 파일의 경로 및 이름은 `DumpFile` 레지스트리 값을 그대로 사용한다.
 
 # BSOD 원리
-본 장은 [윈도우 NT](ko.Windows.md) 운영체제에서 [BSOD](#블루스크린)가 나타나 [메모리 덤프](ko.Dump.md#커널-모드-덤프)가 생성되는 원리를 설정 초기화, 시스템 충돌, 그리고 덤프 생성 단계로 나누어 설명한다. 자세한 내용은 [마크 러시노비치](https://ko.wikipedia.org/wiki/마크_러시노비치)([Sysinternals](ko.Sysinternals.md)의 창시자)를 포함한 [마이크로소프트](https://www.microsoft.com/) 엔지니어들이 저자로 참여한 [*Windows Internals*](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) 도서를 읽어볼 것을 권장한다.
+본 장은 [윈도우 NT](ko.Windows.md) 운영체제에서 [BSOD](#블루스크린)가 나타나 [메모리 덤프](ko.Dump.md#커널-모드-덤프)가 생성되는 원리를 [설정 초기화](#설정-초기화), [시스템 충돌](#시스템-충돌), 그리고 [덤프 생성](#덤프-생성) 단계로 나누어 설명한다. 자세한 내용은 [마크 러시노비치](https://ko.wikipedia.org/wiki/마크_러시노비치)([Sysinternals](ko.Sysinternals.md)의 창시자)를 포함한 [마이크로소프트](https://www.microsoft.com/) 엔지니어들이 저자로 참여한 [*Windows Internals*](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) 도서를 읽어볼 것을 권장한다.
 
 ## 설정 초기화
 세션 관리자(Session Manager; smss.exe)는 시스템이 부팅되는 시점에 `HKLM\SYSTEM\CurrentControlSet\Control\CrashControl` (이하 CrashControl) 레지스트리 키의 값들을 읽어 BSOD가 발생할 경우 어떠한 동작을 취할 것인지, 그리고 덤프는 어떻게 수집할 것인지 설정을 시스템에 적용한다.
@@ -246,10 +246,12 @@ Dump completed successfully.
 
 위의 그림은 [프로세스 모니터](ko.Process_Monitor.md)로 수집된 시스템 부팅 과정에서 smss.exe가 CrashControl의 값들을 읽어오는 작업(즉, RegQueryValue)에 하이라이트를 하였다. [BSOD 설정](#bsod-설정)에서 소개한 `AutoReboot`, `CrashDumpEnabled`, `DedicatedDumpFile` 등을 찾아볼 수 있다.
 
-Smss.exe는 이후 디스크에 데이터(즉, 덤프)를 저장하는데 필요한 [storport](https://learn.microsoft.com/en-us/windows-hardware/drivers/storage/storport-driver-overview) [미니포트](https://learn.microsoft.com/en-us/windows-hardware/drivers/storage/storport-miniport-drivers) 드라이버를 메모리상 복제하여 `dump_` 접두사를 붙여 명명한다. 만일 시스템에서 stornvme.sys (Microsoft NVM Express Storport Miniport Driver) 드라이버를 사용하면 아래와 같이 dump_stornvme.sys가 생성된다.
+Smss.exe는 이후 디스크에 데이터(즉, 덤프)를 저장하는데 필요한 [storport](https://learn.microsoft.com/en-us/windows-hardware/drivers/storage/storport-driver-overview)와 해당 [미니포트](https://learn.microsoft.com/en-us/windows-hardware/drivers/storage/storport-miniport-drivers) 드라이버를 메모리상 복제하여 `dump_` 접두사를 붙여 명명한다. 만일 시스템에서 stornvme.sys (Microsoft NVM Express Storport Miniport Driver) 드라이버를 사용하면 아래와 같이 dump_stornvme.sys가 생성된다.
 
 > *출처: [What are these ghost drivers named dump_diskdump.sys and other dump_*.sys that didn’t come from any file? - The Old New Thing](https://devblogs.microsoft.com/oldnewthing/20160913-00/?p=94305)*
 
 ![세션 관리자가 CrashControl 레지스트리 키의 값을 읽어오는 작업이 기록된 프로세스 모니터 로그](./images/smss_storport_miniport_dump.png)
 
-드라이버 파일이 복제되어 로드된 게 아니므로 실제 dump_stornvme.sys 드라이버가 파일로 존재하지 않으며, [프로세스 탐색기](ko.Process_Explorer.md)에 표시된 정보는 단순히 메타데이터에 기반한 것이기 때문에 매우 제한적이다. 이와 같은 번거로운 작업을 수행하는 이유는 BSOD가 storport 미니포트 드라이버에 의해 발생한 경우를 대비하는 차원이다. 그러므로 복제된 storport 미니포트 드라이버는 비록 메모리에 상주하지만, 외부로부터 손상이 가해지는 것을 방지하기 위해 시스템에 로드되지 않는다.
+드라이버 파일이 복사되어 로드된 게 아니므로 실제 dump_stornvme.sys 드라이버가 파일로 존재하지 않으며, [프로세스 탐색기](ko.Process_Explorer.md)에 표시된 정보는 단순히 메타데이터에 기반한 것이기 때문에 매우 제한적이다. 이와 같은 번거로운 작업을 수행하는 이유는 BSOD가 storport 관련 드라이버에 의해 발생한 경우를 대비하는 차원이다. 그러므로 복제된 storport 및 미니포트 드라이버는 비록 메모리에 상주하지만, 외부로부터 손상이 가해지는 것을 방지하기 위해 시스템에 로드되지 않는다.
+
+드라이버 복제에 이어서 smss.exe는 CrashControl 레지스트리 키의 `DumpFilters` 값에서 [덤프 필터 드라이버](https://learn.microsoft.com/en-us/windows-hardware/drivers/storage/crash-dump-filter-drivers) 여부를 확인한다. 덤프 파일을 디스크에 저장하는 데 있어 요구되는 기능을 storport 및 미니포트 드라이버에 지원하는 목적을 가진다. 대표적인 예시로 dumpfve.sys가 있으며, 바로 마이크로스프트의 볼륨 암호화를 담당하는 [비트로커](https://ko.wikipedia.org/wiki/비트로커)(BitLocker)가 활성화된 디스크 공간에 덤프를 저장할 수 있도록 한다. 덤프 필터 드라이버의 의의는 [*시스템 충돌*](#시스템-충돌) 부문에서 소개한다.
