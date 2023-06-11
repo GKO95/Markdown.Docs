@@ -240,18 +240,30 @@ Dump completed successfully.
 ## 설정 초기화
 세션 관리자(Session Manager; smss.exe)는 시스템이 부팅되는 시점에 `HKLM\SYSTEM\CurrentControlSet\Control\CrashControl` (이하 CrashControl) 레지스트리 키의 값들을 읽어 BSOD가 발생할 경우 어떠한 동작을 취할 것인지, 그리고 덤프는 어떻게 수집할 것인지 설정을 시스템에 적용한다.
 
-> 이러한 이유로 CrashControl 레지스트리 키의 변경 사항을 시스템에 적용하려면 재부팅이 불가피하다.
+> 위와 같은 이유로 CrashControl 레지스트리 키의 변경 사항을 시스템에 적용하려면 재부팅이 불가피하다.
 
 ![세션 관리자가 CrashControl 레지스트리 키의 값을 읽어오는 작업이 기록된 프로세스 모니터 로그](./images/smss_crashcontrol_query.png)
 
-위의 그림은 [프로세스 모니터](ko.Process_Monitor.md)로 수집된 시스템 부팅 과정에서 smss.exe가 CrashControl의 값들을 읽어오는 작업(즉, RegQueryValue)에 하이라이트를 하였다. [BSOD 설정](#bsod-설정)에서 소개한 `AutoReboot`, `CrashDumpEnabled`, `DedicatedDumpFile` 등을 찾아볼 수 있다.
+[프로세스 모니터](ko.Process_Monitor.md)로 수집된 시스템 부팅 과정에서 smss.exe가 CrashControl의 값들을 살펴본다. 그리고 RegQueryValue 작업 대상들은 [BSOD 설정](#bsod-설정)에서 소개한 `AutoReboot`, `CrashDumpEnabled`, `DedicatedDumpFile` 등을 확인할 수 있다. 이후 smss.exe는  `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management` 레지스트리 키의 `PagingFiles` 값을 토대로 페이징 파일을 생성한다.
 
-Smss.exe는 이후 디스크에 데이터(즉, 덤프)를 저장하는데 필요한 [storport](https://learn.microsoft.com/en-us/windows-hardware/drivers/storage/storport-driver-overview)와 해당 [미니포트](https://learn.microsoft.com/en-us/windows-hardware/drivers/storage/storport-miniport-drivers) 드라이버를 메모리상 복제하여 `dump_` 접두사를 붙여 명명한다. 만일 시스템에서 stornvme.sys (Microsoft NVM Express Storport Miniport Driver) 드라이버를 사용하면 아래와 같이 dump_stornvme.sys가 생성된다.
+BSOD가 발생할 때 덤프를 디스크에 저장하기 위해 필요한 스토리지 포트 및 미니포트 드라이버를 smss.exe가 메모리상 복제하여 `dump_` 접두사를 붙여 명명한다. 아래 예시는 [stornvme.sys](https://ko.wikipedia.org/wiki/NVM_익스프레스)를 덤프 전용의 미니포트 드라이버로 활용하기 위해 복제한 dump_stornvme.sys 존재를 [프로세스 탐색기](ko.Process_Explorer.md)로 보여준다. ([관련 문서](https://devblogs.microsoft.com/oldnewthing/20160913-00/?p=94305))
 
-> *출처: [What are these ghost drivers named dump_diskdump.sys and other dump_*.sys that didn’t come from any file? - The Old New Thing](https://devblogs.microsoft.com/oldnewthing/20160913-00/?p=94305)*
+> 스토리지 포트 드라이버를 대신해, 커널은 [diskdump.sys](https://learn.microsoft.com/en-us/windows-hardware/drivers/storage/restrictions-on-miniport-drivers-that-manage-the-boot-drive) 드라이버를 호출하여 파일 시스템을 우회하고 직접 디스크 입출력에 관여할 수 있다.
 
 ![세션 관리자가 CrashControl 레지스트리 키의 값을 읽어오는 작업이 기록된 프로세스 모니터 로그](./images/smss_storport_miniport_dump.png)
 
-드라이버 파일이 복사되어 로드된 게 아니므로 실제 dump_stornvme.sys 드라이버가 파일로 존재하지 않으며, [프로세스 탐색기](ko.Process_Explorer.md)에 표시된 정보는 단순히 메타데이터에 기반한 것이기 때문에 매우 제한적이다. 이와 같은 번거로운 작업을 수행하는 이유는 BSOD가 storport 관련 드라이버에 의해 발생한 경우를 대비하는 차원이다. 그러므로 복제된 storport 및 미니포트 드라이버는 비록 메모리에 상주하지만, 외부로부터 손상이 가해지는 것을 방지하기 위해 시스템에 로드되지 않는다.
+드라이버 파일이 복사되어 로드된 게 아니므로 예시의 dump_stornvme.sys 드라이버는 파일로 존재하지 않으며, 프로세스 탐색기에는 매우 제한적인 메타데이터만 표시된다. 번거로운 작업이지만 BSOD가 스토리지 관련 드라이버에 의해 발생한 경우를 대비한 조치이다. 그러므로 복제된 스토리지 포트와 미니포트 드라이버는 혹여나 외부로부터 가해지는 손상을 최소화하기 위해 방지하기 위해 시스템 충돌이 발생할 때에만 로드된다.
 
-드라이버 복제에 이어서 smss.exe는 CrashControl 레지스트리 키의 `DumpFilters` 값에서 [덤프 필터 드라이버](https://learn.microsoft.com/en-us/windows-hardware/drivers/storage/crash-dump-filter-drivers) 여부를 확인한다. 덤프 파일을 디스크에 저장하는 데 있어 요구되는 기능을 storport 및 미니포트 드라이버에 지원하는 목적을 가진다. 대표적인 예시로 dumpfve.sys가 있으며, 바로 마이크로스프트의 볼륨 암호화를 담당하는 [비트로커](https://ko.wikipedia.org/wiki/비트로커)(BitLocker)가 활성화된 디스크 공간에 덤프를 저장할 수 있도록 한다. 덤프 필터 드라이버의 의의는 [*시스템 충돌*](#시스템-충돌) 부문에서 소개한다.
+드라이버 복제에 이어서 smss.exe는 CrashControl 레지스트리 키의 `DumpFilters` 값에서 [덤프 필터 드라이버](https://learn.microsoft.com/en-us/windows-hardware/drivers/storage/crash-dump-filter-drivers) 여부를 확인한다. 덤프 파일을 디스크에 저장하는 데 있어 요구되는 기능을 스토리지 포트와 미니포트 드라이버에 지원하는 목적을 가진다. 대표적인 예시로 dumpfve.sys가 있으며, 바로 마이크로스프트의 볼륨 암호화를 담당하는 [비트로커](https://ko.wikipedia.org/wiki/비트로커)(BitLocker)가 활성화된 디스크 공간에 덤프를 저장할 수 있도록 한다. 덤프 필터 드라이버의 의의는 [*시스템 충돌*](#시스템-충돌) 부문에서 언급한다.
+
+## 시스템 충돌
+시스템 내부적으로 오류나 문제가 발생하면 [`KeBugCheckEx`](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-kebugcheckex) 루틴이 호출되면서 시스템의 모든 작업이 중지된다. 당시 [물리 메모리](ko.Memory.md)에 들어있는 데이터를 디스크의 페이징 파일로 옮기는, 즉 덤핑(dumping)을 진행하는데 일반적인 파일 입출력과 다른 스토리지 스택을 거쳐 저장한다.
+
+![일반 파일 시스템과 충돌 덤프의 입출력 경로 비교<sub><i>출처: <a href="https://crashdmp.files.wordpress.com/2013/02/new_chart.png">WordPress.com</a></i></sub>](./images/bsod_crashdmp_io.png)
+
+<table style="width: 60%; margin: auto;">
+<caption style="caption-side: top;">파일 시스템과 충돌 덤프의 I/O <a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/driver-stacks">드라이버 스택</a></caption>
+<colgroup><col style="width: 50%;" /><col style="width: 50%;" /></colgroup>
+<thead><tr><th style="text-align: center;">파일 시스템</th><th style="text-align: center;">충돌 덤프</th></tr></thead>
+<tbody style="text-align: center;"><tr style="vertical-align: bottom;"><td><a href="https://ko.wikipedia.org/wiki/파일_시스템">파일 시스템</a> <br/>↓<br/><a href="https://ko.wikipedia.org/wiki/볼륨_(컴퓨팅)">볼륨</a>/<a href="https://ko.wikipedia.org/wiki/디스크_파티션">파티션</a><br/>↓<br/><a href="https://en.wikipedia.org/wiki/Class_driver">클래스 드라이버</a><br/>↓</td><td>커널<br/>↓<br/>Crashdmp.sys<br/>(w/ 덤프 필터 드라이버)<br/>↓</td></tr><tr><td colspan="2">스토리지 포트 & 미니포트<br/>↓<br/>하드웨어 (저장소)</td></tr></tbody>
+</table>
