@@ -240,8 +240,16 @@ Dump completed successfully.
 ## 설정 초기화
 세션 관리자(Session Manager; smss.exe)는 시스템이 부팅되는 시점에 `HKLM\SYSTEM\CurrentControlSet\Control\CrashControl` (이하 CrashControl) 레지스트리 키의 값들을 읽어 BSOD가 발생할 경우 어떠한 동작을 취할 것인지, 그리고 덤프는 어떻게 수집할 것인지 설정을 시스템에 적용한다.
 
-> 위의 이유로 CrashControl 레지스트리 키의 변경 사항을 시스템에 적용하려면 재부팅이 불가피하다.
+> 이러한 이유로 CrashControl 레지스트리 키의 변경 사항을 시스템에 적용하려면 재부팅이 불가피하다.
 
 ![세션 관리자가 CrashControl 레지스트리 키의 값을 읽어오는 작업이 기록된 프로세스 모니터 로그](./images/smss_crashcontrol_query.png)
 
 위의 그림은 [프로세스 모니터](ko.Process_Monitor.md)로 수집된 시스템 부팅 과정에서 smss.exe가 CrashControl의 값들을 읽어오는 작업(즉, RegQueryValue)에 하이라이트를 하였다. [BSOD 설정](#bsod-설정)에서 소개한 `AutoReboot`, `CrashDumpEnabled`, `DedicatedDumpFile` 등을 찾아볼 수 있다.
+
+Smss.exe는 이후 디스크에 데이터(즉, 덤프)를 저장하는데 필요한 [storport](https://learn.microsoft.com/en-us/windows-hardware/drivers/storage/storport-driver-overview) [미니포트](https://learn.microsoft.com/en-us/windows-hardware/drivers/storage/storport-miniport-drivers) 드라이버를 메모리상 복제하여 `dump_` 접두사를 붙여 명명한다. 만일 시스템에서 stornvme.sys (Microsoft NVM Express Storport Miniport Driver) 드라이버를 사용하면 아래와 같이 dump_stornvme.sys가 생성된다.
+
+> *출처: [What are these ghost drivers named dump_diskdump.sys and other dump_*.sys that didn’t come from any file? - The Old New Thing](https://devblogs.microsoft.com/oldnewthing/20160913-00/?p=94305)*
+
+![세션 관리자가 CrashControl 레지스트리 키의 값을 읽어오는 작업이 기록된 프로세스 모니터 로그](./images/smss_storport_miniport_dump.png)
+
+드라이버 파일이 복제되어 로드된 게 아니므로 실제 dump_stornvme.sys 드라이버가 파일로 존재하지 않으며, [프로세스 탐색기](ko.Process_Explorer.md)에 표시된 정보는 단순히 메타데이터에 기반한 것이기 때문에 매우 제한적이다. 이와 같은 번거로운 작업을 수행하는 이유는 BSOD가 storport 미니포트 드라이버에 의해 발생한 경우를 대비하는 차원이다. 그러므로 복제된 storport 미니포트 드라이버는 비록 메모리에 상주하지만, 외부로부터 손상이 가해지는 것을 방지하기 위해 시스템에 로드되지 않는다.
