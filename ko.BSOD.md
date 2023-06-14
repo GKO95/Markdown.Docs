@@ -235,7 +235,7 @@ Dump completed successfully.
 단, 저장될 덤프 파일의 경로 및 이름은 `DumpFile` 레지스트리 값을 그대로 사용한다.
 
 # BSOD 원리
-본 장은 [윈도우 NT](ko.Windows.md) 운영체제에서 [BSOD](#블루스크린)가 나타나 [메모리 덤프](ko.Dump.md#커널-모드-덤프)가 생성되는 원리를 [설정 초기화](#설정-초기화), [시스템 충돌](#시스템-충돌), 그리고 [덤프 생성](#덤프-생성) 단계로 나누어 설명한다. 자세한 내용은 [마크 러시노비치](https://ko.wikipedia.org/wiki/마크_러시노비치)([Sysinternals](ko.Sysinternals.md)의 창시자)를 포함한 [마이크로소프트](https://www.microsoft.com/) 엔지니어들이 저자로 참여한 [*Windows Internals*](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) 도서를 읽어볼 것을 권장한다.
+본 장은 [윈도우 NT](ko.Windows.md) 운영체제에서 [BSOD](#블루스크린)가 나타나 [메모리 덤프](ko.Dump.md#커널-모드-덤프)가 생성되는 원리를 [설정 초기화](#설정-초기화), [시스템 충돌](#시스템-충돌), 그리고 [덤프 생성](#덤프-생성) 단계로 나누어 설명한다. 자세한 내용은 [Mark Russinovich](https://ko.wikipedia.org/wiki/마크_러시노비치)([Sysinternals](ko.Sysinternals.md) 공동 창시자)를 포함한 [마이크로소프트](https://www.microsoft.com/) 엔지니어들이 저자로 참여한 [*Windows Internals*](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) 도서를 읽어볼 것을 권장한다.
 
 ## 설정 초기화
 세션 관리자(Session Manager; smss.exe)는 시스템이 부팅되는 시점에 `HKLM\SYSTEM\CurrentControlSet\Control\CrashControl` (이하 CrashControl) 레지스트리 키의 값들을 읽어 BSOD가 발생할 경우 어떠한 동작을 취할 것인지, 그리고 덤프는 어떻게 수집할 것인지 설정을 시스템에 적용한다.
@@ -268,6 +268,6 @@ BSOD가 발생할 때 덤프를 디스크에 저장하기 위해 필요한 스�
 <tbody style="text-align: center;"><tr style="vertical-align: bottom;"><td><a href="https://ko.wikipedia.org/wiki/파일_시스템">파일 시스템</a> <br/>↓<br/><a href="https://ko.wikipedia.org/wiki/볼륨_(컴퓨팅)">볼륨</a>/<a href="https://ko.wikipedia.org/wiki/디스크_파티션">파티션</a><br/>↓<br/><a href="https://en.wikipedia.org/wiki/Class_driver">클래스 드라이버</a><br/>↓</td><td>커널<br/>↓<br/>Crashdmp.sys<br/>(w/ 덤프 필터 드라이버)<br/>↓</td></tr><tr><td colspan="2">스토리지 포트 & 미니포트<br/>↓<br/>하드웨어 (저장소)</td></tr></tbody>
 </table>
 
-시스템 충돌 당시에 덤프를 페이징 파일로 저장할 때, [FAT32](https://ko.wikipedia.org/wiki/파일_할당_테이블#FAT32)나 [NTFS](https://ko.wikipedia.org/wiki/NTFS)와 같은 파일 시스템 혹은 볼륨 및 파티션의 드라이버에 의한 BSOD 가능성을 고려하여, 충돌 덤프 드라이버인 Crashdmp.sys 드라이버가 덤프를 직접 디스크에 저장한다. 하지만 일반적인 파일 입출력 스택에서는 개입되었던 BitLocker 볼륨 암호화(fvevol.sys) 등의 필터 드라이버가 누락되면서, 이를 보완하기 위해 덤프 필터 드라이버(BitLocker의 경우 dumpfve.sys)가 도입되었다.
+시스템 충돌 당시에 덤프를 페이징 파일로 저장할 때, [FAT32](https://ko.wikipedia.org/wiki/파일_할당_테이블#FAT32)나 [NTFS](https://ko.wikipedia.org/wiki/NTFS)와 같은 파일 시스템 혹은 볼륨 및 파티션의 드라이버에 의한 BSOD 가능성을 감안하여 Crashdmp.sys 충돌 덤프 드라이버가 직접 덤프를 디스크에 저장한다. 하지만 일반적인 파일 입출력 스택에서 개입되었던 BitLocker 볼륨 암호화(fvevol.sys) 등의 필터 드라이버가 누락되면서, 이를 보완하기 위해 덤프 필터 드라이버(BitLocker의 경우 dumpfve.sys)가 도입되었다.
 
-BSOD 화면에서 나타나는 백분율은 RAM 데이터가 페이징 파일로 얼마나 덤핑되었는 지 나타낸 수치이다. 만일 진행률이 0%로 머물러 있다면 덤프 필터 드라이버를 살펴보는 것도 권장한다. 여기서 100% 덤핑이 완료되어도 아직은 MEMORY.DMP가 시스템에 존재하지 않는다. 이와 관련된 내용은 [*덤프 생성*](#덤프-생성) 부문에서 설명할 예정이다.
+BSOD 화면에서 나타나는 백분율은 RAM 데이터가 페이징 파일로 얼마나 덤핑되었는 지 나타낸 수치이다. 만일 진행률이 0%로 머물러 있다면 덤프 필터 드라이버를 살펴보는 것도 권장한다. 여기서 100% 덤프 수집이 완료되어도 아직은 MEMORY.DMP가 시스템에 존재하지 않는다. 이와 관련된 내용은 [*덤프 생성*](#덤프-생성) 부문에서 설명할 예정이다.
