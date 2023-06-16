@@ -273,6 +273,16 @@ BSOD가 발생할 때 덤프를 디스크에 저장하기 위해 필요한 스�
 BSOD 화면에서 나타나는 백분율은 RAM 데이터가 페이징 파일로 얼마나 덤핑되었는 지 나타낸 수치이다. 만일 진행률이 0%로 머물러 있다면 덤프 필터 드라이버를 살펴보는 것도 권장한다. 여기서 100% 덤프 수집이 완료되어도 아직은 MEMORY.DMP가 시스템에 존재하지 않는다. 이와 관련된 내용은 [*덤프 생성*](#덤프-생성) 부문에서 설명할 예정이다.
 
 ## 덤프 생성
-BSOD 화면에서 덤프 수집이 100% 완료되어 재부팅이 될 시, smss.exe는 이전 부팅 때의 페이징 파일을 나열하는 Memory Management 레지스트리 키의 `ExistingPageFiles` 값을 확인한다. 나열된 각 페이징 파일들의 헤더로부터 `PAGEDUMP`(32비트 시스템) 혹은 `PAGEDU64`(64비트 시스템)가 존재하는지 살펴보며, 발견될 시 해당 페이징 파일에 시스템 충돌 당시에 수집된 덤프 정보가 포함되어 있다고 인지한다.
+BSOD 화면에서 덤프 수집이 100% 완료되어 재부팅이 될 시, smss.exe는 이전 부팅 때의 페이징 파일을 나열하는 Memory Management 레지스트리 키의 `ExistingPageFiles` 값을 확인한다. 나열된 각 페이징 파일들의 헤더로부터 `PAGEDUMP`(32비트 시스템) 혹은 `PAGEDU64`(64비트 시스템)가 존재하는지 살펴보며, 발견될 시 해당 페이징 파일에 시스템 충돌 당시에 수집된 덤프 정보가 포함되어 있다고 인지한다. 다시 한번 언급하지만, 현 시점에서는 DMP 확장자의 덤프 파일이 아직 존재하지 않는다.
 
-Smss.exe는 CrashControl의 `DumpFile` 값에 기입된 덤프 저장 경로와 페이징 파일 간 드라이브를 비교한다.
+Smss.exe는 CrashControl의 `DumpFile` 값에 기입된 덤프 저장 경로와 페이징 파일 간 볼륨을 비교하며, 이에 따라 덤프 생성 절차가 달라진다. QuerySizeInformationVolume 작업을 통해 덤프가 저장되기 위해 충분한 여유 공간이 확보되었는지 확인한 smss.exe는 페이징 파일의 크기를 헤더에 기록된 덤프 파일의 크기만큼 축소시킨다. 페이징 파일과 덤프 경로가 동일한 볼륨에 위치한 경우, SetRenameInformationFile 작업을 통해 페이징 파일의 이름을 MEMORY.DMP와 같이 지정된 덤프 파일명으로 바꾸는 걸로 변환이 완료된다.
+
+반면, 페이징 파일과 덤프 경로가 상이한 볼륨에 위치한 경우, SetRenameInformationFile 작업을 통해 페이징 파일은 우선 DUMP****.tmp 파일로 이름이 바뀌며 네 개의 별 표시는 시스템 시간의 하위 2바이트의 [워드](https://ko.wikipedia.org/wiki/워드_(컴퓨팅)) 값이 기입된다(예를 들어 DUMP7c83.tmp). 그리고 smss.exe는 CrashControl에 휘발성 MachineCrash 하위 레지스트리 키를 생성한다. MachineCrash에는 다음 세 가지 값을 포함한다:
+
+* `DumpFile`: 현재 덤프 정보가 담겨있는 파일 경로 (예를 들어 DUMP7c83.tmp) 
+* `FinalDumpFileLocation`: CrashControl의 `DumpFile`에 명시된 최종 덤프 저장 경로
+* `TempDestination`: 위의 두 값의 경로를 비교하여 일치하는지 여부에 따라 덤프가 아직 임시 파일에 머물러 있음을 인지한다.
+
+부팅 과정에서 Wininit.exe 프로그램이 MachineCrash 레지스트리 키의 존재를 확인하고 WerFault.exe를 실행시킨다. WerFault.exe는 `TempDestination`에 설정된 값이 1인지 확인하여 임시 파일에 대한 후속 처리를 진행한다. 임시 파일의 내용을 전부 읽어 최종 덤프 저장 경로에 MEMORY.DMP를 생성하고 내용을 복사한다.
+
+> 만일 `TempDestination`의 값이 0이면, 이는 덤프 저장 경로와 페이징 파일이 동일한 볼륨에 상주하는 것을 의미하여 아무런 조치가 이루어지지 않는다.
