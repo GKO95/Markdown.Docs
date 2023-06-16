@@ -244,7 +244,7 @@ Dump completed successfully.
 
 ![세션 관리자가 CrashControl 레지스트리 키의 값을 읽어오는 작업이 기록된 프로세스 모니터 로그](./images/smss_crashcontrol_query.png)
 
-[프로세스 모니터](ko.Process_Monitor.md)로 수집된 시스템 부팅 과정에서 smss.exe가 CrashControl의 값들을 살펴본다. 그리고 RegQueryValue 작업 대상들은 [BSOD 설정](#bsod-설정)에서 소개한 `AutoReboot`, `CrashDumpEnabled`, `DedicatedDumpFile` 등을 확인할 수 있다. 이후 smss.exe는  `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management` 레지스트리 키의 `PagingFiles` 값을 토대로 페이징 파일을 생성한다.
+[프로세스 모니터](ko.Process_Monitor.md)로 수집된 시스템 부팅 과정에서 smss.exe가 CrashControl의 값들을 살펴본다. 그리고 RegQueryValue 작업 대상들은 [BSOD 설정](#bsod-설정)에서 소개한 `AutoReboot`, `CrashDumpEnabled`, `DedicatedDumpFile` 등을 확인할 수 있다. 이후 smss.exe는  `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management` (이하 Memory Management) 레지스트리 키의 `PagingFiles` 값을 토대로 페이징 파일을 생성한다.
 
 BSOD가 발생할 때 덤프를 디스크에 저장하기 위해 필요한 스토리지 포트 및 미니포트 드라이버를 smss.exe가 메모리상 복제하여 `dump_` 접두사를 붙여 명명한다. 아래 예시는 [stornvme.sys](https://ko.wikipedia.org/wiki/NVM_익스프레스)를 덤프 전용의 미니포트 드라이버로 활용하기 위해 복제한 dump_stornvme.sys 존재를 [프로세스 탐색기](ko.Process_Explorer.md)로 보여준다. ([관련 문서](https://devblogs.microsoft.com/oldnewthing/20160913-00/?p=94305))
 
@@ -271,3 +271,8 @@ BSOD가 발생할 때 덤프를 디스크에 저장하기 위해 필요한 스�
 시스템 충돌 당시에 덤프를 페이징 파일로 저장할 때, [FAT32](https://ko.wikipedia.org/wiki/파일_할당_테이블#FAT32)나 [NTFS](https://ko.wikipedia.org/wiki/NTFS)와 같은 파일 시스템 혹은 볼륨 및 파티션의 드라이버에 의한 BSOD 가능성을 감안하여 Crashdmp.sys 충돌 덤프 드라이버가 직접 덤프를 디스크에 저장한다. 하지만 일반적인 파일 입출력 스택에서 개입되었던 BitLocker 볼륨 암호화(fvevol.sys) 등의 필터 드라이버가 누락되면서, 이를 보완하기 위해 덤프 필터 드라이버(BitLocker의 경우 dumpfve.sys)가 도입되었다.
 
 BSOD 화면에서 나타나는 백분율은 RAM 데이터가 페이징 파일로 얼마나 덤핑되었는 지 나타낸 수치이다. 만일 진행률이 0%로 머물러 있다면 덤프 필터 드라이버를 살펴보는 것도 권장한다. 여기서 100% 덤프 수집이 완료되어도 아직은 MEMORY.DMP가 시스템에 존재하지 않는다. 이와 관련된 내용은 [*덤프 생성*](#덤프-생성) 부문에서 설명할 예정이다.
+
+## 덤프 생성
+BSOD 화면에서 덤프 수집이 100% 완료되어 재부팅이 될 시, smss.exe는 이전 부팅 때의 페이징 파일을 나열하는 Memory Management 레지스트리 키의 `ExistingPageFiles` 값을 확인한다. 나열된 각 페이징 파일들의 헤더로부터 `PAGEDUMP`(32비트 시스템) 혹은 `PAGEDU64`(64비트 시스템)가 존재하는지 살펴보며, 발견될 시 해당 페이징 파일에 시스템 충돌 당시에 수집된 덤프 정보가 포함되어 있다고 인지한다.
+
+Smss.exe는 CrashControl의 `DumpFile` 값에 기입된 덤프 저장 경로와 페이징 파일 간 드라이브를 비교한다.
