@@ -44,10 +44,10 @@ title: 덤프
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">포함</th><th style="text-align: center;">제외</th></tr></thead>
 <tbody style="text-align: center;">
-<tr><td>윈도우 커널</td><td>비할당 메모리</td></tr>
-<tr><td>커널 모드 드라이버</td><td>사용자 모드 어플리케이션</td></tr>
+<tr><td><a href="ko.Kernel.md">윈도우 커널</a></td><td>비할당 메모리</td></tr>
+<tr><td><a href="ko.Driver.md">커널 모드 드라이버</a></td><td>사용자 모드 어플리케이션</td></tr>
 <tr><td>커널 모드 프로그램</td><td>-</td></tr>
-<tr><td>하드웨어 추상화 계층 (HAL)</td><td>-</td></tr>
+<tr><td><a href="ko.Kernel.md#하드웨어-추상-계층">하드웨어 추상화 계층</a></td><td>-</td></tr>
 </tbody>
 </table>
 
@@ -76,11 +76,11 @@ title: 덤프
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">포함</th><th style="text-align: center;">제외</th></tr></thead>
 <tbody style="text-align: center;">
-<tr><td>윈도우 커널</td><td>비할당 메모리</td></tr>
-<tr><td>커널 모드 드라이버</td><td>게스트 VM 페이지</td></tr>
+<tr><td><a href="ko.Kernel.md">윈도우 커널</a></td><td>비할당 메모리</td></tr>
+<tr><td><a href="ko.Driver.md">커널 모드 드라이버</a></td><td>게스트 VM 페이지</td></tr>
 <tr><td>커널 모드 프로그램</td><td>파일 캐시</td></tr>
 <tr><td>사용자 모드 어플리케이션</td><td>-</td></tr>
-<tr><td>하드웨어 추상화 계층 (HAL)</td><td>-</td></tr>
+<tr><td><a href="ko.Kernel.md#하드웨어-추상-계층">하드웨어 추상화 계층</a></td><td>-</td></tr>
 </tbody>
 </table>
 
