@@ -34,7 +34,7 @@ title: 커널
 마이크로소프트의 [윈도우 NT](ko.Windows.md)가 하이브리드 커널의 영향을 받은 대표적인 운영체제이다.
 
 # NT 커널
-[윈도우 NT](ko.Windows.md) 운영체제의 커널 이미지 `ntoskrnl.exe`는 아래와 같이 구성된다.
+[윈도우 NT](ko.Windows.md) 운영체제의 커널 이미지 ntoskrnl.exe는 아래와 같이 구성된다.
 
 <table style="width: 95%; margin: auto;">
 <caption style="caption-side: top;">윈도우 커널 이미지의 구성</caption>
@@ -44,7 +44,7 @@ title: 커널
 <tr><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Architecture_of_Windows_NT#Kernel">Kernel</a></td><td colspan="10" style="text-align: center;">스케줄링, 동기화, 인터럽트 등 기초적인 핵심 함수 제공</td></tr></tbody>
 </table>
 
-Executive는 특정 작업을 수행하는 여러 구성원들로 이루어진 `ntoskrnl.exe`의 상위 계층이다. 한편, Kernel 계층은 모듈에서 필요로 하는 기초적인 커널 함수들을 제공하는 하위 계층이며 [마이크로커널](#마이크로커널)의 역할을 담당한다. 이러한 구조의 정립으로 Kernel은 단순히 OS 매커니즘을 구현하고, Executive는 이를 활용하여 실질적인 정책 결정에 기여한다.
+Executive는 특정 작업을 수행하는 여러 구성원들로 이루어진 ntoskrnl.exe의 상위 계층이다. 한편, Kernel 계층은 모듈에서 필요로 하는 기초적인 커널 함수들을 제공하는 하위 계층이며 [마이크로커널](#마이크로커널)의 역할을 담당한다. 이러한 구조의 정립으로 Kernel은 단순히 OS 매커니즘을 구현하고, Executive는 이를 활용하여 실질적인 정책 결정에 기여한다.
 
 아래는 `nt` 모듈의 함수 접두사가 각각 어떤 목적으로 사용되는 지 식별하는 도표이다. 일부 함수는 접두사에 `p`가 추가된 경우가 있는데, 이는 해당 목적 혹은 구성원에서만 사용되는 내부 전용 함수를 의미한다.
 
@@ -84,3 +84,12 @@ Executive는 특정 작업을 수행하는 여러 구성원들로 이루어진 `
 <tr><td style="text-align: center;"><a href="ko.WinAPI.md#nt와-zw-접두사-시스템-서비스-비교"><code>Nt</code></a>/<a href="ko.WinAPI.md#nt와-zw-접두사-시스템-서비스-비교"><code>Zw</code></a></td><td>네이티브 <a href="ko.WinAPI.md#시스템-서비스">시스템 서비스</a> API 함수; 두 접두사의 함수는 유사한 (혹은 동일한) 작업을 하지만 커널 모드에서 추가 검증 여부 차이가 존재한다.</td></tr>
 </tbody>
 </table>
+
+## 하드웨어 추상 계층
+하드웨어 추상 계층(Hardware Abstraction Layer; HAL)은 하드웨어 이식성을 구현하는데 핵심되는 구성요소이며, hal.dll 라이브러리에 정의되어 NT 커널 이미지 ntoskrnl.exe에 로드된다. HAL의 역할은 윈도우가 [부팅](ko.Boot.md)된 하드웨어 플랫폼의 CPU, 메모리, 디스크 등의 구성요소들로부터 기능을 수행하기 위해 필요한 저급 인터페이스를 kernel에 제공한다.
+
+> [윈도우 10, 버전 2004](https://en.wikipedia.org/wiki/Windows_10,_version_2004) (코드네임: 20H1) 빌드부터 HAL은 ntoskrnl.exe 안에 포함(혹은 정적 링크)되었으며, DLL은 하위호환을 위해 남겨둔 상태이다.
+
+x86 시스템의 경우, 시스템 부팅 단계에서 [APIC](https://ko.wikipedia.org/wiki/APIC) 지원 여부에 따라 두 종류의 HAL 중 하나를 시스템에 로드한다: halacpi.dll ([ACPI](https://ko.wikipedia.org/wiki/ACPI)만 지원) 그리고 halmacpi.dll (ACPI + [SMP](https://ko.wikipedia.org/wiki/대칭형_다중_처리), 즉 APIC 지원). 반면, x64 및 ARM64 시스템은 마더보드에 ACPI와 APIC가 모두 필요하므로 hal.dll 하나만 존재한다.
+
+마이크로소프트에서 제공하는 기본적인 HAL만으로 부족할 경우를 대비하여, 이전에는 3rd 파티 제조사가 자체적으로 HAL을 제공하는 방안을 고려하였지만 현실적이지 않다고 판단하였다. 시스템이 필요에 따라 언제든지 로드가 자유로운 DLL 파일로 제작된 HAL extension을 도입하였으며(예를 들어 HalExtPL080.dll, HalExtIntcLpioDMA.dll 등), 이를 개발하기 위해서는 반드시 마이크로소프트의 협업이 필요하다.
