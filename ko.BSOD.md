@@ -266,7 +266,7 @@ Smss.exe는 CrashControl의 `DumpFile` 값에 기입된 덤프 저장 경로와 
 
 * `DumpFile`: 현재 덤프 정보가 담겨있는 파일 경로 (예를 들어 DUMP7c83.tmp) 
 * `FinalDumpFileLocation`: CrashControl의 `DumpFile`에 명시된 최종 덤프 저장 경로
-* `TempDestination`: 위의 두 값의 경로를 비교하여 볼륨 일치 여부에 따라 덤프가 아직 임시 파일에 머물러 있음을 인지한다.
+* `TempDestination`: 위의 두 값의 경로를 비교하여 볼륨 일치 여부에 따라 덤프가 아직 임시 파일에 머물러 있는지 인지한다.
 
 부팅 과정에서 Wininit.exe 프로그램이 MachineCrash 레지스트리 키의 존재를 확인하고 WerFault.exe를 실행시킨다. WerFault.exe는 `TempDestination`에 설정된 값이 1인지 확인하여 임시 파일에 대한 후속 처리를 진행한다. 임시 파일의 내용을 전부 읽어 최종 덤프 저장 경로에 MEMORY.DMP를 생성하고 내용을 복사한다.
 
