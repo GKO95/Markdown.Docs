@@ -3,9 +3,9 @@ category: Sysinternals
 title: NotMyFault
 ---
 # NotMyFault
-[NotMyFault](https://learn.microsoft.com/en-us/sysinternals/downloads/notmyfault), 직역하자면 "제가 한 게 아니에요"는 시스템 [충돌](ko.BSOD.md), [응답 없음](https://ko.wikipedia.org/wiki/프리징_(컴퓨팅)), 그리고 [메모리 누수](https://ko.wikipedia.org/wiki/메모리_누수)를 의도적으로 일으키는 [Sysinternals](ko.Sysinternals.md) 유틸리티 프로그램이다. 재미있는 사실은 이러한 문제를 일으키는 범인은 정말 따로 존재하는 데 바로 `myfault.sys` 드라이버이다. GUI 또는 명령어로 실행할 수 있는 프로그램이며, 반드시 관리자 권한으로 실행되어야 한다.
+[NotMyFault](https://learn.microsoft.com/en-us/sysinternals/downloads/notmyfault), 직역하자면 "제가 한 게 아니에요"는 시스템 [충돌](ko.BSOD.md), [응답 없음](https://ko.wikipedia.org/wiki/프리징_(컴퓨팅)), 그리고 [메모리 누수](https://ko.wikipedia.org/wiki/메모리_누수)를 의도적으로 일으키는 [Sysinternals](ko.Sysinternals.md) 유틸리티 프로그램이다. 재미있는 사실은 이러한 문제를 일으키는 범인은 정말 따로 존재하는 데 바로 myfault.sys 드라이버이다. GUI 또는 명령어로 실행할 수 있는 프로그램이며, 반드시 관리자 권한으로 실행되어야 한다.
 
-> 명령어 버전의 유티릴티는 뒤에 알파벳 'c'가 붙는 `notmyfaultc.exe` 프로그램으로 충돌 및 프리징 증상을 일으킨다.
+> 명령어 버전의 유티릴티는 notmyfaultc.exe 프로그램으로 충돌 및 프리징 증상을 일으킨다.
 
 <table style="table-layout: fixed; width: 100%; margin: auto;">
 <caption style="caption-side: top;">NotMyFault 어플리케이션 화면</caption>
@@ -40,7 +40,7 @@ notmyfaultc crash crash_type_num
 <caption style="caption-side: top;">NotMyFault 응답 없음 선택지</caption>
 <thead><tr><th style="text-align: center;">선택지</th><th style="text-align: center;">대상</th><th style="text-align: center;">증상</th></tr></thead>
 <tbody>
-<tr><td style="text-align: center; width: 20%">Hang with <a href="https://en.wikipedia.org/wiki/I/O_request_packet">IRP</a></td><td style="text-align: center; width: 20%">드라이버</td><td><code>myfault.sys</code> 드라이버를 먹통으로 만들어 시스템 충돌도 일으킬 수 없다.</td></tr>
+<tr><td style="text-align: center; width: 20%">Hang with <a href="https://en.wikipedia.org/wiki/I/O_request_packet">IRP</a></td><td style="text-align: center; width: 20%">드라이버</td><td>myfault.sys 드라이버를 먹통으로 만들어 시스템 충돌도 일으킬 수 없다.</td></tr>
 <tr><td style="text-align: center; width: 20%">Hang with <a href="ko.Processor.md#지연-프로시저-호출">DPC</a></td><td style="text-align: center; width: 20%">시스템</td><td>시스템 자체가 아무런 반응이 없어 강제 종료 혹은 <a href="ko.BSOD.md#강제-시스템-충돌">시스템 충돌</a>을 일으켜야 한다.</td></tr>
 <tr><td style="text-align: center; width: 20%"><a href="https://ko.wikipedia.org/wiki/교착_상태">Deadlock</a></td><td style="text-align: center; width: 20%">어플리케이션</td><td>어플리케이션 자체가 아무런 반응이 없으며 <a href="ko.Process.md">프로세스</a> 강제 종료도 되지 않는다.</td></tr>
 </tbody>
