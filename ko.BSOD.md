@@ -142,9 +142,7 @@ CrashControl 레지스트리 키의 값들은 아래 "시작 및 복구(Startup 
 ![시작 및 복구 다이얼로그 창](./images/bsod_startup_recovery.png)
 
 ### 덤프 로그
-DumpStack.log 파일은 덤프가 수집되는 과정을 로그로 기록한 파일이며, 페이징 파일이 위치한 드라이브에 생성된다. 다음은 `EnableLogFile` 및 `DumpLogLevel` 레지스트리 값을 활성화하였을 때 기록된 DumpStack.log 내용의 일부를 보여준다.
-
-> `DumpLogLevel` 비활성화 시, DumpStack.log에는 *WriteBitmapDump: page written = ###, MB per sec = ###* 내용이 누락된다.
+DumpStack.log 파일은 덤프가 수집되는 과정을 로그로 기록한 파일이며, 페이징 파일이 위치한 드라이브에 생성된다. 다음은 CrashControl의 `EnableLogFile` 값을 활성화하였을 때 기록된 DumpStack.log 내용의 일부를 보여준다.
 
 ```
 DLOGFILE00010000DUMPù!          
@@ -167,50 +165,37 @@ Finish write of bitmap dump header.
 Starting write of memory dump data.
 Elapsed BugCheck duration 00005274ms
 Dumping physical memory to disk:  0% 
-WriteBitmapDump: pages written = 52505, MB per sec = 41.
 Dumping physical memory to disk:  5% 
-WriteBitmapDump: pages written = 52480, MB per sec = 42.
 Dumping physical memory to disk:  10% 
-WriteBitmapDump: pages written = 52320, MB per sec = 49.
 Dumping physical memory to disk:  15% 
-WriteBitmapDump: pages written = 52480, MB per sec = 52.
 Dumping physical memory to disk:  20% 
-WriteBitmapDump: pages written = 52320, MB per sec = 46.
 Dumping physical memory to disk:  25% 
-WriteBitmapDump: pages written = 52480, MB per sec = 233.
 Dumping physical memory to disk:  30% 
-WriteBitmapDump: pages written = 52320, MB per sec = 192.
 Dumping physical memory to disk:  35% 
-WriteBitmapDump: pages written = 52480, MB per sec = 233.
 Dumping physical memory to disk:  40% 
-WriteBitmapDump: pages written = 52480, MB per sec = 237.
 Dumping physical memory to disk:  45% 
-WriteBitmapDump: pages written = 52320, MB per sec = 234.
 Dumping physical memory to disk:  50% 
-WriteBitmapDump: pages written = 52480, MB per sec = 232.
 Dumping physical memory to disk:  55% 
-WriteBitmapDump: pages written = 52320, MB per sec = 233.
 Dumping physical memory to disk:  60% 
-WriteBitmapDump: pages written = 52480, MB per sec = 235.
 Dumping physical memory to disk:  65% 
-WriteBitmapDump: pages written = 52320, MB per sec = 221.
 Dumping physical memory to disk:  70% 
-WriteBitmapDump: pages written = 52480, MB per sec = 233.
 Dumping physical memory to disk:  75% 
-WriteBitmapDump: pages written = 52480, MB per sec = 49.
 Dumping physical memory to disk:  80% 
-WriteBitmapDump: pages written = 52320, MB per sec = 50.
 Dumping physical memory to disk:  85% 
-WriteBitmapDump: pages written = 52480, MB per sec = 79.
 Dumping physical memory to disk:  90% 
-WriteBitmapDump: pages written = 52320, MB per sec = 115.
 Dumping physical memory to disk:  95% 
-WriteBitmapDump: pages written = 52394, MB per sec = 52.
 Dumping physical memory to disk:  100% 
 Finish write of bitmap dump data. Total pages:1048259 Pages written:1048259
 Dump ended at UTC: 2023/05/22 05:16:03, local time: 2023/05/21 22:16:03.
 Elapsed BugCheck duration 00053316ms
 Dump completed successfully.
+```
+
+만일 `DumpLogLevel` 값도 함께 활성화 되었을 시, 덤프 수집 진행률 외에 저장된 페이지 및 초당 MB 수치가 구체적으로 기록된다.
+
+```
+Dumping physical memory to disk:  ##% 
+WriteBitmapDump: page written = 52505, MB per sec = 41.
 ```
 
 ## 전용 덤프
