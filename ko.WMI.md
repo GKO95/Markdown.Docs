@@ -17,18 +17,18 @@ WBEM은 아래에서 소개되는 [CIM](#일반-정보-모델) 및 [WS-MAN](#웹
 
 CIM 표준은 다음 내용들을 소개한다:
 
-* **CIM 기반 구조 사양 (CIM Infrastructure Specification)**
+* **[CIM 스키마](https://en.wikipedia.org/wiki/CIM_Schema)(CIM Schema)**
 
-    CIM 구조 및 개념을 정의한다: 다른 정보 모델(예를 들어 [SNMP](https://ko.wikipedia.org/wiki/간이_망_관리_프로토콜))하고 매핑되는 방법과 CIM 스키마가 정의된 언어가 무엇인지 등을 내포한다. CIM 구조는 객체 지향으로써 IT 환경의 구성요소와 이들의 관계성을 각각 CIM [클래스](ko.Csharp.md#클래스) 및 [연관](https://en.wikipedia.org/wiki/Association_(object-oriented_programming))으로 나타내고, [상속](ko.Csharp.md#상속)을 활용하여 파생 CIM 클래스 정의도 가능케 한다.
+    IT 환경 내에서 운영되는 장비, 하드웨어, 소프트웨어 등의 요소들을 정의한 [CIM 클래스](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/cim-wmi-provider)들의 집합체이다. CIM 클래스는 하드웨어 종류나 소프트웨어 유형마다 이들을 잘 반영하는 대표되는 데이터 모형을 제공하는, 즉 프로그래밍 언어의 [클래스](ko.Csharp.md#클래스)와 동일한 개념이다. [운영체제](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/cim-operatingsystem), [프로세스](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/cim-process), [네트워크 어댑터](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/cim-networkadapter), [프린터](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/cim-printer), 심지어 [쿨링팬](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/cim-fan) 등도 CIM 클래스로 정의되며, 실제 장비나 프로그램들은 CIM 클래스로부터 객체화된 CIM 인스턴스(CIM instance)라고 부른다.
 
-* **[CIM 스키마](https://en.wikipedia.org/wiki/CIM_Schema) (CIM Schema)**
+* **CIM 기반 구조 사양(CIM Infrastructure Specification)**
 
-    IT 환경 내에서 운영되는 요소들의 공통 기반을 나타낸 특정 객체들의 집합과 이들의 관계를 정의하는 개념적 [스키마](https://ko.wikipedia.org/wiki/XML_스키마_(W3C))이다. 오늘날 IT 환경에서 사용되는 컴퓨터 시스템([`CIM_ComputerSystem`](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/cim-computersystem)), 운영 체계([`CIM_OperatingSystem`](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/cim-operatingsystem)), 프로세스([`CIM_Process`](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/cim-process)), 네트워크, 미들웨어, 보조 기억 장치 등 대부분의 요소를 다룬다. 제품 및 제조사에 특화된 기능도 함께 반영될 수 있도록 확장성을 지원한다.
+    CIM 구조 및 개념을 정의한다: 다른 정보 모델(예를 들어 [SNMP](https://ko.wikipedia.org/wiki/간이_망_관리_프로토콜))하고 매핑되는 방법과 CIM 스키마가 정의된 언어가 무엇인지 등을 내포한다. CIM 구조는 객체 지향으로써 IT 환경의 구성요소와 이들의 관계성을 각각 CIM 클래스 및 [연관](https://en.wikipedia.org/wiki/Association_(object-oriented_programming))으로 나타내고, [상속](ko.Csharp.md#상속)을 활용하여 파생 CIM 클래스 정의도 가능케 한다.
 
 ### 웹 서비스 관리
 [웹 서비스 관리](https://learn.microsoft.com/en-us/windows/win32/winrm/ws-management-protocol)(Web Service-Management), 일명 WS-Management 혹은 WS-MAN은 서버, 장치, 어플리케이션 그리고 다양한 [웹 서비스](https://ko.wikipedia.org/wiki/웹_서비스)를 관리하기 위한 [SOAP](https://ko.wikipedia.org/wiki/SOAP)(Simple Object Access Protocol; 단순 객체 접근 프로토콜) 기반의 프로토콜이다. WS-MAN은 시스템이 IT 인프라를 거쳐 운영 정보를 접근 및 교환할 수 있도록 하는 일반적인 방법을 제시한다.
 
-# WMI 명령
+# WMI 상호작용
 다음은 [WMI](#wmi) 인터페이스를 제공하여 로컬 혹은 원격 시스템의 관리 정보 등을 불러올 수 있도록 하는 도구들을 목록이다.
 
 * [WMI 명령줄 유틸리티](https://learn.microsoft.com/en-us/windows/win32/wmisdk/wmic)(WMI command-line utility; WMIC); [윈도우 10](https://ko.wikipedia.org/wiki/윈도우_10), [버전 21H2](https://ko.wikipedia.org/wiki/윈도우_10_버전_역사#21H2) 및 반기 채널 업데이트의 윈도우 서버부터 더이상 장려되지 않는다.
@@ -36,7 +36,7 @@ CIM 표준은 다음 내용들을 소개한다:
     * WMI cmdlet: [Microsoft.PowerShell.Management](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management) 모듈의 일부로 WMI에 대한 명령을 제공한다.
     * CIM cmdlet: [CimCmdlets](https://learn.microsoft.com/en-us/powershell/module/cimcmdlets) 모듈에서 (WMI를 포함한) [CIM](#일반-정보-모델)을 지원하는 WMI cmdlet의 상위호환이다.
 
-아래 예시는 운영체제 빌드 번호를 확인하기 위해 CIM 서버, 즉 [winmgmt](#wmi) [서비스](ko.Service.md)로부터 [Win32_OperatingSystem](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem) [클래스](https://learn.microsoft.com/en-us/windows/win32/wmisdk/retrieving-a-class) 인스턴스를 살펴보는 명령이다.
+아래 예시는 운영체제 빌드 번호를 확인하기 위해 CIM 서버, 즉 [winmgmt](#wmi) [서비스](ko.Service.md)로부터 [Win32_OperatingSystem](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem) [클래스](https://learn.microsoft.com/en-us/windows/win32/wmisdk/retrieving-a-class) 인스턴스를 반환받는 방법을 WMIC와 파워셸의 CimCmdlets 모듈을 사용하여 비교한다.
 
 <table style="width: 95%; margin: auto;"><caption style="caption-side: top;">WMI 명령 유티릴티 비교</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">WMIC</th><th style="text-align: center;">파워셸 CimCmdlets</th></tr></thead><tbody><tr style="vertical-align: top;"><td>
 
@@ -61,3 +61,5 @@ BuildNumber
 22621
 ```
 </td></tr></tbody></table>
+
+본 문서는 파워셸의 CimCmdlets 모듈을 활용한 명령을 위주로 WMI 상호작용 예시를 보여준다.
