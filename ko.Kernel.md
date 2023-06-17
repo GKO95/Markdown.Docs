@@ -86,7 +86,7 @@ Executive는 특정 작업을 수행하는 여러 구성원들로 이루어진 n
 </table>
 
 ## 하드웨어 추상 계층
-하드웨어 추상 계층(Hardware Abstraction Layer; HAL)은 하드웨어 이식성을 구현하는데 핵심되는 구성요소이며, hal.dll 라이브러리에 정의되어 NT 커널 이미지 ntoskrnl.exe에 로드된다. HAL의 역할은 윈도우가 [부팅](ko.Boot.md)된 하드웨어 플랫폼의 CPU, 메모리, 디스크 등의 구성요소들로부터 기능을 수행하기 위해 필요한 저급 인터페이스를 kernel에 제공한다.
+[하드웨어 추상 계층](https://ko.wikipedia.org/wiki/하드웨어_추상화)(Hardware Abstraction Layer; HAL)은 하드웨어 이식성을 구현하는데 핵심되는 구성요소이며, hal.dll 라이브러리에 정의되어 NT 커널 이미지 ntoskrnl.exe에 로드된다. HAL의 역할은 윈도우가 [부팅](ko.Boot.md)된 하드웨어 플랫폼의 CPU, 메모리, 디스크 등의 구성요소들로부터 기능을 수행하기 위해 필요한 저급 인터페이스를 kernel에 제공한다.
 
 > [윈도우 10, 버전 2004](https://en.wikipedia.org/wiki/Windows_10,_version_2004) (코드네임: 20H1) 빌드부터 HAL은 ntoskrnl.exe 안에 포함(혹은 정적 링크)되었으며, DLL은 하위호환을 위해 남겨둔 상태이다.
 
