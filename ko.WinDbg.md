@@ -7,7 +7,7 @@ title: 윈도우 디버거
 
 > 만일 윈도우 7 혹은 8.1 운영체제를 사용하거나, 혹은 Preview가 아닌 버전을 설치하려면 윈도우 [SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-sdk/)를 통해 설치를 진행한다.
 
-![WinDbg의 간단한 활용 예시: Surface Pro X에서 생성된 <a href="ko.Dump.md#커널-모드-덤프">커널 덤프</a> 분석](./images/windbg_bugcheck_sample.png)
+![WinDbg의 간단한 활용 예시: Surface Pro X에서 생성된 <a href="ko.Dump.md#커널-모드-덤프">커널 덤프</a> 분석](./images/windbg_bugcheck_d1.png)
 
 WinDbg는 흔히 어플리케이션 충돌이나 [블루스크린](ko.BSOD.md)으로 생성된 [덤프](ko.Dump.md) 파일을 분석하는 데 사용되며, 그 외에도 실시간 디버깅 및 TTD (Time Travel Debugging; 시간여행 디버깅) 등이 가능하다. 단, WinDbg는 [근본적인 원인 분석](https://en.wikipedia.org/wiki/Root_cause_analysis)을 위한 보조 도구에 불과하며 윈도우에서 발생한 모든 문제를 해결해 주는 게 아니다. 덤프에 남겨진 단서로부터 논리적이고 체계적인 방법론을 동원하여 합리적인 견해를 주장 및 조치 방안을 제시할 수 있어야 한다.
 
