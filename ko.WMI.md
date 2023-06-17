@@ -36,7 +36,7 @@ CIM 표준은 다음 내용들을 소개한다:
     * WMI cmdlet: [Microsoft.PowerShell.Management](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management) 모듈의 일부로 WMI에 대한 명령을 제공한다.
     * CIM cmdlet: [CimCmdlets](https://learn.microsoft.com/en-us/powershell/module/cimcmdlets) 모듈에서 (WMI를 포함한) [CIM](#일반-정보-모델)을 지원하는 WMI cmdlet의 상위호환이다.
 
-아래 예시는 운영체제 빌드 번호를 확인하기 위해 CIM 서버, 즉 [winmgmt](#wmi) [서비스](ko.Service.md)로부터 [Win32_OperatingSystem](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem) [클래스](https://learn.microsoft.com/en-us/windows/win32/wmisdk/retrieving-a-class) 인스턴스를 확인하는 명령이다.
+아래 예시는 운영체제 빌드 번호를 확인하기 위해 CIM 서버, 즉 [winmgmt](#wmi) [서비스](ko.Service.md)로부터 [Win32_OperatingSystem](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem) [클래스](https://learn.microsoft.com/en-us/windows/win32/wmisdk/retrieving-a-class) 인스턴스를 살펴보는 명령이다.
 
 <table style="width: 95%; margin: auto;"><caption style="caption-side: top;">WMI 명령 유티릴티 비교</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">WMIC</th><th style="text-align: center;">파워셸 CimCmdlets</th></tr></thead><tbody><tr style="vertical-align: top;"><td>
 
