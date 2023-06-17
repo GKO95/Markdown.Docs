@@ -52,3 +52,8 @@ title: 윈도우 NT
 * [성능 모니터](ko.Performance_Monitor.md)
 * [이벤트 뷰어](ko.Event_Viwer.md)
 * [파워셸](ko.PowerShell.md)
+
+# 기타 프로그램
+* [Sysinternals](ko.Sysinternals.md)
+* [WinDbg](ko.WinDbg.md)
+* [Dependency Walker](http://www.dependencywalker.com/)
