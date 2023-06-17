@@ -194,7 +194,7 @@ Dump completed successfully.
 만일 `DumpLogLevel` 값도 함께 활성화 되었을 시, 덤프 수집 진행률 외에 저장된 페이지 및 초당 MB 수치가 구체적으로 기록된다.
 
 ```
-Dumping physical memory to disk:  ##% 
+Dumping physical memory to disk:  0% 
 WriteBitmapDump: page written = 52505, MB per sec = 41.
 ```
 
