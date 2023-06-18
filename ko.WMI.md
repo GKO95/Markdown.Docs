@@ -13,13 +13,17 @@ title: 윈도우 관리 도구
 WBEM은 아래에서 소개되는 [CIM](#일반-정보-모델) 및 [WS-MAN](#웹-서비스-관리) 표준들로부터 비롯되었다.
 
 ### 일반 정보 모델
-[일반 정보 모델](https://ko.wikipedia.org/wiki/일반_정보_모델_(컴퓨팅))(Common Information Model), 일명 CIM은 [데스크탑](https://ko.wikipedia.org/wiki/워크스테이션), [네트워크 라우터](https://ko.wikipedia.org/wiki/라우터), [어플리케이션](https://ko.wikipedia.org/wiki/응용_소프트웨어) 등 기업의 IT 환경을 구성하여 운영되는 요소들을 일반적인 [객체 지향 데이터](https://ko.wikipedia.org/wiki/객체_(컴퓨터_과학))로 반영한 모델이다. 단순히 운영정보 교환에 그치지 않으며, 이들을 적극적으로 제어하고 관리할 수 있는 기능을 함께 제공한다. CIM의 공통 모델이 적용된 요소들은 하나의 IT 환경 관리 소프트웨어로도 복잡하거나 무거운 변환 작업 또는 정보의 손실 없이도 다양한 구성들과 상호작용이 가능하다.
+[일반 정보 모델](https://learn.microsoft.com/en-us/windows/win32/wmisdk/common-information-model)(Common Information Model), 일명 CIM은 [데스크탑](https://ko.wikipedia.org/wiki/워크스테이션), [네트워크 라우터](https://ko.wikipedia.org/wiki/라우터), [어플리케이션](https://ko.wikipedia.org/wiki/응용_소프트웨어) 등 기업의 IT 환경을 구성하여 운영되는 요소들을 일반적인 [객체 지향 데이터](https://ko.wikipedia.org/wiki/객체_(컴퓨터_과학))로 반영한 모델이다. 단순히 운영정보 교환에 그치지 않으며, 이들을 적극적으로 제어하고 관리할 수 있는 기능을 함께 제공한다. CIM의 공통 모델이 적용된 요소들은 하나의 IT 환경 관리 소프트웨어로도 복잡하거나 무거운 변환 작업 또는 정보의 손실 없이도 다양한 구성들과 상호작용이 가능하다.
 
 CIM 표준은 다음 내용들을 소개한다:
 
 * **[CIM 스키마](https://en.wikipedia.org/wiki/CIM_Schema)(CIM Schema)**
 
     IT 환경 내에서 운영되는 장비, 하드웨어, 소프트웨어 등의 요소들을 정의한 [CIM 클래스](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/cim-wmi-provider)들의 집합체이다. CIM 클래스는 하드웨어 종류나 소프트웨어 유형마다 이들을 잘 반영하는 대표되는 데이터 모형을 제공하는, 즉 프로그래밍 언어의 [클래스](ko.Csharp.md#클래스)와 동일한 개념이다. [운영체제](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/cim-operatingsystem), [프로세스](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/cim-process), [네트워크 어댑터](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/cim-networkadapter), [프린터](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/cim-printer), 심지어 [쿨링팬](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/cim-fan) 등도 CIM 클래스로 정의되며, 실제 장비나 프로그램들은 CIM 클래스로부터 객체화된 CIM 인스턴스(CIM instance)라고 부른다.
+
+    * *[Win32 스키마](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-provider)*
+
+        CIM 스키마에서 파생되어 Win32 환경에 최적화된 클래스들을 제공한다. CIM과 Win32 스키마는 각각 `CIM_` 그리고 `Win32_` 접두사로 구분된다. 예를 들어 [Win32 운영체제 클래스](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem)는 CIM 운영체제 클래스에서 파생되었으나, 빌드 번호 등의 윈도우 운영체제를 반영하는 속성들이 추가되었다.
 
 * **CIM 기반 구조 사양(CIM Infrastructure Specification)**
 
