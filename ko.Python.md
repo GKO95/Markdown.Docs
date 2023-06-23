@@ -405,10 +405,10 @@ print(str(3.14))        # 출력: '3.14'
 들여쓰기의 여부에 따라 코드의 내용이 완전히 변경될 수 있으므로 주의해야 한다.
 
 # 제어문
-제어문(control statement)는 코드 실행을 제어하는 문장을 가리키며, 파이썬 프로그래밍에서는 대표적으로 조건문, 반복문, 그리고 이동문이 존재한다.
+제어문(control statement)은 코드 실행을 제어하는 문장을 가리키며, 프로그래밍에 있어 기초적이면서 가장 흔히 사용되는 코드 유형 중 하나이다. 제어문을 크게 세 분류로 나누면 [조건문](#조건문), [반복문](#반복문), 그리고 [이동문](#이동문)이 존재한다.
 
 ## 조건문
-조건문(conditional statement)은 프로그래밍에 주어진 조건의 논리에 따라서 코드 실행 여부를 결정하는 제어문이다.
+조건문(conditional statement)은 주어진 조건의 논리에 따라서 코드 실행 여부를 결정하는 제어문이다:
 
 ### `if` 조건문
 [`if`](https://docs.python.org/3/reference/compound_stmts.html#the-if-statement) 조건문은 조건 혹은 논리가 참(`True`)일 경우 코드를 실행하며, 거짓(`False`)일 경우에는 코드를 실행하지 않는다.
@@ -471,7 +471,7 @@ match argument:
 `match` 조건문은 타 프로그래밍 언어에서 소개되는 `switch` 조건문과 유사한 구조와 동작을 수행한다. 그러나 몇 가지 차이점이 있다면 `case` 문의 코드가 실행된 이후에 자동적으로 `match` 조건문이 종료되어 별도의 [`break`](#break-문) 문이 필요하지 않다. 또한 패턴 뒤에 `if` 문을 기입하는 감시(guard) 표현식으로 부가적인 조건 일치여부를 거칠 수 있다.
 
 ## 반복문
-반복문(loop statement)은 프로그래밍에 주어진 조건의 논리에 따라서 코드를 얼마나 반복적으로 실행할 것인지 결정하는 제어문이다.
+반복문(loop statement)은 주어진 조건의 논리에 따라서 코드를 얼마나 반복적으로 실행할 지 결정하는 제어문이다:
 
 ### `while` 반복문
 [`while`](https://docs.python.org/3/reference/compound_stmts.html#the-while-statement) 반복문은 조건 혹은 논리가 참(`True`)일 동안 코드를 반복적으로 실행하며, 거짓(`False`)일 경우에는 반복문을 종료한다.
@@ -544,7 +544,7 @@ else:
 ```
 
 ## 이동문
-이동문(jump statement)은 코드 실행 지점을 이동시키는 무조건 제어문이다.
+이동문(jump statement)은 아무런 조건이 필요없이 코드 실행 지점을 이동시키는 제어문이다:
 
 ### `break` 탈출문
 [`break`](https://docs.python.org/3/reference/simple_stmts.html#break) 탈출문은 반복문을 조기 종료시키기 위해 사용된다.
