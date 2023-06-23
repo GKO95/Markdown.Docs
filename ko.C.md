@@ -309,3 +309,66 @@ char variable = 75;    // ASCII에 의해 문자 'K'가 저장
 ```
 
 거의 모든 프로그래밍 언어는 할당 기호를 기준으로 왼쪽에는 피할당자(변수), 오른쪽에는 할당자(데이터 혹은 변수)가 위치한다. 반대로 놓여질 경우, 오류가 발생하거나 원치 않는 결과가 도출될 수 있다.
+
+## 연산자
+연산자(operator)는 피연산 데이터를 조작할 수 있는 가장 간단한 형태의 연산 요소이다. 연산자는 피연산자의 접두부, 접미부, 혹은 두 데이터 사이에 위치시켜 사용한다. 가독성을 위해 데이터와 연산자 사이에 공백을 넣어도 연산에는 아무런 영향을 주지 않는다. 다음은 C 언어의 연산자들을 간략히 소개한다.
+
+* **[산술 연산자](https://en.cppreference.com/w/cpp/language/operator_arithmetic)(arithmetic operators)**
+    
+    정수나 부동소수점 자료형 산술 연산에 사용된다: 가장 기본적인 `+`, `-`, `*`, `/` 사칙 연산자부터 나눗셈의 나머지 `%`를 구할 수 있다.
+
+    * **증감 연산자**
+
+        [증가 연산자](https://en.cppreference.com/w/cpp/language/operator_incdec)(increment operator) `++` 및 [감소 연산자](https://en.cppreference.com/w/cpp/language/operator_incdec)(decrement operator) `--`는 데이터를 1만큼 증가 혹은 감소하는데 간략하게 한 줄로 표현한다.
+
+        <table style="width: 95%; margin: auto;"><caption style="caption-side: top;">증감 연산자의 위치에 따른 비교</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">접두부</th><th style="text-align: center;">접미부</th></tr></thead><tbody><tr><td>해당 변수를 1만큼 증가/감소시킨 다음에 표현식을 평가한다.</td><td>표현식을 평가한 다음에 해당 변수를 1만큼 증가/감소시킨다.</td></tr><tr><td>
+
+        ```c
+        x = ++y;    // 동일: { y = y + 1; x = y; }
+        x = --y;    // 동일: { y = y - 1; x = y; }
+        ```
+        </td><td>
+
+        ```c
+        x = y++;    // 동일: { x = y; y = y + 1; }
+        x = y--;    // 동일: { x = y; y = y - 1; }
+        ```
+        </td></tr></tbody></table>
+
+* **[비트 연산자](https://en.wikipedia.org/wiki/Bitwise_operations_in_C)(bitwise operators)**
+
+* **[비교 연산자](https://en.cppreference.com/w/cpp/language/operator_comparison)(relational operators)**
+
+    초과 `>`와 미만 `<`, 이상 `>=`과 이하 `<=`, 그리고 동일 `==`와 다름 `!=` 관계 부합 여부에 따라 논리적 참 혹은 거짓이 반환된다.
+
+* **[논리 연산자](https://en.cppreference.com/w/cpp/language/operator_logical)(logical operators)**
+
+    논리 자료형의 조합이 논리적으로 참인지 거짓인지 판별한다.
+
+    <table style="width: 75%; margin: auto;"><caption style="caption-side: top;">논리 연산자 목록</caption><colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">논리</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>&&</code></td><td style="text-align: center;">논리곱</td><td>모든 데이터가 참이면 1을 반환하고, 그렇지 않으면 0을 반환한다.</td></tr><tr><td style="text-align: center;"><code>||</code></td><td style="text-align: center;">논리합</td><td>하나 이상의 데이터가 참이면 1을 반환하고, 그렇지 않으면 0을 반환한다.</td></tr><tr><td style="text-align: center;"><code>!</code></td><td style="text-align: center;">보수</td><td>참을 거짓으로, 또는 거짓을 참으로 변환한다.</td></tr></tbody></table>
+
+* **[할당 연산자](https://en.cppreference.com/w/cpp/language/operator_assignment)(assignment operators)**
+
+    할당 기호와 조합하여 산술 및 비트 연산 코드를 더욱 간결하게 작성할 수 있도록 한다. 아래는 다양한 할당 연산자 중에서 일부를 선보인다.
+
+    <table style="width: 40%; margin: auto;"><caption style="caption-side: top;">할당 연산자 예시</caption><colgroup><col style=""/><col style=""/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>=</code></td><td>변수로 할당된 값이 반환된다.</td></tr><tr><td style="text-align: center;"><code>+=</code></td><td>
+
+    ```c
+    x += y;    // 동일: x = x + y;
+    ```
+    </td></tr><tr><td style="text-align: center;"><code>*=</code></td><td>
+
+    ```c
+    x *= y;    // 동일: x = x * y;
+    ```
+    </td></tr><tr><td style="text-align: center;"><code>&=</code></td><td>
+
+    ```c
+    x &= y;    // 동일: x = x & y;
+    ```
+    </td></tr><tr><td style="text-align: center;"><code><<=</code></td><td>
+
+    ```c
+    x <<= y;    // 동일: x = x << y;
+    ```
+    </td></tr></tbody></table>
