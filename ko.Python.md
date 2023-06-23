@@ -404,10 +404,13 @@ print(str(3.14))        # 출력: '3.14'
 
 들여쓰기의 여부에 따라 코드의 내용이 완전히 변경될 수 있으므로 주의해야 한다.
 
-# 조건
-조건문(conditional statement)은 프로그래밍에 주어진 조건의 논리에 따라서 코드 실행 여부를 결정하는 가장 흔히 사용되는 코드 문장(statement) 중 하나이다. 본 장에서는 파이썬 프로그래밍의 조건에 따라 실행하는 조건문에 대하여 소개한다.
+# 제어문
+제어문(control statement)는 코드 실행을 제어하는 문장을 가리키며, 파이썬 프로그래밍에서는 대표적으로 조건문, 반복문, 그리고 이동문이 존재한다.
 
-## `if` 조건문
+## 조건문
+조건문(conditional statement)은 프로그래밍에 주어진 조건의 논리에 따라서 코드 실행 여부를 결정하는 제어문이다.
+
+### `if` 조건문
 [`if`](https://docs.python.org/3/reference/compound_stmts.html#the-if-statement) 조건문은 조건 혹은 논리가 참(`True`)일 경우 코드를 실행하며, 거짓(`False`)일 경우에는 코드를 실행하지 않는다.
 
 ```python
@@ -418,36 +421,37 @@ if condition:
 if condition: ...
 ```
 
-### `else` 조건문
-`else` 조건문은 단독으로 사용될 수 없으며 반드시 `if` 조건문 이후에 사용되어야 한다. 조건부가 거짓(`False`)으로 판정되면 실행할 코드를 포함한다.
+* **`else` 조건문**
 
-```python
-if condition:
-    ...
-else:
-    ...
-```
+    단독으로 사용될 수 없으며 반드시 `if` 조건문 이후에 사용되어야 한다. 조건부가 거짓(`False`)으로 판정되면 실행할 코드를 포함한다.
 
-### `elif` 조건문
-`elif` 조건문은 `else`와 `if` 조건문의 조합으로 이전 조건이 거짓(`False`)일 때 새로운 조건을 제시한다.
+    ```python
+    if condition:
+        ...
+    else:
+        ...
+    ```
 
-```python
-if condition:
-    ...
-elif condition:
-    ...
-else:
-    ...
-```
+* **`elif` 조건문**
+    `else`와 `if` 조건문의 조합으로 이전 조건이 거짓(`False`)일 때 새로운 조건을 제시한다.
 
-## 조건 연산자
+    ```python
+    if condition:
+        ...
+    elif condition:
+        ...
+    else:
+        ...
+    ```
+
+### 조건 연산자
 조건 연산자(ternary operator)는 세 가지 인수만을 사용하여 조건문을 아래와 같이 간략하게 표현한다. 조건 연산자는 가독성을 감소시키므로 과용해서는 안되지만 변수 할당에 유용하다.
 
 ```python
 True_return if condition else False_return
 ```
 
-## `match` 조건문
+### `match` 조건문
 > 본 조건문은 파이썬 3.10부터 추가된 기능으로, 자세한 내용은 [PEP 643](https://www.python.org/dev/peps/pep-0634/)을 참고한다.
 
 [`match`](https://docs.python.org/3/reference/compound_stmts.html#the-match-statement) 조건문은 전달받은 인자를 `case`의 패턴과 일치하는지 비교하여 논리가 참일 경우 해당 지점부터 코드를 실행하며, 거짓일 경우에는 다음 `case`로 넘어간다. 그 중에서 밑줄 `_` 조건을 와일드카드(wildcard) 패턴이라 하여 무조건 실행되는 지점이다.
@@ -466,10 +470,10 @@ match argument:
 
 `match` 조건문은 타 프로그래밍 언어에서 소개되는 `switch` 조건문과 유사한 구조와 동작을 수행한다. 그러나 몇 가지 차이점이 있다면 `case` 문의 코드가 실행된 이후에 자동적으로 `match` 조건문이 종료되어 별도의 [`break`](#break-문) 문이 필요하지 않다. 또한 패턴 뒤에 `if` 문을 기입하는 감시(guard) 표현식으로 부가적인 조건 일치여부를 거칠 수 있다.
 
-# 반복
-반복문(loop statement)은 프로그래밍에 주어진 조건의 논리에 따라서 코드를 얼마나 반복적으로 실행할 것인지 결정하는 가장 흔히 사용되는 코드 문장(statement) 중 하나이다. 본 장에서는 파이썬 프로그래밍의 조건에 따라 실행하는 반복문에 대하여 소개한다.
+## 반복문
+반복문(loop statement)은 프로그래밍에 주어진 조건의 논리에 따라서 코드를 얼마나 반복적으로 실행할 것인지 결정하는 제어문이다.
 
-## `while` 반복문
+### `while` 반복문
 [`while`](https://docs.python.org/3/reference/compound_stmts.html#the-while-statement) 반복문은 조건 혹은 논리가 참(`True`)일 동안 코드를 반복적으로 실행하며, 거짓(`False`)일 경우에는 반복문을 종료한다.
 
 ```python
@@ -505,12 +509,6 @@ else:
 첫 번째 반복문...완료!
 ```
 
-### `break` 문
-[`break`](https://docs.python.org/3/reference/simple_stmts.html#break) 문(일명 탈출문)은 반복문을 조기 종료시키는데 사용된다. 반복 실행 도중에 탈출문을 마주치는 즉시 가장 인접한 반복문으로부터 탈출한다.
-
-### `continue` 문
-[`continue`](https://docs.python.org/3/reference/simple_stmts.html#continue) 문은 반복문의 나머지 실행문을 전부 건너뛰어 다시 반복문의 조건부로 돌아간다. `break`와 달리 반복문은 종료되지 않고 여전히 살아있다.
-
 ## `for` 반복문
 [`for`](https://docs.python.org/3/reference/compound_stmts.html#the-for-statement) 반복문은 유효한 범위 내에서 코드를 반복적으로 실행하고, 범위의 모든 값이 반복되면 종료한다.
 
@@ -543,6 +541,31 @@ else:
 ```
 ```terminal
 첫 번째 반복문...완료!
+```
+
+## 이동문
+이동문(jump statement)은 코드 실행 지점을 이동시키는 무조건 제어문이다.
+
+### `break` 탈출문
+[`break`](https://docs.python.org/3/reference/simple_stmts.html#break) 탈출문은 반복문을 조기 종료시키기 위해 사용된다.
+
+### `continue` 연속문
+[`continue`](https://docs.python.org/3/reference/simple_stmts.html#continue) 연속문은 반복문을 종료하지 않은 채 나머지 실행 코드를 전부 무시하고 반복문의 조건부로 되돌아간다.
+
+### `return` 반환문
+[`return`](https://docs.python.org/3/reference/simple_stmts.html#return) 반환문은 [함수](#함수)를 종료하면서 데이터를 반환한다. 하단에 코드가 남아 있음에도 불구하고 반환문이 실행되면 함수는 즉시 종료된다. 함수는 반환문을 반드시 필요로 하지 않으며, 이러한 경우에는 `None` 값이 반환되어 변수에 전달된다.
+
+```python
+# return 반환문이 있는 사용자 정의 함수
+def function():
+    print("Hello World!")
+    return 1 + 2
+    
+print(function())
+```
+```terminal
+Hello World!
+3
 ```
 
 # 이터러블
@@ -822,22 +845,6 @@ function()
     ```terminal
     반환: <function function at 0x0000027FB6A57160>
     ```
-
-### `return` 반환문
-[`return`](https://docs.python.org/3/reference/simple_stmts.html#return) 반환문은 함수로부터 데이터를 반환하는 함수 전용 문장이다. 반환문이 실행되면 하단에 코드가 남아 있음에도 불구하고 함수는 즉시 종료된다. 함수는 반환문을 반드시 필요로 하지 않으며, 이러한 경우에는 `None` 값이 반환되어 변수에 전달된다.
-
-```python
-# return 반환문이 있는 사용자 정의 함수
-def function():
-    print("Hello World!")
-    return 1 + 2
-    
-print(function())
-```
-```terminal
-Hello World!
-3
-```
 
 ### 지역 변수 및 전역 변수
 파이썬 프로그래밍 언어에서 변수가 코드 중에서 어디에 정의되었는지에 따라 두 가지의 종류로 구분된다.
