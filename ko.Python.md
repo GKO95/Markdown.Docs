@@ -1652,40 +1652,44 @@ py -3.8-32 -m pip
 # 가상환경
 만일 서로 다른 버전의 [패키지](#패키지)가 요구되는 다수의 프로젝트가 존재할 시, 상이하는 여러 버전의 패키지 설치가 불가하므로 다른 프로젝트를 작업할 때마다 버전을 새로 설치해야 하는 불편함이 존재한다. [가상환경](https://docs.python.org/3/glossary.html#term-virtual-environment)(virtual environment)은 파이썬 프로젝트의 런타임 환경을 다른 파이썬 프로젝트에 영향을 미치지 않도록 고립시키기 때문에, 문단에서 상시한 패키지 버전 충돌 문제가 나타나지 않으며 관리가 용이하다.
 
-다음은 명령은 파이썬 3에 기본적으로 제공하는 [`venv`](https://docs.python.org/3/library/venv.html) 패키지를 활용하여 가상환경을 생성한다. 
+다음은 명령은 파이썬 3에 기본적으로 제공하는 [`venv`](https://docs.python.org/3/library/venv.html) 패키지를 활용하여 가상환경을 생성한다. 아래 명령은 프로젝트 경로에 `.venv`라는 폴더를 생성하며, 가상환경을 통해 설치한 패키지들은 전부 해당 폴더에 저장된다.
 
 ```terminal
 py -m venv .venv
 ```
 
-위의 명령은 프로젝트 경로에 `.venv`라는 폴더를 생성하며, 가상환경을 통해 설치한 패키지들은 전부 해당 폴더에 저장된다.
-
-### 가상환경 활성
 가상환경에 패키지를 설치하려면 사용 중인 [터미널](https://ko.wikipedia.org/wiki/명령_줄_인터페이스)에 가상환경을 활성시켜야 한다. 가상환경을 활성화하지 않은 채 패키지를 설치하면 시스템 전역의 인터프리터에 패키지를 설치하게 된다.
 
-* **[명령 프롬프트](https://ko.wikipedia.org/wiki/Cmd.exe)**
+<table style="width: 90%; margin: auto;">
+<caption style="caption-side: top;">터미널에 따른 가상환경 활성/비활성 명령</caption>
+<colgroup><col style="width: 10%;"/><col style="width: 30%;"/><col style="width: 30%;"/><col style="width: 30%;"/></colgroup>
+<thead><tr><th/><th style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/Cmd.exe">명령 프롬프트</a></th><th style="text-align: center;"><a href="ko.PowerShell.md">파워셸</a></th><th style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/배시_(유닉스_셸)">Bash</a></th></tr></thead>
+<tbody><tr>
+<td style="text-align: center;">활성</td>
+<td>
 
-    ```terminal
-    .venv\Scripts\activate.bat
-    ```
+```terminal
+.venv\Scripts\activate.bat
+```
+</td><td>
 
-* **[PowerShell](https://ko.wikipedia.org/wiki/파워셸)**
+```powershell
+.venv/Scripts/activate.ps1
+```
+</td><td>
 
-    ```powershell
-    .venv/Scripts/activate.ps1
-    ```
-
-* **[Bash](https://ko.wikipedia.org/wiki/배시_(유닉스_셸))**
-
-    ```bash
-    source .venv/bin/activate
-    ```
-
-### 가상환경 비활성
-터미널에 활성화된 가상환경을 비활성화하려면 아래의 명령어를 입력한다.
+```bash
+source .venv/bin/activate
+```
+</td>
+</tr><tr>
+<td style="text-align: center;">비활성</td><td colspan="3">
 
 ```terminal
 deactivate
 ```
+</td></tr>
+</tbody>
+</table>
 
-이는 `.venv\Scripts\deactivate` 명령어를 입력하는 것과 동일하다. 만일 프로젝트 경로를 다른 위치로 옮기면 `deactivate` 명령어가 동작하지 않아 손수 경로를 찾아 `deactivate` 파일을 실행해야 한다.
+여기서 가상환경 비활성화에 입력한 명령은 `.venv\Scripts\deactivate`를 실행하는 것과 동일하다. 만일 프로젝트 경로를 다른 위치로 옮기면 `deactivate` 명령어가 동작하지 않아 손수 경로를 찾아 `deactivate` 파일을 실행해야 한다.
