@@ -223,7 +223,7 @@ WriteBitmapDump: page written = 52505, MB per sec = 41.
 본 장은 [윈도우 NT](ko.Windows.md) 운영체제에서 [BSOD](#블루스크린)가 나타나 [메모리 덤프](ko.Dump.md#커널-모드-덤프)가 생성되는 원리를 [설정 초기화](#설정-초기화), [시스템 충돌](#시스템-충돌), 그리고 [덤프 생성](#덤프-생성) 단계로 나누어 설명한다. 자세한 내용은 [Mark Russinovich](https://ko.wikipedia.org/wiki/마크_러시노비치)([Sysinternals](ko.Sysinternals.md) 공동 창시자)를 포함한 [마이크로소프트](https://www.microsoft.com/) 엔지니어들이 저자로 참여한 [*Windows Internals*](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) 도서를 읽어볼 것을 권장한다.
 
 ## 설정 초기화
-세션 관리자(Session Manager; smss.exe)는 시스템이 부팅되는 시점에 `HKLM\SYSTEM\CurrentControlSet\Control\CrashControl` (이하 CrashControl) 레지스트리 키의 값들을 읽어 BSOD가 발생할 경우 어떠한 동작을 취할 것인지, 그리고 덤프는 어떻게 수집할 것인지 설정을 시스템에 적용한다.
+[세션 관리자](https://ko.wikipedia.org/wiki/세션_관리자_하위_시스템)(Session Manager; smss.exe)는 시스템이 부팅되는 시점에 [ntoskrnl.exe](ko.Kernel.md#nt-커널)의 입출력 관리자를 통해 `HKLM\SYSTEM\CurrentControlSet\Control\CrashControl` (이하 CrashControl) 레지스트리 키의 값들을 읽는다. 이들을 토대로 BSOD가 발생할 경우 어떠한 동작을 취할 것인지, 그리고 덤프는 어떻게 수집할 것인지 설정을 시스템에 적용한다.
 
 > 위와 같은 이유로 CrashControl 레지스트리 키의 변경 사항을 시스템에 적용하려면 재부팅이 불가피하다.
 
