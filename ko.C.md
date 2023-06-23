@@ -93,7 +93,7 @@ C [런타임 라이브러리](https://ko.wikipedia.org/wiki/런타임_라이브�
 <caption style="caption-side: top;">C 표준 라이브러리의 헤더 파일</caption>
 <colgroup><col style="width: 18%;"/><col style="width: 12%;"/><col style="70%;"/></colgroup>
 <thead><tr><th style="text-align: center;">유형</th><th style="text-align: center;">헤더 파일</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody><tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/C_파일_입출력">표준 입출력</a></td><td style="text-align: center;"><code>stdio</code></td><td>파일 입출력 함수를 제공한다: <code>printf()</code>, <code>scanf()</code> 등</td></tr><tr><td style="text-align: center;">표준 라이브러리</td><td style="text-align: center;"><code>stdlib</code></td><td>메모리 할당, 예외처리를 포함한 범목적 기능들을 제공한다: <code>malloc()</code>, <code>free()</code> 등</td></tr><tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/C_날짜와_시간_함수">날짜 및 시간</a></td><td style="text-align: center;"><code>time</code></td><td>날짜 및 시간과 관련된 함수를 제공한다: <code>time()</code>, <code>clock()</code> 등</td></tr><tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/C_수식_함수">수식</a></td><td style="text-align: center;"><code>math</code></td><td>수학적 함수를 제공한다: <code>exp()</code>, <code>cos()</code> 등</td></tr></tbody>
+<tbody><tr><td style="text-align: center;"><a href="#파일-입출력">표준 입출력</a></td><td style="text-align: center;"><code>stdio</code></td><td>파일 입출력 함수를 제공한다: <code>printf()</code>, <code>scanf()</code> 등</td></tr><tr><td style="text-align: center;">표준 라이브러리</td><td style="text-align: center;"><code>stdlib</code></td><td>메모리 할당, 예외처리를 포함한 범목적 기능들을 제공한다: <code>malloc()</code>, <code>free()</code> 등</td></tr><tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/C_날짜와_시간_함수">날짜 및 시간</a></td><td style="text-align: center;"><code>time</code></td><td>날짜 및 시간과 관련된 함수를 제공한다: <code>time()</code>, <code>clock()</code> 등</td></tr><tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/C_수식_함수">수식</a></td><td style="text-align: center;"><code>math</code></td><td>수학적 함수를 제공한다: <code>exp()</code>, <code>cos()</code> 등</td></tr></tbody>
 </table>
 
 ### 컴파일된 헤더
@@ -383,6 +383,35 @@ printf("Hello,\nWorld!");
 Hello,
 World!
 ```
+
+# 파일 입출력
+C 언어의 [파일 입출력](https://ko.wikipedia.org/wiki/C_파일_입출력)(일명 I/O)은 [`stdio.h`](https://en.cppreference.com/w/cpp/header/cstdio) 헤더로부터 관련 함수들을 호출할 수 있으며, 단순 파일뿐만 아니라 터미널로부터 텍스트를 입력받거나 출력할 때에도 관여한다. C 언어의 파일 입출력은 다른 프로그래밍 언어에 비해 신경써야 할 부분이 많아 별도의 장을 마련하여 소개한다.
+
+<table style="width: 80%; margin: auto;">
+<caption style="caption-side: top;">C 언어의 파일 출력 함수</caption>
+<colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup>
+<thead><tr><th style="text-align: center;">출력 함수</th><th style="text-align: center;">설명</th></tr></thead>
+<tbody><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/io/putchar"><code>putchar</code></a></td><td>문자(character) 하나를 터미널에 출력한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/io/puts"><code>puts</code></a></td><td>일련의 문자들, 일명 <a href="#문자열">문자열</a>을 터미널에 출력한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/io/c/fprintf"><code>printf</code></a></td><td><a href="#형식-지정자">형식 지정자</a>에 따라 데이터를 터미널에 출력한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/io/c/fprintf"><code>fprintf</code></a></td><td><a href="https://ko.wikipedia.org/wiki/스트림_(컴퓨팅)">스트림</a>을 지정할 수 있는 출력 함수이다; <code>printf</code>는 표준 스트림의 <code>fprintf(<a href="https://ko.wikipedia.org/wiki/표준_스트림">stdout</a>)</code>과 동일하다.
+
+```c
+fprintf(stdout, "Number: %f", 3.14159);
+// Number: 3.141590
+```
+</td></tr></tbody>
+</table>
+
+<table style="width: 80%; margin: auto;">
+<caption style="caption-side: top;">C 언어의 파일 입력 함수</caption>
+<colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup>
+<thead><tr><th style="text-align: center;">입력 함수</th><th style="text-align: center;">설명</th></tr></thead>
+<tbody><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/io/getchar"><code>getchar</code></a></td><td>터미널로부터 문자(character) 하나를 입력받아 반환한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/io/gets"><code>gets</code></a></td><td>터미널로부터 입력받은 텍스트를 매개변수로부터 <a href="#문자열">문자열</a> <a href="#변수">변수</a>에 전달한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/io/c/fscanf"><code>scanf</code></a></td><td>터미널로부터 입력받은 텍스트를 <a href="#형식-지정자">형식 지정자</a>에 따른 데이터로 변환하여 변수에 전달한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/io/c/fscanf"><code>fscanf</code></a></td><td><a href="https://ko.wikipedia.org/wiki/스트림_(컴퓨팅)">스트림</a>을 지정할 수 있는 입력 함수이다; <code>scanf</code>는 표준 스트림의 <code>fscanf(<a href="https://ko.wikipedia.org/wiki/표준_스트림">stdin</a>)</code>과 동일하다.
+
+```c
+char variable[32];
+fscanf(stdin, "%s", variable);
+```
+</td></tr></tbody>
+</table>
 
 # 제어문
 제어문(control statement)은 코드 실행을 제어하는 문장을 가리키며, 프로그래밍에 있어 기초적이면서 가장 흔히 사용되는 코드 유형 중 하나이다. 제어문을 크게 세 분류로 나누면 [조건문](#조건문), [반복문](#반복문), 그리고 [이동문](#이동문)이 존재한다.
