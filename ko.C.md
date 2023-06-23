@@ -5,6 +5,14 @@ title: C
 # C
 [C 언어](https://learn.microsoft.com/en-us/cpp/c-language/)는 [유닉스](https://ko.wikipedia.org/wiki/유닉스)(UNIX) 컴퓨터를 위한 소프트웨어 제작을 위해 개발된 [B 언어](https://ko.wikipedia.org/wiki/B_(프로그래밍_언어))의 후속작이다. 현재 C 언어는 가장 널리 사용되고 있는 프로그래밍 언어로 [C++](ko.Cpp.md), [C#](ko.Csharp.md), [파이썬](ko.Python.md), 자바 등 여러 프로그래밍 언어에 영향을 주었다. C 언어는 다른 프로그래밍 언어에 비해 매우 빠른 처리 속도와 훌륭한 호환성을 가지고 있어 소프트웨어 및 펌웨어 개발에 여전히 사용되고 있다.
 
+C 언어에 필요한 컴파일러는 흔히 소스 코드 편집, 프로그램 빌드, 그리고 디버깅 기능을 제공하는 [통합 개발 환경](https://ko.wikipedia.org/wiki/통합_개발_환경)(integrated development environment; IDE)을 설치하면 대체로 권장되는 [컴파일러](#컴파일러)가 함께 설치된다.
+
+> [비주얼 스튜디오 코드](https://code.visualstudio.com/)(Visual Studio Code; VS Code)는 엄연히 말해 "텍스트 편집기"이며, 아래의 IDE를 사용할 것을 권장한다.
+
+* [비주얼 스튜디오](https://visualstudio.microsoft.com/) <sub>(윈도우, macOS)</sub>
+* [엑스코드](https://developer.apple.com/xcode/) <sub>(macOS)</sub>
+* [CLion](https://www.jetbrains.com/clion/) <sub>(윈도우, macOS, 리눅스)</sub>
+
 ## 컴파일러
 C 언어는 [컴파일 언어](ko.Compiler.md)(compiled language)이다. C 컴파일러는 [국제 표준화 기구](https://www.iso.org/home.html)(International Organization for Standardization; ISO)에서 표준을 발표한 년도에 따라 버전이 나뉘어진다. 가장 널리 사용되고 있는 버전으로는 ANSI C(일명 C89)와 C99가 있다. 본 문서는 <span style="color: red;">*ANSI C 컴파일러 기준*</span>으로 C 언어를 설명한다.
 
@@ -13,15 +21,6 @@ C 언어는 [컴파일 언어](ko.Compiler.md)(compiled language)이다. C 컴�
 * [Microsoft Visual C++](https://ko.wikipedia.org/wiki/마이크로소프트_비주얼_C%2B%2B) (일명 MSVC): 마이크로소프트
 * [GNU C Compiler](https://ko.wikipedia.org/wiki/GNU_C_컴파일러) (일명 GCC): GNU 프로젝트
 * [Clang](https://ko.wikipedia.org/wiki/클랭): LLVM Developer Group, 애플
-
-## 설치
-C 언어에 필요한 컴파일러는 흔히 소스 코드 편집, 프로그램 빌드, 그리고 디버깅 기능을 제공하는 [통합 개발 환경](https://ko.wikipedia.org/wiki/통합_개발_환경)(integrated development environment; IDE)을 설치하면 대체로 권장되는 컴파일러가 함께 설치된다.
-
-> [비주얼 스튜디오 코드](https://code.visualstudio.com/)(Visual Studio Code; VS Code)는 엄연히 말해 "텍스트 편집기"이며, 아래의 IDE를 사용할 것을 권장한다.
-
-* [비주얼 스튜디오](https://visualstudio.microsoft.com/) <sub>(윈도우, macOS)</sub>
-* [엑스코드](https://developer.apple.com/xcode/) <sub>(macOS)</sub>
-* [CLion](https://www.jetbrains.com/clion/) <sub>(윈도우, macOS, 리눅스)</sub>
 
 ## 프로젝트
 다음은 비주얼 스튜디오 2022을 위주로 C 언어 프로젝트 구축에 대하여 설명한다.
@@ -52,7 +51,7 @@ int main() {
 }
 ```
 </td><td>
-<ul><li><code>#include &lt;stdio.h&gt;</code><br/>C 표준 입출력 라이브러리를 불러오며, 터미널에 텍스트를 출력하는 `printf()` <a href="#함수">함수</a>를 제공한다.</li><li><code>int main() { ... }</code><br/>C 언어가 시작되는 함수, 일명 <a href="#진입점">진입점</a>이다.</li><li><code>return 0;</code><br/>함수를 종료하며 0 값을 반환하는 데, 이는 <code>EXIT_SUCCESS</code>에 대응하며 성공적으로 프로그램이 종료되었음을 의미한다.</li></ul>
+<ul><li><code>#include &lt;stdio.h&gt;</code><br/>Stdio.h <a href="#헤더-파일">헤더 파일</a>로부터 C 표준 입출력 라이브러리를 불러오며, 터미널에 텍스트를 출력하는 <a href="#파일-입출력"><code>printf()</code></a> <a href="#함수">함수</a> 등을 제공한다.</li><li><code>int main() { ... }</code><br/>C 언어가 시작되는 함수, 일명 <a href="#진입점">진입점</a>이다.</li><li><code>return 0;</code><br/>함수를 종료하며 0 값을 반환하는 데, 이는 <code>EXIT_SUCCESS</code>에 대응하며 성공적으로 프로그램이 종료되었음을 의미한다.</li></ul>
 </td></tr></tbody>
 </table>
 
@@ -69,10 +68,43 @@ C [런타임 라이브러리](https://ko.wikipedia.org/wiki/런타임_라이브�
 
 ![비주얼 스튜디오 프로젝트에 <code>CRT_SECURE_NO_WARNINGS</code> 매크로 설정](./images/visual_studio_crt_warnings.png)
 
+## 헤더 파일
+[헤더 파일](https://ko.wikipedia.org/wiki/헤더_파일)(header file)은 데이터 및 기능의 존재를 알리는 역할을 하는 `.H` 확장자 파일이다. 통상적으로 헤더 파일은 동일한 이름의 소스 파일과 짝을 이루며, 소스 파일에서 작성된 데이터와 코드를 헤더 파일로 통해 다른 소스 파일에서도 사용할 수 있도록 한다. 헤더 파일을 불러오는 방식은 두 가지가 존재한다:
+
+```c
+#include <stdio.h>
+#include "header.h"
+```
+
+이 둘은 [전처리기](#전처리기)가 헤더 파일을 어느 위치에서 찾을 것인지 차이점을 가진다.
+
+* **`#include <header.h>`**
+    
+    컴파일러 혹은 IDE에서 지정한 경로를 위주로 헤더 파일을 찾으며, 일반적으로 시스템 헤더 파일에 사용된다.
+
+* **`#include "header.h"`**
+    
+    현재 소스 파일이 위치한 경로를 위주로 헤더 파일을 찾는다. 만일 찾지 못하였을 시, `#include <header.h>`와 같이 지정된 경로에서 헤더 파일을 재탐색한다. 일반적으로 사용자 정의 헤더 파일에 사용된다.
+
+
+아래는 프로그래밍 언어에서 흔히 사용되는 데이터와 기능들은 바로 사용할 수 있도록 미리 컴파일된 [표준 라이브러리](https://ko.wikipedia.org/wiki/C_표준_라이브러리)를 불러오는 헤더 파일 일부를 나열한다.
+
+<table style="width: 80%; margin: auto;">
+<caption style="caption-side: top;">C 표준 라이브러리의 헤더 파일</caption>
+<colgroup><col style="width: 18%;"/><col style="width: 12%;"/><col style="70%;"/></colgroup>
+<thead><tr><th style="text-align: center;">유형</th><th style="text-align: center;">헤더 파일</th><th style="text-align: center;">설명</th></tr></thead>
+<tbody><tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/C_파일_입출력">표준 입출력</a></td><td style="text-align: center;"><code>stdio</code></td><td>파일 입출력 함수를 제공한다: <code>printf()</code>, <code>scanf()</code> 등</td></tr><tr><td style="text-align: center;">표준 라이브러리</td><td style="text-align: center;"><code>stdlib</code></td><td>메모리 할당, 예외처리를 포함한 범목적 기능들을 제공한다: <code>malloc()</code>, <code>free()</code> 등</td></tr><tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/C_날짜와_시간_함수">날짜 및 시간</a></td><td style="text-align: center;"><code>time</code></td><td>날짜 및 시간과 관련된 함수를 제공한다: <code>time()</code>, <code>clock()</code> 등</td></tr><tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/C_수식_함수">수식</a></td><td style="text-align: center;"><code>math</code></td><td>수학적 함수를 제공한다: <code>exp()</code>, <code>cos()</code> 등</td></tr></tbody>
+</table>
+
+### 컴파일된 헤더
+[컴파일된 헤더](https://en.wikipedia.org/wiki/Precompiled_header)(precompiled header)는 컴파일러에서 더 빠른 속도로 처리할 수 있도록 중간체 형태로 컴파일된 헤더 파일이다. 컴파일 시간을 줄일 수 있는 장점을 가져 수많은 헤더 파일을 가진 프로젝트 혹은 큰 용량을 가진 헤더 파일에 효율적이다. 허나 컴파일된 헤더를 사용하면 컴파일 작업 자체에는 시간이 다소 걸리는 단점이 있어, 용량이 작은 프로젝트나 자주 수정을 해야 하는 헤더 파일이 있다면 컴파일된 헤더 파일은 오히려 비효율적이다.
+
+> MSVC 컴파일러의 경우 `pch.h`(비주얼 스튜디오 2017 이전에는 `stdafx.h`)가 해당한다.
+
 # 구문
 [구문](https://ko.wikipedia.org/wiki/구문_(프로그래밍_언어))(syntax)은 프로그래밍 언어에서 문자 및 기호들의 조합이 올바른 문장 또는 표현식을 구성하였는지 정의하는 규칙이다. 각 프로그래밍 언어마다 규정하는 구문이 다르며, 이를 준수하지 않을 시 해당 프로그램은 빌드되지 않거나, 실행이 되어도 오류 및 의도치 않은 동작을 수행한다.
 
-다음은 C 프로그래밍 언어에서 구문에 관여하는 요소들을 소개한다:
+다음은 C 언어에서 구문에 관여하는 요소들을 소개한다:
 
 * **[표현식](https://ko.wikipedia.org/wiki/식_(프로그래밍))(expression)**
     
@@ -101,6 +133,17 @@ C [런타임 라이브러리](https://ko.wikipedia.org/wiki/런타임_라이브�
     if (2 < 3) statement;      // 논리가 참이면 "statement" 문장 실행
     ```
 
+* **[블록](블록_(프로그래밍))(block)**
+
+    한 개 이상의 문장들을 한꺼번에 관리할 수 있도록 묶어놓은 소스 코드상 그룹이다. 블록 안에 또 다른 블록이 상주할 수 있으며, 이를 네스티드 블록(nested block)이라고 부른다. C 언어에서는 한 쌍의 중괄호 `{ }`로 표시된다.
+
+    ```c
+    {
+        int variable = 2 + 3;
+        if (2 < 3) statement;
+    }
+    ```
+
 ### 식별자
 [식별자](https://learn.microsoft.com/en-us/cpp/c-language/c-identifiers)(identifier)는 프로그램을 구성하는 데이터들을 구별하기 위해 사용되는 명칭이다. 즉, 식별자는 개발자가 데이터에 직접 붙여준 이름이다. C 프로그래밍 언어에서 식별자를 선정하는데 아래의 규칙을 지켜야 한다.
 
@@ -110,14 +153,14 @@ C [런타임 라이브러리](https://ko.wikipedia.org/wiki/런타임_라이브�
 4. [예약어](https://ko.wikipedia.org/wiki/예약어) 금지
 
 ### 주석
-[주석](https://doc.rust-lang.org/reference/comments.html)(comment)은 프로그램의 소스 코드로 취급하지 않아 실행되지 않는 영역이다. 흔히 코드에 대한 간단한 정보를 기입하기 위해 사용되는 데, C 언어에는 한줄 주석(line comments) 그리고 블록 주석(block comments)이 존재한다.
+[주석](https://doc.rust-lang.org/reference/comments.html)(comment)은 프로그램의 소스 코드로 취급하지 않아 실행되지 않는 영역이다. 흔히 코드에 대한 간단한 정보를 기입하기 위해 사용되는 데, C 언어에는 한줄 주석 그리고 블록 주석이 존재한다.
 
 <table style="table-layout: fixed; width: 80%; margin: auto;">
 <caption style="caption-side: top;">C 언어 주석 종류</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">한줄 주석(line comment)</th><th style="text-align: center;">블록 주석(block comment)</th></tr></thead>
+<thead><tr><th style="text-align: center;">한줄 주석</th><th style="text-align: center;">블록 주석</th></tr></thead>
 <tbody>
-<tr><td colspan="2">주석은 컴파일 직전에 <a href="#전처리기">전처리기</a>(preprocessor)에 의해 소스 코드에 제거된다. 즉, 실행 파일 안에는 주석의 어떠한 정보도 저장되지 않는다.</td></tr>
+<tr><td colspan="2">주석은 컴파일 직전에 <a href="#전처리기">전처리기</a>에 의해 소스 코드에 제거된다. 즉, 실행 파일 안에는 주석의 어떠한 정보도 저장되지 않는다.</td></tr>
 <tr style="vertical-align: top; overflow-wrap: break-word;"><td>
 
 ```c
@@ -136,7 +179,7 @@ C [런타임 라이브러리](https://ko.wikipedia.org/wiki/런타임_라이브�
 </table>
 
 ## 자료형
-[자료형](https://ko.wikipedia.org/wiki/자료형)(data type)은 데이터를 어떻게 표현할 지 결정하는 요소이며, C 프로그래밍 언어에서는 다음과 같이 존재한다. 단, 본 문서는 ANSI C 언어를 기준으로 소개하므로, 이후 C99부터 소개된 일부 자료형(`bool`, `long long` 등)은 목록에 제외되었다.
+[자료형](https://ko.wikipedia.org/wiki/자료형)(data type)은 데이터를 어떻게 표현할 지 결정하는 요소이며, C 언어에서는 다음과 같이 존재한다. 단, 본 문서는 ANSI C 언어를 기준으로 소개하므로, 이후 C99부터 소개된 일부 자료형(`bool`, `long long` 등)은 목록에 제외되었다.
 
 <table style="width: 80%; margin: auto;">
 <caption style="caption-side: top;"><a href="https://learn.microsoft.com/en-us/cpp/c-language/storage-of-basic-types">C 언어 자료형</a> (ANSI C 기준)</caption>
@@ -193,7 +236,7 @@ int variable = 3;
 
 정수 자료형 변수인 `variable`을 생성한 동시에 값 3을 할당하였는데, 변수로의 최초 할당을 "초기화(initialization)"라고 부른다.
 
-아래는 변수를 정의하는 과정에서 초기화를 나중에 하는 예시 코드이다. 한 번 정의된 변수는 컴파일러 측에서 이미 존재를 알고 있으므로, 이후 변수에 다른 데이터를 저장하거나 호출할 때 자료형을 함께 언급하지 않는다. 초기화되지 않은 변수를 호출하는 것은 변수에 연동된 메모리가 가공되지 않은 상태로 잠재적 위험을 초래할 수 있기 때문에, 일반적으로 C 프로그래밍 언어 컴파일러는 이를 오류로 치부한다.
+아래는 변수를 정의하는 과정에서 초기화를 나중에 하는 예시 코드이다. 한 번 정의된 변수는 컴파일러 측에서 이미 존재를 알고 있으므로, 이후 변수에 다른 데이터를 저장하거나 호출할 때 자료형을 함께 언급하지 않는다. 초기화되지 않은 변수를 호출하는 것은 변수에 연동된 메모리가 가공되지 않은 상태로 잠재적 위험을 초래할 수 있기 때문에, 일반적으로 C 언어 컴파일러는 이를 오류로 치부한다.
 
 ```c
 // 변수 "variable"의 정의
@@ -219,12 +262,45 @@ int variable1 = 3, variable2 = 4, variable3;
 
 > 위에서 소개한 키워드, 특히 `static` 및 `extern`은 차후 함수와 [라이브러리](#라이브러리)를 소개하면서 다시 설명할 예정이다.
 
-C/C++ 프로그래밍 언어 [ISO 표준](https://github.com/cplusplus/draft)의 § 6.2 Declarations and definitions 부문에 의하면 일반적인 변수의 선언은 정의와 동일하다고 간주한다. 단, 다음은 변수가 선언되었으나 정의되지 않은 예외를 나열한다:
+C/C++ 언어 [ISO 표준](https://github.com/cplusplus/draft)의 § 6.2 Declarations and definitions 부문에 의하면 일반적인 변수의 선언은 정의와 동일하다고 간주한다. 단, 다음은 변수가 선언되었으나 정의되지 않은 예외를 나열한다:
 
 * 함수 전방선언
 * 함수 매개변수 선언
 * `extern` 키워드 선언
 * `typedef` 선언
+
+변수가 소스 코드 중에서 어디에 정의되었는지에 따라 지역 변수와 전역 변수로 구분된다. 
+
+<table style="width: 95%; margin: auto;">
+<caption>C 언어의 지역 및 전역 변수</caption>
+<colgroup><col style="width: 50%;"/></col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;">지역 변수</th><th style="text-align: center;">전역 변수</th></tr></thead>
+<tbody><tr><td>
+
+```c
+int main () {
+
+    // 지역 변수
+    int variable;
+
+    return 0;
+}
+```
+</td><td>
+
+```c
+// 전역 변수
+int variable;
+
+int main() {
+
+    return 0;
+}
+```
+</td></tr>
+<tr><td>블록 내부에서 정의된 변수이다. 지역 변수에 저장된 데이터는 블록 밖에서는 소멸되므로 외부에서 사용할 수 없다.</td><td>어떠한 블록에도 속하지 않은 외부에 정의된 변수이다. 전역 변수는 어느 블록에서라도 호출하여 지역 변수와 함께 사용할 수 있다.</td></tr>
+</tbody>
+</table>
 
 변수는 지정된 자료형 외의 데이터를 할당받을 수 있다. 아래 예시 코드는 문자 자료형 변수에 값 75로 초기화할 시, ASCII 코드에 의하여 대문자 'K'로 저장된다.
 
