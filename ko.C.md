@@ -372,3 +372,199 @@ char variable = 75;    // ASCII에 의해 문자 'K'가 저장
     x <<= y;    // 동일: x = x << y;
     ```
     </td></tr></tbody></table>
+
+## 탈출 문자
+[탈출 문자](https://ko.wikipedia.org/wiki/이스케이프_문자)(escape character)는 백슬래시 기호 `\`를 사용하며, [문자열](#문자열)로부터 탈출하여 텍스트 데이터 내에서 특정 연산을 수행하도록 한다. 예시에서 `\n` 탈출 문자를 사용하여 문자열 줄바꿈을 구현한 것을 보여주었다.
+
+```c
+printf("Hello,\nWorld!");
+```
+```
+Hello,
+World!
+```
+
+# 제어문
+제어문(control statement)는 코드 실행을 제어하는 문장을 가리키며, C 언어에서는 대표적으로 조건문, 반복문, 그리고 이동문이 존재한다.
+
+## 조건문
+조건문(conditional statement)은 프로그래밍에 주어진 조건의 논리에 따라서 코드 실행 여부를 결정하는 제어문이다.
+
+### `if` 조건문
+[`if`](https://en.cppreference.com/w/c/language/if) 조건문은 조건 혹은 논리가 참일 경우 코드를 실행하며, 거짓일 경우에는 코드를 실행하지 않는다.
+
+```c
+if (condition) {
+    statements;
+}
+
+// 간략화된 문장
+if (condition) statement;
+```
+
+* **`else` 조건문**
+
+    단독으로 사용될 수 없으며 반드시 `if` 조건문 이후에 사용되어야 한다. 조건부가 거짓으로 판정되면 실행할 코드를 포함한다.
+
+    ```c
+    if (condition) {
+        statements;
+    }
+    else {
+        statements; 
+    }
+    ```
+
+* **`else if` 조건문**
+
+    `else`와 `if` 조건문의 조합으로 이전 조건이 거짓일 때 새로운 조건을 제시한다.
+
+    ```c
+    if (condition) {
+        statements;
+    }
+    else if (condition) {
+        statements;
+    }
+    else {
+        statements;
+    }
+    ```
+
+### 조건 연산자
+[조건 연산자](https://en.cppreference.com/w/c/language/operator_other#Conditional_operator)(ternary operator) `?:`는 세 가지 인수만을 사용하여 조건문을 아래와 같이 간략하게 표현한다. 조건 연산자는 가독성을 감소시키므로 과용해서는 안되지만 변수 할당에 유용하다.
+
+```c
+condition ? true_return : false_return;
+```
+
+### `switch` 조건문
+[`switch`](https://en.cppreference.com/w/c/language/switch) 조건문은 전달받은 인자를 `case`의 상수와 동일한지 비교하여 논리가 참일 경우 해당 지점부터 코드를 실행하며, 거짓일 경우에는 다음 `case`로 넘어간다. 선택사항으로 `default` 키워드를 통해 어떠한 `case` 조건에도 부합하지 않으면 실행될 지점을 지정한다.
+
+```c
+switch (argument) {
+case value1:
+    statements;
+    break;
+
+case value2:
+    statements;
+    break;
+
+case value3:
+    statements;
+    break;
+
+default:
+    statements;
+}
+```
+
+`switch` 조건문이 어느 `case` 코드를 실행할지 결정하는 것이라고 쉽사리 착각할 수 있으나, 이는 사실상 [`break`](#break-문) 탈출문 덕분이다. 탈출문이 없었더라면 아래 예시 코드처럼 해당 조건의 `case` 코드 실행을 마쳤어도 다음 `case` 코드로 계속 진행하는 걸 확인할 수 있다. 즉, `case` 키워드는 코드 실행 영역을 분별하는 것이 아니라 진입 포인트 역할을 한다.
+
+```c
+int variable = 2;
+
+// switch 조건문의 동작 예시
+switch (variable) {
+case 1:
+    printf("Statement 1\n");
+
+case 2:
+    printf("Statement 2\n");
+
+case 3:
+    printf("Statement 3\n");
+ 
+default:
+    printf("Statement 4\n");
+}
+```
+```
+Statement 2
+Statement 3
+Statement 4
+```
+
+## 반복문
+반복문(loop statement)은 프로그래밍에 주어진 조건의 논리에 따라서 코드를 얼마나 반복적으로 실행할 것인지 결정하는 제어문이다.
+
+### `while` 반복문
+[`while`](https://en.cppreference.com/w/c/language/while) 반복문은 조건 혹은 논리가 참일 동안 코드를 반복적으로 실행하며, 거짓일 경우에는 반복문을 종료한다.
+
+```c
+while (condition) {
+    statements;
+}
+
+// 간략화된 문장
+while (condition) statement;
+```
+
+* **[`do`](https://en.cppreference.com/w/c/language/do) 반복문**
+
+    코드를 우선 실행하고 조건 혹은 논리가 참일 경우 코드를 반복하며, 거짓일 경우에는 반복문을 종료한다.
+
+    ```c
+    do {
+        statements;
+    } while (condition);
+    ```
+
+### `for` 반복문
+[`for`](https://en.cppreference.com/w/c/language/for) 반복문은 조건 혹은 논리가 참일 동안 코드를 반복적으로 실행하며, 거짓일 경우에는 반복문을 종료한다. `for` 반복문은 조건 평가 외에도 지역 변수를 초기화 및 증감할 수 있는 인자가 있다.
+
+```c
+for (initialize; condition; increment) {
+    statements;
+}
+
+// 간략화된 문장
+for (initialize; condition; increment) statement;
+```
+
+`for` 반복문의 우선 `initialize`에서 반복문 지역 변수를 정의하거나 외부 변수를 불러와 반복문을 위한 초기값을 할당한 다음 `condition`에서 조건을 평가한다. 논리가 참이면 코드를 반복적으로 실행하며, 거짓일 경우에는 반복문을 종료한다. 블록 내의 코드가 마무리되었거나 `continue` 문을 마주하면 `increment`에서 변수를 증감하고, `condition`으로 돌아가 절차를 반복한다.
+
+## 이동문
+이동문(jump statement)은 코드 실행 지점을 이동시키는 무조건 제어문이다.
+
+### `break` 탈출문
+[`break`](https://en.cppreference.com/w/cpp/language/break) 탈출문은 (1) 반복문을 조기 종료시키거나, (2) `switch` 조건문에서 경우에 따라 실행되어야 할 코드를 구분짓기 위해 사용된다.
+
+### `continue` 연속문
+[`continue`](https://en.cppreference.com/w/cpp/language/continue) 연속문은 반복문을 종료하지 않은 채 나머지 실행 코드를 전부 무시하고 반복문의 조건부로 되돌아간다.
+
+### `goto` 이동문
+[`goto`](https://en.cppreference.com/w/c/language/goto) 이동문은 다른 문장으로써는 절대로 접근이 불가한 코드에 도달할 수 있도록 한다 (일명 제어 전달; control transfer). `goto` 키워드에 명시된 [레이블](https://en.cppreference.com/w/cpp/language/statements#Labels)로 제어를 전달하나, 이 둘은 반드시 동일한 [함수](#함수) 내에 위치해야 한다. 레이블은 `goto` 문 이전이나 이후에 위치하여도 무관하다.
+
+```c
+int main() {
+    
+    // 제어 전달: "label"로 이동
+    goto label;    
+
+    // "label" 레이블
+label:
+    statements;
+
+}
+```
+
+단, `goto` 이동문을 사용할 때에는 매우 조심해야 하며 무리한 남용은 [스파게티 코드](https://ko.wikipedia.org/wiki/스파게티_코드)의 원인이 된다.
+
+### `return` 반환문
+[`return`](https://en.cppreference.com/w/cpp/language/return) 반환문은 [함수](#함수)를 종료하면서 지정된 자료형으로 데이터를 반환한다. 하단에 코드가 남아 있음에도 불구하고 반환문이 실행되면 함수는 즉시 종료된다.
+
+```c
+// return 반환문이 있는 사용자 정의 함수
+int function() {
+    printf("Hello World!\n");
+    return 1 + 2;
+}
+    
+printf("%d\n", function());
+```
+```
+Hello World!
+3
+```
