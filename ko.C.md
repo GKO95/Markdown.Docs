@@ -96,6 +96,8 @@ C [런타임 라이브러리](https://ko.wikipedia.org/wiki/런타임_라이브�
 <tbody><tr><td style="text-align: center;"><a href="#파일-입출력">표준 입출력</a></td><td style="text-align: center;"><code>stdio</code></td><td>파일 입출력 함수를 제공한다: <code>printf()</code>, <code>scanf()</code> 등</td></tr><tr><td style="text-align: center;">표준 라이브러리</td><td style="text-align: center;"><code>stdlib</code></td><td>메모리 할당, 예외처리를 포함한 범목적 기능들을 제공한다: <code>malloc()</code>, <code>free()</code> 등</td></tr><tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/C_날짜와_시간_함수">날짜 및 시간</a></td><td style="text-align: center;"><code>time</code></td><td>날짜 및 시간과 관련된 함수를 제공한다: <code>time()</code>, <code>clock()</code> 등</td></tr><tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/C_수식_함수">수식</a></td><td style="text-align: center;"><code>math</code></td><td>수학적 함수를 제공한다: <code>exp()</code>, <code>cos()</code> 등</td></tr></tbody>
 </table>
 
+헤더 파일에 대한 자세한 내용은 [라이브러리](#라이브러리)에서 추가로 설명할 예정이다.
+
 ### 컴파일된 헤더
 [컴파일된 헤더](https://en.wikipedia.org/wiki/Precompiled_header)(precompiled header)는 컴파일러에서 더 빠른 속도로 처리할 수 있도록 중간체 형태로 컴파일된 헤더 파일이다. 컴파일 시간을 줄일 수 있는 장점을 가져 수많은 헤더 파일을 가진 프로젝트 혹은 큰 용량을 가진 헤더 파일에 효율적이다. 허나 컴파일된 헤더를 사용하면 컴파일 작업 자체에는 시간이 다소 걸리는 단점이 있어, 용량이 작은 프로젝트나 자주 수정을 해야 하는 헤더 파일이 있다면 컴파일된 헤더 파일은 오히려 비효율적이다.
 
@@ -814,7 +816,7 @@ int function(int arg1, float arg2) {
 <table style="width: 95%; margin: auto;">
 <caption style="caption-side: top;">배열을 매개변수로 전달하는 방법</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;"><a href="#배열">배열</a>로 선언</th><th style="text-align: center;"><a href="#포인터">포인터</a>로 선언</tr></thead>
+<thead><tr><th style="text-align: center;"><a href="#배열">배열</a>로 선언</th><th style="text-align: center;"><a href="#포인터">포인터</a>로 선언</th></tr></thead>
 <tbody><tr style="vertical-align: top;"><td>
 
 ```c
@@ -902,7 +904,7 @@ printf("%f", calling(callback, 1));
 <table style="width: 95%; margin: auto;">
 <caption style="caption-side: top;">인라인 함수를 활용한 코드 비교</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">인라인 함수가 적용된 코드</th><th style="text-align: center;">동일 코드</tr></thead>
+<thead><tr><th style="text-align: center;">인라인 함수가 적용된 코드</th><th style="text-align: center;">동일 코드</th></tr></thead>
 <tbody><tr style="vertical-align: top;"><td>
 
 ```c
@@ -951,7 +953,7 @@ C 언어가 컴파일되기 이전에 전처리기로부터 `#include`와 같은
 <table style="width: 95%; margin: auto;">
 <caption style="caption-side: top;">C 언어의 매크로 유형</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">객체형식 매크로</th><th style="text-align: center;">함수형식 매크로</tr></thead>
+<thead><tr><th style="text-align: center;">객체형식 매크로</th><th style="text-align: center;">함수형식 매크로</th></tr></thead>
 <tbody><tr style="vertical-align: top;"><td>
 
 ```c
