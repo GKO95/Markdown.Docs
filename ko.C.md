@@ -635,3 +635,156 @@ printf("%d\n", function());
 Hello World!
 3
 ```
+
+# 배열
+[배열](https://en.cppreference.com/w/cpp/language/array)(array)은 동일한 자료형의 데이터를 일련의 순서로 담는 저장공간이다. 식별자 뒤에는 대괄호 `[]`가 위치하여 배열이 담을 수 있는 데이터 용량 크기를 [정수 리터럴](https://en.cppreference.com/w/cpp/language/integer_literal)이나 [상수](#변수)로 지정한다. 배열의 데이터 초기화는 중괄호 `{}` 내에 항목을 순서대로 쉼표로 나누어 나열한다. 만일 배열 용량을 지정하지 않으면 데이터 개수만큼 크기가 정해지며, 아래는 배열을 정의하는 두 방식을 보여준다.
+
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;">배열 크기를 지정하는 여부에 따른 정의 방식</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;">명시적 배열 크기</th><th style="text-align: center;">암묵적 배열 크기</th></tr></thead>
+<tbody>
+<tr><td>
+
+```c
+int arr[size] = {value1, value2, ... };
+```
+</td><td>
+
+```c
+int arr[] = {value1, value2, ... };
+```
+</td></tr>
+</tbody>
+</table>
+
+한 번 정의된 배열의 크기는 변경이 불가하다. 초기 데이터 개수는 배열 용량을 초과해서는 안되지만, 반면에 데이터 개수가 용량을 미치지 못하면 나머지는 `0` 혹은 `NULL`로 초기화된다.
+
+배열의 각 요소에 할당된 데이터는 대괄호 `[]`를 사용해 0번부터 시작하는 인덱스 위치를 호출할 수 있다. 그러나 배열 자체를 호출하면 컴퓨터 메모리에 배열이 저장된 주소가 반환된다. 배열의 메모리 주소는 첫 번째 요소(즉, 인덱스 0번)의 주소와 일치하는데, 그 다음 주소에는 다음 인덱스 요소가 연쇄적으로 할당되어 있다. 자세한 내용은 [포인터](#포인터)를 다룰 때 소개한다.
+
+```c
+int arr[3] = {value1, value2, value3};
+
+printf("%p\n", arr);        // 출력: 00D2FBA8
+printf("%p\n", &arr[0]);    // 출력: 00D2FBA8
+printf("%p\n", &arr[1]);    // 출력: 00D2FBAC (= 00D2FBA8 + 정수형 4바이트)
+```
+
+이러한 배열의 특징으로 인해 배열은 정의 외에 한꺼번에 할당이 불가능하다. 그렇지만 개별 요소를 재할당하여 데이터를 변경할 수 있다.
+
+```c
+int arr[3];
+
+// 배열의 개별 요소 할당
+arr[0] = value1;
+arr[1] = value2;
+arr[2] = value3;
+```
+
+### 다차원 배열
+배열은 또 다른 배열을 요소로 가질 수 있으나, 자료형이 동일해야 하며 요소로 작용하는 배열들의 크기는 모두 같아야 하는 제약을 갖는다. 다차원 배열도 첫 번째 차원의 크기를 별도로 명시하지 않아도 되지만, 나머지 차원의 크기는 반드시 지정해야 한다.
+
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;">다차원 배열의 1차원 크기를 지정하는 여부에 따른 정의 방식</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;">명시적 배열 크기</th><th style="text-align: center;">암묵적 배열 크기</th></tr></thead>
+<tbody>
+<tr><td>
+
+```c
+int arr[size1][size2] = {
+    { value11, value12, ... },
+    { value11, value12, ... },
+    ...
+};
+```
+</td><td>
+
+```c
+int arr[][size2] = {
+    { value11, value12, ... },
+    { value11, value12, ... },
+    ...
+};
+```
+</td></tr>
+</tbody>
+</table>
+
+### 배열의 크기
+[`sizeof`](#sizeof-연산자) 연산자가 배열에 사용되면 배열의 크기가 아닌, 배열이 차지하는 총 바이트 수를 반환한다. 배열의 각 요소마다 자료형만큼 메모리를 차지하므로 배열의 크기를 구하기 위해서는 다음과 같은 표현식을 사용한다. 자료형의 요소들로 구성된 배열을 해당 자료형으로 나누면 요소의 개수가 계산된다.
+
+```c
+int arr[3];
+printf("%d", sizeof(arr)/sizeof(int));    // 출력: 3 (= 배열의 크기)
+```
+
+# 함수
+함수(function)는 독립적인 코드 블록으로써 데이터를 처리하며, 재사용이 가능하고 호출 시 처리된 데이터를 보여주어 유동적인 프로그램 코딩을 가능하게 한다. 함수는 이름 뒤에 소괄호가 있는 `function()` 형식으로 구별된다.
+
+```c
+int variable[4] = {0, 3, 5, 9};
+printf("%d", sizeof(variable));
+// 터미널에 텍스트를 출력하는 "printf()" 함수
+```
+```
+16
+```
+
+함수를 정의하기 위해서 (1) 여러 문장의 코드들을 하나로 묶는 [블록](#구문)과 (2) [`return`](#return-반환문) 키워드에 의해 반환될 데이터 유형을 결정하는 [자료형](#자료형)이 반드시 필요하다. 함수 안에 새로운 함수를 정의하는 건 허용되지 않는다. 정의된 함수를 호출하여 사용하는 데, 함수명 뒤에 소괄호 `()` 기입 여부에 따라 의미하는 바가 다르다:
+
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;">함수 식별자의 호출 방식에 따른 차이</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;"><code>function()</code> 호출</th><th style="text-align: center;"><code>function</code> 호출</th></tr></thead>
+<tbody><tr><td>함수에 정의된 코드를 실행한다.</td><td>함수의 <a href="#포인터">메모리 주소</a>를 가리키며, 정의된 코드를 실행하지 않는다.</td></tr><tr style="vertical-align: top;"><td>
+
+```c
+int function() {
+    printf("%d\n", 1 + 2);
+    return 7;
+}
+
+int variable = function();
+printf("반환: %p", variable);
+```
+</td><td>
+
+```c
+int function() {
+    printf("%d\n", 1 + 2);
+    return 7;
+}
+
+int variable = function;
+printf("반환: %p", variable);
+```
+</td></tr><tr style="vertical-align: top;"><td>
+
+```terminal
+3
+반환: 0000000000000007
+```
+</td><td>
+
+```terminal
+반환: 00000000249513ED
+```
+</td></tr>
+</tbody>
+</table>
+
+함수가 정의하기도 전에 호출되면 순차적으로 실행되는 C 언어 특성상 존재하지 않는 함수를 호출하는 것으로 간주되어 오류가 발생한다. 함수 [프로토타입](https://en.cppreference.com/w/c/language/function_declaration)(prototype), 일명 전방선언(forward declaration)은 컴파일러에게 미리 함수의 존재를 알려주어 정의되기 전에 호출할 수 있다. 프로토타입은 선택사항이며, 우선적으로 선언될 수 있게 스크립트 상단부에 기입하는 게 일반적이다.
+
+```c
+// 함수 프로토타입
+void function();
+
+// 함수 호출
+function();
+
+// 함수 정의
+void function() {
+    printf("%d", 1 + 2);
+}
+```
