@@ -387,11 +387,11 @@ World!
 # 파일 입출력
 C 언어의 [파일 입출력](https://ko.wikipedia.org/wiki/C_파일_입출력)(일명 I/O)은 [`stdio.h`](https://en.cppreference.com/w/cpp/header/cstdio) 헤더로부터 관련 함수들을 호출할 수 있으며, 단순 파일뿐만 아니라 터미널로부터 텍스트를 입력받거나 출력할 때에도 관여한다. C 언어의 파일 입출력은 다른 프로그래밍 언어에 비해 신경써야 할 부분이 많아 별도의 장을 마련하여 소개한다.
 
-<table style="width: 80%; margin: auto;">
+<table style="width: 85%; margin: auto;">
 <caption style="caption-side: top;">C 언어의 파일 출력 함수</caption>
 <colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup>
 <thead><tr><th style="text-align: center;">출력 함수</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/io/putchar"><code>putchar</code></a></td><td>문자(character) 하나를 터미널에 출력한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/io/puts"><code>puts</code></a></td><td>일련의 문자들, 일명 <a href="#문자열">문자열</a>을 터미널에 출력한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/io/c/fprintf"><code>printf</code></a></td><td><a href="#형식-지정자">형식 지정자</a>에 따라 데이터를 터미널에 출력한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/io/c/fprintf"><code>fprintf</code></a></td><td><a href="https://ko.wikipedia.org/wiki/스트림_(컴퓨팅)">스트림</a>을 지정할 수 있는 출력 함수이다; <code>printf</code>는 표준 스트림의 <code>fprintf(<a href="https://ko.wikipedia.org/wiki/표준_스트림">stdout</a>)</code>과 동일하다.
+<tbody><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/io/putchar"><code>putchar</code></a></td><td>문자(character) 하나를 터미널에 출력한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/io/puts"><code>puts</code></a></td><td>일련의 문자들, 일명 <a href="#문자열">문자열</a>을 터미널에 출력한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/io/c/fprintf"><code>printf</code></a></td><td><a href="#형식-지정자">형식 지정자</a>에 따라 데이터를 터미널에 출력한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/io/c/fprintf"><code>fprintf</code></a></td><td><a href="https://ko.wikipedia.org/wiki/스트림_(컴퓨팅)">스트림</a>을 지정할 수 있는 출력 함수이다; <code>printf</code>는 "표준 출력" 스트림의 <code>fprintf(<a href="https://ko.wikipedia.org/wiki/표준_스트림#표준_출력_(stdout)">stdout</a>)</code>과 동일하다.
 
 ```c
 fprintf(stdout, "Number: %f", 3.14159);
@@ -400,17 +400,55 @@ fprintf(stdout, "Number: %f", 3.14159);
 </td></tr></tbody>
 </table>
 
-<table style="width: 80%; margin: auto;">
+<table style="width: 85%; margin: auto;">
 <caption style="caption-side: top;">C 언어의 파일 입력 함수</caption>
 <colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup>
 <thead><tr><th style="text-align: center;">입력 함수</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/io/getchar"><code>getchar</code></a></td><td>터미널로부터 문자(character) 하나를 입력받아 반환한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/io/gets"><code>gets</code></a></td><td>터미널로부터 입력받은 텍스트를 매개변수로부터 <a href="#문자열">문자열</a> <a href="#변수">변수</a>에 전달한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/io/c/fscanf"><code>scanf</code></a></td><td>터미널로부터 입력받은 텍스트를 <a href="#형식-지정자">형식 지정자</a>에 따른 데이터로 변환하여 변수에 전달한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/io/c/fscanf"><code>fscanf</code></a></td><td><a href="https://ko.wikipedia.org/wiki/스트림_(컴퓨팅)">스트림</a>을 지정할 수 있는 입력 함수이다; <code>scanf</code>는 표준 스트림의 <code>fscanf(<a href="https://ko.wikipedia.org/wiki/표준_스트림">stdin</a>)</code>과 동일하다.
+<tbody><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/io/getchar"><code>getchar</code></a></td><td>터미널로부터 문자(character) 하나를 입력받아 반환한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/io/gets"><code>gets</code></a></td><td>터미널로부터 입력받은 텍스트를 <a href="#문자열">문자열</a> 형태로 인자에 전달한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/io/c/fscanf"><code>scanf</code></a></td><td>터미널로부터 입력받은 텍스트를 <a href="#형식-지정자">형식 지정자</a>에 따른 자료형으로 변환하여 인자에 전달한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/io/c/fscanf"><code>fscanf</code></a></td><td><a href="https://ko.wikipedia.org/wiki/스트림_(컴퓨팅)">스트림</a>을 지정할 수 있는 입력 함수이다; <code>scanf</code>는 "표준 입력" 스트림의 <code>fscanf(<a href="https://ko.wikipedia.org/wiki/표준_스트림#표준_입력_(stdin)">stdin</a>)</code>과 동일하다.
 
 ```c
 char variable[32];
 fscanf(stdin, "%s", variable);
 ```
 </td></tr></tbody>
+</table>
+
+여기서 `fscanf()` 입력 함수는 입력된 텍스트를 빈칸(띄어쓰기, [줄바꿈](https://ko.wikipedia.org/wiki/새줄_문자) 등) 및 형식 지정자가 수용할 수 있는 문자 개수를 기준으로 데이터를 나누어 변수에 전달한다. 만일 전달받을 변수의 개수가 입력보다 적을 시, 남은 입력은 다음 입력 함수에서 변수로 전달될 때까지 스트림 [버퍼](https://ko.wikipedia.org/wiki/버퍼_(컴퓨터_과학))에 잔여한다.
+
+## 형식 지정자
+형식 지정자(format specifier)는 입출력 함수가 데이터를 어떻게 받아들일 것인지 결정한다. 이는 자료형 이외에도 [출력 함수](https://learn.microsoft.com/en-us/cpp/c-runtime-library/format-specification-syntax-printf-and-wprintf-functions)의 경우에는 화면에 어떻게 표시할 지, 그리고 [입력 함수](https://learn.microsoft.com/en-us/cpp/c-runtime-library/format-specification-fields-scanf-and-wscanf-functions)의 경우에는 입력된 데이터를 어떻게 수용할 지 등에 대하여 서식을 지정한다. 본 부문은 형식 지정자에 대한 개략적인 예시만을 소개한다.
+
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;">입출력 함수의 형식 지정자</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;">입력 함수</th><th style="text-align: center;">출력 함수</th></tr></thead>
+<tbody>
+<tr><td>본래 데이터의 성질이나 값이 변한다.</td><td>본래 데이터는 그대로 유지되나, 어떻게 표시되는지만 달라진다.</td></tr><tr><td>
+
+```c
+int variable = 0;
+scanf("%c", &variable);
+```
+</td><td>
+
+```c
+int variable = 51;
+printf("%c", variable);
+```
+</td></tr><tr><td>
+
+```terminal
+INPUT: 3
+variable = 51 (char '3' equals to ASCII code 51)
+```
+</td><td>
+
+```terminal
+OUTPUT: 3
+variable = 51 (unchanged)
+```
+</td></tr>
+</tbody>
 </table>
 
 # 제어문
