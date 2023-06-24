@@ -817,34 +817,44 @@ def function():
 function()
 ```
 
-함수명 뒤에 소괄호 `()` 기입여부에 따라 의미하는 바가 다르다.
+함수명 뒤에 소괄호 `()` 기입 여부에 따라 의미하는 바가 다르다:
 
-* `function()`은 함수에 정의된 코드를 실행한다.
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;">함수 식별자의 호출 방식에 따른 차이</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;"><code>function()</code> 호출</th><th style="text-align: center;"><code>function</code> 호출</th></tr></thead>
+<tbody><tr><td>함수에 정의된 코드를 실행한다.</td><td>함수 자체를 가리키며, 정의된 코드를 실행하지 않는다.</td></tr><tr style="vertical-align: top;"><td>
 
-    ```python
-    def function():
-        print("Hello World!")
+```python
+def function():
+    print("Hello World!")
 
-    variable = function()
-    print("반환:", variable)
-    ```
-    ```terminal
-    Hello World!
-    반환: None
-    ```
+variable = function()
+print("반환:", variable)
+```
+</td><td>
 
-* `function`은 함수 자체를 가리킨다.
+```python
+def function():
+    print("Hello World!")
 
-    ```python
-    def function():
-        print("Hello World!")
+variable = function
+print("반환:", variable)
+```
+</td></tr><tr style="vertical-align: top;"><td>
 
-    variable = function
-    print("반환:", variable)
-    ```
-    ```terminal
-    반환: <function function at 0x0000027FB6A57160>
-    ```
+```terminal
+Hello World!
+반환: None
+```
+</td><td>
+
+```terminal
+반환: <function function at 0x0000027FB6A57160>
+```
+</td></tr>
+</tbody>
+</table>
 
 ### 지역 변수 및 전역 변수
 파이썬 프로그래밍 언어에서 변수가 코드 중에서 어디에 정의되었는지에 따라 두 가지의 종류로 구분된다.
@@ -1541,56 +1551,70 @@ for variable in file:
 마지막 줄은 어딘가에.
 ```
 
-1. 덮어쓰기(overwrite) 모드 `w`는 기존의 모든 내용들을 삭제하여 처음부터 새로 작성한다.
-    
-    ```python
-    with open("path\\filename.txt", "w") as file:
-        file.write("텍스트 덮어쓰기!")
-    ```
-    ```
-    <filename.txt>
-    텍스트 덮어쓰기!
-    ```
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;">파일 쓰기 모드 비교</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;">덮어쓰기 모드: <code>W</code></th><th style="text-align: center;">덧붙여 쓰기 모드: <code>A</code></th></tr></thead>
+<tbody><tr><td>기존의 모든 내용들을 삭제하여 처음부터 새로 작성한다.</td><td>기존의 모든 내용들을 유지한 채 맨 끝 단락에서부터 작성한다.</td></tr><tr style="vertical-align: top;"><td>
 
-2. 덧붙여 쓰기(append) 모드 `a`는 기존의 모든 내용들을 유지한 채 맨 끝 단락에서부터 작성한다.
+```python
+with open("path\\filename.txt", "w") as file:
+    file.write("텍스트 덮어쓰기!")
+```
+</td><td>
 
-    ```python
-    with open("path\\filename.txt", "a") as file:
-        file.write("텍스트 덧붙여 쓰기!")
-    ```
-    ```
-    <filename.txt>
-    첫 번째 줄은 여기에.
-    두 번째 줄은 저기에.
-    마지막 줄은 어딘가에.텍스트 덧붙여 쓰기!
-    ```
+```python
+with open("path\\filename.txt", "a") as file:
+    file.write("텍스트 덧붙여 쓰기!")
+```
+</td></tr><tr style="vertical-align: top;"><td>
+
+```terminal
+<filename.txt>
+텍스트 덮어쓰기!
+```
+</td><td>
+
+```terminal
+<filename.txt>
+첫 번째 줄은 여기에.
+두 번째 줄은 저기에.
+마지막 줄은 어딘가에.텍스트 덧붙여 쓰기!
+```
+</td></tr>
+</tbody>
+</table>
 
 성공적으로 파일 작성을 완료하였으면 `write()` 메소드는 작성된 내용의 바이트 개수를 반환한다.
 
 # 모듈
-[모듈](https://docs.python.org/3/tutorial/modules.html)(module)은 부가적인 기능 및 데이터를 제공하는 파이썬 소스 코드이며, 이들은 일반 스크립트와 마찬가지로 `.PY` 확장자를 갖는다. 파이썬 모듈을 불러오는 방법에는 두 가지가 있다:
+[모듈](https://docs.python.org/3/tutorial/modules.html)(module)은 부가적인 기능 및 데이터를 제공하는 파이썬 소스 코드이며, 이들은 일반 스크립트와 마찬가지로 `.PY` 확장자를 갖는다. 파이썬 모듈로부터 [변수](#변수), [함수](#함수), 그리고 [클래스](#클래스)를 불러올 수 있다:
 
-1. [`import`](https://docs.python.org/3/reference/simple_stmts.html#the-import-statement) 키워드에 모듈명을 기입하여 모듈에 정의된 모든 [변수](#변수), [함수](#함수), 그리고 [클래스](#클래스)를 불러온다.
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;">파이썬 모듈 불러오기</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;"><a href="https://docs.python.org/3/reference/simple_stmts.html#the-import-statement"><code>import</code></a> 키워드</th><th style="text-align: center;"><a href="https://docs.python.org/3/reference/simple_stmts.html#from"><code>from</code></a> 키워드</th></tr></thead>
+<tbody><tr><td>기입된 모듈에 정의된 모든 데이터와 코드를 불러온다.</td><td>기입된 모듈로부터 <code>import</code> 키워드를 통해 원하는 데이터나 코드를 선택적으로, 혹은 <code>*</code> <a href="https://ko.wikipedia.org/wiki/와일드카드_문자">와일드카드 문자</a>로 전부 불러온다.</td></tr><tr style="vertical-align: top;"><td>
 
-    ```python
-    # 모듈 불러오기
-    import module
+```python
+# 모듈 불러오기
+import module
 
-    # 모듈에 정의된 함수 호출
-    module.function()
-    ```
+# 모듈에 정의된 함수 호출
+module.function()
+```
+</td><td>
 
-1. [`from`](https://docs.python.org/3/reference/simple_stmts.html#from) 키워드로 모듈명을 기입한 다음 `import` 키워드로 불러오고자 하는 변수, 함수, 혹은 클래스를 지정한다.
+```python
+# 모듈에서 선택적으로 데이터 불러오기
+from module import variable, function, classes
 
-    > 만일 모든 변수, 함수, 그리고 클래스를 불러오려면 `from module import *`로 작성한다.
-
-    ```python
-    # 모듈 불러오기: 선택적
-    from module import variable, function, classes
-
-    # 모듈에 정의된 함수 호출
-    function()
-    ```
+# 모듈에 정의된 함수 호출
+function()
+```
+</td></tr>
+</tbody>
+</table>
 
 불러온 모듈이나 변수, 함수, 그리고 클래스는 `as` 키워드를 통해 별칭을 지정할 수 있다. 이는 복잡하거나 긴 모듈명을 간단한 이름으로 호출하거나, 혹은 기존 데이터의 식별자와 중첩하여 발생할 수 있는 네이밍 충돌 문제를 방지하기 위해 사용된다.
 
