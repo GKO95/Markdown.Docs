@@ -257,7 +257,7 @@ int variable1 = 3, variable2 = 4, variable3;
 <caption style="caption-side: top;">변수 선언 키워드 및 특징</caption>
 <colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup>
 <thead><tr><th style="text-align: center;">키워드</th><th style="text-align: center;">특징</th></tr></thead>
-<tbody><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/constant_expression"><code>const</code></a></td><td>초기화된 이후로 변경이 불가한 상수(constant)로 지정한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/storage_duration#Static_local_variables"><code>static</code></a></td><td><a href="#함수">함수</a>를 탈출하여도 데이터가 소멸되지 않는 특수한 <a href="#지역-변수">지역 변수</a>, 일명 <a href="#정적-변수">정적 변수</a>이다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/language/extern"><code>extern</code></a></td><td>아직 정의되지 않은 변수 혹은 함수를 미리 호출할 수 있도록 선언만 하는 <a href="#외부-변수">외부 변수</a>이다.</td></tr></tbody>
+<tbody><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/constant_expression"><code>const</code></a></td><td>초기화된 이후로 변경이 불가한 상수(constant)로 지정한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/storage_duration#Static_local_variables"><code>static</code></a></td><td><a href="#함수">함수</a>를 탈출하여도 데이터가 소멸되지 않는 특수한 <a href="#지역-변수">지역 변수</a>, 일명 <a href="https://en.cppreference.com/w/cpp/language/storage_duration#Static_local_variables">정적 변수</a>이다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/language/extern"><code>extern</code></a></td><td>아직 정의되지 않은 변수 혹은 함수를 미리 호출할 수 있도록 선언만 하는 <a href="#외부-변수">외부 변수</a>이다.</td></tr></tbody>
 </table>
 
 > 위에서 소개한 키워드, 특히 `static` 및 `extern`은 차후 함수와 [라이브러리](#라이브러리)를 소개하면서 다시 설명할 예정이다.
@@ -786,5 +786,158 @@ function();
 // 함수 정의
 void function() {
     printf("%d", 1 + 2);
+}
+```
+
+다음은 함수에 대해 논의할 때 중요하게 언급되는 매개변수와 전달인자의 차이에 대하여 설명한다.
+
+* **전달인자 (argument)**: 간략하게 "인자"라고도 부르며, 함수로 전달되는 데이터이다.
+* **매개변수 (parameter)**: 전달인자를 할당받는 함수 내의 지역 변수이다. 그러므로 매개변수는 함수 외부에서 호출이 불가능하다. 매개변수 선언은 함수의 소괄호 `()` 내에서 이루어진다.
+
+> 매개변수와 전달인자는 개념적으로 다른 존재이지만, 동일한 데이터를 가지고 있는 관계로 흔히 두 용어는 혼용되어 사용하는 경우가 많다.
+
+아래의 예제는 함수의 매개변수와 전달인자가 어떻게 동작하는지 보여준다.
+
+```c
+int function(int arg1, float arg2);
+
+function(1, 3.14);
+// 반환: 4 (= 1 + 3.14의 정수형만 추출)
+
+int function(int arg1, float arg2) {
+    return arg1 + arg2;
+}
+```
+
+배열은 위와 동일한 구문으로 인자를 매개변수로 건네줄 수 없으며, 아래의 두 가지 방법이 존재한다:
+
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;">배열을 매개변수로 전달하는 방법</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;"><a href="#배열">배열</a>로 선언</th><th style="text-align: center;"><a href="#포인터">포인터</a>로 선언</tr></thead>
+<tbody><tr style="vertical-align: top;"><td>
+
+```c
+void function(int arg[]);
+
+int arr[3] = {value1, value2, value3};
+function(arr);
+
+// 넘겨받은 인자를 배열 그대로 받아들인다.
+void function(int arg[]) {
+    statements;
+    return;
+}
+```
+</td><td>
+
+```c
+void function(int *arg);
+
+int arr[3] = {value1, value2, value3};
+function(arr);
+
+// 넘겨받은 인자를 배열이 아닌 포인터로 받아들인다.
+void function(int *arg) {
+    statements;
+    return;
+}
+```
+</td></tr>
+</tbody>
+</table>
+
+배열 자체를 호출하면 배열의 첫 번째 요소의 메모리 주소를 가져오기 때문에 가능하다. 특히 배열의 각 요소가 할당된 메모리 주소는 연쇄적이므로, 바로 옆 (`int` 정수형이면 +4) 메모리 주소에는 배열의 다음 요소가 저장된 메모리 공간이다.
+
+## 진입점
+[진입점](https://ko.wikipedia.org/wiki/엔트리_포인트)(entry point)는 프로그램이 시작되는 부분을 의미하며, C 언어의 경우 [`main()`](https://en.cppreference.com/w/cpp/language/main_function) 함수에서부터 코드가 실행된다. 진입점은 프로토타입이 존재하지 않으며, 유일해야 하므로 복수의 `main()` 함수가 존재하거나 찾지 못하면 요류가 발생하여 컴파일이 불가하다.
+
+```c
+// C 언어 진입점: main()
+int main(int argc, char **argv) {
+
+    return 0;
+}
+```
+
+> 본 문서의 대부분 예시에는 `main()` 함수가 직접 언급되지 않았으나, 전역 변수와 함수 등을 제외한 코드들은 `main()` 함수 내에서 작성되어야만 실행된다.
+
+C/C++ 언어 표준에 의하면 `main()` 함수는 반드시 `int` 정수형을 반환해야 하며, `EXIT_SUCCESS`(혹은 정수 `0`) 그리고 `EXIT_FAILURE`이 있다. 만일 반환문이 없을 시, 컴파일러는 자동적으로 `return 0;` 문장을 `main()` 함수의 말단에 삽입한다.
+
+`main()` 진입점은 아래와 같은 매개변수를 함축적으로 가진다.
+
+* **`argc`**: 전달인자 개수(argument count).
+* **`argv`**: 전달인자 데이터 배열(argument vector); 매개변수 정의는 `char *argv[]`로 대체 가능하다.
+
+## 콜백 함수
+[콜백 함수](https://ko.wikipedia.org/wiki/콜백)(callback function)는 인자로 전달되는 함수이다. 여기서 콜백이란, 전달인자로 전달된 함수가 다른 함수에서 언젠가 다시 호출(call back)되어 실행된다는 의미에서 붙여진 용어이다. 콜백 함수를 전달받는 함수, 일명 호출 함수(calling function)는 블록 내에서 매개변수 호출을 통해 콜백 함수를 실행한다.
+
+아래는 콜백 함수의 예시이며, 이에 대한 자세한 원리는 차후 [함수 포인터](#함수-포인터)에서 설명한다.
+
+```c
+// 호출 함수
+float calling(float (*function)(int, float), int arg) {
+    // 콜백 함수의 호출
+    return function(arg, 3.14159);
+}
+
+// 콜백 함수
+float callback(int arg1, float arg2) {
+    return (float)arg1 + arg2;
+}
+
+printf("%f", calling(callback, 1));
+```
+```
+4.141590
+```
+
+## 인라인 함수
+[인라인 함수](https://en.cppreference.com/w/c/language/inline)(inline function)는 인라인 확장에 사용될 `inline` 키워드로 지정된 함수이다.
+
+> [인라인 확장](https://ko.wikipedia.org/wiki/인라인_확장)(inline expansion)은 컴파일 과정에서 함수 [호출지](https://en.wikipedia.org/wiki/Call_site)(call site)를 함수 코드로 치환하는 최적화 기법이다. 
+
+프로그램 실행 (즉, 런타임) 도중에 함수를 호출하는데 소모되는 시간이 없으므로 속도가 소폭 향상되는 효과가 있으나, 과도한 사용은 프로그램 크기가 커지고 RAM 메모리를 더 많이 사용하는 단점으로 작용한다. 그러므로 인라인은 코드가 작지만 자주 사용되는 함수에 가장 적합하다.
+
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;">인라인 함수를 활용한 코드 비교</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;">인라인 함수가 적용된 코드</th><th style="text-align: center;">동일 코드</tr></thead>
+<tbody><tr style="vertical-align: top;"><td>
+
+```c
+// 인라인 함수
+inline void function(char* arg) {
+    printf("%s", arg);
+}
+
+int main() {
+    function("Hello World!");
+    return 0;
+}
+```
+</td><td>
+
+```c
+int main() {
+    printf("%s", "Hello World!");
+    return 0;
+}
+```
+</td></tr>
+</tbody>
+</table>
+
+## 재귀 함수
+[재귀 함수](https://ko.wikipedia.org/wiki/재귀_(컴퓨터_과학))(recursive function)는 스스로를 호출하는 함수이다. 재귀 함수는 반드시 스스로를 호출하는 반복으로부터 탈출하는 기저 조건(base case)이 필요하다. 기저 조건이 없으면 무한 재귀가 발생하는데 프로그램 실행에 기여하는 [메모리](#스택-영역)가 부족하여 충돌이 발생한다.
+
+```c
+// 예제: 펙토리얼 "!"
+int factorial(int arg) {
+    // 기저 조건: 재귀로부터 탈출하는 조건
+    if (arg == 1)
+        return 1;
+    else
+        return arg * factorial(arg - 1);
 }
 ```
