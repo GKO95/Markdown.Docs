@@ -509,7 +509,7 @@ else:
 첫 번째 반복문...완료!
 ```
 
-## `for` 반복문
+### `for` 반복문
 [`for`](https://docs.python.org/3/reference/compound_stmts.html#the-for-statement) 반복문은 유효한 범위 내에서 코드를 반복적으로 실행하고, 범위의 모든 값이 반복되면 종료한다.
 
 ```python
