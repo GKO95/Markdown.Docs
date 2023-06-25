@@ -380,6 +380,8 @@ fscanf(stdin, "%s", variable);
 </td></tr></tbody>
 </table>
 
+> [스트림](https://ko.wikipedia.org/wiki/스트림_(컴퓨팅))(stream)이란 사전적 의미로 "물이 흐르는 개울"을 의미한다. 즉, 컴퓨터 통신 용어에서 스트림은 데이터가 흐르는 길을 의미한다.
+
 여기서 `fscanf()` 입력 함수는 입력된 텍스트를 빈칸(띄어쓰기, [줄바꿈](https://ko.wikipedia.org/wiki/새줄_문자) 등) 및 형식 지정자가 수용할 수 있는 문자 개수를 기준으로 데이터를 나누어 변수에 전달한다. 만일 전달받을 변수의 개수가 입력보다 적을 시, 남은 입력은 다음 입력 함수에서 변수로 전달될 때까지 스트림 [버퍼](https://ko.wikipedia.org/wiki/버퍼_(컴퓨터_과학))에 잔여한다.
 
 ## 형식 지정자
@@ -1396,6 +1398,64 @@ variable = (UNION){ 365 };
 </td></tr></tr>
 </tbody>
 </table>
+
+# 예외 처리
+[예외](https://ko.wikipedia.org/wiki/예외_처리)(exception)는 [런타임](https://ko.wikipedia.org/wiki/런타임) 도중에 잘못된 데이터 처리나 적절하지 않은 알고리즘 등에 의해 프로그램상 실행 불가한 코드 오류이다. C 언어의 구문적 문제가 아닌 관계로 정상적으로 빌드되지만, 예외를 마주하게 되면 [프로세스](ko.Process.md)는 충돌하여 즉시 종료된다. 그러므로 예외 처리(exception handling)란, 프로세스가 오류를 처음으로 마주한 순간인 "[1차 시도 예외](ko.ProcDump.md#예외-처리)(1<sup>st</sup> chance exception)"에서 유연하게 대처하여 종료되는 것을 방지하고 안정적으로 실행을 유지하는 게 주목표이다.
+
+## 오류 번호
+[오류 번호](https://en.cppreference.com/w/c/error/errno)(error number) 혹은 `errno` [매크로](#매크로-정의)는 `errno.h` 헤더 파일 내에 정의된 전역 변수이다. 매크로를 사용하기 위해서는 먼저 정수 0으로 초기화하고, 런타임 도중에 오류가 발생하면 이에 대응하는 오류 번호가 자동으로 할당된다. MSVC의 경우, 오류 번호와 내용은 [여기](https://learn.microsoft.com/en-us/windows/win32/debug/system-error-codes)에서 확인할 수 있다.
+
+아래의 예시 코드는 존재하지 않는 파일을 읽기 모드로 열려고 할 때 발생하는 오류를 `errno` 매크로로 감지한다.
+
+```c
+#include <errno.h>
+
+// errno 전역 변수 선언
+extern int errno;
+
+int main(){
+
+    // errno 전역 변수 초기화
+    errno = 0;
+    
+    FILE* fptr = fopen("./non_existance.txt", "r");
+    
+    // 파일 열기 실패 경우...
+    if (fptr == NULL) {
+        // 오류명 및 번호: ENOENT 2 (해당 파일 혹은 경로 미발견)
+        fprintf(stderr, "파일 열기 오류 발생! 오류 코드: %d\n", errno);
+        exit(-1);
+    }
+
+    fclose(fptr);
+    return 0;
+}
+```
+```
+파일 열기 오류 발생! 오류 코드: 2
+```
+
+### 오류 설명
+각종 오류들은 정수형으로 표현되어 `errno` 매크로를 통해 전역 변수에 저장된다. 그러나 해당 오류를 정수가 아닌 텍스트로 된 내용을 보기 위해서는 [`perror()`](https://en.cppreference.com/w/c/io/perror) 함수를 사용한다.
+
+```c
+int main(){
+    
+    FILE* fptr = fopen("./non_existance.txt", "r");
+    if (fptr == NULL) {
+
+        // 오류명 및 번호: ENOENT 2 (해당 파일 혹은 경로 미발견)
+        perror("오류 설명");
+        exit(-1);
+    }
+
+    fclose(fptr);
+    return 0;
+}
+```
+```
+오류 설명: No such file or directory
+```
 
 # 전처리기
 C 언어가 컴파일되기 이전에 전처리기로부터 `#include`와 같은 전처리기 지시문이 우선적으로 처리된다. 전처리기 지시문은 C 언어 컴파일러 설정 및 프로그래밍의 편리성을 제공한다. 본 장에서는 일부 유용한 전처리기 지시문에 대하여 소개한다.
