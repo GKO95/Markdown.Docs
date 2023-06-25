@@ -275,7 +275,7 @@ int main() {
 char variable = 75;    // ASCII에 의해 문자 'K'가 저장
 ```
 
-거의 모든 프로그래밍 언어는 할당 기호를 기준으로 왼쪽에는 피할당자(변수), 오른쪽에는 할당자(데이터 혹은 변수)가 위치한다. 반대로 놓여질 경우, 오류가 발생하거나 원치 않는 결과가 도출될 수 있다.
+거의 모든 프로그래밍 언어는 할당 기호를 기준으로 왼쪽에는 피할당자(변수), 오른쪽에는 피할당자로 전달하려는 표현식(값 혹은 데이터)이 위치한다. 반대로 놓여질 경우, 오류가 발생하거나 원치 않는 결과가 도출될 수 있다.
 
 ## 연산자
 연산자(operator)는 피연산 데이터를 조작할 수 있는 가장 간단한 형태의 연산 요소이다. 연산자는 피연산자의 접두부, 접미부, 혹은 두 데이터 사이에 위치시켜 사용한다. 가독성을 위해 데이터와 연산자 사이에 공백을 넣어도 연산에는 아무런 영향을 주지 않는다. 다음은 C 언어의 연산자들을 간략히 소개한다.
@@ -908,6 +908,176 @@ int factorial(int arg) {
         return arg * factorial(arg - 1);
 }
 ```
+
+# 포인터
+[포인터](https://en.cppreference.com/w/cpp/language/pointer)(pointer)는 정의된 데이터나 코드가 할당받은 [메모리](ko.Memory.md) 주소를 가리키는(가리키다; point) [변수](#변수)(주최; -er)이다. 포인터가 가리키는 메모리 주소 안에는 해당 데이터나 코드가 저장되어 있는데, 이러한 메모리 주소를 통해 접근이 가능한 특징이 C 언어의 핵심이자 많은 코딩 입문자들을 기피하게 만든다. 포인터에 대한 이해를 위해 컴퓨터 구조, 특히 메모리와 관련된 개념이 함께 설명될 필요가 있다.
+
+포인터를 선언할 때에는 변수와 마찬가지로 [자료형](#자료형)이 명시되어야 하지만, 자료형과 식별자 사이에 별표 `*`(영문: [asterisk](https://en.wikipedia.org/wiki/Asterisk))를 기입하여 포인터임을 알린다.
+
+```c
+// int 자료형의 포인터 정의
+int *ptr = &variable;
+```
+
+위의 예시는 [참조 연산자](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_address-of_operator) `&`(영문: [ampersand](https://en.wikipedia.org/wiki/Ampersand))를 통해 변수 `variable`가 저장된 메모리 주소를 정수형 자료형의 포인터 `ptr`에 알려주는 문장이다. 단, 포인터가 가리킬 수 있는 메모리 주소는 lvalue에 속하는 값 유형에만 해당한다.
+
+* **[lvalue](https://learn.microsoft.com/en-us/cpp/c-language/l-value-and-r-value-expressions)**: 접근 가능한 메모리 주소를 할당받은 데이터로 변수, [함수](#함수) 등이 해당한다.
+* **[rvalue](https://learn.microsoft.com/en-us/cpp/cpp/lvalues-and-rvalues-visual-cpp)**
+    * *prvalue*: 접근 가능한 메모리 주소를 할당받지 아니한 데이터로 정수 및 문자열 [리터럴](https://ko.wikipedia.org/wiki/리터럴) 등이 해당한다.
+    * *xrvalue*: 메모리 주소를 할당받았지만 더 이상 접근이 불가한 데이터이다.
+
+> lvalue와 rvalue는 각각 할당 기호 `=`의 좌측(left)과 우측(right)에 위치한, 즉 데이터를 저장하는 피할당자와 값을 전달하는 표현식 관계이다.
+
+32비트와 64비트 프로그램은 메모리 주소를 각각 4바이트(8자리의 십육진수)와 8바이트(16자리의 십육진수)로 표현한다. 그렇지만 메모리 주소는 개발자가 직접 수기로 작성하면 절대 안되며, 이는 오히려 [NTSTATUS](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/596a1078-e883-4972-9bbc-49e60bebca55) [0xC0000005](https://learn.microsoft.com/en-us/shows/inside/c0000005) STATUS_ACCESS_VIOLATION이란 유효하지 않은 메모리 주소 접근 오류를 유발한다.
+
+메모리 주소에는 오로지 한 바이트의 데이터만 저장할 수 있다. 예를 들어, `int` 정수를 표현하려면 4바이트가 필요하므로 이웃하는 네 개의 메모리 주소가 하나의 데이터를 저장하는데 관여한다. 포인터의 자료형은 이러한 특성을 고려하여 가리키고 있는 메모리 주소로부터 어디까지 참조해야 완전한 데이터를 표현할 수 있는지 알려주는 역할을 한다. 그러므로 포인터에 [역참조 연산자](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_indirection_operator) `*`를 사용하면 자료형을 반영한 메모리 주소에 저장된 값을 반환한다.
+
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;">포인터와 자료형의 관계</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;">동일한 자료형</th><th style="text-align: center;">상이한 자료형</th></tr></thead>
+<tbody><tr style="vertical-align: top;"><td>
+
+```c
+int variable = 365;
+int *ptr = &variable;
+
+printf("%p\n%d\n", ptr, *ptr);
+```
+</td><td>
+
+```c
+int variable = 365;
+char *ptr = &variable;
+
+printf("%p\n%d\n", ptr, *ptr);
+```
+</td></tr><tr style="vertical-align: top;"><td>
+
+```terminal
+000000526132F5E4 (주소)
+365              (값)
+```
+</td><td>
+
+```terminal
+000000526132F5E4 (주소)
+109              (값)
+```
+</td></tr>
+</tbody>
+</table>
+
+여기서 역참조 연산자의 `*`와 포인터 선언에 사용된 별표는 기호만 동일한 뿐, 연관성이 없는 전혀 다른 존재이다. 만일 `variable` 변수의 값이 변하면 해당 메모리 주소를 참조하는 `ptr` 포인터의 역참조로도 관측이 가능하다. "참조에 의한 호출(call by reference)"은 이러한 매커니즘을 기반하며, 이미 함수에서 [배열](#배열)을 매개변수로 전달하는 방법을 소개할 때 선보였다.
+
+* **널 포인터(null pointer)**
+
+    아무런 메모리 주소를 가리키지 않는 포인터이다. C 언어에서 포인터가 더 이상 사용되지 않는 메모리 주소를 계속 가리키고 있으면, 이는 자칫 NTSTATUS 0xC0000005 메모리 접근 오류를 유발할 수 있다. 안전한 포인터 사용을 위해 해당 포인터에 [`NULL`](https://en.cppreference.com/w/cpp/types/NULL)을 할당한다.
+
+    ```c
+    int *ptr = NULL;
+    printf("%p", ptr);
+    ```
+    ```
+    0000000000000000 (주소)
+    ```
+
+* **보이드 포인터(void pointer)**
+
+    지정된 자료형이 없는, 즉 `void` 자료형의 포인터이다. 이는 자료형과 무관하게 단순히 가리키고자 하는 메모리 주소만을 저장하기 위한 방법으로 사용된다.
+
+    ```c
+    int variable = 356;
+    
+    void *ptr = &variable;
+    printf("%d", *(int*)ptr);
+    ```
+    ```
+    365
+    ```
+
+### 함수 포인터
+함수 포인터(function pointer)는 함수 자체를 가리키는 보이드 포인터이다. 배열 자체가 첫 번째 요소 메모리 주소를 가리키는 것과 동일한 맥락이다. 함수 포인터를 활용한 대표적인 예시로 [콜백 함수](#콜백-함수)가 있다. 함수 포인터의 선언은 아래와 같아야 하며, 이를 만족하지 않을 시 컴파일 오류가 발생한다.
+
+1. 포인터의 자료형은 함수의 자료형과 일치해야 한다. 
+1. 함수가 갖는 매개변수의 자료형과 개수가 동일해야 한다.
+
+```c
+int function(int arg1, float arg2) {
+    statements;
+    return 0;
+}
+
+int main() {
+
+    // 함수 포인터 선언 및 호출
+    int (*ptr)(int, float) = function;
+    ptr(1, 3.14);
+
+    return 0;
+}
+```
+
+## 엔디언
+[엔디언](https://ko.wikipedia.org/wiki/엔디언)(endianess)이란 컴퓨터가 메모리로부터 데이터를 표현하기 위해 바이트 단위의 정보를 어떻게 정렬할 것인지를 가리킨다. 특히 포인터가 메모리 주소를 접근 및 호출하기 때문에 엔디언의 기본적인 개념 이해는 필요하다고 본다.
+
+엔디언이 C 언어 프로그래밍에 어떠한 영향을 주는지 설명하기 위해, 아래 예시는 십진수 정수를 십육진수로 변환 및 메모리 주소를 출력하였다.
+
+> 본 예시는 이해를 돕기 위해 32비트 어플리케이션으로 빌드한 것이며, 64비트 어플리케이션은 메모리 주소 길이가 배로 늘어날 뿐 동일한 결과를 보여준다.
+
+```c
+int variable = 123456789;
+
+printf("십육진수: %#010x\n", variable);
+printf("포인터: 0x%p\n", &variable);
+```
+```terminal
+십육진수: 0x075bcd15
+포인터: 0x00CFF790
+```
+
+위의 바이트 네 개, `0x07`, `0x5b`, `0xcd`, 그리고 `0x15`는 각각 `int` 정수 자료형을 정의하면 할당되는 인접한 네 개의 메모리 주소에 저장된다. 그리고 포인터를 호출하면 전체 메모리 중에서 첫 번째 주소만 호출한다고 설명하였다. 그렇다면 한 바이트만 저장할 수 있는 첫 번째 메모리 주소에는 실제로 어떤 값이 들어있는가: `0x07` 아니면 `0x15`인가?
+
+아래는 두 유형의 엔디언에 대하여 간략하게 소개한다.
+
+* **빅 엔디언(big-endian; BE)**: 최상위 바이트가 첫 주소에 할당된다.
+
+    ```terminal
+    +---------------------------------------------------+
+    | 0x00CFF790 | 0x00CFF791 | 0x00CFF792 | 0x00CFF793 |
+    |------------+------------+------------+------------|
+    |    0x07    |    0x5b    |    0xcd    |    0x15    |
+    +---------------------------------------------------+
+    ```
+
+* **리틀 엔디언(little-endian; LE)**: 최하위 바이트가 첫 주소에 할당된다.
+
+    ```terminal
+    +---------------------------------------------------+
+    | 0x00CFF790 | 0x00CFF791 | 0x00CFF792 | 0x00CFF793 |
+    |------------+------------+------------+------------|
+    |    0x15    |    0xcd    |    0x5b    |    0x07    |
+    +---------------------------------------------------+
+    ```
+
+십육진수 `0x075bcd15`와 `0x15cd5b07`는 각각 십진수로 변환하면 123456789 그리고 365779719가 나온다. 그러나 결론적으로 프로그램의 각 메모리 주소를 확인해 보면 *리틀 엔디언*으로 데이터가 저장되고 있음을 확인할 수 있다.
+
+```c
+int variable = 123456789;
+unsigned char* ptr = (void*)&variable;
+
+for (int index = 0; index < sizeof(variable); index++) {
+    printf("0x%#p : %#04x\n", ptr + index, *(ptr + index));
+}
+```
+```terminal
+0x00CFF790 : 0x15
+0x00CFF791 : 0xcd
+0x00CFF792 : 0x5b
+0x00CFF793 : 0x07
+```
+
+비록 숫자를 읽을 때에는 빅 엔디언이 익숙하겠지만, 컴퓨터 메모리에서는 리틀 엔디언으로 데이터를 저장한다는 점을 명시하도록 한다.
 
 # 전처리기
 C 언어가 컴파일되기 이전에 전처리기로부터 `#include`와 같은 전처리기 지시문이 우선적으로 처리된다. 전처리기 지시문은 C 언어 컴파일러 설정 및 프로그래밍의 편리성을 제공한다. 본 장에서는 일부 유용한 전처리기 지시문에 대하여 소개한다.
