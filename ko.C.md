@@ -1051,36 +1051,6 @@ printf("%d", variable);
 # 링커
 [링커](https://ko.wikipedia.org/wiki/링커_(컴퓨팅))(linker) 혹은 링크 편집기(link editor)는 소스 코드를 구성하는 각 .c 확장자 파일마다 기계어로 컴파일된 [오브젝트 파일](https://ko.wikipedia.org/wiki/목적_파일)들을 하나의 완전한 프로그램으로 동작할 수 있도록 서로 연동시키는 도구이다. C 언어의 [빌드](https://ko.wikipedia.org/wiki/소프트웨어_빌드) 과정은 결국 "[전처리기](#전처리기) > [컴파일러](#컴파일러) > 링커" 순서로 진행되는 작업을 함축한다. 링커를 통해 소스 코드는 외부 스크립트 또는 [라이브러리](#라이브러리)에 정의된 데이터나 코드를 불러와 활용할 수 있다.
 
-## 헤더 파일
-[헤더 파일](https://ko.wikipedia.org/wiki/헤더_파일)(header file)은 데이터 및 기능의 존재를 알리는 역할을 하는 .h 확장자 파일이며, 링커로부터 오브젝트 파일들을 연동하기 위해 필요한 핵심 요소이다. 다른 스크립트 파일 또는 라이브러리에 정의된 데이터와 코드를 헤더 파일로 통해 다른 스크립트에서도 사용할 수 있도록 한다. 헤더 파일을 불러오는 방식은 두 가지가 존재한다:
-
-```c
-#include <stdio.h>
-#include "header.h"
-```
-
-이 둘은 [전처리기](#전처리기)가 헤더 파일을 어느 위치에서 찾을 것인지 차이점을 가진다.
-
-* **`#include <header.h>`**
-    
-    컴파일러 혹은 IDE에서 지정한 경로를 위주로 헤더 파일을 찾으며, 일반적으로 시스템 헤더 파일에 사용된다.
-
-* **`#include "header.h"`**
-    
-    현재 소스 파일이 위치한 경로를 위주로 헤더 파일을 찾는다. 만일 찾지 못하였을 시, `#include <header.h>`와 같이 지정된 경로에서 헤더 파일을 재탐색한다. 일반적으로 사용자 정의 헤더 파일에 사용된다.
-
-
-아래는 프로그래밍 언어에서 흔히 사용되는 데이터와 기능들은 바로 사용할 수 있도록 미리 컴파일된 [표준 라이브러리](https://ko.wikipedia.org/wiki/C_표준_라이브러리)를 불러오는 헤더 파일 일부를 나열한다.
-
-<table style="width: 80%; margin: auto;">
-<caption style="caption-side: top;">C 표준 라이브러리의 헤더 파일</caption>
-<colgroup><col style="width: 18%;"/><col style="width: 12%;"/><col style="70%;"/></colgroup>
-<thead><tr><th style="text-align: center;">유형</th><th style="text-align: center;">헤더 파일</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody><tr><td style="text-align: center;"><a href="#파일-입출력">표준 입출력</a></td><td style="text-align: center;"><code>stdio</code></td><td>파일 입출력 함수를 제공한다: <code>printf()</code>, <code>scanf()</code> 등</td></tr><tr><td style="text-align: center;">표준 라이브러리</td><td style="text-align: center;"><code>stdlib</code></td><td>메모리 할당, 예외처리를 포함한 범목적 기능들을 제공한다: <code>malloc()</code>, <code>free()</code> 등</td></tr><tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/C_날짜와_시간_함수">날짜 및 시간</a></td><td style="text-align: center;"><code>time</code></td><td>날짜 및 시간과 관련된 함수를 제공한다: <code>time()</code>, <code>clock()</code> 등</td></tr><tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/C_수식_함수">수식</a></td><td style="text-align: center;"><code>math</code></td><td>수학적 함수를 제공한다: <code>exp()</code>, <code>cos()</code> 등</td></tr></tbody>
-</table>
-
-헤더 파일 개수나 선언된 데이터가 매우 많은 경우, 프로젝트 빌드 시간을 줄이기 위한 방안으로 헤더 파일을 중간체 형태로 미리 변환시킨 [컴파일된 헤더](https://en.wikipedia.org/wiki/Precompiled_header)(precompiled header)를 활용하기도 한다. 허나 컴파일된 헤더를 사용하면 컴파일 작업 자체에는 시간이 다소 걸리는 단점이 있어, 용량이 작은 프로젝트나 자주 수정을 해야 하는 헤더 파일이 있다면 오히려 비효율적이다. MSVC 컴파일러에서는 `pch.h` 혹은 `stdafx.h`가 해당한다.
-
 ## 포함 지시문
 [포함 지시문](https://en.cppreference.com/w/cpp/preprocessor/include)(inclusive directive) `#include`는 전처리기 지시문 중 하나로 대표적으로 [`stdio.h`](#파일-입출력)와 같은 [헤더 파일](#헤더-파일)을 불러오기 위해 사용된다. `#include` 지시문의 역할은 헤더 파일에 작성된 코드 전체를 해당 위치에 삽입하여 함수 프로토타입과 전역 및 [`extern`](#eb9dbcec9db4ebb88ceb9faceba6ac-1) 변수를 선언한다. 소스 코드에 데이터와 함수가 정의되었다면, 헤더 파일은 데이터와 함수를 선언하는 목적으로 사용된다.
 
@@ -1142,7 +1112,36 @@ void func(int x, float y) {
 }
 ```
 
-## `extern` 키워드
+### 헤더 파일
+[헤더 파일](https://ko.wikipedia.org/wiki/헤더_파일)(header file)은 데이터 및 기능의 존재를 알리는 역할을 하는 .h 확장자 파일이며, 링커로부터 오브젝트 파일들을 연동하기 위해 필요한 핵심 요소이다. 다른 스크립트 파일 또는 라이브러리에 정의된 데이터와 코드를 헤더 파일로 통해 다른 스크립트에서도 사용할 수 있도록 한다. 헤더 파일을 불러오는 방식은 두 가지가 존재한다:
+
+```c
+#include <stdio.h>
+#include "header.h"
+```
+
+이 둘은 [전처리기](#전처리기)가 헤더 파일을 어느 위치에서 찾을 것인지 차이점을 가진다.
+
+* **`#include <header.h>`**
+    
+    컴파일러 혹은 IDE에서 지정한 경로를 위주로 헤더 파일을 찾으며, 일반적으로 시스템 헤더 파일에 사용된다.
+
+* **`#include "header.h"`**
+    
+    현재 소스 파일이 위치한 경로를 위주로 헤더 파일을 찾는다. 만일 찾지 못하였을 시, `#include <header.h>`와 같이 지정된 경로에서 헤더 파일을 재탐색한다. 일반적으로 사용자 정의 헤더 파일에 사용된다.
+
+아래는 프로그래밍 언어에서 흔히 사용되는 데이터와 기능들은 바로 사용할 수 있도록 미리 컴파일된 [표준 라이브러리](https://ko.wikipedia.org/wiki/C_표준_라이브러리)를 불러오는 헤더 파일 일부를 나열한다.
+
+<table style="width: 80%; margin: auto;">
+<caption style="caption-side: top;">C 표준 라이브러리의 헤더 파일</caption>
+<colgroup><col style="width: 18%;"/><col style="width: 12%;"/><col style="70%;"/></colgroup>
+<thead><tr><th style="text-align: center;">유형</th><th style="text-align: center;">헤더 파일</th><th style="text-align: center;">설명</th></tr></thead>
+<tbody><tr><td style="text-align: center;"><a href="#파일-입출력">표준 입출력</a></td><td style="text-align: center;"><code>stdio</code></td><td>파일 입출력 함수를 제공한다: <code>printf()</code>, <code>scanf()</code> 등</td></tr><tr><td style="text-align: center;">표준 라이브러리</td><td style="text-align: center;"><code>stdlib</code></td><td>메모리 할당, 예외처리를 포함한 범목적 기능들을 제공한다: <code>malloc()</code>, <code>free()</code> 등</td></tr><tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/C_날짜와_시간_함수">날짜 및 시간</a></td><td style="text-align: center;"><code>time</code></td><td>날짜 및 시간과 관련된 함수를 제공한다: <code>time()</code>, <code>clock()</code> 등</td></tr><tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/C_수식_함수">수식</a></td><td style="text-align: center;"><code>math</code></td><td>수학적 함수를 제공한다: <code>exp()</code>, <code>cos()</code> 등</td></tr></tbody>
+</table>
+
+헤더 파일 개수나 선언된 데이터가 매우 많은 경우, 프로젝트 빌드 시간을 줄이기 위한 방안으로 헤더 파일을 중간체 형태로 미리 변환시킨 [컴파일된 헤더](https://en.wikipedia.org/wiki/Precompiled_header)(precompiled header)를 활용하기도 한다. 허나 컴파일된 헤더를 사용하면 컴파일 작업 자체에는 시간이 다소 걸리는 단점이 있어, 용량이 작은 프로젝트나 자주 수정을 해야 하는 헤더 파일이 있다면 오히려 비효율적이다. MSVC 컴파일러에서는 `pch.h` 혹은 `stdafx.h`가 해당한다.
+
+### `extern` 키워드
 [`extern`](https://en.cppreference.com/w/c/language/extern) 키워드는 [변수](#변수)를 정의 없이 선언만 한다. C 언어에서 변수를 소개하였을 당시 특수한 경우를 제외하고 선언과 정의는 동일하게 취급한다고 언급한 점에서 상당히 대비된다. 변수나 함수를 정의(definition)하면 메모리를 할당받아, 동일한 [식별자](#식별자)로 다시 정의할 수 없게 된다. 반면, 선언(declaration)은 단순히 컴파일러에게 변수나 함수의 존재를 알려줄 뿐이며 메모리를 할당받지 않아 여러 번 선언이 가능하다.
 
 위에서 설명한 특징을 상기하며, 아래의 예시를 통해 `extern` 키워드에 의해 스크립트에 미치는 영향을 살펴본다.
@@ -1186,16 +1185,20 @@ int main() {
     return 0;
 }
 ```
-</td></tr><tr><td colspan="3">위의 예시에서 두 소스 코드 <code>module.c</code>와 <code>main.c</code>는 하나의 헤더 파일 <code>module.h</code>에 의해 링커로부터 서로 연동된다.
-<ul><li>만일 <code>extern</code> 키워드가 없을 시, 포함 지시문에 의해 변수를 정의하는 코드가 각각 <code>module.c</code>와 <code>main.c</code>에 삽입된다. 그러면 <code>variable</code> 변수가 프로그램 전반적으로 두 번 정의되는 불상사로 인해 컴파일 오류가 발생한다.</li><li><code>extern</code> 키워드를 사용하면 변수는 여러 번 선언이 가능하지만, 정의되지 않은 채 사용하려면 할당된 메모리가 없기 때문에 컴파일 오류가 발생한다. <code>module.c</code>에서 <code>variable</code>을 사용하기 위해 필요한 단 한 번의 정의가 이루어졌다.</li></ul>
+</td></tr><tr><td colspan="3">위의 예시에서 두 소스 코드 <code>module.c</code>와 <code>main.c</code>는 하나의 헤더 파일 <code>module.h</code>에 의해 링커로부터 서로 연동된다. <code>extern</code> 키워드에 의해 변수는 여러 번 선언이 가능하지만, 실제 코드에서 사용하기 위해서는 단 한 번의 정의가 필요하다. <code>module.c</code>에서의 <code>variable</code>를 정의한 이유가 바로 이러한 이유가 배경이 된 것이다.
 </td></tr>
 </tbody>
 </table>
 
+위의 예시에서 자칫 잘못하면 경우에 따라 MSVC 컴파일러 기준으로 두 가지 오류가 발생할 수 있다.
+
+1. **[C2374](https://learn.microsoft.com/en-us/cpp/error-messages/compiler-errors-1/compiler-error-c2374)**: 동일한 식별자의 변수가 두 번 이상 정의되면서 발생한 컴파일러 오류이다; 예시에서 `extern` 키워드를 사용하지 않으면 나타난다.
+1. **[LNK2001](https://learn.microsoft.com/en-us/cpp/error-messages/tool-errors/linker-tools-error-lnk2001)**: 컴파일된 코드가 참조 혹은 호출하려는 [심볼](ko.Symbol.md)의 정의를 찾을 수 없어 발생하는 링커 오류이다; 선언된 변수를 정의하지 않으면 나타난다.
+
 한편, 함수 [프로토타입](#함수)는 원래부터 정의가 아닌 (또 다른 이름인 "전방선언"에서도 알 수 있듯이) 선언이므로 `extern` 키워드가 필요하지 않는다.
 
 ## 라이브러리
-[라이브러리](https://ko.wikipedia.org/wiki/라이브러리_(컴퓨팅))(library)는 함수 기능 및 데이터 호출을 제공하는 이진파일이며 `main()` 진입점을 갖지 않는다. 본 문서도 여태까지 C 언어의 표준 라이브러리인 `libc`(Visual C++ 컴파일러에서는 `libcmt`)을 `stdio.h` 헤더 파일로 불러와 사용하고 있었다. 마찬가지로 소스 코드를 라이브러리로 만들어 헤더 파일과 함께 배포하면 누군든지 라이브러리의 함수 기능과 데이터를 활용할 수 있다. 또한 이진파일 컴파일되었기 때문에 저장공간 절약과 소스 코드 유출 방지를 함께 꾀할 수 있다.
+[라이브러리](https://ko.wikipedia.org/wiki/라이브러리_(컴퓨팅))(library)는 변수나 함수 등을 제공하지만, 소스 코드 형태가 아닌 이미 컴파일 및 링크된 완전한 형태의 이진 파일이다. 라이브러리에 연동된 헤더 파일이 있어 `#include` 포함 지시문으로 불러와 사용할 수 있다. 즉, 라이브러리 관점에서 헤더 파일은 [API](https://ko.wikipedia.org/wiki/API)를 제공하는 역할을 한다. 라이브러리로 컴파일을 하면 파일 용량이 줄어들고 배포하기 편리하며, 또한 소스 코드 유출을 방지할 수 있다.
 
 ![비주얼 스튜디오 라이브러리 컴파일 설정](./images/visual_studio_library.png)
 
@@ -1203,10 +1206,10 @@ int main() {
 
 * **[정적 라이브러리](https://ko.wikipedia.org/wiki/정적_라이브러리)(static library)**
 
-    정적 라이브러리(`.LIB` 혹은 `.A` 확장자)는 프로그램 프로젝트를 컴파일하면 라이브러리도 함께 내포된다. 그러면 프로그램 하나가 완전체이기 때문에 외부 의존도가 낮아지는 장점을 가지지만, 프로그램 용량이 커지고 프로그램을 업데이트하려면 전부 새로 컴파일해야 하는 단점이 있다.
+    소스 코드를 컴파일하면 라이브러리도 함께 프로그램의 일부로 융합되어 외부 환경에 대한 의존도를 상당히 낮출 수 있다. 다만, 프로그램 용량이 커지고 업데이트된 라이브러리를 적용하려면 소스 코드를 새로 컴파일해야 하는 단점이 있다. 윈도우 NT에서 .lib 확장자를 가진다(유닉스의 경우 .a).
 
 * **[동적 라이브러리](https://ko.wikipedia.org/wiki/동적_링커)(dynamic library)**
 
-    동적 라이브러리(`.DLL` 혹은 `.SO`)는 프로그램에 내포되지 않고 별개의 파일로 존재하기 때문에 프로그램 용량이 작아지고 업데이트가 필요한 라이브러리만 교체하면 되지만, 프로그램의 외부 의존도가 높아져 라이브러리를 찾지 못하면 치명적인 문제를 야기할 수 있다.
+    소스 코드를 컴파일하여도 라이브러리는 프로그램 일부로 융합되지 않아 프로그램 용량이 획기적으로 줄어들고 라이브러리 업데이트가 매우 편리하다. 하지만 컴파일된 프로그램이 라이브러리를 찾지 못하면 실행이 불가하거나 정상적으로 동작하지 않으며, VCRUNTIME140.dll을 찾을 수 없다는 오류창이 대표적인 예시이다. 윈도우 NT에서 .dll 확장자를 가진다(유닉스의 경우 .so).
 
-C 언어에서는 라이브러리 생성이 어렵지 않다; 본 장에서 예시로 들은 `module.c`를 컴파일하는 게 전부이다. 헤더 파일에서 이미 함수에 대한 선언이 모두 되어있기 때문에 컴파일러는 라이브러리 내에 있는 함수들의 존재를 알아차리고 있다. 그리고 프로그램을 컴파일 혹은 실행하면서 라이브러리를 호출하여 원하는 함수를 사용한다.
+비주얼 스튜디오에서 C 언어로 라이브러리를 빌드하려면 위의 그림과 같이 프로젝트 속성에서 구성 유형을 정적 혹은 동적 라이브러리로 변경한다. 소스 코드에서 데이터와 함수를 정의하되, `main()`은 [진입점](#진입점)이 아닌 일반 함수로 동작하는 점에 유의한다. 정의된 변수나 함수를 접근할 수 있도록 헤더 파일에 선언하여 컴파일하면 라이브러리가 완성된다.
