@@ -1079,6 +1079,324 @@ for (int index = 0; index < sizeof(variable); index++) {
 
 비록 숫자를 읽을 때에는 빅 엔디언이 익숙하겠지만, 컴퓨터 메모리에서는 리틀 엔디언으로 데이터를 저장한다는 점을 명시하도록 한다.
 
+# 사용자 정의 자료형
+C 언어는 `int`, `float`, 또는 `char` 등의 기존 [자료형](#자료형)을 활용하여 특정 목적을 위한 커스텀 자료형을 제작할 수 있으며, 이를 사용자 정의 자료형(user-defined data type)이라고 부른다. 정확히 말하자면 아예 새로운 자료형을 창조하는 게 아닌, 효율적인 데이터 관리를 위해 기존 자료형들을 활용한 혹은 취합한 자료형이다.
+
+## 구조체
+[구조체](https://en.cppreference.com/w/c/language/struct)(structure)는 여러 내부 변수, 일명 맴버(member)들을 자료형과 무관하게 하나의 단일 데이터로 통합시킨 사용자 정의 자료형이며, `struct` 키워드로 정의된다. 아래 C 언어 예시는 문자형과 정수형 맴버를 가진 구조체를 선언한다.
+
+```c
+struct STRUCTURE {
+    char  field1;
+    int   field2;
+};
+```
+
+구조체로 변수를 정의하려면 기존 자료형처럼 변수 앞에 구조체를 기입하는데, 이때 `struct` 키워드도 함께 명시하여 컴파일러에게 구조체임을 알려야 한다.
+
+1. 구조체 맴버에 값을 할당하는 방법:
+
+    <table style="width: 95%; margin: auto;">
+    <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+    <thead><tr><th style="text-align: center;">순차적 맴버 정의</th><th style="text-align: center;">명시적 맴버 정의</th></tr></thead>
+    <tbody><tr style="vertical-align: top;"><td>
+    
+    ```c
+    struct STRUCTURE variable = { 'A', 3 };
+    ```
+    </td><td>
+    
+    ```c
+    struct STRUCTURE variable = { 
+        .field2 = 3,
+        .field1 = 'A'
+    };
+    ```
+    </td></tr><tr><td>구조체에서 맴버를 선언한 순서대로 데이터를 나열한다.</td><td>구조체 맴버를 직접 명시하고 할당함으로 순서의 영향을 받지 않는다.</td></tr>
+    </tbody>
+    </table>
+
+1. 구조체 선언과 동시에 변수를 함께 정의하는 방법:
+
+    <table style="width: 95%; margin: auto;">
+    <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+    <thead><tr><th style="text-align: center;">명명된 구조체</th><th style="text-align: center;">익명 구조체</th></tr></thead>
+    <tbody><tr style="vertical-align: top;"><td>
+    
+    ```c
+    struct STRUCTURE {
+        char  field1;
+        int   field2;
+    } variable = { 'A', 3 };
+    ```
+    </td><td>
+    
+    ```c
+    struct {
+        char  field1;
+        int   field2;
+    } variable = { 'A', 3 };
+    ```
+    </td></tr><tr style="vertical-align: top;"><td>차후 해당 구조체로부터 다른 변수를 정의하는 등 재활용이 가능하다.</td><td>재활용이 불가하지만, 사실상 이름을 지정할 필요가 없는 네스티드(nested), 즉 다른 사용자 정의 자료형 내에 흔히 사용된다.</td></tr>
+    </tbody>
+    </table>
+
+1. 구조체 맴버를 호출하는 방법:
+
+    <table style="width: 95%; margin: auto;">
+    <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+    <thead><tr><th style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators">객체 맴버 연산자</a></th><th style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators">포인터 맴버 연산자</a></th></tr></thead>
+    <tbody><tr style="vertical-align: top;"><td>
+    
+    ```c
+    printf("%c\n%d",
+        variable.field1, variable.field2);
+    ```
+    </td><td>
+    
+    ```c
+    struct STRUCTURE *ptr = &variable;
+    printf("%c\n%d", ptr->field1, ptr->field2);
+    ```
+    </td></tr><tr style="vertical-align: top;"><td>객체 맴버 연산자 <code>.</code>를 활용한 "값에 의한 호출"이다.</td><td>포인터 맴버 연산자 <code>.</code>를 활용한 "참조에 의한 호출"이다.</td></tr>
+    </tbody>
+    </table>
+
+각 맴버에 새로운 값을 할당하는 건 [배열](#배열)과 마찬가지로 가능하지만, 만일 모든 맴버들을 한꺼번에 할당할 필요가 있다면 [캐스팅](#자료형-변환)을 활용할 수 있다.
+
+```c
+variable = (struct STRUCTURE){ 'B', 7 };
+```
+
+### 데이터 구조 정렬
+위의 예시로 소개된 구조체의 크기를 반환하면 다음과 같이 출력된다.
+
+```c
+struct STRUCTURE {
+    char  field1;
+    int   field2;
+};
+
+printf("%d", sizeof(struct STRUCTURE));
+```
+```terminal
+8
+```
+
+분명 1바이트의 `char`과 4바이트의 `int`를 취합하면 총 5바이트가 계산되어야 한다고 생각이 들겠지만, 이는 시스템 프로세서 차원에서 메모리 접근성을 위한 [데이터 구조 정렬](https://en.wikipedia.org/wiki/Data_structure_alignment)(data structure alignment)이 반영된 결과이다. 만일 n-바이트 자료형의 데이터가 n-바이트 배수 간격의 메모리 주소에 할당되었을 시, 시스템 관점에서는 "자연스럽게 정렬(naturally aligned)"되었다고 하며 하드웨어 성능 효율이 가장 높다.
+
+대체적으로 자료형마다 지정된 정렬 크기는 해당 자료형 크기와 일치하는 편이다: `char`은 1바이트 정렬, `short`는 2바이트 정렬, `int` 및 `float`는 4바이트 정렬이다. 다양한 자료형 맴버들로 구성될 수 있는 구조체의 경우, 메모리 공간 절약보다 접근 효율이 우선시되기 때문에 맴버 자료형이 갖는 가장 큰 정렬 크기의 배수만큼 메모리를 할당받아 맴버들을 정의된 순서대로 정렬시킨다.
+
+> 그러므로 위의 예시는 가장 큰 자료형인 `int`에 따라 4바이트 정렬되어 총 8바이트의 크기가 도출된 것이다.
+
+다음은 몇 가지 경우에 따라 데이터 구조 정렬이 어떻게 이루어진 것인지 설명한다:
+
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;">맴버 구성에 따른 데이터 구조 정렬 비교</caption>
+<colgroup><col style="width: 33.3%;"/><col style="width: 33.4%;"/><col style="width: 33.3%;"/></colgroup>
+<thead><tr><th style="text-align: center;">8바이트: <code>char</code>-<code>int</code> 구조</th><th style="text-align: center;">8바이트: <code>char</code>-<code>short</code>-<code>int</code> 구조</th><th style="text-align: center;">12바이트: <code>char</code>-<code>int</code>-<code>short</code> 구조</th></tr></thead>
+<tbody><tr style="vertical-align: top;"><td>
+
+```c
+struct STRUCTURE {
+// ------- Addr: 0x00000000
+    char  field1;      // + 1
+//  char  Padding1[3]; // + 3
+// ------- Addr: 0x00000004
+    int   field2;      // + 4
+// ------- Addr: 0x00000008
+};
+```
+</td><td>
+
+```c
+struct STRUCTURE {
+// ------- Addr: 0x00000000
+    char  field1;      // + 1
+//  char  Padding1[1]; // + 1
+    short field2;      // + 2
+// ------- Addr: 0x00000004
+    int   field3;      // + 4
+// ------- Addr: 0x00000008
+};
+```
+
+</td><td>
+
+```c
+struct STRUCTURE {
+// ------- Addr: 0x00000000
+    char  field1;      // + 1
+//  char  Padding1[3]; // + 3
+// ------- Addr: 0x00000004
+    int   field2;      // + 4
+// ------- Addr: 0x00000008
+    short field3;      // + 2
+//  char  Padding2[2]; // + 2
+// ------- Addr: 0x0000000C
+};
+```
+</td></tr><tr style="vertical-align: top;"><td>정렬에 의해 맴버 간 여분이 발생하면 메모리의 연속성을 위해 패딩으로 메워진다.</td><td>구조체 자체의 정렬을 위해, 구조체 크기는 정렬 크기의 배수이어야 한다. 맨 마지막 맴버의 자료형 크기가 정렬 크기에 미치지 못하면 나머지를 패딩으로 채운다.</td><td>비록 <code>short</code> 자료형이 2바이트 정렬인 관계로 <code>char</code> 자료형 맴버 사이에 1바이트 패딩이 메워지지만, <code>int</code> 자료형에 의한 4바이트 크기의 정렬 경계 내에 두 맴버를 모두 담아낼 수 있기 때문이다.</td></tr>
+</tbody>
+</table>
+
+## 공용체
+[공용체](https://en.cppreference.com/w/cpp/language/union)(union)는 여러 내부 변수, 일명 맴버(member)들을 자료형과 무관하게 하나의 단일 데이터로 통합시킨 사용자 정의 자료형이며, `union` 키워드로 정의된다. 각 맴버마다 주어진 메모리가 있는 [구조체](#구조체)와 달리, 공용체의 맴버들은 하나의 메모리를 공용한다. 즉, 공용체의 한 맴버에 값이 변경되면 나머지 맴버에도 영향을 미친다.
+
+```c
+union UNION {    
+    char  field1;
+    int   field2;
+};
+```
+
+공용체로 변수를 정의하려면 기존 자료형처럼 변수 앞에 공용체를 기입하는데, 이때 `union` 키워드도 함께 명시하여 컴파일러에게 공용체임을 알려야 한다.
+
+1. 공용체 맴버에 값을 할당하는 방법:
+
+    <table style="width: 95%; margin: auto;">
+    <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+    <thead><tr><th style="text-align: center;">최전방 맴버 자료형 기준</th><th style="text-align: center;">명시적 맴버 자료형 기준</th></tr></thead>
+    <tbody><tr style="vertical-align: top;"><td>
+    
+    ```c
+    union UNION variable = { 365 };
+    // field1 = 'm' (0x0000006d)
+    // field2 = 109 (0x0000006d)
+    ```
+    </td><td>
+    
+    ```c
+    union UNION variable = { .field2 = 365 };
+    // field1 = 'm' (0x0000006d)
+    // field2 = 365 (0x0000016d)
+    ```
+    </td></tr><tr><td>숫자 365(<code>0x16d</code>) 중에서 가장 먼저 선언된 문자형 맴버에 의해 1바이트만 공용체에 저장되어, <code>field2</code>에는 숫자 109(<code>0x6d</code>)만 출력된다. </td><td>공용체 맴버를 직접 명시하고 할당하면 해당 맴버의 자료형에 따라 값이 저장되어, <code>field2</code>에는 숫자 365(<code>0x16d</code>)가 온전히 출력된다.</td></tr>
+    </tbody>
+    </table>
+
+1. 공용체 선언과 동시에 변수를 함께 정의하는 방법:
+
+    <table style="width: 95%; margin: auto;">
+    <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+    <thead><tr><th style="text-align: center;">명명된 공용체</th><th style="text-align: center;">익명 공용체</th></tr></thead>
+    <tbody><tr style="vertical-align: top;"><td>
+    
+    ```c
+    union UNION {
+        char  field1;
+        int   field2;
+    } variable = { 365 };
+    ```
+    </td><td>
+    
+    ```c
+    union {
+        char  field1;
+        int   field2;
+    } variable = { 365 };
+    ```
+    </td></tr><tr style="vertical-align: top;"><td>차후 해당 공용체로부터 다른 변수를 정의하는 등 재활용이 가능하다.</td><td>재활용이 불가하지만, 사실상 이름을 지정할 필요가 없는 네스티드(nested), 즉 다른 사용자 정의 자료형 내에 흔히 사용된다.</td></tr>
+    </tbody>
+    </table>
+
+1. 공용체 맴버를 호출하는 방법:
+
+    <table style="width: 95%; margin: auto;">
+    <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+    <thead><tr><th style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators">객체 맴버 연산자</a></th><th style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators">포인터 맴버 연산자</a></th></tr></thead>
+    <tbody><tr style="vertical-align: top;"><td>
+    
+    ```c
+    printf("%c\n%d",
+        variable.field1, variable.field2);
+    ```
+    </td><td>
+    
+    ```c
+    union UNION *ptr = &variable;
+    printf("%c\n%d", ptr->field1, ptr->field2);
+    ```
+    </td></tr><tr style="vertical-align: top;"><td>객체 맴버 연산자 <code>.</code>를 활용한 "값에 의한 호출"이다.</td><td>포인터 맴버 연산자 <code>.</code>를 활용한 "참조에 의한 호출"이다.</td></tr>
+    </tbody>
+    </table>
+
+## 열거형
+> 초창기 C 컴파일러인 [*K&R C*](https://ko.wikipedia.org/wiki/C_(프로그래밍_언어)#K&R_C)에는 존재하지 않았으나, 본 문서에서 다루는 보편적인 컴파일러 버전인 [*ANSI C*](https://ko.wikipedia.org/wiki/ANSI_C)부터 추가되었다.
+
+[열거형](https://en.cppreference.com/w/cpp/language/enum)(enumeration)은 열거된 항목, 일명 열거자(enumerator)들을 정수로 순번을 매기며, `enum` 키워드 정의된다. [구조체](#구조체)와 [공용체](#공용체)처럼 커스텀 자료형을 제작하는 게 아닌, 정수를 [식별자](#식별자)로 대신 치환하여 소스 코드 가독성을 높여주는 역할을 한다. 다음은 열거형에 대한 유의사항이다:
+
+1. 열거자들은 정수 0부터 시작하여 다음 열거자마다 1만큼 증가한다. 할당 연산자 `=`로 정수를 직접 지정하지 않는 이상, 이러한 규칙은 계속 유지된다.
+
+    ```c
+    enum ENUMERATION {
+        enumerator1,     // = 0
+        enumerator2,     // = 1
+        enumerator3 = 7, // = 7
+        enumerator4      // = 8
+    };
+    ```
+
+1. 비록 다른 열거형에 정의된 열거자여도 식별자는 전역적으로 유일해야 한다.
+
+    ```c
+    enum ENUMERATION1 {
+        enumerator1,
+        enumerator2,
+    };
+    
+    enum ENUMERATION2 {
+        enumeration2,    // <- [C2086] 'enumerator2': 재정의: 이전 정의는 '열거자'입니다.
+        enumeration3,
+    };
+    ```
+
+열거형 선언 이후, 열거자를 추가하거나 열거형 값을 변경하는 건 불가하다. 그래도 열거형으로부터 정의된 변수는 범위 외의 정수나 타 열거형의 열거자를 할당받아 사용할 수 있다. 아래는 선언된 열거형으로부터 변수를 정의하는 구문을 보여준다.
+
+```c
+enum ENUMERATION variable = enumerator1;
+```
+
+## `typedef` 키워드
+[`typedef`](https://en.cppreference.com/w/c/language/typedef) 키워드는 C 언어 내장 자료형 및 사용자 지정 자료형에 별칭(alias)을 선언하여 가독성을 높이는 역할을 한다.
+
+```c
+// unsigned 문자 자료형의 BYTE 별칭 선언
+typedef unsigned char BYTE;
+```
+
+`typedef` 키워드는 구조체와 공용체 등의 사용자 정의 자료형을 더 간편하게 사용할 수 있도록 하는 역할도 지닌다.
+
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;">사용자 정의 자료형의 <code>typedef</code> 활용법</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;"><code>typedef struct</code></th><th style="text-align: center;"><code>typedef union</code></th></tr></thead>
+<tbody><tr style="vertical-align: top;"><td>
+
+```c
+typedef struct {
+    char field1;
+    int  field2;
+} STRUCTURE;
+
+STRUCTURE variable;
+variable = (STRUCTURE){ 'A', 3 };
+```
+</td><td>
+
+```c
+typedef union {
+    int  field1;
+    char field2;
+} UNION;
+
+UNION variable;
+variable = (UNION){ 365 };
+```
+</td></tr></tr>
+</tbody>
+</table>
+
 # 전처리기
 C 언어가 컴파일되기 이전에 전처리기로부터 `#include`와 같은 전처리기 지시문이 우선적으로 처리된다. 전처리기 지시문은 C 언어 컴파일러 설정 및 프로그래밍의 편리성을 제공한다. 본 장에서는 일부 유용한 전처리기 지시문에 대하여 소개한다.
 
