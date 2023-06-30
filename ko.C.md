@@ -1566,12 +1566,12 @@ printf("%d", MACRO(3, 4));
 ```
 </td></tr><tr style="vertical-align: top;"><td>
 
-```c
+```terminal
 7
 ```
 </td><td>
 
-```c
+```terminal
 12
 ```
 </td></tr>
@@ -1594,7 +1594,7 @@ int value1 = 1, value2 = 3;
 int variable = (value1 += value2, ++value1);
 printf("%d", variable);
 ```
-```
+```terminal
 5
 ```
 
