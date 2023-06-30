@@ -21,3 +21,31 @@ C++ 언어는 [컴파일 언어](ko.Compiler.md)(compiled language)이다. C++ �
 * [Microsoft Visual C++](https://ko.wikipedia.org/wiki/마이크로소프트_비주얼_C%2B%2B) (일명 MSVC): 마이크로소프트
 * [GNU C Compiler](https://ko.wikipedia.org/wiki/GNU_C_컴파일러) (일명 GCC): GNU 프로젝트
 * [Clang](https://ko.wikipedia.org/wiki/클랭): LLVM Developer Group, 애플
+
+## 프로젝트
+다음은 비주얼 스튜디오 2022을 위주로 C++ 프로젝트 구축에 대하여 설명한다.
+
+![비주얼 스튜디오 C++ 프로그래밍을 위한 구성요소](./images/visual_studio_cpp.png)
+
+아래는 C++를 실행하는 가장 기초적인 코드와 함께 코드에 대한 설명이다.
+
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;">간단한 C++ 코드 및 설명</caption>
+<colgroup><col style="width: 50%;"/><col styl="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;">코드</th><th style="text-align: center;">설명</th></tr></thead>
+<tbody>
+<tr>
+<td>
+
+```cpp
+#include <iostream>
+
+int main()
+{
+    std::cout << "Hello World!\n";
+}
+```
+</td><td>
+<ul><li><code>#include &lt;iostream&gt;</code><br/>Iostream <a href="#헤더-파일">헤더 파일</a>로부터 C++ 표준 입출력 라이브러리를 <a href="#포함-지시문">불러오며</a>, 터미널에 텍스트를 출력하는 <a href="#파일-입출력"><code>std::cout</code></a> 등을 제공한다.</li><li><code>int main() { ... }</code><br/>C++가 시작되는 함수, 일명 <a href="#진입점">진입점</a>이다.</li></ul>
+</td></tr></tbody>
+</table>
