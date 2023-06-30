@@ -144,7 +144,65 @@ int main()
 ```cpp
 short             // 표현 가능 범위: -32768 ~ +32767
 unsigned short    // 표현 가능 범위:     +0 ~ +65535
-``` 
+```
+
+### 자료형 변환
+자료형 변환(type casting)은 데이터를 다른 자료형으로 바꾸는 작업이며, 불가피하게 데이터가 손실될 수 있으므로 유의하도록 한다.
+
+* **암묵적 자료형 변환(implicit type casting)**
+
+    코드에서 별도로 자료형을 명시하지 않아도 컴파일러에 의해 데이터가 자동적으로 적합한 자료형으로 변환되는 경우이다.
+
+    ```cpp
+    float num1 = 314.159;
+    short num2 = num1;                   // num2 저장값: 314
+    ```
+
+* **명시적 자료형 변환(explicit type casting)**
+
+    코드에서 소괄호 `()` 안에 자료형을 직접 기입하여 원하는 자료형으로 변환되는 경우이다.
+
+    ```cpp
+    float num1 = 314.159;
+    short num2 = (unsigned char)num1;    // num2 저장값: 58
+    ```
+
+    C 형식의 자료형 변환이 가지던 결함을 보완하기 위해 C++11부터 네 가지의 새로운 캐스팅 연산자가 소개되었다. C++에서는 다음 네 개의 연산자를 사용한 자료형 캐스팅을 권장한다.
+
+    <table style="width: 80%; margin: auto;"><caption style="caption-side: top;">C++ 캐스팅 연산자</caption><colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">설명 및 예시</th></tr></thead><tbody><tr><td rowspan="2" style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/static_cast"><code>static_cast</code></a></td><td>명시적 그리고 암묵적 변환에 사용되는 가장 일반적인 자료형 캐스팅 연산자이다.</td></tr><tr><td>
+    
+    ```cpp
+    int variable = 3;
+    static_cast<double>(variable);
+    ```
+    </td></tr><tr><td rowspan="2" style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/const_cast"><code>const_cast</code></a></td><td>상수 전용 자료형 캐스팅 연산자이며, 이 과정에서 상수의 값을 <a href="#참조">참조</a>를 통해 변경할 수 있다.</td></tr><tr><td>
+    
+    ```cpp
+    const int A = 3;                 // 변환 이전: A = 3
+    int *B = const_cast<int *>(&A);
+    *B = 1;                          // 변환 이후: A = 1
+    ```
+    </td></tr><tr><td rowspan="2" style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/dynamic_cast"><code>dynamic_cast</code></a></td><td><a href="#클래스">클래스</a> 혹은 <a href="#클래스">객체</a>의 <a href="#다형성">다형성</a>을 처리하는데 사용되는 자료형 캐스팅 연산자이다.</td></tr><tr><td>
+    
+    ```cpp
+    derivedClass *A = new derivedClass;
+    baseClass *B = dynamic_cast<baseClass *>(A);
+    ```
+    </td></tr><tr><td rowspan="2" style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/reinterpret_cast"><code>reinterpret_cast</code></a></td><td><a href="#포인터">포인터</a>를 다른 자료형의 포인터로 변환하는데 사용되는 자료형 캐스팅 연산자이다. 데이터 손상 위험이 가장 높은 캐스팅 연산자로써 매우 신중히 사용되어야 한다.</td></tr><tr><td>
+    
+    ```cpp
+    int *variable = 3
+    reinterpret_cast<double *>(variable)
+    ```
+    </td></tr></tbody></table>
+
+### `sizeof` 연산자
+[`sizeof`](https://en.cppreference.com/w/cpp/language/sizeof) 연산자는 데이터나 자료형의 메모리에 할당된 바이트 크기를 반환한다.
+
+```cpp
+sizeof(int);      // 크기: 4바이트
+sizeof(char);     // 크기: 1바이트
+```
 
 ## 탈출 문자
 [탈출 문자](https://ko.wikipedia.org/wiki/이스케이프_문자)(escape character)는 백슬래시 기호 `\`를 사용하며, [문자열](#문자열)로부터 탈출하여 텍스트 데이터 내에서 특정 연산을 수행하도록 한다. 예시에서 `\n` 탈출 문자를 사용하여 문자열 줄바꿈을 구현한 것을 보여주었다.
