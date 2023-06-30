@@ -346,7 +346,7 @@ char variable = 75;    // ASCII에 의해 문자 'K'가 저장
 ```c
 printf("Hello,\nWorld!");
 ```
-```
+```terminal
 Hello,
 World!
 ```
