@@ -102,7 +102,7 @@ C [런타임 라이브러리](https://ko.wikipedia.org/wiki/런타임_라이브�
 
 * **[블록](https://ko.wikipedia.org/wiki/블록_(프로그래밍))(block)**
 
-    한 개 이상의 문장들을 한꺼번에 관리할 수 있도록 묶어놓은 소스 코드상 그룹이다. 블록 안에 또 다른 블록이 상주할 수 있으며, 이를 네스티드 블록(nested block)이라고 부른다. C 언어에서는 한 쌍의 중괄호 `{ }`로 표시된다.
+    한 개 이상의 문장들을 한꺼번에 관리할 수 있도록 묶어놓은 소스 코드상 그룹이다. 블록 안에 또 다른 블록이 상주할 수 있으며, 이를 네스티드 블록(nested block)이라고 부른다. C 언어에서는 한 쌍의 중괄호 `{}`로 표시된다.
 
     ```c
     {
@@ -112,7 +112,7 @@ C [런타임 라이브러리](https://ko.wikipedia.org/wiki/런타임_라이브�
     ```
 
 ### 식별자
-[식별자](https://learn.microsoft.com/en-us/cpp/c-language/c-identifiers)(identifier)는 프로그램을 구성하는 데이터들을 구별하기 위해 사용되는 명칭이다. 즉, 식별자는 개발자가 데이터에 직접 붙여준 이름이다. C 프로그래밍 언어에서 식별자를 선정하는데 아래의 규칙을 지켜야 한다.
+[식별자](https://learn.microsoft.com/en-us/cpp/c-language/c-identifiers)(identifier)는 프로그램을 구성하는 데이터들을 구별하기 위해 사용되는 명칭이다. 즉, 식별자는 개발자가 데이터에 직접 붙여준 이름이다. C 언어에서 식별자를 선정하는데 아래의 규칙을 지켜야 한다.
 
 1. 알파벳, 숫자, 밑줄 `_`만 허용 (그 외 특수문자 및 공백 사용 불가)
 2. 식별자의 첫 문자는 숫자가 될 수 없음
@@ -120,7 +120,7 @@ C [런타임 라이브러리](https://ko.wikipedia.org/wiki/런타임_라이브�
 4. [예약어](https://ko.wikipedia.org/wiki/예약어) 금지
 
 ### 주석
-[주석](https://doc.rust-lang.org/reference/comments.html)(comment)은 프로그램의 소스 코드로 취급하지 않아 실행되지 않는 영역이다. 흔히 코드에 대한 간단한 정보를 기입하기 위해 사용되는 데, C 언어에는 한줄 주석 그리고 블록 주석이 존재한다.
+[주석](https://learn.microsoft.com/en-us/cpp/c-language/c-comments)(comment)은 프로그램의 소스 코드로 취급하지 않아 실행되지 않는 영역이다. 흔히 코드에 대한 간단한 정보를 기입하기 위해 사용되는 데, C 언어에는 한줄 주석 그리고 블록 주석이 존재한다.
 
 <table style="table-layout: fixed; width: 80%; margin: auto;">
 <caption style="caption-side: top;">C 언어 주석 종류</caption>
