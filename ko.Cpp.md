@@ -126,3 +126,142 @@ int main()
 </td></tr>
 </tbody>
 </table>
+
+# 전처리기
+C++가 컴파일되기 이전에 전처리기로부터 `#include`와 같은 전처리기 지시문이 우선적으로 처리된다. 전처리기 지시문은 C++ 컴파일러 설정 및 프로그래밍의 편리성을 제공한다. 본 장에서는 일부 유용한 전처리기 지시문에 대하여 소개한다.
+
+## 매크로 정의
+[매크로](https://en.cppreference.com/w/cpp/preprocessor/replace)(macro)란 식별자가 있는 코드 조각이다. 코드 조각은 숫자나 문자와 같은 간단한 데이터가 될 수 있으며(객체형식 매크로; object-like macro), 전달인자를 받는 표현식이나 문장이 될 수도 있다(함수형식 매크로; function-like macro). 매크로는 `#define` 지시문으로 정의되며, 각 매크로에 해당하는 데이터 및 표현식이 소스 코드에 대체된다. 정의된 매크로는 `#undef` 지시자로 제거할 수 있다.
+
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;">C++의 매크로 유형</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;">객체형식 매크로</th><th style="text-align: center;">함수형식 매크로</th></tr></thead>
+<tbody><tr style="vertical-align: top;"><td>
+
+```cpp
+#define MACRO    7
+
+printf("%d", MACRO);
+
+#undef MACRO
+```
+</td><td>
+
+```cpp
+#define MACRO(x, y)    (x * y)
+
+printf("%d", MACRO(3, 4));
+
+#undef MACRO
+```
+</td></tr><tr style="vertical-align: top;"><td>
+
+```terminal
+7
+```
+</td><td>
+
+```terminal
+12
+```
+</td></tr>
+</tbody>
+</table>
+
+한 번 정의된 매크로는 런타임 도중에 변경이 불가하다. 정의된 매크로는 마치 전역 변수인 마냥 헤더 파일에서 `#include`와 같은 포함 지시문을 통해 다른 스크립트에서도 사용할 수 있다.
+
+컴파일러에는 공통된 표준 매크로 및 컴파일러마다 전용 매크로가 내장되어 있다.
+
+* **Visual C++**: [Microsoft Docs - 미리 정의된 매크로](https://learn.microsoft.com/en-us/cpp/preprocessor/predefined-macros)
+* **GCC**: [GCC Online Documentation - Predefined Macros](https://gcc.gnu.org/onlinedocs/cpp/Predefined-Macros.html)
+* **그 외**: [SourceForge Wiki](https://sourceforge.net/p/predef/wiki/Compilers/)
+
+### 쉼표 연산자
+[쉼표 연산자](https://en.cppreference.com/w/cpp/language/operator_other)(comma operator)는 앞에 있는 표현식을 평가하되 반환되지 않고, 뒤에 있는 표현식이 평가되어 반환된다. 흔히 매크로 정의를 간결하게 하기 위해 사용된다. 아래의 예시 코드에 의하면 먼저 할당 연산자로 `value1`은 4가 되고, 이후에 증가 연산자에 의해 5가 된다.
+
+```cpp
+int value1 = 1, value2 = 3;
+int variable = (value1 += value2, ++value1);
+printf("%d", variable);
+```
+```terminal
+5
+```
+
+## 조건 포함문
+[조건 포함문](https://en.cppreference.com/w/cpp/preprocessor/conditional)(conditional inclusion)은 조건여부에 따라 컴파일 시 특정 범위의 코드를 포함시킬 것인지 배제할 것인지 결정한다. 비록 조건 포함문이 일반 조건문의 키워드와 유사할지라도 절대 [`if`](#if-조건문) 및 [`else`](#if-조건문) 조건문을 대체하기 위해 사용되지 말아야 한다.
+
+```cpp
+#if    SOMETHING > value
+    ...
+#elif  SOMETHING < value
+    ...
+#else
+    ...
+#endif
+```
+
+
+### 매크로 조건
+조건 포함문은 매크로의 정의 여부를 판단할 수 있다.
+
+```cpp
+// 만일 64비트 ARM 혹은 x64 아키텍쳐로 컴파일 할 경우...
+#ifdef    _WIN64
+
+    ...
+
+#endif
+
+// 만일 64비트 ARM 혹은 x64 아키텍쳐로 컴파일되지 않은 경우...
+#ifndef   _WIN64
+
+    ...
+
+#endif
+```
+
+## Pragma 지시문
+[Pragma 지시문](https://en.cppreference.com/w/cpp/preprocessor/impl)(pragma directive)은 컴파일러의 기능과 옵션을 설정하기 위해 사용되는 전처리기 지시문이다. 개발사마다 제작한 컴파일러는 기술적 성능이 각각 다르기 때문에 pragma는 비공통적인 컴파일러 특정 전처리기 지시문이다.
+
+> Pragma란 용어는 pragmatic의 줄임말로, 사전적 의미로는 "실용적인"을 뜻한다. 이는 실질적 컴파일러 동작 및 처리 방식에 관여한 것을 보아 붙여진 용어라고 판단된다.
+
+* **Visual C++**: [Microsoft Docs - Pragma Directives and the Pragma Keyword](https://learn.microsoft.com/en-us/cpp/preprocessor/pragma-directives-and-the-pragma-keyword)
+* **GCC**: [GCC Online Documentation - Pragmas](https://gcc.gnu.org/onlinedocs/gcc/Pragmas.html)
+
+본 장은 마이크로소프트의 비주얼 스튜디어에서 제공하는 Visual C++ 컴파일러의 pragma 지시문을 위주로 다룬다.
+
+### `#pragma once`
+`#pragma once`는 컴파일 작업 시 `#include` 지시문을 통해 중복 포함된 헤더 파일을 한 번만 포함시키는 pragma 지시문이다.
+
+```cpp
+#pragma once
+```
+
+결과적으로 하나의 소스 파일에 헤더 파일이 중복적으로 포함이 되는 것을 제한하므로써 정의가 반복되는 현상을 막을 수 있는데, 이러한 기능을 [헤더 중복 방지](https://en.wikipedia.org/wiki/Include_guard)(include guard)라고 부른다. 추가적으로 `#pragma once` 지시문을 사용하면 처리하는 헤더 파일 횟수가 줄어들어 컴파일 작업 시간도 함께 줄이게 된다.
+
+아래의 코드는 `#pragma once` 지시문을 사용하지 않고 헤더 중복 방지 기능을 구현하는 방법이다.
+
+```cpp
+// 헤더 파일: "header.h"
+#ifndef HEADER_FILE
+#define HEADER_FILE
+
+    ...
+
+#endif
+```
+
+만일 `header.h` 헤더 파일이 아직 처리되지 않았으면 컴파일러는 처음으로 `HEADER_FILE` 매크로를 정의한다. 그러나 헤더 파일을 다시 한 번 마주하였을 시, `HEADER_FILE`이 이미 정의되어 있기에 매크로 조건에 의해 컴파일러는 헤더 파일을 처리하지 않는다.
+
+### `#pragma region`
+컴파일 작업에는 직접적인 영향을 주지 않지만, `#pragma region` 및 `#pragma endregion` 쌍은 가독성을 위해 비주얼 스튜디오에서 지정된 코드 부분을 한 줄로 압축하거나 펼치는 기능을 제공한다.
+
+```cpp
+#pragma region REGIONNAME
+
+    ...
+
+#pragma endregion REGIONNAME
+```
