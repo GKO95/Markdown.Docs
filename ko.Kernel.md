@@ -3,7 +3,7 @@ category: 운영체제
 title: 커널
 ---
 # 커널
-[커널](https://ko.wikipedia.org/wiki/커널_(컴퓨팅))(kernel)은 [운영체제](https://ko.wikipedia.org/wiki/운영체제)의 핵심 프로그램으로 일반적으로 시스템 전체에 대한 제어권을 가진다. [메모리](ko.Memory.md)에 항상 상주하여 하드웨어와 소프트웨어 간 상호작용을 가능케 하여, 운영체제의 아래 역할을 담당한다.
+[커널](https://ko.wikipedia.org/wiki/커널_(컴퓨팅))(kernel), 일명 슈퍼바이저(supervisor)는 [운영체제](https://ko.wikipedia.org/wiki/운영체제)의 핵심 프로그램으로 일반적으로 시스템 전체에 대한 제어권을 가진다. [메모리](ko.Memory.md)에 항상 상주하여 하드웨어와 소프트웨어 간 상호작용을 가능케 하여, 운영체제의 아래 역할을 담당한다.
 
 * [장치 드라이버](ko.Driver.md#장치-드라이버)를 통한 하드웨어 리소스 제어: 메모리, 입출력, 암호화 등
 * [프로세스](ko.Process.md) 간 위의 하드웨어 리소스 할당에 대한 갈등 중재
