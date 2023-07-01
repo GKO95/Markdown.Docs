@@ -101,39 +101,55 @@ Arg4: fffff803999612d0, address which referenced memory
 </tbody>
 </table>
 
-아래는 어플리케이션과 운영체제 공통사항으로 출력되는 레지스터에 저장된 데이터 및 충돌이 발생한 스택을 보여준다.
-
-```windbg
-TRAP_FRAME:  ffff9e81031476e0 -- (.trap 0xffff9e81031476e0)
-rax=00000000d34a8f72 rbx=0000000000000000 rcx=0000000000000000
-rdx=ffffc4899d02bc60 rsi=0000000000000000 rdi=0000000000000000
-rip=fffff803999612d0 rsp=ffff9e8103147870 rbp=ffff9e8103147ae1
-    r8=0000000000000002  r9=ffffc4899e100000 r10=ffffc48997600300
-r11=ffffc4899e14c710 r12=0000000000000000 r13=0000000000000000
-r14=0000000000000000 r15=0000000000000000
-iopl=0         nv up ei pl zr na po nc
-myfault+0x12d0:
-fffff803`999612d0 8b03            mov     eax,dword ptr [rbx] ds:00000000`00000000=????????
-
-STACK_TEXT:  
-ffff9e81`03147598 fffff803`7aa3e2a9     : 00000000`0000000a ffffc489`9e155720 00000000`00000002 00000000`00000000 : nt!KeBugCheckEx
-ffff9e81`031475a0 fffff803`7aa39934     : 00000000`00000fff 00000000`00001001 00000000`00000001 00007ffe`00000000 : nt!KiBugCheckDispatch+0x69
-ffff9e81`031476e0 fffff803`999612d0     : 00000000`656e6f4e ffffc489`9e14c720 ffff9e81`00000003 00000000`00000880 : nt!KiPageFault+0x474
-ffff9e81`03147870 fffff803`9996168e     : fffff803`d34a8f72 ffff9e81`031478f8 00000000`00000000 00000000`00000000 : myfault+0x12d0
-ffff9e81`031478a0 fffff803`999617f1     : ffffe681`038f55d0 fffff803`7b0e83a9 ffffe681`07a04db0 ffff9e81`031479a0 : myfault+0x168e
-ffff9e81`031479e0 fffff803`7a8cf765     : ffffe681`038f55d0 00000000`00000002 00000000`0000000c ffff9e81`03147b20 : myfault+0x17f1
-ffff9e81`03147a40 fffff803`7acddfc0     : ffffe681`038f55d0 ffff9e81`03147ae1 ffffe681`038f55d0 ffffe681`07a5fd60 : nt!IofCallDriver+0x55
-ffff9e81`03147a80 fffff803`7acdc58c     : 00000000`00000000 00000000`83360018 ffff9e81`03147ea0 ffffe681`038f55d0 : nt!IopSynchronousServiceTail+0x1d0
-ffff9e81`03147b30 fffff803`7acda866     : 00000000`00000000 00000000`00000000 00000000`00000000 00000000`00000000 : nt!IopXxxControlFile+0x72c
-ffff9e81`03147d40 fffff803`7aa3d9e8     : 00000000`00000000 00000000`00000000 ffff75ba`5f10e2ea ffff9e81`03147ea0 : nt!NtDeviceIoControlFile+0x56
-ffff9e81`03147db0 00007ffe`81aaeee4     : 00000000`00000000 00000000`00000000 00000000`00000000 00000000`00000000 : nt!KiSystemServiceCopyEnd+0x28
-0000008e`15fbe968 00000000`00000000     : 00000000`00000000 00000000`00000000 00000000`00000000 00000000`00000000 : 0x00007ffe`81aaeee4
-```
-
-위의 내용들은 각각 [어셈블리](ko.Assembly.md)와 스택 기반의 [메모리](ko.Memory.md) 할당 등의 컴퓨터공학 및 윈도우 운영체제에 대한 이해도가 요구된다. 본 문서에서는 언급한 이론들을 설명하지 않을 것이며, WinDbg를 사용하여 분석하기 위해 알아야 할 사항과 명령, 그리고 방법론을 위주로 소개한다.
+이후 공통사항으로 레지스터에 저장된 데이터와 충돌이 발생한 스택을 화면에 출력한다. [어셈블리](ko.Assembly.md)와 스택 기반의 [메모리](ko.Memory.md) 할당 등의 컴퓨터공학 및 윈도우 운영체제에 대한 이해도가 요구된다. 본 문서에서는 WinDbg를 사용하여 분석하기 위해 알아야 할 사항과 명령, 그리고 방법론을 위주로 소개한다.
 
 # 스택 해석하기
-덤프로부터 [스레드](ko.Process.md#스레드) 스택을 읽는다는 건 증상이 발생한 당시 프로그램 혹은 시스템 상황을 이해하려는 디버깅의 기초이자 핵심인 작업 중 하나이다. 본 내용은 가급적 [WinDbg](#windbg)에서 제공하는 기본 명령만을 사용하여 스택을 해석하는 방법을 소개한다.
+[스레드](ko.Process.md#스레드) [스택](https://ko.wikipedia.org/wiki/스택)을 읽는 절차는 당시 프로그램 혹은 시스템이 어떠한 작업을 하였는지 이해하려는 디버깅의 기초이자 핵심되는 작업 중 하나이다. 본 내용은 가급적 [WinDbg](#windbg)에서 제공하는 기본 명령만을 사용하여 스택을 해석하는 방법을 소개한다.
+
+아래는 [Bugcheck](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-code-reference2) [0xD1 DRIVER_IRQL_NOT_LESS_OR_EQUAL](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0xd1--driver-irql-not-less-or-equal)에 의해 생성된 전체 메모리 덤프를 예시로 스택 해석을 설명한다. WinDbg에서 [`k*`](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/k--kb--kc--kd--kp--kp--kv--display-stack-backtrace-) 명령어는 스택을 역추적하여 화면에 출력하며, [와일드카드](https://ko.wikipedia.org/wiki/와일드카드_문자)에 어떤 문자를 입력하는지에 따라 표시되는 정보가 다소 달라진다.
+
+```windbg
+0: kd> k
+ # Child-SP          RetAddr               Call Site
+00 ffff9e81`03147598 fffff803`7aa3e2a9     nt!KeBugCheckEx
+01 ffff9e81`031475a0 fffff803`7aa39934     nt!KiBugCheckDispatch+0x69
+02 ffff9e81`031476e0 fffff803`999612d0     nt!KiPageFault+0x474
+03 ffff9e81`03147870 fffff803`9996168e     myfault+0x12d0
+04 ffff9e81`031478a0 fffff803`999617f1     myfault+0x168e
+05 ffff9e81`031479e0 fffff803`7a8cf765     myfault+0x17f1
+06 ffff9e81`03147a40 fffff803`7acddfc0     nt!IofCallDriver+0x55
+07 ffff9e81`03147a80 fffff803`7acdc58c     nt!IopSynchronousServiceTail+0x1d0
+08 ffff9e81`03147b30 fffff803`7acda866     nt!IopXxxControlFile+0x72c
+09 ffff9e81`03147d40 fffff803`7aa3d9e8     nt!NtDeviceIoControlFile+0x56
+0a ffff9e81`03147db0 00007ffe`81aaeee4     nt!KiSystemServiceCopyEnd+0x28
+0b 0000008e`15fbe968 00007ffe`7f4abdab     ntdll!NtDeviceIoControlFile+0x14
+0c 0000008e`15fbe970 00007ffe`809327f1     KERNELBASE!DeviceIoControl+0x6b
+0d 0000008e`15fbe9e0 00007ff6`bcaf2b4f     KERNEL32!DeviceIoControlImplementation+0x81
+0e 0000008e`15fbea30 00007ffe`7f839636     notmyfault64+0x2b4f
+0f 0000008e`15fbeb30 00007ffe`7f838f27     USER32!UserCallDlgProcCheckWow+0x182
+10 0000008e`15fbec10 00007ffe`7f852e09     USER32!DefDlgProcWorker+0xc7
+11 0000008e`15fbecc0 00007ffe`7f838281     USER32!DefDlgProcA+0x39
+12 0000008e`15fbed00 00007ffe`7f837f3c     USER32!UserCallWinProcCheckWow+0x2d1
+13 0000008e`15fbee60 00007ffe`7f84303d     USER32!DispatchClientMessage+0x9c
+14 0000008e`15fbeec0 00007ffe`81ab2e44     USER32!_fnDWORD+0x3d
+15 0000008e`15fbef20 00007ffe`7f451554     ntdll!KiUserCallbackDispatcherContinue
+16 0000008e`15fbefa8 00007ffe`7f8378b8     win32u!NtUserMessageCall+0x14
+17 0000008e`15fbefb0 00007ffe`7f837567     USER32!SendMessageWorker+0x2e8
+18 0000008e`15fbf060 00007ffe`663db485     USER32!SendMessageW+0x137
+19 0000008e`15fbf0c0 00007ffe`66352433     COMCTL32!Button_ReleaseCapture+0x18d
+1a 0000008e`15fbf0f0 00007ffe`7f838281     COMCTL32!Button_WndProc+0x28c63
+1b 0000008e`15fbf1c0 00007ffe`7f837d41     USER32!UserCallWinProcCheckWow+0x2d1
+1c 0000008e`15fbf320 00007ffe`7f838bad     USER32!DispatchMessageWorker+0x1f1
+1d 0000008e`15fbf3a0 00007ffe`663883c4     USER32!IsDialogMessageW+0x17d
+1e 0000008e`15fbf400 00007ffe`6638ad1c     COMCTL32!Prop_IsDialogMessage+0x1f0
+1f 0000008e`15fbf430 00007ffe`6638a99f     COMCTL32!_RealPropertySheet+0x32c
+20 0000008e`15fbf500 00007ffe`6638b633     COMCTL32!_PropertySheet+0x47
+21 0000008e`15fbf530 00007ff6`bcaf449d     COMCTL32!PropertySheetA+0x53
+22 0000008e`15fbf5d0 00007ff6`bcaf47da     notmyfault64+0x449d
+23 0000008e`15fbf930 00007ffe`809426bd     notmyfault64+0x47da
+24 0000008e`15fbf970 00007ffe`81a6dfb8     KERNEL32!BaseThreadInitThunk+0x1d
+25 0000008e`15fbf9a0 00000000`00000000     ntdll!RtlUserThreadStart+0x28
+```
 
 # 같이 보기
 * [Debugger Commands - Windows drivers &#124; Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/debugger-commands)
