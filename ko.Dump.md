@@ -3,24 +3,33 @@ category: 디버깅
 title: 덤프
 ---
 # 사용자 모드 덤프
-[사용자 모드 덤프](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/user-mode-dump-files)(user-mode dump), 일명 어플리케이션 덤프는 충돌이 발생하는 등 특정 시점에서 [프로세스](ko.Process.md)의 [가상 주소 공간](ko.Process.md#가상-주소-공간) 중 [사용자 공간](ko.Processor.md#보호-링)에 포함된 정보가 수집된 파일이다. 사용자 모드 덤프를 통해 당시 어플리케이션이 어떠한 작업을 수행하고 있었는지 파악할 수 있으나, 커널측 정보는 살펴볼 수 없다. 아래 프로그램들을 사용자 모드 덤프를 수집하는 데 사용된다:
+[사용자 모드 덤프](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/user-mode-dump-files)(user-mode dump), 일명 어플리케이션 덤프는 충돌이 발생하는 등 특정 시점에서 [프로세스](ko.Process.md)의 [가상 주소 공간](ko.Process.md#가상-주소-공간) 중 [사용자 공간](ko.Processor.md#보호-링)에 포함된 정보가 수집된 파일이다. 사용자 모드 덤프를 통해 당시 어플리케이션이 어떠한 작업을 수행하고 있었는지 파악할 수 있으나, [커널](ko.Kernel.md#커널)측 정보는 살펴볼 수 없다. 아래 프로그램들을 사용자 모드 덤프를 수집하는 데 사용된다:
 
 <ul><li><dl><b>시스템 기본 프로그램</b><ul><li><a href="ko.WER.md">Windows Error Reporting</a></li><li><a href="https://ko.wikipedia.org/wiki/작업_관리자">작업 관리자</a></li></ul></dl></li>
 <li><dl><b>설치 프로그램</b><ul><li><a href="ko.WinDbg.md">WinDbg</a></li><li><a href="https://www.microsoft.com/en-us/download/details.aspx?id=103453">Debug Diagnostic Tool v2</a></li></ul></dl></li>
 <li><dl><b><a href="ko.Sysinternals.md">Sysinternals</a></b><ul><li><a href="ko.ProcDump.md">ProcDump</a></li><li><a href="ko.Process_Monitor.md">프로세스 탐색기</a></li></ul></dl></li></ul>
 
-## 사용자 모드 덤프 종류
-본 부문은 사용자 모드 덤프의 [종류](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/user-mode-dump-files)를 소개하며, 덤프 수집에 필요한 설정은 각 프로그램 문서를 참고하도록 한다.
+다음은 사용자 모드 덤프의 [종류](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/user-mode-dump-files)를 소개하며, 덤프 수집에 필요한 설정은 위에서 언급한 프로그램 문서를 참고하도록 한다.
 
-### 전체 덤프
-[전체 사용자 모드 덤프](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/user-mode-dump-files#full)(Full User-Mode Dump), 일명 풀 덤프(full dump)는 프로세스의 사용자 주소 공간에 커밋된 메모리를 전부 수집한 어플리케이션 덤프이다. 덤프에 포함된 정보들은 프로그램 실행 이미지, [핸들](ko.Process.md#핸들) 테이블, 그리고 덤프가 수집되었을 당시 스택을 재현하는 데 유용한 추가 정보 등이 있다.
+<table style="width: 95%; margin: auto;">
+<caption style="text-align: center;">사용자 모드 덤프 종류</capation>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;"><a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/user-mode-dump-files#full">전체 덤프</a> (Full User-Mode Dump)</th><th style="text-align: center;"><a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/user-mode-dump-files#minidumps">미니 덤프</a> (Minidump)</th></tr></thead>
+<tbody><tr><td>프로세스의 사용자 주소 공간에 커밋된 <a href="ko.Memory.md">메모리</a>를 전부 수집한 어플리케이션 덤프이다. 프로그램 실행 이미지, <a href="ko.Process.md#핸들">핸들</a> 테이블, 그리고 덤프가 수집되었을 당시 스택을 재현하는 데 유용한 추가 정보 등을 포함한다.</td><td>증상에 따라 프로세스의 사용자 주소 공간에서 정보를 선택적으로 수집한다. 일반적으로 <a href="ko.Process.md#스레드">스레드 스택</a> 위주로 수집되지만, 경우에 따라 전체 덤프보다 더 많이 혹은 참조된 모듈 단 하나만을 포함하기도 한다.</td></tr></tbody>
+</table>
 
-> 전체 덤프와 이름이 비슷한 "[전체 메모리 덤프](#전체-메모리-덤프)"와 혼돈하지 않도록 주의한다.
+덤프를 [WinDbg](ko.WinDbg.md)로 열어보면 아래와 같은 문구를 통해 전체 혹은 미니 덤프인지 식별할 수 있다.
 
-### 미니 덤프
-[미니 덤프](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/user-mode-dump-files#minidumps)(Minidump)는 프로세스의 사용자 주소 공간 중에서 덤프가 수집된 당시 증상에 따라 정보를 선택적으로 수집한 어플리케이션 덤프이다. 일반적으로 [스레드 스택](ko.Process.md#스레드) 위주로 수집되지만, 경우에 따라 사용자 주소 공간 전체 혹은 참조된 모듈 단 하나만이 수집되기도 한다.
+```windbg
+Loading Dump File [C:\Users\Administrator\Downloads\Application.exe.1000.dmp]
+User Mini Dump File with Full Memory: Only application data is available
+```
 
-> 비록 명칭은 "미니 덤프"이지만, 간혹 전체 사용자 모드 덤프보다 더 많은 정보를 수집하는 경우도 있다.
+## 시간여행 디버깅
+[시간여행 디버깅](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/time-travel-debugging-overview)(Time-Travel Debugging; TTD)은 프로세스가 실행되는 일정 구간동안 수집된 덤프와 추적 정보를 토대로 자유자재 시점을 이동시킬 수 있는 디버거 세션이다. 아래는 TTD 추적 정보를 수집할 수 있는 프로그램을 나열한다.
+
+* **tttracer.exe**: 윈도우 10, 버전 1809 또는 서버 2019 이후부터 `%WinDir%\System32` 시스템 폴더에 추가되었으나 성능이 매우 제한적이다.
+* **WinDbg**: 설치 폴더에는 TTD.exe 프로그램이 존재하며, Launch executable (advanced)에서 TTD를 수집하는 옵션을 찾을 수 있다.
 
 # 커널 모드 덤프
 [커널 모드 덤프](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/kernel-mode-dump-files)(kernel-mode dump), 일명 메모리 덤프는 특정 시점에서 시스템이 기여한 [물리 메모리](https://en.wikipedia.org/wiki/Computer_memory) (즉, [RAM](https://en.wikipedia.org/wiki/Random-access_memory)) 내의 데이터를 수집한 파일이다. 메모리 덤프를 통해 운영체제가 당시 어떠한 작업을 수행하고 있었는지 파악할 수 있다. 아래의 커널 모드 덤프를 생성하는 방법들을 나열한다:
