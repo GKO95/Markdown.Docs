@@ -29,7 +29,7 @@ User Mini Dump File with Full Memory: Only application data is available
 [시간여행 디버깅](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/time-travel-debugging-overview)(Time-Travel Debugging; TTD)은 프로세스가 실행되는 일정 구간동안 수집된 덤프와 추적 정보를 토대로 자유자재 시점을 이동시킬 수 있는 디버거 세션이다. 아래는 TTD 추적 정보를 수집할 수 있는 프로그램을 나열한다.
 
 * **tttracer.exe**: 윈도우 10, 버전 1809 또는 서버 2019 이후부터 `%WinDir%\System32` 시스템 폴더에 추가되었으나 성능이 매우 제한적이다.
-* **WinDbg**: 설치 폴더에는 TTD.exe 프로그램이 존재하며, Launch executable (advanced)에서 TTD를 수집하는 옵션을 찾을 수 있다.
+* **WinDbg**: 설치 폴더에는 TTD.exe 프로그램이 존재하며, Launch executable (advanced) 및 Attach to process 옵션에서 TTD 수집이 가능하다.
 
 # 커널 모드 덤프
 [커널 모드 덤프](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/kernel-mode-dump-files)(kernel-mode dump), 일명 메모리 덤프는 특정 시점에서 시스템이 기여한 [물리 메모리](https://en.wikipedia.org/wiki/Computer_memory) (즉, [RAM](https://en.wikipedia.org/wiki/Random-access_memory)) 내의 데이터를 수집한 파일이다. 메모리 덤프를 통해 운영체제가 당시 어떠한 작업을 수행하고 있었는지 파악할 수 있다. 아래의 커널 모드 덤프를 생성하는 방법들을 나열한다:
