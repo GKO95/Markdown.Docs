@@ -11,7 +11,7 @@ title: 프로세서
 프로세서 코어(processor core)는 CPU에서 실질적인 연산을 도맡는 전자회로 하드웨어이며, CPU 칩 안에는 한 개 이상의 코어로 구성된다. 실제 연산이 이루어지는 부품인 관계로 흔히 각 코어를 CPU에 번호를 붙여 칭하는 경우가 대다수이다. 예를 들어 헥사코어 CPU에는 프로세서 코어가 여섯 개가 들어있어 CPU #0 - 5까지 나열되며, 동시에 최대 여섯 개의 [스레드](ko.Process.md#스레드)를 처리할 수 있다.
 
 ### 논리 프로세서
-논리 프로세서(logical processor)는 프로세서 코어가 여러 스레드를 더욱 효율적으로 처리할 수 있도록 하는 [멀티스레딩](https://ko.wikipedia.org/wiki/멀티스레딩) 기술에서 기반하여 (인텔의 [하이퍼스레딩](https://ko.wikipedia.org/wiki/하이퍼스레딩), 그리고 AMD 및 ARM 계열의 [SMT](https://ko.wikipedia.org/wiki/동시_멀티스레딩) 등), 마치 하나의 프로세서 코어가 두 개 이상의 프로세서를 가진 듯이 운영된다. 아래는 코어가 여섯 개가 있는 AMD 프로세서이지만, 각 코어마다 두 개의 논리 프로세서를 가지므로 총 12개의 프로세서가 있는 것으로 운영체제가 판단한 것이다.
+논리 프로세서(logical processor)는 프로세서 코어가 여러 스레드를 더욱 효율적으로 처리할 수 있도록 하는 [멀티스레딩](https://ko.wikipedia.org/wiki/멀티스레딩) 기술에서 기반하여 ([인텔](https://www.intel.com/)의 [하이퍼스레딩](https://ko.wikipedia.org/wiki/하이퍼스레딩), 그리고 [AMD](https://www.amd.com/) 및 [ARM](https://www.arm.com/) 계열의 [SMT](https://ko.wikipedia.org/wiki/동시_멀티스레딩) 등), 마치 하나의 프로세서 코어가 두 개 이상의 프로세서를 가진 듯이 운영된다. 아래는 코어가 여섯 개가 있는 AMD 프로세서이지만, 각 코어마다 두 개의 논리 프로세서를 가지므로 총 12개의 프로세서가 있는 것으로 운영체제가 판단한 것이다.
 
 ![작업 관리자에서 두 개의 논리 프로세서를 가진 헥사코어의 CPU 성능 정보 표시](./images/processor_taskmgr.png)
 
@@ -40,15 +40,14 @@ title: 프로세서
 
 보호 링은 시스템 운영체제의 [권한](https://en.wikipedia.org/wiki/Privilege_(computing))(privilege) 구조를 이루는 계층으로써, CPU 구조가 하드웨어적으로 어떤 [모드](https://en.wikipedia.org/wiki/CPU_modes)에 있는지에 따라 권한에 의해 제한된 일부 명령어들 활용 가능여부가 결정된다. 해당 명령어들은 CPU 및 메모리와 같은 하드웨어를 직접적으로 상호작용하므로 자칫 잘못하면 시스템에 치명적인 문제를 야기한다.
 
-[윈도우](ko.Windows.md) 운영체제는 만일을 대비해 x86 프로세서가 제공하는 네 개의 링 계층 중에서 오로지 Ring 0 그리고 Ring 3만 사용한다:
+[윈도우 NT](ko.Windows.md) 운영체제는 만일을 대비해 x86 프로세서가 제공하는 네 개의 링 계층 중에서 오로지 Ring 0 그리고 Ring 3만 사용한다:
 
-* **[커널 모드](https://ko.wikipedia.org/wiki/보호_링#수퍼바이저_모드)(kernel mode)**
-
-    일명 수퍼바이저 모드(supervisor mode)는 시스템에 민감한 영향을 줄 수 있는 입출력 동작이나 메모리 접근에 아무런 제약을 받지 않고 아키텍처의 모든 작업을 수행할 수 있다. [가상 주소 공간](ko.Process.md#가상-주소-공간) 중 커널 공간(kernel space)에서 작업을 처리한다. 대표적인 예시로 디바이스 드라이버(device driver)와 같은 커널 모듈(kernel module)이 커널 모드에서 동작한다.
-
-* **사용자 모드(user mode)**
-
-    사용할 수 있는 CPU 작업이 커널 모드에 비해 하드웨어 상호작용 등 민간한 시스템 구성요소의 접근이 제한된다. 만일 커널 동작이 요구되면 [시스템 호출](https://ko.wikipedia.org/wiki/시스템_호출)(system call)을 통해 커널에 요청을 해야 한다. 가상 주소 공간 중 사용자 공간(user space)에서 작업을 처리한다. 대표적인 예시로 일반 어플리케이션의 프로세스가 사용자 모드에서 동작한다.
+<table style="width: 80%; margin: auto;">
+<caption style="caption-side: top;">윈도우 NT에서 사용하는 x86 프로세서 모드</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/보호_링#수퍼바이저_모드">커널 모드</a> (<a href="ko.Kernel.md#커널">슈퍼바이저</a> 모드)</th><th style="text-align: center;">사용자 모드</th></tr></thead>
+<tbody><tr style="text-align: center;"><td>Ring 0</td><td>Ring 3</td></tr><tr><td>시스템에 민감한 영향을 줄 수 있는 입출력 동작이나 메모리 접근에 아무런 제약을 받지 않고 아키텍처의 모든 작업을 수행할 수 있다.</td><td>하드웨어 상호작용 및 커널 구성요소 접근에 대한 제한이 존재한다. 커널 함수가 필요하면 <a href="ko.WinAPI.md#시스템-서비스">시스템 호출</a>을 통해 CPU를 커널 모드로 전환해야 한다.</td></tr><tr style="text-align: center;"><td><a href="ko.Process.md#가상-주소-공간">가상 주소 공간</a>: 커널 공간</td><td><a href="ko.Process.md#가상-주소-공간">가상 주소 공간</a>: 사용자 공간</td></tr><tr style="text-align: center;"><td><a href="ko.Kernel.md#커널">커널</a> 및 <a href="ko.Driver.md">드라이버</a></td><td>응용 프로그램의 <a href="ko.Process.md">프로세스</a></td></tr></tbody>
+</table>
 
 이렇게 보호 링이 분류된 이유는 "더 많은 제어에는 더 큰 책임이 뒤따른다"는 관점에서 비롯된다. 커널 모드의 프로그램 오동작은 시스템 전체에 충돌을 일으켜 [블루스크린](ko.BSOD.md)을 야기하는 원인이기 때문에 매우 신중하게 개발되어야 한다.
 
