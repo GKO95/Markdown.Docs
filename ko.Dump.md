@@ -90,6 +90,11 @@ User Mini Dump File with Full Memory: Only application data is available
 </tbody>
 </table>
 
+## 보조 덤프 정보
+> *참고: [Bugcheck Secondary Dump Data | Microsoft Learn](https://learn.microsoft.com/en-us/shows/inside/bugcheck-secondary-dump-data)*
+
+보조 덤프 정보(Secondary dump data)는 [전체 메모리 덤프](#전체-메모리-덤프) 외의 메모리 덤프에서 RAM으로부터 데이터를 선택적으로 가져오는 도중 분석에 반드시 필요한 연관된 [장치 드라이버](ko.Driver.md) 정보를 놓친 경우를 대비한 데이터이다. 이들은 덤프 파일의 또 다른 데이터 블록에 저장되기 때문에 "보조" 덤프 정보라고 칭하는 것이다. 해당 정보는 장치 드라이버 개발자가 [`KBUGCHECK_SECONDARY_DUMP_DATA`](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/ns-wdm-_kbugcheck_secondary_dump_data) 구조체에 정보를 기입하고, [`KBUGCHECK_REASON_CALLBACK_ROUTINE`](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nc-wdm-kbugcheck_reason_callback_routine) [콜백 함수](ko.C.md#콜백-함수)를 등록해야 BSOD 발생 시 수집될 수 있다.
+
 # 참조
 * [Enabling a Kernel-Mode Dump File - Windows drivers &#124; Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/enabling-a-kernel-mode-dump-file)
 * [How to determine the appropriate page file size for 64-bit versions of Windows - Windows Client Management &#124; Microsoft Learn](https://learn.microsoft.com/en-us/windows/client-management/determine-appropriate-page-file-size)
