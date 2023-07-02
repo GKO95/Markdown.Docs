@@ -3,7 +3,9 @@ category: 디버깅
 title: 덤프
 ---
 # 사용자 모드 덤프
-[사용자 모드 덤프](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/user-mode-dump-files)(user-mode dump), 일명 어플리케이션 덤프는 충돌이 발생하는 등 특정 시점에서 [프로세스](ko.Process.md)의 [가상 주소 공간](ko.Process.md#가상-주소-공간) 중 [사용자 공간](ko.Processor.md#보호-링)에 포함된 정보가 수집된 파일이다. 사용자 모드 덤프를 통해 당시 어플리케이션이 어떠한 작업을 수행하고 있었는지 파악할 수 있으나, [커널](ko.Kernel.md#커널)측 정보는 살펴볼 수 없다. 아래 프로그램들을 사용자 모드 덤프를 수집하는 데 사용된다:
+[사용자 모드 덤프](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/user-mode-dump-files)(user-mode dump), 일명 어플리케이션 덤프는 충돌이 발생하는 등 특정 시점에서 [프로세스](ko.Process.md)의 [가상 주소 공간](ko.Process.md#가상-주소-공간) 중 [사용자 공간](ko.Processor.md#보호-링)에 포함된 정보가 수집된 파일이다. 사용자 모드 덤프를 통해 당시 어플리케이션이 어떠한 작업을 수행하고 있었는지 파악할 수 있으나, [커널](ko.Kernel.md#커널)측 정보는 살펴볼 수 없다.
+
+아래 프로그램들을 사용자 모드 덤프를 수집하는 데 사용된다:
 
 <ul><li><dl><b>시스템 기본 프로그램</b><ul><li><a href="ko.WER.md">Windows Error Reporting</a></li><li><a href="https://ko.wikipedia.org/wiki/작업_관리자">작업 관리자</a></li></ul></dl></li>
 <li><dl><b>설치 프로그램</b><ul><li><a href="ko.WinDbg.md">WinDbg</a></li><li><a href="https://www.microsoft.com/en-us/download/details.aspx?id=103453">Debug Diagnostic Tool v2</a></li></ul></dl></li>
@@ -32,21 +34,18 @@ User Mini Dump File with Full Memory: Only application data is available
 * **WinDbg**: 설치 폴더에는 TTD.exe 프로그램이 존재하며, Launch executable (advanced) 및 Attach to process 옵션에서 TTD 수집이 가능하다.
 
 # 커널 모드 덤프
-[커널 모드 덤프](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/kernel-mode-dump-files)(kernel-mode dump), 일명 메모리 덤프는 특정 시점에서 시스템이 기여한 [물리 메모리](https://en.wikipedia.org/wiki/Computer_memory) (즉, [RAM](https://en.wikipedia.org/wiki/Random-access_memory)) 내의 데이터를 수집한 파일이다. 메모리 덤프를 통해 운영체제가 당시 어떠한 작업을 수행하고 있었는지 파악할 수 있다. 아래의 커널 모드 덤프를 생성하는 방법들을 나열한다:
+[커널 모드 덤프](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/kernel-mode-dump-files)(kernel-mode dump), 일명 메모리 덤프는 특정 시점에서 시스템이 기여한 [물리 메모리](https://en.wikipedia.org/wiki/Computer_memory) (즉, [RAM](https://en.wikipedia.org/wiki/Random-access_memory)) 내의 데이터를 수집한 파일이다. 메모리 덤프를 통해 운영체제가 당시 어떠한 작업을 수행하고 있었는지 파악할 수 있다. 본 내용은 메모리 덤프 종류에 대한 설명을 위주로 소개하며, 메모리 덤프 설정 방법은 [여기](ko.BSOD.md#bsod-설정)를 참고하도록 한다.
+
+아래의 커널 모드 덤프를 생성하는 방법들을 나열한다:
 
 * [블루스크린](ko.BSOD.md)
 * [LiveKD](ko.LiveKD.md)
 
-## 커널 모드 덤프 종류
-본 부문은 커널 모드 덤프의 [종류](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/varieties-of-kernel-mode-dump-files)를 소개하며, 덤프 수집에 필요한 설정은 [블루스크린](ko.BSOD.md) 문서를 참고하도록 한다.
-
 ### 전체 메모리 덤프
-[전체 메모리 덤프](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/complete-memory-dump)(Complete Memory Dump)는 커널 및 사용자 공간 주소를 모두 포함한 물리 메모리 전체를 수집한다. 시스템이 생성할 수 있는 가장 큰 덤프이며, 덤프 수집에 사용되는 [페이징 파일](ko.BSOD.md#가상-메모리)은 최소 RAM 크기 + 257 [MB](https://ko.wikipedia.org/wiki/메가바이트)(256 MB의 장치 드라이버에 대한 보조 덤프 정보와 1 MB의 헤더 크기 합계)가 확보되어야 한다.
+[전체 메모리 덤프](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/complete-memory-dump)(Complete Memory Dump)는 커널 및 사용자 공간 주소를 모두 포함한 물리 메모리 전체를 수집한다. 시스템이 생성할 수 있는 가장 큰 덤프이며, [페이징 파일](ko.Memory.md#페이징-파일)은 최소한 RAM 크기 + 덤프 헤더 크기(1 MB) + [보조 덤프 정보](#보조-덤프-정보)(256 MB)의 합계만큼 확보되어야 한다.
 
 ### 커널 메모리 덤프
-[커널 메모리 덤프](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/kernel-memory-dump)(Kernel Memory Dump)는 물리 메모리 중에서 사용자 공간을 제외한 오로지 커널 공간 주소의 데이터만을 수집한다. 생성된 덤프의 크기는 수집된 데이터 양에 따라 다르지만 [전체 메모리 덤프](#전체-메모리-덤프)보다 훨씬 작다.
-
-> 비록 전체 메모리 덤프보다 파일 크기는 작으나, "시스템이 관리하는 크기"로 가상 메모리를 설정하면 RAM 용량만큼의 페이징 파일 크기가 확보된다.
+[커널 메모리 덤프](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/kernel-memory-dump)(Kernel Memory Dump)는 물리 메모리에서 사용자 공간을 제외한 커널 공간 주소의 데이터만을 수집한다. 비록 [전체 메모리 덤프](#전체-메모리-덤프)보다 필요한 페이징 파일이 작지만, RAM 크기와 할당된 [메모리 풀](ko.Memory.md#메모리-풀) 용량 등 경우에 따라 수집되는 덤프 크기가 천차만별인 관계로 수치화된 정량이 없다.
 
 <table style="table-layout: fixed; width: 60%; margin: auto;">
 <caption style="caption-side: top;">커널 메모리 덤프에 수집되는 정보</caption>
@@ -61,7 +60,7 @@ User Mini Dump File with Full Memory: Only application data is available
 </table>
 
 ### 작은 메모리 덤프
-[작은 메모리 덤프](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/small-memory-dump)(Small Memory Dump)는 [KB](https://ko.wikipedia.org/wiki/킬로바이트) 단위의 저용량 덤프를 생성하는데, 운영체제에 따라 크기가 64 KB, 128 KB, 혹은 256 KB 이상이 될 수 있다. 비록 데이터는 제한적이지만 제한된 저장공간에서 [커널 메모리 덤프](#커널-메모리-덤프) 수집이 불가한 환경에서 1 MB 페이징 파일만으로 문제점을 파악하기에 충분한 정보를 제공할 수 있다:
+[작은 메모리 덤프](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/small-memory-dump)(Small Memory Dump)는 [KB](https://ko.wikipedia.org/wiki/킬로바이트) 단위의 저용량 덤프를 생성하는데, 운영체제에 따라 크기가 64 KB, 128 KB, 혹은 256 KB 이상이 될 수 있다. 데이터는 제한적이지만, [커널 메모리 덤프](#커널-메모리-덤프) 수집이 불가할 정도로 디스크 여유 공간이 부족한 경우에 아래와 같은 정보를 제공하여 증상을 파악하는데 도움이 될 수 있다.
 
 > 커널 모드 덤프 중에서 유일하게 다른 경로(기본: `%SystemRoot%\Minidump`)에 저장되며, 자세한 내용은 [블루스크린](ko.BSOD.md#crashcontrol-작은-메모리-덤프) 문서를 확인한다.
 
@@ -73,12 +72,10 @@ User Mini Dump File with Full Memory: Only application data is available
 * 로드 및 언로드된 모듈 목록<sub>(윈도우 XP부터)</sub>
 
 ### 자동 메모리 덤프
-[자동 메모리 덤프](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/automatic-memory-dump)(Automatic Memory Dump)는 실질적으로 [커널 메모리 덤프](#커널-메모리-덤프)와 동일하지만, 시스템에서 페이징 파일을 크기를 결정하는 방식에서 차이가 있다. 페이징 파일은 "시스템이 관리하는 크기"로 설정되어야 하며, 블루스크린이 발생할 때 시스템은 커널 메모리 덤프를 수집하는 데 충분히 작은 크기를 택하려 한다. 만일 부족하다면 시스템은 페이징 파일의 크기를 RAM 용량 (혹은 최대 32 GB까지)만큼 확장시키고 QWORD 레지스트리 `PagefileTooSmall`을 생성을 생성한다.
-
-> 확장된 가상 메모리 크기는 4주간 유지되며, 당장 원래대로 되돌리고 싶다면 레지스트리 편집기에서 `PagefileTooSmall` 값을 삭제하고 재부팅한다.
+[자동 메모리 덤프](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/automatic-memory-dump)(Automatic Memory Dump)는 실질적으로 [커널 메모리 덤프](#커널-메모리-덤프)와 동일하지만, 페이징 파일 크기를 결정하는 방식이 다르다. "시스템이 관리하는 크기"로 설정되었을 시, 커널 메모리 덤프는 RAM 전체 크기만큼 할당받지만, 자동 메모리 덤프는 충분히 수집이 가능한 작은 크기를 택하려 한다. 만일 페이징 파일 용량이 부족하면 [`PagefileTooSmall`](ko.BSOD.md#bsod-설정) 레지스트리 값을 생성하고 다음 재부팅 때 페이징 파일 크기를 확장시킨다.
 
 ### 활성 메모리 덤프
-[활성 메모리 덤프](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/active-memory-dump)(Active Memory Dump)는 트러블슈팅에 필요하지 않는 데이터가 필터링된 [전체 메모리 덤프](#전체-메모리-덤프)의 일종으로, 덤프 파일 크기는 전체 메모리 덤프보다 작은 관계로 RAM 크기가 매우 크거나 [하이퍼바이저](https://ko.wikipedia.org/wiki/하이퍼바이저) 호스트를 대상으로 덤프를 수집할 때 매우 유용하다.
+[활성 메모리 덤프](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/active-memory-dump)(Active Memory Dump)는 트러블슈팅에 필요하지 않는 데이터가 필터링된 [전체 메모리 덤프](#전체-메모리-덤프)의 일종으로, 덤프 파일 크기는 전체 메모리 덤프보다 작다. 엄청난 크기의 물리 메모리가 탑재되었거나 (예를 들어 256 GB 이상의 RAM이 탑재된 서버), [하이퍼바이저](https://ko.wikipedia.org/wiki/하이퍼바이저) 호스트를 대상으로 덤프를 수집해야 하는 경우 등에 활용된다.
 
 <table style="table-layout: fixed; width: 60%; margin: auto;">
 <caption style="caption-side: top;">활성 메모리 덤프에 수집되는 정보</caption>

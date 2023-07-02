@@ -133,7 +133,7 @@ CrashControl 레지스트리 키에서 설정할 수 있는 값들은 알파벳 
 <tr><td><code>MinidumpsCount</code></td><td style="text-align: center;">REG_DWORD</td><td>지정된 경로에 저장될 수 있는 작은 메모리 덤프의 최대 개수이다.</td></tr>
 <tr><td><s><code>NMICrashDump</code></s></td><td style="text-align: center;"><s>REG_DWORD</s></td><td>(<a href="https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/nmi-hardware-failure-error">Deprecated</a>) <s><a href="https://en.wikipedia.org/wiki/Non-maskable_interrupt">NMI</a> 신호를 주입하여 BSOD를 일으킬 수 있도록 한다.</s><br/><ul><li><i>윈도우 8 및 서버 2012부터 해당 값은 필요하지 않으며 아무런 영향을 주지 않는다.</i></li></ul></td></tr>
 <tr><td><code>Overwrite</code></td><td style="text-align: center;">REG_DWORD</td><td>기존의 메모리 덤프를 덮어씌운다.<br/><ul><li>0x0: 비활성</li><li>0x1: 활성</li></ul></td></tr>
-<tr><td><code>PageFileTooSmall</code></td><td style="text-align: center;">REG_QWORD</td><td>페이징 파일 크기 부족으로 덤프 수집을 실패할 시 생성된다. 이를 토대로 재부팅이 되면 덤프 수집에 필요한 크기만큼 페이징 파일을 확장시킨다.</td></tr>
+<tr><td><code>PageFileTooSmall</code></td><td style="text-align: center;">REG_QWORD</td><td>페이징 파일 크기 부족으로 덤프 수집을 실패할 시 생성된다. 이를 토대로 재부팅이 되면 덤프 수집에 필요한 크기만큼 페이징 파일을 확장시켜 4주간 유지한다.</td></tr>
 </tbody>
 </table>
 
@@ -223,7 +223,7 @@ WriteBitmapDump: page written = 52505, MB per sec = 41.
 본 장은 [윈도우 NT](ko.Windows.md) 운영체제에서 [BSOD](#블루스크린)가 나타나 [메모리 덤프](ko.Dump.md#커널-모드-덤프)가 생성되는 원리를 [설정 초기화](#설정-초기화), [시스템 충돌](#시스템-충돌), 그리고 [덤프 생성](#덤프-생성) 단계로 나누어 설명한다. 자세한 내용은 [Mark Russinovich](https://ko.wikipedia.org/wiki/마크_러시노비치)([Sysinternals](ko.Sysinternals.md) 공동 창시자)를 포함한 [마이크로소프트](https://www.microsoft.com/) 엔지니어들이 저자로 참여한 [*Windows Internals*](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) 도서를 읽어볼 것을 권장한다.
 
 ## 설정 초기화
-[세션 관리자](https://ko.wikipedia.org/wiki/세션_관리자_하위_시스템)(Session Manager; smss.exe)는 시스템이 부팅되는 시점에 [ntoskrnl.exe](ko.Kernel.md#nt-커널)의 입출력 관리자를 통해 `HKLM\SYSTEM\CurrentControlSet\Control\CrashControl` (이하 CrashControl) 레지스트리 키의 값들을 읽는다. 이들을 토대로 BSOD가 발생할 경우 어떠한 동작을 취할 것인지, 그리고 덤프는 어떻게 수집할 것인지 설정을 시스템에 적용한다.
+[세션 관리자](https://ko.wikipedia.org/wiki/세션_관리자_하위_시스템)(Session Manager; smss.exe)는 시스템이 부팅되는 시점에 [ntoskrnl.exe](ko.Kernel.md#nt-커널)의 [입출력 관리자](ko.Kernel.md#입출력-관리자)를 통해 `HKLM\SYSTEM\CurrentControlSet\Control\CrashControl` (이하 CrashControl) 레지스트리 키의 값들을 읽는다. 이들을 토대로 BSOD가 발생할 경우 어떠한 동작을 취할 것인지, 그리고 덤프는 어떻게 수집할 것인지 설정을 시스템에 적용한다.
 
 > 위와 같은 이유로 CrashControl 레지스트리 키의 변경 사항을 시스템에 적용하려면 재부팅이 불가피하다.
 
