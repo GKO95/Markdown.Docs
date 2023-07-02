@@ -42,7 +42,7 @@ User Mini Dump File with Full Memory: Only application data is available
 * [LiveKD](ko.LiveKD.md)
 
 ### 전체 메모리 덤프
-[전체 메모리 덤프](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/complete-memory-dump)(Complete Memory Dump)는 커널 및 사용자 공간 주소를 모두 포함한 물리 메모리 전체를 수집한다. 시스템이 생성할 수 있는 가장 큰 덤프이며, [페이징 파일](ko.Memory.md#페이징-파일)은 최소한 RAM 크기 + 덤프 헤더 크기(1 MB) + [보조 덤프 정보](#보조-덤프-정보)(256 MB)의 합계만큼 확보되어야 한다.
+[전체 메모리 덤프](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/complete-memory-dump)(Complete Memory Dump)는 커널 및 사용자 공간 주소를 모두 포함한 물리 메모리 전체를 수집한다. 시스템이 생성할 수 있는 가장 큰 덤프이며, [페이징 파일](ko.Memory.md#페이징-파일)은 최소한 RAM 크기 + 덤프 헤더 크기(1 MB) + 잠재적 [보조 덤프 정보](#보조-덤프-정보)(256 MB)의 합계만큼 확보되어야 한다.
 
 ### 커널 메모리 덤프
 [커널 메모리 덤프](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/kernel-memory-dump)(Kernel Memory Dump)는 물리 메모리에서 사용자 공간을 제외한 커널 공간 주소의 데이터만을 수집한다. 비록 [전체 메모리 덤프](#전체-메모리-덤프)보다 필요한 페이징 파일이 작지만, RAM 크기와 할당된 [메모리 풀](ko.Memory.md#메모리-풀) 용량 등 경우에 따라 수집되는 덤프 크기가 천차만별인 관계로 수치화된 정량이 없다.
