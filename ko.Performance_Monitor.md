@@ -25,7 +25,7 @@ title: 성능 모니터
 * 시스템 구성 정보
 
 ### 성능 카운터
-[성능 카운터](https://learn.microsoft.com/en-us/windows/win32/perfctrs/about-performance-counters)(Performance counter)는 운영체제 혹은 개별 어플리케이션에 관여되는 시스템 상태 및 활동 측정을 제공한다. 고급 추상화 계층의 인터페이스를 통해 [프로세서](ko.Processor), [메모리](ko.Memory.md), [디스크](ko.Storage.md) 등에 대한 성능 데이터가 제공되는 데, 성능 모니터의 카운터는 다음과 같이 표시된다.
+[성능 카운터](https://learn.microsoft.com/en-us/windows/win32/perfctrs/about-performance-counters)(Performance counter)는 운영체제 혹은 개별 어플리케이션에 관여되는 시스템 상태 및 활동 측정을 제공한다. 고급 추상화 계층의 인터페이스를 통해 [프로세서](ko.Processor), [메모리](ko.Memory.md), [디스크](ko.Disk.md) 등에 대한 성능 데이터가 제공되는 데, 성능 모니터의 카운터는 다음과 같이 표시된다.
 
 ```terminal
 \\Machine\Object(Instance)\Counter

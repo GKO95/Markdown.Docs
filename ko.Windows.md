@@ -43,7 +43,7 @@ title: 윈도우 NT
 
 * [프로세서](ko.Processor.md)
 * [메모리](ko.Memory.md)
-* [디스크](ko.Storage.md)
+* [디스크](ko.Disk.md)
 * [네트워크](ko.Network.md)
 
 # 관리 프로그램
