@@ -31,7 +31,7 @@ title: 서브시스템
 1. 커널 운영자(Executive)로부터 최소 하나 이상의 [시스템 서비스](ko.WinAPI.md#시스템-서비스)를 호출한다.
 1. [ALPC](https://ko.wikipedia.org/wiki/로컬_프로시저_호출)를 통해 해당 환경 서브시스템 프로세스에게 일부 작업 처리를 요청한다.
 
-환경 서브시스템은 세션 관리자 smss.exe에 의해 관리되며, `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\SubSystems` 레지스트리 키에 설정되어 있다. `Required` 값은 생성되는 각 세션마다 반드시 초기화되는 환경 서브시스템을 나열하며, `Option` 값의 서브시스템은 필요에 따라 초기화된다.
+환경 서브시스템은 [세션 관리자](ko.Process.md#세션-관리자)에 의해 관리되며, `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\SubSystems` 레지스트리 키에 설정되어 있다. `Required` 값은 생성되는 각 세션마다 반드시 초기화되는 환경 서브시스템을 나열하며, `Option` 값의 서브시스템은 필요에 따라 초기화된다.
 
 > `Debug` 레지스트리 값에는 아무런 환경 서브시스템가 기입되어 있지 않고 윈도우 XP 이후부터 필요가 없어졌으나 호환성을 위해 유지되고 있다.
 

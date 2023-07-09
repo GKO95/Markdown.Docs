@@ -9,13 +9,7 @@ title: 메모리
 <caption style="caption-side: top;">주 및 보조기억장치의 비교</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">주기억장치</th><th style="text-align: center;">보조기억장치</th></tr></thead>
-<tbody style="text-align: center;">
-<tr><td>컴퓨터 메모리</td><td>디스크 및 드라이브</td></tr>
-<tr><td>동작속도가 매우 빠르다.</td><td>동작속도가 상대적으로 느리다.</td></tr>
-<tr><td>물리적으로 CPU와 가까이 위치한다.</td><td>물리적으로 CPU와 멀리 위치한다.</td></tr>
-<tr><td>대용량 제작이 어렵고 비싸다.</td><td>대용량 제작이 용이하고 저렴하다.</td></tr>
-<tr><td><a href="https://ko.wikipedia.org/wiki/휘발성_메모리">휘발성</a>이다.</td><td><a href="https://ko.wikipedia.org/wiki/비휘발성_메모리">비휘발성</a>이다.</td></tr>
-</tbody>
+<tbody style="text-align: center;"><tr><td>컴퓨터 메모리</td><td>디스크 및 드라이브</td></tr><tr><td>동작속도가 매우 빠르다.</td><td>동작속도가 상대적으로 느리다.</td></tr><tr><td>물리적으로 CPU와 가까이 위치한다.</td><td>물리적으로 CPU와 멀리 위치한다.</td></tr><tr><td>대용량 제작이 어렵고 비싸다.</td><td>대용량 제작이 용이하고 저렴하다.</td></tr><tr><td><a href="https://ko.wikipedia.org/wiki/휘발성_메모리">휘발성</a>이다.</td><td><a href="https://ko.wikipedia.org/wiki/비휘발성_메모리">비휘발성</a>이다.</td></tr></tbody>
 </table>
 
 [CPU](ko.Processor.md)와 물리적으로 근접한 점과 빠른 데이터 접근속도는 순식간에 연산을 할 수 있도록 보조하기에 적합한 단기기억 역할을 담당한다. 하드웨어는 지속적으로 발전하고 있으나, 일반적으로 메모리와 디스크는 대략 100,000 배의 속도 차이를 갖는다. 그러므로 시스템의 성능을 결정하는 요소로 메모리가 함께 언급된다.
@@ -48,7 +42,7 @@ title: 메모리
 
 * **사용자 지정 크기(Custom size)**: 사용자가 직접 페이징 파일의 처음 크기(Initial size) 및 확장될 수 있는 최대 크기(Maximum size)를 [메가바이트](https://ko.wikipedia.org/wiki/메가바이트) 단위로 지정한다 (참고: 1 [GB](https://ko.wikipedia.org/wiki/기가바이트) = 1024 MB).
 
-* **시스템이 관리하는 크기(System manged size)**: Smss.exe [세션 관리자](https://ko.wikipedia.org/wiki/세션_관리자_하위_시스템)에 의해 몇 가지의 요인들을 살펴본 이후 적합한 페이징 파일 크기로 결정된다:
+* **시스템이 관리하는 크기(System manged size)**: Smss.exe [세션 관리자](ko.Process.md#세션-관리자)에 의해 몇 가지의 요인들을 살펴본 이후 적합한 페이징 파일 크기로 결정된다:
 
     1. 커밋된 메모리 사용률이 90%에 도달하면 시스템은 페이징 파일을 RAM의 3배(최대 16 GB)까지 확장할 수 있다. 예를 들어, 4 GB와 8 GB 메모리의 시스템은 각각 페이징 파일이 12 GB와 16 GB까지 늘어날 수 있다. 그러나 페이징 파일이 확장될 수 있는 크기는 해당 드라이브 용량의 1/8로 제한된다.
     

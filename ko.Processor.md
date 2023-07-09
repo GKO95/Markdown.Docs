@@ -3,12 +3,13 @@ category: 운영체제
 title: 프로세서
 ---
 # 프로세서
-[프로세서](https://ko.wikipedia.org/wiki/중앙_처리_장치)(processor), 흔히 컴퓨터에서 중앙 처리 장치(central processing unit; CPU)로 알려진 하드웨어는 프로그램의 [기계어](https://ko.wikipedia.org/wiki/기계어)를 처리하는 [전자회로](https://ko.wikipedia.org/wiki/전자_회로)이다. 프로그램을 실행하기 위해 필요한 시스템의 다양한 작업들은 [명령어 집합](https://ko.wikipedia.org/wiki/명령어_집합)(instruction set)에 의해 정의되어 있으며, 대표적으로 [x86](https://ko.wikipedia.org/wiki/X86)과 [ARM](https://ko.wikipedia.org/wiki/ARM_아키텍처) 계열 명령어 집합 아키텍처가 있다. 그리고 프로세서에서 처리할 수 있는 명령어 집합이 무엇인지에 따라 시스템 아키텍처가 함께 결정된다.
+[프로세서](https://ko.wikipedia.org/wiki/중앙_처리_장치)(processor), 흔히 컴퓨터에서 중앙 처리 장치(central processing unit; CPU)로 알려진 하드웨어는 프로그램의 [기계어](https://ko.wikipedia.org/wiki/기계어)를 처리하는 [전자회로](https://ko.wikipedia.org/wiki/전자_회로)이다. 프로그램을 실행하기 위해 필요한 시스템의 다양한 작업들은 [명령어 집합](https://ko.wikipedia.org/wiki/명령어_집합)(instruction set)에 의해 정의되어 있으며, 대표적으로 [x86](https://ko.wikipedia.org/wiki/X86)과 [ARM](https://ko.wikipedia.org/wiki/ARM_아키텍처) 계열 명령어 집합 아키텍처가 존재한다. 프로세서에서 처리하는 명령어 집합이 무엇인지에 따라 운영체제의 아키텍처가 함께 결정된다.
 
 ![단일 프로세서 중앙 처리 장치](https://upload.wikimedia.org/wikipedia/commons/3/3a/ABasicComputer.svg)
 
-## 프로세서 코어
-프로세서 코어(processor core)는 CPU에서 실질적인 연산을 도맡는 전자회로 하드웨어이며, CPU 칩 안에는 한 개 이상의 코어로 구성된다. 실제 연산이 이루어지는 부품인 관계로 흔히 각 코어를 CPU에 번호를 붙여 칭하는 경우가 대다수이다. 예를 들어 헥사코어 CPU에는 프로세서 코어가 여섯 개가 들어있어 CPU #0 - 5까지 나열되며, 동시에 최대 여섯 개의 [스레드](ko.Process.md#스레드)를 처리할 수 있다.
+프로세서 내부에는 실질적인 연산을 도맡는 전자회로 하드웨어인 프로세서 코어(processor core)가 한 개 이상으로 구성된다. 흔히 각 코어를 CPU에 번호를 붙여 칭하는 경우가 대다수이며, 헥사코어 CPU에는 프로세서 코어가 여섯 개가 들어있어 CPU #0 - 5까지 나열된다. 즉 헥사코어 CPU는 동시에 최대 여섯 개의 [스레드](ko.Process.md#스레드)를 처리할 수 있는 연산 능력을 지닌다.
+
+프로세서 코어가 [프로세스](ko.Process.md)(또는 [시스템 프로세스](ko.Process.md#시스템-프로세스))의 스레드로부터 [이미지](https://ko.wikipedia.org/wiki/실행_파일)에 코드된 기계어를 연산하고 처리하는 데 할애한 시간을 [프로세서 시간](https://ko.wikipedia.org/wiki/CPU_타임)(processor time)이라고 부른다. 프로세스의 프로세서 시간은 [스케줄링](#스케줄링)이나 입출력 요청 등에 의해 대기 혹은 준비 상태에 진입하여 처리되지 않는 동안 반영되지 않는다. 그리고 일정한 간격으로 샘플링된 시간동안 프로세스가 얼마나 오래 처리되었는지를 토대로 CPU 사용량(%)이 계산된다.
 
 ### 논리 프로세서
 논리 프로세서(logical processor)는 프로세서 코어가 여러 스레드를 더욱 효율적으로 처리할 수 있도록 하는 [멀티스레딩](https://ko.wikipedia.org/wiki/멀티스레딩) 기술에서 기반하여 ([인텔](https://www.intel.com/)의 [하이퍼스레딩](https://ko.wikipedia.org/wiki/하이퍼스레딩), 그리고 [AMD](https://www.amd.com/) 및 [ARM](https://www.arm.com/) 계열의 [SMT](https://ko.wikipedia.org/wiki/동시_멀티스레딩) 등), 마치 하나의 프로세서 코어가 두 개 이상의 프로세서를 가진 듯이 운영된다. 아래는 코어가 여섯 개가 있는 AMD 프로세서이지만, 각 코어마다 두 개의 논리 프로세서를 가지므로 총 12개의 프로세서가 있는 것으로 운영체제가 판단한 것이다.
@@ -22,16 +23,6 @@ title: 프로세서
 
 ### CPU 스로틀링
 [동적 주파수 스케일링](https://ko.wikipedia.org/wiki/동적_주파수_스케일링)(dynamic frequency scaling), 일명 CPU 스로틀링(CPU throttling)은 전력 관리 기법으로, 전원 절약 및 CPU 발열 등의 필요에 따라 실시간으로 프로세서의 클럭 주파수를 자동으로 조절한다. 작업 관리자에서 프로세서 속도가 지속적으로 바뀌는 이유가 CPU 스로틀링에 의한 것이며, 발열이 심할 경우에는 MHz 단위까지 내려가 마우스 및 키보드 응답 지연이 가시적으로 나타나기도 한다.
-
-## 프로세서 시간
-[프로세서 시간](https://ko.wikipedia.org/wiki/CPU_타임)(processor time)은 순전히 한 개의 프로그램만을 처리하기 위해 CPU가 할애한 시간이다. [스케줄링](#스케줄링)이나 입출력 요청 대기 등의 작업에 의해 항시 프로세서에서 처리되지 않는다. 아래 그림에서 P1 프로그램만을 처리하는 데 CPU를 사용한 시간은 파란색 블록의 총 너비로 계산된다.
-
-![P1 프로그램에 대한 단일 코어 CPU 시간](https://upload.wikimedia.org/wikipedia/commons/9/91/CpuTimeonSingleCpuMultiTaskingSystem.svg)
-
-> CPU 시간은 곧 CPU 사용량(%)을 반영하기도 한다: 일정한 간격으로 샘플링되는 구간동안 해당 프로그램이 CPU에서 얼마나 오래 처리되었는지를 토대로 계산된다.
-
-### 유휴 프로세스
-[유휴 프로세스](https://ko.wikipedia.org/wiki/시스템_유휴_프로세스)(idle process)은 아무런 작업을 하지 않는 프로세서를 나타내기 위한 가짜 프로세스이다. 만일 유휴 프로세스의 프로세서 사용량이 90%로 집계된 경우, 이는 반대로 프로세서의 10%만이 실제 실행 중인 프로세스를 처리하는 작업에 동원되고 있음을 의미한다. 
 
 ## 보호 링
 [보호 링](https://ko.wikipedia.org/wiki/보호_링)(protection ring)은 데이터와 기능을 결함과 위협적인 행위로부터 보호하는 메커니즘이다.

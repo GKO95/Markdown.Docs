@@ -59,9 +59,7 @@ title: 프로세스
 <caption style="caption-side: top;">가상 주소 공간의 페이지 상태</caption>
 <colgroup><col style="width: 10%;"/><col style="width: 90%;"/></colgroup>
 <thead><tr><th style="text-align: center;">상태</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody><tr><td style="text-align: center;">여유<br/>(Free)</td><td>가상 주소 공간에서 사용되고 있지 않는 가상 메모리이다.</td></tr>
-<tr><td style="text-align: center;"><a href="ko.Memory.md#가상-메모리">예약된</a><br/>(Reserved)</td><td>가상 주소 공간의 메모리를 차지하지만 시스템에서는 메모리를 사용하지 않는 것으로 인식한다.</td></tr>
-<tr><td style="text-align: center;"><a href="ko.Memory.md#커밋된-메모리">커밋된</a><br/>(Committed)</td><td>가상 주소 공간의 메모리를 차지하면서 시스템에서는 메모리를 사용하는 것으로 인식한다.<ul><li>페이지가 커밋되었다고 곧바로 물리 메모리를 할당받는 게 아니다.</li><li>시스템에 커밋된 메모리 전체 크기를 커밋 총량(commit charge)이라고 부르며 "<a href="ko.Memory.md#메모리">물리 메모리</a> + <a href="ko.Memory.md#페이징-파일">페이징 파일</a>" 크기만큼으로 제한된다.</li></ul></td></tr></tbody>
+<tbody><tr><td style="text-align: center;">여유<br/>(Free)</td><td>가상 주소 공간에서 사용되고 있지 않는 가상 메모리이다.</td></tr><tr><td style="text-align: center;"><a href="ko.Memory.md#가상-메모리">예약된</a><br/>(Reserved)</td><td>가상 주소 공간의 메모리를 차지하지만 시스템에서는 메모리를 사용하지 않는 것으로 인식한다.</td></tr><tr><td style="text-align: center;"><a href="ko.Memory.md#커밋된-메모리">커밋된</a><br/>(Committed)</td><td>가상 주소 공간의 메모리를 차지하면서 시스템에서는 메모리를 사용하는 것으로 인식한다.<ul><li>페이지가 커밋되었다고 곧바로 물리 메모리를 할당받는 게 아니다.</li><li>시스템에 커밋된 메모리 전체 크기를 커밋 총량(commit charge)이라고 부르며 "<a href="ko.Memory.md#메모리">물리 메모리</a> + <a href="ko.Memory.md#페이징-파일">페이징 파일</a>" 크기만큼으로 제한된다.</li></ul></td></tr></tbody>
 </table>
 
 ## 핸들
@@ -77,6 +75,30 @@ typedef void* HANDLE;
 
 # 스레드
 [스레드](https://ko.wikipedia.org/wiki/스레드_(컴퓨팅))(thread)는 프로세스의 프로그램 이미지 코드를 실행하기 위해 [CPU](ko.Processor.md)에서 처리할 수 있는 작업 흐름의 단위이다. 프로세스는 기본적으로 하나의 스레드를 갖는데 개발자의 설계에 의해 추가로 생성하여 두 개 이상의 스레드를 활용할 수 있고, 동일한 가상 주소 공간에 상주하기 때문에 서로의 리소스를 아무런 제약없이 공유할 수 있다. 그러나 프로세스에는 최소한 하나의 스레드가 존재해야 하므로, 모든 스레드가 종료되면 해당 프로세스는 자동적으로 함께 종료된다.
+
+# 시스템 프로세스
+시스템 프로세스(system processes)는 운영체제 구동을 위해 반드시 존재하는 프로세스들을 가리킨다. 이들은 작업 관리자의 *세부 정보* 탭이나 [Sysinternals](ko.Sysinternals.md)의 [프로세스 탐색기](ko.Process_Explorer.md)를 통해 직접 확인이 가능하다.
+
+* **[유휴 프로세스](https://ko.wikipedia.org/wiki/시스템_유휴_프로세스)(Idle process)**
+
+    [프로세서](ko.Processor.md#프로세서)가 아무런 작업을 하지 않고 있음을 나타내기 위한 실체가 없는 PID 0의 가짜 프로세스이다. 만일 유휴 프로세스의 프로세서 사용량이 90%로 집계된 경우, 이는 반대로 프로세서의 10%만이 실제로 실행 중인 프로세스를 처리하는 작업에 동원되고 있음을 의미한다. 이러한 이유로 유휴 프로세스의 [스레드](#스레드) 개수는 시스템의 [논리 프로세서](ko.Processor.md#논리-프로세서) 개수와 일치한다.
+
+* **시스템 프로세스(System process)**
+
+    [Ntoskrnl.exe](ko.Kernel.md#nt-커널) 또는 로드된 [장치 드라이버](ko.Driver.md#장치-드라이버) 등의 [커널](ko.Kernel.md#커널) 스레드를 반영하기 위한 PID 4의 특수한 프로세스이다. 시스템 프로세스는 "프로세스 자체"를 가리키는 게 아닌, [커널 모드](ko.Processor.md#보호-링)에서 생성된 "시스템 스레드의 집합"을 지칭한다. 시스템 스레드는 일반 사용자 모드 스레드와 동일한 속성과 문맥을 지니고 있으나, [프로세스 공간](#가상-주소-공간)의 주소가 존재하지 않으며 오로지 [시스템 공간](#가상-주소-공간)의 코드만 실행한다.
+
+    > 즉 어떤 프로세스라도 장치 드라이버를 통해 스레드를 생성하면 이 또한 시스템 스레드가 되기 때문에 트러블슈팅 과정에서 유의해야 한다.
+
+    * *보안 시스템 프로세스(Secure System process)*
+
+        [VTL1](ko.Hypervisor.md#가상-보안-모드) 보안 커널 주소 공간, 핸들, 그리고 시스템 스레드가 상주하는 프로세스이다. [스케줄링](ko.Processor.md#스케줄링), 객체 및 메모리 관리는 VTL0 커널에서 이루어지기 때문에 실질적인 운영체제 동작에는 아무런 관여를 하지 않는다. 해당 프로세스는 단순히 사용자에게 [VBS](ko.Hypervisor.md#가상화-기반-보안)가 활성화되었음을 가시화하는 게 전부이다.
+
+* **[메모리 압축 프로세스](https://en.wikipedia.org/wiki/Virtual_memory_compression)(Memory Compression process)**
+
+    프로세스의 가상 주소 공간으로부터 [페이징 아웃](ko.Memory.md#페이징-파일) 될 페이지를 [HDD](https://ko.wikipedia.org/wiki/하드_디스크_드라이브) 또는 [SSD](https://ko.wikipedia.org/wiki/솔리드_스테이트_드라이브)와 같은 [보조기억장치](ko.Disk.md)로 보내기 전에 압축시켜 [물리 메모리](ko.Memory.md)에 상주시키는 기법을 활용할 수 있다. 이때 타 프로세스의 [워킹 세트](ko.Memory.md#워킹-세트)로부터 방출되어 압축된 [대기 메모리](ko.Memory.md#캐시-메모리)가 바로 메모리 압축 프로세스의 사용자 주소 공간에 저장된다. 그러므로 메모리 압축 프로세스의 워킹 세트는 작업 관리자의 메모리 성능에 표시된 "(압축)" 크기와 일치한다.
+
+## 세션 관리자
+[세션 관리자](https://ko.wikipedia.org/wiki/세션_관리자_하위_시스템)(Session Manager; smss.exe)는 윈도우 운영체제에서 가장 최초로 생성되는 사용자 모드 프로세스이다.
 
 # 같이 보기
 * [Processes and Threads - Win32 apps &#124; Microsoft Learn](https://learn.microsoft.com/en-us/windows/win32/procthread/processes-and-threads)
