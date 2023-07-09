@@ -257,7 +257,7 @@ BSOD가 발생할 때 덤프를 디스크에 저장하기 위해 필요한 스�
 <tbody style="text-align: center;"><tr style="vertical-align: bottom;"><td><a href="https://ko.wikipedia.org/wiki/파일_시스템">파일 시스템</a> <br/>↓<br/><a href="https://ko.wikipedia.org/wiki/볼륨_(컴퓨팅)">볼륨</a>/<a href="https://ko.wikipedia.org/wiki/디스크_파티션">파티션</a><br/>↓<br/><a href="https://en.wikipedia.org/wiki/Class_driver">클래스 드라이버</a><br/>↓</td><td>커널<br/>↓<br/>Crashdmp.sys<br/>(w/ 덤프 필터 드라이버)<br/>↓</td></tr><tr><td colspan="2">스토리지 포트 & 미니포트<br/>↓<br/>하드웨어 (저장소)</td></tr></tbody>
 </table>
 
-시스템 충돌 당시에 덤프를 페이징 파일로 저장할 때, [FAT32](https://ko.wikipedia.org/wiki/파일_할당_테이블#FAT32)나 [NTFS](https://ko.wikipedia.org/wiki/NTFS)와 같은 파일 시스템 혹은 볼륨 및 파티션의 드라이버에 의한 BSOD 가능성을 감안하여 Crashdmp.sys 충돌 덤프 드라이버가 직접 덤프를 디스크에 저장한다. 하지만 일반적인 파일 입출력 스택에서 개입되었던 BitLocker 볼륨 암호화(fvevol.sys) 등의 필터 드라이버가 누락되면서, 이를 보완하기 위해 덤프 필터 드라이버(BitLocker의 경우 dumpfve.sys)가 도입되었다.
+[NTFS](https://ko.wikipedia.org/wiki/NTFS) [파일 시스템](https://ko.wikipedia.org/wiki/파일_시스템) 혹은 [볼륨](https://ko.wikipedia.org/wiki/볼륨_(컴퓨팅)) 및 [파티션](https://ko.wikipedia.org/wiki/디스크_파티션)의 드라이버에 의한 BSOD 가능성을 감안하여, 충돌 덤프 드라이버 Crashdmp.sys는 이들을 우회하여 직접 디스크의 페이징 파일에 덤프를 저장한다. 하지만 해당 과정에서 파일 입출력 스택에 개입되었던 [필터 드라이버](ko.Driver.md#장치-드라이버)(BitLocker의 경우 fvevol.sys)가 누락되면서, 이를 보완하기 위해 덤프 필터 드라이버(BitLocker의 경우 dumpfve.sys)가 도입되었으며 CrashControl 키의 `DumpFilters` 값에 기입된다.
 
 BSOD 화면에서 나타나는 백분율은 RAM 데이터가 페이징 파일로 얼마나 덤핑되었는 지 나타낸 수치이다. 만일 진행률이 0%로 머물러 있다면 덤프 필터 드라이버를 살펴보는 것도 권장한다. 여기서 100% 덤프 수집이 완료되어도 아직은 MEMORY.DMP가 시스템에 존재하지 않는다. 이와 관련된 내용은 [*덤프 생성*](#덤프-생성) 부문에서 설명할 예정이다.
 
