@@ -10,41 +10,45 @@ title: 프로세스
 동일한 프로그램에서 실행되어도, [가상 주소 공간](#가상-주소-공간)에 의해 각 프로세스는 서로에게 영향을 미치지 않으며 자신만의 작업을 수행할 수 있다.
 
 ## 가상 주소 공간
-[가상 주소 공간](https://ko.wikipedia.org/wiki/가상_주소_공간)(virtual address space; VAS)은 프로세스마다 데이터를 저장할 수 있는 가상의 [메모리](ko.Memory.md) 공간이다. 여기서 "가상"이 갖는 의미는 매우 중요하며, 아래의 성질들을 충족시킨다.
+[가상 주소 공간](https://ko.wikipedia.org/wiki/가상_주소_공간)(virtual address space; VAS)은 프로세스마다 데이터를 저장할 수 있는 가상의 [메모리](ko.Memory.md) 공간이다. [Sysinternals](ko.Sysinternals.md)의 [VMMap](ko.VMMap.md) 유틸리티 프로그램은 프로세스의 가상 주소 공간을 살펴볼 수 있는 유용한 도구이다. 여기서 "가상"이 갖는 의미는 매우 중요하며, 아래의 세 가지 성질들을 충족시킨다.
 
-![가상 주소 공간과 물리 메모리의 관계](https://upload.wikimedia.org/wikipedia/commons/3/32/Virtual_address_space_and_physical_address_space_relationship.svg)
+1. **고립성**
+
+    프로세스마다 주어지는 개별적인 메모리 공간이므로, 일반적으로 프로세스 간 접근이 불가하고 어떠한 영향을 미치거나 받지도 않는다. 가상 주소 공간을 구성하는 두 가지 공간에 대한 설명은 다음과 같다:
+
+    * *사용자 공간(user space)*
+
+        개별 프로세스의 데이터 및 리소스가 저장되는 "프로세스 공간"이다. 샤용자 공간은 모든 프로세스마다 각각 주어지며, 타 프로세스에서 단순 접근이 절대로 불가한 구조로 되어있다. 만일 한 프로세스에서 충돌이 발생하여도 시스템 및 나머지 프로세스들은 아무런 영향이 없으며 온전히 실행된다. 즉 가상 주소 공간의 고립성은 바로 사용자 공간의 특성에서 비롯된 것이다.
+
+    * *커널 공간(kernel space)*
+
+        프로세스가 실행되기 위해 반드시 필요한 운영체제 [커널](ko.Kernel.md)의 데이터 및 리소스가 저장되는 "시스템 공간"이다. 커널 공간은 성능 및 효율성을 위해 여러 개로 나누지 않으므로, 모든 프로세스는 하나의 커널 공간을 공용하여 동일한 정보를 가진다. 그러나 프로세스는 ([장치 드라이버](ko.Driver.md#장치-드라이버)를 활용하지 않는 이상) 하드웨어적 보안 조치로 인해 커널 공간에 함부로 접근이 불가하다.
+
+    다시 말해, 비록 가상 주소 공간에 커널 공간이 포함되어 있어도 [시스템 서비스](ko.WinAPI.md#시스템-서비스) 외에는 프로세스가 직접 접근할 수 없는 공간이기 때문에 사용자 공간의 고립성이 여전히 유효하다.
 
 1. **독립성**
 
-    가상의 메모리 공간이므로, 설치된 [물리 메모리](https://ko.wikipedia.org/wiki/주기억장치)(즉, [RAM](https://ko.wikipedia.org/wiki/랜덤_액세스_메모리))의 크기에 의한 제약이 없다. 시스템에 4 GB RAM이 설치되었다고 가정할 시, 1 GB 메모리 용량이 필요한 프로세스가 동시에 네 개 이상 실행되어도 메모리 부족 문제가 발생하지 않는다. 다만, 성능 저하가 나타날 수 있으며 자세한 내용은 페이징(paging) 기법을 다룰 때 설명할 예정이다.
+    가상의 메모리 공간이므로, 설치된 [물리 메모리](https://ko.wikipedia.org/wiki/주기억장치)(즉, [RAM](https://ko.wikipedia.org/wiki/랜덤_액세스_메모리))의 크기에 의한 제약을 받지 않는다. 32비트와 64비트는 각각 4 GB (= 2<sup>32</sup>) 그리고 16 EB (= 2<sup>64</sup>) 크기만큼의 주소를 표현할 수 있다는 걸 감안하면, 아래는 프로세스가 할당받을 수 있는 이론상 메모리 공간이며 물리 메모리 크기와 아무런 상관이 없다.
 
-2. **고립성**
+    <table style="table-layout: fixed; width: 80%; margin: auto;">
+    <caption style="caption-side: top;">가상 주소 공간의 최대 크기</caption>
+    <colgroup><col style="width: 25%;"/><col style="width: 25%;"/><col style="width: 25%;"/><col style="width: 25%;"/></colgroup>
+    <thead><tr><th rowspan="2" style="text-align: center;">가상 주소 공간</th><th rowspan="2" style="text-align: center;">32비트 프로세스</th><th colspan="2" style="text-align: center; border-bottom-style: none;">64비트 프로세스</th></tr><tr><th style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/윈도우_8">윈도우 8</a> 및 이전</th><th style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/윈도우_8.1">윈도우 8.1</a> 및 이후</th></tr></thead><tbody style="text-align: center;"><tr><td>사용자 공간</td><td>2 GB</td><td>8 TB</td><td>128 TB</td></tr><tr><td>커널 공간</td><td>2 GB</td><td>8 TB</td><td>128 TB</td></tr></tbody>
+    <caption style="caption-side: bottom; text-align: left;"><sup>출처: <a href="https://learn.microsoft.com/en-us/windows/win32/memory/memory-limits-for-windows-releases"><i>Memory Limits for Windows and Windows Server Releases -Win32 apps | Microsoft Learn</i></a></sup></caption>
+    </table>
 
-    개별적 메모리 공간이므로, 일반적으로 프로세스 간 접근이 불가하고 어떠한 영향을 미치거나 받지도 않는다. 위의 파일 탐색기 예시에서 제가각 다른 작업을 할 수 있던 것은 VAS 때문이며, 만일 프로세스 하나가 충돌로 종료되어도 나머지는 아무렇지 않은 듯 온전히 실행된다. 예외로 모든 프로세스가 공통적으로 갖는 시스템 공간이나 타 프로세스와 함께 리소스를 사용하기 위한 공유 메모리 등이 있다.
+    프로그램의 `IMAGE_FILE_LARGE_ADDRESS_AWARE` 플래그 설정 여부에 따라 프로세스의 사용자 공간을 2 GB으로 제한할 지 (32비트 프로세스 기본값), 혹은 그 이상 크기를 확장할 지 (64비트 프로세스 기본값) 선택할 수 있다.
 
-3. **연속성**
+    ![비주얼 스튜디오에서 <code>IMAGE_FILE_LARGE_ADDRESS_AWARE</code> 플래그 설정여부 위치](./images/process_large_addresses.png)
+
+    * 32비트 프로세스는 32비트 윈도우 운영체제에서 3 GB만 사용자 공간으로 사용하고, 나머지 1 GB는 커널 공간으로 확보한다.
+    * 32비트 프로세스는 64비트 윈도우 운영체제에서 4 GB 전체를 사용자 공간으로 활용한다.
+
+1. **연속성**
 
     매핑된 메모리 공간이므로, 물리 메모리상 띄엄띄엄 분산된 메모리 조각들을 하나의 연속된 가상 메모리 공간으로 구현한다. 가상 메모리의 [페이지](#페이지)(page)와 물리 메모리의 [페이지 프레임](#페이지)(page frame)를 일대일 매핑하는 것은 [메모리 관리 장치](https://ko.wikipedia.org/wiki/메모리_관리_장치)(MMU) 하드웨어에서 담당한다. 해당 성질은 메모리의 [파편화](https://en.wikipedia.org/wiki/Fragmentation_(computing))를 방지하는 효과를 기대할 수 있다.
 
-가상 주소 공간은 크게 (1) 개별 프로세스 데이터 및 리소스를 저장하는 "프로세스 공간"과 (2) 모든 프로세스에 공통적인 윈도우 운영체제 데이터 및 리소스를 담고있는 "시스템 공간"으로 나뉘어지는데, 흔히 전자와 후자를 각각 사용자 공간(user space) 및 커널 공간(kernel space)이라고 부르기도 한다. 윈도우 운영체제 및 아키텍처에 따라 각 공간들이 가질 수 있는 최대 크기는 아래와 같이 [지정](https://learn.microsoft.com/en-us/windows/win32/memory/memory-limits-for-windows-releases)되어 있다.
-
-<table style="table-layout: fixed; width: 80%; margin: auto;">
-<caption style="caption-side: top;">가상 주소 공간의 최대 크기</caption>
-<colgroup><col style="width: 25%;"/><col style="width: 25%;"/><col style="width: 25%;"/><col style="width: 25%;"/></colgroup>
-<thead><tr><th rowspan="2" style="text-align: center;">가상 주소 공간</th><th rowspan="2" style="text-align: center;">32비트 프로세스</th><th colspan="2" style="text-align: center; border-bottom-style: none;">64비트 프로세스</th></tr><tr><th style="text-align: center;">윈도우 8 (혹은 윈도우 서버 2012) 그리고 이전</th><th style="text-align: center;">윈도우 8.1 (혹은 윈도우 서버 2012 R2) 그리고 이후</th></tr></thead>
-<tbody style="text-align: center;">
-<tr><td>사용자 공간</td><td>2 GB</td><td>8 TB</td><td>128 TB</td></tr>
-<tr><td>커널 공간</td><td>2 GB</td><td>8 TB</td><td>128 TB</td></tr>
-</tbody>
-</table>
-
-> 32비트와 64비트는 각각 4 GB (= 2<sup>32</sup>) 그리고 16 EB (= 2<sup>64</sup>) 크기만큼의 주소를 표현할 수 있다.
-
-프로세스에 `IMAGE_FILE_LARGE_ADDRESS_AWARE` 플래그 설정여부에 따라 사용자 공간을 2 GB으로 제한할 지 (32비트 프로세스 기본값), 혹은 그 이상 크기를 확장할 지 (64비트 프로세스 기본값) 선택할 수 있다. 특히, 해당 플래그가 설정된 32비트 프로세스는 32비트 윈도우 운영체제에서 1 GB 커널 공간 확보를 위해 3 GB만 사용자 공간으로 사용한다. 반면 64비트 윈도우 운영체제에서는 4 GB 전체를 사용자 공간으로 활용한다.
-
-![비주얼 스튜디오에서 <code>IMAGE_FILE_LARGE_ADDRESS_AWARE</code> 플래그 설정여부 위치](./images/process_large_addresses.png)
-
-가상 주소 공간을 확인할 수 있는 도구로 [Sysinternals](ko.Sysinternals.md)의 [VMMap](ko.VMMap.md) 유틸리티 프로그램이 있다.
+    ![가상 주소 공간과 물리 메모리의 관계](https://upload.wikimedia.org/wikipedia/commons/3/32/Virtual_address_space_and_physical_address_space_relationship.svg)
 
 ### 페이지
 [페이지](https://ko.wikipedia.org/wiki/페이지_(컴퓨터_메모리))(page)는 가상 주소 공간에서 관리되는 가장 작은 단위의 메모리 블록이며, 이와 매핑된 하나의 물리 메모리 조각을 페이지 프레임(page frame) 혹은 간단히 프레임(frame)이라고 부른다. 페이지 및 프레임의 크기는 고정되어 있으며 일반적으로 4 KB이다.
