@@ -11,8 +11,6 @@ title: 업데이트
 
     연간 하반기에 새로운 기능을 OS에 추가하는 업데이트이며, 기능 업데이트가 설치되면 윈도우 OS가 상위버전으로 올라가기 때문에 흔히 *In-Place 업그레이드*라고 언급된다. 해당 업데이트는 사용자의 모든 어플리케이션, 설정, 그리고 데이터를 유지할 수 있다.
 
-    > 이전에는 반기마다, 즉 3월과 9월을 기점으로 출시되었으나 [21H2](https://en.wikipedia.org/wiki/Windows_11_version_history#Version_21H2_(original_release))부터 [변경](https://blogs.windows.com/windowsexperience/2021/11/16/how-to-get-the-windows-10-november-2021-update/)되었다.
-
 * **품질 업데이트**(Quality updates)
 
     해당 버전의 윈도우 OS에서 발견된 문제나 성능 및 보안을 개선하는 등 품질 관리를 위한 업데이트이다. 이전 품질 업데이트를 모두 내포하기 때문에 *누적 업데이트*라고 부른다. 품질 업데이트는 아래와 같이 보안 및 비보안 업데이트가 존재한다:
@@ -23,7 +21,7 @@ title: 업데이트
 
 * **[서비스 스택 업데이트](https://learn.microsoft.com/en-us/windows/deployment/update/servicing-stack-updates)**(Servicing stack update; SSU)
 
-    서비스 스택(servicing stack)은 윈도우 업데이트 설치를 실질적으로 담당하는 ([CBS](#구성요소-기반-서비스-스택) 및 CSI를 포함한) 이진 파일들의 집합을 가리킨다. SSU는 서비스 스택에 패치가 필요할 때만 월별 업데이트와 함께 배포되며, 설치 이후 재부팅을 요하지 않으나 제거될 수 없다. 서비스 스택을 최신 버전으로 유지하지 않으면 최신 윈도우 업데이트를 설치하는 데 문제가 발생할 수 있다.
+    서비스 스택(Servicing stack)은 윈도우 업데이트 설치를 실질적으로 담당하는 ([CBS](#구성요소-기반-서비스-스택) 및 CSI를 포함한) 이진 파일들의 집합을 가리킨다. SSU는 서비스 스택에 패치가 필요할 때만 월별 업데이트와 함께 배포되며, 설치 이후 재부팅을 요하지 않으나 제거될 수 없다. 서비스 스택을 최신 버전으로 유지하지 않으면 최신 윈도우 업데이트를 설치하는 데 문제가 발생할 수 있다.
 
     > 2018년 11월부로 SSU는 "위험(Critical)" 등급의 "보안(Security)"으로 분류되었다. 
 
@@ -34,7 +32,22 @@ title: 업데이트
 ### 구성요소 기반 서비스 스택
 > 참고: *[Understanding Component-Based Servicing - Microsoft Community Hub](https://techcommunity.microsoft.com/t5/ask-the-performance-team/understanding-component-based-servicing/ba-p/373012)*
 
-구성요소 기반 서비스 스택(Component-based servicing stack), 일명 CBS는 윈도우 배포, 기능 및 역할 변경, 그리고 구성요소 수리에 핵심 요소로 도맡는 윈도우 모듈 설치자 TrustedInstaller.exe를 가리킨다. CBS가 실행되면 `%WinDir%\Logs\CBS\CBS.log` 파일에 활동 이력이 기록된다.
+구성요소 기반 서비스 스택(Component-based servicing stack), 일명 CBS는 윈도우 배포, 기능 및 역할 변경, 그리고 구성요소 수리에 핵심 요소로 도맡는 윈도우 모듈 설치자 TrustedInstaller.exe를 가리킨다. 아래와 같이 CBS가 개입된 프로그램이 실행되면 `%WinDir%\Logs\CBS\CBS.log` 파일에 활동 이력이 기록된다.
 
 * DISM
 * SFC
+
+## 서비스 채널
+[서비스 채널](https://learn.microsoft.com/ko-kr/windows/deployment/update/waas-overview#servicing-channels)(Servicing channel)은 장치에 설치된 윈도우 OS를 얼마나 자주 업데이트할 것인지 지정할 수 있도록 한다. 윈도우 클라이언트 OS에는 총 세 가지의 서비스 채널이 다음과 같이 존재한다:
+
+* **[일반 공급 채널](https://learn.microsoft.com/en-us/windows/deployment/update/waas-overview#general-availability-channel)**(General Availability Channel; GA)
+
+    기능 업데이트를 매년 하반기에 출시하는 채널이며, 업데이트에 대한 설정이 구성되어 있지 않으면 장치는 기본적으로 해당 채널을 통해 가능한 즉시 업데이트를 설치한다.
+
+    > 이전에는 반기마다, 즉 3월과 9월을 기점으로 출시되었으나 [21H2](https://en.wikipedia.org/wiki/Windows_11_version_history#Version_21H2_(original_release))부터 [변경](https://blogs.windows.com/windowsexperience/2021/11/16/how-to-get-the-windows-10-november-2021-update/)되었다.
+
+* **[장기 서비스 채널](https://learn.microsoft.com/ko-kr/windows/deployment/update/waas-overview#long-term-servicing-channel)**(Long-term Servicing Channel; LTSC)
+
+* **[윈도우 참가자 프로그램](https://learn.microsoft.com/ko-kr/windows/deployment/update/waas-overview#long-term-servicing-channel)**(Windows Insider Program)
+
+    GA로 출시되기 전에 미리 기능 업데이트를 체험할 수 있는 채널이다. 참가자들은 해당 기능 업데이트가 GA에 출시되기 전에 마이크로소프트에 이슈를 보고하는 등의 피드백으로 기여할 수 있다.
