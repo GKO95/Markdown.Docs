@@ -3,7 +3,7 @@ category: 소프트웨어
 title: Sysinternals
 ---
 # Sysinternals
-[Sysinternals](https://ko.wikipedia.org/wiki/Sysinternals)는 [Mark Russinovich](https://ko.wikipedia.org/wiki/마크_러시노비치) [소프트웨어 엔지니어](https://ko.wikipedia.org/wiki/소프트웨어_공학자)가 1996년부터 호스팅한 웹사이트이며 [윈도우](ko.Windows.md) 및 어플리케이션을 관리, 검사, 그리고 트러블슈팅 하는데 유용한 리소스 및 유틸리티 프로그램을 소개한다. 지금도 꾸준히 사용되고 있는 Sysinternals는 분야와 목적에 따라 70개가 넘는 개별 프로그램들이 존재한다.
+[Sysinternals](https://aka.ms/sysinternals)는 [Mark Russinovich](https://ko.wikipedia.org/wiki/마크_러시노비치) [소프트웨어 엔지니어](https://ko.wikipedia.org/wiki/소프트웨어_공학자)가 1996년부터 호스팅한 웹사이트이며 [윈도우](ko.Windows.md) 및 어플리케이션을 관리, 검사, 그리고 트러블슈팅 하는데 유용한 리소스 및 유틸리티 프로그램을 소개한다. 지금도 꾸준히 사용되고 있는 Sysinternals는 분야와 목적에 따라 70개가 넘는 개별 프로그램들이 존재한다.
 
 > Sysinternals [소프트웨어 라이선스 약관](https://learn.microsoft.com/en-us/sysinternals/license-terms)에 명시된 바로는 [마이크로소프트 기술지원](https://support.microsoft.com/) 대상이 아니므로 유의해서 사용하도록 합니다!
 
