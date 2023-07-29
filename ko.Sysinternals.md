@@ -32,7 +32,7 @@ Sysinternals는 필요한 개별 프로그램만 [다운로드](https://learn.mi
 <td><ul><li>AdExplorer</li><li>AdInsight</li><li>AdRestore</li><li>PipeList</li><li>PsFile</li><li>PsPing</li><li>ShareEnum</li><li>TCPView</li><li>WhoIs</li></ul></td>
 <td><ul><li>Autoruns</li><li>Handle</li><li>ListDLLs</li><li>PortMon</li><li><a href="ko.ProcDump.md">ProcDump</a></li><li><a href="ko.Process_Explorer.md">Process Explorer</a></li><li><a href="ko.Process_Monitor.md">Process Monitor</a></li><li>PsExec</li><li>PsGetSid</li><li>PsKill</li><li>PsList</li><li>PsService</li><li>PsSuspend</li><li>PsTools</li><li>ShellRunas</li><li><a href="ko.VMMap.md">VMMap</a></li></ul></td>
 <td><ul><li>Autologon</li><li>LogonSessions</li><li>PsLoggedOn</li><li>PsLogList</li><li>Sysmon</li></ul></td>
-<td><ul><li>ClockRes</li><li>Coreinfo</li><li>LiveKD</li><li>LoadOrder</li><li>PsInfo</li><li><a href="ko.RAMMap.md">RAMMap</a></li><li>WinObj</li></ul></td>
+<td><ul><li>ClockRes</li><li>Coreinfo</li><li><a href="ko.LiveKD.md">LiveKD</a></li><li>LoadOrder</li><li>PsInfo</li><li><a href="ko.RAMMap.md">RAMMap</a></li><li>WinObj</li></ul></td>
 <td><ul><li>BgInfo</li><li>BlueScreen</li><li>CpuStres</li><li>Ctrl2Cap</li><li>DebugView</li><li>Desktops</li><li><a href="ko.Hex2dec.md">Hex2dec</a></li><li>Junction</li><li><a href="ko.NotMyFault.md">NotMyFault</a></li><li>PsPasswd</li><li>PsShutdown</li><li>RDCMan</li><li>RegDelNull</li><li>RegHide</li><li>RegJump</li><li>Registry Usage</li><li>Strings</li><li>Testlimit</li><li>ZoomIt</li></ul></td>
 </tr>
 </tbody>
