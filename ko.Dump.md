@@ -28,7 +28,7 @@ User Mini Dump File with Full Memory: Only application data is available
 ```
 
 ## 시간여행 디버깅
-[시간여행 디버깅](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/time-travel-debugging-overview)(Time-Travel Debugging; TTD)은 프로세스가 실행되는 일정 구간동안 수집된 덤프와 추적 정보를 토대로 자유자재 시점을 이동시킬 수 있는 디버거 세션이다. 아래는 TTD 추적 정보를 수집할 수 있는 프로그램을 나열한다.
+[시간여행 디버깅](https://aka.ms/ttd)(Time-Travel Debugging; TTD)은 프로세스가 실행되는 일정 구간동안 수집된 덤프와 추적 정보를 토대로 자유자재 시점을 이동시킬 수 있는 디버거 세션이다. 아래는 TTD 추적 정보를 수집할 수 있는 프로그램을 나열한다.
 
 * **tttracer.exe**: 윈도우 10, 버전 1809 또는 서버 2019 이후부터 `%WinDir%\System32` 시스템 폴더에 추가되었으나 성능이 매우 제한적이다.
 * **WinDbg**: 설치 폴더에는 TTD.exe 프로그램이 존재하며, Launch executable (advanced) 및 Attach to process 옵션에서 TTD 수집이 가능하다.
