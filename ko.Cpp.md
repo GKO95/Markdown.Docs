@@ -53,7 +53,7 @@ int main()
 # 구문
 [구문](https://ko.wikipedia.org/wiki/구문_(프로그래밍_언어))(syntax)은 프로그래밍 언어에서 문자 및 기호들의 조합이 올바른 문장 또는 표현식을 구성하였는지 정의하는 규칙이다. 각 프로그래밍 언어마다 규정하는 구문이 다르며, 이를 준수하지 않을 시 해당 프로그램은 빌드되지 않거나, 실행이 되어도 오류 및 의도치 않은 동작을 수행한다.
 
-다음은 C 언어에서 구문에 관여하는 요소들을 소개한다:
+다음은 C++ 언어에서 구문에 관여하는 요소들을 소개한다:
 
 * **[표현식](https://ko.wikipedia.org/wiki/식_(프로그래밍))(expression)**
     
@@ -436,13 +436,92 @@ x <<= y;  // 동일: x = x << y;
 ## 탈출 문자
 [탈출 문자](https://ko.wikipedia.org/wiki/이스케이프_문자)(escape character)는 백슬래시 기호 `\`를 사용하며, [문자열](#문자열)로부터 탈출하여 텍스트 데이터 내에서 특정 연산을 수행하도록 한다. 예시에서 `\n` 탈출 문자를 사용하여 문자열 줄바꿈을 구현한 것을 보여주었다.
 
+> 한편, C++ 표준 라이브러리는 [줄바꿈 조작자](https://en.cppreference.com/w/cpp/io/manip/endl)(new-line manipulator) `std::endl`를 통해 자체적으로 텍스트 [줄바꿈](https://ko.wikipedia.org/wiki/새줄_문자)을 지원한다.
+
+<table style="table-layout: fixed; width: 90%; margin: auto;">
+<caption style="caption-side: top;">C++ 텍스트 줄바꿈 구현 방법</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;">탈출 문자</th><th style="text-align: center;">줄바꿈 조작자</th></tr></thead>
+<tbody>
+<tr style="vertical-align: top; overflow-wrap: break-word;"><td>
+
 ```cpp
 std::cout << "Hello,\nWorld!";
 ```
+</td><td>
+
+```cpp
+std::cout << "Hello" << std::endl << "World!"; 
+```
+</td></tr>
+<tr><td colspan="2">
+
 ```terminal
 Hello,
 World!
 ```
+</td></tr>
+</tbody>
+</table>
+
+# 파일 입출력
+C++ 언어의 파일 입출력(일명 I/O)은 [`iostream`](https://en.cppreference.com/w/cpp/header/cstdio) 헤더로부터 관련 함수들을 호출할 수 있으며, 단순 파일뿐만 아니라 터미널로부터 텍스트를 입력받거나 출력할 때에도 관여한다. [C](ko.C.md) 언어의 [파일 입출력](ko.C.md#파일-입출력)에서 소개한 [`stdio.h`](https://en.cppreference.com/w/cpp/header/cstdio) 헤더를 활용할 수 있지만, 본 장은 C++에 최적화된 입출력을 위주로 다룬다.
+
+<table style="width: 80%; margin: auto;">
+<caption style="caption-side: top;">C++ 파일 입출력 연산자</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;">추출 연산자(extraction operator) <code>&gt;&gt;</code></th><th style="text-align: center;">삽입 연산자(insertion operator) <code>&lt;&lt;</code></th></tr></thead>
+<tbody>
+<tr><td>입력 받은 데이터를 빈 공간(띄어쓰기, 줄바꿈 등)마다 추출하여 순서대로 변수에 할당한다.</td><td>데이터를 자료형에 맞게 순서대로 파일 또는 터미널에 삽입, 즉 작성한다.</td></tr><tr><td>
+
+```cpp
+int variable;
+std::cin >> variable;
+```
+</td><td>
+
+```cpp
+int variable = 51;
+std::cout << static_cast<char>(variable);
+```
+</td></tr>
+</tbody>
+</table>
+
+여기서 `std::cin` 및 `std::cout`은 각각 터미널 대상의 입출력 전역 스트림이며, 파일 스트림 객체로 지정하였다면 해당 파일로 입출력이 처리된다.
+
+> [스트림](https://ko.wikipedia.org/wiki/스트림_(컴퓨팅))(stream)이란 사전적 의미로 "물이 흐르는 개울"을 의미한다. 즉, 컴퓨터 통신 용어에서 스트림은 데이터가 흐르는 길을 의미한다.
+
+## 파일 관리
+C++ 언어는 파일 입출력 스트림을 제공하는 [`fstream`](https://en.cppreference.com/w/cpp/header/fstream) 헤더에서 제공하는 [클래스](#클래스)를 통해 파일을 열고 닫을 수 있다.
+
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;">파일 입출력 및 모드 옵션</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 10%;"/><col style="width: 40%;"/></colgroup>
+<thead><tr><th style="text-align: center;">파일 관리 코드</th><th colspan="2" style="text-align: center;">파일 열기 옵션: <a href="https://en.cppreference.com/w/cpp/io/ios_base/openmode"><code>openmode</code></a></th></tr></thead>
+<tbody>
+<tr><td rowspan="6">
+
+```cpp
+#include <fstream>
+
+std::fstream FILE;
+FILE.open("filename.txt");
+// std::fstream FILE("filename.txt");
+
+    ...
+
+FILE.close();
+```
+
+<td><code>std::ios::binary</code></td><td><a href="https://en.cppreference.com/w/cpp/io/c/FILE#Binary_and_text_modes">이진파일 모드</a></td><tr><td><code>std::ios::in</code></td><td>읽기 전용 모드 <sub>(대안 클래스: <a href="https://en.cppreference.com/w/cpp/io/basic_ifstream"><code>ifstream</code></a>)</sub></td></tr><tr><td><code>std::ios::out</code></td><td>쓰기 전용 모드 <sub>(대안 클래스: <a href="https://en.cppreference.com/w/cpp/io/basic_ofstream"><code>ofstream</code></a>)</sub></td></tr></td><td><code>std::ios::app</code></td><td>매 입력마다 스트림 끝으로 이동하여 덧붙여 쓰기</td></tr><tr><td><code>std::ios::ate</code></td><td>파일을 열었을 때 곧바로 스트림 끝으로 이동</td></tr><tr><td><code>std::ios::trunc</code></td><td>파일을 열기 직전에 내용을 전부 삭제</td></tr></tbody>
+</table>
+
+C++ 언어의 파일 스트림은 입출력 양방향을 지원하지만, 열었을 당시 입력 혹은 출력 중 하나만 선택할 수 있다. 만일 `fstream`에 모드가 별도로 명시되지 않았을 시, 최초 파일 작업이 입력인지 출력인지에 따라 모드가 자동으로 결정된다. 혹은 `ifstream` 및 `ofstream`을 대신 사용할 수 있다.
+
+더 이상 사용하지 않는 파일은 스트림 객체의 [`close()`](https://en.cppreference.com/w/cpp/io/basic_ofstream/close) 메소드로 닫아 리소스 낭비를 줄이는데 기여할 수 있다. [예외](#예외-처리)가 발생하여도 정상적으로 파일을 닫을 수 있도록 예외 처리문이나 `EOF`(End-of-File) 또는 [`is_open()`](https://en.cppreference.com/w/cpp/io/basic_ofstream/is_open) 메소드를 활용한 조건문을 사용할 것을 권장한다.
+
+> [EOF](https://ko.wikipedia.org/wiki/파일_끝)란, End-of-File의 약자로 파일의 끝에 도달하였으면 트리거되는 데이터이다.
 
 # 전처리기
 C++가 컴파일되기 이전에 전처리기로부터 `#include`와 같은 전처리기 지시문이 우선적으로 처리된다. 전처리기 지시문은 C++ 컴파일러 설정 및 프로그래밍의 편리성을 제공한다. 본 장에서는 일부 유용한 전처리기 지시문에 대하여 소개한다.
