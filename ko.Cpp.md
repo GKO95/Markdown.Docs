@@ -815,7 +815,7 @@ std::cout << sizeof(arr)/sizeof(int);    // 출력: 3 (= 배열의 크기)
 ## 벡터 클래스
 [벡터 클래스](https://en.cppreference.com/w/cpp/container/vector)(vector class)는 [`vector`](https://en.cppreference.com/w/cpp/header/vector) 헤더로부터 제공되는 크기를 가변할 수 있는 [시퀀스 컨테이너](https://en.wikipedia.org/wiki/Sequence_container_(C++))이다. 비록 유연하다는 장점이 있으나, 배열에 비해 상대적으로 처리 속도가 느리다는 단점을 지닌다.
 
-> 배열의 데이터는 스택 영역에 저장되는 반면, 벡터는 힙 영역에 저장하기 때문에 크기 변경이 가능하다. 이에 대한 내용은 [메모리 관리](#메모리-관리)에서 설명한다.
+> 배열의 데이터는 스택 영역에 저장되는 반면, 벡터는 힙 영역에 저장하기 때문에 크기 변경이 가능하다. 이에 대한 내용은 [동적 할당](#동적-할당)에서 설명한다.
 
 ```cpp
 #include <vector>
