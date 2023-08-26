@@ -581,7 +581,7 @@ default:
     printf("Statement 4\n");
 }
 ```
-```
+```terminal
 Statement 2
 Statement 3
 Statement 4
@@ -665,7 +665,7 @@ int function() {
     
 printf("%d\n", function());
 ```
-```
+```terminal
 Hello World!
 3
 ```
