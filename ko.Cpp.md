@@ -204,6 +204,155 @@ sizeof(int);      // 크기: 4바이트
 sizeof(char);     // 크기: 1바이트
 ```
 
+## 변수
+변수(variable)는 데이터를 지정된 [자료형](#자료형)으로 저장하는 저장공간이다. 아래 예시는 `variable`이란 [식별자](#식별자)를 갖는 정수형 변수에 숫자 3을 할당한다. 시스템 관점에서 바라보면 `variable` 정수형 변수의 존재가 컴파일러에 각인되고 메모리가 할당되어 3이란 값이 저장되는 것으로, 이를 변수의 "정의(definition)"라고 부른다.
+
+```cpp
+// 변수 "variable"의 정의
+int variable = 3;
+```
+
+정수 자료형 변수인 `variable`을 생성한 동시에 값 3을 할당하였는데, 변수로의 최초 할당을 "초기화(initialization)"라고 부른다.
+
+아래는 변수를 정의하는 과정에서 초기화를 나중에 하는 예시 코드이다. 한 번 정의된 변수는 컴파일러 측에서 이미 존재를 알고 있으므로, 이후 변수에 다른 데이터를 저장하거나 호출할 때 자료형을 함께 언급하지 않는다. 초기화되지 않은 변수를 호출하는 것은 변수에 연동된 메모리가 가공되지 않은 상태로 잠재적 위험을 초래할 수 있기 때문에, 일반적으로 C 언어 컴파일러는 이를 오류로 치부한다.
+
+```cpp
+// 변수 "variable"의 정의
+int variable;
+variable = 3;
+```
+
+동일한 자료형의 변수 여러 개를 한꺼번에 정의하려면, 식별자마다 쉼표 `,`로 구분지을 수 있다.
+
+```cpp
+// 다수의 정수 자료형 변수 정의
+int variable1 = 3, variable2 = 4, variable3;
+```
+
+변수의 "선언(declaration)"은 메모리 할당 여부와 관계없이 컴파일러에게 해당 변수의 존재성을 알리는 행위이다. 그러나 이미 변수를 정의하는 과정에서 컴파일러에게 변수의 존재를 알렸는데, 이 또한 변수를 선언한 것이다. 다음은 변수에 특수한 성질을 부여하는 선언 키워드를 소개한다.
+
+<table style="width: 80%; margin: auto;">
+<caption style="caption-side: top;">변수 선언 키워드 및 특징</caption>
+<colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup>
+<thead><tr><th style="text-align: center;">키워드</th><th style="text-align: center;">특징</th></tr></thead>
+<tbody><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/constant_expression"><code>const</code></a></td><td>초기화된 이후로 변경이 불가한 상수(constant)로 지정한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/storage_duration#Static_local_variables"><code>static</code></a></td><td><a href="#함수">함수</a>를 탈출하여도 데이터가 소멸되지 않는 특수한 <a href="#지역-변수">지역 변수</a>, 일명 <a href="https://en.cppreference.com/w/cpp/language/storage_duration#Static_local_variables">정적 변수</a>이다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/language/extern"><code>extern</code></a></td><td>아직 정의되지 않은 변수 혹은 함수를 미리 호출할 수 있도록 선언만 하는 <a href="#외부-변수">외부 변수</a>이다.</td></tr></tbody>
+</table>
+
+> 위에서 소개한 키워드, 특히 `static` 및 `extern`은 차후 함수와 [라이브러리](#라이브러리)를 소개하면서 다시 설명할 예정이다.
+
+C/C++ 언어 [ISO 표준](https://github.com/cplusplus/draft)의 § 6.2 Declarations and definitions 부문에 의하면 일반적인 변수의 선언은 정의와 동일하다고 간주한다. 단, 다음은 변수가 선언되었으나 정의되지 않은 예외를 나열한다:
+
+* 함수 전방선언
+* 함수 매개변수 선언
+* `using` 선언 및 지시문
+* `alias` 선언
+* `extern` 키워드 선언
+* `typedef` 선언
+
+변수가 소스 코드 중에서 어디에 정의되었는지에 따라 지역 변수와 전역 변수로 구분된다. 
+
+<table style="width: 95%; margin: auto;">
+<caption>C 언어의 지역 및 전역 변수</caption>
+<colgroup><col style="width: 50%;"/></col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;">지역 변수</th><th style="text-align: center;">전역 변수</th></tr></thead>
+<tbody><tr><td>
+
+```cpp
+int main () {
+
+    // 지역 변수
+    int variable;
+
+    return 0;
+}
+```
+</td><td>
+
+```cpp
+// 전역 변수
+int variable;
+
+int main() {
+
+    return 0;
+}
+```
+</td></tr>
+<tr><td>블록 내부에서 정의된 변수이다. 지역 변수에 저장된 데이터는 블록 밖에서는 소멸되므로 외부에서 사용할 수 없다.</td><td>어떠한 블록에도 속하지 않은 외부에 정의된 변수이다. 전역 변수는 어느 블록에서라도 호출하여 지역 변수와 함께 사용할 수 있다.</td></tr>
+</tbody>
+</table>
+
+변수는 지정된 자료형 외의 데이터를 할당받을 수 있다. 아래 예시 코드는 문자 자료형 변수에 값 75로 초기화할 시, ASCII 코드에 의하여 대문자 'K'로 저장된다.
+
+```cpp
+char variable = 75;    // ASCII에 의해 문자 'K'가 저장
+```
+
+거의 모든 프로그래밍 언어는 할당 기호를 기준으로 왼쪽에는 피할당자(변수), 오른쪽에는 피할당자로 전달하려는 표현식(값 혹은 데이터)이 위치한다. 반대로 놓여질 경우, 오류가 발생하거나 원치 않는 결과가 도출될 수 있다.
+
+## 연산자
+연산자(operator)는 피연산 데이터를 조작할 수 있는 가장 간단한 형태의 연산 요소이다. 연산자는 피연산자의 접두부, 접미부, 혹은 두 데이터 사이에 위치시켜 사용한다. 가독성을 위해 데이터와 연산자 사이에 공백을 넣어도 연산에는 아무런 영향을 주지 않는다. 다음은 C/C++ 언어의 연산자들을 간략히 소개한다.
+
+* **[산술 연산자](https://en.cppreference.com/w/cpp/language/operator_arithmetic)(arithmetic operators)**
+    
+    정수나 부동소수점 자료형 산술 연산에 사용된다: 가장 기본적인 `+`, `-`, `*`, `/` 사칙 연산자부터 나눗셈의 나머지 `%`를 구할 수 있다.
+
+    * **증감 연산자**
+
+        [증가 연산자](https://en.cppreference.com/w/cpp/language/operator_incdec)(increment operator) `++` 및 [감소 연산자](https://en.cppreference.com/w/cpp/language/operator_incdec)(decrement operator) `--`는 데이터를 1만큼 증가 혹은 감소하는데 간략하게 한 줄로 표현한다.
+
+        <table style="width: 95%; margin: auto;"><caption style="caption-side: top;">증감 연산자의 위치에 따른 비교</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">접두부</th><th style="text-align: center;">접미부</th></tr></thead><tbody><tr><td>해당 변수를 1만큼 증가/감소시킨 다음에 표현식을 평가한다.</td><td>표현식을 평가한 다음에 해당 변수를 1만큼 증가/감소시킨다.</td></tr><tr><td>
+
+        ```cpp
+        x = ++y;    // 동일: { y = y + 1; x = y; }
+        x = --y;    // 동일: { y = y - 1; x = y; }
+        ```
+        </td><td>
+
+        ```cpp
+        x = y++;    // 동일: { x = y; y = y + 1; }
+        x = y--;    // 동일: { x = y; y = y - 1; }
+        ```
+        </td></tr></tbody></table>
+
+* **[비트 연산자](https://en.wikipedia.org/wiki/Bitwise_operations_in_C)(bitwise operators)**
+
+* **[비교 연산자](https://en.cppreference.com/w/cpp/language/operator_comparison)(relational operators)**
+
+    초과 `>`와 미만 `<`, 이상 `>=`과 이하 `<=`, 그리고 동일 `==`와 다름 `!=` 관계 부합 여부에 따라 논리적 참 혹은 거짓이 반환된다.
+
+* **[논리 연산자](https://en.cppreference.com/w/cpp/language/operator_logical)(logical operators)**
+
+    논리 자료형의 조합이 논리적으로 참인지 거짓인지 판별한다.
+
+    <table style="width: 75%; margin: auto;"><caption style="caption-side: top;">논리 연산자 목록</caption><colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">논리</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>&&</code></td><td style="text-align: center;">논리곱</td><td>모든 데이터가 참이면 1을 반환하고, 그렇지 않으면 0을 반환한다.</td></tr><tr><td style="text-align: center;"><code>||</code></td><td style="text-align: center;">논리합</td><td>하나 이상의 데이터가 참이면 1을 반환하고, 그렇지 않으면 0을 반환한다.</td></tr><tr><td style="text-align: center;"><code>!</code></td><td style="text-align: center;">보수</td><td>참을 거짓으로, 또는 거짓을 참으로 변환한다.</td></tr></tbody></table>
+
+* **[할당 연산자](https://en.cppreference.com/w/cpp/language/operator_assignment)(assignment operators)**
+
+    할당 기호와 조합하여 산술 및 비트 연산 코드를 더욱 간결하게 작성할 수 있도록 한다. 아래는 다양한 할당 연산자 중에서 일부를 선보인다.
+
+    <table style="width: 40%; margin: auto;"><caption style="caption-side: top;">할당 연산자 예시</caption><colgroup><col style=""/><col style=""/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>=</code></td><td>변수로 할당된 값이 반환된다.</td></tr><tr><td style="text-align: center;"><code>+=</code></td><td>
+
+    ```cpp
+    x += y;    // 동일: x = x + y;
+    ```
+    </td></tr><tr><td style="text-align: center;"><code>*=</code></td><td>
+
+    ```cpp
+    x *= y;    // 동일: x = x * y;
+    ```
+    </td></tr><tr><td style="text-align: center;"><code>&=</code></td><td>
+
+    ```cpp
+    x &= y;    // 동일: x = x & y;
+    ```
+    </td></tr><tr><td style="text-align: center;"><code><<=</code></td><td>
+
+    ```cpp
+    x <<= y;    // 동일: x = x << y;
+    ```
+    </td></tr></tbody></table>
+
 ## 탈출 문자
 [탈출 문자](https://ko.wikipedia.org/wiki/이스케이프_문자)(escape character)는 백슬래시 기호 `\`를 사용하며, [문자열](#문자열)로부터 탈출하여 텍스트 데이터 내에서 특정 연산을 수행하도록 한다. 예시에서 `\n` 탈출 문자를 사용하여 문자열 줄바꿈을 구현한 것을 보여주었다.
 
