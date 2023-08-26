@@ -719,6 +719,139 @@ Hello World!
 3
 ```
 
+# 컨테이너
+C++ 언어는 여러 데이터를 하나의 변수로 저장하는 공간인 [컨테이너](https://en.cppreference.com/w/cpp/container)(container)를 기본적으로 [표준 라이브러리](https://ko.wikipedia.org/wiki/C++_표준_라이브러리)로부터 제공한다. 아래는 C++ 컨테이너 유형에 대하여 간략하게 소개한다.
+
+<table style="width: 80%; margin: auto;">
+<caption style="caption-side: top;">C++ 컨테이너 유형</caption>
+<colgroup><col style="width: 25%;"/><col style="width: 75%;"/></colgroup>
+<thead><tr><th style="text-align: center;">유형</th><th style="text-align: center;">설명</th></tr></thead>
+<tbody><tr><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Sequence_container_(C++)">시퀀스 컨테이너</a><br/>(sequence)</td><td>저장된 다수의 데이터, 일명 요소가 순번을 가져 순차적인 호출이 가능하다.</td></tr><tr><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Associative_containers">연관 컨테이너</a><br/>(associative)</td><td>키(key)와 값(value)이 하나씩 서로 연관 및 정돈된 자료구조로 탐색에 적합하다.</td></tr><tr><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Unordered_associative_containers_(C++))(unordered associative containers">비정돈 연관 컨테이너</a><br/>(unordered associative)</td><td>키와 값이 하나씩 서로 연관되었으나 정돈되지 않은, 즉 <a href="https://ko.wikipedia.org/wiki/해시_테이블">해시</a> 자료구조의 컨테이너이다.</td></tr></tbody>
+</table>
+
+## 배열
+[배열](https://en.cppreference.com/w/cpp/language/array)(array)은 동일한 자료형의 데이터를 일련의 순서로 담는 [시퀀스 컨테이너](https://en.wikipedia.org/wiki/Sequence_container_(C++))이다. 식별자 뒤에는 대괄호 `[]`가 위치하여 배열이 담을 수 있는 데이터 용량 크기를 [정수 리터럴](https://en.cppreference.com/w/cpp/language/integer_literal)이나 [상수](#변수)로 지정한다. 배열의 데이터 초기화는 중괄호 `{}` 내에 항목을 순서대로 쉼표로 나누어 나열한다. 만일 배열 용량을 지정하지 않으면 데이터 개수만큼 크기가 정해지며, 아래는 배열을 정의하는 두 방식을 보여준다.
+
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;">배열 크기를 지정하는 여부에 따른 정의 방식</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;">명시적 배열 크기</th><th style="text-align: center;">암묵적 배열 크기</th></tr></thead>
+<tbody>
+<tr><td>
+
+```cpp
+int arr[size] = {value1, value2, ... };
+```
+</td><td>
+
+```cpp
+int arr[] = {value1, value2, ... };
+```
+</td></tr>
+</tbody>
+</table>
+
+한 번 정의된 배열의 크기는 변경이 불가하다. 초기 데이터 개수는 배열 용량을 초과해서는 안되지만, 반면에 데이터 개수가 용량을 미치지 못하면 나머지는 `0` 혹은 `NULL`로 초기화된다.
+
+배열의 각 요소에 할당된 데이터는 대괄호 `[]`를 사용해 0번부터 시작하는 인덱스 위치를 호출할 수 있다. 그러나 배열 자체를 호출하면 컴퓨터 메모리에 배열이 저장된 주소가 반환된다. 배열의 메모리 주소는 첫 번째 요소(즉, 인덱스 0번)의 주소와 일치하는데, 그 다음 주소에는 다음 인덱스 요소가 연쇄적으로 할당되어 있다. 자세한 내용은 [포인터](#포인터)를 다룰 때 소개한다.
+
+```cpp
+int arr[3] = {value1, value2, value3};
+
+printf("%p\n", arr);        // 출력: 00D2FBA8
+printf("%p\n", &arr[0]);    // 출력: 00D2FBA8
+printf("%p\n", &arr[1]);    // 출력: 00D2FBAC (= 00D2FBA8 + 정수형 4바이트)
+```
+
+이러한 배열의 특징으로 인해 배열은 정의 외에 한꺼번에 할당이 불가능하다. 그렇지만 개별 요소를 재할당하여 데이터를 변경할 수 있다.
+
+```cpp
+int arr[3];
+
+// 배열의 개별 요소 할당
+arr[0] = value1;
+arr[1] = value2;
+arr[2] = value3;
+```
+
+### 다차원 배열
+배열은 또 다른 배열을 요소로 가질 수 있으나, 자료형이 동일해야 하며 요소로 작용하는 배열들의 크기는 모두 같아야 하는 제약을 갖는다. 다차원 배열도 첫 번째 차원의 크기를 별도로 명시하지 않아도 되지만, 나머지 차원의 크기는 반드시 지정해야 한다.
+
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;">다차원 배열의 1차원 크기를 지정하는 여부에 따른 정의 방식</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;">명시적 배열 크기</th><th style="text-align: center;">암묵적 배열 크기</th></tr></thead>
+<tbody>
+<tr><td>
+
+```cpp
+int arr[size1][size2] = {
+    { value11, value12, ... },
+    { value11, value12, ... },
+    ...
+};
+```
+</td><td>
+
+```cpp
+int arr[][size2] = {
+    { value11, value12, ... },
+    { value11, value12, ... },
+    ...
+};
+```
+</td></tr>
+</tbody>
+</table>
+
+### 배열의 크기
+[`sizeof`](#sizeof-연산자) 연산자가 배열에 사용되면 배열의 크기가 아닌, 배열이 차지하는 총 바이트 수를 반환한다. 배열의 각 요소마다 자료형만큼 메모리를 차지하므로 배열의 크기를 구하기 위해서는 다음과 같은 표현식을 사용한다. 자료형의 요소들로 구성된 배열을 해당 자료형으로 나누면 요소의 개수가 계산된다.
+
+```cpp
+int arr[3];
+std::cout << sizeof(arr)/sizeof(int);    // 출력: 3 (= 배열의 크기)
+```
+
+## 벡터 클래스
+[벡터 클래스](https://en.cppreference.com/w/cpp/container/vector)(vector class)는 `<vector>` 헤더로부터 제공되는 크기를 가변할 수 있는 [시퀀스 컨테이너](https://en.wikipedia.org/wiki/Sequence_container_(C++))이다. 비록 유연하다는 장점이 있으나, 배열에 비해 상대적으로 처리 속도가 느리다는 단점을 지닌다.
+
+> 배열의 데이터는 스택 영역에 저장되는 반면, 벡터는 힙 영역에 저장하기 때문에 크기 변경이 가능하다. 이에 대한 내용은 [메모리 관리](#메모리-관리)에서 설명한다.
+
+```cpp
+#include <vector>
+
+// 벡터 정의: C++ 벡터 클래스
+std::vector<int> vec;
+```
+
+## 문자열
+C 언어는 일련의 문자들, 일명 [문자열](https://en.cppreference.com/w/cpp/string/byte)(string)을 한 개 이상의 `char` 문자들과 널 문자 `\0`로 구성된 배열로 문자열을 표현한다. 이러한 전통적인 방식을 C++ 언어에서는 "C 형식 문자열(C-style string)"이라고 부른다.
+
+```cpp
+// C 형식 문자열
+char arr[] = "Hello";    // 즉, arr[] = {'H', 'e', 'l', 'l', 'o', '\0'};
+char* ptr = "World!";    // 포인터를 활용한 문자열 표현 방법
+```
+
+[`cstring`](https://en.cppreference.com/w/cpp/header/cstring) 헤더 파일은 아래와 같이 C 표준 라이브러리로부터 제공하는 문자열 관련 함수들을 제공한다.
+
+<table style="width: 80%; margin: auto;">
+<caption style="caption-side: top;">C 언어의 문자열 함수</caption>
+<colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup>
+<thead><tr><th style="text-align: center;">함수</th><th style="text-align: center;">설명</th></tr></thead>
+<tbody><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/string/byte/strcat"><code>strcat</code></a></td><td>배열의 문자열에 다른 배열의 문자열을 덧붙인다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/string/byte/strcpy"><code>strcpy</code></a></td><td>배열의 문자열을 다른 배열로 복사한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/string/byte/strlen"><code>strlen</code></a></td><td>널 문자를 제외한 문자열 길이를 반환한다.</td></tr></tbody>
+</table>
+
+### 문자열 자료형
+C++ 표준 라이브러리는 [`iostream`](#파일-입출력) (구체적으로 [`string`](https://en.cppreference.com/w/cpp/header/string)) 헤더로부터 자체적으로 문자열 자료형 [`std::string`](https://en.cppreference.com/w/cpp/string/basic_string)을 제공한다. 문자열 자료형은 매우 편리하지만, [윈도우 API](ko.WinAPI.md) 또는 [POSIX](https://ko.wikipedia.org/wiki/POSIX) 등에서는 불가피하게 C 형식 문자열을 사용해야 할 경우가 흔히 발생한다.
+
+> 문자열 자료형은 흔히 문자열 [객체](#클래스)(string object)라고도 부른다.
+
+```cpp
+// C++ 문자열 자료형
+std::string variable = "Hello World!";
+```
+
 # 전처리기
 C++가 컴파일되기 이전에 전처리기로부터 `#include`와 같은 전처리기 지시문이 우선적으로 처리된다. 전처리기 지시문은 C++ 컴파일러 설정 및 프로그래밍의 편리성을 제공한다. 본 장에서는 일부 유용한 전처리기 지시문에 대하여 소개한다.
 
