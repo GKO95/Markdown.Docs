@@ -325,7 +325,7 @@ x = y--;  // 동일: { x = y; y = y - 1; }
 <colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup>
 <thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">할당</th><th style="text-align: center;">설명</th></tr></thead>
 <tbody>
-<tr><td style="text-align: center;"><code>=</code></td><td style="text-align: center;">단순 할당</td><td>피연산자(右)가 <a href="#변수">변수</a>(左)로 할당된 값을 반환한다.</td></tr><tr><td style="text-align: center;"><code>+=</code></td><td style="text-align: center;">덧셈 대입</td><td>
+<tr><td style="text-align: center;"><code>=</code></td><td style="text-align: center;">단순 할당</td><td>피연산자(右)가 <a href="#변수">변수</a>와 같은 피할당자(左)로 할당된 값을 반환한다.</td></tr><tr><td style="text-align: center;"><code>+=</code></td><td style="text-align: center;">덧셈 대입</td><td>
 
 ```c
 x += y;  // 동일: x = x + y;
@@ -1064,7 +1064,7 @@ printf("%p\n%d\n", ptr, *ptr);
     printf("%p", ptr);
     ```
     ```
-    0000000000000000 (주소)
+    0000000000000000
     ```
 
 * **보이드 포인터(void pointer)**
