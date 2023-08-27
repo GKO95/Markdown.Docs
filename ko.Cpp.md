@@ -1564,3 +1564,216 @@ printf("%d", variable);
 
 #pragma endregion REGIONNAME
 ```
+
+# 링커
+[링커](https://ko.wikipedia.org/wiki/링커_(컴퓨팅))(linker) 혹은 링크 편집기(link editor)는 소스 코드를 구성하는 각 .cpp 확장자 파일마다 기계어로 컴파일된 [오브젝트 파일](https://ko.wikipedia.org/wiki/목적_파일)들을 하나의 완전한 프로그램으로 동작할 수 있도록 서로 연동시키는 도구이다. C++ 언어의 [빌드](https://ko.wikipedia.org/wiki/소프트웨어_빌드) 과정은 결국 "[전처리기](#전처리기) → [컴파일러](#컴파일러) → 링커" 순서로 진행되는 작업을 함축한다. 링커를 통해 소스 코드는 외부 스크립트 또는 [라이브러리](#라이브러리)에 정의된 데이터나 코드를 불러와 활용할 수 있다.
+
+## 포함 지시문
+[포함 지시문](https://en.cppreference.com/w/cpp/preprocessor/include)(inclusive directive) `#include`는 전처리기 지시문 중 하나로 대표적으로 [`iostream`](#파일-입출력)와 같은 [헤더 파일](#헤더-파일)을 불러오기 위해 사용된다. `#include` 지시문의 역할은 헤더 파일에 작성된 코드 전체를 해당 위치에 삽입하여 함수 프로토타입과 전역 및 [`extern`](#extern-키워드) 변수를 선언한다. 소스 코드에 데이터와 함수가 정의되었다면, 헤더 파일은 데이터와 함수를 선언하는 목적으로 사용된다.
+
+[진입점](#진입점)인 `main()` 함수는 선언부가 없다는 점을 고려하면 메인 스크립트를 다음과 같이 구성할 수 있다.
+
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;">헤더 파일과 소스 코드 나누기</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;">헤더 파일: <code>main.hpp</code></th><th style="text-align: center;">소스 코드: <code>main.cpp</code></th></tr></thead>
+<tbody><tr style="vertical-align: top;"><td>
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int variable;
+void func(int, float);
+```
+</td><td>
+
+```cpp
+#include "main.hpp"
+
+int main() {
+
+    variable = 'A';
+    func(variable, 0.01);
+
+    return 0;
+}
+
+void func(int x, float y) {
+    cout << x + y << endl;
+}
+```
+</td></tr>
+</tbody>
+</table>
+
+위의 소스 파일의 헤더 파일 포함은 결과적으로 `#include` 지시문으로 인해 다음과 같이 표현된 것과 동일하다.
+
+```cpp
+// #include "main.hpp" 코드 시작
+#include <iostream>
+using namespace std;
+
+int variable;
+void func(int, float);
+// #include "main.hpp" 코드 끝
+
+int main() {
+
+    variable = 'A';
+    func(variable, 0.01);
+
+    return 0;
+}
+
+void func(int x, float y) {
+    cout << x + y << endl;
+}
+```
+
+### 헤더 파일
+[헤더 파일](https://ko.wikipedia.org/wiki/헤더_파일)(header file)은 데이터 및 기능의 존재를 알리는 역할을 하는 .hpp 확장자 파일이며, 링커로부터 오브젝트 파일들을 연동하기 위해 필요한 핵심 요소이다. 다른 스크립트 파일 또는 라이브러리에 정의된 데이터와 코드를 헤더 파일로 통해 다른 스크립트에서도 사용할 수 있도록 한다. 헤더 파일을 불러오는 방식은 두 가지가 존재한다:
+
+```cpp
+#include <iostream>
+#include "header.hpp"
+```
+
+이 둘은 [전처리기](#전처리기)가 헤더 파일을 어느 위치에서 찾을 것인지 차이점을 가진다.
+
+* **`#include <header>`**
+    
+    컴파일러 혹은 IDE에서 지정한 경로를 위주로 헤더 파일을 찾으며, 일반적으로 시스템 헤더 파일에 사용된다.
+
+* **`#include "header.hpp"`**
+    
+    현재 소스 파일이 위치한 경로를 위주로 헤더 파일을 찾는다. 만일 찾지 못하였을 시, `#include <header>`와 같이 지정된 경로에서 헤더 파일을 재탐색한다. 일반적으로 사용자 정의 헤더 파일에 사용된다.
+
+아래는 프로그래밍 언어에서 흔히 사용되는 데이터와 기능들은 바로 사용할 수 있도록 미리 컴파일된 [표준 라이브러리](https://ko.wikipedia.org/wiki/C_표준_라이브러리)를 불러오는 헤더 파일 일부를 나열한다.
+
+<table style="width: 80%; margin: auto;">
+<caption style="caption-side: top;">C++ 표준 라이브러리의 헤더 파일</caption>
+<colgroup><col style="width: 18%;"/><col style="width: 12%;"/><col style="70%;"/></colgroup>
+<thead><tr><th style="text-align: center;">유형</th><th style="text-align: center;">헤더 파일</th><th style="text-align: center;">설명</th></tr></thead>
+<tbody><tr><td style="text-align: center;"><a href="#파일-입출력">표준 입출력</a></td><td style="text-align: center;"><code>iostream</code></td><td>표준 입출력 관련 데이터를 제공한다: <code>cin</code>, <code>cout</code> 등</td></tr><tr><td style="text-align: center;"><a href="#파일-입출력">파일 입출력</a></td><td style="text-align: center;"><code>fstream</code></td><td>파일 입출력 관련 데이터 및 기능을 제공하며, <code>iostream</code> 헤더를 포함한다.</td></tr><tr><td style="text-align: center;"><a href="#문자열-자료형">문자열</a></td><td style="text-align: center;"><code>string</code></td><td>문자열 관련 데이터 및 기능을 제공한다: <code>string</code> 자료형 등</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/header/chrono">날짜 및 시간</a></td><td style="text-align: center;"><code>chrono</code></td><td>날짜 및 시간과 관련된 함수를 제공한다.</td></tr></tbody>
+</table>
+
+헤더 파일 개수나 선언된 데이터가 매우 많은 경우, 프로젝트 빌드 시간을 줄이기 위한 방안으로 헤더 파일을 중간체 형태로 미리 변환시킨 [컴파일된 헤더](https://en.wikipedia.org/wiki/Precompiled_header)(precompiled header)를 활용하기도 한다. 허나 컴파일된 헤더를 사용하면 컴파일 작업 자체에는 시간이 다소 걸리는 단점이 있어, 용량이 작은 프로젝트나 자주 수정을 해야 하는 헤더 파일이 있다면 오히려 비효율적이다. MSVC 컴파일러에서는 `pch.h` 혹은 `stdafx.h`가 해당한다.
+
+### `extern` 키워드
+[`extern`](https://en.cppreference.com/w/c/language/extern) 키워드는 [변수](#변수)를 정의 없이 선언만 한다. C++ 언어에서 변수를 소개하였을 당시 특수한 경우를 제외하고 선언과 정의는 동일하게 취급한다고 언급한 점에서 상당히 대비된다. 변수나 함수를 정의(definition)하면 메모리를 할당받아, 동일한 [식별자](#식별자)로 다시 정의할 수 없게 된다. 반면, 선언(declaration)은 단순히 컴파일러에게 변수나 함수의 존재를 알려줄 뿐이며 메모리를 할당받지 않아 여러 번 선언이 가능하다.
+
+위에서 설명한 특징을 상기하며, 아래의 예시를 통해 `extern` 키워드에 의해 스크립트에 미치는 영향을 살펴본다.
+
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;"><code>extern</code> 키워드를 설명하기 위한 예시</caption>
+<colgroup><col style="width: 33.3%;"/><col style="width: 33.4%;"/><col style="width: 33.3%;"/></colgroup>
+<thead><tr><th style="text-align: center;">모듈 헤더 파일: <code>module.hpp</code></th><th style="text-align: center;">모듈 소스 코드: <code>module.cpp</code></th><th style="text-align: center;">메인 소스 코드: <code>main.cpp</code></th></tr></thead>
+<tbody><tr style="vertical-align: top;"><td>
+
+```cpp
+#include <iostream>
+using namespace std;
+
+// variable 변수 선언
+extern char variable;
+
+void func(int, float);
+```
+</td><td>
+
+```cpp
+#include "module.hpp"
+
+// variable 변수 정의
+char variable = 'A';
+
+void func(int x, float y) {
+    cout << x + y << endl;
+}
+```
+</td><td>
+
+```cpp
+#include "module.hpp"
+
+int main() {
+
+    func(variable, 0.01);
+
+    return 0;
+}
+```
+</td></tr><tr><td colspan="3">위의 예시에서 두 소스 코드 <code>module.cpp</code>와 <code>main.cpp</code>는 하나의 헤더 파일 <code>module.hpp</code>에 의해 링커로부터 서로 연동된다. <code>extern</code> 키워드에 의해 변수는 여러 번 선언이 가능하지만, 실제 코드에서 사용하기 위해서는 단 한 번의 정의가 필요하다. <code>module.cpp</code>에서의 <code>variable</code>를 정의한 이유가 바로 이러한 이유가 배경이 된 것이다.
+</td></tr>
+</tbody>
+</table>
+
+위의 예시에서 자칫 잘못하면 경우에 따라 MSVC 컴파일러 기준으로 두 가지 오류가 발생할 수 있다.
+
+1. **[C2374](https://learn.microsoft.com/en-us/cpp/error-messages/compiler-errors-1/compiler-error-c2374)**: 동일한 식별자의 변수가 두 번 이상 정의되면서 발생한 컴파일러 오류이다; 예시에서 `extern` 키워드를 사용하지 않으면 나타난다.
+1. **[LNK2001](https://learn.microsoft.com/en-us/cpp/error-messages/tool-errors/linker-tools-error-lnk2001)**: 컴파일된 코드가 참조 혹은 호출하려는 [심볼](ko.Symbol.md)의 정의를 찾을 수 없어 발생하는 링커 오류이다; 선언된 변수를 정의하지 않으면 나타난다.
+
+한편, 함수 [프로토타입](#함수)는 원래부터 정의가 아닌 (또 다른 이름인 "전방선언"에서도 알 수 있듯이) 선언이므로 `extern` 키워드가 필요하지 않는다.
+
+## 라이브러리
+[라이브러리](https://ko.wikipedia.org/wiki/라이브러리_(컴퓨팅))(library)는 변수나 함수 등을 제공하지만, 소스 코드 형태가 아닌 이미 컴파일 및 링크된 완전한 형태의 이진 파일이다. 라이브러리에 연동된 헤더 파일이 있어 `#include` 포함 지시문으로 불러와 사용할 수 있다. 즉, 라이브러리 관점에서 헤더 파일은 [API](https://ko.wikipedia.org/wiki/API)를 제공하는 역할을 한다. 라이브러리로 컴파일을 하면 파일 용량이 줄어들고 배포하기 편리하며, 또한 소스 코드 유출을 방지할 수 있다.
+
+![비주얼 스튜디오 라이브러리 컴파일 설정](./images/visual_studio_library.png)
+
+라이브러리는 크게 두 종류로 나뉘어진다:
+
+* **[정적 라이브러리](https://ko.wikipedia.org/wiki/정적_라이브러리)(static library)**
+
+    소스 코드를 컴파일하면 라이브러리도 함께 프로그램의 일부로 융합되어 외부 환경에 대한 의존도를 상당히 낮출 수 있다. 다만, 프로그램 용량이 커지고 업데이트된 라이브러리를 적용하려면 소스 코드를 새로 컴파일해야 하는 단점이 있다. 윈도우 NT에서 .lib 확장자를 가진다(유닉스의 경우 .a).
+
+* **[동적 라이브러리](https://ko.wikipedia.org/wiki/동적_링커)(dynamic library)**
+
+    소스 코드를 컴파일하여도 라이브러리는 프로그램 일부로 융합되지 않아 프로그램 용량이 획기적으로 줄어들고 라이브러리 업데이트가 매우 편리하다. 하지만 컴파일된 프로그램이 라이브러리를 찾지 못하면 실행이 불가하거나 정상적으로 동작하지 않으며, VCRUNTIME140.dll을 찾을 수 없다는 오류창이 대표적인 예시이다. 윈도우 NT에서 .dll 확장자를 가진다(유닉스의 경우 .so).
+
+비주얼 스튜디오에서 C++ 언어로 라이브러리를 빌드하려면 위의 그림과 같이 프로젝트 속성에서 구성 유형을 정적 혹은 동적 라이브러리로 변경한다. 소스 코드에서 데이터와 함수를 정의하되, `main()`은 [진입점](#진입점)이 아닌 일반 함수로 동작하는 점에 유의한다. 정의된 변수나 함수를 접근할 수 있도록 헤더 파일에 선언하여 컴파일하면 라이브러리가 완성된다.
+
+### `extern "C"`
+[`extern "C"`](https://en.cppreference.com/w/cpp/language/language_linkage)는 C++ 프로젝트가 다른 프로그래밍 언어, 즉 C 언어와 호환될 수 있도록 지원하는 언어 연동이다.
+
+> 기본적으로 C++ 프로젝트는 `extern "C++"`이며, 이러한 이유로 언어를 명시할 때 [문자열](#문자열)에 사용되는 큰 따옴표가 기입된다.
+
+C 그리고 C++ 언어는 유사한 점이 상당히 많지만 엄밀히 다른 언어이며, 대표적으로 [함수 오버로딩](#함수-오버로딩) 지원 여부에서도 살펴볼 수 있다. C++ 언어로 빌드된 파일은 함수의 식별자 외에도 전달인자 자료형과 개수 정보를 활용하여 함수 오버로딩이 가능하지만, C 언어는 오로지 식별자만으로 함수를 구분하는 차이를 극복해야 한다. C++ 프로젝트에서 `extern "C"`는 두 가지 목적을 지닌다:
+
+* C++ 언어로 작성된 함수를 C 프로젝트에서도 호환되도록 컴파일
+* C++ 프로젝트에서 C 언어로 작성된 함수를 호출하여 사용할 수 있도록 지원
+
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;"><code>extern "C"</code> 링크 선언 방법</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;">함수마다 개별 지정</th><th style="text-align: center;">블록으로 묶음 지정</th></tr></thead>
+<tbody><tr style="vertical-align: top;"><td>
+
+```cpp
+extern "C" void function(int, float);
+```
+</td><td>
+
+```cpp
+extern "C" {
+    void function(int, float);
+}
+```
+</td></tr>
+</tbody>
+</table>
+
+C 언어에서는 `extern "C"`에 대한 개념이 전무하기 때문에, 이로 인해 발생할 수 있는 문제를 방지하는 차원에서 아래와 같이 전처리기와 매크로를 활용하여 C++ 프로젝트에서만 언어 연동이 인식되도록 조치한다.
+
+```cpp
+// 헤더 파일: module.h
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+    void function(int, float);
+
+#ifdef __cplusplus
+}
+#endif
+```
