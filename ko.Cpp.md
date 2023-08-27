@@ -1426,6 +1426,76 @@ C++ 언어는 여전히 전통적인 [C 형식 동적 메모리 할당](ko.C.md#
 
     *[NTSTATUS](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/596a1078-e883-4972-9bbc-49e60bebca55) [0xC0000005](https://learn.microsoft.com/en-us/shows/inside/c0000005) STATUS_ACCESS_VIOLATION 참고*
 
+# 예외 처리
+[예외](https://ko.wikipedia.org/wiki/예외_처리)(exception)는 [런타임](https://ko.wikipedia.org/wiki/런타임) 도중에 잘못된 데이터 처리나 적절하지 않은 알고리즘 등에 의해 프로그램상 실행 불가한 코드 오류이다. C++ 언어의 구문적 문제가 아닌 관계로 정상적으로 빌드되지만, 예외를 마주하게 되면 [프로세스](ko.Process.md)는 충돌하여 즉시 종료된다. 그러므로 예외 처리(exception handling)란, 프로세스가 오류를 처음으로 마주한 순간인 [1차 시도 예외](ko.ProcDump.md#예외-처리)(1<sup>st</sup> chance exception)에서 유연하게 대처하여 종료되는 것을 방지하고 안정적으로 실행을 유지하는 게 주목표이다.
+
+### 표준 오류 스트림
+[파일 입출력](#파일-입출력) 장에서 `cin` 및 `cout` 객체와 함께 표준 입력과 출력 스트림을 소개하였다. C++ 언어는 오류 내용을 전달을 목적의 `cerr` "표준 오류(standard error)" 스트림 객체를 제공한다. 이렇게 나뉘어진 스트림은 프로그램으로부터 파일 혹은 장치로 데이터가 전송되는데 선택적 제어를 가능케 한다.
+
+```cpp
+std::cerr << "Hello World!";
+```
+
+## `try`-`catch` 예외 처리문
+[`try`](https://en.cppreference.com/w/cpp/language/try_catch)-[`catch`](https://en.cppreference.com/w/cpp/language/try_catch) 예외 처리문 쌍은 감지된 예외의 유형에 따라 기입된 코드를 실행한다. 예외 처리된 C++ 런타임 프로세스는 종료되지 않으며, 마치 아무런 일이 없었다는 듯이 이어서 실행한다.
+
+* **`try` 문**
+
+    코드에 예외가 발생하는지 확인한다. 예외가 발생하였을 시, 나머지 코드는 실행되지 않고 예외 유형에 따라 해당하는 `catch` 문으로 넘어간다.
+
+* **`except` 문**
+
+    `try` 문에서 발생한 예외에 따라 실행되는 코드를 포함한다. 하나의 `try` 문에 여러 `catch` 문을 사용하여 다양한 예외에 대비할 수 있다. 만일 `catch` 블록이 없으면 컴파일 오류가 발생한다. 예외 유형의 목록은 [여기](https://en.cppreference.com/w/cpp/error/exception)에서 확인할 수 있다.
+
+```cpp
+try
+{
+    statements;
+}
+catch(const std::out_of_range &e)
+{
+    // 예외 유형: 범위를 벗어난 요소 접근
+}
+catch(const std::overflow_error &e)
+{
+    // 예외 유형: 산술 오버플로우 발생
+}
+catch(...)
+{
+    // 예외 유형: 모든 유형의 예외 처리
+}
+```
+
+## `throw` 키워드
+[`throw`](https://en.cppreference.com/w/cpp/language/throw) 키워드는 내에서 의도적으로 예외를 발생시키는데 사용된다. 자체 제작 함수나 클래스에서 설계되지 않은 방식으로 접근하거나 사용하려는 경우, 해당 문으로 오류를 일으켜서 프로세스 실행을 즉시 중단시키는 용도로 활용된다. 해당 키워드는 `try` 블록 내부 및 외부에서 동작 방식이 약간 다르다:
+
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;"><code>throw</code> 위치에 따른 동작 방식</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;"><code>try</code> 블록 내부</th><th style="text-align: center;"><code>try</code> 블록 외부</th></tr></thead>
+<tbody>
+<tr><td>표현식으로부터 평가된 자료형을 <code>catch</code> 예외 처리문으로 전달한다. <code>catch</code>는 전달된 값이 아닌 자료형에 따라 구별하여 예외 처리한다.
+
+</td><td><a href="https://en.cppreference.com/w/cpp/error/terminate"><code>std::terminate()</code></a>와 동일, 즉 프로그램을 종료한다.</td></tr><tr><td>
+
+```cpp
+try
+{
+    throw expression;
+}
+catch(int e)
+{
+    // catch: 정수형
+}
+catch(char e)
+{
+    // catch: 문자형
+}
+```
+</td><td>-</td></tr>
+</tbody>
+</table>
+
 # 전처리기
 C++ 언어가 컴파일되기 이전에 전처리기로부터 `#include`와 같은 전처리기 지시문이 우선적으로 처리된다. 전처리기 지시문은 C++ 컴파일러 설정 및 프로그래밍의 편리성을 제공한다. 본 장에서는 일부 유용한 전처리기 지시문에 대하여 소개한다.
 
