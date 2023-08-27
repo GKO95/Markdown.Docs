@@ -1718,7 +1718,7 @@ printf("%d", variable);
 ## 포함 지시문
 [포함 지시문](https://en.cppreference.com/w/cpp/preprocessor/include)(inclusive directive) `#include`는 전처리기 지시문 중 하나로 대표적으로 [`stdio.h`](#파일-입출력)와 같은 [헤더 파일](#헤더-파일)을 불러오기 위해 사용된다. `#include` 지시문의 역할은 헤더 파일에 작성된 코드 전체를 해당 위치에 삽입하여 함수 프로토타입과 전역 및 [`extern`](#extern-키워드) 변수를 선언한다. 소스 코드에 데이터와 함수가 정의되었다면, 헤더 파일은 데이터와 함수를 선언하는 목적으로 사용된다.
 
-진입점인 `main()` 함수는 선언부가 없다는 점을 고려하면 메인 스크립트를 다음과 같이 구성할 수 있다.
+[진입점](#진입점)인 `main()` 함수는 선언부가 없다는 점을 고려하면 메인 스크립트를 다음과 같이 구성할 수 있다.
 
 <table style="width: 95%; margin: auto;">
 <caption style="caption-side: top;">헤더 파일과 소스 코드 나누기</caption>
@@ -1839,7 +1839,6 @@ void func(int x, float y) {
 </td><td>
 
 ```c
-#include <stdio.h>
 #include "module.h"
 
 int main() {
