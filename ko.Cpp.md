@@ -1388,6 +1388,44 @@ for (int index = 0; index < sizeof(variable); index++) {
 
 비록 숫자를 읽을 때에는 빅 엔디언이 익숙하겠지만, 컴퓨터 메모리에서는 리틀 엔디언으로 데이터를 저장한다는 점을 명시하도록 한다.
 
+# 동적 할당
+소스 코드에서 정의된 [변수](#변수)와 [함수](#함수)들은 [메모리](ko.Memory.md)의 [스택](https://ko.wikipedia.org/wiki/%EC%8A%A4%ED%83%9D)(stack) 영역에서 [레지스터](ko.Processor.md)에 의한 푸쉬(push)와 팝(pop)이 빠른 속도로 이루어지면서 [프로세스](ko.Process.md)가 실행된다. 하지만 스택 구조의 특성상 메모리 데이터를 저장하기에 부적합하며, 특히 블록 내에 정의된 변수를 외부에서 사용할 수 없는 점도 스택에 의한 현상이다. 이러한 한계점을 극복하기 위한 기술이 바로 프로세스 [런타임](https://ko.wikipedia.org/wiki/런타임) 도중에 메모리를 확보하는 "[동적 할당](https://ko.wikipedia.org/wiki/C_동적_메모리_할당)(dynamic allocation)"이다. 만일 [배열](#배열)을 변수에 정의하였다면, 프로세스 실행 당시에 애초부터 이를 고려하여 스택상 메모리가 미리 확보된 점과 상반되는 동작이다.
+
+동적 할당은 [힙](https://en.wikipedia.org/wiki/Memory_management#HEAP)(heap) 영역에 메모리를 할당하여, 스택의 영향을 전혀 받지 않은 채 데이터를 저장할 수 있다.
+
+> 힙 영역은 [힙 자료구조](https://ko.wikipedia.org/wiki/힙_(자료_구조))와 전혀 상관이 없으며, 사전적으로 "(데이터) 더미"를 뜻하는 순수히 물리 메모리의 주소공간 영역을 지칭하는 용어이다.
+
+개발자는 원하는 데이터를 저장할 힙 영역의 메모리를 할당받아 사용할 수 있지만, 반면 사용하지 않게 된다면 개발자가 직접 할당받은 메모리를 해제하여 시스템에 반환해야 한다. 이러한 작업이 충분히 이루어지지 않는다면 메모리 누수(memory leak)가 발생하여 리소스 고갈로 프로세스 충돌을 야기한다.
+
+<table style="width: 80%; margin: auto;">
+<caption style="caption-side: top;">C++ 언어의 동적 할당 표현식</caption>
+<colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup>
+<thead><tr><th style="text-align: center;">표현식</th><th style="text-align: center;">설명</th></tr></thead>
+<tbody><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/new"><code>new</code></a></td><td>힙 영역의 메모리 공간에 데이터 크기만큼 동적 할당 및 저장한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/new#Placement_new"><code>new()</code></a></td><td>지정된 메모리 주소에 힙 영역의 메모리 공간에 데이터 크기만큼 동적 할당 및 저장한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/delete"><code>delete</code></a></td><td>동적 할당받은 메모리를 해제한다.</td></tr></tbody>
+</table>
+
+```cpp
+// 동적 할당: 정수 3
+int* ptr = new int(3);
+delete ptr;
+
+// 동적 할당: 문자형 배열
+int* arr = new char[2] {1, 7};
+delete[] arr;
+```
+
+위의 동적 할당은 [값 초기화](https://en.cppreference.com/w/cpp/language/value_initialization)(value initialization)가 진행되었으며, 할당받은 메모리에 저장한 데이터를 해당하는 값으로 초기화한다. 반면, 소괄호가 없이 [기본 초기화](https://en.cppreference.com/w/cpp/language/default_initialization)(default initialization)를 하면 자료형에 따라 동작이 다소 차이가 있다: (1) 기본 자료형은 초기화되지 않아 메모리에 잔여한 쓰레기 값을 가지며, (2) [클래스](#클래스) 및 [구조체](#구조체)의 경우 [기본 생성자](#생성자)가 실행된다.
+
+C++ 언어는 여전히 전통적인 [C 형식 동적 메모리 할당](ko.C.md#동적-할당)이 가능하지만, 되도록 C++ 언어에 최적화된 `new` 및 `delete` 표현식을 사용할 것을 권장한다.
+
+* **[메모리 누수](https://ko.wikipedia.org/wiki/메모리_누수)(memory leak)**
+
+    더 이상 사용되지 않는 동적 할당된 메모리가 계속 잔여하여, 프로세스의 [가상 주소 공간](ko.Process.md#가상-주소-공간)에 할당할 수 있는 메모리 리소스가 점차 줄어드는 현상이다. 가상 주소 공간에 더 이상 할당받을 수 있는 메모리가 없으면 프로세스 충돌이 발생하여 종료된다.
+
+* **[허상 포인터](https://ko.wikipedia.org/wiki/허상_포인터)(dangling pointer)**
+
+    *[NTSTATUS](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/596a1078-e883-4972-9bbc-49e60bebca55) [0xC0000005](https://learn.microsoft.com/en-us/shows/inside/c0000005) STATUS_ACCESS_VIOLATION 참고*
+
 # 전처리기
 C++ 언어가 컴파일되기 이전에 전처리기로부터 `#include`와 같은 전처리기 지시문이 우선적으로 처리된다. 전처리기 지시문은 C++ 컴파일러 설정 및 프로그래밍의 편리성을 제공한다. 본 장에서는 일부 유용한 전처리기 지시문에 대하여 소개한다.
 
