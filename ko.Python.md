@@ -915,11 +915,11 @@ Hello World!
 다음은 매개변수에 사용되는 연산자로 전달인자을 받는데 유연성을 제공한다. 이들은 프로그래밍 구문상 명확한 구별이 가능해야 하므로 반드시 일반 매개변수 뒤에 위치해야 한다.
 
 <table style="width: 100%; margin: auto;">
-
+<caption>파이썬 함수의 매개변수 활용</caption>
 <colgroup><col style="width: 33.3%;"/><col style="width: 33.3%;"/><col style="width: 33.3%;"/></colgroup>
 <thead><tr><th style="text-align: center;"><code>arg =  value</code></th><th style="text-align: center;"><code>*args</code></th><th style="text-align: center;"><code>**kwargs</code></th></tr></thead>
 <tbody><tr>
-<td>전달인자가 없으면 기본값 <code>value</code>가 대신 매개변수에 할당된다</td><td><a href="#시퀀스-언패킹">시퀀스 언패킹</a>으로 여러 개의 전달인자들을 하나의 튜플로 전달받는다.</td><td><a href="#딕셔너리 언패킹">딕셔너리 언패킹</a>으로 여러 개의 <code>key = value</code> 형식 전달인자들을 하나의 딕셔너리로 전달받는다.</td>
+<td>전달인자가 없으면 기본값 <code>value</code>가 대신 매개변수에 할당된다.</td><td><a href="#시퀀스-언패킹">시퀀스 언패킹</a>으로 여러 개의 전달인자들을 하나의 튜플로 전달받는다.</td><td><a href="#딕셔너리 언패킹">딕셔너리 언패킹</a>으로 여러 개의 <code>key = value</code> 형식 전달인자들을 하나의 딕셔너리로 전달받는다.</td>
 </tr><tr style="vertical-align: top;"><td>
 
 ```python
