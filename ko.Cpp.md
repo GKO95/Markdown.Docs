@@ -18,7 +18,7 @@ C++ 언어는 [컴파일 언어](ko.Compiler.md)(compiled language)이다. C++ �
 
 컴파일러는 개발사와 목적에 따라 다양한 종류가 존재하지만, 전부 동일한 ISO 표준에 따라 동작하므로 일반적인 경우에는 어떤 컴파일러를 사용하던 무관하다. 아래는 대표적인 C++ 언어 컴파일러들을 나열한다.
 
-* [Microsoft Visual C++](https://ko.wikipedia.org/wiki/마이크로소프트_비주얼_C%2B%2B) (일명 MSVC): 마이크로소프트
+* [Microsoft Visual C++](https://ko.wikipedia.org/wiki/마이크로소프트_비주얼_C++) (일명 MSVC): 마이크로소프트
 * [GNU C Compiler](https://ko.wikipedia.org/wiki/GNU_C_컴파일러) (일명 GCC): GNU 프로젝트
 * [Clang](https://ko.wikipedia.org/wiki/클랭): LLVM Developer Group, 애플
 
@@ -850,6 +850,321 @@ C++ 표준 라이브러리는 [`iostream`](#파일-입출력) (구체적으로 [
 ```cpp
 // C++ 문자열 자료형
 std::string variable = "Hello World!";
+```
+
+# 함수
+함수(function)는 독립적인 코드 블록으로써 데이터를 처리하며, 재사용이 가능하고 호출 시 처리된 데이터를 보여주어 유동적인 프로그램 코딩을 가능하게 한다. 함수는 이름 뒤에 소괄호가 있는 `function()` 형식으로 구별된다.
+
+```cpp
+float variable = 3.14159
+std::cout << std::round(variable);
+// 실수의 소수점을 반올림하는 "std::round()" 함수
+```
+```
+3
+```
+
+함수를 정의하기 위해서 (1) 여러 문장의 코드들을 하나로 묶는 [블록](#구문)과 (2) [`return`](#return-반환문) 키워드에 의해 반환될 데이터 유형을 결정하는 [자료형](#자료형)이 반드시 필요하다. 함수 안에 새로운 함수를 정의하는 건 허용되지 않는다. 정의된 함수를 호출하여 사용하는 데, 함수명 뒤에 소괄호 `()` 기입 여부에 따라 의미하는 바가 다르다:
+
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;">함수 식별자의 호출 방식에 따른 차이</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;"><code>function()</code> 호출</th><th style="text-align: center;"><code>function</code> 호출</th></tr></thead>
+<tbody><tr><td>함수에 정의된 코드를 실행한다.</td><td>함수의 <a href="#포인터">메모리 주소</a>를 가리키며, 정의된 코드를 실행하지 않는다.</td></tr><tr style="vertical-align: top;"><td>
+
+```cpp
+int function() {
+    std::cout << 1 + 2 << std::endl;
+    return 7;
+}
+
+int variable = function();
+printf("반환: %p", variable);
+```
+</td><td>
+
+```cpp
+int function() {
+    std::cout << 1 + 2 << std::endl;
+    return 7;
+}
+
+int variable = function;
+printf("반환: %p", variable);
+```
+</td></tr><tr style="vertical-align: top;"><td>
+
+```terminal
+3
+반환: 0000000000000007
+```
+</td><td>
+
+```terminal
+반환: 00000000249513ED
+```
+</td></tr>
+</tbody>
+</table>
+
+함수가 정의하기도 전에 호출되면 순차적으로 실행되는 C++ 언어 특성상 존재하지 않는 함수를 호출하는 것으로 간주되어 오류가 발생한다. 함수 [프로토타입](https://en.cppreference.com/w/c/language/function_declaration)(prototype), 일명 전방선언(forward declaration)은 컴파일러에게 미리 함수의 존재를 알려주어 정의되기 전에 호출할 수 있다. 프로토타입은 선택사항이며, 우선적으로 선언될 수 있게 스크립트 상단부에 기입하는 게 일반적이다.
+
+```cpp
+// 함수 프로토타입
+void function();
+
+// 함수 호출
+function();
+
+// 함수 정의
+void function() {
+    std::cout << 1 + 2;
+}
+```
+
+다음은 함수에 대해 논의할 때 중요하게 언급되는 매개변수와 전달인자의 차이에 대하여 설명한다.
+
+* **전달인자 (argument)**: 간략하게 "인자"라고도 부르며, 함수로 전달되는 데이터이다.
+* **매개변수 (parameter)**: 전달인자를 할당받는 함수 내의 지역 변수이다. 그러므로 매개변수는 함수 외부에서 호출이 불가능하다. 매개변수 선언은 함수의 소괄호 `()` 내에서 이루어진다.
+
+> 매개변수와 전달인자는 개념적으로 다른 존재이지만, 동일한 데이터를 가지고 있는 관계로 흔히 두 용어는 혼용되어 사용하는 경우가 많다.
+
+C++ 언어는 매개변수에 할당 연산자를 사용하여 인자가 없을 시 전달할 [기본값](https://en.cppreference.com/w/cpp/language/default_arguments)을 함수 선언부에 미리 지정할 수 있다. 
+
+```cpp
+void function(std::string arg = "Hello World!");
+
+function();       // 반환: "Hello World!"
+function("C++");  // 반환: "C++"
+
+void function(std::string arg) {
+    std::cout << arg << std::endl;
+}
+```
+
+배열은 위와 동일한 구문으로 인자를 매개변수로 건네줄 수 없으며, 아래의 두 가지 방법이 존재한다:
+
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;">배열을 매개변수로 전달하는 방법</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;"><a href="#배열">배열</a>로 선언</th><th style="text-align: center;"><a href="#포인터">포인터</a>로 선언</th></tr></thead>
+<tbody><tr style="vertical-align: top;"><td>
+
+```cpp
+void function(int arg[]);
+
+int arr[3] = {value1, value2, value3};
+function(arr);
+
+// 넘겨받은 인자를 배열 그대로 받아들인다.
+void function(int arg[]) {
+    statements;
+    return;
+}
+```
+</td><td>
+
+```cpp
+void function(int *arg);
+
+int arr[3] = {value1, value2, value3};
+function(arr);
+
+// 넘겨받은 인자를 배열이 아닌 포인터로 받아들인다.
+void function(int *arg) {
+    statements;
+    return;
+}
+```
+</td></tr>
+</tbody>
+</table>
+
+배열 자체를 호출하면 배열의 첫 번째 요소의 메모리 주소를 가져오기 때문에 가능하다. 특히 배열의 각 요소가 할당된 메모리 주소는 연쇄적이므로, 바로 옆 (`int` 정수형이면 +4) 메모리 주소에는 배열의 다음 요소가 저장된 메모리 공간이다.
+
+### 함수 오버로딩
+[함수 오버로딩](https://ko.wikipedia.org/wiki/함수_오버로드)(function overloading)은 동일한 식별자 및 반환 자료형을 갖는 함수를 전달받은 인자의 자료형 및 개수에 따라 달리 동작할 수 있도록 지원한다. 원하는 자료형 및 개수의 매개변수 조합을 가진 함수를 추가 정의하여 오버로딩을 구현할 수 있다.
+
+```cpp
+// 오버로딩된 함수의 프로토타입
+float function(int arg1, float arg2);
+float function(float arg1, float arg2);
+
+function(1, 3.0);      // 반환: 4.0
+function(1.0, 3.0);    // 반환: -2.0
+
+// 오버로딩된 함수의 정의 1
+float function(int arg1, float arg2) {
+    return arg1 + arg2;
+}
+
+// 오버로딩된 함수의 정의
+float function(float arg1, float arg2) {
+    return arg1 - arg2;
+}
+```
+
+## 진입점
+[진입점](https://ko.wikipedia.org/wiki/엔트리_포인트)(entry point)는 프로그램이 시작되는 부분을 의미하며, C++ 언어의 경우 [`main()`](https://en.cppreference.com/w/cpp/language/main_function) 함수에서부터 코드가 실행된다. 진입점은 프로토타입이 존재하지 않으며, 유일해야 하므로 복수의 `main()` 함수가 존재하거나 찾지 못하면 요류가 발생하여 컴파일이 불가하다.
+
+```cpp
+// C++ 언어 진입점: main()
+int main(int argc, char **argv) {
+
+    return 0;
+}
+```
+
+> 본 문서의 대부분 예시에는 `main()` 함수가 직접 언급되지 않았으나, 전역 변수와 함수 등을 제외한 코드들은 `main()` 함수 내에서 작성되어야만 실행된다.
+
+C/C++ 언어 표준에 의하면 `main()` 함수는 반드시 `int` 정수형을 반환해야 하며, `EXIT_SUCCESS`(혹은 정수 `0`) 그리고 `EXIT_FAILURE`이 있다. 만일 반환문이 없을 시, 컴파일러는 자동적으로 `return 0;` 문장을 `main()` 함수의 말단에 삽입한다.
+
+`main()` 진입점은 아래와 같은 매개변수를 함축적으로 가진다.
+
+* **`argc`**: 전달인자 개수(argument count).
+* **`argv`**: 전달인자 데이터 배열(argument vector); 매개변수 정의는 `char *argv[]`로 대체 가능하다.
+
+## 콜백 함수
+[콜백 함수](https://ko.wikipedia.org/wiki/콜백)(callback function)는 인자로 전달되는 함수이다. 여기서 콜백이란, 전달인자로 전달된 함수가 다른 함수에서 언젠가 다시 호출(call back)되어 실행된다는 의미에서 붙여진 용어이다. 콜백 함수를 전달받는 함수, 일명 호출 함수(calling function)는 블록 내에서 매개변수 호출을 통해 콜백 함수를 실행한다.
+
+아래는 콜백 함수의 예시이며, 이에 대한 자세한 원리는 차후 [함수 포인터](#함수-포인터)에서 설명한다.
+
+```cpp
+// 호출 함수
+float calling(float (*function)(int, float), int arg) {
+    // 콜백 함수의 호출
+    return function(arg, 3.14159);
+}
+
+// 콜백 함수
+float callback(int arg1, float arg2) {
+    return (float)arg1 + arg2;
+}
+
+std::cout << calling(callback, 1);
+```
+```
+4.141590
+```
+
+## 람다 표현식
+[람다 표현식](https://en.cppreference.com/w/cpp/language/lambda)(lambda expression), 일명 [람다 함수](https://learn.microsoft.com/en-us/cpp/cpp/lambda-expressions-in-cpp)(lambda function) 혹은 익명 함수(anonymous function)는 이름이 없는, 즉 익명 함수로써 흔히 일회용으로 사용된다. 비록 식별자가 필요없는 함수일지라도, 람다 표현식은 재호출을 위해 일반 함수처럼 식별자를 가질 수 있다.
+
+```cpp
+// 람다 표현식 정의
+[ capture ]( params ) -> ret
+{
+    statements;
+}
+```
+
+> 여기서 `ret`은 람다 표현식의 반환 자료형을 의미하며, 명시되지 않을 경우에는 `auto`로 간주한다.
+
+[캡처 조항](https://en.cppreference.com/w/cpp/language/lambda#Lambda_capture)(capture clause)은 매개변수 이외에 유효범위 내에 선언된 변수를 람다 표현식으로 전달할 수 있는 수단을 제공한다. 유효범위 내의 변수를 캡처 조항에 명시하지 않고 람다 표현식에 호출하면 [MSVC](https://ko.wikipedia.org/wiki/마이크로소프트_비주얼_C++)의 경우에 [C3493](https://learn.microsoft.com/en-us/cpp/error-messages/compiler-errors-2/compiler-error-c3493) 오류가 발생한다. 다음은 캡처 조항을 활용하는 예시와 함께 코드에 대하여 설명한다.
+
+<table style="width: 100%; margin: auto;">
+<caption>C++ 람다 표현식의 캡처 조항 예시</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;">명시적 캡처</th><th style="text-align: center;">암시적 캡처</th></tr></thead>
+<tbody><tr>
+<td>캡쳐 조항에 유효범위 내에 위치한 변수를 선택적으로 기입할 때, 변수 앞에 <code>&</code> 기호 여부에 따라 "값에 의한" 혹은 "<a href="#참조">참조</a>에 의한" 캡처가 구분된다.</td><td>유효범위의 변수를 기본적으로 "값에 의한" <code>[=]</code> 혹은 "참조에 의한" <code>[&]</code> 캡처하여, 개별적으로 변수를 명시하여 별도 캡처 조항을 지정할 수 있다.</td></tr><tr style="vertical-align: top;"><td>
+
+```cpp
+int  number = 3;
+char letter = 'A';
+
+auto lambda = [number, &letter]
+{
+    std::cout << number;
+    std::cout << letter;
+};
+
+number = 7;
+letter = 'C';
+
+lambda();
+```
+</td><td>
+
+```cpp
+int  number = 3;
+char letter = 'A';
+
+auto lambda = [=, &letter]
+{
+    std::cout << number;
+    std::cout << letter;
+};
+
+/* 대안:
+    auto lambda = [&, number] {
+        std::cout << number;
+        std::cout << letter;
+    };
+*/
+
+number = 7;
+letter = 'C';
+
+lambda();
+```
+</td></tr>
+<tr style="vertical-align: top;"><td colspan="2">
+
+```terminal
+3C
+```
+</td></tr></tbody>
+</table>
+
+## 인라인 함수
+[인라인 함수](https://en.cppreference.com/w/cpp/language/inline)(inline function)는 인라인 확장에 사용될 `inline` 키워드로 지정된 함수이다.
+
+> [인라인 확장](https://ko.wikipedia.org/wiki/인라인_확장)(inline expansion)은 컴파일 과정에서 함수 [호출지](https://en.wikipedia.org/wiki/Call_site)(call site)를 함수 코드로 치환하는 최적화 기법이다. 
+
+프로그램 실행 (즉, 런타임) 도중에 함수를 호출하는데 소모되는 시간이 없으므로 속도가 소폭 향상되는 효과가 있으나, 과도한 사용은 프로그램 크기가 커지고 RAM 메모리를 더 많이 사용하는 단점으로 작용한다. 그러므로 인라인은 코드가 작지만 자주 사용되는 함수에 가장 적합하다.
+
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;">인라인 함수를 활용한 코드 비교</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;">인라인 함수가 적용된 코드</th><th style="text-align: center;">동일 코드</th></tr></thead>
+<tbody><tr style="vertical-align: top;"><td>
+
+```cpp
+// 인라인 함수
+inline void function(char* arg) {
+    std::cout << arg;
+}
+
+int main() {
+    function("Hello World!");
+    return 0;
+}
+```
+</td><td>
+
+```cpp
+int main() {
+    std::cout << "Hello World!";
+    return 0;
+}
+```
+</td></tr>
+</tbody>
+</table>
+
+## 재귀 함수
+[재귀 함수](https://ko.wikipedia.org/wiki/재귀_(컴퓨터_과학))(recursive function)는 스스로를 호출하는 함수이다. 재귀 함수는 반드시 스스로를 호출하는 반복으로부터 탈출하는 기저 조건(base case)이 필요하다. 기저 조건이 없으면 무한 재귀가 발생하는데 프로그램 실행에 기여하는 [메모리](#스택-영역)가 부족하여 충돌이 발생한다.
+
+```cpp
+// 예제: 펙토리얼 "!"
+int factorial(int arg) {
+    // 기저 조건: 재귀로부터 탈출하는 조건
+    if (arg == 1)
+        return 1;
+    else
+        return arg * factorial(arg - 1);
+}
 ```
 
 # 전처리기
