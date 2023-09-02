@@ -1198,7 +1198,7 @@ free(ptr);
     *[NTSTATUS](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/596a1078-e883-4972-9bbc-49e60bebca55) [0xC0000005](https://learn.microsoft.com/en-us/shows/inside/c0000005) STATUS_ACCESS_VIOLATION 참고*
 
 # 사용자 정의 자료형
-C 언어는 `int`, `float`, 또는 `char` 등의 기존 [자료형](#자료형)을 활용하여 특정 목적을 위한 커스텀 자료형을 제작할 수 있으며, 이를 사용자 정의 자료형(user-defined data type)이라고 부른다. 정확히 말하자면 아예 새로운 자료형을 창조하는 게 아닌, 효율적인 데이터 관리를 위해 기존 자료형들을 활용한 혹은 취합한 자료형이다.
+C 언어는 `int`, `float`, 또는 `char` 등의 기존 [자료형](#자료형)을 활용하여 특정 목적을 위한 커스텀 자료형을 제작할 수 있으며, 이를 사용자 정의 자료형(user-defined data type)이라고 부른다. 새로운 자료형을 창조하는 게 아닌, 효율적인 데이터 관리를 위해 기존 자료형들을 활용한 혹은 취합한 자료형이다.
 
 ## 구조체
 [구조체](https://en.cppreference.com/w/c/language/struct)(structure)는 여러 내부 변수, 일명 맴버(member)들을 자료형과 무관하게 하나의 단일 데이터로 통합시킨 사용자 정의 자료형이며, `struct` 키워드로 정의된다. 아래 C 언어 예시는 문자형과 정수형 맴버를 가진 구조체를 선언한다.
