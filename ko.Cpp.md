@@ -2190,6 +2190,78 @@ union UNION {
     </tbody>
     </table>
 
+## 열거형
+[열거형](https://en.cppreference.com/w/cpp/language/enum)(enumeration)은 열거된 항목, 일명 열거자(enumerator)들을 정수로 순번을 매기며, `enum` 키워드 정의된다. [구조체](#구조체)와 [공용체](#공용체)처럼 커스텀 자료형을 제작하는 게 아닌, 정수를 [식별자](#식별자)로 대신 치환하여 소스 코드 가독성을 높여주는 역할을 한다. 다음은 열거형에 대한 유의사항이다:
+
+1. 열거자들은 정수 0부터 시작하여 다음 열거자마다 1만큼 증가한다. 할당 연산자 `=`로 정수를 직접 지정하지 않는 이상, 이러한 규칙은 계속 유지된다.
+
+    ```cpp
+    enum ENUMERATION {
+        enumerator1,     // = 0
+        enumerator2,     // = 1
+        enumerator3 = 7, // = 7
+        enumerator4      // = 8
+    };
+    ```
+
+1. 비록 다른 열거형에 정의된 열거자여도 식별자는 전역적으로 유일해야 한다.
+
+    ```cpp
+    enum ENUMERATION1 {
+        enumerator1,
+        enumerator2,
+    };
+    
+    enum ENUMERATION2 {
+        enumeration2,    // <- [C2086] 'enumerator2': 재정의: 이전 정의는 '열거자'입니다.
+        enumeration3,
+    };
+    ```
+
+열거형 선언 이후, 열거자를 추가하거나 열거형 값을 변경하는 건 불가하다. 그래도 열거형으로부터 정의된 변수는 범위 외의 정수나 타 열거형의 열거자를 할당받아 사용할 수 있다. 아래는 선언된 열거형으로부터 변수를 정의하는 구문을 보여준다.
+
+```cpp
+ENUMERATION variable = enumerator1;
+```
+
+### 열거형 클래스
+[열거형 클래스](https://en.cppreference.com/w/cpp/language/enum#Scoped_enumerations)(enumeration class)는 클래스 성질이 추가된 열거형이며, `enum class` 혹은 `enum struct` 키워드로 정의된다. 열거형 클래스로 정의된 변수는 오로지 주어진 열거자만을 할당받을 수 있다. 개별 열거자는 열거형 클래스의 정적 필드 맴버인 마냥 호출되는데, 이러한 국부적 영역범위 특성은 서로 다른 열거형 클래스에도 동명의 열거자를 정의할 수 있도록 한다. 때문에 열거형 클래스는 영역 제한 열거형(scoped enumeration)이라고 칭한다.
+
+> 열거자 충돌 문제를 방지할 수 있기 때문에, C++ 언어는 열거자 클래스의 활용을 적극 권장한다. 
+
+```cpp
+// 열거형 클래스 정의 1
+enum class ENUMERATION1 {
+    enumerator1,
+    enumerator2
+};
+
+// 열거형 클래스 정의 2
+enum struct ENUMERATION2 {
+    enumerator2,
+    enumerator3
+};
+
+ENUMERATION1 variable = ENUMERATION1::enumerator1;
+```
+
+## `typedef` 선언
+[`typedef`](https://en.cppreference.com/w/cpp/language/typedef) 키워드는 C++ 언어 내장 자료형 및 사용자 지정 자료형에 별칭(alias)을 선언하여 가독성을 높이는 역할을 한다.
+
+```cpp
+// unsigned 문자 자료형의 BYTE 별칭 선언
+typedef unsigned char BYTE;
+```
+
+### 자료형 별칭 선언
+[`using`](https://en.cppreference.com/w/cpp/language/type_alias) 키워드는 [네임스페이스](#네임스페이스)의 반복적 호출을 생략하는데 사용되기도 하지만, 자료형에 별칭을 선언(type alias declaration)하는 데에도 활용된다.
+
+> 자료형 별칭 선언은 `typedef` 선언과 차이가 없으며 사실상 동일한 역할을 수행한다.
+
+```cpp
+using dtypeName = int;
+```
+
 # 템플릿
 [템플릿](https://en.cppreference.com/w/cpp/language/templates)(template)은 [함수](#함수)와 [클래스](#클래스)([구조체](#구조체) 및 [공용체](#공용체) 포함)의 매개변수나 맴버 등의 [자료형](#자료형)이 지정되지 않은 채 정의되어, 호출할 때 자료형을 지정하여 사용할 수 있는 코드이다. 유사한 코드를 실행하는 함수나 클래스는 반복적으로 정의할 필요 없이 템플릿으로 통합하여 작업 효율을 높이고 수월하게 관리할 수 있다. 템플릿을 사용하는 대표적인 예시로 [배열 클래스](#배열-클래스) 그리고 [벡터 클래스](#벡터-클래스)가 있다.
 
