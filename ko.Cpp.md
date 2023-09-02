@@ -1436,6 +1436,174 @@ C++ 언어는 여전히 전통적인 [C 형식 동적 메모리 할당](ko.C.md#
 
     *[NTSTATUS](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/596a1078-e883-4972-9bbc-49e60bebca55) [0xC0000005](https://learn.microsoft.com/en-us/shows/inside/c0000005) STATUS_ACCESS_VIOLATION 참고*
 
+# 클래스
+객체(object 혹은 instance)는 데이터를 저장할 수 있는 [변수](#변수)와 처리할 수 있는 [함수](#함수)를 하나로 묶은 데이터이다. 객체의 변수와 함수는 각각 필드(field)와 메소드(method)라고 불리며, 이를 통틀어 맴버(member)라고 칭하고 다음과 같이 접근한다.
+
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;">객체의 맴버 유형별 호출 구문</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;">필드 (유사 변수)</th><th style="text-align: center;">메소드 (유사 함수)</th></tr></thead>
+<tbody><tr style="vertical-align: top;"><td>
+
+```cpp
+instance.field
+```
+</td><td>
+
+```cpp
+instance.method()
+```
+</td></tr>
+</tbody>
+</table>
+
+현재까지 다룬 내용 중에서 객체에 해당되는 데이터로는 [문자열 객체](#문자열-자료형)와 [시퀀스 객체](#배열-클래스)가 있다.
+
+```cpp
+std::array<int, 4> variable = {0, 3, 5, 9};
+std::cout << variable.at(2);
+// "variable" 배열 객체의 "at()" 메소드를 사용하여 2 번째 인덱스 요소의 값을 반환한다.
+```
+
+[클래스](https://en.cppreference.com/w/cpp/language/classes)(class)는 객체의 필드와 메소드를 정의하여, "객체화(instantiation)" 작업을 통해 해당 객체를 생성하는 코드이다. `class` 키워드로부터 정의되며, [`struct`](#구조체) 혹은 [`union`](#공용체) 키워드로도 정의될 수 있으나 [PDS](#사용자-정의-자료형)에서 성질 차이에 대하여 설명할 예정이다.
+
+> 클래스 내에 정의된 메소드는 사실상 [인라인 함수](#인라인-함수)이며, 자세한 내용은 [맴버 선언](#맴버-선언)을 참고한다.
+
+객체화에 의해 클래스에 정의된 맴버들은 [캡슐화](https://ko.wikipedia.org/wiki/캡슐화)(encapsulation)되어 다음 특징을 갖는다:
+
+1. 변수와 함수가 하나의 객체로 결합된다.
+1. 우연치 않은 수정을 방지하기 위해 변수 및 함수에 대한 직접적인 접근을 외부로부터 제한할 수 있다.
+
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;">유형별 클래스 정의 및 객체화</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;">명명된 클래스</th><th style="text-align: center;">익명 클래스</th></tr></thead>
+<tbody><tr style="vertical-align: top;"><td>명명된 식별자를 통해 해당 클래스를 언제든지 객체화할 수 있다.</td><td>흔히 네스티드(nested) 구조에서 코드 일관성을 보여주기 위해 사용된다.</td></tr><tr style="vertical-align: top;"><td>
+
+```cpp
+class CLASS {
+public:
+
+    int   field1 = 2;
+    float field2 = 3.14;
+    
+    int method() {
+        return field1 * field2;
+    }
+
+    int method(int arg) {
+        return field1 + field2 - arg;
+    }
+};
+
+CLASS instance;
+```
+</td><td>
+
+```cpp
+class {
+public:
+
+    int   field1 = 2;
+    float field2 = 3.14;
+    
+    int method() {
+        return field1 * field2;
+    }
+
+    int method(int arg) {
+        return field1 + field2 - arg;
+    }
+} instance;
+```
+</td></tr>
+</tbody>
+</table>
+
+### 접근 지정자
+[접근 지정자](https://en.cppreference.com/w/cpp/language/access)(access specifier)는 외부 코드 및 [상속](#상속)으로부터 맴버들을 접근할 수 있는 권한을 설정하며, 대표적인 세 가지 유형을 소개한다.
+
+> `class`와 `struct` 키워드의 유일한 차이점은 기본 접근 지정자 뿐이다. 그러므로 클래스를 정의할 때 후자를 사용하는 경우도 흔히 찾아볼 수 있다.
+
+* `public`: 클래스 외부 코드로부터 맴버 접근이 자유롭다 (`stuct` 및 `union` 키워드의 기본 접근 지정자이다).
+* `private`: 클래스 내부에서만 맴버 접근이 가능하다 (`class` 키워드의 기본 접근 지정자이다).
+* `protected`: 맴버 접근이 가능한 외부 코드가 해당 클래스로부터 상속된 파생 클래스로 제한된다.
+
+### 클래스 포인터
+클래스 포인터(class pointer)는 클래스를 자료형으로 갖는 [포인터](#포인터)이며, 클래스 뒤에 별표 `*`를 기입하여 포인터를 선언한다. 포인터로부터 맴버를 접근하는기 위해 [포인터 맴버 연산자](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) `->`를 사용해야 한다.
+
+```cpp
+// 클래스 포인터 정의
+CLASS *ptr = &instance;
+
+std::cout << ptr->field;
+std::cout << ptr->method();
+```
+
+## 생성자
+[생성자](https://en.cppreference.com/w/cpp/language/constructor)(constructor)는 객체화마다 자동으로 실행되는 특수한 보이드 메소드이다. 비록 생성자는 선택사항이지만, 정의한다면 반드시 클래스명과 동일해야 한다. 외부 코드로부터 객체화되기 때문에 생성자를 `public` 접근 지정자로 설정한다. 흔히 객체화 단계에서 맴버들을 초기화하는 용도로 사용된다.
+
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;">생성자의 맴버 초기화 방식</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;">직접 초기화(direct initialization)</th><th style="text-align: center;">목록 초기화(list initialization)</th></tr></thead>
+<tbody><tr style="vertical-align: top;"><td>생성자의 블록 내에서 각 맴버를 할당 연산자(<code>=</code>)로 초기화하는 일반적인 방법이다.</td><td>직접 초기화가 불가능한 <a href="#상수">상수</a> 맴버의 초기화가 가능하다.</td></tr><tr style="vertical-align: top;"><td>
+
+```cpp
+class CLASS {
+    int   field1;
+    float field2; 
+
+public:
+    CLASS(int arg1, float arg2)
+    {
+        field1 = arg1; field2 = arg2;
+        ...
+    }
+};
+
+// 클래스 객체화
+CLASS intance(2, 3.14);
+```
+</td><td>
+
+```cpp
+class CLASS {
+    int   field1;
+    float field2;
+
+public:
+    CLASS(int arg1, float arg2)
+        : field1(arg1), field2(arg2)
+    {
+        ...
+    }
+};
+
+// 클래스 객체화
+CLASS intance(2, 3.14);
+```
+</td></tr>
+</tbody>
+</table>
+
+생성자는 오버로딩될 수 있어 한 개 이상이 정의될 수 있다. 그 중에서 아무런 전달인자를 받지 않는 생성자를 기본 생성자(default constructor)라고 칭한다.
+
+### 소멸자
+[소멸자](https://en.cppreference.com/w/cpp/language/destructor)(destructor)는 객체가 메모리로부터 소멸되기 직전에 자동으로 실행되는 특수한 보이드 메소드이다. 비록 소멸자는 선택사항이지만, 정의한다면 접두부에는 물결표 `~`가 함께 반드시 클래스명과 동일해야 한다. 외부 코드로부터 소멸되기 때문에 소멸자를 `public` 접근 지정자로 설정한다.
+
+```cpp
+class CLASS {
+public:
+    ~CLASS()
+    {
+    	...
+    }
+};
+```
+
+소멸자는 매개변수를 가질 수 없으므로 오버로딩될 수 없다. 그러므로 클래스는 오로지 하나의 소멸자만 정의할 수 있다.
+
 # 템플릿
 [템플릿](https://en.cppreference.com/w/cpp/language/templates)(template)은 [함수](#함수)와 [클래스](#클래스)([구조체](#구조체) 및 [공용체](#공용체) 포함)의 매개변수나 맴버 등의 [자료형](#자료형)이 지정되지 않은 채 정의되어, 호출할 때 자료형을 지정하여 사용할 수 있는 코드이다. 유사한 코드를 실행하는 함수나 클래스는 반복적으로 정의할 필요 없이 템플릿으로 통합하여 작업 효율을 높이고 수월하게 관리할 수 있다. 템플릿을 사용하는 대표적인 예시로 [배열 클래스](#배열-클래스) 그리고 [벡터 클래스](#벡터-클래스)가 있다.
 
