@@ -1604,6 +1604,123 @@ public:
 
 소멸자는 매개변수를 가질 수 없으므로 오버로딩될 수 없다. 그러므로 클래스는 오로지 하나의 소멸자만 정의할 수 있다.
 
+## 맴버 선언
+맴버 함수(즉, 메소드)와 [정적 맴버](#정적-맴버)는 클래스 내에 정의되지 않고 선언에 국한된다. 다시 말해, 클래스는 이들 맴버의 존재를 인지하지만, 해당 맴버의 실질적인 데이터나 코드는 클래스 외부에 위치한다. 때문에 클래스에 [`sizeof`](#sizeof-연산자) 연산자를 사용하면 맴버 변수만 반영되어 크기가 결정되고, 선언된 맴버들은 클래스 자료형 크기에 어떠한 영향을 미치지 않는다.
+
+> 클래스 내부에 맴버 함수의 정의가 가능한 것은 편의상 제공된 컴파일러 기능일 뿐, 결국 [인라인](#인라인-함수)에 의해 실제 코드는 클래스 외부로 옮겨진다.
+
+아래는 메소드를 선언과 정의로 나누어 작성한 코드를 보여준다:
+
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;">맴버 함수의 선언과 정의</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;">선언과 정의 구분</th><th style="text-align: center;">동일 코드</th></tr></thead>
+<tbody><tr style="vertical-align: top;"><td>
+
+```cpp
+struct CLASS {
+    int method(int arg);
+};
+
+int CLASS::method(int arg) { ... }
+```
+
+</td><td>
+
+```cpp
+struct CLASS {
+
+    int method(int arg) { ... }
+
+};
+```
+</td></tr>
+</tbody>
+</table>
+
+### 정적 맴버
+[정적 맴버](https://en.cppreference.com/w/cpp/language/static)(static member)는 클래스로부터 생성된 객체의 개수와 무관하게 오로지 하나의 데이터만 존재하여 공유되는 `static` 키워드로 명시된 맴버이다. 해당 유형의 맴버는 객체화가 필요없이 클래스로부터 직접 호출이 가능하다.
+
+> 파이썬 프로그래밍 언어와 비교하자면 [클래스 속성 및 메소드](/docs/ko.Python/#클래스-속성-및-메소드)에 대응한다.
+
+일반 맴버와 달리, 정적 맴버는 클래스 내에서 선언만 되고 외부에서 별도로 정의되어야 한다:
+
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;">정적 맴버의 선언과 정의</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;">정적 필드</th><th style="text-align: center;">정적 메소드</th></tr></thead>
+<tbody><tr style="vertical-align: top;"><td>
+
+```cpp
+using namespace std;
+
+struct CLASS {
+    // 정적 맴버 선언
+    static int field;
+} instance;
+
+// 정적 맴버 정의
+int CLASS::field = 7;
+
+int main() {
+    cout << ++CLASS::field << endl;
+    cout << ++instance.field << endl;
+}
+```
+
+</td><td>
+
+```cpp
+using namespace std;
+
+struct CLASS {
+    // 정적 맴버 선언
+    static int method(int arg);
+} instance;
+
+// 정적 맴버 정의
+void CLASS::method(int arg) { return 7 + arg; }
+
+int main() {
+    cout << CLASS::method(1) << endl;
+    cout << instance.method(2) << endl;
+}
+```
+</td></tr><tr style="vertical-align: top;"><td>
+
+```terminal
+8
+9
+```
+
+</td><td>
+
+```terminal
+8
+9
+```
+</td></tr>
+</tbody>
+</table>
+
+## `this` 포인터
+[`this`](https://en.cppreference.com/w/cpp/language/this) 포인터는 (클래스가 아닌) 객체가 자신의 메모리 주소를 반환하는데 사용된다. 즉, 객체는 `this` 포인터를 통해 [비정적](#변수)(non-static) 맴버들을 명시적으로 호출할 수 있으며, 객체 내부적으로 사용되는 [클래스 포인터](#클래스-포인터)로 간주할 수 있다. 흔히 맴버를 매개변수나 지역변수와 구분짓는데 유용하게 활용된다.
+
+```cpp
+struct CLASS {
+    int   field1 = 2;
+    float field2 = 3.14;
+    
+    int method() {
+        return this->field1 * this->field2;
+    }
+
+    int method(int arg) {
+        return this->field1 + this->field2 - arg;
+    }
+};
+```
+
 # 템플릿
 [템플릿](https://en.cppreference.com/w/cpp/language/templates)(template)은 [함수](#함수)와 [클래스](#클래스)([구조체](#구조체) 및 [공용체](#공용체) 포함)의 매개변수나 맴버 등의 [자료형](#자료형)이 지정되지 않은 채 정의되어, 호출할 때 자료형을 지정하여 사용할 수 있는 코드이다. 유사한 코드를 실행하는 함수나 클래스는 반복적으로 정의할 필요 없이 템플릿으로 통합하여 작업 효율을 높이고 수월하게 관리할 수 있다. 템플릿을 사용하는 대표적인 예시로 [배열 클래스](#배열-클래스) 그리고 [벡터 클래스](#벡터-클래스)가 있다.
 
