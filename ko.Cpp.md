@@ -1757,6 +1757,84 @@ struct CLASS {
 };
 ```
 
+## 상속
+[상속](https://en.cppreference.com/w/cpp/language/derived_class)(inheritance)은 기반 클래스(base class)의 맴버 데이터 및 함수를 파생 클래스(derived class)에게 전달하는 행위이다. 파생 클래스가 상속 받을 기반 클래스의 맴버들은 [접근 지정자](#접근-지정자)로부터 접근 권한을 설정할 수 있다.
+
+* `public`: 기반 클래스 맴버들의 접근 지정자가 파생 클래스에서도 유지된다 (`stuct` 및 `union` 키워드의 기본 접근 지정자이다).
+* `private`: 기반 클래스 맴버들은 접근 지정자가 파생 클래스에서 `private`으로 전환된다 (`class` 키워드의 기본 접근 지정자이다).
+* `protected`: 기반 클래스 맴버들은 접근 지정자가 파생 클래스에서 `protected`로 전환된다.
+
+> 그러므로 기반 클래스의 `private` 맴버는 절대로 상속되지 않으며 접근이 불가하다.
+
+파생 클래스는 기반 클래스에 이미 정의된 식별자의 맴버를 선언할 수 있으며, 이러한 경우 기반 클래스의 맴버 정의는 파생 클래스에 의해 묻힌다. 범위지정 연산자 `::`를 사용하여 파생 클래스에 묻힌 기반 클래스의 맴버를 접근할 수 있다. 파생 클래스는 여러 기반 클래스로부터 동시에 상속받을 수 있다.
+
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;">기반 및 파생 클래스의 상속 관계</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;">기반 클래스</th><th style="text-align: center;">파생 클래스</th></tr></thead>
+<tbody><tr style="vertical-align: top;"><td>
+
+```cpp
+using namespace std;
+
+class CLASS1 {
+public:
+
+    CLASS1()  { cout << "생성자: 기반 클래스\n"; }
+    ~CLASS1() { cout << "소멸자: 기반 클래스\n"; }
+
+    int    field1 = 3;
+    string field2 = "C++";
+
+    int method(int arg1, int arg2) {
+        return arg1 + arg2;
+    }
+};
+```
+</td><td>
+
+```cpp
+using namespace std;
+
+struct CLASS2
+    : public CLASS1 {
+    
+    CLASS2()  { cout << "생성자: 파생 클래스\n"; }
+    ~CLASS2() { cout << "소멸자: 파생 클래스\n"; }
+
+    string field2 = "Hello World!";
+    bool   field3 = true;
+
+    int method(int arg1, int arg2) {
+        return CLASS1::method(arg1, arg2) * 2;
+    }
+};
+```
+</td></tr><tr style="vertical-align: top;"><td colspan="2">
+
+```cpp
+int main() {
+    // 파생 클래스 객체화
+    CLASS2 instance;
+    
+    cout << instance.field1 << " " << instance.field2 << " " << instance.field3 << endl;
+    cout << instance.method(2, 3) << endl;
+}
+```
+</td></tr><tr style="vertical-align: top;"><td colspan="2">
+
+```terminal
+생성자: 기반 클래스
+생성자: 파생 클래스
+3 Hello World! 1
+10
+소멸자: 파생 클래스
+소멸자: 기반 클래스
+```
+</td></tr>
+</tbody>
+</table>
+
 # 템플릿
 [템플릿](https://en.cppreference.com/w/cpp/language/templates)(template)은 [함수](#함수)와 [클래스](#클래스)([구조체](#구조체) 및 [공용체](#공용체) 포함)의 매개변수나 맴버 등의 [자료형](#자료형)이 지정되지 않은 채 정의되어, 호출할 때 자료형을 지정하여 사용할 수 있는 코드이다. 유사한 코드를 실행하는 함수나 클래스는 반복적으로 정의할 필요 없이 템플릿으로 통합하여 작업 효율을 높이고 수월하게 관리할 수 있다. 템플릿을 사용하는 대표적인 예시로 [배열 클래스](#배열-클래스) 그리고 [벡터 클래스](#벡터-클래스)가 있다.
 
