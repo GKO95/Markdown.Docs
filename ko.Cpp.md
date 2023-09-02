@@ -1780,8 +1780,8 @@ using namespace std;
 class CLASS1 {
 public:
 
-    CLASS1()  { cout << "생성자: 기반 클래스\n"; }
-    ~CLASS1() { cout << "소멸자: 기반 클래스\n"; }
+    CLASS1()  { cout << "[기반 클래스] 생성자\n"; }
+    ~CLASS1() { cout << "[기반 클래스] 소멸자\n"; }
 
     int    field1 = 3;
     string field2 = "C++";
@@ -1799,8 +1799,8 @@ using namespace std;
 struct CLASS2
     : public CLASS1 {
     
-    CLASS2()  { cout << "생성자: 파생 클래스\n"; }
-    ~CLASS2() { cout << "소멸자: 파생 클래스\n"; }
+    CLASS2()  { cout << "[파생 클래스] 생성자\n"; }
+    ~CLASS2() { cout << "[파생 클래스] 소멸자\n"; }
 
     string field2 = "Hello World!";
     bool   field3 = true;
@@ -1824,12 +1824,12 @@ int main() {
 </td></tr><tr style="vertical-align: top;"><td colspan="2">
 
 ```terminal
-생성자: 기반 클래스
-생성자: 파생 클래스
+[기반 클래스] 생성자
+[파생 클래스] 생성자
 3 Hello World! 1
 10
-소멸자: 파생 클래스
-소멸자: 기반 클래스
+[파생 클래스] 소멸자
+[기반 클래스] 소멸자
 ```
 </td></tr>
 </tbody>
