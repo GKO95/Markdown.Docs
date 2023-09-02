@@ -1317,25 +1317,25 @@ printf("%d", sizeof(struct STRUCTURE));
 
 ```c
 struct STRUCTURE {
-// ------- Addr: 0x00000000
-    char  field1;      // + 1
-//  char  Padding1[3]; // + 3
-// ------- Addr: 0x00000004
-    int   field2;      // + 4
-// ------- Addr: 0x00000008
+// ------ Addr: 0x00000000
+    char  field1;       // +1
+//  char  Padding1[3];  // +3
+// ------ Addr: 0x00000004
+    int   field2;       // +4
+// ------ Addr: 0x00000008
 };
 ```
 </td><td>
 
 ```c
 struct STRUCTURE {
-// ------- Addr: 0x00000000
-    char  field1;      // + 1
-//  char  Padding1[1]; // + 1
-    short field2;      // + 2
-// ------- Addr: 0x00000004
-    int   field3;      // + 4
-// ------- Addr: 0x00000008
+// ------ Addr: 0x00000000
+    char  field1;       // +1
+//  char  Padding1[1];  // +1
+    short field2;       // +2
+// ------ Addr: 0x00000004
+    int   field3;       // +4
+// ------ Addr: 0x00000008
 };
 ```
 
@@ -1343,15 +1343,15 @@ struct STRUCTURE {
 
 ```c
 struct STRUCTURE {
-// ------- Addr: 0x00000000
-    char  field1;      // + 1
-//  char  Padding1[3]; // + 3
-// ------- Addr: 0x00000004
-    int   field2;      // + 4
-// ------- Addr: 0x00000008
-    short field3;      // + 2
-//  char  Padding2[2]; // + 2
-// ------- Addr: 0x0000000C
+// ------ Addr: 0x00000000
+    char  field1;       // +1
+//  char  Padding1[3];  // +3
+// ------ Addr: 0x00000004
+    int   field2;       // +4
+// ------ Addr: 0x00000008
+    short field3;       // +2
+//  char  Padding2[2];  // +2
+// ------ Addr: 0x0000000C
 };
 ```
 </td></tr><tr style="vertical-align: top;"><td>정렬에 의해 맴버 간 여분이 발생하면 메모리의 연속성을 위해 패딩으로 메워진다.</td><td>구조체 자체의 정렬을 위해, 구조체 크기는 정렬 크기의 배수이어야 한다. 맨 마지막 맴버의 자료형 크기가 정렬 크기에 미치지 못하면 나머지를 패딩으로 채운다.</td><td>비록 <code>short</code> 자료형이 2바이트 정렬인 관계로 <code>char</code> 자료형 맴버 사이에 1바이트 패딩이 메워지지만, <code>int</code> 자료형에 의한 4바이트 크기의 정렬 경계 내에 두 맴버를 모두 담아낼 수 있기 때문이다.</td></tr>
