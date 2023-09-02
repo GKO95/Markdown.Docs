@@ -2090,7 +2090,6 @@ struct STRUCTURE {
 // ------ Addr: 0x00000008
 };
 ```
-
 </td><td>
 
 ```cpp
@@ -2109,6 +2108,87 @@ struct STRUCTURE {
 </td></tr><tr style="vertical-align: top;"><td>정렬에 의해 맴버 간 여분이 발생하면 메모리의 연속성을 위해 패딩으로 메워진다.</td><td>구조체 자체의 정렬을 위해, 구조체 크기는 정렬 크기의 배수이어야 한다. 맨 마지막 맴버의 자료형 크기가 정렬 크기에 미치지 못하면 나머지를 패딩으로 채운다.</td><td>비록 <code>short</code> 자료형이 2바이트 정렬인 관계로 <code>char</code> 자료형 맴버 사이에 1바이트 패딩이 메워지지만, <code>int</code> 자료형에 의한 4바이트 크기의 정렬 경계 내에 두 맴버를 모두 담아낼 수 있기 때문이다.</td></tr>
 </tbody>
 </table>
+
+## 공용체
+[공용체](https://en.cppreference.com/w/cpp/language/union)(union)는 여러 내부 변수, 일명 맴버(member)들을 자료형과 무관하게 하나의 단일 데이터로 통합시킨 사용자 정의 자료형이며, `union` 키워드로 정의된다. 각 맴버마다 주어진 메모리가 있는 [구조체](#구조체)와 달리, 공용체의 맴버들은 하나의 메모리를 공용한다. 즉, 공용체의 한 맴버에 값이 변경되면 나머지 맴버에도 영향을 미친다.
+
+```cpp
+union UNION {    
+    char  field1;
+    int   field2;
+};
+```
+
+공용체로 변수를 정의하려면 기존 자료형처럼 변수 앞에 공용체를 기입하는데, [C 언어의 공용체](ko.C.md#공용체)와 달리 `union` 키워드를 명시하지 않는다.
+
+1. 공용체 맴버에 값을 할당하는 방법:
+
+    <table style="width: 95%; margin: auto;">
+    <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+    <thead><tr><th style="text-align: center;">최전방 맴버 자료형 기준</th><th style="text-align: center;">명시적 맴버 자료형 기준</th></tr></thead>
+    <tbody><tr style="vertical-align: top;"><td>
+    
+    ```cpp
+    union UNION variable = { 365 };
+    // field1 = 'm' (0x0000006d)
+    // field2 = 109 (0x0000006d)
+    ```
+    </td><td>
+    
+    ```cpp
+    union UNION variable = { .field2 = 365 };
+    // field1 = 'm' (0x0000006d)
+    // field2 = 365 (0x0000016d)
+    ```
+    </td></tr><tr><td>숫자 365(<code>0x16d</code>) 중에서 가장 먼저 선언된 문자형 맴버에 의해 1바이트만 공용체에 저장되어, <code>field2</code>에는 숫자 109(<code>0x6d</code>)만 출력된다. </td><td>공용체 맴버를 직접 명시하고 할당하면 해당 맴버의 자료형에 따라 값이 저장되어, <code>field2</code>에는 숫자 365(<code>0x16d</code>)가 온전히 출력된다.</td></tr>
+    </tbody>
+    </table>
+
+1. 공용체 선언과 동시에 변수를 함께 정의하는 방법:
+
+    <table style="width: 95%; margin: auto;">
+    <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+    <thead><tr><th style="text-align: center;">명명된 공용체</th><th style="text-align: center;">익명 공용체</th></tr></thead>
+    <tbody><tr style="vertical-align: top;"><td>
+    
+    ```cpp
+    union UNION {
+        char  field1;
+        int   field2;
+    } variable = { 365 };
+    ```
+    </td><td>
+    
+    ```cpp
+    union {
+        char  field1;
+        int   field2;
+    } variable = { 365 };
+    ```
+    </td></tr><tr style="vertical-align: top;"><td>차후 해당 공용체로부터 다른 변수를 정의하는 등 재활용이 가능하다.</td><td>재활용이 불가하지만, 사실상 이름을 지정할 필요가 없는 네스티드(nested), 즉 다른 사용자 정의 자료형 내에 흔히 사용된다.</td></tr>
+    </tbody>
+    </table>
+
+1. 공용체 맴버를 호출하는 방법:
+
+    <table style="width: 95%; margin: auto;">
+    <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+    <thead><tr><th style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators">객체 맴버 연산자</a></th><th style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators">포인터 맴버 연산자</a></th></tr></thead>
+    <tbody><tr style="vertical-align: top;"><td>
+    
+    ```cpp
+    std::cout << variable.field1
+        << variable.field2;
+    ```
+    </td><td>
+    
+    ```cpp
+    UNION *ptr = &variable;
+    std::cout << ptr->field1 << ptr->field2;
+    ```
+    </td></tr><tr style="vertical-align: top;"><td>객체 맴버 연산자 <code>.</code>를 활용한 "값에 의한 호출"이다.</td><td>포인터 맴버 연산자 <code>-&gt;</code>를 활용한 "참조에 의한 호출"이다.</td></tr>
+    </tbody>
+    </table>
 
 # 템플릿
 [템플릿](https://en.cppreference.com/w/cpp/language/templates)(template)은 [함수](#함수)와 [클래스](#클래스)([구조체](#구조체) 및 [공용체](#공용체) 포함)의 매개변수나 맴버 등의 [자료형](#자료형)이 지정되지 않은 채 정의되어, 호출할 때 자료형을 지정하여 사용할 수 있는 코드이다. 유사한 코드를 실행하는 함수나 클래스는 반복적으로 정의할 필요 없이 템플릿으로 통합하여 작업 효율을 높이고 수월하게 관리할 수 있다. 템플릿을 사용하는 대표적인 예시로 [배열 클래스](#배열-클래스) 그리고 [벡터 클래스](#벡터-클래스)가 있다.
