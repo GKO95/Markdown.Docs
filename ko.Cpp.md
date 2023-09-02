@@ -465,7 +465,7 @@ World!
 </table>
 
 # 파일 입출력
-C++ 언어의 파일 입출력(일명 I/O)은 [`iostream`](https://en.cppreference.com/w/cpp/header/cstdio) 헤더로부터 관련 함수들을 호출할 수 있으며, 단순 파일뿐만 아니라 터미널로부터 텍스트를 입력받거나 출력할 때에도 관여한다. [C](ko.C.md) 언어의 [파일 입출력](ko.C.md#파일-입출력)에서 소개한 [`stdio.h`](https://en.cppreference.com/w/cpp/header/cstdio) 헤더를 활용할 수 있지만, 본 장은 C++에 최적화된 입출력을 위주로 다룬다.
+C++ 언어의 파일 입출력(일명 I/O)은 [`iostream`](https://en.cppreference.com/w/cpp/header/iostream) 헤더로부터 관련 함수들을 호출할 수 있으며, 단순 파일뿐만 아니라 터미널로부터 텍스트를 입력받거나 출력할 때에도 관여한다. [C](ko.C.md) 언어의 [파일 입출력](ko.C.md#파일-입출력)에서 소개한 [`stdio.h`](https://en.cppreference.com/w/cpp/header/cstdio) 헤더를 활용할 수 있지만, 본 장은 C++에 최적화된 입출력을 위주로 다룬다.
 
 <table style="width: 80%; margin: auto;">
 <caption style="caption-side: top;">C++ 파일 입출력 연산자</caption>
@@ -730,10 +730,10 @@ C++ 언어는 여러 데이터를 하나의 변수로 저장하는 공간인 [�
 </table>
 
 ## 배열
-[배열](https://en.cppreference.com/w/cpp/language/array)(array)은 동일한 자료형의 데이터를 일련의 순서로 담는 [시퀀스 컨테이너](https://en.wikipedia.org/wiki/Sequence_container_(C++))이다. 식별자 뒤에는 대괄호 `[]`가 위치하여 배열이 담을 수 있는 데이터 용량 크기를 [정수 리터럴](https://en.cppreference.com/w/cpp/language/integer_literal)이나 [상수](#변수)로 지정한다. 배열의 데이터 초기화는 중괄호 `{}` 내에 항목을 순서대로 쉼표로 나누어 나열한다. 만일 배열 용량을 지정하지 않으면 데이터 개수만큼 크기가 정해지며, 아래는 배열을 정의하는 두 방식을 보여준다.
+[배열](https://en.cppreference.com/w/cpp/language/array)(array)은 동일한 자료형의 데이터를 일련의 순서로 담는 [시퀀스 컨테이너](https://en.wikipedia.org/wiki/Sequence_container_(C++))이다. 전통적인 C 형식의 배열은 식별자 뒤에 대괄호 `[]`가 위치하여 배열이 담을 수 있는 데이터 용량 크기를 [정수 리터럴](https://en.cppreference.com/w/cpp/language/integer_literal)이나 [상수](#변수)로 지정한다. 배열의 데이터 초기화는 중괄호 `{}` 내에 항목을 순서대로 쉼표로 나누어 나열한다. 만일 배열 용량을 지정하지 않으면 데이터 개수만큼 크기가 정해지며, 아래는 배열을 정의하는 두 방식을 보여준다.
 
 <table style="width: 95%; margin: auto;">
-<caption style="caption-side: top;">배열 크기를 지정하는 여부에 따른 정의 방식</caption>
+<caption style="caption-side: top;">배열 크기를 지정하는 여부에 따른 C 형식의 배열 정의 방식</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">명시적 배열 크기</th><th style="text-align: center;">암묵적 배열 크기</th></tr></thead>
 <tbody>
@@ -812,8 +812,18 @@ int arr[3];
 std::cout << sizeof(arr)/sizeof(int);    // 출력: 3 (= 배열의 크기)
 ```
 
+## 배열 클래스
+[배열 클래스](https://en.cppreference.com/w/cpp/container/array)(vector class)는 [`array`](https://en.cppreference.com/w/cpp/header/array) 헤더로부터 C++ 형식의 [배열](#배열)을 생성할 수 있도록 지원한다. 원칙적으로 C 형식의 배열과 다르지 않지만, [클래스](#클래스)의 특성상 부가적인 정보 및 기능을 제공하여 프로그래밍 차원에서 보조한다.
+
+```cpp
+#include <array>
+
+// 배열 정의: C++ 배열 클래스
+std::array<int> arr;
+```
+
 ## 벡터 클래스
-[벡터 클래스](https://en.cppreference.com/w/cpp/container/vector)(vector class)는 [`vector`](https://en.cppreference.com/w/cpp/header/vector) 헤더로부터 제공되는 크기를 가변할 수 있는 [시퀀스 컨테이너](https://en.wikipedia.org/wiki/Sequence_container_(C++))이다. 비록 유연하다는 장점이 있으나, 배열에 비해 상대적으로 처리 속도가 느리다는 단점을 지닌다.
+[배열 클래스](https://en.cppreference.com/w/cpp/container/vector)(vector class)는 [`vector`](https://en.cppreference.com/w/cpp/header/vector) 헤더로부터 제공하는 크기를 가변할 수 있는 [시퀀스 컨테이너](https://en.wikipedia.org/wiki/Sequence_container_(C++))이다. 비록 유연하다는 장점이 있으나, 배열에 비해 상대적으로 처리 속도가 느리다는 단점을 지닌다.
 
 > 배열의 데이터는 스택 영역에 저장되는 반면, 벡터는 힙 영역에 저장하기 때문에 크기 변경이 가능하다. 이에 대한 내용은 [동적 할당](#동적-할당)에서 설명한다.
 
@@ -1426,6 +1436,91 @@ C++ 언어는 여전히 전통적인 [C 형식 동적 메모리 할당](ko.C.md#
 
     *[NTSTATUS](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/596a1078-e883-4972-9bbc-49e60bebca55) [0xC0000005](https://learn.microsoft.com/en-us/shows/inside/c0000005) STATUS_ACCESS_VIOLATION 참고*
 
+# 템플릿
+[템플릿](https://en.cppreference.com/w/cpp/language/templates)(template)은 [함수](#함수)와 [클래스](#클래스)([구조체](#구조체) 및 [공용체](#공용체) 포함)의 매개변수나 맴버 등의 [자료형](#자료형)이 지정되지 않은 채 정의되어, 호출할 때 자료형을 지정하여 사용할 수 있는 코드이다. 유사한 코드를 실행하는 함수나 클래스는 반복적으로 정의할 필요 없이 템플릿으로 통합하여 작업 효율을 높이고 수월하게 관리할 수 있다. 템플릿을 사용하는 대표적인 예시로 [배열 클래스](#배열-클래스) 그리고 [벡터 클래스](#벡터-클래스)가 있다.
+
+다음은 템플릿의 유형별 정의 그리고 홑화살괄호 `<>` 안에 자료형을 지정하여 객체화하는 예시 코드를 보여준다.
+
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;">템플릿 유형별 정의 및 호출</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;">함수 테블릿</th><th style="text-align: center;">클래스 템플릿</th></tr></thead>
+<tbody><tr style="vertical-align: top;"><td>
+
+```cpp
+// 함수 템플릿 정의
+template <class T, class U>
+U FUNCTION(T arg1, U arg2) {
+    ...
+}
+```
+</td><td>
+
+```cpp
+// 클래스 템플릿 정의
+template <class T, class U>
+class CLASS {
+public:
+    CLASS(T arg1, U arg2)
+        : field1(arg1), field2(arg2) { ... }
+    ~CLASS() { ... }
+    
+    T member1;
+    U member2(T arg) { ... }
+};
+```
+</td></tr><tr style="vertical-align: top;"><td>
+
+```cpp
+// 함수 템플릿 객체화
+FUNCTION<int, float>(1, 3.0)
+```
+</td><td>
+
+```cpp
+// 클래스 템플릿 객체화
+CLASS<int, float> instance(1, 3.0);
+```
+</td></tr>
+</tbody>
+</table>
+
+> 클래스 템플릿은 클래스가 아니다: 클래스처럼 [헤더 파일과 소스 파일로 나누어서 관리하는 것](#클래스-파일)은 C++ 프로그래밍 언어에서 지원하지 않는다.
+
+### `typename` 키워드
+[`typename`](https://learn.microsoft.com/en-us/cpp/cpp/typename) 키워드는 컴파일러에게 해당 데이터가 자료형임을 명시적으로 알리는 기능을 가진다. 그러나 템플릿 정의에 있어서 `typename` 키워드는 `class` 키워드 대안으로 사용되기도 한다.
+
+```cpp
+// 함수 템플릿 정의: typename 키워드 사용
+template <typename T, typename U>
+U FUNCTION(T arg1, U arg2) {
+    ...
+}
+```
+
+## 템플릿 특수화
+[템플릿 특수화](https://en.cppreference.com/w/cpp/language/template_specialization)(template specialization)는 특정 자료형으로 객체화하였을 시 별도의 정의가 적용되도록 한다. 템플릿 정의와 동일한 구문을 사용하지만, 홑화살괄호 안에 `class` 키워드를 지정하지 않으며 자료형을 직접 명시하여 코드를 정의한다.
+
+```cpp
+// 함수 템플릿 특수화: 문자 자료형 전용
+template <>
+bool FUNCTION<char>(int arg1, float arg2) {
+    ...
+}
+```
+
+## 템플릿 별칭
+템플릿 별칭(template alias)은 [자료형 별칭 선언](#자료형-별칭-선언)을 템플릿에 그대로 적용한, 즉 `using` 키워드로 기존 템플릿을 다른 별칭으로 호출하여 가독성을 높여준다.
+
+```cpp
+// 템플릿 별칭
+template <class X>
+    using aliasName = FUNCTION<X, X>;
+
+// 함수 템플릿 객체화: 별칭 사용
+aliasName<int>(1, 3)
+```
+
 # 예외 처리
 [예외](https://ko.wikipedia.org/wiki/예외_처리)(exception)는 [런타임](https://ko.wikipedia.org/wiki/런타임) 도중에 잘못된 데이터 처리나 적절하지 않은 알고리즘 등에 의해 프로그램상 실행 불가한 코드 오류이다. C++ 언어의 구문적 문제가 아닌 관계로 정상적으로 빌드되지만, 예외를 마주하게 되면 [프로세스](ko.Process.md)는 충돌하여 즉시 종료된다. 그러므로 예외 처리(exception handling)란, 프로세스가 오류를 처음으로 마주한 순간인 [1차 시도 예외](ko.ProcDump.md#예외-처리)(1<sup>st</sup> chance exception)에서 유연하게 대처하여 종료되는 것을 방지하고 안정적으로 실행을 유지하는 게 주목표이다.
 
@@ -1476,7 +1571,7 @@ catch(...)
 <tbody>
 <tr><td>표현식으로부터 평가된 자료형을 <code>catch</code> 예외 처리문으로 전달한다. <code>catch</code>는 전달된 값이 아닌 자료형에 따라 구별하여 예외 처리한다.
 
-</td><td><a href="https://en.cppreference.com/w/cpp/error/terminate"><code>std::terminate()</code></a>와 동일, 즉 프로그램을 종료한다.</td></tr><tr><td>
+</td><td><a href="https://en.cppreference.com/w/cpp/error/terminate"><code>std::terminate()</code></a>와 동일, 즉 프로그램을 종료한다.</td></tr><tr><td colspan="2">
 
 ```cpp
 try
@@ -1492,7 +1587,7 @@ catch(char e)
     // catch: 문자형
 }
 ```
-</td><td>-</td></tr>
+</td></tr>
 </tbody>
 </table>
 
