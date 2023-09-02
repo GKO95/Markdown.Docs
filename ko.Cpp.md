@@ -1835,6 +1835,102 @@ int main() {
 </tbody>
 </table>
 
+## 다형성
+[다형성](https://ko.wikipedia.org/wiki/다형성_(컴퓨터_과학))(polymorphism)은 "여러가지의 형태를 가진"이란 사전적 의미를 가지며, 프로그래밍 언어에서는 상황과 용도에 따라 달리 동작하는 것을 가리킨다.
+
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;">C++ 언어의 다형성 유형</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;">컴파일타임 다형성(compile-time polymorphism)</th><th style="text-align: center;">런타임 다형성(runtime polymorphism)</th></tr></thead>
+<tbody><tr style="vertical-align: top; text-align: center;"><td>컴파일 시 이루어지는 다형성<br/>(일명 정적 다형성; static polymorphism)</td><td>프로그램 실행 시 이루어지는 다형성<br/>(일명 동적 다형성; dynamic polymorphism)</td></tr><tr style="vertical-align: top; text-align: center;"><td>예시: <a href="#연산자-오버로딩">연산자 오버로딩</a></td><td>예시: <a href="#함수-오버로딩">함수 오버로딩</a>, <a href="#함수-오버라이딩">함수 오버라이딩</a></td></tr>
+</tbody>
+</table>
+
+### 연산자 오버로딩
+[연산자 오버로딩](https://en.cppreference.com/w/cpp/language/operators)(operator overloading)은 연산자가 특정 클래스 및 해당 객체에서 어떻게 동작할 지 `operator` 키워드로 재정의하는 컴파일타임 다형성이다. 한 개의 연산자에 전달받은 인자의 자료형 및 개수에 따라 여러 정의가 가능하다.
+
+```cpp
+struct CLASS {
+
+    CLASS(int arg) : field(arg) { }
+    int field;
+    
+    // 연산자 오버로딩: + 정의
+    CLASS operator + (const CLASS &arg) {
+        return CLASS obj(field + arg.field);
+    }
+
+    // 연산자 오버로딩: [] 정의
+    std::string operator [] (std::string arg) {
+    	return std::string(std::to_string(field) + arg);
+    }
+};
+
+int main() {
+    CLASS obj1(2), obj2(3);
+
+    // 연산자 사용: +
+    CLASS instance(obj1 + obj2);
+
+    // 연산자 사용: []
+    std::cout << instance["!"] << std::endl;
+}
+```
+```
+5!
+```
+
+### 함수 오버라이딩
+[함수 오버라이딩](https://en.cppreference.com/w/cpp/language/override)(function overriding)은 상속된 기반 클래스의 맴버 함수(일명 메소드)를 파생 클래스에서 재정의하는 런타임 다형성이다.
+
+> 동일한 이름 하에 정의된 여러 함수 중에서 하나를 택하여 실행하는 [함수 오버로딩](#함수-오버로딩)과 전혀 다른 개념이다.
+
+오버라이딩이 되는 기반 클래스의 메소드는 [`virtual`](https://en.cppreference.com/w/cpp/language/virtual) 지정자로 정의된 가상 함수(virtual function)이다. 정의된 가상 함수는 기반 클래스를 객체화하여 곧바로 사용할 수 있으며, 또는 파생 클래스에서 오버라이딩을 하지 않은 채 객체화하여 사용될 수 있다. [상속](#상속)에서 보여준 예시 코드는 절대 함수 오버라이딩이 아니며 단순히 파생 클래스에 묻힌 것일 뿐이다.
+
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;">가상 함수의 오버라이딩</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;">기반 클래스</th><th style="text-align: center;">파생 클래스</th></tr></thead>
+<tbody><tr style="vertical-align: top;"><td>
+
+```cpp
+struct CLASS1 {
+    
+    // 가상 함수
+    virtual void function() {
+    	...
+    }
+};
+```
+</td><td>
+
+```cpp
+struct CLASS2 : public CLASS1 {
+
+    // 함수 오버라이딩
+    void function() {
+    	...
+    }
+};
+```
+</td></tr>
+</tbody>
+</table>
+
+기반 클래스의 가상 함수는 아무런 정의가 없이 `=0` 구문이 뒤에 붙는 [순수 가상 함수](https://en.cppreference.com/w/cpp/language/abstract_class)(pure virtual function)로 선언될 수 있다. 그리고 최소한 한 개 이상의 순수 가상 함수를 갖는 클래스를 추상 클래스(abstract class)라고 부른다.
+
+```cpp
+// 추상 클래스
+class BASECLASS {
+public:
+    
+    // 순수 가상 함수
+    virtual void function() = 0;
+};
+```
+
+순수 가상 함수는 아무런 정의가 없으므로 추상 클래스는 객체화가 불가하며, 오로지 상속 목적으로만 사용된다.
+
 # 템플릿
 [템플릿](https://en.cppreference.com/w/cpp/language/templates)(template)은 [함수](#함수)와 [클래스](#클래스)([구조체](#구조체) 및 [공용체](#공용체) 포함)의 매개변수나 맴버 등의 [자료형](#자료형)이 지정되지 않은 채 정의되어, 호출할 때 자료형을 지정하여 사용할 수 있는 코드이다. 유사한 코드를 실행하는 함수나 클래스는 반복적으로 정의할 필요 없이 템플릿으로 통합하여 작업 효율을 높이고 수월하게 관리할 수 있다. 템플릿을 사용하는 대표적인 예시로 [배열 클래스](#배열-클래스) 그리고 [벡터 클래스](#벡터-클래스)가 있다.
 
