@@ -1952,6 +1952,164 @@ C++ 언어는 `int`, `float`, 또는 `char` 등의 기존 [자료형](#자료형
 * `private`, `protected` 그리고 가상 기반 클래스로부터 상속되지 않다.
 * [가상 맴버 함수](#함수-오버라이딩)가 없다.
 
+## 구조체
+[구조체](https://en.cppreference.com/w/c/language/struct)(structure)는 여러 내부 변수, 일명 맴버(member)들을 자료형과 무관하게 하나의 단일 데이터로 통합시킨 사용자 정의 자료형이며, `struct` 키워드로 정의된다. 아래 C++ 언어 예시는 문자형과 정수형 맴버를 가진 구조체를 선언한다.
+
+```c
+struct STRUCTURE {
+    char  field1;
+    int   field2;
+};
+```
+
+구조체로 변수를 정의하려면 기존 자료형처럼 변수 앞에 구조체를 기입하는데, [C 언어의 구조체](ko.C.md#구조체)와 달리 `struct` 키워드를 명시하지 않는다.
+
+1. 구조체 맴버에 값을 할당하는 방법:
+
+    <table style="width: 95%; margin: auto;">
+    <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+    <thead><tr><th style="text-align: center;">순차적 맴버 정의</th><th style="text-align: center;">명시적 맴버 정의</th></tr></thead>
+    <tbody><tr style="vertical-align: top;"><td>
+    
+    ```cpp
+    struct STRUCTURE variable = { 'A', 3 };
+    ```
+    </td><td>
+    
+    ```cpp
+    struct STRUCTURE variable = { 
+        .field2 = 3,
+        .field1 = 'A'
+    };
+    ```
+    </td></tr><tr><td>구조체에서 맴버를 선언한 순서대로 데이터를 나열한다.</td><td>구조체 맴버를 직접 명시하고 할당함으로 순서의 영향을 받지 않는다.</td></tr>
+    </tbody>
+    </table>
+
+1. 구조체 선언과 동시에 변수를 함께 정의하는 방법:
+
+    <table style="width: 95%; margin: auto;">
+    <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+    <thead><tr><th style="text-align: center;">명명된 구조체</th><th style="text-align: center;">익명 구조체</th></tr></thead>
+    <tbody><tr style="vertical-align: top;"><td>
+    
+    ```cpp
+    struct STRUCTURE {
+        char  field1;
+        int   field2;
+    } variable = { 'A', 3 };
+    ```
+    </td><td>
+    
+    ```cpp
+    struct {
+        char  field1;
+        int   field2;
+    } variable = { 'A', 3 };
+    ```
+    </td></tr><tr style="vertical-align: top;"><td>차후 해당 구조체로부터 다른 변수를 정의하는 등 재활용이 가능하다.</td><td>재활용이 불가하지만, 사실상 이름을 지정할 필요가 없는 네스티드(nested), 즉 다른 사용자 정의 자료형 내에 흔히 사용된다.</td></tr>
+    </tbody>
+    </table>
+
+1. 구조체 맴버를 호출하는 방법:
+
+    <table style="width: 95%; margin: auto;">
+    <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+    <thead><tr><th style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators">객체 맴버 연산자</a></th><th style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators">포인터 맴버 연산자</a></th></tr></thead>
+    <tbody><tr style="vertical-align: top;"><td>
+    
+    ```cpp
+    std::cout << variable.field1
+        << variable.field2;
+    ```
+    </td><td>
+    
+    ```cpp
+    STRUCTURE *ptr = &variable;
+    std::cout << ptr->field1 << ptr->field2;
+    ```
+    </td></tr><tr style="vertical-align: top;"><td>객체 맴버 연산자 <code>.</code>를 활용한 "값에 의한 호출"이다.</td><td>포인터 맴버 연산자 <code>-&gt;</code>를 활용한 "참조에 의한 호출"이다.</td></tr>
+    </tbody>
+    </table>
+
+각 맴버에 새로운 값을 할당하는 건 [배열](#배열)과 마찬가지로 가능하지만, 만일 모든 맴버들을 한꺼번에 할당할 필요가 있다면 [캐스팅](#자료형-변환)을 활용할 수 있다.
+
+```cpp
+variable = (STRUCTURE){ 'B', 7 };
+```
+
+### 데이터 구조 정렬
+위의 예시로 소개된 구조체의 크기를 반환하면 다음과 같이 출력된다.
+
+```cpp
+struct STRUCTURE {
+    char  field1;
+    int   field2;
+};
+
+std::cout << sizeof(STRUCTURE);
+```
+```terminal
+8
+```
+
+분명 1바이트의 `char`과 4바이트의 `int`를 취합하면 총 5바이트가 계산되어야 한다고 생각이 들겠지만, 이는 시스템 프로세서 차원에서 메모리 접근성을 위한 [데이터 구조 정렬](https://en.wikipedia.org/wiki/Data_structure_alignment)(data structure alignment)이 반영된 결과이다. 만일 n-바이트 자료형의 데이터가 n-바이트 배수 간격의 메모리 주소에 할당되었을 시, 시스템 관점에서는 "자연스럽게 정렬(naturally aligned)"되었다고 하며 하드웨어 성능 효율이 가장 높다.
+
+대체적으로 자료형마다 지정된 정렬 크기는 해당 자료형 크기와 일치하는 편이다: `char`은 1바이트 정렬, `short`는 2바이트 정렬, `int` 및 `float`는 4바이트 정렬이다. 다양한 자료형 맴버들로 구성될 수 있는 구조체의 경우, 메모리 공간 절약보다 접근 효율이 우선시되기 때문에 맴버 자료형이 갖는 가장 큰 정렬 크기의 배수만큼 메모리를 할당받아 맴버들을 정의된 순서대로 정렬시킨다.
+
+> 그러므로 위의 예시는 가장 큰 자료형인 `int`에 따라 4바이트 정렬되어 총 8바이트의 크기가 도출된 것이다.
+
+다음은 몇 가지 경우에 따라 데이터 구조 정렬이 어떻게 이루어진 것인지 설명한다:
+
+<table style="width: 95%; margin: auto;">
+<caption style="caption-side: top;">맴버 구성에 따른 데이터 구조 정렬 비교</caption>
+<colgroup><col style="width: 33.3%;"/><col style="width: 33.4%;"/><col style="width: 33.3%;"/></colgroup>
+<thead><tr><th style="text-align: center;">8바이트: <code>char</code>-<code>int</code> 구조</th><th style="text-align: center;">8바이트: <code>char</code>-<code>short</code>-<code>int</code> 구조</th><th style="text-align: center;">12바이트: <code>char</code>-<code>int</code>-<code>short</code> 구조</th></tr></thead>
+<tbody><tr style="vertical-align: top;"><td>
+
+```cpp
+struct STRUCTURE {
+// ------ Addr: 0x00000000
+    char  field1;       // +1
+//  char  Padding1[3];  // +3
+// ------ Addr: 0x00000004
+    int   field2;       // +4
+// ------ Addr: 0x00000008
+};
+```
+</td><td>
+
+```cpp
+struct STRUCTURE {
+// ------ Addr: 0x00000000
+    char  field1;       // +1
+//  char  Padding1[1];  // +1
+    short field2;       // +2
+// ------ Addr: 0x00000004
+    int   field3;       // +4
+// ------ Addr: 0x00000008
+};
+```
+
+</td><td>
+
+```cpp
+struct STRUCTURE {
+// ------ Addr: 0x00000000
+    char  field1;       // +1
+//  char  Padding1[3];  // +3
+// ------ Addr: 0x00000004
+    int   field2;       // +4
+// ------ Addr: 0x00000008
+    short field3;       // +2
+//  char  Padding2[2];  // +2
+// ------ Addr: 0x0000000C
+};
+```
+</td></tr><tr style="vertical-align: top;"><td>정렬에 의해 맴버 간 여분이 발생하면 메모리의 연속성을 위해 패딩으로 메워진다.</td><td>구조체 자체의 정렬을 위해, 구조체 크기는 정렬 크기의 배수이어야 한다. 맨 마지막 맴버의 자료형 크기가 정렬 크기에 미치지 못하면 나머지를 패딩으로 채운다.</td><td>비록 <code>short</code> 자료형이 2바이트 정렬인 관계로 <code>char</code> 자료형 맴버 사이에 1바이트 패딩이 메워지지만, <code>int</code> 자료형에 의한 4바이트 크기의 정렬 경계 내에 두 맴버를 모두 담아낼 수 있기 때문이다.</td></tr>
+</tbody>
+</table>
+
 # 템플릿
 [템플릿](https://en.cppreference.com/w/cpp/language/templates)(template)은 [함수](#함수)와 [클래스](#클래스)([구조체](#구조체) 및 [공용체](#공용체) 포함)의 매개변수나 맴버 등의 [자료형](#자료형)이 지정되지 않은 채 정의되어, 호출할 때 자료형을 지정하여 사용할 수 있는 코드이다. 유사한 코드를 실행하는 함수나 클래스는 반복적으로 정의할 필요 없이 템플릿으로 통합하여 작업 효율을 높이고 수월하게 관리할 수 있다. 템플릿을 사용하는 대표적인 예시로 [배열 클래스](#배열-클래스) 그리고 [벡터 클래스](#벡터-클래스)가 있다.
 
