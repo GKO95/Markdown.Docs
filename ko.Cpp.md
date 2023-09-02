@@ -1624,7 +1624,6 @@ struct CLASS {
 
 int CLASS::method(int arg) { ... }
 ```
-
 </td><td>
 
 ```cpp
@@ -1667,7 +1666,6 @@ int main() {
     cout << ++instance.field << endl;
 }
 ```
-
 </td><td>
 
 ```cpp
@@ -1692,7 +1690,6 @@ int main() {
 8
 9
 ```
-
 </td><td>
 
 ```terminal
@@ -1702,6 +1699,45 @@ int main() {
 </td></tr>
 </tbody>
 </table>
+
+### 상수 맴버 함수
+[상수 맴버 함수](https://learn.microsoft.com/en-us/cpp/cpp/const-cpp#const-member-functions)(constant member function)는 객체를 변경하지 않는 "읽기 전용"이 보장된 메소드이며 매개변수 선언 이후에 `const` 키워드를 기입하여 선언한다. 클래스가 상수로 객체화된 경우에만 호출이 가능하며, 아래와 같은 성질을 지닌다:
+
+1. [비정적](#변수)(non-static) 맴버 변수(즉, 필드)를 변경할 수 없다.
+1. 상수가 아닌 맴버 함수를 호출할 수 없다.
+
+```cpp
+struct CLASS {
+    int   field1 = 2;
+    float field2 = 3.14;
+
+    // 상수 맴버 함수
+    int method(int arg) const {
+        return field1 + field2 - arg;
+    }    
+};
+
+// 클래스 상수 객체화
+const CLASS instance;
+```
+
+### 프렌드 선언
+[프렌드 선언](https://en.cppreference.com/w/cpp/language/friend)(friend declaration)는 외부에 정의된 함수나 메소드, 클래스 등을 `friend` 키워드로 클래스 내에 선언하여 캡슐화에 의한 맴버 접근할 권한을 제공한다. 프렌드 선언된 코드는 클래스의 맴버가 전혀 아니므로 단독적으로 사용할 수 있다. 캡슐화에 기반한 기술이므로 접근 지정자와 무관하다.
+
+```cpp
+class CLASS {
+    int   field1 = 2;
+    float field2 = 3.14;
+
+    // 프렌드 선언
+    friend int function(CLASS &obj, int arg);
+
+};
+
+int function(CLASS &obj, int arg) {
+    return obj.field1 + obj.field2 - arg;
+}
+```
 
 ## `this` 포인터
 [`this`](https://en.cppreference.com/w/cpp/language/this) 포인터는 (클래스가 아닌) 객체가 자신의 메모리 주소를 반환하는데 사용된다. 즉, 객체는 `this` 포인터를 통해 [비정적](#변수)(non-static) 맴버들을 명시적으로 호출할 수 있으며, 객체 내부적으로 사용되는 [클래스 포인터](#클래스-포인터)로 간주할 수 있다. 흔히 맴버를 매개변수나 지역변수와 구분짓는데 유용하게 활용된다.
