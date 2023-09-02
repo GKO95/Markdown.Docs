@@ -1276,7 +1276,7 @@ struct STRUCTURE {
     struct STRUCTURE *ptr = &variable;
     printf("%c\n%d", ptr->field1, ptr->field2);
     ```
-    </td></tr><tr style="vertical-align: top;"><td>객체 맴버 연산자 <code>.</code>를 활용한 "값에 의한 호출"이다.</td><td>포인터 맴버 연산자 <code>.</code>를 활용한 "참조에 의한 호출"이다.</td></tr>
+    </td></tr><tr style="vertical-align: top;"><td>객체 맴버 연산자 <code>.</code>를 활용한 "값에 의한 호출"이다.</td><td>포인터 맴버 연산자 <code>-&gt;</code>를 활용한 "참조에 의한 호출"이다.</td></tr>
     </tbody>
     </table>
 
