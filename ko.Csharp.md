@@ -78,3 +78,89 @@ Console.WriteLine("Hello World!");
 </table>
 
 본 문서는 가독성을 위해 후자에서 선보인 최상위 문장이 작용한 코드를 예시로 활용할 예정이다.
+
+# 구문
+[구문](https://ko.wikipedia.org/wiki/구문_(프로그래밍_언어))(syntax)은 프로그래밍 언어에서 문자 및 기호들의 조합이 올바른 문장 또는 표현식을 구성하였는지 정의하는 규칙이다. 각 프로그래밍 언어마다 규정하는 구문이 다르며, 이를 준수하지 않을 시 해당 프로그램은 빌드되지 않거나, 실행이 되어도 오류 및 의도치 않은 동작을 수행한다.
+
+다음은 C# 언어에서 구문에 관여하는 요소들을 소개한다:
+
+* **[표현식](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/expressions)(expression)**
+    
+    값을 반환하는 구문적 존재를 가리킨다. 표현식에 대한 결과를 도출하는 것을 평가(evaluate)라고 부른다.
+    
+    ```cs
+    2 + 3           // 숫자 5를 반환
+    2 < 3           // 논리 참을 반환
+    ```
+
+* **[토큰](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/lexical-structure#64-tokens)(token)**
+
+    표현식을 구성하는 가장 기본적인 요소이며, 대표적으로 [키워드](https://learn.microsoft.com/en-us/cpp/cpp/keywords-cpp)(keyword), [식별자](#식별자)(identifier), [숫자](https://learn.microsoft.com/en-us/cpp/cpp/numeric-boolean-and-pointer-literals-cpp) 및 [문자열 리터럴](https://learn.microsoft.com/en-us/cpp/cpp/string-and-character-literals-cpp)(literal) 등이 있다.
+
+    ```cs
+    variable        // 식별자
+    2               // 정수 리터럴
+    ```
+
+* **[문장](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/statements)(statement)**
+    
+    실질적으로 무언가를 실행하는 구문적 존재를 가리킨다: 흔히 하나 이상의 표현식으로 구성되지만, [`break`](#break-문) 및 [`continue`](#continue-문)와 같이 독립적으로 사용되는 문장도 있다. 러스트 프로그래밍 언어는 [세미콜론](https://ko.wikipedia.org/wiki/새줄_문자)(semicolon) `;`을 기준으로 문장을 분별한다. 
+
+    ```cs
+    int variable = 2 + 3;      // 숫자 5를 "variable" 변수에 초기화
+    if (2 < 3) statement;      // 논리가 참이면 "statement" 문장 실행
+    ```
+
+* **[블록](https://ko.wikipedia.org/wiki/블록_(프로그래밍))(block)**
+
+    한 개 이상의 문장들을 한꺼번에 관리할 수 있도록 묶어놓은 소스 코드상 그룹이다. 블록 안에 또 다른 블록이 상주할 수 있으며, 이를 네스티드 블록(nested block)이라고 부른다. C#에서는 한 쌍의 중괄호 `{}`로 표시된다.
+
+    ```cs
+    {
+        int variable = 2 + 3;
+        if (2 < 3) statement;
+    }
+    ```
+
+### 식별자
+[식별자](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/identifier-names)(identifier)는 프로그램을 구성하는 데이터들을 구별하기 위해 사용되는 명칭이다. 즉, 식별자는 개발자가 데이터에 직접 붙여준 이름이다. C++에서 식별자를 선정하는데 아래의 규칙을 지켜야 한다.
+
+1. 알파벳, 숫자, 밑줄 `_`만 허용 (그 외 특수문자 및 공백 사용 불가)
+2. 식별자의 첫 문자는 숫자가 될 수 없음
+3. 대소문자 구분 필수
+4. [예약어](https://ko.wikipedia.org/wiki/예약어) 금지
+
+### 주석
+[주석](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/comments)(comment)은 프로그램의 소스 코드로 취급하지 않아 실행되지 않는 영역이다. 흔히 코드에 대한 간단한 정보를 기입하기 위해 사용되는 데 C# 언어에는 한줄 및 블록, 그리고 문서 주석이 존재한다. 아래 그림은 문서 주석의 예시를 보여준다.
+
+![비주얼 스튜디오의 C# 프로그래밍 언어 문서 주석 예시](./images/csharp_documentation_comment.png)
+
+<table style="table-layout: fixed; width: 95%; margin: auto;">
+<caption style="caption-side: top;">C# 주석 종류</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;">한줄/블록 주석</th><th style="text-align: center;"><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/documentation-comments">문서 주석</a></th></tr></thead>
+<tbody>
+<tr><td>실행 파일 안에는 주석의 어떠한 정보도 저장되지 않는다.</td><td>XML 형식으로 설명을 덧붙일 수 있도록 한다. 해당 코드 위에 마우스를 올리면 내용을 바로 확인할 수 있다.</td></tr>
+<tr style="vertical-align: top; overflow-wrap: break-word;"><td>
+
+```cs
+// 한줄 주석: 코드 한 줄을 차지하는 주석이다.
+
+/*
+    블록 주석:
+    코드 여러 줄을 차지하는 주석이다.
+*/
+```
+</td><td>
+
+```cs
+/// <summary>한줄 문서 주석</summary>
+
+/**
+    <summary>범위 문서 주석:
+    코드 여러 줄을 차지하는 문서 주석이다.</summary>
+ */
+```
+</td></tr>
+</tbody>
+</table>
