@@ -25,35 +25,15 @@ C 언어는 [컴파일 언어](ko.Compiler.md)(compiled language)이다. C 컴�
 ## 프로젝트
 다음은 비주얼 스튜디오 2022을 위주로 C 언어 프로젝트 구축에 대하여 설명한다.
 
-![비주얼 스튜디오 C 프로그래밍을 위한 구성요소](./images/visual_studio_c.png)
+![비주얼 스튜디오 C 언어 프로그래밍 화면](./images/visual_studio_c.png)
 
 엑스코드와 달리, 비주얼 스튜디오는 C 언어를 위한 별도 프로젝트 생성 옵션이 존재하지 않는다. 대안으로 [C++](ko.Cpp.md)에서 빈 프로젝트(Empty Project)를 생성한 다음, 소스 코드를 .c 확장자로 직접 추가할 수 있다. MSVC 컴파일러는 C++를 주요 대상으로 설계된 컴파일러이지만, C 언어도 함께 지원하기 때문이다.
 
-아래는 C 언어를 실행하는 가장 기초적인 코드와 함께 코드에 대한 설명이다.
+아래는 C 언어 프로그램을 실행하는 가장 기초적인 코드와 함께 코드에 대한 설명이다.
 
-<table style="width: 95%; margin: auto;">
-<caption style="caption-side: top;">간단한 C 언어 코드 및 설명</caption>
-<colgroup><col style="width: 50%;"/><col styl="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">코드</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody>
-<tr>
-<td>
-
-```c
-#include <stdio.h>
-
-int main() {
-
-    // 여기서부터 코드 입력...
-    printf("Hello, World!\n");
-
-    return 0;
-}
-```
-</td><td>
-<ul><li><code>#include &lt;stdio.h&gt;</code><br/>Stdio.h <a href="#헤더-파일">헤더 파일</a>로부터 C 표준 입출력 라이브러리를 <a href="#포함-지시문">불러오며</a>, 터미널에 텍스트를 출력하는 <a href="#파일-입출력"><code>printf()</code></a> <a href="#함수">함수</a> 등을 제공한다.</li><li><code>int main() { ... }</code><br/>C 언어가 시작되는 함수, 일명 <a href="#진입점">진입점</a>이다.</li><li><code>return 0;</code><br/>함수를 종료하며 0 값을 반환하는 데, 이는 <code>EXIT_SUCCESS</code>에 대응하며 성공적으로 프로그램이 종료되었음을 의미한다.</li></ul>
-</td></tr></tbody>
-</table>
+* `#include <stdio.h>`: Stdio.h [헤더 파일](#헤더-파일)로부터 C 표준 입출력 라이브러리를 [불러오며](#포함-지시문), 터미널에 텍스트를 출력하는 [`printf()`](#파일-입출력) [함수](#함수) 등을 제공한다.
+* `int main() { ... }`: C 언어가 시작되는 함수, 일명 [진입점](#진입점)이다.
+* `return 0;`: 함수를 종료하며 0 값을 반환하는 데, 이는 `EXIT_SUCCESS`에 대응하며 성공적으로 프로그램이 종료되었음을 의미한다.
 
 ### C 런타임 라이브러리
 > *출처: [Security Features in the CRT | Microsoft Learn](https://learn.microsoft.com/en-us/cpp/c-runtime-library/security-features-in-the-crt)*
