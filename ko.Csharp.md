@@ -39,3 +39,42 @@ OOP 언어는 "객체"라는 데이터를 위주로 프로그램을 개발되며
 [.NET 프레임워크](https://ko.wikipedia.org/wiki/닷넷_프레임워크)(.NET Framework)는 .NET 이전에 활발히 사용되던 [윈도우 NT](ko.Windows.md) 데스크탑에서만 사용할 수 있는 프레임워크이다. 비록 2020년 11월부로 [.NET Core](#net)(현재 .NET)가 주요 프레임워크로 전환되었으나, 마이크로소프트는  [누적 업데이트](ko.Update.md#waas)를 배포하는 등 .NET 프레임워크를 [윈도우 OS](ko.Windows.md)에서 제거할 계획이 없음을 [발표](https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-5#net-5-doesnt-replace-net-framework)했다. 다만, 새로운 어플리케이션 개발에 있어서는 [.NET 6](https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-6) 버전 이상을 사용하는 걸 적극 권장한다.
 
 > .NET 프레임워크는 4.x 버전 번호를 유지할 것으로 보이며, 현재까지도 새로운 빌드가 [출시](https://learn.microsoft.com/en-us/dotnet/framework/whats-new/) 및 [지원](https://learn.microsoft.com/en-us/lifecycle/products/microsoft-net-framework)되고 있다.
+
+## 프로젝트
+다음은 비주얼 스튜디오 2022을 위주로 C# 프로젝트 구축에 대하여 설명한다.
+
+![비주얼 스튜디오 C# 프로그래밍 화면](./images/visual_studio_csharp.png)
+
+[C# 9.0](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-9) 업데이트를 기점으로 비주얼 스튜디오에서 C# 콘솔 프로젝트를 생성할 때 [새로운 템플릿](https://learn.microsoft.com/en-us/dotnet/core/tutorials/top-level-templates)이 제공되며, 아래는 이전과 이후 소스 코드를 비교한다.
+
+<table style="table-layout: fixed; width: 95%; margin: auto;">
+<caption style="caption-side: top;">C# 9.0 전후 콘솔 프로젝트 비교</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;">C# 9.0 이전</th><th style="text-align: center;">C# 9.0 이후</th></tr></thead>
+<tbody>
+<tr style="text-align: center;"><td>초창기 .NET 5 또는 이전 버전</td><td>현재 .NET 5 또는 이후 버전</td></tr><tr style="vertical-align: top; overflow-wrap: break-word;"><td>
+
+```cs
+using System;
+
+namespace Experiment
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hello World!");
+        }
+    }
+}
+```
+</td><td>
+
+```cs
+Console.WriteLine("Hello World!");
+```
+</td></tr><tr><td><code>Main()</code> 진입점이 C# 프로젝트명의 <a href="#네임스페이스">네임스페이스</a> 안에 위치한다. 객체지향 프로그래밍의 성격이 잘 드러나는 정석적인 코드이다.</td><td><code>Main()</code> 진입점이 컴파일러에 의해 <a href="#전역-네임스페이스">전역 네임스페이스</a>에 생성된다. <a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/program-structure/top-level-statements">최상위 문장</a>(top-level statements)은 코드를 간결하게 표현하지만 암묵적인 규칙들이 존재한다.</td></tr>
+</tbody>
+</table>
+
+본 문서는 가독성을 위해 후자에서 선보인 최상위 문장이 작용한 코드를 예시로 활용할 예정이다.
