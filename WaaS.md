@@ -76,17 +76,13 @@
 <table style="width: 95%; margin: auto;"><caption style="caption-side: top;">업데이트 클라이언트 구성</caption><colgroup><col style="width: 30%;"/><col style="width: 70%;"/></colgroup><thead><tr><th style="text-align: center;">구성</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;">비관리형 자동 업데이트</td><td>WU 클라이언트가 클라우드 서비스에서 업데이트를 스캔하여 자동으로 업데이트가 진행된다.</td></tr><tr><td style="text-align: center;">비관리형 API 업데이트</td><td>WU 클라이언트가 클라우드 서비스에서 업데이트를 스캔하고 API 호출자를 통해 업데이트가 진행된다.</td></tr><tr><td style="text-align: center;">관리형 자동 업데이트</td><td>WU 클라이언트가 WSUS 서버로부터 업데이트를 스캔하여 자동으로 업데이트가 진행된다.</td></tr><tr><td style="text-align: center;">관리형 API 업데이트</td><td>WU 클라이언트가 WSUS 서버로부터 업데이트를 스캔하고 API 호출자를 통해 업데이트가 진행된다.</td></tr></tbody></table>
 
 # 컴포넌트 기반 서비스
-윈도우 서비스는 운영체제의 컴포넌트화 개념을 기반하여 설계되었다. [컴포넌트](#컴포넌트) 단위로 분리하되, 다양한 분야의 윈도우 개발자들이 기준되는 [매니페스트](https://ko.wikipedia.org/wiki/매니페스트_파일)로부터 프로그램을 개발하여 균일화에 기여한다. 그리고 [윈도우 서비스](#waas)([업데이트](#윈도우-업데이트), 역할 및 기능, [드라이버](Driver.md#장치-드라이버) 추가 등)의 롤백을 지원하여 더욱 견고한 파일 및 컴포넌트 설치 및 제거에 이바지한다.
-
-### 컴포넌트
-컴포넌트(component)는 윈도우 서비스에 필요한 기능을 제공하는 가장 기초적인 구성 요소이며, 이를 위해 필요한 (바이너리, 레지스트리 값, [서비스](Service.md) 및 [보안 기술자](https://en.wikipedia.org/wiki/Security_descriptor) 등) 리소스들을 [매니페스트](https://ko.wikipedia.org/wiki/매니페스트_파일)로부터 정의된다.
-
-> 컴포넌트 스토어(component store)는 필요에 따라 파일 시스템에 반영될 수 있도록 모든 버전의 컴포넌트들이 저장된 공간으로 [WinSxS](https://en.wikipedia.org/wiki/Side-by-side_assembly#WinSxS_(Windows_component_store)) 디렉토리가 해당한다.
-
-## 컴포넌트 기반 서비스 스택
 > *참고: [Understanding Component-Based Servicing - Microsoft Community Hub](https://techcommunity.microsoft.com/t5/ask-the-performance-team/understanding-component-based-servicing/ba-p/373012)*
 
-컴포넌트 기반 서비스 스택(Component-based servicing stack), 일명 CBS는 윈도우 배포, 기능 및 역할 변경, 그리고 컴포넌트 수리에 핵심 요소로 도맡는 윈도우 모듈 설치자 TrustedInstaller.exe를 가리킨다. 아래와 같이 CBS가 개입된 프로그램이 실행되면 `%WinDir%\Logs\CBS\CBS.log` 파일에 활동 이력이 기록된다.
+컴포넌트 기반 서비스(Component-based servicing; CBS)는 [윈도우 비스타](Windows.md)부터 소개된 운영체제의 컴포넌트화 설계를 가리키며, [윈도우 업데이트](WaaS.md#윈도우-업데이트)나 [드라이버](Driver.md#장치-드라이버) 파일, 또는 시스템에 ([OpenSSH](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse) 서버와 같은) 추가 기능을 구현하는 선택적 [컴포넌트](#컴포넌트)를 이전 윈도우 OS보다 더 견고하고 안전하게 설치한다. 만일 부분적 혹은 부적합한 설치로 인한 불안정 이슈도 대응이 가능하다.
 
-* DISM
-* SFC
+### 컴포넌트
+컴포넌트(component)는 시스템의 가장 기초적인 구성이며, 필요한 (바이너리, 레지스트리 값, [서비스](Service.md) 및 [보안 기술자](https://en.wikipedia.org/wiki/Security_descriptor) 등) 리소스들은 [매니페스트](https://ko.wikipedia.org/wiki/매니페스트_파일) 파일로부터 정의된다. [WinSxS](https://en.wikipedia.org/wiki/Side-by-side_assembly#WinSxS_(Windows_component_store))에는 모든 버전의 컴포넌트가 저장되어 있어 필요에 따라 시스템에 반영될 수 있다. 컴포넌트의 예시로 [파일 탐색기](https://ko.wikipedia.org/wiki/파일_탐색기), [메모장](https://ko.wikipedia.org/wiki/메모장_(소프트웨어)), [레지스트리 편집기](Registry.md#레지스트리-편집기), [ntdll.dll](WinAPI.md#ntdlldll), [ntoskrnl.exe](Kernel.md#nt-커널) 등이 해당한다.
+
+> 매니페스트 파일들은 WinSxS 하에 있는 Manifests 폴더에 찾을 수 있다.
+
+다만, 시스템을 구성하는 컴포넌트들은 매우 중요하기 때문에 관리자도 변경할 수 없는 Trusted Installer 권한만이 다룰 수 있다.
