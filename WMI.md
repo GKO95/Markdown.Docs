@@ -73,32 +73,10 @@ WMI는 [성능 카운터](Performance_Monitor.md#성능-카운터)로부터 성�
 여기서 "가공된 성능 데이터"란, [프로세서](Processor.md) 점유율(%)과 같이 사전에 계산된 성능 데이터를 가리킨다. 그리고 Win32_PerfFormattedData 클래스가 [성능 모니터](Performance_Monitor.md)와 같은 시스템 모니터링 도구에 활용되는 성능 카운터이다.
 
 ```powershell
-Get-CimInstance -ClassName Win32_PerfFormattedData_PerfOS_Processor -Filter "Name='_Total'"
+Get-CimInstance -ClassName Win32_PerfFormattedData_PerfOS_Processor -Filter "Name='_Total'" | Select-Object Name, PercentIdleTime, PercentUserTime, PercentPrivilegedTime 
 ```
 ```terminal
-Caption               :
-Description           :
-Name                  : _Total
-Frequency_Object      :
-Frequency_PerfTime    :
-Frequency_Sys100NS    :
-Timestamp_Object      :
-Timestamp_PerfTime    :
-Timestamp_Sys100NS    :
-C1TransitionsPersec   : 0
-C2TransitionsPersec   : 55
-C3TransitionsPersec   : 3347
-DPCRate               : 10
-DPCsQueuedPersec      : 662
-InterruptsPersec      : 3961
-PercentC1Time         : 0
-PercentC2Time         : 2
-PercentC3Time         : 81
-PercentDPCTime        : 0
-PercentIdleTime       : 84
-PercentInterruptTime  : 0
-PercentPrivilegedTime : 0
-PercentProcessorTime  : 9
-PercentUserTime       : 11
-PSComputerName        :
+Name   PercentIdleTime PercentUserTime PercentPrivilegedTime
+----   --------------- --------------- ---------------------
+_Total              83              10                     2
 ```
