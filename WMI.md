@@ -65,7 +65,7 @@ BuildNumber
 본 문서는 파워셸의 CimCmdlets 모듈을 활용한 명령을 위주로 WMI 상호작용 예시를 보여준다.
 
 ## 성능 카운터
-WMI는 [성능 카운터](Performance_Monitor.md#성능-카운터)로부터 성능 데이터 수치를 가져올 수 있으며, [Win32_Perf](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/performance-counter-classes)로부터 기반한 두 개의 클래스를 소개한다:
+WMI는 [성능 카운터](Performance_Monitor.md#성능-카운터)로부터 성능 데이터 수치를 가져올 수 있으며, [Win32_Perf](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/performance-counter-classes)로부터 기반한 두 개의 클래스를 소개한다.
 
 * [Win32_PerfRawData](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-perfrawdata): 순수 비가공된 성능 데이터를 [성능 카운터 제공자](https://learn.microsoft.com/en-us/windows/win32/wmisdk/performance-counter-provider)로부터 제공받는다.
 * [Win32_PerfFormattedData](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-perfformatteddata): 가공된 성능 데이터를 [서식화 성능 카운터 제공자](https://learn.microsoft.com/en-us/windows/win32/wmisdk/formatted-performance-data-provider)로부터 제공받는다.
