@@ -1,24 +1,58 @@
 # 프로세서
-[프로세서](https://ko.wikipedia.org/wiki/중앙_처리_장치)(processor), 흔히 컴퓨터에서 중앙 처리 장치(central processing unit; CPU)로 알려진 하드웨어는 프로그램의 [기계어](https://ko.wikipedia.org/wiki/기계어)를 처리하는 [전자회로](https://ko.wikipedia.org/wiki/전자_회로)이다. 프로그램을 실행하기 위해 필요한 시스템의 다양한 작업들은 [명령어 집합](https://ko.wikipedia.org/wiki/명령어_집합)(instruction set)에 의해 정의되어 있으며, 대표적으로 [x86](https://ko.wikipedia.org/wiki/X86)과 [ARM](https://ko.wikipedia.org/wiki/ARM_아키텍처) 계열 명령어 집합 아키텍처가 존재한다. 프로세서에서 처리하는 명령어 집합이 무엇인지에 따라 운영체제의 아키텍처가 함께 결정된다.
+[프로세서](https://ko.wikipedia.org/wiki/중앙_처리_장치)(processor), 또는 CPU로 알려진 하드웨어는 프로그램의 [기계어](https://ko.wikipedia.org/wiki/기계어)를 처리하는 [전자회로](https://ko.wikipedia.org/wiki/전자_회로)이다. 프로그램을 실행하기 위해 필요한 시스템의 다양한 작업들은 [명령어 집합](https://ko.wikipedia.org/wiki/명령어_집합)에 의해 정의되어 있으며, 대표적으로 [x86](https://ko.wikipedia.org/wiki/X86)과 [ARM](https://ko.wikipedia.org/wiki/ARM_아키텍처) 계열 명령어 집합 아키텍처가 존재한다. 프로세서에서 처리하는 명령어 집합이 무엇인지에 따라 [운영체제](https://ko.wikipedia.org/wiki/운영체제)의 아키텍처가 함께 결정된다.
+
+### 명령어
+프로세서가 처리하게 될 [명령어](https://en.wikipedia.org/wiki/Instruction_set_architecture#Instructions)는 일반적으로 두 가지 필드로 구성되어 있다.
+
+![MIPS32 Add Immediate 명령의 구조](https://upload.wikimedia.org/wikipedia/commons/2/2a/Mips32_addi.svg)
+
+1. [명령 코드](https://ko.wikipedia.org/wiki/명령_코드)(일명 opcode)는 덧셈, 복사, 이동 등의 프로세서가 수행할 연산 작업을 명시한다.
+1. [피연산자](https://ko.wikipedia.org/wiki/피연산자#컴퓨터_과학)는 opcode에 따라 아예 없거나 한 개 이상이 [레지스터](Assembly.md#레지스터), [리터럴](C.md#구문) 및 [상수](C.md#변수), 또는 [메모리 주소](C.md#포인터)로서 활용된다.
+
+## 프로세서 구조
+다음은 단일 코어 프로세서의 구조를 다이어그램으로 보여주며, 황색 바탕의 "Processor"는 실질적인 연산을 담당하는 물리적인 [프로세서 코어](#프로세서-코어)를 의미한다. 그리고 흑색과 적색 화살표는 각각 데이터와 제어 흐름 방향을 가리킨다.
 
 ![단일 프로세서 중앙 처리 장치](https://upload.wikimedia.org/wikipedia/commons/3/3a/ABasicComputer.svg)
 
-프로세서 내부에는 실질적인 연산을 도맡는 전자회로 하드웨어인 프로세서 코어(processor core)가 한 개 이상으로 구성된다. 흔히 각 코어를 CPU에 번호를 붙여 칭하는 경우가 대다수이며, 헥사코어 CPU에는 프로세서 코어가 여섯 개가 들어있어 CPU #0 - 5까지 나열된다. 즉 헥사코어 CPU는 동시에 최대 여섯 개의 [스레드](Process.md#스레드)를 처리할 수 있는 연산 능력을 지닌다.
+* [제어 장치](#제어-장치)
+* [산술 논리 장치](#산술-논리-장치)
+* [레지스터](#레지스터)
 
-프로세서 코어가 [프로세스](Process.md)(또는 [시스템 프로세스](Process.md#시스템-프로세스))의 스레드로부터 [이미지](https://ko.wikipedia.org/wiki/실행_파일)에 코드된 기계어를 연산하고 처리하는 데 할애한 시간을 [프로세서 시간](https://ko.wikipedia.org/wiki/CPU_타임)(processor time)이라고 부른다. 프로세스의 프로세서 시간은 [스케줄링](#스케줄링)이나 입출력 요청 등에 의해 대기 혹은 준비 상태에 진입하여 처리되지 않는 동안 반영되지 않는다. 그리고 일정한 간격으로 샘플링된 시간동안 프로세스가 얼마나 오래 처리되었는지를 토대로 CPU 사용량(%)이 계산된다.
+### 제어 장치
+[제어 장치](https://en.wikipedia.org/wiki/Control_unit)(Control Unit; CU)는 프로세서의 연산 작업을 지휘하는 CPU의 구성요소이다. [명령어](#명령어)로부터 식별된 opcode는 [이진 디코더](https://ko.wikipedia.org/wiki/복호화#복호기_(디코더,_decoder))에 의해 해당 연산 작업을 수행하는데 필요한 타이밍 및 제어 신호로 변환된다. 결과적으로 CPU와 타 장치들 간 데이터 흐름을 지휘하기 위해 대부분의 컴퓨터 리소스를 관리한다.
 
-### 논리 프로세서
-논리 프로세서(logical processor)는 프로세서 코어가 여러 스레드를 더욱 효율적으로 처리할 수 있도록 하는 [멀티스레딩](https://ko.wikipedia.org/wiki/멀티스레딩) 기술에서 기반하여 ([인텔](https://www.intel.com/)의 [하이퍼스레딩](https://ko.wikipedia.org/wiki/하이퍼스레딩), 그리고 [AMD](https://www.amd.com/) 및 [ARM](https://www.arm.com/) 계열의 [SMT](https://ko.wikipedia.org/wiki/동시_멀티스레딩) 등), 마치 하나의 프로세서 코어가 두 개 이상의 프로세서를 가진 듯이 운영된다. 아래는 코어가 여섯 개가 있는 AMD 프로세서이지만, 각 코어마다 두 개의 논리 프로세서를 가지므로 총 12개의 프로세서가 있는 것으로 운영체제가 판단한 것이다.
+### 산술 논리 장치
+[산술 논리 장치](https://ko.wikipedia.org/wiki/산술_논리_장치)(Arithmetic Logic Unit; ALU)는 CPU의 구성요소 중 이진 정수의 [산술](https://ko.wikipedia.org/wiki/산술) 및 [비트 연산](https://ko.wikipedia.org/wiki/비트_연산)을 담당하면서도 실질적인 컴퓨터 연산처리에서 가장 핵심되는 장치이다.
 
-![작업 관리자에서 두 개의 논리 프로세서를 가진 헥사코어의 CPU 성능 정보 표시](./images/processor_taskmgr.png)
+> [부동소수점](https://ko.wikipedia.org/wiki/부동소수점) 연산을 담당하는 [FPU](https://ko.wikipedia.org/wiki/부동소수점_장치)가 있으나, 주로 수학 계산을 위해 사용되며 초창기 CPU에는 내장되지 않은 장치이다.
 
-## 프로세서 클럭
-[클럭 속도](https://ko.wikipedia.org/wiki/클럭_속도)(clock speed; clock rate) 혹은 클럭 주파수(clock frequency)는 프로세서가 작업을 수행하기 위해 필요한 동기화 시점의 기준이 되는 펄스 신호를 [클럭 발생기](https://en.wikipedia.org/wiki/Clock_generator)로부터 얼마나 빈번하게 생성할 수 있는지를 가리키는 [헤르츠](https://ko.wikipedia.org/wiki/헤르츠)(Hz) 단위의 수치이다. 주파수가 높을수록 동일한 시간 간격에 동기화가 더 자주 일어나기 때문에 더 많은 작업을 수행할 수 있어, 결국 프로세서의 작업 처리 속도와 일치한다.
+![프로세서 ALU의 입출력 데이터를 표현한 다이어그램](https://upload.wikimedia.org/wikipedia/commons/0/0f/ALU_block.gif)
 
-> 프로세서 코어의 예시로 보여준 작업 관리자에서는 당시 클럭 속도가 4.24 GHz로 측정되었다. 단, 이는 컴퓨터가 1초에 42.4억 개의 작업을 처리한다는 의미와 거리가 멀다.
+ALU는 기본적으로 opcode와 피연산자를 입력받고, 해당 opcode 작업의 결과물을 출력한다. 만일 [상태 레지스터](https://ko.wikipedia.org/wiki/상태_레지스터)로부터 입력을 받으면 [캐리](https://en.wikipedia.org/wiki/Carry_flag), [오버플로우](https://en.wikipedia.org/wiki/Overflow_flag) 여부 등의 상태가 이전 작업에서 발생하였는지 확인할 수 있으며, 현재 작업에서 발생한 상태 정보는 다시 상태 레지스터로 출력된다.
 
-### CPU 스로틀링
-[동적 주파수 스케일링](https://ko.wikipedia.org/wiki/동적_주파수_스케일링)(dynamic frequency scaling), 일명 CPU 스로틀링(CPU throttling)은 전력 관리 기법으로, 전원 절약 및 CPU 발열 등의 필요에 따라 실시간으로 프로세서의 클럭 주파수를 자동으로 조절한다. 작업 관리자에서 프로세서 속도가 지속적으로 바뀌는 이유가 CPU 스로틀링에 의한 것이며, 발열이 심할 경우에는 MHz 단위까지 내려가 마우스 및 키보드 응답 지연이 가시적으로 나타나기도 한다.
+### 레지스터
+[레지스터](https://ko.wikipedia.org/wiki/프로세서_레지스터)(register)는 CPU에 내장되어 프로세서가 가장 빨리 접근할 수 있는 (8비트, 16비트, 32비트 등) [비트](https://ko.wikipedia.org/wiki/비트_(단위)) 단위의 소규모 임시 [저장공간](Disk.md)이다. 아래 그림은 [x86-64](https://ko.wikipedia.org/wiki/X86-64) 아키텍처의 프로세서에 탑재된 레지스터들이다.
+
+![x86-64 아키텍처의 프로세서 레지스터](https://upload.wikimedia.org/wikipedia/commons/1/15/Table_of_x86_Registers_svg.svg)
+
+하드웨어 기능을 제어하는 [제어 레지스터](https://en.wikipedia.org/wiki/Control_register)(CR)나 작업 상태를 나타내는 [FLAGS 레지스터](https://en.wikipedia.org/wiki/FLAGS_register)(RFLASG)와 같이 일부는 특수한 목적을 지닌다. 한편, 다양한 용도로 활용될 수 있는 [범용 레지스터](Assembly.md#범용-레지스터)는 [어셈블리](Assembly.md) 언어를 참고하도록 한다.
+
+## 프로세서 규격
+아래 [작업 관리자](https://ko.wikipedia.org/wiki/작업_관리자_(윈도우))에 나타난 CPU 성능 정보를 예시로 시스템에 영향을 미치는 프로세서의 규격에 대해 설명한다.
+
+![작업 관리자에서 표시된 CPU 성능 정보 예시](./images/processor_taskmgr.png)
+
+* [프로세서 코어](#프로세서-코어)
+* [프로세서 클럭](#프로세서-클럭)
+
+### 프로세서 클럭
+[클럭 속도](https://ko.wikipedia.org/wiki/클럭_속도)(clock rate 또는 clock speed), 일명 클럭 주파수(clock frequency)는 [메인보드](https://ko.wikipedia.org/wiki/메인보드)에 위치한 [클럭 발생기](https://en.wikipedia.org/wiki/Clock_generator)로부터 프로세서가 작업을 수행하는데 기준이 되는 [클럭 신호](https://ko.wikipedia.org/wiki/클럭_신호)가 얼마나 빈번히 생성될 수 있는지 나타내는 [헤르츠](https://ko.wikipedia.org/wiki/헤르츠)(Hz) 단위의 수치이다. 프로세서의 연산은 클럭 신호에 동기화되어, 주파수가 높을수록 동일한 시간동안 더 많은 작업을 수행할 수 있다. 그러나 클럭 속도는 프로세서가 초당 작업한 개수를 의미하는 게 절대 아니다.
+
+> 다시 말해, 위의 작업 관리자에서 클럭 속도가 4.24 GHz로 측정되었지만 프로세서가 초당 42.4억 개의 작업을 수행한 걸 의미하는 게 아니다. 이는 한 [명령어](#명령어)을 수행하는 데 opcode에 따라 필요한 클럭 주기가 다양하기 때문이다.
+
+* **[동적 주파수 스케일링](https://ko.wikipedia.org/wiki/동적_주파수_스케일링)**(dynamic frequency scaling)
+
+    일명 CPU 스로틀링(CPU throttling)은 전력 관리 기법으로, 전원 절약 및 CPU 발열 등의 필요에 따라 실시간으로 클럭 주파수를 자동 조절한다. 발열이 심할 경우에는 MHz 단위까지 내려가 마우스 및 키보드 응답 지연이 가시적으로 나타나기도 한다.
 
 ## 보호 링
 [보호 링](https://ko.wikipedia.org/wiki/보호_링)(protection ring)은 데이터와 기능을 결함과 위협적인 행위로부터 보호하는 메커니즘이다.
