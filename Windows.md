@@ -39,14 +39,14 @@
 
 * [프로세서](Processor.md)
 * [메모리](Memory.md)
-* [디스크](ko.Disk.md)
+* [디스크](Disk.md)
 * [네트워크](Network.md)
 
 # 관리 프로그램
 다음은 시스템 상태를 모니터링 및 관리할 수 있는 프로그램을 나열한다.
 
 * [성능 모니터](Performance_Monitor.md)
-* [이벤트 뷰어](ko.Event_Viwer.md)
+* [이벤트 뷰어](Event_Viwer.md)
 * [파워셸](PowerShell.md)
 
 # 기타 프로그램
