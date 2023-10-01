@@ -1,5 +1,5 @@
 # 사용자 모드 덤프
-[사용자 모드 덤프](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/user-mode-dump-files)(user-mode dump), 일명 어플리케이션 덤프는 충돌이 발생하는 등 특정 시점에서 [프로세스](Process.md)의 [가상 주소 공간](Process.md#가상-주소-공간) 중 [사용자 공간](Processor.md#보호-링)에 포함된 정보가 수집된 파일이다. 사용자 모드 덤프를 통해 당시 어플리케이션이 어떠한 작업을 수행하고 있었는지 파악할 수 있으나, [커널](Kernel.md#커널)측 정보는 살펴볼 수 없다.
+[사용자 모드 덤프](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/user-mode-dump-files)(user-mode dump), 일명 어플리케이션 덤프는 충돌이 발생하는 등 특정 시점에서 [프로세스](Process.md)의 [가상 주소 공간](Process.md#가상-주소-공간) 중 [사용자 공간](Processor.md#프로세서-모드)에 포함된 정보가 수집된 파일이다. 사용자 모드 덤프를 통해 당시 어플리케이션이 어떠한 작업을 수행하고 있었는지 파악할 수 있으나, [커널](Kernel.md#커널)측 정보는 살펴볼 수 없다.
 
 아래 프로그램들을 사용자 모드 덤프를 수집하는 데 사용된다:
 

@@ -135,7 +135,7 @@ MNEMONIC    OPERAND     ; 명령어 집합을 표현하는 기초적인 문장 �
 
 * **[플래그 레지스터](https://en.wikipedia.org/wiki/FLAGS_register)(FLAGS Register)**
 
-    일종의 [상태 레지스터](https://ko.wikipedia.org/wiki/상태_레지스터), 즉 현 프로세서 상태를 담고 있는 레지스터이다. 흔히 산술 연산의 결과나 당시 CPU 작업에 걸린 [제약](Processor.md#보호-링)을 반영한다.
+    일종의 [상태 레지스터](https://ko.wikipedia.org/wiki/상태_레지스터), 즉 현 프로세서 상태를 담고 있는 레지스터이다. 흔히 산술 연산의 결과나 당시 CPU 작업에 걸린 [제약](Processor.md#프로세서-모드)을 반영한다.
 
 ## 호출 규약
 [호출 규약](https://ko.wikipedia.org/wiki/호출_규약)(calling convention)은 함수가 [매개변수](C.md#매개변수-및-전달인자)를 통해 인자를 전달받고 [`return`](C.md#return-반환문) 문으로 결과를 반환하는 방식을 규정하며, 일반적으로 [ABI](https://ko.wikipedia.org/wiki/응용_프로그램_이진_인터페이스)의 일부로 간주된다. 호출자(caller)와 피호출자(callee) 간 데이터 전달은 일반적으로 레지스터나 스택 프레임의 도움으로 처리된다. 올바른 호출 규약의 사용은 신뢰할 수 있는 프로그램 실행을 보장하기 때문에 매 함수 호출 시 준수되어야 한다.

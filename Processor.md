@@ -42,8 +42,9 @@ ALU는 기본적으로 opcode와 피연산자를 입력받고, 해당 opcode 작
 
 ![작업 관리자에서 표시된 CPU 성능 정보 예시](./images/processor_taskmgr.png)
 
-* [프로세서 클럭](#프로세서-클럭)
+* [프로세서 클럭](#프로세서-클럭) (GHz)
 * [프로세서 코어](#프로세서-코어)
+* [프로세서 점유](#프로세서-점유) (%)
 
 ### 프로세서 클럭
 [클럭 속도](https://ko.wikipedia.org/wiki/클럭_속도)(clock rate 또는 clock speed), 일명 클럭 주파수(clock frequency)는 [메인보드](https://ko.wikipedia.org/wiki/메인보드)에 위치한 [클럭 발생기](https://en.wikipedia.org/wiki/Clock_generator)로부터 프로세서가 작업을 수행하는데 기준이 되는 [클럭 신호](https://ko.wikipedia.org/wiki/클럭_신호)가 얼마나 빈번히 생성될 수 있는지 나타내는 [헤르츠](https://ko.wikipedia.org/wiki/헤르츠)(Hz) 단위의 수치이다. 프로세서의 연산은 클럭 신호에 동기화되어, 주파수가 높을수록 동일한 시간동안 더 많은 작업을 수행할 수 있다. 그러나 클럭 속도는 프로세서가 초당 작업한 개수를 의미하는 게 절대 아니다.
@@ -63,7 +64,10 @@ ALU는 기본적으로 opcode와 피연산자를 입력받고, 해당 opcode 작
 
     하드웨어적 [멀티스레딩](https://ko.wikipedia.org/wiki/멀티스레딩)을 지원하는 경우, 프로세서 코어는 매 클럭 주기마다 다수의 스레드의 명령어를 처리할 수 있다. 하나의 물리 코어가 마치 두 개 이상의 프로세서 역할을 처리하는 것처럼 보여주어, 이를 논리 프로세서(logical processor)라고 부른다. 대표적으로 [인텔](https://www.intel.com)의 [하이퍼스레딩](https://ko.wikipedia.org/wiki/하이퍼스레딩), AMD의 [Zen 마이크로아키텍처](https://en.wikipedia.org/wiki/Zen_(microarchitecture)) 등이 SMT에 해당한다.
 
-## 보호 링
+### 프로세서 점유
+프로세서가 ([시스템](Process.md#시스템-프로세스)) [프로세스](Process.md)의 스레드로부터 [이미지](https://ko.wikipedia.org/wiki/실행_파일) 코드를 연산하고 처리하는 데 할애한 시간을 [프로세서 시간](https://ko.wikipedia.org/wiki/CPU_타임)(processor time)이라고 부른다. 프로세스의 프로세서 시간은 [스케줄링](#스케줄링)이나 입출력 요청 등에 의해 대기 혹은 준비 상태에 진입하여 처리되지 않는 동안 반영되지 않는다. 일정한 간격으로 샘플링된 시간 동안 스레드가 얼마나 오래 처리되었는지를 토대로 프로세서 점유율(%)이 계산된다.
+
+## 프로세서 모드
 [보호 링](https://ko.wikipedia.org/wiki/보호_링)(protection ring)은 데이터와 기능을 결함과 위협적인 행위로부터 보호하는 메커니즘이다.
 
 ![x86 프로세서의 보호 링 다이어그램](https://upload.wikimedia.org/wikipedia/commons/2/2f/Priv_rings.svg)

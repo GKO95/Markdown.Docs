@@ -2,7 +2,7 @@
 운영체제 커널을 지칭하는 [슈퍼바이저](Kernel.md)(supervisor)란 옛 용어에서 비롯되어, "슈퍼바이저의 슈퍼바이저"를 의미하는 [하이퍼바이저](https://ko.wikipedia.org/wiki/하이퍼바이저)(hypervisor)가 유래되었다.
 
 # 가상 보안 모드
-[가상 보안 모드](https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/tlfs/vsm)(virtual secure mode; VSM)는 [가상화 기반 보안](#가상화-기반-보안) 기술을 접목하여 운영체제 안에 새로운 보안 영역을 구축하는 [하이퍼바이저](#하이퍼바이저) 기능이다. VSM은 시스템 보안 자산을 보관하고 처리하기 위한 격리된 [메모리](Memory.md) 영역을 생성하며, 이는 오로지 하이퍼바이저를 통해서만 접근이 승인 및 제어된다. 하이퍼바이저가 운영체제보다 상위 권한을 가지고 있는 점에서 VSM의 격리된 영역은 ([슈퍼바이저 모드](Processor.md#보호-링)의 [커널](Kernel.md#nt-커널) 및 [드라이버](Driver.md)를 포함한) 인가받지 않은 접근으로부터 보호된다.
+[가상 보안 모드](https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/tlfs/vsm)(virtual secure mode; VSM)는 [가상화 기반 보안](#가상화-기반-보안) 기술을 접목하여 운영체제 안에 새로운 보안 영역을 구축하는 [하이퍼바이저](#하이퍼바이저) 기능이다. VSM은 시스템 보안 자산을 보관하고 처리하기 위한 격리된 [메모리](Memory.md) 영역을 생성하며, 이는 오로지 하이퍼바이저를 통해서만 접근이 승인 및 제어된다. 하이퍼바이저가 운영체제보다 상위 권한을 가지고 있는 점에서 VSM의 격리된 영역은 ([슈퍼바이저 모드](Processor.md#프로세서-모드)의 [커널](Kernel.md#nt-커널) 및 [드라이버](Driver.md)를 포함한) 인가받지 않은 접근으로부터 보호된다.
 
 > [컴퓨터 보안](https://ko.wikipedia.org/wiki/컴퓨터_보안)에서 [자산](https://en.wikipedia.org/wiki/Asset_(computer_security))(assets)이란, 정보 관련 활동에 관여하는 시스템 환경의 데이터, 장치, 또는 기타 구성요소들을 일컷는다.
 
@@ -10,7 +10,7 @@
 
 위의 그림은 가상화 기반 보안으로부터 구축된 아키텍처이며, [VTL](https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/tlfs/vsm#virtual-trust-level-vtl)(Virtual Trust Level; 가상 신뢰 수준)에 의해 독립된 두 개의 VSM 영역을 묘사하였다. VTL의 숫자가 높을수록 부여되는 권한이 상승하는데, 일반 [윈도우 NT](Windows.md) 커널 및 드라이버는 최하위 권한의 VTL0에 속한다. 이들은 VTL1에 상주하는 리소스를 제어하거나 정의하는 게 절대로 허용되지 않아, 즉 격리된 보안 영역이 구현된다.
 
-VTL1도 마찬가지로 [커널](Processor.md#보호-링) 및 [사용자 공간](Processor.md#보호-링)이 구분되어 있다:
+VTL1도 마찬가지로 [커널](Processor.md#프로세서-모드) 및 [사용자 공간](Processor.md#프로세서-모드)이 구분되어 있다:
 
 <table style="width: 95%; margin: auto;">
 <caption style="caption-side: top;">윈도우 NT의 VTL1 프로세서 모드</caption>
