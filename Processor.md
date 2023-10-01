@@ -7,7 +7,7 @@
 ![MIPS32 Add Immediate 명령의 구조](https://upload.wikimedia.org/wikipedia/commons/2/2a/Mips32_addi.svg)
 
 1. [명령 코드](https://ko.wikipedia.org/wiki/명령_코드)(일명 opcode)는 덧셈, 복사, 이동 등의 프로세서가 수행할 연산 작업을 명시한다.
-1. [피연산자](https://ko.wikipedia.org/wiki/피연산자#컴퓨터_과학)는 opcode에 따라 아예 없거나 한 개 이상이 [레지스터](Assembly.md#레지스터), [리터럴](C.md#구문) 및 [상수](C.md#변수), 또는 [메모리 주소](C.md#포인터)로서 활용된다.
+1. [피연산자](https://ko.wikipedia.org/wiki/피연산자#컴퓨터_과학)는 opcode에 따라 아예 없거나 한 개 이상이 [레지스터](#레지스터), [리터럴](C.md#구문) 및 [상수](C.md#변수), 또는 [메모리 주소](C.md#포인터)로서 활용된다.
 
 ## 프로세서 구조
 다음은 단일 코어 프로세서의 구조를 다이어그램으로 보여주며, 황색 바탕의 "Processor"는 실질적인 연산을 담당하는 물리적인 [프로세서 코어](#프로세서-코어)를 의미한다. 그리고 흑색과 적색 화살표는 각각 데이터와 제어 흐름 방향을 가리킨다.
