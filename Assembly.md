@@ -162,7 +162,6 @@ void __stdcall function(int argc, char** argv) { return; }
 다음은 `__cdecl` 호출 규약이 가지는 특징을 나열한다:
 
 1. 전달인자를 스택을 통해 전달하며, 오른쪽에서부터 왼쪽 순서대로 스택에 푸쉬한다.
-
 1. 정수나 메모리 주소는 `EAX` 레지스터, 부동소수점은 `ST0 x87` 레지스터를 통해 반환된다.
 
 <table style="width: 80%; margin: auto;"><caption style="caption-side: top;"><code>__cdecl</code> 및 <code>__stdcall</code> 호출 규약의 휘발성 및 비휘발성 레지스터</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">휘발성(volitile)</th><th style="text-align: center;">비휘발성(non-volitile)</th></tr></thead><tbody><tr><td style="text-align: center;"><code>EAX</code>, <code>ECX</code>, <code>EDX</code></td><td style="text-align: center;">나머지 레지스터</td></tr></tbody></table>
