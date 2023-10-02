@@ -51,13 +51,4 @@ ProcDump에서 덤프를 생성하는 조건을 다음과 같이 설정할 수 �
 ### 성능 카운터
 어플리케이션의 리소스 사용량을 성능 카운터 기준에서 지정한 한계치를 초과하거나 미달하면 덤프를 수집하도록 할 수 있다.
 
-<table style="width: 70%; margin: auto;">
-<caption style="caption-side: top;">ProcDump 덤프 생성 기준의 성능 카운터</caption>
-<colgroup><col style="width: 20%;"/><col style="width: 10%;"/><col style="width: 10%;"/><col style="width: 60%;"/></colgroup>
-<thead><tr><th rowspan="2" style="text-align: center;">성능 카운터</th><th colspan="2" style="text-align: center;">매개변수</th><th rowspan="2" style="text-align: center;">비고</th></tr><tr><th style="text-align: center;">초과</th><th style="text-align: center;">미달</th></tr></thead>
-<tbody>
-<tr><td style="text-align: center;">CPU 점유율</td><td style="text-align: center;"><code>-c</code></td><td style="text-align: center;"><code>-cl</code></td><td>퍼센트(%) 단위를 입력한다.</td></tr>
-<tr><td style="text-align: center;"><a href="Memory.md#커밋된-메모리">커밋된 메모리</a></td><td style="text-align: center;"><code>-m</code></td><td style="text-align: center;"><code>-ml</code></td><td>MB 단위를 입력한다.</td></tr>
-<tr><td style="text-align: center;">기타</td><td style="text-align: center;"><code>-p</code></td><td style="text-align: center;"><code>-pl</code></td><td>예시: <code>"\Processor(_Total)\% Processor Time"</code></td></tr>
-</tbody>
-</table>
+<table style="width: 70%; margin: auto;"><caption style="caption-side: top;">ProcDump 덤프 생성 기준의 성능 카운터</caption><colgroup><col style="width: 20%;"/><col style="width: 10%;"/><col style="width: 10%;"/><col style="width: 60%;"/></colgroup><thead><tr><th rowspan="2" style="text-align: center;">성능 카운터</th><th colspan="2" style="text-align: center; border-bottom-style: none;">매개변수</th><th rowspan="2" style="text-align: center;">비고</th></tr><tr><th style="text-align: center;">초과</th><th style="text-align: center;">미달</th></tr></thead><tbody><tr><td style="text-align: center;">CPU 점유율</td><td style="text-align: center;"><code>-c</code></td><td style="text-align: center;"><code>-cl</code></td><td>퍼센트(%) 단위를 입력한다.</td></tr><tr><td style="text-align: center;"><a href="Memory.md#커밋된-메모리">커밋된 메모리</a></td><td style="text-align: center;"><code>-m</code></td><td style="text-align: center;"><code>-ml</code></td><td>MB 단위를 입력한다.</td></tr><tr><td style="text-align: center;">기타</td><td style="text-align: center;"><code>-p</code></td><td style="text-align: center;"><code>-pl</code></td><td>예시: <code>"\Processor(_Total)\% Processor Time"</code></td></tr></tbody></table>
