@@ -147,26 +147,29 @@ MNEMONIC    OPERAND     ; 명령어 집합을 표현하는 기초적인 문장 �
 ### x86 아키텍처
 > *참고: [x86 Architecture - Windows driver | Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/x86-architecture)*
 
-[x86 호출 규약](https://ko.wikipedia.org/wiki/X86_호출_규약)에는 C 프로그래밍 언어의 기본 호출 규약인 [`__cdecl`](https://learn.microsoft.com/en-us/cpp/cpp/cdecl)(C Declaration의 줄임말)이 가장 널리 사용되고 있다. 일반적으로 선언 당시에 별도로 호출 규약을 명시하지 않아도 되지만, 만일 해야 할 경우가 있으면 아래와 같이 작성한다.
+다양한 종류의 [x86 호출 규약](https://ko.wikipedia.org/wiki/X86_호출_규약)이 존재하며 함수에 선언하여 결정할 수 있으나, 본 내용에서는 중요하다고 판단한 두 가지만 소개한다:
 
-```c
-void __cdecl function(int argc, char** argv) { return; }
-```
+1. **[`__cdecl`](https://learn.microsoft.com/en-us/cpp/cpp/cdecl)**
 
-그 외에도 마이크로소프트의 [WinAPI](WinAPI.md) 함수에 적용된 [`__stdcall`](https://learn.microsoft.com/en-us/cpp/cpp/stdcall) 등 다양한 호출 규약이 존재하며, 이들은 아래와 같이 함수에서 선언되어야 한다.
+    "C Declaration"의 줄임말로 C 언어의 기본 호출 규약이면서 가장 널리 사용되고 있다. 일반적으로 선언 당시에 별도로 호출 규약을 명시하지 않아도 되지만, 만일 해야 할 경우가 있으면 아래와 같이 작성한다.
 
-```c
-void __stdcall function(int argc, char** argv) { return; }
-```
+    ```c
+    void __cdecl function(int argc, char** argv) { return; }
+    ```
 
-다음은 `__cdecl` 호출 규약이 가지는 특징을 나열한다:
+    해당 호출 규약의 특징으로 (1) 전달인자를 스택을 통해 전달하며, 오른쪽에서부터 왼쪽 순서대로 스택에 푸쉬되고 (2) 정수나 메모리 주소는 `EAX` 레지스터, 부동소수점은 `ST0 x87` 레지스터를 통해 반환된다.
 
-1. 전달인자를 스택을 통해 전달하며, 오른쪽에서부터 왼쪽 순서대로 스택에 푸쉬한다.
-1. 정수나 메모리 주소는 `EAX` 레지스터, 부동소수점은 `ST0 x87` 레지스터를 통해 반환된다.
+1. **[`__stdcall`](https://learn.microsoft.com/en-us/cpp/cpp/stdcall)**
 
-<table style="width: 80%; margin: auto;"><caption style="caption-side: top;"><code>__cdecl</code> 및 <code>__stdcall</code> 호출 규약의 휘발성 및 비휘발성 레지스터</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">휘발성(volitile)</th><th style="text-align: center;">비휘발성(non-volitile)</th></tr></thead><tbody><tr><td style="text-align: center;"><code>EAX</code>, <code>ECX</code>, <code>EDX</code></td><td style="text-align: center;">나머지 레지스터</td></tr></tbody></table>
+    마이크로소프트의 [WinAPI](WinAPI.md) 함수에 적용되어, 아래와 같이 함수에서 선언되어야 한다.
+
+    ```c
+    void __stdcall function(int argc, char** argv) { return; }
+    ```
 
 호출 규약 `__cdecl`와 `__stdcall` 사이에는 호출된 함수를 정리(clean-up)하는 주체가 누구인지 달라진다: 전자는 호출자에게, 그리고 후자는 피호출자에게 책임을 묻는다. 여기서 스택 정리란, 위에서 언급한 휘발성 및 비휘발성 레지스터와 전혀 다른 개념이다.
+
+<table style="width: 80%; margin: auto;"><caption style="caption-side: top;"><code>__cdecl</code> 및 <code>__stdcall</code> 호출 규약의 휘발성 및 비휘발성 레지스터</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">휘발성(volitile)</th><th style="text-align: center;">비휘발성(non-volitile)</th></tr></thead><tbody><tr><td style="text-align: center;"><code>EAX</code>, <code>ECX</code>, <code>EDX</code></td><td style="text-align: center;">나머지 레지스터</td></tr></tbody></table>
 
 ### x64 아키텍처
 > *참고: [x64 Architecture - Windows driver | Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/x64-architecture)*
