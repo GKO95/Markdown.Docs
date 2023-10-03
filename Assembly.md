@@ -20,7 +20,7 @@
 어셈블러를 통해 어셈블리 언어에서 기계어로 변환되면 부산물로 [오브젝트 파일](https://ko.wikipedia.org/wiki/목적_파일)(object file)이 생성된다. 오브젝트 파일은 파편적인 코드이므로, 다른 코드와 연동시키기 위해서는 [링커](https://ko.wikipedia.org/wiki/링커_(컴퓨팅))(linker)의 작업을 필요하다. 이를 통해 정적 및 동적 [라이브러리](C.md#라이브러리)의 함수나 구조체를 가져올 수 있게 된다.
 
 # 레지스터
-[레지스터](https://ko.wikipedia.org/wiki/프로세서_레지스터)(register)는 [프로세서](Processor.md)가 연산을 위해 필요한 데이터, 또는 연산을 마치고 반환될 데이터를 임시로 저장할 수 있는 [워드](https://ko.wikipedia.org/wiki/워드_(컴퓨팅))([x86](https://ko.wikipedia.org/wiki/X86) 및 [x64](https://ko.wikipedia.org/wiki/X86-64)는 각각 32비트 그리고 64비트) 크기의 메모리이다. 여기서 워드(word)란, 시스템 아키텍처가 처리하는 데 가장 자연스러운 데이터 크기를 가리킨다. 시스템 아키텍처의 워드를 정의하는 요소 중 하나가 바로 프로세서의 레지스터 크기이다.
+[레지스터](https://ko.wikipedia.org/wiki/프로세서_레지스터)(register)는 [프로세서](Processor.md)가 연산을 위해 필요한 데이터, 또는 연산을 마치고 반환될 데이터를 임시로 저장할 수 있는 [워드](https://ko.wikipedia.org/wiki/워드_(컴퓨팅))([x86](https://ko.wikipedia.org/wiki/X86) 및 [x64](https://ko.wikipedia.org/wiki/X86-64)는 각각 [32비트](https://ko.wikipedia.org/wiki/32비트) 그리고 [64비트](https://ko.wikipedia.org/wiki/64비트)) 크기의 메모리이다. 여기서 워드(word)란, 시스템 아키텍처가 처리하는 데 가장 자연스러운 데이터 크기를 가리킨다. 시스템 아키텍처의 워드를 정의하는 요소 중 하나가 바로 프로세서의 레지스터 크기이다.
 
 > 레지스터는 프로세서에만 종속되지 않고 [물리 디스크](https://ko.wikipedia.org/wiki/하드_디스크_드라이브) 또는 [그래픽 카드](https://ko.wikipedia.org/wiki/그래픽_카드) 등 다양한 하드웨어에서도 활용되지만, 본문은 프로세서를 위주로 설명한다.
 
@@ -31,55 +31,51 @@
 위의 그림은 x86-64(일명 x64) 아키텍처의 다양한 레지스터를 보여주며, 그 중에는 레지스터(예. 64비트 `RAX`) 안에 또 다른 레지스터(예. 32비트 `EAX`)가 들어있는 구조를 찾아볼 수 있다. 이는 사실상 하드웨어적으로는 하나의 메모리이지만, `EAX`는 메모리의 전체 64비트 중에서 하위 32비트만을 활용하는 레지스터이다.
 
 ## 범용 레지스터
-[범용 레지스터](https://en.wikipedia.org/wiki/Processor_register#GPR)(General-Purpose Register; GPR)는 본래 의도된 목적이 존재하지만 상황에 따라 다양한 용도로 사용될 수 있는 레지스터이다. 이론적으로 어느 작업이라도 제약없이 유연하게 활용될 수 있으나, [호출 규약](#호출-규약)(calling convention)에 의해 레지스터마다 어떻게 사용되어야 할 지 규칙이 정해져 있다. 다음은 x64 아키텍처에서 제공하는 범용 레지스터를 소개한다.
+[범용 레지스터](https://en.wikipedia.org/wiki/Processor_register#GPR)(General-Purpose Register; GPR)는 본래 의도된 목적이 존재하지만 상황에 따라 다양한 용도로 사용될 수 있는 레지스터이다. 이론적으로 어느 작업이라도 제약없이 유연하게 활용될 수 있으나, [호출 규약](#호출-규약)(calling convention)에 의해 레지스터마다 어떻게 사용되어야 할 지 규칙이 정해져 있다.
 
-* **기본 범용 레지스터(Primary General-Purpose Register)**
+GPR 중에서 가장 기본적이면서 활발히 사용되는 `A`, `C`, `D`, 그리고 `B` 레지스터이다. 16비트 아키텍처 당시에도 이들은 8비트 단위로 처리되어야 하는 경우가 흔하여, 상위(High) 및 하위(Low) 8비트 명칭을 접미사 `H`와 `L`로 분류하였다. 그리고 이 둘을 종합한 레지스터는 16비트로 "확장되었다(e**X**tended)"고 하여 접미사 `X`가 붙는다. 32비트 및 64비트 프로세서의 등장으로 각각 접두사 `E`(**E**xtended의 앞글자)와 `R`(**R**egister의 앞글자)"를 붙여 명칭한다.
 
-    GPR 중에서 가장 기본적이면서 활발히 사용되는 `A`, `C`, `D`, 그리고 `B` 레지스터이다. 16비트 아키텍처 당시에도 이들은 8비트 단위로 처리되어야 하는 경우가 흔하여, 상위(High) 및 하위(Low) 8비트 명칭을 접미사 `H`와 `L`로 분류하였다. 그리고 이 둘을 종합한 레지스터는 16비트로 "확장되었다(e**X**tended)"고 하여 접미사 `X`가 붙는다. 32비트 및 64비트 프로세서의 등장으로 각각 접두사 `E`(**E**xtended의 앞글자)와 `R`(**R**egister의 앞글자)"를 붙여 명칭한다.
+* `A` (Accumulator): 산술 및 논리 연산에 활용되는 레지스터이다.
+* `C` (Counter): 반복문의 카운터로 활용되며, `loop` 등의 일부 명령어는 카운터의 영값 여부에 따라 반복 실행한다.
+* `D` (Data): 산술 및 논리 연산을 보조하는 데이터 레지스터이며, 특히 정수의 곱셈이나 나눗셈 등에 흔히 활용된다.
+* `B` (Base): 배열, 문자열, 구조체 등의 데이터 기반 혹은 오프셋 메모리 주소를 저장하는 포인터 레지스터이다.
 
-    * `A` (Accumulator): 산술 및 논리 연산에 활용되는 레지스터이다.
-    * `C` (Counter): 반복문의 카운터로 활용되며, `loop` 등의 일부 명령어는 카운터의 영값 여부에 따라 반복 실행한다.
-    * `D` (Data): 산술 및 논리 연산을 보조하는 데이터 레지스터이며, 특히 정수의 곱셈이나 나눗셈 등에 흔히 활용된다.
-    * `B` (Base): 배열, 문자열, 구조체 등의 데이터 기반 혹은 오프셋 메모리 주소를 저장하는 포인터 레지스터이다.
+<table style="width: 80%; margin: auto;"><caption style="caption-side: top;">x86-64 프로세서의 기본 GPR 명칭</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>R?X</code></td></tr><tr><td>-</td><td colspan="3"><code>E?X</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>?X</code></td></tr><tr><td colspan="2">-</td><td><code>?H</code></td><td><code>?L</code></td></tr></tbody></table>
 
-    <table style="width: 80%; margin: auto;"><caption style="caption-side: top;">x86-64 프로세서의 기본 GPR 명칭</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>R?X</code></td></tr><tr><td>-</td><td colspan="3"><code>E?X</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>?X</code></td></tr><tr><td colspan="2">-</td><td><code>?H</code></td><td><code>?L</code></td></tr></tbody></table>
+### 포인터 레지스터
+[스택](https://ko.wikipedia.org/wiki/스택) 연산을 위한 메모리 주소를 다루며, 명칭 뒤에 [포인터](C.md#포인터)(pointer)를 의미하는 `P`가 있는 게 특징이다:
 
-* **[포인터](C.md#포인터) 레지스터(Pointer Register)**
+* `SP` (Stack Pointer): 스택의 최상위 주소를 가리키는 레지스터이며, [`push`](#push) 또는 [`pop`](#pop) 연산 시 자동으로 값이 변동된다.
+* `BP` (Base Pointer): [함수](C.md#함수)의 [스택 프레임](https://en.wikipedia.org/wiki/Call_stack#Structure)(stack frame), 일명 호출 스택(call stacK)의 기반 메모리 주소를 가리키는 레지스터이다.
 
-    [스택](https://ko.wikipedia.org/wiki/스택) 연산을 위한 메모리 주소를 다루며, 명칭 뒤에 포인터(pointer)를 의미하는 `P`가 있는 게 특징이다:
+<table style="width: 80%; margin: auto;"><caption style="caption-side: top;">x86-64 프로세서의 포인터 레지스터 명칭</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>R?P</code></td></tr><tr><td>-</td><td colspan="3"><code>E?P</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>?P</code></td></tr><tr><td colspan="3">(64비트 모드에서만 지원)</td><td><code>?PL</code></td></tr></tbody><caption style="caption-side: bottom; text-align: left;"><sup>† 범용 레지스터처럼 16비트 레지스터를 상위 및 하위 8비트로 나누려는 데 의미를 두지 않았다.</sup></caption></table>
 
-    * `SP` (Stack Pointer): 스택의 최상위 주소를 가리키는 레지스터이며, `push` 또는 `pop` 연산 시 자동으로 값이 변동된다.
-    * `BP` (Base Pointer): [함수](C.md#함수)의 [스택 프레임](https://en.wikipedia.org/wiki/Call_stack#Structure)(stack frame), 일명 호출 스택(call stacK)의 기반 메모리 주소를 가리키는 레지스터이다.
+### 인덱스 레지스터
+[배열](C.md#배열) 혹은 [문자열](C.md#문자열)의 메모리 주소를 다루며, 명칭 뒤에 [인덱스](C.md#배열)(index)를 의미하는 `I`가 있는 게 특징이다:
 
-    <table style="width: 80%; margin: auto;"><caption style="caption-side: top;">x86-64 프로세서의 포인터 레지스터 명칭</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>R?P</code></td></tr><tr><td>-</td><td colspan="3"><code>E?P</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>?P</code></td></tr><tr><td colspan="3">(64비트 모드에서만 지원)</td><td><code>?PL</code></td></tr></tbody><caption style="caption-side: bottom; text-align: left;"><sup>† 범용 레지스터처럼 16비트 레지스터를 상위 및 하위 8비트로 나누려는 데 의미를 두지 않았다.</sup></caption></table>
+* `SI` (Source Index): 배열 혹은 문자열의 원천 주소를 담는 레지스터이다.
+* `DI` (Destination Index): 배욜 혹은 문자열의 목적 주소를 담는 레지스터이다.
 
-* **[인덱스](C.md#배열) 레지스터(Index Register)**
+<table style="width: 80%; margin: auto;"><caption style="caption-side: top;">x86-64 프로세서의 인덱스 레지스터 명칭</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>R?I</code></td></tr><tr><td>-</td><td colspan="3"><code>E?I</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>?I</code></td></tr><tr><td colspan="3">(64비트 모드에서만 지원)</td><td><code>?IL</code></td></tr></tbody><caption style="caption-side: bottom; text-align: left;"><sup>† 범용 레지스터처럼 16비트 레지스터를 상위 및 하위 8비트로 나누려는 데 의미를 두지 않았다.</sup></caption></table>
 
-    [배열](C.md#배열) 혹은 [문자열](C.md#문자열)의 메모리 주소를 다루며, 명칭 뒤에 인덱스(index)를 의미하는 `I`가 있는 게 특징이다:
+### x64 확장 레지스터
+x86-64 아키텍처의 64비트 모드에서만 사용할 수 있는 GPR `R8` ~ `R15`는 본래 64비트를 위해 설계되었으므로, 하위 비트의 레지스터를 부르는 명칭을 달리 택하였다: 접미사에 `DWORD` (32비트), `WORD` (16비트), 그리고 `BYTE` (8비트) 자료형의 앞글자를 따서 분별한다.
 
-    * `SI` (Source Index): 배열 혹은 문자열의 원천 주소를 담는 레지스터이다.
-    * `DI` (Destination Index): 배욜 혹은 문자열의 목적 주소를 담는 레지스터이다.
-
-    <table style="width: 80%; margin: auto;"><caption style="caption-side: top;">x86-64 프로세서의 인덱스 레지스터 명칭</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>R?I</code></td></tr><tr><td>-</td><td colspan="3"><code>E?I</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>?I</code></td></tr><tr><td colspan="3">(64비트 모드에서만 지원)</td><td><code>?IL</code></td></tr></tbody><caption style="caption-side: bottom; text-align: left;"><sup>† 범용 레지스터처럼 16비트 레지스터를 상위 및 하위 8비트로 나누려는 데 의미를 두지 않았다.</sup></caption></table>
-
-* **추가 레지스터(Additional Register)**
-
-    x86-64 아키텍처의 64비트 모드에서만 사용할 수 있는 GPR `R8` ~ `R15`는 본래 64비트를 위해 설계되었으므로, 하위 비트의 레지스터를 부르는 명칭을 달리 택하였다: 접미사에 `DWORD` (32비트), `WORD` (16비트), 그리고 `BYTE` (8비트) 자료형의 앞글자를 따서 분별한다.
-
-    <table style="width: 80%; margin: auto;"><caption style="caption-side: top;">x86-64 프로세서의 64비트 전용 GPR 명칭</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>?</code></td></tr><tr><td>-</td><td colspan="3"><code>?D</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>?W</code></td></tr><tr><td colspan="3">-</td><td><code>?B</code></td></tr></tbody></table>
+<table style="width: 80%; margin: auto;"><caption style="caption-side: top;">x86-64 프로세서의 64비트 전용 GPR 명칭</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>?</code></td></tr><tr><td>-</td><td colspan="3"><code>?D</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>?W</code></td></tr><tr><td colspan="3">-</td><td><code>?B</code></td></tr></tbody></table>
 
 ## 특수 레지스터
-특수 레지스터(Special-Purpose Register; SPR)는 [범용 레지스터](#범용-레지스터)와 달리, 특수한 목적을 위해서만 사용되는 레지스터를 가리킨다:
+특수 레지스터(Special-Purpose Register; SPR)는 [범용 레지스터](#범용-레지스터)와 달리, 특수한 목적을 위해서만 사용되는 레지스터를 가리킨다.
 
-* **명령어 포인터 레지스터(Instruction Pointer Register)**
+* [IP 레지스터](#명령어-포인터-레지스터)
+* [FLAGS 레지스터](#플래그-레지스터)
 
-    일명 [IP](https://ko.wikipedia.org/wiki/프로그램_카운터) 레지스터는 다음으로 실행할 명령어가 위치하는 메모리 주소를 가리킨다.
+### 명령어 포인터 레지스터
+일명 [IP](https://ko.wikipedia.org/wiki/프로그램_카운터)(instruction pointer) 레지스터는 다음에 실행할 명령어가 위치하는 메모리 주소를 가리킨다.
 
-    <table style="width: 80%; margin: auto;"><caption style="caption-side: top;">x86-64 프로세서의 IP 레지스터 명칭</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>RIP</code></td></tr><tr><td>-</td><td colspan="3"><code>EIP</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>IP</code></td></tr></tbody></table>
+<table style="width: 80%; margin: auto;"><caption style="caption-side: top;">x86-64 프로세서의 IP 레지스터 명칭</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>RIP</code></td></tr><tr><td>-</td><td colspan="3"><code>EIP</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>IP</code></td></tr></tbody></table>
 
-* **[플래그 레지스터](https://en.wikipedia.org/wiki/FLAGS_register)(FLAGS Register)**
-
-    일종의 [상태 레지스터](https://ko.wikipedia.org/wiki/상태_레지스터), 즉 현 프로세서 상태를 담고 있는 레지스터이다. 흔히 산술 연산의 결과나 당시 CPU 작업에 걸린 [제약](Processor.md#프로세서-모드)을 반영한다.
+### 플래그 레지스터
+산술 연산 및 현 시점에서 제동된 CPU 제약 등의 프로세서 상태를 담고 있는 [상태 레지스터](https://ko.wikipedia.org/wiki/상태_레지스터)이며, x86 계열의 CPU에서는 이를 [FLAGS 레지스터](https://en.wikipedia.org/wiki/FLAGS_register)라고 칭한다.
 
 ## 호출 규약
 [호출 규약](https://ko.wikipedia.org/wiki/호출_규약)(calling convention)은 함수가 [매개변수](C.md#매개변수-및-전달인자)를 통해 인자를 전달받고 [`return`](C.md#return-반환문) 문으로 결과를 반환하는 방식을 규정하며, 일반적으로 [ABI](https://ko.wikipedia.org/wiki/응용_프로그램_이진_인터페이스)의 일부로 간주된다. 호출자(caller)와 피호출자(callee) 간 데이터 전달은 일반적으로 레지스터나 스택 프레임의 도움으로 처리된다. 올바른 호출 규약의 사용은 신뢰할 수 있는 프로그램 실행을 보장하기 때문에 매 함수 호출 시 준수되어야 한다.
@@ -131,8 +127,6 @@
 # 구문
 [구문](https://ko.wikipedia.org/wiki/구문_(프로그래밍_언어))(syntax)은 프로그래밍 언어에서 문자 및 기호들의 조합이 올바른 문장 또는 표현식을 구성하였는지 정의하는 규칙이다. 어셈블리 코드를 작성하지 않더라도, 구문을 알고 있으면 디버깅 등의 트러블슈팅 목적으로도 유용하게 활용될 수 있다. 허나, 운영체제 및 [어셈블러](#어셈블러)에 따라 구문에 차이가 있음을 명시하도록 한다.
 
-> 본문은 [윈도우](Windows.md) 운영체제에서 [NASM](https://ko.wikipedia.org/wiki/넷와이드_어셈블러) 어셈블러를 위주로 설명한다.
-
 어셈블리의 소스 코드는 [메모리 세그먼트](https://ko.wikipedia.org/wiki/X86_메모리_분할)<sub>([참고](https://en.wikipedia.org/wiki/File:Program_memory_layout.pdf))</sub> 중 다음 세 가지를 지원하며 (즉, [스택](https://ko.wikipedia.org/wiki/스택) 및 [힙](https://ko.wikipedia.org/wiki/동적_메모리_할당) 영역 제외), 이들은 `section` 키워드와 함께 명시하여 구분된다:
 
 <table style="width: 80%; margin: auto;">
@@ -162,7 +156,7 @@ section .data
 위의 예시 코드에서 세미콜론 `;`은 주석(comment)을 나타내며 프로그램의 소스 코드로 취급하지 않아 실행되지 않는다.
 
 ### 진입점
-[진입점](https://ko.wikipedia.org/wiki/엔트리_포인트)(entry point)은 프로그램이 시작되는 지점이다. C 런타임 라이브러리는 `_main` 함수를 기본 진입점으로 지정하였지만, [링커](https://ko.wikipedia.org/wiki/링커_(컴퓨팅))에게 진입점을 명시한다면 어떠한 이름을 지정해도 상관없다. 그리고 프로그램을 실행할 수 있도록 진입점은 외부에서도 접근이 가능한 [전역 함수](C.md#함수)(global function)로 선언되어야 한다.
+[진입점](https://ko.wikipedia.org/wiki/엔트리_포인트)(entry point)은 프로그램이 시작되는 지점이다. C 런타임 라이브러리는 `_main` 함수를 기본 진입점으로 지정하였지만, [링커](https://ko.wikipedia.org/wiki/링커_(컴퓨팅))에게 진입점을 명시한다면 어떠한 이름을 지정해도 상관없다. 그리고 프로그램을 실행할 수 있도록 진입점은 외부에서도 접근이 가능한 [전역 함수](C.md#함수)로 선언되어야 한다.
 
 > `_main`에서의 밑줄은 사용자가 정의한 심볼과 네이밍 충돌을 방지하기 위한 관습으로, GCC 컴파일러는 C 언어 심볼에 해당 관습을 기본으로 적용한다.
 
@@ -180,6 +174,12 @@ MNEMONIC    OPERAND     ; 명령어 집합을 표현하는 기초적인 문장 �
 ### 레이블
 [레이블](https://ko.wikipedia.org/wiki/레이블_(컴퓨터_과학))(label)은 [메모리 주소](C.md#포인터)를 명칭으로 호출할 수 있도록 하며, [C](C.md)/[C++](Cpp.md) 언어의 `goto` 이동문에 사용되는 [레이블](C.md#goto-이동문)과 동일하다. 다시 말해, 레이블은 `.data` 혹은 `.bss` 영역에서 다루어지는 [변수](C.md#변수)가 절대 아니다. 본 장의 예시에서 `_main`은 진입점을 가리키는 레이블에 해당한다.
 
+# 함수
+[함수](https://ko.wikipedia.org/wiki/함수_(컴퓨터_과학))(function)는 독립적인 코드 블록으로써 데이터를 처리하며, 재사용이 가능하고 호출 시 처리된 데이터를 보여주어 유동적인 프로그램 코딩을 가능하게 한다. 일반적으로 어셈블리는 [`call`](#call) [명령어](#명령어)를 통해 함수를 호출하여 [스택 프레임](https://en.wikipedia.org/wiki/Call_stack#Structure)이 구축되는데, [아키텍처](https://ko.wikipedia.org/wiki/컴퓨터_구조)에 따라 새로운 스택 프레임 진입 및 종료 절차가 상이하다.
+
+## x86 아키텍처 스택 프레임
+> *참고: [x86 Disassembly/Functions and Stack Frames - Wikibooks](https://en.wikibooks.org/wiki/X86_Disassembly/Functions_and_Stack_Frames)*
+
 # 명령어
 > *출처: [Intel® 64 and IA-32 Architectures Software Developer Manuals](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html)*
 
@@ -191,3 +191,18 @@ MNEMONIC    OPERAND     ; 명령어 집합을 표현하는 기초적인 문장 �
 1. [피연산자](https://ko.wikipedia.org/wiki/피연산자#컴퓨터_과학)는 opcode에 따라 아예 없거나 한 개 이상이 [레지스터](#레지스터), [리터럴](C.md#구문) 및 [상수](C.md#변수), 또는 [메모리 주소](C.md#포인터)로서 활용된다.
 
 다양한 명령어를 전부 다룰 수 없는 관계로 본 장에서는 부연 설명이 필요한 일부 명령어에 대해서만 소개하며, 만일 찾을 수 없다면 위의 링크로부터 다운로드한 소프트웨어 개발자 매뉴얼 문서에서 *Volume 2: Instruction Set Reference, A-Z*를 참고한다.
+
+## `call`
+[함수](#함수)를 호출하는 명령어이며, 다음에 수행할 명령어 주소를 계산한 다음 [EIP](#명령어-포인터-레지스터)(혹은 RIP) 레지스터에 저장 및 스택에 푸쉬한다. 스택에 푸쉬된 메모리 주소는 차후 호출된 함수 실행 이후 재개하기 위한 조치이다.
+
+* Opcode E8: IP 레지스터에 저장된 (혹은 스택에 [푸쉬](#push)된) 명령어 주소로부터 호출 함수의 메모리 주소로 도달하기 위해 필요한 오프셋이 피연산자로 전달된다. 아래는 이해를 돕기 위한 예시를 보여준다.
+
+    ```nasm
+    00D117F1 E8 BC FA FF FF       call        function (0D112B2h)  
+    ```
+
+    `call` 명령어를 실행하는 당시, EIP에 저장된 다음 명령어 주소는 5바이트를 더한 00D117F6h이다. 여기에 FFFFFABCh를 더하면 아래와 같이 해당 함수로 이동하는 [분기 테이블](https://ko.wikipedia.org/wiki/분기_테이블)의 00D112B2h 주소가 계산된다.
+
+    ```nasm
+    00D112B2 E9 B9 04 00 00       jmp         function (0D11770h)  
+    ```
