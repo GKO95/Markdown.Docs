@@ -88,7 +88,7 @@
 
 <table style="width: 80%; margin: auto;"><caption style="caption-side: top;">휘발성 및 비휘발성 레지스터 비교</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">휘발성(volitile)</th><th style="text-align: center;">비휘발성(non-volitile)</th></tr></thead><tbody><tr><td style="text-align: center;">호출자에 의해 저장(caller-saved)</td><td style="text-align: center;">피호출자에 의해 저장(callee-saved)</td></tr><tr><td>저장된 정보는 다른 함수로 인해 쉽게 덮어씌어질 수 있으며, 만일 복원하려면 호출자가 당시 값을 저장해야 한다.</td><td>피호출자가 반환된 이후에도, 해당 함수를 호출한 당시 호출자의 레지스터 값들은 피호출자에 의해 복원되어야 한다.</td></tr></tbody></table>
 
-### x86 아키텍처
+### x86 아키텍처 호출 규약
 > *참고: [x86 Architecture - Windows driver | Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/x86-architecture)*
 
 다양한 종류의 [x86 호출 규약](https://ko.wikipedia.org/wiki/X86_호출_규약)이 존재하며 함수에 선언하여 결정할 수 있으나, 본 내용에서는 중요하다고 판단한 두 가지만 소개한다:
@@ -115,7 +115,7 @@
 
 <table style="width: 80%; margin: auto;"><caption style="caption-side: top;"><code>__cdecl</code> 및 <code>__stdcall</code> 호출 규약의 휘발성 및 비휘발성 레지스터</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">휘발성(volitile)</th><th style="text-align: center;">비휘발성(non-volitile)</th></tr></thead><tbody><tr><td style="text-align: center;"><code>EAX</code>, <code>ECX</code>, <code>EDX</code></td><td style="text-align: center;">나머지 레지스터</td></tr></tbody></table>
 
-### x64 아키텍처
+### x86-64 아키텍처 호출 규약
 > *참고: [x64 Architecture - Windows driver | Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/x64-architecture)*
 
 [x64 호출 규약](https://en.wikipedia.org/wiki/X86_calling_conventions#x86-64_calling_conventions)은 크게 두 종류가 있으며, [윈도우 OS](Windows.md) 혹은 [유닉스 계열](https://ko.wikipedia.org/wiki/유닉스_계열) 운영체제에 따라 각각 Microsoft x64 호출 규약 및 System V AMD64 ABI가 사용된다. x86 아키텍처와 달리, 레지스터 개수가 늘어나면서 레지스터 활용도가 상당히 늘어났으며, 본 부분은 Microsft x64 호출 규약을 위주로 설명한다.
