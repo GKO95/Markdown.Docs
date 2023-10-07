@@ -8,8 +8,42 @@ WPR은 본래 [윈도우 SDK](https://aka.ms/windowssdk)의 설치 옵션 중 �
 본 문서는 CLI 버전의 WPR을 위주로 소개한다.
 
 ## 프로파일
-[프로파일](https://learn.microsoft.com/en-us/windows-hardware/test/wpt/recording-profiles)(profile)애는 WPR이 성능 데이터를 수집하는데 사용할 [이벤트 제공자](ETW.md) 목록, 버퍼 크기와 개수 등의 설정이 저장되어 있다. WPR에 내장된 프로파일이 있으며, 사용자가 직접 XML로 작성된 .wprp 확장자의 자체 프로파일을 제작할 수 있다. 아래는 WPR에서 사용할 수 있는 프로파일 목록을 확인하는 명령이다.
+[프로파일](https://learn.microsoft.com/en-us/windows-hardware/test/wpt/recording-profiles)(profile)애는 WPR이 성능 데이터를 수집하는데 사용할 [이벤트 제공자](ETW.md) 목록, 버퍼 크기와 개수 등의 설정이 저장되어 있다. WPR에 내장된 프로파일이 있으며, 사용자가 직접 XML로 작성된 .wprp 확장자의 자체 프로파일을 제작할 수 있다. 프로파일 목록을 확인하려면 [`-profiles`](https://learn.microsoft.com/en-us/windows-hardware/test/wpt/wpr-command-line-options#profiles) 옵션을 입력한다.
 
 ```terminal
 wpr -profiles
+```
+```
+Microsoft Windows Performance Recorder Version 10.0.22621 (CoreSystem)
+Copyright (c) 2022 Microsoft Corporation. All rights reserved.
+
+        GeneralProfile              First level triage
+        CPU                         CPU usage
+        DiskIO                      Disk I/O activity
+        FileIO                      File I/O activity
+        Registry                    Registry I/O activity
+        Network                     Networking I/O activity
+        Heap                        Heap usage
+        Pool                        Pool usage
+        VirtualAllocation           VirtualAlloc usage
+        Audio                       Audio glitches
+        Video                       Video glitches
+        Power                       Power usage
+        InternetExplorer            Internet Explorer
+        EdgeBrowser                 Microsoft Edge Browser
+        Minifilter                  Minifilter I/O activity
+        GPU                         GPU activity
+        Handle                      Handle usage
+        XAMLActivity                XAML activity
+        HTMLActivity                HTML activity
+        DesktopComposition          Desktop composition activity
+        XAMLAppResponsiveness       XAML App Responsiveness analysis
+        HTMLResponsiveness          HTML Responsiveness analysis
+        ReferenceSet                Reference Set analysis
+        ResidentSet                 Resident Set analysis
+        XAMLHTMLAppMemoryAnalysis   XAML/HTML application memory analysis
+        UTC                         UTC Scenarios
+        DotNET                      .NET Activity
+        WdfTraceLoggingProvider     WDF Driver Activity
+        HeapSnapshot                Heap snapshot
 ```
