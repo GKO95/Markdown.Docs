@@ -38,7 +38,7 @@
 
 성능 카운터로부터 데이터를 수신받는 주체를 소비자(consumer)라고 부르며 성능 모니터 이외에도 [작업 관리자](https://ko.wikipedia.org/wiki/작업_관리자), [리소스 모니터](https://en.wikipedia.org/wiki/Resource_Monitor), [`logman.exe`](#logman) 등의 프로그램이 해당한다. 반면, 소비자가 호출한 카운터의 성능 데이터를 생성 및 발행하는 소프트웨어 구성요소를 제공자(provider)라고 부른다. [윈도우 비스타](https://ko.wikipedia.org/wiki/윈도우_비스타)를 기점으로 사용자 모드 제공자는 두 버전으로 나뉘어진다.
 
-* **V1 제공자 <sub>(deprecated)</sub>**
+* **V1 제공자** <sub>(deprecated)</sub>
 
     소비자가 성능 데이터를 확인하려고 할 때, 성능 라이브러리(일명 성능 DLL; `PDH.DLL`)가 소비자 프로세스에 로드되어 `.INI` 초기화 파일로 설치된 제공자를 호출하여 성능 데이터를 수집한다.
 
