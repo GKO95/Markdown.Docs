@@ -1,9 +1,9 @@
 # 성능 모니터
-[성능 모니터](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-r2-and-2008/cc749249(v=ws.11))(Performance Monitor; 일명 Perfmon)는 시스템 및 어플리케이션의 성능 데이터를 수집하여 수치적 모니터링을 제공하는 도구이다.
+[성능 모니터](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-r2-and-2008/cc749249(v=ws.11))(Performance Monitor; 일명 Perfmon)는 시스템 및 어플리케이션의 전반적인 성능 데이터를 수집하여 수치적 모니터링을 제공하는 도구이다.
 
 ![성능 모니터의 프로세서별 사용량(%) 예시](./images/perfmon_graph_sample.png)
 
-성능 모니터는 [윈도우](Windows.md) 운영체제에 기본적으로 설치된 프로그램이며, 모니터링 이외에도 이상 현상이 목격되었을 시 시스템 성능을 기록 및 진단하기 위해 사용된다. 시스템 성능 진단에는 유용하나, 증상의 [근본적인 원인 분석](https://en.wikipedia.org/wiki/Root_cause_analysis)(root cause analysis; RCA)에는 적합하지 않아 [Windows Performance Toolkit](ko.WPT.md) 프로그램이 활용되기도 한다.
+성능 모니터는 [윈도우](Windows.md) 운영체제에 기본적으로 설치된 프로그램이며, 모니터링 이외에도 이상 현상이 목격되었을 시 시스템 성능을 기록 및 진단하기 위해 사용된다. 시스템 성능 진단에는 유용하나 RCA, 즉 증상의 [근본적인 원인 분석](https://en.wikipedia.org/wiki/Root_cause_analysis)에는 적합하지 않아 [WPR](WPR.md) 및 [WPA](WPA.md) 프로그램이 활용되기도 한다.
 
 ## 데이터 수집기 집합
 [데이터 수집기 집합](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-r2-and-2008/cc749337(v=ws.11))(Data Collector Sets)은 시스템 관련 정보를 수집하는 다수의 데이터 수집기들을 하나의 집합으로 정리하여 파일 형태의 [로그](https://ko.wikipedia.org/wiki/로그파일)로 저장하거나 검토할 수 있도록 한다.
