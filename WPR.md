@@ -8,7 +8,7 @@ WPR은 본래 [윈도우 SDK](https://aka.ms/windowssdk)의 설치 옵션 중 �
 본 문서는 CLI 버전의 WPR을 위주로 소개한다.
 
 ## 프로파일
-[프로파일](https://learn.microsoft.com/en-us/windows-hardware/test/wpt/recording-profiles)(profile)애는 WPR이 성능 데이터를 수집하는데 사용할 [이벤트 제공자](ETW.md) 목록, 버퍼 크기와 개수 등의 설정이 저장되어 있다. WPR에 내장된 프로파일이 있으며, 사용자가 직접 XML로 작성된 .wprp 확장자의 자체 프로파일을 제작할 수 있다. 프로파일 목록을 확인하려면 [`-profiles`](https://learn.microsoft.com/en-us/windows-hardware/test/wpt/wpr-command-line-options#profiles) 옵션을 입력한다.
+[프로파일](https://learn.microsoft.com/en-us/windows-hardware/test/wpt/recording-profiles)(profile)애는 WPR이 성능 데이터를 수집하는데 사용할 [이벤트 제공자](ETW.md) 목록, 버퍼 크기와 개수 등의 설정이 저장되어 있다. WPR에 내장된 프로파일이 있으며, 사용자가 직접 XML로 작성된 .wprp 확장자의 자체 프로파일을 제작할 수 있다. WPR의 프로파일 목록을 확인하려면 [`-profiles`](https://learn.microsoft.com/en-us/windows-hardware/test/wpt/wpr-command-line-options#profiles) 옵션을 입력한다.
 
 ```terminal
 wpr -profiles
