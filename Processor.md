@@ -153,34 +153,32 @@ ALU는 기본적으로 opcode와 피연산자를 입력받고, 해당 opcode 작
 프로세스의 우선순위 클래스와 스레드의 우선순위 레벨의 조합으로부터 각 스레드의 기초 우선순위(base priority)가 형성된다.
 
 # 인터럽트
-[인터럽트](https://ko.wikipedia.org/wiki/인터럽트)(interrupt; 간혹 "트랩"이라고도 언급)는 마우스 움직임이나 키보드 입력과 같은 시스템에서 발생한 일종의 비동기 사건, 즉 이벤트(event)가 최우선으로 처리될 수 있도록 [프로세서](#프로세서)에 요청되는 신호이다. 아래 그림은 인터럽트가 프로세서로부터 처리되는, 즉 인터럽트 서비스(interrupt service) 과정을 간략히 보여준다.
+[인터럽트](https://ko.wikipedia.org/wiki/인터럽트)(interrupt), 간혹 트랩(trap)이라고도 언급되며 시스템에서 발생한 일종의 비동기 사건, 즉 이벤트가 최우선으로 처리될 수 있도록 [프로세서](#프로세서)에 요청되는 신호이다. 대표적인 예시로 마우스 커서 움직임이나 키보드 타자 입력 등이 인터럽트에 의해 처리된다. 인터럽트는 하드웨어 혹은 소프트웨어에 의해 발생될 수 있다.
 
-![인터럽트의 종류 및 처리 과정](https://upload.wikimedia.org/wikipedia/commons/c/cf/Interrupt_Process.PNG)
+<table style="width: 95%; margin: auto;"><caption style="caption-side: top;">인터럽트 유형별 개요</caption>
+<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<thead><tr><th style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Interrupt#Hardware_interrupts">하드웨어 인터럽트</a></th><th style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Interrupt#Software_interrupts">소프트웨어 인터럽트</a></th></tr></thead>
+<tbody><tr style="text-align: center;"><td>전달 발향: <a href="https://ko.wikipedia.org/wiki/컴퓨터_하드웨어">하드웨어</a> & <a href="https://ko.wikipedia.org/wiki/주변기기">외부 장치</a> → <a href="https://ko.wikipedia.org/wiki/운영체제">운영체제</a></td><td>전달 방향: <a href="https://ko.wikipedia.org/wiki/운영체제">운영체제</a> → <a href="https://ko.wikipedia.org/wiki/컴퓨터_하드웨어">하드웨어</a> & <a href="https://ko.wikipedia.org/wiki/주변기기">외부 장치</a></td></tr><tr><td>마우스, 키보드, 프린터 등의 장치가 운영체제와 통신하거나 정보를 전달하기 위해 발신하는 인터럽트이다. 운영체제는 하드웨어 인터럽트마다 각자 다른 <a href="https://ko.wikipedia.org/wiki/인터럽트_요청">IRQ</a> 값을 지정하여 장치를 분별한다.</td><td>프로세서는 <a href="https://ko.wikipedia.org/wiki/INT_(x86_명령어)">INT 명령어</a> 연산 혹은 특정 조건에 부합하면 발신되는 인터럽트이며, 일반적으로 <a href="Kernel.md#하드웨어-추상-계층">HAL</a> 상주하는 <a href="Kernel.md">커널</a>에서 수신한다. 프로그램이 실행되는 도중에 발생하는 <a href="C.md#예외-처리">예외</a>도 이에 해당한다.</td></tr></tbody>
+</table>
 
-인터럽트를 전달받은 프로세서는 이벤트를 처리하기 위해 현재 실행 중이던 [스레드](Process.md#스레드)를 잠시 중단시키고 재개되어야 할 시점의 스레드 [상태](https://en.wikipedia.org/wiki/State_(computer_science))(state)를 저장한다. 각 인터럽트마다 대응되는 함수를 [인터럽트 핸들러](https://ko.wikipedia.org/wiki/인터럽트_핸들러)(interrupt handler) 또는 인터럽트 서비스 루틴(interrupt service routine; ISR)이라고 부르는데, 프로세서에 의해 실행되는 ISR이 바로 이벤트를 처리하는 역할을 한다.
+## 인터럽트 핸들러
+[인터럽트 핸들러](https://ko.wikipedia.org/wiki/인터럽트_핸들러)(interrupt handler) 또는 인터럽트 서비스 루틴(interrupt service routine; ISR)은 발생한 인터럽트에 대응하는 [함수](C.md#함수)를 가리킨다. 인터럽트도 제각각 용도가 다르기 때문에, 인터럽트를 처리할 수 있는 ISR 또한 다양하게 존재한다. 아래는 프로세서가 인터럽트를 처리하는 "인터럽트 서비스" 과정을 소개한다.
 
-> ISR은 실행 중이던 스레드를 중단시켜 프로세서를 점유한 것이므로 최대한 빠른 시간 내에 처리되어야 한다. 그러나 ISR의 작업들이 많아질수록 인터럽트 처리 시간이 길어지는데, 이는 스레드가 재개되는 시점을 미루거나 새로운 인터럽트가 제때 처리되지 못하게 한다. 윈도우 운영체제는 [DPC](#지연-프로시저-호출)를 제공하므로써 이러한 문제를 해소한다.
+![인터럽트의 유형에 따른 서비스 절차](https://upload.wikimedia.org/wikipedia/commons/c/cf/Interrupt_Process.PNG)
 
-마지막으로 프로세서가 중단된 스레드를 다시 실행하므로써 일련의 인터럽트 서비스가 마무리된다.
+위의 그림을 정리하면 다음과 같다:
 
-### 하드웨어 인터럽트
-[하드웨어 인터럽트](https://en.wikipedia.org/wiki/Interrupt#Hardware_interrupts)(hardware interrupt)는 마우스, 키보드, 프린터 등의 컴퓨터 [하드웨어](https://ko.wikipedia.org/wiki/컴퓨터_하드웨어) 또는 [외부 장치](https://ko.wikipedia.org/wiki/주변기기)가 운영체제와 통신 및 상호작용을 하기 위해 발신되는 인터럽트이다.
+1. 이벤트로부터 발생한 인터럽트를 전달받은 프로세서는 이를 처리하기 위해 현재 실행 중이던 [스레드](Process.md#스레드)를 잠시 중단한다.
+1. 프로세서는 차후 작업을 재개할 수 있도록 중단된 스레드의 [상태](https://en.wikipedia.org/wiki/State_(computer_science))를 저장한다.
+1. 프로세서는 해당 인터럽트에 대응하는 ISR을 실행하여 이벤트를 처리한다.
+1. ISR이 마무리되면 프로세서는 일시적으로 중단한 스레드 실행을 재개한다.
 
-> 운영체제는 하드웨어마다 발생되는 인터럽트에 각자 다른 [IRQ](https://ko.wikipedia.org/wiki/인터럽트_요청) 값을 지정하여 장치를 분별한다. 만일 두 개 이상의 장치가 동일한 IRQ로 전송하면 [혼선](https://en.wikipedia.org/wiki/Interrupt_request_(PC_architecture)#Conflicts)이 발생하여 시스템 [프리징](https://ko.wikipedia.org/wiki/프리징_(컴퓨팅))을 야기한다.
-
-비록 하드웨어 인터럽트는 시스템에 아무 때나 도달할 수 있으나, 결국 프로세서의 [클럭 발진기](https://en.wikipedia.org/wiki/Clock_generator)에 의해 동기화된다.
-
-### 소프트웨어 인터럽트
-[소프트웨어 인터럽트](https://en.wikipedia.org/wiki/Interrupt#Software_interrupts)(software interrupt)는 운영체제가 컴퓨터 하드웨어 또는 외부 장치와 통신 및 동작을 지시하기 위해, [특정 명령어](https://ko.wikipedia.org/wiki/INT_(x86_명령어))를 실행하거나 조건에 부합하면 프로세서로부터 발신되는 인터럽트이다. 일반적으로 소프트웨어 인터럽트는 운영체제의 커널단에서 수신받아 처리된다.
-
-> 흔히 커널 프로세스에 나타나서는 안될 특정 소프트웨어 인터럽트가 존재하나, 모종의 이유로 해당 신호가 발신되었다면 [시스템 충돌](BSOD.md)을 초래할 수 있다.
-
-프로그램이 실행되는 도중에 발생한 [예외](https://ko.wikipedia.org/wiki/예외_처리)(exception)도 소프트웨어 인터럽트에 해당한다.
+ISR은 실행 중이던 스레드를 중단시켜 프로세서를 점유한 것이므로 최대한 빠른 시간 내에 처리되어야 한다. 그러나 ISR의 작업들이 많아질수록 인터럽트 처리 시간이 길어지는데, 이는 스레드가 재개되는 시점을 미루거나 새로운 인터럽트가 제때 처리되지 못하게 한다. 윈도우 운영체제는 [DPC](#지연-프로시저-호출)를 제공하므로써 이러한 문제를 해소한다.
 
 ## 지연 프로시저 호출
 [지연 프로시저 호출](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-dpcs)(deferred procedure calls; DPC)은 [큐](https://ko.wikipedia.org/wiki/큐_(자료_구조))에 대기된 작업들을 나중에 한꺼번에 처리하는 매커니즘이다.
 
-인터럽트 핸들러는 기존 스레드를 중단시켜 프로세서를 점유한 것이기 때문에, 원활한 스레드 재개를 위해 인터럽트 서비스는 되도록 빠른 시간 내에 완료되어야 한다. 하지만 인터럽트 핸들러가 처리하는 작업이 많아질수록 인터럽트 서비스 완료에 필요한 시간은 더 길어지게 된다. 이는 스레드가 다시 실행되는 시점을 늦추고 또 다른 인터럽트 처리를 방해하여 매끄럽지 못한 시스템 성능을 야기할 수 있다.
+ISR은 기존 스레드를 중단시켜 프로세서를 점유한 것이기 때문에, 원활한 스레드 재개를 위해 인터럽트 서비스는 되도록 빠른 시간 내에 완료되어야 한다. 하지만 인터럽트 핸들러가 처리하는 작업이 많아질수록 인터럽트 서비스 완료에 필요한 시간은 더 길어지게 된다. 이는 스레드가 다시 실행되는 시점을 늦추고 또 다른 인터럽트 처리를 방해하여 매끄럽지 못한 시스템 성능을 야기할 수 있다.
 
 DPC는 필연적이지만 나중에 처리되어도 무관한 낮은 우선순위의 작업들을 실행할 수 있도록 다음 두 가지 특성을 지닌다:
 
