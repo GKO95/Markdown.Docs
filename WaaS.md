@@ -1,5 +1,5 @@
 # WaaS
-[Windows as a Service](https://learn.microsoft.com/en-us/windows/deployment/update/waas-overview), 일명 WaaS는 [윈도우 NT](Windows.md)의 운영체제 파일, 레지스트리 값, 또는 시스템 상태 구성을 변경하는 모든 작업을 일컫는다. [윈도우 업데이트](#윈도우-업데이트), 역할 및 기능 추가, 또는 [드라이버](Driver.md#장치-드라이버) 설치 등이 전부 윈도우 서비스에 해당한다.
+[Windows as a Service](https://learn.microsoft.com/en-us/windows/deployment/update/waas-overview), 일명 WaaS는 [윈도우 NT](Windows.md)의 운영체제 파일, 레지스트리 값, 또는 시스템 상태 구성을 변경하는 모든 작업을 일컫는다. [윈도우 업데이트](#윈도우-업데이트), 역할 및 기능 추가, 또는 [드라이버](Driver.md) 설치 등이 전부 윈도우 서비스에 해당한다.
 
 본 문서에 앞서 마이크로소프트에서 사용되는 소프트웨어 [업데이트 용어](https://learn.microsoft.com/en-us/troubleshoot/windows-client/deployment/standard-terminology-software-updates)를 소개한다.
 
@@ -30,7 +30,7 @@
 
 * **드라이버 업데이트**(Driver updates)
 
-    시스템 장치에 적합한 [드라이버](Driver.md#장치-드라이버) 업데이트를 제공한다. [마이크로소프트 서피스](https://aka.ms/surface) 제품에 한해 [펌웨어](https://ko.wikipedia.org/wiki/펌웨어) 업데이트도 함께 전달한다.
+    시스템 장치에 적합한 [드라이버](Driver.md) 업데이트를 제공한다. [마이크로소프트 서피스](https://aka.ms/surface) 제품에 한해 [펌웨어](https://ko.wikipedia.org/wiki/펌웨어) 업데이트도 함께 전달한다.
 
 * **마이크로소프트 제품 업데이트**(Microsoft product updates)
 
@@ -78,7 +78,7 @@
 # 컴포넌트 기반 서비스
 > *참고: [Understanding Component-Based Servicing - Microsoft Community Hub](https://techcommunity.microsoft.com/t5/ask-the-performance-team/understanding-component-based-servicing/ba-p/373012)*
 
-컴포넌트 기반 서비스(Component-based servicing; CBS)는 [윈도우 비스타](Windows.md)부터 소개된 운영체제의 컴포넌트화 설계를 가리키며, [윈도우 업데이트](WaaS.md#윈도우-업데이트)나 [드라이버](Driver.md#장치-드라이버) 파일, 또는 시스템에 ([OpenSSH](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse) 서버와 같은) 추가 기능을 구현하는 선택적 [컴포넌트](#컴포넌트)를 이전 윈도우 OS보다 더 견고하고 안전하게 설치한다. 만일 부분적 혹은 부적합한 설치로 인한 불안정 이슈도 대응이 가능하다.
+컴포넌트 기반 서비스(Component-based servicing; CBS)는 [윈도우 비스타](Windows.md)부터 소개된 운영체제의 컴포넌트화 설계를 가리키며, [윈도우 업데이트](WaaS.md#윈도우-업데이트)나 [드라이버](Driver.md) 파일, 또는 시스템에 ([OpenSSH](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse) 서버와 같은) 추가 기능을 구현하는 선택적 [컴포넌트](#컴포넌트)를 이전 윈도우 OS보다 더 견고하고 안전하게 설치한다. 만일 부분적 혹은 부적합한 설치로 인한 불안정 이슈도 대응이 가능하다.
 
 ### 컴포넌트
 컴포넌트(component)는 시스템의 가장 기초적인 구성이며, 필요한 (바이너리, 레지스트리 값, [서비스](Service.md) 및 [보안 기술자](https://en.wikipedia.org/wiki/Security_descriptor) 등) 리소스들은 [매니페스트](https://ko.wikipedia.org/wiki/매니페스트_파일) 파일로부터 정의된다. [WinSxS](https://en.wikipedia.org/wiki/Side-by-side_assembly#WinSxS_(Windows_component_store))에는 모든 버전의 컴포넌트가 저장되어 있어 필요에 따라 시스템에 반영될 수 있다. 컴포넌트의 예시로 [파일 탐색기](https://ko.wikipedia.org/wiki/파일_탐색기), [메모장](https://ko.wikipedia.org/wiki/메모장_(소프트웨어)), [레지스트리 편집기](Registry.md#레지스트리-편집기), [ntdll.dll](WinAPI.md#ntdlldll), [ntoskrnl.exe](Kernel.md#nt-커널) 등이 해당한다.

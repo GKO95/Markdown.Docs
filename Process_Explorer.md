@@ -1,5 +1,5 @@
 # 프로세스 탐색기
-[프로세스 탐색기](https://aka.ms/procexp)(Process Explorer)는 간단히 소개하자면 더 많은 기능들이 탑재된 "IT 관리자용" [작업 관리자](https://ko.wikipedia.org/wiki/작업_관리자_(윈도우))라고 설명할 수 있다. 실행 중인 프로세스 뿐만 아니라 로드된 [DLL](C.md#라이브러리)이나 [드라이버](Driver.md#장치-드라이버), 할당된 [스레드](Process.md#스레드) 및 [핸들](Process.md#핸들), 프로세스의 부모와 자식 관계를 [트리 구조](https://ko.wikipedia.org/wiki/트리_구조)로 보여주는 등의 정보를 실시간으로 확인할 수 있다.
+[프로세스 탐색기](https://aka.ms/procexp)(Process Explorer)는 간단히 소개하자면 더 많은 기능들이 탑재된 "IT 관리자용" [작업 관리자](https://ko.wikipedia.org/wiki/작업_관리자_(윈도우))라고 설명할 수 있다. 실행 중인 프로세스 뿐만 아니라 로드된 [DLL](C.md#라이브러리)이나 [드라이버](Driver.md), 할당된 [스레드](Process.md#스레드) 및 [핸들](Process.md#핸들), 프로세스의 부모와 자식 관계를 [트리 구조](https://ko.wikipedia.org/wiki/트리_구조)로 보여주는 등의 정보를 실시간으로 확인할 수 있다.
 
 > 사용자의 선호도에 따라 작업 관리자를 대신하여 프로세스 탐색기가 실행되도록 레지스트리를 설정하는 옵션을 제공한다.
 
