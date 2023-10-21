@@ -127,30 +127,11 @@ ALU는 기본적으로 opcode와 피연산자를 입력받고, 해당 opcode 작
 </table>
 
 ## 스케줄링 우선순위
-[스케줄링 우선순위](https://learn.microsoft.com/en-us/windows/win32/procthread/scheduling-priorities)(scheduling priorities)는 프로세스와 스레드가 생성될 클래스로부터 정해진 우선순위에 따라 결정된 스케줄링 기준이다. 우선순위 범위는 1(최하) ~ 31(최상)까지 있으며, 특수한 경우의 우선순위 0은 오로지 시스템 운영 및 보안을 위한 것으로 [영값 페이지 커널 스레드](Memory.md#여유-메모리) 등에 사용된다. 동일한 우선순위 간에는 라운드 로빈 알고리즘에 의해 공평하게 스케줄링한 다음 차우선순위로 넘어간다.
+[스케줄링 우선순위](https://learn.microsoft.com/en-us/windows/win32/procthread/scheduling-priorities)(scheduling priorities)는 [프로세스](Process.md#프로세스) 또는 [스레드](Process.md#스레드)가 타 객체에 비해 CPU로부터 얼마나 먼저 처리되어야 하는지 알리는 [필드](Cpp.md#클래스) 값이다. 우선순위 범위는 1 - 31이며 높을수록 스케줄링 최상위 우선권을 가진다. 특수한 경우의 우선순위 0은 오로지 시스템 운영 및 보안을 위한 것으로 [영값 페이지 커널 스레드](Memory.md#여유-메모리) 등에 사용된다. 동일한 우선순위 간에는 라운드 로빈 알고리즘에 의해 공평하게 스케줄링한 다음 차우선순위로 넘어간다.
 
-윈도우 NT에서는 프로세스와 스레드의 우선순위 클래스 및 레벨은 다음과 같다:
+다음은 [윈도우 NT](Windows.md) 운영체제의 우선순위 체계이며, 우선순위 클래스와 레벨의 조합으로부터 각 스레드의 기초 우선순위(base priority)가 형성된다.
 
-* 프로세스 우선순위 클래스
-
-    * `IDLE_PRIORITY_CLASS`
-    * `BELOW_NORMAL_PRIORITY_CLASS`
-    * `NORMAL_PRIORITY_CLASS`
-    * `ABOVE_NORMAL_PRIORITY_CLASS`
-    * `HIGH_PRIORITY_CLASS`
-    * `REALTIME_PRIORITY_CLASS`
-
-* 스레드 우선순위 레벨
-    
-    * `THREAD_PRIORITY_IDLE`
-    * `THREAD_PRIORITY_LOWEST`
-    * `THREAD_PRIORITY_BELOW_NORMAL`
-    * `THREAD_PRIORITY_NORMAL`
-    * `THREAD_PRIORITY_ABOVE_NORMAL`
-    * `THREAD_PRIORITY_HIGHEST`
-    * `THREAD_PRIORITY_TIME_CRITICAL`
-
-프로세스의 우선순위 클래스와 스레드의 우선순위 레벨의 조합으로부터 각 스레드의 기초 우선순위(base priority)가 형성된다.
+<table style="width: 80%; margin: auto;"><caption style="caption-side: top;">프로세스 및 스레드 우선순위</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">프로세스 우선순위 클래스</th><th style="text-align: center;">스레드 우선순위 레벨</th></tr></thead><tbody><tr style="text-align: center;"><td><code>IDLE_PRIORITY_CLASS</code></td><td><code>THREAD_PRIORITY_IDLE</code></td></tr><tr style="text-align: center;"><td><code>BELOW_NORMAL_PRIORITY_CLASS</code></td><td><code>THREAD_PRIORITY_LOWEST</code></td></tr><tr style="text-align: center;"><td><code>NORMAL_PRIORITY_CLASS</code></td><td><code>THREAD_PRIORITY_BELOW_NORMAL</code></td></tr><tr style="text-align: center;"><td><code>ABOVE_NORMAL_PRIORITY_CLASS</code></td><td><code>THREAD_PRIORITY_NORMAL</code></td></tr><tr style="text-align: center;"><td><code>HIGH_PRIORITY_CLASS</code></td><td><code>THREAD_PRIORITY_ABOVE_NORMAL</code></td></tr><tr style="text-align: center;"><td><code>REALTIME_PRIORITY_CLASS</code></td><td><code>THREAD_PRIORITY_HIGHEST</code></td></tr><tr style="text-align: center;"><td>-</td><td><code>THREAD_PRIORITY_TIME_CRITICAL</code></td></tr></tbody></table>
 
 # 인터럽트
 [인터럽트](https://ko.wikipedia.org/wiki/인터럽트)(interrupt), 간혹 트랩(trap)이라고도 언급되며 시스템에서 발생한 일종의 비동기 사건, 즉 이벤트가 최우선으로 처리될 수 있도록 [프로세서](#프로세서)에 요청되는 신호이다. 대표적인 예시로 마우스 커서 움직임이나 키보드 타자 입력 등이 인터럽트에 의해 처리된다. 인터럽트는 하드웨어 혹은 소프트웨어에 의해 발생될 수 있다.
