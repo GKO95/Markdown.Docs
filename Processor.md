@@ -72,6 +72,8 @@ ALU는 기본적으로 opcode와 피연산자를 입력받고, 해당 opcode 작
 프로세서가 ([시스템](Process.md#시스템-프로세스)) [프로세스](Process.md)의 스레드로부터 [이미지](https://ko.wikipedia.org/wiki/실행_파일) 코드를 연산하고 처리하는 데 할애한 시간을 [프로세서 시간](https://ko.wikipedia.org/wiki/CPU_타임)(processor time)이라고 부른다. 프로세스의 프로세서 시간은 [스케줄링](#스케줄링)이나 입출력 요청 등에 의해 대기 혹은 준비 상태에 진입하여 처리되지 않는 동안 반영되지 않는다. 일정한 간격으로 샘플링된 시간 동안 스레드가 얼마나 오래 처리되었는지를 토대로 프로세서 점유율(%)이 계산된다.
 
 ## 프로세서 모드
+> *참고: [User mode and kernel mode - Windows drivers | Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/user-mode-and-kernel-mode)*
+
 [보호 링](https://ko.wikipedia.org/wiki/보호_링)(protection ring)은 데이터와 기능을 결함과 위협적인 행위로부터 보호하는 메커니즘이다.
 
 ![x86 프로세서의 보호 링 다이어그램](https://upload.wikimedia.org/wikipedia/commons/2/2f/Priv_rings.svg)
