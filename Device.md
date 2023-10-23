@@ -28,4 +28,4 @@ Proseware Gizmo 장치에는 총 세 개의 드라이버가 사용되고 있다:
 
 [`DEVICE_OBJECT`](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/ns-wdm-_device_object) [구조체](C.md#구조체)를 살펴보면 `AttachedDevice` 필드를 찾아볼 수 있는데, 이게 바로 다음 상위 드라이버(와 쌍을 이루는 디바이스 객체) 포인터를 가리킨다. 결국 Proseware Gizmo 노드에서 Pci.sys 이후에 Proseware.sys 드라이버가 있음을 디바이스 객체로부터 알 수 있게 된다.
 
-* [WinDbg](WinDbg.md)에서 [`!devobj`](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/-devobj) 명령을 입력하면 `AttachedTo`라는 항목이 있어 이전 드라이버가 무엇인지 알려주지만, 이는 `DEVICE_OBJECT`의 필드가 아니다.
+* [WinDbg](WinDbg.md)에서 [`!devobj`](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/-devobj) 명령을 입력하면 `AttachedTo` 항목이 있어 이전 드라이버가 무엇인지 알려주지만, 이는 `DEVICE_OBJECT`의 필드가 아니다.
