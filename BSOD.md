@@ -1,21 +1,21 @@
 # 블루스크린
-![윈도우 10 블루스크린 화면: [0xD1 DRIVER_IRQL_NOT_LESS_OR_EQUAL](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0xd1--driver-irql-not-less-or-equal)](./images/bsod_bugcheck_d1.png)
+![윈도우 11 블루스크린 화면 예시](./images/bsod_sample.png)
 
-[블루스크린](https://ko.wikipedia.org/wiki/블루스크린), 일명 BSOD(Blue Screen of Death; 죽음의 파란 화면)는 시스템을 망가뜨릴 수 있는 손상이 가해지는 것을 방지하기 위한 화면이며, 블루스크린 원인을 알려주는 [버그 검사 코드](#버그-검사-코드)를 표시하고 분석에 필요한 [메모리 덤프](Dump.md#커널-모드-덤프) 파일을 생성한다. 시스템은 아래의 사유가 발생하면 블루스크린이 나타난다.
+[블루스크린](https://ko.wikipedia.org/wiki/블루스크린), 일명 BSOD(Blue Screen of Death; 죽음의 파란 화면)는 시스템을 망가뜨릴 수 있는 손상이 가해지는 것을 방지하기 위한 파란색 ([윈도우 참가자 프로그램](https://support.microsoft.com/en-us/windows/windows-참가자-프로그램에-참여하기-ef20bb3d-40f4-20cc-ba3c-a72c844b563c)일 경우 초록색) 화면이며, 블루스크린 원인을 알려주는 [버그 검사 코드](#버그-검사-코드)를 표시하고 분석에 필요한 [메모리 덤프](Dump.md#커널-모드-덤프) 파일을 생성한다. 시스템은 아래의 사유가 발생하면 블루스크린이 나타난다.
 
-> [윈도우 참가자 프로그램](https://support.microsoft.com/en-us/windows/windows-참가자-프로그램에-참여하기-ef20bb3d-40f4-20cc-ba3c-a72c844b563c)(Windows Insider Program)을 통해 사용할 수 있는 Preview 버전의 윈도우 운영체제는 "초록색" 블루스크린이 나타난다.
+> 윈도우 부팅 시 나타나는 또 다른 파란색 오류 화면인 "[복구 모두](WinRE.md#복구-모드)"는 BSOD와 전혀 다른 증상이므로 혼돈하지 않도록 유의한다.
 
 * **시스템 충돌**: 운영체제 커널상 처리되지 않은 [오류](https://ko.wikipedia.org/wiki/예외_처리), 일명 커널 모드 충돌이다 (예시. [0x19 BAD_POOL_HEADER](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0x19--bad-pool-header)).
 * **유효하지 않은 동작**: 운영체제가 본래 설계에 벗어난 동작을 하였을 때, 복구가 불가하다고 판정되면 커널 초기화를 명분으로 발생한다 (예시. [0x133 DPC_WATCHDOG_VIOLATION](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0x133-dpc-watchdog-violation)).
 
 ## 버그 검사 코드
-버그 검사 코드(bug check code) 혹은 중지코드(stop code)는 블루스크린이 발생한 원인을 설명하는 운영체제 오류 번호이다. [`KeBugCheck()`](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/ntddk/nf-ntddk-kebugcheck) 매개변수 또는 [`KeBugCheckEx()`](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-kebugcheckex) 첫 번째 매개변수 `BugCheckCode` 명칭에서 유래된 용어이며, 여기로 전달되는 인자가 바로 버그 검사 코드이다. 특히 `KeBugCheckEx()` 루틴은 추가 매개변수 네 개가 있어 오류에 대한 구체적인 정보를 제공한다.
+버그 검사 코드(bug check code) 혹은 중지코드(stop code)는 블루스크린이 발생한 원인을 설명하는 [십육진수](https://ko.wikipedia.org/wiki/십육진법)의 운영체제 오류 번호이다. [`KeBugCheckEx()`](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-kebugcheckex) 함수에서 중지코드를 전달받는 첫 번째 매개변수의 명칭인 `BugCheckCode`에서 유래되었다. 해당 함수는 네 개의 추가 매개변수들이 있어 증상의 유형이나 문제가 발생한 [메모리 주소](C.md#포인터) 등의 구체적인 정보를 제공한다.
 
-> 버그 검사 코드는 매우 다양하기 때문에, [참조 문서](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-code-reference2)로부터 정확한 블루스크린 발생 경위를 파악하고 [근본 원인 분석](https://en.wikipedia.org/wiki/Root_cause_analysis)(root cause analysis; RCA)을 진행한다.
+시스템에 발생한 BSOD 이력과 중지코드를 확인하려면 [이벤트 뷰어](https://ko.wikipedia.org/wiki/이벤트_뷰어)의 시스템 이벤트 로그에서 Kernel-Power 41을 살펴보도록 한다.
 
-다음은 상기 블루스크린으로부터 생성된 덤프 파일을 확인한 내용이며, 버그 검사 코드 아래에 표시된 네 개의 전달인자로부터 문제가 발생한 메모리 주소 등의 시스템 충돌 관련 정보를 알 수 있다.
+> 단, 중지코드를 알려주는 BugcheckCode의 값은 십진수이기 때문에 십육진수로 변환이 필요하다: 0n209 =  [0xD1 DRIVER_IRQL_NOT_LESS_OR_EQUAL](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0xd1--driver-irql-not-less-or-equal)
 
-![버그 검사 코드 0xD1에 대한 [WinDbg](WinDbg.md) 덤프 분석 내용](./images/windbg_bugcheck_d1.png)
+![이벤트 뷰어의 시스템 로그에서 Kernel-Power 41로 확인한 BSOD 이력](./images/bsod_eventvwr_41.png)
 
 ## 강제 시스템 충돌
 간혹 시스템이 아무런 반응이 없는 [프리징](https://ko.wikipedia.org/wiki/프리징_(컴퓨팅)) 상태에 걸리면, 해당 증상의 원인 분석에 필요한 덤프 파일을 생성하기 위해 블루스크린이 강요된다. 다음은 블루스크린을 강제로 발생기키는 방법을 소개한다.
