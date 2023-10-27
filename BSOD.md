@@ -13,7 +13,7 @@
 
 시스템에 발생한 BSOD 이력과 중지코드를 확인하려면 [이벤트 뷰어](https://ko.wikipedia.org/wiki/이벤트_뷰어)의 시스템 이벤트 로그에서 Kernel-Power 41을 살펴보도록 한다.
 
-> 단, 중지코드를 알려주는 BugcheckCode의 값은 십진수이기 때문에 십육진수로 변환이 필요하다: 0n209 =  [0xD1 DRIVER_IRQL_NOT_LESS_OR_EQUAL](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0xd1--driver-irql-not-less-or-equal)
+> 중지코드를 알려주는 BugcheckCode의 값은 십진수이기 때문에 십육진수로 변환이 필요하다: 0n209 =  [0xD1 DRIVER_IRQL_NOT_LESS_OR_EQUAL](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0xd1--driver-irql-not-less-or-equal)
 
 ![이벤트 뷰어의 시스템 로그에서 Kernel-Power 41로 확인한 BSOD 이력](./images/bsod_eventvwr_41.png)
 
