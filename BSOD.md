@@ -20,25 +20,25 @@
 ## 강제 시스템 충돌
 간혹 시스템이 아무런 반응이 없는 [프리징](https://ko.wikipedia.org/wiki/프리징_(컴퓨팅)) 상태에 걸리면, 해당 증상의 원인 분석에 필요한 덤프 파일을 생성하기 위해 블루스크린이 강요된다. 다음은 블루스크린을 강제로 발생기키는 방법을 소개한다.
 
-* **NMI**
+* **[NMI](https://en.wikipedia.org/wiki/Non-maskable_interrupt)**
 
-    [마스크 불가능 인터럽트](https://en.wikipedia.org/wiki/Non-maskable_interrupt)(Non-maskable Interrupt; NMI)는 가장 최우선적으로 처리되어 시스템이 절대 무시할 수 없는 [인터럽트](Processor.md#인터럽트) 신호이다. 흔히 서버용 PC는 NMI 버튼이 존재하여, 누를 시 중지코드 [0x80 NMI_HARDWARE_FAILURE](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0x80--nmi-hardware-failure)가 발생한다. 블루스크린을 일으키기에 가장 확실한 방법이지만, 일반적으로 [PowerEdge R720](https://www.dell.com/support/manuals/ko-kr/poweredge-r720/720720xdom-v3/전면-패널-구조-및-표시등?guid=guid-23ecb1eb-0086-4839-80a9-9f5f3e679dbf)과 같은 서버용 컴퓨터에서 트러블슈팅 용도로 존재한다.
+    가장 최우선적으로 처리되어 시스템이 절대 무시할 수 없는 [인터럽트](Processor.md#인터럽트) 신호이다. 흔히 서버용 PC는 NMI 버튼이 존재하여, 누를 시 중지코드 [0x80 NMI_HARDWARE_FAILURE](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0x80--nmi-hardware-failure)가 발생한다. 블루스크린을 일으키기에 가장 확실한 방법이지만, 일반적으로 [PowerEdge R720](https://www.dell.com/support/manuals/ko-kr/poweredge-r720/720720xdom-v3/전면-패널-구조-및-표시등?guid=guid-23ecb1eb-0086-4839-80a9-9f5f3e679dbf)과 같은 서버용 컴퓨터에서 트러블슈팅 용도로 존재한다.
 
-    * **Debug-VM**
+    * **[`Debug-VM`](https://learn.microsoft.com/en-us/powershell/module/hyper-v/debug-vm)**
 
-        [`Debug-VM`](https://learn.microsoft.com/en-us/powershell/module/hyper-v/debug-vm) 파워셸 명령어는 마이크로소프트에서 개발한 [하이퍼바이저](https://ko.wikipedia.org/wiki/하이퍼바이저), 즉 [하이퍼-V](https://ko.wikipedia.org/wiki/하이퍼-V)(Hyper-V) 호스트로부터 가상 머신에 NMI 신호를 전송하여 블루스크린을 유발할 수 있다. 파워셸은 관리자 권한으로 실행되어야 하며, 가상 머신의 이름은 [`Get-VM`](https://learn.microsoft.com/en-us/powershell/module/hyper-v/get-vm) 명령어로 확인이 가능하다.
+        [PowerShell](PowerShell.md) [명령어](PowerShell.md#cmdlet)로 마이크로소프트에서 개발한 [하이퍼바이저](https://ko.wikipedia.org/wiki/하이퍼바이저), 즉 [하이퍼-V](https://ko.wikipedia.org/wiki/하이퍼-V) 가상 머신에 NMI 신호를 전송하여 블루스크린을 유발할 수 있다. 관리자 권한으로 실행되어야 하며, 가상 머신의 이름은 [`Get-VM`](https://learn.microsoft.com/en-us/powershell/module/hyper-v/get-vm) 명령어로 식별할 수 있다.
     
         ```powershell
         Debug-VM -Name "<VM name>" -InjectNonMaskableInterrupt
         ```
 
-    * **대역 외 관리**
+    * **[대역 외 관리](https://en.wikipedia.org/wiki/Out-of-band_management)**
 
-        [대역 외 관리](https://en.wikipedia.org/wiki/Out-of-band_management)(Out-of-band management; OOBM)는 네트워크 인프라구조를 구성하는 장비들을 원격으로 접근하고 관리할 수 있도록 하는 솔루션이다. 흔히 서버 장비들을 대상으로 사용되며, NMI 신호 주입 외에도 CPU 및 메모리 사용량 모니터링 등을 제공한다. 대표적으로 [iLO](https://en.wikipedia.org/wiki/HP_Integrated_Lights-Out) ([HP](https://ko.wikipedia.org/wiki/휴렛_팩커드_엔터프라이즈)), [iDRAC](https://en.wikipedia.org/wiki/Dell_DRAC) ([Dell](https://ko.wikipedia.org/wiki/델)), [XClarity Controller](https://www.lenovo.com/kr/ko/data-center/software/systems-management/xclarity-controller/) ([Lenovo](https://ko.wikipedia.org/wiki/레노버)) 등이 있다.
+        일명 OOBM(Out-of-band management)은 네트워크 인프라구조를 구성하는 장비들을 원격으로 접근하고 관리할 수 있도록 하는 솔루션이다. 흔히 서버 장비들을 대상으로 사용되며, NMI 신호 주입 외에도 CPU 및 메모리 사용량 모니터링 등을 제공한다. 대표적으로 [HP](https://ko.wikipedia.org/wiki/휴렛_팩커드_엔터프라이즈)의 [iLO](https://en.wikipedia.org/wiki/HP_Integrated_Lights-Out), [Dell](https://ko.wikipedia.org/wiki/델)의  [iDRAC](https://en.wikipedia.org/wiki/Dell_DRAC), [Lenovo](https://ko.wikipedia.org/wiki/레노버)의 [XClarity Controller](https://www.lenovo.com/kr/ko/data-center/software/systems-management/xclarity-controller/) 등이 있다.
 
 * **[키보드](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/forcing-a-system-crash-from-the-keyboard)**
 
-    키보드로부터 커널에 `KeBugCheck()` 루틴을 호출하므로써 윈도우 운영체제에 중지코드 [0xE2 MANUALLY_INITIATED_CRASH](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0xe2--manually-initiated-crash)를 발생시키는 방법이다. [PS/2](https://ko.wikipedia.org/wiki/PS/2_단자) 혹은 [USB](https://ko.wikipedia.org/wiki/USB) 키보드를 사용할 수 있으나, [IRQL](Processor.md#IRQL)이 상대적으로 높은 PS/2 키보드를 사용하는 걸 권장한다. 강제 블루스크린을 설정하는 방법은 아래의 둘 중 오로지 하나만이 적용되며 재부팅이 요구된다.
+    키보드로부터 커널에 `KeBugCheck()` 루틴을 호출하므로써 윈도우 운영체제에 [0xE2 MANUALLY_INITIATED_CRASH](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0xe2--manually-initiated-crash)를 발생시키는 방법이다. [PS/2](https://ko.wikipedia.org/wiki/PS/2_단자) 혹은 [USB](https://ko.wikipedia.org/wiki/USB) 키보드를 사용할 수 있으나, [IRQL](Processor.md#IRQL)이 상대적으로 높은 PS/2 키보드를 사용하는 걸 권장한다. 강제 블루스크린을 설정하는 방법은 아래의 둘 중 오로지 하나만이 적용되며 재부팅이 요구된다.
 
     1. **`CTRL`+`SCROLL` 단축키**
 
@@ -77,25 +77,25 @@
 
 * **[전원 버튼](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/forcing-a-system-crash-with-the-power-button)**
 
-    전원 버튼으로 블루스크린을 발생키려면 반드시 하드웨어, 펌웨어, 그리고 운영체제 요건이 충족되어야 한다:
+    전원 버튼을 7초 동안 누르고 있으면 [0x1C8 MANUALLY_INITIATED_POWER_BUTTON_HOLD](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0x1c8--manually-initiated-power-button-hold)가 반환된다 (하지만 10초 이상 누르면 [UEFI](Boot.md#uefi) 재설정이 되므로 그 전에 전원 버튼에 손을 떼도록 한다). 전원 버튼으로 블루스크린을 발생키려면 반드시 하드웨어, 펌웨어, 그리고 운영체제 요건이 충족되어야 한다:
+
+    
 
     1. [GPIO](https://ko.wikipedia.org/wiki/GPIO) 기반의 전원 버튼
     2. 전원 이벤트를 Windows Power Manager로 전달하는 펌웨어
     3. [윈도우 10](https://ko.wikipedia.org/wiki/윈도우_10) ([버전 1809](https://ko.wikipedia.org/wiki/윈도우_10#레드스톤_5)) 혹은 [윈도우 서버 2019](https://ko.wikipedia.org/wiki/윈도우_서버_2019) 이상의 운영체제
 
-    위의 요건을 모두 충족한다면 아래의 레지스트리 키로 이동하여 `PowerButtonBugcheck`이란 새로운 DWORD (32-bit) 값을 생성한다.
+    위의 요건을 모두 충족한다면 아래의 레지스트리 키로 이동하여 `PowerButtonBugcheck`이란 새로운 DWORD (32-bit) 값을 생성한다. 해당 레지스트리 값을 새로 생성해야 한다면 재부팅이 필요할 수 있다.
     
     ```terminal
     HKLM\SYSTEM\CurrentControlSet\Control\Power
     ```
 
     ![<code>PowerButtonBugcheck</code> 레지스트리 값](./images/bsod_force_power.png)
-    
-    전원 버튼을 7초 동안 누르고 있으면 버그 검사 코드 [0x1C8 MANUALLY_INITIATED_POWER_BUTTON_HOLD](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0x1c8--manually-initiated-power-button-hold)가 반환되지만, 10초 이상 누르면 UEFI 재설정이 되므로 그 전에 전원 버튼에 손을 떼도록 한다. 해당 레지스트리 값을 새로 생성해야 한다면 재부팅이 필요할 수 있다.
 
 * **[WinDbg](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/forcing-a-system-crash-from-the-debugger)**
 
-    [WinDbg](WinDbg.md)는 윈도우 운영체제를 [디버깅](https://ko.wikipedia.org/wiki/디버그)하는 프로그램으로 커널 모드에서 [`.crash`](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/-crash--force-system-crash-) 명령어를 입력하여 시스템 강제 충돌을 일으킬 수 있다. `KeBugCheck()` 루틴으로부터 버그 검사 코드 0xE2 MANUALLY_INITIATED_CRASH가 반환되는데, 만일 시스템 충돌이 발생하지 않으면 중단점 탈출을 시도한다.
+    [WinDbg](WinDbg.md)는 윈도우 운영체제를 [디버깅](https://ko.wikipedia.org/wiki/디버그)하는 프로그램으로 커널 모드에서 [`.crash`](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/-crash--force-system-crash-) 명령어를 입력하여 시스템 강제 충돌을 일으킬 수 있다. `KeBugCheck()` 루틴으로부터 [0xE2 MANUALLY_INITIATED_CRASH](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0xe2--manually-initiated-crash)가 반환되는데, 만일 시스템 충돌이 발생하지 않으면 중단점 탈출을 시도한다.
 
 * **[NotMyFault](NotMyFault.md)**
 
@@ -220,7 +220,11 @@ Memory Management 레지스트리 키에서 설정할 수 있는 값들은 알�
 단, 저장될 덤프 파일의 경로 및 이름은 `DumpFile` 레지스트리 값을 그대로 사용한다.
 
 # BSOD 원리
-본 장은 [윈도우 NT](Windows.md) 운영체제에서 [BSOD](#블루스크린)가 나타나 [메모리 덤프](Dump.md#커널-모드-덤프)가 생성되는 원리를 [설정 초기화](#설정-초기화), [시스템 충돌](#시스템-충돌), 그리고 [덤프 생성](#덤프-생성) 단계로 나누어 설명한다. 자세한 내용은 [Mark Russinovich](https://ko.wikipedia.org/wiki/마크_러시노비치)([Sysinternals](Sysinternals.md) 공동 창시자)를 포함한 [마이크로소프트](https://www.microsoft.com/) 엔지니어들이 저자로 참여한 [*Windows Internals*](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) 도서를 읽어볼 것을 권장한다.
+본 내용은 [윈도우](Windows.md) [OS](https://ko.wikipedia.org/wiki/운영체제)에서 [BSOD](#블루스크린)가 나타나 [메모리 덤프](Dump.md#커널-모드-덤프)가 생성되는 원리를 세 가진 단계로 나누어 설명한다. 자세한 내용은 [Mark Russinovich](https://ko.wikipedia.org/wiki/마크_러시노비치)([Sysinternals](Sysinternals.md) 공동 창시자)를 포함한 [마이크로소프트](https://www.microsoft.com/) 엔지니어들이 저자로 참여한 [*Windows Internals*](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) 도서를 읽어볼 것을 권장한다.
+
+1. **[설정 초기화](#설정-초기화)**: 부팅 시 덤프를 수집할 수 있도록 [CrashControl](#bsod-설정)에 설정된 항목들을 시스템에 적용하는 단계
+1. **[시스템 충돌](#시스템-충돌)**: 시스템 충돌이 발생할 때 RAM에 담겨진 데이터를 [페이징 파일](#페이징-파일)로 수집하는 단계
+1. **[덤프 생성](#덤프-생성)**: 충돌 이후 재부팅 과정에서 페이징 파일을 .dmp [덤프 파일](Dump.md#커널-모드-덤프)로 변환하는 단계
 
 ## 설정 초기화
 [세션 관리자](Process.md#세션-관리자)(smss.exe)는 시스템이 부팅되는 시점에 [ntoskrnl.exe](Kernel.md#nt-커널)의 [입출력 관리자](Kernel.md#입출력-관리자)를 통해 `HKLM\SYSTEM\CurrentControlSet\Control\CrashControl` (이하 CrashControl) 레지스트리 키의 값들을 읽는다. 이들을 토대로 BSOD가 발생할 경우 어떠한 동작을 취할 것인지, 그리고 덤프는 어떻게 수집할 것인지 설정을 시스템에 적용한다.
@@ -242,7 +246,7 @@ BSOD가 발생할 때 덤프를 디스크에 저장하기 위해 필요한 스�
 드라이버 복제에 이어서 smss.exe는 CrashControl 레지스트리 키의 `DumpFilters` 값에서 [덤프 필터 드라이버](https://learn.microsoft.com/en-us/windows-hardware/drivers/storage/crash-dump-filter-drivers) 여부를 확인한다. 덤프 파일을 디스크에 저장하는 데 있어 요구되는 기능을 스토리지 포트와 미니포트 드라이버에 지원하는 목적을 가진다. 대표적인 예시로 dumpfve.sys가 있으며, 바로 마이크로스프트의 볼륨 암호화를 담당하는 [BitLocker](https://ko.wikipedia.org/wiki/비트로커)가 활성화된 디스크 공간에 덤프를 저장할 수 있도록 한다. 덤프 필터 드라이버의 의의는 [*시스템 충돌*](#시스템-충돌) 부문에서 언급한다.
 
 ## 시스템 충돌
-시스템 내부적으로 오류나 문제가 발생하면 [`KeBugCheckEx`](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-kebugcheckex) 루틴이 호출되면서 시스템의 모든 작업이 중지된다. 당시 [물리 메모리](Memory.md)에 들어있는 데이터를 디스크의 페이징 파일로 옮기는, 즉 덤핑(dumping)을 진행하는데 일반적인 파일 입출력과 다른 스토리지 스택을 거쳐 저장한다.
+시스템 내부적으로 오류나 문제가 발생하면 [`KeBugCheckEx()`](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-kebugcheckex) 루틴이 호출되면서 시스템의 모든 작업이 중지된다. 당시 [물리 메모리](Memory.md)에 들어있는 데이터를 디스크의 페이징 파일로 옮기는, 즉 덤핑(dumping)을 진행하는데 일반적인 파일 입출력과 다른 스토리지 스택을 거쳐 저장한다.
 
 ![일반 파일 시스템과 충돌 덤프의 입출력 경로 비교](https://crashdmp.files.wordpress.com/2013/02/new_chart.png)
 
@@ -250,7 +254,7 @@ BSOD가 발생할 때 덤프를 디스크에 저장하기 위해 필요한 스�
 <caption style="caption-side: top;">파일 시스템과 충돌 덤프의 I/O <a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/driver-stacks">드라이버 스택</a></caption>
 <colgroup><col style="width: 50%;" /><col style="width: 50%;" /></colgroup>
 <thead><tr><th style="text-align: center;">파일 시스템</th><th style="text-align: center;">충돌 덤프</th></tr></thead>
-<tbody style="text-align: center;"><tr style="vertical-align: bottom;"><td><a href="https://ko.wikipedia.org/wiki/파일_시스템">파일 시스템</a> <br/>↓<br/><a href="https://ko.wikipedia.org/wiki/볼륨_(컴퓨팅)">볼륨</a>/<a href="https://ko.wikipedia.org/wiki/디스크_파티션">파티션</a><br/>↓<br/><a href="https://en.wikipedia.org/wiki/Class_driver">클래스 드라이버</a><br/>↓</td><td>커널<br/>↓<br/>Crashdmp.sys<br/>(w/ 덤프 필터 드라이버)<br/>↓</td></tr><tr><td colspan="2">스토리지 포트 & 미니포트<br/>↓<br/>하드웨어 (저장소)</td></tr></tbody>
+<tbody style="text-align: center;"><tr style="vertical-align: bottom;"><td><a href="https://ko.wikipedia.org/wiki/파일_시스템">파일 시스템</a> <br/>↓<br/><a href="https://ko.wikipedia.org/wiki/볼륨_(컴퓨팅)">볼륨</a>/<a href="https://ko.wikipedia.org/wiki/디스크_파티션">파티션</a><br/>↓<br/><a href="https://en.wikipedia.org/wiki/Class_driver">클래스 드라이버</a><br/>↘</td><td>커널<br/>↓<br/>Crashdmp.sys<br/>(w/ 덤프 필터 드라이버)<br/>↙</td></tr><tr><td colspan="2">스토리지 포트 & 미니포트<br/>↓<br/>하드웨어 (저장소)</td></tr></tbody>
 </table>
 
 [NTFS](https://ko.wikipedia.org/wiki/NTFS) [파일 시스템](https://ko.wikipedia.org/wiki/파일_시스템) 혹은 [볼륨](https://ko.wikipedia.org/wiki/볼륨_(컴퓨팅)) 및 [파티션](https://ko.wikipedia.org/wiki/디스크_파티션)의 드라이버에 의한 BSOD 가능성을 감안하여, 충돌 덤프 드라이버 Crashdmp.sys는 이들을 우회하여 직접 디스크의 페이징 파일에 덤프를 저장한다. 하지만 해당 과정에서 파일 입출력 스택에 개입되었던 [필터 드라이버](Driver.md)(BitLocker의 경우 fvevol.sys)가 누락되면서, 이를 보완하기 위해 덤프 필터 드라이버(BitLocker의 경우 dumpfve.sys)가 도입되었으며 CrashControl 키의 `DumpFilters` 값에 기입된다.
