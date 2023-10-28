@@ -261,7 +261,7 @@ BSOD 화면에서 덤프 수집이 100% 완료되었으면 시스템을 강제 �
 
 [CrashControl](#bsod-설정) 레지스트리 키에 설정된 덤프 저장 경로와 덤핑에 사용된 페이징 파일이 동일한 볼륨에 위치한지 여부에 따라 덤프 생성 절차가 달라진다.
 
-<table style="width: 95%; margin: auto;"><caption style="caption-side: top;">볼륨 일치 여부에 따른 덤프 생성 절차 비교</caption><colgroup><col style="width: 50%;" /><col style="width: 50%;" /></colgroup><thead><tr><th style="text-align: center;">볼륨 일치</th><th style="text-align: center;">볼륨 상이</th></tr></thead><tbody style="text-align: left;"><tr><td>SetRenameInformationFile 작업을 통해 페이징 파일의 이름을 지정된 덤프 파일명(대표적으로 MEMORY.DMP)으로 바꾼다.</td><td>SetRenameInformationFile 작업을 통해 페이징 파일의 이름을 임시로 DUMP7c83.tmp와 같은 형식의 이름으로 바꾼다. </td></tr></tbody></table>
+<table style="width: 95%; margin: auto;"><caption style="caption-side: top;">볼륨 일치 여부에 따른 덤프 생성 절차 비교</caption><colgroup><col style="width: 50%;" /><col style="width: 50%;" /></colgroup><thead><tr><th style="text-align: center;">볼륨 일치</th><th style="text-align: center;">볼륨 상이</th></tr></thead><tbody style="text-align: left;"><tr><td>SetRenameInformationFile 작업을 통해 페이징 파일의 이름을 지정된 덤프 파일명(대표적으로 MEMORY.DMP)으로 바꾼다.</td><td>SetRenameInformationFile 작업을 통해 페이징 파일의 이름을 임시로 DUMP7c83.tmp와 같은 형식의 이름으로 바꾼다.</td></tr></tbody></table>
 
 이후 smss.exe는 CrashControl 하에 MachineCrash이란 휘발성 하위 레지스트리 키를 생성하며 아래 값들을 포함한다.
 
