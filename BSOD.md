@@ -244,13 +244,15 @@ Memory Management 레지스트리 키에서 설정할 수 있는 값들은 알�
 ## 시스템 충돌
 시스템 내부적으로 오류나 문제가 발생하면 [`KeBugCheckEx()`](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-kebugcheckex) 루틴이 호출되고 파란색 화면이 나타나며 모든 작업이 중지된다. 당시 [물리 메모리](Memory.md)에 들어있는 데이터를 디스크의 페이징 파일로 옮기는, 즉 덤핑(dumping)을 진행하는데 일반적인 파일 입출력과 다른 스토리지 스택을 거쳐 저장한다. 화면에 나타난 백분율(%)이 바로 얼마나 덤핑 진행률을 나타낸다.
 
-* 위와 같은 이유로 [페이징 파일](#페이징-파일)이 없는 [NFS](https://learn.microsoft.com/en-us/windows-server/storage/nfs/nfs-overview) 및 [ReFS](https://learn.microsoft.com/en-us/windows-server/storage/refs/refs-overview) 등의 파일 시스템, 그리고 [UWF](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/customize/unified-write-filter)로 보호된 볼륨에는 BSOD로 인한 메모리 덤프 수집이 불가하다.
-
 ![일반 파일 시스템과 충돌 덤프의 입출력 경로 비교](https://crashdmp.files.wordpress.com/2013/02/new_chart.png)
 
 <table style="width: 60%; margin: auto;"><caption style="caption-side: top;">파일 시스템과 충돌 덤프의 I/O <a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/driver-stacks">드라이버 스택</a></caption><colgroup><col style="width: 50%;" /><col style="width: 50%;" /></colgroup><thead><tr><th style="text-align: center;">파일 시스템</th><th style="text-align: center;">충돌 덤프</th></tr></thead><tbody style="text-align: center;"><tr style="vertical-align: bottom;"><td><a href="https://ko.wikipedia.org/wiki/파일_시스템">파일 시스템</a> <br/>↓<br/><a href="https://ko.wikipedia.org/wiki/볼륨_(컴퓨팅)">볼륨</a>/<a href="https://ko.wikipedia.org/wiki/디스크_파티션">파티션</a><br/>↓<br/><a href="https://en.wikipedia.org/wiki/Class_driver">클래스 드라이버</a><br/>↓</td><td>커널<br/>↓<br/>Crashdmp.sys<br/>(w/ 덤프 필터 드라이버)<br/>↓</td></tr><tr><td colspan="2">스토리지 포트 & 미니포트<br/>↓<br/>하드웨어 (저장소)</td></tr></tbody></table>
 
-[NTFS](https://ko.wikipedia.org/wiki/NTFS) [파일 시스템](https://ko.wikipedia.org/wiki/파일_시스템) 혹은 [볼륨](https://ko.wikipedia.org/wiki/볼륨_(컴퓨팅)) 및 [파티션](https://ko.wikipedia.org/wiki/디스크_파티션)의 드라이버에 의한 BSOD 가능성을 감안하여, 충돌 덤프 드라이버 Crashdmp.sys는 이들을 우회하여 직접 디스크의 페이징 파일에 덤프를 저장한다. 하지만 해당 과정에서 파일 입출력 스택에 개입되었던 [필터 드라이버](Driver.md)가 누락되면서, 이를 보완하기 위해 [덤프 필터 드라이버](https://learn.microsoft.com/en-us/windows-hardware/drivers/storage/crash-dump-filter-drivers)가 도입되었으며 CrashControl 레지스트리 키의 `DumpFilters` 값에 기입된다. 만일 진행률이 0%로 머물러 있다면 덤프 필터 드라이버를 살펴보는 것을 권장한다.
+[NTFS](https://ko.wikipedia.org/wiki/NTFS) 또는 [볼륨](https://ko.wikipedia.org/wiki/볼륨_(컴퓨팅))/[파티션](https://ko.wikipedia.org/wiki/디스크_파티션) 드라이버에 문제가 있을 수 있어, 충돌 덤프 드라이버(Crashdmp.sys)는 이들을 우회하여 직접 디스크의 [페이징 파일](#페이징-파일)에 덤프를 저장한다.
+
+* 반면, 페이징 파일을 지원하지 않는 [NFS](https://learn.microsoft.com/en-us/windows-server/storage/nfs/nfs-overview) 및 [ReFS](https://learn.microsoft.com/en-us/windows-server/storage/refs/refs-overview) 등의 [파일 시스템](https://ko.wikipedia.org/wiki/파일_시스템), 그리고 [UWF](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/customize/unified-write-filter)로 보호된 볼륨에는 BSOD로 인한 메모리 덤프 수집이 불가하다.
+
+파일 입출력 스택에 개입되었던 [필터 드라이버](Driver.md)가 덤프 수집에 누락되면 디스크에 저장할 수 없기 때문에, 이를 보완하기 위해 [덤프 필터 드라이버](https://learn.microsoft.com/en-us/windows-hardware/drivers/storage/crash-dump-filter-drivers)가 도입되었으며 CrashControl 레지스트리 키의 `DumpFilters` 값에 기입된다. 만일 진행률이 0%로 머물러 있다면 덤프 필터 드라이버를 살펴보는 것을 권장한다.
 
 > [BitLocker](https://ko.wikipedia.org/wiki/비트로커)의 필터 드라이버와 덤프 필터 드라이버는 각각 fvevol.sys 그리고 dumpfve.sys이다.
 
