@@ -79,8 +79,6 @@
 
     전원 버튼을 7초 동안 누르고 있으면 [0x1C8 MANUALLY_INITIATED_POWER_BUTTON_HOLD](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0x1c8--manually-initiated-power-button-hold)가 반환된다 (하지만 10초 이상 누르면 [UEFI](Boot.md#uefi) 재설정이 되므로 그 전에 전원 버튼에 손을 떼도록 한다). 전원 버튼으로 블루스크린을 발생키려면 반드시 하드웨어, 펌웨어, 그리고 운영체제 요건이 충족되어야 한다:
 
-    
-
     1. [GPIO](https://ko.wikipedia.org/wiki/GPIO) 기반의 전원 버튼
     2. 전원 이벤트를 Windows Power Manager로 전달하는 펌웨어
     3. [윈도우 10](https://ko.wikipedia.org/wiki/윈도우_10) ([버전 1809](https://ko.wikipedia.org/wiki/윈도우_10#레드스톤_5)) 혹은 [윈도우 서버 2019](https://ko.wikipedia.org/wiki/윈도우_서버_2019) 이상의 운영체제
@@ -245,6 +243,8 @@ Memory Management 레지스트리 키에서 설정할 수 있는 값들은 알�
 
 ## 시스템 충돌
 시스템 내부적으로 오류나 문제가 발생하면 [`KeBugCheckEx()`](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-kebugcheckex) 루틴이 호출되고 파란색 화면이 나타나며 모든 작업이 중지된다. 당시 [물리 메모리](Memory.md)에 들어있는 데이터를 디스크의 페이징 파일로 옮기는, 즉 덤핑(dumping)을 진행하는데 일반적인 파일 입출력과 다른 스토리지 스택을 거쳐 저장한다. 화면에 나타난 백분율(%)이 바로 얼마나 덤핑 진행률을 나타낸다.
+
+* 위와 같은 이유로 [페이징 파일](#페이징-파일)이 없는 [NFS](https://learn.microsoft.com/en-us/windows-server/storage/nfs/nfs-overview) 및 [ReFS](https://learn.microsoft.com/en-us/windows-server/storage/refs/refs-overview) 등의 파일 시스템, 그리고 [UWF](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/customize/unified-write-filter)로 보호된 볼륨에는 BSOD로 인한 메모리 덤프 수집이 불가하다.
 
 ![일반 파일 시스템과 충돌 덤프의 입출력 경로 비교](https://crashdmp.files.wordpress.com/2013/02/new_chart.png)
 
