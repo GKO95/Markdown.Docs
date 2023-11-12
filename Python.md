@@ -52,7 +52,7 @@
 <tbody>
 <tr><td style="text-align: center;">Documentation</td><td>파이썬 문서 파일</td></tr><tr><td style="text-align: center;"><a href="#pip">pip</a></td><td>파이썬 패키지 관리 소프트웨어</td></tr><tr><td style="text-align: center;">tcl/tk and IDLE</td><td>파이썬으로 프로그램 GUI 제작도구와 코드 편집기</td></tr><tr><td style="text-align: center;">Python test suite</td><td>파이썬 프로그램 동작을 시험하는 프레임워크</td></tr><tr><td style="text-align: center;">py launcher</td><td>파이썬 인터프리터 관리 프로그램</td></tr></tbody></table>
 
-필자는 `pip`와 `py launcher`만은 반드시 설치한다. 나머지 옵션들은 사용하지 않으며, 사용자 인터페이스를 가진 프로그램을 만든다 하더라도 대표적인 GUI 프레임워크 중 하나인 [PySide2](/docs/ko.Qt)를 사용하기 때문에 `tcl/tk`가 필요하지 않다. 코드 편집기 또한 IDLE보다 편한 것을 곧 소개할 예정이다.
+필자는 `pip`와 `py launcher`만은 반드시 설치한다. 나머지 옵션들은 사용하지 않으며, 사용자 인터페이스를 가진 프로그램을 만든다 하더라도 대표적인 GUI 프레임워크 중 하나인 [PySide2](https://en.wikipedia.org/wiki/PySide)를 사용하기 때문에 `tcl/tk`가 필요하지 않다. 코드 편집기 또한 IDLE보다 편한 것을 곧 소개할 예정이다.
 
 다음에 나타나는 "Advanced Options" 화면은 실질적으로 인터프리터 동작에 영향을 미칠 수 있는 고급 옵션들이다.
 
