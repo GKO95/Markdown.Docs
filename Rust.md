@@ -30,6 +30,8 @@
     * [CodeLLDB](https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb) (macOS 또는 리눅스 운영체제)
 
 ## 프로젝트
+> *참고: [Rust with Visual Studio Code](https://code.visualstudio.com/docs/languages/rust)*
+
 러스트 프로그래밍 언어는 [`cargo`](https://doc.rust-lang.org/rust-by-example/cargo.html)라는 공식 패키지 관리 도구를 통해 프로젝트를 관리한다.
 
 ![VS Code에서 러스트 프로그래밍의 프로젝트](./images/vscode_rust.png)
@@ -39,7 +41,8 @@
 VS Code 편집기에 rust-analyzer 확장도구를 사용하면 `main()` 진입점 위에 "▶ Run | Debug" CodeLens 표시가 나타난다. 이는 `cargo`를 대신하여 프로젝트를 컴파일 및 실행하는 데 활용될 수 있다. 그러나 `CTRL+F5` 또는 `F5` 단축키로 빌드 및 실행이 불가하므로, `.vscode` 폴더에 추가할 두 개의 JSON 파일을 공유한다.
 
 ```json
-// 파일명: launch.json
+// filename: launch.json
+// Allow VS Code to run or debug the source code with (CTRL+) F5 hotkey.
 {
     "version": "0.2.0",
     "configurations": [
@@ -53,13 +56,14 @@ VS Code 편집기에 rust-analyzer 확장도구를 사용하면 `main()` 진입�
             "cwd": "${fileDirname}",
             "environment": [],
             "console": "integratedTerminal",
-            "preLaunchTask": "Rust: rustc.exe build active file"
+            "preLaunchTask": "rust: cargo build"
         }
     ]
 }
 ```
 ```json
-// 파일명: tasks.json
+// filename: tasks.json
+// Build the source code before running the source code.
 {
 	"version": "2.0.0",
 	"tasks": [
@@ -69,11 +73,8 @@ VS Code 편집기에 rust-analyzer 확장도구를 사용하면 `main()` 진입�
 			"problemMatcher": [
 				"$rustc"
 			],
-			"label": "Rust: rustc.exe build active file",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			}
+			"group": "build",
+            "label": "rust: cargo build"
 		}
 	]
 }
@@ -141,7 +142,7 @@ cargo new <프로젝트명>
 1. [예약어](https://ko.wikipedia.org/wiki/예약어) 금지
 
 ### 주석
-[주석](https://doc.rust-lang.org/reference/comments.html)(comment)은 프로그램의 소스 코드로 취급하지 않아 실행되지 않는 영역이다. 흔히 코드에 대한 간단한 정보를 기입하기 위해 사용되는 데, 크게 비문서 주석(non-doc comments) 그리고 문서 주석(doc comments)로 나뉘어진다.
+[주석](https://doc.rust-lang.org/reference/comments.html)(comment)은 프로그램의 소스 코드로 취급하지 않아 실행되지 않는 영역이다. 흔히 코드에 대한 간단한 정보를 기입하기 위해 사용되는 데, 크게 비문서 주석 그리고 문서 주석로 나뉘어진다.
 
 <table style="table-layout: fixed; width: 90%; margin: auto;">
 <caption style="caption-side: top;">러스트 주석 종류</caption>
@@ -176,3 +177,25 @@ cargo new <프로젝트명>
 일반 주석과 달리, 사용자가 정의한 데이터에 기입된 문서 주석은 `doc`이란 특수한 속성에 저장되어 정의된 데이터에 대한 설명을 정의한 소스 코드를 찾아가지 않고서도 곧바로 내용을 살펴볼 수 있다.
 
 ![VS Code에서의 문서 주석 활용 예시](./images/rust_doccomments.png)
+
+## 자료형
+[자료형](https://ko.wikipedia.org/wiki/자료형)(data type)은 데이터를 어떻게 표현할 지 결정하는 요소이며, 러스트에서는 다음과 같이 존재한다.
+
+<table style="width: 80%; margin: auto;"><caption style="caption-side: top;"><a href="https://doc.rust-lang.org/reference/types.html">러스트 자료형</a></caption><colgroup><col style="width: 20%;"/><col style="width: 15%;"/><col style="width: 15%;"/><col/></colgroup><thead><tr><th style="text-align: center;">키워드</th><th style="text-align: center;">자료형</th><th style="text-align: center;">크기 (바이트)</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>i8</code><br/><i>(<a href="https://ko.wikipedia.org/wiki/Signed와_unsigned#unsigned_int">unsigned</a>: <code style="font-style: normal;">u8</code>)</i></td><td style="text-align: center;">정수</td><td style="text-align: center;">1</td><td>1바이트 정수</td></tr>
+
+<tr><td style="text-align: center;"><code>i16</code><br/><i>(<a href="https://ko.wikipedia.org/wiki/Signed와_unsigned#unsigned_int">unsigned</a>: <code style="font-style: normal;">u16</code>)</i></td><td style="text-align: center;">정수</td><td style="text-align: center;">2</td><td>2바이트 정수</td></tr>
+
+<tr><td style="text-align: center;"><code>i32</code><br/><i>(<a href="https://ko.wikipedia.org/wiki/Signed와_unsigned#unsigned_int">unsigned</a>: <code style="font-style: normal;">u32</code>)</i></td><td style="text-align: center;">정수</td><td style="text-align: center;">4</td><td>4바이트 정수</td></tr>
+
+<tr><td style="text-align: center;"><code>i64</code><br/><i>(<a href="https://ko.wikipedia.org/wiki/Signed와_unsigned#unsigned_int">unsigned</a>: <code style="font-style: normal;">u64</code>)</i></td><td style="text-align: center;">정수</td><td style="text-align: center;">8</td><td>8바이트 정수</td></tr>
+
+<tr><td style="text-align: center;"><code>i128</code><br/><i>(<a href="https://ko.wikipedia.org/wiki/Signed와_unsigned#unsigned_int">unsigned</a>: <code style="font-style: normal;">u128</code>)</i></td><td style="text-align: center;">정수</td><td style="text-align: center;">16</td><td>16바이트 정수</td></tr><tr><td style="text-align: center;"><code>f32</code></td><td style="text-align: center;">부동소수점</td><td style="text-align: center;">4</td><td>32비트 단정밀도 실수</td></tr><tr><td style="text-align: center;"><code>f64</code></td><td style="text-align: center;">부동소수점</td><td style="text-align: center;">8</td><td>64비트 배정밀도 실수</td></tr><tr><td style="text-align: center;"><code>f128</code></td><td style="text-align: center;">부동소수점</td><td style="text-align: center;">16</td><td>128비트 4배정밀도 실수</td></tr><tr><td style="text-align: center;"><code>bool</code></td><td style="text-align: center;">논리형</td><td style="text-align: center;">1</td><td>참(<code>true</code>; 1) 혹은 거짓(<code>false</code>; 0)</td></tr><tr><td style="text-align: center;"><code>char</code></td><td style="text-align: center;">문자</td><td style="text-align: center;">4</td><td>단일 <a href="https://en.wikipedia.org/wiki/Unicode">유니코드</a> 문자 (<a href="https://en.wikipedia.org/wiki/Hangul">한글</a> 및 <a href="https://en.wikipedia.org/wiki/Emoji">이모지</a> 지원)</td></tr><tr><td style="text-align: center;"><code>()</code></td><td style="text-align: center;"><a href="#튜플">유닛</a></td><td style="text-align: center;">0</td><td><a href="#함수">함수</a>의 자료형으로 명시하면 <a href="#return-반환문">반환값</a>이 없음을 의미한다. 즉, <a href="C.md">C</a>/<a href="Cpp.md">C++</a> 언어의 <a href="C.md#자료형"><code>void</code></a> 자료형과 역할이 유사하다.</td></tr></tbody/></table>
+
+> [바이트](https://ko.wikipedia.org/wiki/바이트)(byte)란, 컴퓨터에서 메모리에 저장하는 가장 기본적인 단위이다. 자료형마다 크기가 정해진 이유는 효율적인 메모리 관리 차원도 있으나 CPU 연산과도 깊은 연관성을 갖는다. 한 바이트는 여덟 개의 [비트](https://ko.wikipedia.org/wiki/비트_(단위))(bit)로 구성된다.
+
+여기서 [unsigned](https://ko.wikipedia.org/wiki/Signed와_unsigned#unsigned_int)란, 자료형 중에서 [최상위 비트](https://ko.wikipedia.org/wiki/최상위_비트)를 정수의 [부호](https://ko.wikipedia.org/wiki/Signed와_unsigned)를 결정하는 요소로 사용하지 않는다. 아래의 16비트 정수형인 `i16`는 원래 최상위 비트를 제외한 나머지 15개의 비트로 정수를 표현한다. 반면 unsigned 자료형인 `u16`은 음의 정수를 나타낼 수 없지만, 16개의 비트로 양의 정수를 더 많이 표현할 수 있다.
+
+```rust
+i16             // 표현 가능 범위: -32768 ~ +32767
+u16             // 표현 가능 범위:     +0 ~ +65535
+```
