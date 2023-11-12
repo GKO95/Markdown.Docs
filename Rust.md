@@ -195,7 +195,7 @@ u16             // 표현 가능 범위:     +0 ~ +65535
 그 외의 자료형들은 차후 러스트 프로그래밍 언어에 대한 개념을 소개하면서 함께 설명할 예정이다.
 
 ### 자료형 변환
-자료형 변환(type conversion)은 데이터를 다른 자료형으로 바꾸는 작업이며, 불가피하게 데이터가 손실될 수 있으므로 유의하도록 한다. 러스트는 일반적인 경우에 암시적 자료형 변환, 일명 [강제 변환](https://doc.rust-lang.org/reference/type-coercions.html)(coercion)을 지원하지 않는다.
+자료형 변환(type conversion)은 데이터를 다른 자료형으로 바꾸는 작업이며, 불가피하게 데이터가 손실될 수 있으므로 유의하도록 한다. 러스트는 일반적으로 [강제 변환](https://doc.rust-lang.org/reference/type-coercions.html)(coercion)이란 암시적 자료형 변환을 지원하지 않으며, 오로지 특정 위치의 코드에서 제한된 자료형으로만 자동 변환이 일어난다.
 
 * **[자료형 캐스팅](https://doc.rust-lang.org/reference/expressions/operator-expr.html#type-cast-expressions)**(type casting)
 
