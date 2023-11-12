@@ -207,3 +207,15 @@ u16             // 표현 가능 범위:     +0 ~ +65535
     ```
 
     만일 `as` 연산자가 없었더라면 암시적 자료형 변환에 해당하기 때문에 러스트는 자료형 불일치라는 명목으로 컴파일 오류를 알린다.
+
+### `size_of` 함수
+[`size_of`](https://doc.rust-lang.org/std/mem/fn.size_of.html) [함수](#함수)는 자료형의 메모리에 할당된 바이트 크기를 반환한다. 정확한 설명은 "배열의 다음 요소 간 오프셋"을 반환하며, 이때 데이터 정렬을 위해 삽입된 패딩도 함께 계산된다.
+
+* [`size_of_val`](https://doc.rust-lang.org/std/mem/fn.size_of_val.html): (자료형을 알 수 없는 경우) 참조된 값의 메모리 할당 크기를 반환한다.
+
+```rust
+std::mem::size_of::<char>();        // 크기: 4바이트
+
+let variable: u128 = 0;
+std::mem::size_of_val(&variable);   // 크기: 16바이트
+```
