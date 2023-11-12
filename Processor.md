@@ -1,10 +1,10 @@
 # 프로세서
-[프로세서](https://ko.wikipedia.org/wiki/중앙_처리_장치)(processor), 또는 CPU로 알려진 하드웨어는 프로그램의 [기계어](https://ko.wikipedia.org/wiki/기계어)를 처리하는 [전자회로](https://ko.wikipedia.org/wiki/전자_회로)이다. 프로그램을 실행하기 위해 필요한 시스템의 다양한 작업들은 [명령어 집합](https://ko.wikipedia.org/wiki/명령어_집합)에 의해 정의되어 있으며, 대표적으로 [x86](https://ko.wikipedia.org/wiki/X86)과 [ARM](https://ko.wikipedia.org/wiki/ARM_아키텍처) 계열 명령어 집합 아키텍처가 존재한다. 프로세서에서 처리하는 명령어 집합이 무엇인지에 따라 [운영체제](https://ko.wikipedia.org/wiki/운영체제)의 아키텍처가 함께 결정된다.
+**[프로세서](https://ko.wikipedia.org/wiki/중앙_처리_장치)**(processor), 또는 CPU로 알려진 하드웨어는 프로그램의 [기계어](https://ko.wikipedia.org/wiki/기계어)를 처리하는 [전자회로](https://ko.wikipedia.org/wiki/전자_회로)이다. 프로그램을 실행하기 위해 필요한 시스템의 다양한 작업들은 [명령어 집합](https://ko.wikipedia.org/wiki/명령어_집합)에 의해 정의되어 있으며, 대표적으로 [x86](https://ko.wikipedia.org/wiki/X86)과 [ARM](https://ko.wikipedia.org/wiki/ARM_아키텍처) 계열 명령어 집합 아키텍처가 존재한다. 프로세서에서 처리하는 명령어 집합이 무엇인지에 따라 [운영체제](https://ko.wikipedia.org/wiki/운영체제)의 아키텍처가 함께 결정된다.
 
 ### 명령어
 > *출처: [Intel® 64 and IA-32 Architectures Software Developer Manuals](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html)*
 
-프로세서가 처리하게 될 [명령어](https://en.wikipedia.org/wiki/Instruction_set_architecture#Instructions)는 일반적으로 두 가지 필드로 구성되어 있다.
+프로세서가 처리하게 될 [**명령어**](https://en.wikipedia.org/wiki/Instruction_set_architecture#Instructions)는 일반적으로 두 가지 필드로 구성되어 있다.
 
 ![MIPS32 Add Immediate 명령의 구조](https://upload.wikimedia.org/wikipedia/commons/2/2a/Mips32_addi.svg)
 
@@ -23,10 +23,10 @@
 * [레지스터](#레지스터)
 
 ### 제어 장치
-[제어 장치](https://en.wikipedia.org/wiki/Control_unit)(Control Unit; CU)는 프로세서의 연산 작업을 지휘하는 CPU의 구성요소이다. [명령어](#명령어)로부터 식별된 opcode는 [이진 디코더](https://ko.wikipedia.org/wiki/복호화#복호기_(디코더,_decoder))에 의해 해당 연산 작업을 수행하는데 필요한 타이밍 및 제어 신호로 변환된다. 결과적으로 CPU와 타 장치들 간 데이터 흐름을 지휘하기 위해 대부분의 컴퓨터 리소스를 관리한다.
+**[제어 장치](https://en.wikipedia.org/wiki/Control_unit)**(Control Unit; CU)는 프로세서의 연산 작업을 지휘하는 CPU의 구성요소이다. [명령어](#명령어)로부터 식별된 opcode는 [이진 디코더](https://ko.wikipedia.org/wiki/복호화#복호기_(디코더,_decoder))에 의해 해당 연산 작업을 수행하는데 필요한 타이밍 및 제어 신호로 변환된다. 결과적으로 CPU와 타 장치들 간 데이터 흐름을 지휘하기 위해 대부분의 컴퓨터 리소스를 관리한다.
 
 ### 산술 논리 장치
-[산술 논리 장치](https://ko.wikipedia.org/wiki/산술_논리_장치)(Arithmetic Logic Unit; ALU)는 CPU의 구성요소 중 이진 정수의 [산술](https://ko.wikipedia.org/wiki/산술) 및 [비트 연산](https://ko.wikipedia.org/wiki/비트_연산)을 담당하면서도 실질적인 컴퓨터 연산처리에서 가장 핵심되는 장치이다.
+**[산술 논리 장치](https://ko.wikipedia.org/wiki/산술_논리_장치)**(Arithmetic Logic Unit; ALU)는 CPU의 구성요소 중 이진 정수의 [산술](https://ko.wikipedia.org/wiki/산술) 및 [비트 연산](https://ko.wikipedia.org/wiki/비트_연산)을 담당하면서도 실질적인 컴퓨터 연산처리에서 가장 핵심되는 장치이다.
 
 > [부동소수점](https://ko.wikipedia.org/wiki/부동소수점) 연산을 담당하는 [FPU](https://ko.wikipedia.org/wiki/부동소수점_장치)가 있으나, 주로 수학 계산을 위해 사용되며 초창기 CPU에는 내장되지 않은 장치이다.
 
@@ -35,7 +35,7 @@
 ALU는 기본적으로 opcode와 피연산자를 입력받고, 해당 opcode 작업의 결과물을 출력한다. 만일 [상태 레지스터](https://ko.wikipedia.org/wiki/상태_레지스터)로부터 입력을 받으면 [캐리](https://en.wikipedia.org/wiki/Carry_flag), [오버플로우](https://en.wikipedia.org/wiki/Overflow_flag) 여부 등의 상태가 이전 작업에서 발생하였는지 확인할 수 있으며, 현재 작업에서 발생한 상태 정보는 다시 상태 레지스터로 출력된다.
 
 ### 레지스터
-[레지스터](https://ko.wikipedia.org/wiki/프로세서_레지스터)(register)는 CPU에 내장되어 프로세서가 가장 빨리 접근할 수 있는 (8비트, 16비트, 32비트 등) [비트](https://ko.wikipedia.org/wiki/비트_(단위)) 단위의 소규모 임시 [저장공간](Disk.md)이다. 아래 그림은 [x86-64](https://ko.wikipedia.org/wiki/X86-64) 아키텍처의 프로세서에 탑재된 레지스터들이다.
+**[레지스터](https://ko.wikipedia.org/wiki/프로세서_레지스터)**(register)는 CPU에 내장되어 프로세서가 가장 빨리 접근할 수 있는 (8비트, 16비트, 32비트 등) [비트](https://ko.wikipedia.org/wiki/비트_(단위)) 단위의 소규모 임시 [저장공간](Disk.md)이다. 아래 그림은 [x86-64](https://ko.wikipedia.org/wiki/X86-64) 아키텍처의 프로세서에 탑재된 레지스터들이다.
 
 ![x86-64 아키텍처의 프로세서 레지스터](https://upload.wikimedia.org/wikipedia/commons/1/15/Table_of_x86_Registers_svg.svg)
 
@@ -51,7 +51,7 @@ ALU는 기본적으로 opcode와 피연산자를 입력받고, 해당 opcode 작
 * [프로세서 점유](#프로세서-점유) (%)
 
 ### 프로세서 클럭
-[클럭 속도](https://ko.wikipedia.org/wiki/클럭_속도)(clock rate 또는 clock speed), 일명 클럭 주파수(clock frequency)는 [메인보드](https://ko.wikipedia.org/wiki/메인보드)에 위치한 [클럭 발생기](https://en.wikipedia.org/wiki/Clock_generator)로부터 프로세서가 작업을 수행하는데 기준이 되는 [클럭 신호](https://ko.wikipedia.org/wiki/클럭_신호)가 얼마나 빈번히 생성될 수 있는지 나타내는 [헤르츠](https://ko.wikipedia.org/wiki/헤르츠)(Hz) 단위의 수치이다. 프로세서의 연산은 클럭 신호에 동기화되어, 주파수가 높을수록 동일한 시간동안 더 많은 작업을 수행할 수 있다. 그러나 클럭 속도는 프로세서가 초당 작업한 개수를 의미하는 게 절대 아니다.
+**[클럭 속도](https://ko.wikipedia.org/wiki/클럭_속도)**(clock rate 또는 clock speed), 일명 **클럭 주파수**(clock frequency)는 [메인보드](https://ko.wikipedia.org/wiki/메인보드)에 위치한 [클럭 발생기](https://en.wikipedia.org/wiki/Clock_generator)로부터 프로세서가 작업을 수행하는데 기준이 되는 [클럭 신호](https://ko.wikipedia.org/wiki/클럭_신호)가 얼마나 빈번히 생성될 수 있는지 나타내는 [헤르츠](https://ko.wikipedia.org/wiki/헤르츠)(Hz) 단위의 수치이다. 프로세서의 연산은 클럭 신호에 동기화되어, 주파수가 높을수록 동일한 시간동안 더 많은 작업을 수행할 수 있다. 그러나 클럭 속도는 프로세서가 초당 작업한 개수를 의미하는 게 절대 아니다.
 
 > 다시 말해, 위의 작업 관리자에서 클럭 속도가 4.24 GHz로 측정되었지만 프로세서가 초당 42.4억 개의 작업을 수행한 걸 의미하는 게 아니다. 이는 한 [명령어](#명령어)을 수행하는 데 opcode에 따라 필요한 클럭 주기가 다양하기 때문이다.
 
@@ -60,7 +60,7 @@ ALU는 기본적으로 opcode와 피연산자를 입력받고, 해당 opcode 작
     일명 CPU 스로틀링(CPU throttling)은 전력 관리 기법으로, 전원 절약 및 CPU 발열 등의 필요에 따라 실시간으로 클럭 주파수를 자동 조절한다. 발열이 심할 경우에는 MHz 단위까지 내려가 마우스 및 키보드 응답 지연이 가시적으로 나타나기도 한다.
 
 ### 프로세서 코어
-프로세서 코어(processor core)는 CPU에서 연산을 담당하는 물리적인 [전자회로](https://ko.wikipedia.org/wiki/집적_회로)를 가리키며, 하나의 칩에 두 개 이상의 프로세서 코어를 가진 CPU를 [멀티 코어](https://ko.wikipedia.org/wiki/멀티_코어)라고 지칭한다. 프로세서 성능을 향상시키는데 [클럭 속도](#프로세서-클럭)의 기술적 제약을 극복하기 위해 하드웨어 제조사는 2005년에 처음으로 시장에 멀티 코어 CPU를 소개하였다. 멀티 코어 CPU는 여러 [스레드](Process.md#스레드)를 동시에 처리할 수 있는 장점을 지닌다.
+**프로세서 코어**(processor core)는 CPU에서 연산을 담당하는 물리적인 [전자회로](https://ko.wikipedia.org/wiki/집적_회로)를 가리키며, 하나의 칩에 두 개 이상의 프로세서 코어를 가진 CPU를 [멀티 코어](https://ko.wikipedia.org/wiki/멀티_코어)라고 지칭한다. 프로세서 성능을 향상시키는데 [클럭 속도](#프로세서-클럭)의 기술적 제약을 극복하기 위해 하드웨어 제조사는 2005년에 처음으로 시장에 멀티 코어 CPU를 소개하였다. 멀티 코어 CPU는 여러 [스레드](Process.md#스레드)를 동시에 처리할 수 있는 장점을 지닌다.
 
 > 위의 작업 관리자는 시스템의 프로세서가 헥사코어, 즉 여섯 개의 코어를 가진 [AMD](https://www.amd.com) [Ryzen 5 5600X](https://www.amd.com/en/products/cpu/amd-ryzen-5-5600x)라고 표시하였다. 여기서 12개의 그래프 항목은 SMT에 의한 논리 프로세서 정보를 보여주는 것으로 아래 내용을 참고한다.
 
@@ -69,12 +69,12 @@ ALU는 기본적으로 opcode와 피연산자를 입력받고, 해당 opcode 작
     하드웨어적 [멀티스레딩](https://ko.wikipedia.org/wiki/멀티스레딩)을 지원하는 경우, 프로세서 코어는 매 클럭 주기마다 다수의 스레드의 명령어를 처리할 수 있다. 하나의 물리 코어가 마치 두 개 이상의 프로세서 역할을 처리하는 것처럼 보여주어, 이를 논리 프로세서(logical processor)라고 부른다. 대표적으로 [인텔](https://www.intel.com)의 [하이퍼스레딩](https://ko.wikipedia.org/wiki/하이퍼스레딩), AMD의 [Zen 마이크로아키텍처](https://en.wikipedia.org/wiki/Zen_(microarchitecture)) 등이 SMT에 해당한다.
 
 ### 프로세서 점유
-프로세서가 ([시스템](Process.md#시스템-프로세스)) [프로세스](Process.md)의 스레드로부터 [이미지](https://ko.wikipedia.org/wiki/실행_파일) 코드를 연산하고 처리하는 데 할애한 시간을 [프로세서 시간](https://ko.wikipedia.org/wiki/CPU_타임)(processor time)이라고 부른다. 프로세스의 프로세서 시간은 [스케줄링](#스케줄링)이나 입출력 요청 등에 의해 대기 혹은 준비 상태에 진입하여 처리되지 않는 동안 반영되지 않는다. 일정한 간격으로 샘플링된 시간 동안 스레드가 얼마나 오래 처리되었는지를 토대로 프로세서 점유율(%)이 계산된다.
+프로세서가 ([시스템](Process.md#시스템-프로세스)) [프로세스](Process.md) (또는 스레드)로부터 [이미지](https://ko.wikipedia.org/wiki/실행_파일) 코드를 연산하고 처리하는 데 할애한 시간을 **[프로세서 시간](https://ko.wikipedia.org/wiki/CPU_타임)**(processor time)이라고 부른다. 프로세스의 프로세서 시간은 [스케줄링](#스케줄링)이나 입출력 요청 등에 의해 대기 혹은 준비 상태에 진입하여 처리되지 않는 동안 반영되지 않는다. 일정한 간격으로 샘플링된 시간 동안 스레드가 얼마나 오래 처리되었는지를 토대로 프로세서 점유율(%)이 계산된다.
 
 ## 프로세서 모드
 > *참고: [User mode and kernel mode - Windows drivers | Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/user-mode-and-kernel-mode)*
 
-[보호 링](https://ko.wikipedia.org/wiki/보호_링)(protection ring)은 데이터와 기능을 결함과 위협적인 행위로부터 보호하는 메커니즘이다.
+**[보호 링](https://ko.wikipedia.org/wiki/보호_링)**(protection ring)은 데이터와 기능을 결함과 위협적인 행위로부터 보호하는 메커니즘이다.
 
 ![x86 프로세서의 보호 링 다이어그램](https://upload.wikimedia.org/wikipedia/commons/2/2f/Priv_rings.svg)
 
@@ -92,17 +92,23 @@ ALU는 기본적으로 opcode와 피연산자를 입력받고, 해당 opcode 작
 이렇게 보호 링이 분류된 이유는 "더 많은 제어에는 더 큰 책임이 뒤따른다"는 관점에서 비롯된다. 커널 모드의 프로그램 오동작은 시스템 전체에 충돌을 일으켜 [블루스크린](BSOD.md)을 야기하는 원인이기 때문에 매우 신중하게 개발되어야 한다.
 
 # 스케줄링
-[스케줄링](https://ko.wikipedia.org/wiki/스케줄링_(컴퓨팅))(scheduling)은 처리되어야 할 리소스(즉, [프로세스](Process.md))의 작업(즉, [스레드](Process.md#스레드))을 사용 가능한 [프로세서 코어](#프로세서-코어)에 분배 및 할당하는 행위이며, 이를 담당하는 프로그램을 스케줄러(scheduler)라고 부른다. 스케줄링에 의해 운영체제는 [멀티태스킹](https://ko.wikipedia.org/wiki/다중작업)이 가능해져 여러 프로그램 및 기능을 동시에 실행할 수 있는 것처럼 보여진다.
+**[스케줄링](https://ko.wikipedia.org/wiki/스케줄링_(컴퓨팅))**(scheduling)이란, *작업*을 실행하기 위해 필요한 *리소스*를 할당시키는 행위를 가리킨다. 본 문서의 문맥에 의하면 *작업*은 [프로세스](Process.md) 또는 [스레드](Process.md#스레드)가 해당하며, *리소스*는 [프로세서](#프로세서)를 가리킨다. 즉, "프로세서에 프로세스 (또는 스레드)를 할당"하는 게 아니라는 점에서 확실한 개념에 유의하도록 한다. 스케줄링을 담당하는 프로그램을 [**스케줄러**](https://en.wikipedia.org/wiki/Scheduling_(computing)#SCHEDULER)라고 부른다. 스케줄링 덕분에 단일 코어 프로세서를 탑재한 운영체제에서도 [멀티태스킹](https://ko.wikipedia.org/wiki/다중작업)이 가능해져 여러 프로그램 및 기능을 동시에 실행할 수 있는 것처럼 구현한다.
 
-스케줄링된 프로세스는 [퀀텀](https://en.wikipedia.org/wiki/Preemption_(computing)#Time_slice)(quantum)이란 일회성 시간제 티켓을 부여받는데, 이는 CPU가 프로세스를 처리하는 데 주어진 고정된 시간이다. 처리 도중에 프로세스의 퀀텀이 소진될 시, CPU는 해당 작업을 완료여부와 상관없이 즉각 중단하고 [실행 큐](#프로세서-실행-큐)에서 스케줄링 대기 중인 다음 프로세스를 처리한다. 한편, 작업이 마무리되지 못한 프로세스는 다시 실행 큐로 되돌아가 스케줄링이 되기를 기다린다.
+### 선점형 라운드 로빈
+[윈도우](Windows.md) [OS](https://ko.wikipedia.org/wiki/운영체제)에서 채택한 [스케줄링 규율](https://en.wikipedia.org/wiki/Scheduling_(computing)#Scheduling_disciplines)은 [선점형](https://ko.wikipedia.org/wiki/스케줄링_(컴퓨팅)#비선점형과_선점형) [라운드 로빈](https://ko.wikipedia.org/wiki/라운드_로빈_스케줄링)이다.
 
-> [윈도우](Windows.md) 운영체제는 [선점형](https://ko.wikipedia.org/wiki/스케줄링_(컴퓨팅)#비선점형과_선점형) [라운드 로빈](https://ko.wikipedia.org/wiki/라운드_로빈_스케줄링)(pre-emptive round-robin) 스캐줄링 알고리즘을 사용한다.
+* **라운드 로빈**(round-robin)
 
-### 프로세서 실행 큐
-각 프로세서 코어마다 처리될 스레드가 대기하는 [실행 큐](https://en.wikipedia.org/wiki/Run_queue)(run queue)가 존재하며, [우선순위](#스케줄링-우선순위)가 높은 순서대로 나열된다. 실행 큐에 대기할 수 있는 프로세스 개수에는 제한이 없으나, 이로 인해 [문맥 교환](#문맥-교환)이 빈번하게 일어나면 성능 저하의 요인으로 작용할 수 있다. 멀티프로세서 시스템의 경우, 실행 큐에 대기 중인 프로세스 개수는 프로세서 코어의 [논리 프로세서](#논리-프로세서) 개수만큼 나누어 계산하도록 한다.
+    > 모든 프로세스가 우선순위 상관없이 동일한 시간동안 균등하게 작업을 처리될 수 있는 선점형 스케줄링 알고리즘이다.
+
+    프로세스는 작업을 처리하기 위해 주어진 고정 시간, 즉 [퀀텀](https://en.wikipedia.org/wiki/Preemption_(computing)#Time_slice)(quantum)이란 일회성 시간제 티켓을 스케줄러로부터 할당 받는다. 퀀텀이 소진되면 프로세서는 완료 여부와 상관 없이 해당 작업을 즉시 중단하고 [큐](https://ko.wikipedia.org/wiki/큐_(자료_구조))의 맨 뒤로 되돌아가 스케줄링이 될 다음 순서까지 기다린다. 한편, 프로세서는 큐에 대기하다 퀀텀을 할당 받은 다음 프로세스를 처리한다.
+
+그리고 선점형 라운드 로빈(preemptive round-robin)은 위에 라운드 로빈 알고리즘에 [우선순위](#스케줄링-우선순위) 개념을 접목시켰다.
 
 ## 문맥 교환
-[문맥](https://en.wikipedia.org/wiki/Context_(computing))(context)은 프로세스 및 스레드가 중단된 시점으로부터 작업을 재개하기 위해 필요한 정보들이다: [스택](https://ko.wikipedia.org/wiki/콜_스택), [레지스터](https://ko.wikipedia.org/wiki/프로세서_레지스터) 등이 해당한다. 그리고 [문맥 교환](https://ko.wikipedia.org/wiki/문맥_교환)(context switch)은 실행 중인 프로세스 및 스레드를 나중에 재개할 수 있도록 문맥을 저장하여 대기시키고, 처리되어야 할 문맥을 불러와 실행하는 절차를 가리킨다. 스케줄링과 함께 멀티태스킹을 가능하게 만드는 핵심 기능이다.
+[문맥](https://en.wikipedia.org/wiki/Context_(computing))(context)은 프로세스 및 스레드가 중단된 시점으로부터 작업을 재개하기 위해 필요한 정보들이다: [스택](https://ko.wikipedia.org/wiki/콜_스택), [레지스터](https://ko.wikipedia.org/wiki/프로세서_레지스터) 등이 해당한다. 
+
+**[문맥 교환](https://ko.wikipedia.org/wiki/문맥_교환)**(context switch)은 실행 중인 프로세스 및 스레드를 나중에 재개할 수 있도록 문맥을 저장하여 대기시키고, 처리되어야 할 문맥을 불러와 실행하는 절차를 가리킨다. 스케줄링과 함께 멀티태스킹을 가능하게 만드는 핵심 기능이다. 그러나 문맥 교환이 너무 빈번하게 일어나면 성능 저하의 요인으로 작용할 수 있다.
 
 > 프로세스의 문맥보다 스레드의 문맥 데이터가 더 작은 관계로, 멀티프로세스보다 멀티스레드의 문맥 교환 작업이 더 빨리 이루어진다.
 
@@ -136,7 +142,7 @@ ALU는 기본적으로 opcode와 피연산자를 입력받고, 해당 opcode 작
 <table style="width: 80%; margin: auto;"><caption style="caption-side: top;">프로세스 및 스레드 우선순위</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">프로세스 우선순위 클래스</th><th style="text-align: center;">스레드 우선순위 레벨</th></tr></thead><tbody><tr style="text-align: center;"><td><code>IDLE_PRIORITY_CLASS</code></td><td><code>THREAD_PRIORITY_IDLE</code></td></tr><tr style="text-align: center;"><td><code>BELOW_NORMAL_PRIORITY_CLASS</code></td><td><code>THREAD_PRIORITY_LOWEST</code></td></tr><tr style="text-align: center;"><td><code>NORMAL_PRIORITY_CLASS</code></td><td><code>THREAD_PRIORITY_BELOW_NORMAL</code></td></tr><tr style="text-align: center;"><td><code>ABOVE_NORMAL_PRIORITY_CLASS</code></td><td><code>THREAD_PRIORITY_NORMAL</code></td></tr><tr style="text-align: center;"><td><code>HIGH_PRIORITY_CLASS</code></td><td><code>THREAD_PRIORITY_ABOVE_NORMAL</code></td></tr><tr style="text-align: center;"><td><code>REALTIME_PRIORITY_CLASS</code></td><td><code>THREAD_PRIORITY_HIGHEST</code></td></tr><tr style="text-align: center;"><td>-</td><td><code>THREAD_PRIORITY_TIME_CRITICAL</code></td></tr></tbody></table>
 
 # 인터럽트
-[인터럽트](https://ko.wikipedia.org/wiki/인터럽트)(interrupt), 간혹 트랩(trap)이라고도 언급되며 시스템에서 발생한 일종의 비동기 사건, 즉 이벤트가 최우선으로 처리될 수 있도록 [프로세서](#프로세서)에 요청되는 신호이다. 대표적인 예시로 마우스 커서 움직임이나 키보드 타자 입력 등이 인터럽트에 의해 처리된다. 인터럽트는 하드웨어 혹은 소프트웨어에 의해 발생될 수 있다.
+**[인터럽트](https://ko.wikipedia.org/wiki/인터럽트)**(interrupt), 간혹 **트랩**(trap)이라고도 언급되며 시스템에서 발생한 일종의 비동기 사건, 즉 이벤트가 최우선으로 처리될 수 있도록 [프로세서](#프로세서)에 요청되는 신호이다. 대표적인 예시로 마우스 커서 움직임이나 키보드 타자 입력 등이 인터럽트에 의해 처리된다. 인터럽트는 하드웨어 혹은 소프트웨어에 의해 발생될 수 있다.
 
 <table style="width: 95%; margin: auto;"><caption style="caption-side: top;">인터럽트 유형별 개요</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
@@ -145,7 +151,7 @@ ALU는 기본적으로 opcode와 피연산자를 입력받고, 해당 opcode 작
 </table>
 
 ## 인터럽트 핸들러
-[인터럽트 핸들러](https://ko.wikipedia.org/wiki/인터럽트_핸들러)(interrupt handler) 또는 인터럽트 서비스 루틴(interrupt service routine; ISR)은 발생한 인터럽트에 대응하는 [함수](C.md#함수)를 가리킨다. 인터럽트도 제각각 용도가 다르기 때문에, 인터럽트를 처리할 수 있는 ISR 또한 다양하게 존재한다. 아래는 프로세서가 인터럽트를 처리하는 "인터럽트 서비스" 과정을 소개한다.
+**[인터럽트 핸들러](https://ko.wikipedia.org/wiki/인터럽트_핸들러)**(interrupt handler) 또는 **인터럽트 서비스 루틴**(interrupt service routine; ISR)은 발생한 인터럽트에 대응하는 [함수](C.md#함수)를 가리킨다. 인터럽트도 제각각 용도가 다르기 때문에, 인터럽트를 처리할 수 있는 ISR 또한 다양하게 존재한다. 아래는 프로세서가 인터럽트를 처리하는 "인터럽트 서비스" 과정을 소개한다.
 
 ![인터럽트의 유형에 따른 서비스 절차](https://upload.wikimedia.org/wikipedia/commons/c/cf/Interrupt_Process.PNG)
 
@@ -159,7 +165,7 @@ ALU는 기본적으로 opcode와 피연산자를 입력받고, 해당 opcode 작
 ISR은 실행 중이던 스레드를 중단시켜 프로세서를 점유한 것이므로 최대한 빠른 시간 내에 처리되어야 한다. 그러나 ISR의 작업들이 많아질수록 인터럽트 처리 시간이 길어지는데, 이는 스레드가 재개되는 시점을 미루거나 새로운 인터럽트가 제때 처리되지 못하게 한다. 윈도우 운영체제는 [DPC](#지연-프로시저-호출)를 제공하므로써 이러한 문제를 해소한다.
 
 ## 지연 프로시저 호출
-[지연 프로시저 호출](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-dpcs)(deferred procedure calls; DPC)은 [큐](https://ko.wikipedia.org/wiki/큐_(자료_구조))에 대기된 작업들을 나중에 한꺼번에 처리하는 매커니즘이다.
+**[지연 프로시저 호출](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-dpcs)**(deferred procedure calls; DPC)은 [큐](https://ko.wikipedia.org/wiki/큐_(자료_구조))에 대기된 작업들을 나중에 한꺼번에 처리하는 매커니즘이다.
 
 ISR은 기존 스레드를 중단시켜 프로세서를 점유한 것이기 때문에, 원활한 스레드 재개를 위해 인터럽트 서비스는 되도록 빠른 시간 내에 완료되어야 한다. 하지만 인터럽트 핸들러가 처리하는 작업이 많아질수록 인터럽트 서비스 완료에 필요한 시간은 더 길어지게 된다. 이는 스레드가 다시 실행되는 시점을 늦추고 또 다른 인터럽트 처리를 방해하여 매끄럽지 못한 시스템 성능을 야기할 수 있다.
 
