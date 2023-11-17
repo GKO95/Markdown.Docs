@@ -99,6 +99,26 @@ Arg4: fffff803999612d0, address which referenced memory
 
 이후 공통사항으로 레지스터에 저장된 데이터와 충돌이 발생한 스택을 화면에 출력한다. [어셈블리](Assembly.md)와 스택 기반의 [메모리](Memory.md) 할당 등의 컴퓨터공학 및 윈도우 운영체제에 대한 이해도가 요구된다. 본 문서에서는 WinDbg를 사용하여 분석하기 위해 알아야 할 사항과 명령, 그리고 방법론을 위주로 소개한다.
 
+# 실시간 디버깅
+[WinDbg](#windbg)는 이미 증상이 나타나 생성된 [덤프](Dump.md) 외에도 [프로세스](Process.md)나 [커널](Kernel.md)에 직접 붙어(attach) 실행되는 도중에 실시간으로 [중단점](https://en.wikipedia.org/wiki/Breakpoint)을 설정하는 등의 [디버깅](https://en.wikipedia.org/wiki/Debugging)이 가능하다. 디버깅 대상에 따라 필요한 준비가 다르며, 본 내용은 [사용자](#사용자-모드-디버깅) 및 [커널 모드](#커널-모드-디버깅)에 따라 분류하여 소개한다.
+
+## 사용자 모드 디버깅
+> *출처: [Get started with WinDbg (user mode) - Windows drivers | Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/getting-started-with-windbg)*
+
+사용자 모드 프로세스에 붙어 디버깅을 하는 기능은 WinDbg 자체적으로 지원하여 매우 간단하다.
+
+## 커널 모드 디버깅
+> *출처: [Get started with WinDbg (kernel-mode) - Windows drivers | Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/getting-started-with-windbg--kernel-mode-)*
+
+커널을 디버깅하기 위해서는 두 개의 컴퓨터가 필요하다: 디버거를 실행하는 *호스트 컴퓨터*, 그리고 디버깅을 당하는 *타겟 컴퓨터*이다.
+
+1. 윈도우 보안 기능들([보안 부팅](https://en.wikipedia.org/wiki/UEFI#Secure_Boot) 및 [BitLocker](https://en.wikipedia.org/wiki/BitLocker) 등)을 일시적으로 비활성화한다.
+1. 타겟 컴퓨터의 [디버깅 모드](https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/bcdedit--debug)를 활성화한다.
+
+    ```terminal
+    bcdedit /debug on
+    ```
+
 # 스택 해석하기
 [스레드](Process.md#스레드) [스택](https://ko.wikipedia.org/wiki/스택)을 읽는 절차는 당시 프로그램 혹은 시스템이 어떠한 작업을 하였는지 이해하려는 디버깅의 기초이자 핵심되는 작업 중 하나이다. 본 내용은 가급적 [WinDbg](#windbg)에서 제공하는 기본 명령만을 사용하여 스택을 해석하는 방법을 소개한다.
 
