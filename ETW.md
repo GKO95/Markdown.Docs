@@ -53,12 +53,27 @@
 ### NT 커널 로거 추적 세션
 **[NT 커널 로거 추적 세션](https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/nt-kernel-logger-trace-session)**(NT Kernel Logger trace session)은 윈도우 [NT 커널](Kernel.md#nt-커널)의 이벤트를 추적하는 예약된, 즉 윈도우에 이미 내장되어 별도로 관리되는 세션이다. 커널 모드 [드라이버](Driver.md)나 사용자 모드의 [어플리케이션](Process.md)의 추적 제공자가 해당 세션으로 로깅을 불허하고 오로지 커널의 추적 제공자들만 허용한다 (반면, NT 커널의 추적 제공자는 타 추적 세션에 로깅될 수 없다). NT 커널 로거 추적 세션에 한하여 최대 여덟 개까지 동시에 운영할 수 있다.
 
-해당 세션은 "NT Kernel Logger"란 예약된 명칭을 사용하며, 세션의 GUID는 "[{9e814aad-3204-11d2-9a82-006008a86939}](https://learn.microsoft.com/en-us/windows/win32/etw/msnt-systemtrace)" [SystemTraceControlGuid](https://learn.microsoft.com/en-us/windows/win32/etw/nt-kernel-logger-constants) 상수이다. [프로세스](https://learn.microsoft.com/en-us/windows/win32/etw/process), [디스크](https://learn.microsoft.com/en-us/windows/win32/etw/diskio) 및 [파일 입출력](https://learn.microsoft.com/en-us/windows/win32/etw/fileio) 등의 커널 제공자를 [EVENT_TRACE_PROPERTIES](https://learn.microsoft.com/en-us/windows/win32/api/evntrace/ns-evntrace-event_trace_properties) 구조체의 EnableFlags 맴버에 플래그를 추가하여 제어할 수 있다.
+* 세션 명칭: NT Kernel Logger
+* 세션 GUID: [SystemTraceControlGuid](https://learn.microsoft.com/en-us/windows/win32/etw/nt-kernel-logger-constants) 상수; [{9e814aad-3204-11d2-9a82-006008a86939}](https://learn.microsoft.com/en-us/windows/win32/etw/msnt-systemtrace)
+
+[프로세스](https://learn.microsoft.com/en-us/windows/win32/etw/process), [디스크](https://learn.microsoft.com/en-us/windows/win32/etw/diskio) 및 [파일 입출력](https://learn.microsoft.com/en-us/windows/win32/etw/fileio) 등의 커널 제공자를 [EVENT_TRACE_PROPERTIES](https://learn.microsoft.com/en-us/windows/win32/api/evntrace/ns-evntrace-event_trace_properties) 구조체의 EnableFlags 맴버에 플래그를 추가하여 제어할 수 있다.
 
 ### 전역 로거 추적 세션
 **[전역 로거 추적 세션](https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/global-logger-trace-session)**(Global Logger trace session)은 시스템이 완전히 동작하기 전의 부팅 과정 동안에 이벤트를 기록하는 예약된 세션이다. 전역 로거 세션은 오로지 로그 파일로만 메시지를 저장, 즉 실시간 및 버퍼된 추적 세션을 지원하지 않는다. 커널 모드 [드라이버](Driver.md)나 사용자 모드의 [어플리케이션](Process.md)의 추적 제공자가 해당 세션으로 로깅하는 걸 허용한다. 시스템은 오로지 한 개의 전역 로거 추적 세션만 운영할 수 있다.
 
-해당 세션은 "GlobalLogger"란 예약된 명칭을 사용하며, 세션의 GUID는 GlobalLoggerGuid 상수로 나타낸다. [Tracelog](#추적-제어자)와 같은 프로그램을 통해 등록할 수 있으며, 이는 `HKLM\SYSTEM\CurrentControlSet\Control\WMI\GlobalLogger`에 세션 GUID를 이름으로 한 하위 레지스트리 키를 생성하여 세션 정보를 값으로 저장하는 방식이다. 시스템 부팅마다 운영되므로, 이를 방지하려면 Start 값을 0으로 설정하거나 전부 삭제한다.
+* 세션 명칭: GlobalLogger
+* 세션 GUID: GlobalLoggerGuid 상수
+
+`HKLM\SYSTEM\CurrentControlSet\Control\WMI\GlobalLogger`에 세션 GUID를 이름으로 한 하위 레지스트리 키를 생성하여 세션 정보를 값으로 저장하는 방식이다. 시스템 부팅마다 운영되므로, 이를 방지하려면 Start 값을 0으로 설정하거나 전부 삭제해야 한다.
+
+### 개인 추적 세션
+**[개인 추적 세션](https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/trace-session#private-trace-sessions)**(private trace session), 일명 사용자 모드 추적 세션(user-mode trace session)은 [사용자 모드](Processor.md#프로세서-모드)의 [프로세스](Process.md)에서 운영되는 추적 세션이며, 오로지 동일 프로세스의 추적 제공자가 생성한 메시지만 로깅한다 (위에서 소개한 일반 추적 세션들은 모두 [커널 모드](Processor.md#프로세서-모드)에서 운영된다). 비록 최대 64개의 동시 운영 가능한 세션 개수에 해당하지 않으나, 각 프로세스마다 운영할 수 있는 개인 추적 세션은 한 개로 제한된다.
+
+다음은 개인 추적 세션의 몇 가지 특징을 소개한다:
+
+* 실시간 추적 세션으로 수행될 수 없으며, 메시지는 반드시 로그 파일로 작성되어야 한다.
+* 만일 버퍼된 추적 세션으로 수행된다면 버퍼의 메모리는 페이징될 수 있으며, 버퍼 메모리의 페이징 및 비페이징 여부 선택은 불가하다.
+* `!wmitrace` 확장도구는 개인 추적 세션을 지원하지 않으므로 WinDbg와 같은 디버거로 메시지를 볼 수 없다.
 
 ## 이벤트 추적 로그
 [이벤트 추적 로그](https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/trace-log)(event trace log; ETL)는 하나 이상의 ETW 세션에서 생성된 메시지가 압축되어 저장된 .etl 확장자 파일이다. 텍스트 로그에 비해 용량이 작으며, 프로그램에 의해 간편하게 분석될 수 있는 장점을 지닌다. 하지만 직접 분석하려면 텍스트 형식으로 변환되어야 하며, 이때 해당 ETL 로그를 생성한 윈도우 구성요소의 [심볼](Symbol.md) 파일이 필요하다.
