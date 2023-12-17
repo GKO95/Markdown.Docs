@@ -95,7 +95,7 @@ ALU는 기본적으로 opcode와 피연산자를 입력받고, 해당 opcode 작
 **[스케줄링](https://ko.wikipedia.org/wiki/스케줄링_(컴퓨팅))**(scheduling)이란, *작업*을 실행하기 위해 필요한 *리소스*를 할당시키는 행위를 가리킨다. 본 문서의 문맥에 의하면 *작업*은 [프로세스](Process.md) 또는 [스레드](Process.md#스레드)가 해당하며, *리소스*는 [프로세서](#프로세서)를 가리킨다. 즉, "프로세서에 프로세스 (또는 스레드)를 할당"하는 게 아니라는 점에서 확실한 개념에 유의하도록 한다. 스케줄링을 담당하는 프로그램을 [**스케줄러**](https://en.wikipedia.org/wiki/Scheduling_(computing)#SCHEDULER)라고 부른다. 스케줄링 덕분에 단일 코어 프로세서를 탑재한 운영체제에서도 [멀티태스킹](https://ko.wikipedia.org/wiki/다중작업)이 가능해져 여러 프로그램 및 기능을 동시에 실행할 수 있는 것처럼 구현한다.
 
 ### 선점형 라운드 로빈
-[윈도우](Windows.md) [OS](https://ko.wikipedia.org/wiki/운영체제)에서 채택한 [스케줄링 규율](https://en.wikipedia.org/wiki/Scheduling_(computing)#Scheduling_disciplines)은 [선점형](https://ko.wikipedia.org/wiki/스케줄링_(컴퓨팅)#비선점형과_선점형) [라운드 로빈](https://ko.wikipedia.org/wiki/라운드_로빈_스케줄링)이다.
+[윈도우](Windows.md) [OS](https://ko.wikipedia.org/wiki/운영체제)에서 채택한 [스케줄링 규율](https://en.wikipedia.org/wiki/Scheduling_(computing)#Scheduling_disciplines)은 [**선점형**](https://ko.wikipedia.org/wiki/스케줄링_(컴퓨팅)#비선점형과_선점형) [**라운드 로빈**](https://ko.wikipedia.org/wiki/라운드_로빈_스케줄링)이다.
 
 * **라운드 로빈**(round-robin)
 
@@ -105,8 +105,15 @@ ALU는 기본적으로 opcode와 피연산자를 입력받고, 해당 opcode 작
 
 그리고 선점형 라운드 로빈(preemptive round-robin)은 위에 라운드 로빈 알고리즘에 [우선순위](#스케줄링-우선순위) 개념을 접목시켰다.
 
+### 스케줄링 우선순위
+**[스케줄링 우선순위](https://learn.microsoft.com/en-us/windows/win32/procthread/scheduling-priorities)**(scheduling priorities)는 [프로세스](Process.md#프로세스) 또는 [스레드](Process.md#스레드)가 타 객체에 비해 CPU로부터 얼마나 먼저 처리되어야 하는지 알리는 [필드](Cpp.md#클래스) 값이다. 우선순위 범위는 1 - 31이며 높을수록 스케줄링 최상위 우선권을 가진다. 특수한 경우의 우선순위 0은 오로지 시스템 운영 및 보안을 위한 것으로 [영값 페이지 커널 스레드](Memory.md#여유-메모리) 등에 사용된다. 동일한 우선순위 간에는 라운드 로빈 알고리즘에 의해 공평하게 스케줄링한 다음 차우선순위로 넘어간다.
+
+다음은 [윈도우 NT](Windows.md) 운영체제의 우선순위 체계이며, 우선순위 클래스와 레벨의 조합으로부터 각 스레드의 기초 우선순위(base priority)가 형성된다.
+
+<table style="width: 80%; margin: auto;"><caption style="caption-side: top;">프로세스 및 스레드 우선순위</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">프로세스 우선순위 클래스</th><th style="text-align: center;">스레드 우선순위 레벨</th></tr></thead><tbody><tr style="text-align: center;"><td><code>IDLE_PRIORITY_CLASS</code></td><td><code>THREAD_PRIORITY_IDLE</code></td></tr><tr style="text-align: center;"><td><code>BELOW_NORMAL_PRIORITY_CLASS</code></td><td><code>THREAD_PRIORITY_LOWEST</code></td></tr><tr style="text-align: center;"><td><code>NORMAL_PRIORITY_CLASS</code></td><td><code>THREAD_PRIORITY_BELOW_NORMAL</code></td></tr><tr style="text-align: center;"><td><code>ABOVE_NORMAL_PRIORITY_CLASS</code></td><td><code>THREAD_PRIORITY_NORMAL</code></td></tr><tr style="text-align: center;"><td><code>HIGH_PRIORITY_CLASS</code></td><td><code>THREAD_PRIORITY_ABOVE_NORMAL</code></td></tr><tr style="text-align: center;"><td><code>REALTIME_PRIORITY_CLASS</code></td><td><code>THREAD_PRIORITY_HIGHEST</code></td></tr><tr style="text-align: center;"><td>-</td><td><code>THREAD_PRIORITY_TIME_CRITICAL</code></td></tr></tbody></table>
+
 ## 문맥 교환
-[문맥](https://en.wikipedia.org/wiki/Context_(computing))(context)은 프로세스 및 스레드가 중단된 시점으로부터 작업을 재개하기 위해 필요한 정보들이다: [스택](https://ko.wikipedia.org/wiki/콜_스택), [레지스터](https://ko.wikipedia.org/wiki/프로세서_레지스터) 등이 해당한다. 
+**[문맥](https://en.wikipedia.org/wiki/Context_(computing))**(context)은 프로세스 및 스레드가 중단된 시점으로부터 작업을 재개하기 위해 필요한 정보들이다: [스택](https://ko.wikipedia.org/wiki/콜_스택), [레지스터](https://ko.wikipedia.org/wiki/프로세서_레지스터) 등이 해당한다. 
 
 **[문맥 교환](https://ko.wikipedia.org/wiki/문맥_교환)**(context switch)은 실행 중인 프로세스 및 스레드를 나중에 재개할 수 있도록 문맥을 저장하여 대기시키고, 처리되어야 할 문맥을 불러와 실행하는 절차를 가리킨다. 스케줄링과 함께 멀티태스킹을 가능하게 만드는 핵심 기능이다. 그러나 문맥 교환이 너무 빈번하게 일어나면 성능 저하의 요인으로 작용할 수 있다.
 
@@ -114,32 +121,16 @@ ALU는 기본적으로 opcode와 피연산자를 입력받고, 해당 opcode 작
 
 일반적으로 문맥 교환이 이루어지는 요인으로 다음과 같다:
 
-1. 스케줄링된 퀀텀 소진
-2. 우선순위에 의한 선점
-3. 프로세스의 대기 상태 전환
+1. 스케줄링된 [퀀텀](#선점형-라운드-로빈) 소진
+2. [우선순위](#스케줄링-우선순위)에 의한 선점
+3. 프로세스의 [대기 상태](#프로세스-상태) 전환
 
 ## 프로세스 상태
-[프로세스 상태](https://en.wikipedia.org/wiki/Process_state)(process state)는 현재 프로세스가 어떠한 상태에 있는지를 가리키며, 크게 세 가지로 분류된다: 준비(ready), 실행(running), 그리고 대기(waiting) 상태가 있다. 윈도우 운영체제는 프로세스 상태에 따라 어떻게 처리할 지 결정한다. 다음은 프로세스 상태의 설명 및 전환되는 경우를 소개한다.
+**[프로세스 상태](https://en.wikipedia.org/wiki/Process_state)**(process state)는 생성된 프로세스가 현 시점에 어떠한 상태에 있는지 나타내며, 이에 따라 스케줄링 여부가 결정한다. 비록 "프로세스"라고 언급을 하였으나 정확히 말하면 이미지 코드를 실행하는 프로세스의 "스레드"를 가리킨다. 다음은 프로세스 상태의 각 [종류](https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.threadstate)마다 소개한다.
 
-![프로세스의 수명 주기를 상태와 함께 표시한 다이어그램](https://www.researchgate.net/profile/Xiangyu-Lin-2/publication/346492253/figure/fig3/AS:963825763368962@1606805377750/Process-state-transition.png)
+![프로세스 상태를 함께 나타낸 생명 주기 다이어그램](https://www.researchgate.net/profile/Xiangyu-Lin-2/publication/346492253/figure/fig3/AS:963825763368962@1606805377750/Process-state-transition.png)
 
-<table style="width: 100%; margin: auto;">
-<caption style="caption-side: top;">프로세스 상태 및 전환</caption>
-<colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup>
-<thead><tr><th style="text-align: center;">프로세스 상태</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody><tr><td style="text-align: center;">생성<br/>(Created)</td><td>프로세스가 처음으로 생성되었을 때의 상태이며, 곧바로 준비 상태로 전환된다.</td></tr>
-<tr><td style="text-align: center;">준비<br/>(Ready)</td><td>프로세서가 즉시 실행할 수 있는 준비된 상태이다.<ul style="list-style-type: '→ ';"><li style="margin: 5px 0;"><b>실행</b>: 스케줄링에 의해 프로세스를 처리할 프로세서가 지정 및 배치되면서 전환된다.</li></ul></td></tr>
-<tr><td style="text-align: center;">실행<br/>(Running)</td><td>프로세서에 의해 현재 실행되고 있는 상태이다.<ul style="list-style-type: '→ ';"><li style="margin: 5px 0;"><b>준비</b>: 퀀텀 소진, <a href="https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-sleep"><code>Sleep</code></a> 함수, 혹은 우선순위에 밀리면 준비 상태로 전환된다.</li><li style="margin: 5px 0;"><b>대기</b>: <a href="https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-waitforsingleobject"><code>WaitingForSingleObject</code></a> 또는 <code>Sleep</code> 함수로 대기 중인 프로세스는 타 프로세스의 도움을 받거나 커널 동작을 기다려야 한다.</li></ul></td></tr>
-<tr><td style="text-align: center;">대기<br/>(Waiting)</td><td>특정 이벤트가 발생하기 전까지는 프로세서로부터 실행될 수 없는 유예 상태이다.<ul style="list-style-type: '→ ';"><li style="margin: 5px 0;"><b>준비</b>: 대기 상태에서 탈출한 프로세스를 처리할 잔여 프로세서가 없을 시 전환된다.</li><li style="margin: 5px 0;"><b>실행</b>: 대기 상태에서 탈출한 프로세스를 처리할 잔여 프러세서가 있거나, 혹은 높은 우선순위에 의해 곧바로 처리될 시 전환된다.</li></ul></td></tr>
-<tr><td style="text-align: center;">종료<br/>(Terminated)</td><td>외부에 의해 강제로, 혹은 코드에 의해 종료되었을 시 전환되는 상태이다.</td></tr></tbody>
-</table>
-
-## 스케줄링 우선순위
-[스케줄링 우선순위](https://learn.microsoft.com/en-us/windows/win32/procthread/scheduling-priorities)(scheduling priorities)는 [프로세스](Process.md#프로세스) 또는 [스레드](Process.md#스레드)가 타 객체에 비해 CPU로부터 얼마나 먼저 처리되어야 하는지 알리는 [필드](Cpp.md#클래스) 값이다. 우선순위 범위는 1 - 31이며 높을수록 스케줄링 최상위 우선권을 가진다. 특수한 경우의 우선순위 0은 오로지 시스템 운영 및 보안을 위한 것으로 [영값 페이지 커널 스레드](Memory.md#여유-메모리) 등에 사용된다. 동일한 우선순위 간에는 라운드 로빈 알고리즘에 의해 공평하게 스케줄링한 다음 차우선순위로 넘어간다.
-
-다음은 [윈도우 NT](Windows.md) 운영체제의 우선순위 체계이며, 우선순위 클래스와 레벨의 조합으로부터 각 스레드의 기초 우선순위(base priority)가 형성된다.
-
-<table style="width: 80%; margin: auto;"><caption style="caption-side: top;">프로세스 및 스레드 우선순위</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">프로세스 우선순위 클래스</th><th style="text-align: center;">스레드 우선순위 레벨</th></tr></thead><tbody><tr style="text-align: center;"><td><code>IDLE_PRIORITY_CLASS</code></td><td><code>THREAD_PRIORITY_IDLE</code></td></tr><tr style="text-align: center;"><td><code>BELOW_NORMAL_PRIORITY_CLASS</code></td><td><code>THREAD_PRIORITY_LOWEST</code></td></tr><tr style="text-align: center;"><td><code>NORMAL_PRIORITY_CLASS</code></td><td><code>THREAD_PRIORITY_BELOW_NORMAL</code></td></tr><tr style="text-align: center;"><td><code>ABOVE_NORMAL_PRIORITY_CLASS</code></td><td><code>THREAD_PRIORITY_NORMAL</code></td></tr><tr style="text-align: center;"><td><code>HIGH_PRIORITY_CLASS</code></td><td><code>THREAD_PRIORITY_ABOVE_NORMAL</code></td></tr><tr style="text-align: center;"><td><code>REALTIME_PRIORITY_CLASS</code></td><td><code>THREAD_PRIORITY_HIGHEST</code></td></tr><tr style="text-align: center;"><td>-</td><td><code>THREAD_PRIORITY_TIME_CRITICAL</code></td></tr></tbody></table>
+<table style="width: 95%; margin: auto;"><caption style="caption-side: top;">프로세스 상태의 종류 및 설명</caption><colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup><thead><tr><th style="text-align: center;">프로세스 상태</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;">생성<br/>(Created; New)</td><td>프로세스 (또는 스레드)가 생성되었을 때의 상태이다.<br/><ul style="list-style-type: '→';"><li style="padding-left: 4px;">준비: <i>생성 및 초기화가 완료된 프로세스 (또는 스레드)는 자동으로 준비 상태로 전환된다.</i></li></ul></td></tr><tr><td style="text-align: center;">준비<br/>(Ready)</td><td>프로세스 (또는 스레드)가 큐에서 퀀텀을 할당 받으면 즉시 프로세서를 활용할 수 있는 준비된 상태이다.<ul style="list-style-type: '→';"><li style="padding-left: 4px;">실행: <i>스케줄링에 의해 프로세스 (또는 스레드)가 퀀텀을 할당 받으면 전환된다.</i></li></ul></td></tr><tr><td style="text-align: center;">실행<br/>(Running)</td><td>프로세서에 의해 퀀텀을 할당 받은 작업이 처리되는, 다시 말해 프로세스 (또는 스레드)가 실행 중인 상태이다.<ul style="list-style-type: '→';"><li style="padding-left: 4px;">준비: <i>퀀텀이 소진되거나 우선순위에 밀려, 또는 <a href="https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-sleep"><code>Sleep</code></a> 함수에 의해 큐로 되돌아가면 전환된다.</i></li><li style="padding-left: 4px;">대기: <i><a href="https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-waitforsingleobject"><code>WaitingForSingleObject</code></a> 또는 <code>Sleep</code> 등의 대기 함수에 의해 전환된다.</i></li></ul></td></tr><tr><td style="text-align: center;">대기<br/>(Waiting)</td><td>외부로부터 특정 이벤트가 발생하기 전까지 프로세스 (또는 스레드)는 퀀텀을 할당 받을 수 없는 유예 상태이다.<ul style="list-style-type: '→';"><li style="padding-left: 4px;">준비: <i>대기 상태 탈출 이후, 가용 프로세서가 없을 시 전환된다.</i></li><li style="padding-left: 4px;">실행: <i>대기 상태 탈출 이후, 가용 프로세서가 있거나 높은 우선순위를 가져 곧바로 실행될 시 전환된다.</i></li></ul></td></tr><tr><td style="text-align: center;">종료<br/>(Terminated)</td><td>프로세스 (또는 스레드)가 코드 실행 완료, 혹은 내부 코드나 외부의 강제적 요인에 의해 종료된 상태이다.</td></tr></tbody></table>
 
 # 인터럽트
 **[인터럽트](https://ko.wikipedia.org/wiki/인터럽트)**(interrupt), 간혹 **트랩**(trap)이라고도 언급되며 시스템에서 발생한 일종의 비동기 사건, 즉 이벤트가 최우선으로 처리될 수 있도록 [프로세서](#프로세서)에 요청되는 신호이다. 대표적인 예시로 마우스 커서 움직임이나 키보드 타자 입력 등이 인터럽트에 의해 처리된다. 인터럽트는 하드웨어 혹은 소프트웨어에 의해 발생될 수 있다.
