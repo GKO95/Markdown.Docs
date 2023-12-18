@@ -6,16 +6,16 @@
 ![윈도우 NT 운영체제의 부팅 절차 트러블슈팅 (예시. 윈도우 10)](https://i0.wp.com/www.msnoob.com/wp-content/uploads/2019/01/boot-sequence.png?fit=1167%2C1107&ssl=1)
 
 ### 부트스트랩
-[부트스트랩](https://ko.wikipedia.org/wiki/부트스트랩_(컴퓨팅))(bootstrap)은 외부로부터 아무런 도움을 받지 않고 자체적으로 실행하는 절차를 가리킨다. 부트스트랩 어원의 유래는 다음과 같다:
+[부트스트랩](https://ko.wikipedia.org/wiki/부트스트랩_(컴퓨팅))(bootstrap)은 외부로부터 아무런 도움을 받지 않고 자체적으로 실행하는 절차를 가리킨다. 부트스트랩의 어원은 다음과 같다:
 
 > 미국 관용구 "[pull yourself up by your bootstraps](https://en.wiktionary.org/wiki/pull_oneself_up_by_one%27s_bootstraps)," 즉 *스스로를 부트스트랩을 당겨 들어올린다*라는 표현이 있는 데 사실상 물리적으로 불가능하다. 하지만 현재는 "아무런 도움없이 어려움을 극복하고 성취하다"라는 의미로 변질되면서, 부트스트랩이란 용어가 이러한 의미를 함축하게 되었다.
 
 컴퓨터에 전력이 공급되는 시점부터 운영체제가 로드될 때까지 자력으로 해내는 부트스트랩 과정을 일명 [부팅](#부팅)(booting)이라 부르게 된 것이다.
 
 ## 시동 자체 시험
-[시동 자체 시험](https://ko.wikipedia.org/wiki/시동_자체_시험)(Power-on self-test), 일명 POST는 컴퓨터나 타 디지털 전자 장치가 전원을 공급받는 즉시 하드웨어 초기화 및 상태를 진단하는 [펌웨어](https://ko.wikipedia.org/wiki/펌웨어) 혹은 소프트웨어 루틴이다. [BIOS](#bios) 또는 [UEFI](#uefi) 규격에 따르는 메인보드 펌웨어에 의해 POST가 진행되고, 검사를 통과하면 [부트로더](https://en.wikipedia.org/wiki/Bootloader)로부터 운영체제를 불러와 실행한다.
+[시동 자체 시험](https://ko.wikipedia.org/wiki/시동_자체_시험)(Power-on self-test), 일명 POST는 컴퓨터나 타 디지털 전자 장치가 전원을 공급받는 즉시 하드웨어 초기화 및 상태를 진단하는 [펌웨어](https://ko.wikipedia.org/wiki/펌웨어) 혹은 소프트웨어 루틴이다. [BIOS](#bios) 또는 [UEFI](#uefi) 규격에 따르는 메인보드 펌웨어에 의해 POST가 진행되고, 검사를 통과하면 [부트로더](https://en.wikipedia.org/wiki/Bootloader)가 운영체제를 불러와 실행한다.
 
-흔히 컴퓨터 전원을 켤 때 나타나는 검은색 바탕에 [메인보드](https://ko.wikipedia.org/wiki/메인보드) 펌웨어 제조사의 로고가 표시되는 화면이 POST가 이루어지는 단계이며, 결과는 장치의 디스플레이 화면에 출력되거나 차후 진단 도구로부터 확인할 수 있도록 저장된다. 만일 화면 출력 기능에 문제가 발견될 경우를 대비하여 LED 또는 경고음을 통해 오류 코드를 알릴 수 있는 장치가 마련되어 있다.
+흔히 컴퓨터 전원을 켤 때 나타나는 검은색 바탕에 [메인보드](https://ko.wikipedia.org/wiki/메인보드) 펌웨어 제조사의 로고가 표시되는 화면이 POST가 이루어지는 단계이며, 진단 결과는 장치의 디스플레이 화면에 출력되거나 혹은 진단 도구로부터 확인할 수 있도록 저장된다. 만일 화면 출력 기능에 문제가 있을 경우를 대비하여 LED 또는 경고음을 통해 오류 코드를 알릴 수 있는 장치가 마련되어 있다.
 
 # BIOS
 [BIOS](https://ko.wikipedia.org/wiki/바이오스)(Basic Input/Output System)는 [운영체제](https://ko.wikipedia.org/wiki/운영체제)를 시스템에 로드하기 전에 하드웨어 초기화를 시행하는 [메인보드](https://ko.wikipedia.org/wiki/메인보드)의 [펌웨어](https://ko.wikipedia.org/wiki/펌웨어)이다. [BIOS 인터럽트 호출](https://ko.wikipedia.org/wiki/%바이오스_인터럽트_호출)를 제공하므로써 운영체제가 요청한 하드웨어 제어 및 입출력 함수 실행, 그리고 시스템 정보의 반환이 이루어진다.
