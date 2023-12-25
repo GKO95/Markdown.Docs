@@ -43,7 +43,7 @@ BIOS가 부트로더를 탐색하는 과정은 다음과 같다:
 이후 BIOS는 메모리로 불러온 부트 섹터에게 PC 제어권을 양도한다. 다만, BIOS는 시그니처 바이트를 확인하는 것 외에 부트 섹터의 내용물을 판독하지 않는다.
 
 ## 부트 섹터
-**[부트 섹터](https://en.wikipedia.org/wiki/Boot_sector)**(boot sector)는 시스템을 부팅하기 위해 필요한 코드, 즉 [부트로더](#부트로더)가 담겨있는 [저장소](Disk.md)의 [섹터](Disk.md#섹터)이다. 일반적으로 디스크의 가장 첫 섹터를 가리키며, 부트 섹터를 포함한 [디스크](Disk.md)를 "부트 장치(boot device)"라고 부른다.
+**[부트 섹터](https://en.wikipedia.org/wiki/Boot_sector)**(boot sector)는 시스템을 부팅하기 위해 필요한 코드, 즉 [부트로더](#부트로더)가 담겨있는 [저장소](Disk.md)의 [섹터](Disk.md#섹터)이다. 일반적으로 [파티션](Disk.md#파티션)에 포함되지 않는 디스크의 가장 첫 섹터를 가리키며, 부트 섹터를 포함한 [디스크](Disk.md)를 "부트 장치(boot device)"라고 부른다.
 
 다음은 [IBM PC 호환기종](https://en.wikipedia.org/wiki/IBM_PC_compatible)에 사용되는 부트 섹터의 유형을 소개한다:
 
@@ -51,7 +51,7 @@ BIOS가 부트로더를 탐색하는 과정은 다음과 같다:
 * [볼륨 부트 레코드](#볼륨-부트-레코드)(VBR)
 
 ### 마스터 부트 레코드
-**[마스터 부트 레코드](https://en.wikipedia.org/wiki/Master_boot_record)**(master boot record; MBR)는 [IBM PC 호환기종](https://en.wikipedia.org/wiki/IBM_PC_compatible)을 위한 부트 섹터의 한 유형이며, [HDD](https://en.wikipedia.org/wiki/Hard_disk_drive) 또는 [SSD](https://en.wikipedia.org/wiki/Solid-state_drive) 등의 [파티션](Disk.md#파티션)을 나눌 수 있는 [대용량 저장 매체](Disk.md)([휴대용](https://en.wikipedia.org/wiki/Disk_enclosure) 포함)가 대상이다. 부트로더 뿐만 아니라, 해당 디스크의 [파티션 정보](https://en.wikipedia.org/wiki/Master_boot_record#PT)도 MBR에 저장되어 있다.
+**[마스터 부트 레코드](https://en.wikipedia.org/wiki/Master_boot_record)**(master boot record; MBR)는 [IBM PC 호환기종](https://en.wikipedia.org/wiki/IBM_PC_compatible)을 위한 부트 섹터의 한 유형이며, [HDD](https://en.wikipedia.org/wiki/Hard_disk_drive) 또는 [SSD](https://en.wikipedia.org/wiki/Solid-state_drive) 등의 파티션을 나눌 수 있는 [대용량 저장 매체](Disk.md)([휴대용](https://en.wikipedia.org/wiki/Disk_enclosure) 포함)가 대상이다. 부트로더 뿐만 아니라, 해당 디스크의 [파티션 정보](https://en.wikipedia.org/wiki/Master_boot_record#PT)도 MBR에 저장되어 있다.
 
 ### 볼륨 부트 레코드
 **[볼륨 부트 레코드](https://en.wikipedia.org/wiki/Volume_boot_record)**(volume boot record; VBR)는 [IBM PC 호환기종](https://en.wikipedia.org/wiki/IBM_PC_compatible)을 위한 부트 섹터의 한 유형이며, 다음 두 경우가 대상이다.
