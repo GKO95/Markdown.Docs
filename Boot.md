@@ -1,7 +1,7 @@
 # 부팅
 > *참고: [Booting process of Windows NT - Wikipedia](https://en.wikipedia.org/wiki/Booting_process_of_Windows_NT)*
 
-[부팅](https://ko.wikipedia.org/wiki/부팅)(booting)은 하드웨어 (예. 전원 버튼) 또는 소프트웨어 명령으로 컴퓨터를 켜는 절차이다. 부팅 초기에 전력을 공급받은 컴퓨터의 [메모리](Memory.md)가 [휘발성](https://ko.wikipedia.org/wiki/휘발성_메모리)이기 때문에 아무런 소프트웨어가 로드되지 않은 상태이다. 그러므로 시스템 하드웨어의 [펌웨어](https://en.wikipedia.org/wiki/Firmware) 또는 타 [프로세서](Processor.md)의 도움으로 컴퓨터를 구동하기 위한 프로그램 이미지를 메모리에 주입시키는 작업이 필요하다.
+**[부팅](https://en.wikipedia.org/wiki/Booting)**(booting)은 하드웨어 (예. 전원 버튼) 또는 소프트웨어 명령으로 컴퓨터를 켜는 절차이다. 부팅 초기에 전력을 공급받은 컴퓨터의 [메모리](Memory.md)가 [휘발성](https://ko.wikipedia.org/wiki/휘발성_메모리)이기 때문에 아무런 소프트웨어가 로드되지 않은 상태이다. 그러므로 시스템 하드웨어의 [펌웨어](https://en.wikipedia.org/wiki/Firmware) 또는 타 [프로세서](Processor.md)의 도움으로 컴퓨터를 구동하기 위한 프로그램 이미지를 메모리에 주입시키는 작업이 필요하다.
 
 아래는 시스템이 부팅되는 과정을 두 규격, [UEFI](#uefi)와 [BIOS](#bios)에 대하여 순차적으로 보여주는 도표이다.
 
