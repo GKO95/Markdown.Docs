@@ -60,9 +60,9 @@ BIOS가 부트로더를 탐색하는 과정은 다음과 같다:
 * 파티션을 나눌 수 있는 대용량 저장 매체에서 각 파티션의 첫 번째 섹터가 해당한다. 디스크 전반의 첫 번째 섹터는 여전히 MBR로써 파티션 정보를 저장하고 있다.
 
 # UEFI
-[UEFI](https://ko.wikipedia.org/wiki/통일_확장_펌웨어_인터페이스)(Unified Extensible Firmware Interface)는 기존 [BIOS](#bios)가 가지던 기술적 한계를 극복하기 위한 [펌웨어](https://ko.wikipedia.org/wiki/펌웨어)와 [운영체제](https://ko.wikipedia.org/wiki/운영체제) 간의 인터페이스 규격이다. 특히 BIOS와 달리 부트 섹터에 의존하지 않는 대신 부트 관리자(boot manager)를 도입하였다.
+**[UEFI](https://en.wikipedia.org/wiki/UEFI)**(Unified Extensible Firmware Interface)는 [BIOS](#bios)의 기술적 한계를 극복하기 위해 설계된 [펌웨어](https://en.wikipedia.org/wiki/Firmware) 구조를 정의하는 규격이다. [인텔](https://www.intel.com/)에서 최초로 *EFI* 규격을 개발하였으나, 2005년부터 [UEFI 포럼](https://en.wikipedia.org/wiki/UEFI_Forum)이란 산업 [컨소시엄](https://en.wikipedia.org/wiki/Consortium)에 합류하며 *UEFI* [개방형 표준](https://en.wikipedia.org/wiki/Open_standard)에 기여하게 되었다.
 
-> [윈도우 NT](ko.WindowsNT.md)의 경우에는 비스타부터 소개된 "[윈도우 부트 관리자](https://ko.wikipedia.org/wiki/윈도우_비스타_시작_프로세스)(Windows Boot Manager)"가 존재한다.
+UEFI가 부트 장치를 탐색하는 과정은 다음과 같다.
 
 ![UEFI 부팅 과정](https://upload.wikimedia.org/wikipedia/commons/1/17/UEFI_boot_process.png)
 
