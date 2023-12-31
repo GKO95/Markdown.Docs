@@ -13,7 +13,7 @@
 ">참고</a>]</sup>
 > 
 > 1. 1980년대에 [32비트](https://en.wikipedia.org/wiki/32-bit_computing)를 지원하는 [i386](https://en.wikipedia.org/wiki/I386) 등의 프로세서가 등장하였으며, 4 GB 표현 범위에 불가하였으나 당시에는 엄청난 기술이었다.
-> 1. RAM의 하위 1024 바이트는 이미 [인터럽트 벡터](https://en.wikipedia.org/wiki/Interrupt_vector_table)로 지정되어, 오히려 메모리의 최상위 주소들을 ROM에 대입하여 활용하는 방안이 검토되었다.
+> 1. RAM의 하위 1024 바이트는 이미 [인터럽트 벡터](https://en.wikipedia.org/wiki/Interrupt_vector_table)로 지정되어, 오히려 메모리의 최상위 주소에 ROM을 대입하는 방안이 검토되었다.
 
 ROM에 저장된 UEFI 혹은 BIOS 펌웨어가 실행되면 가장 먼저 [POST](#시동-자체-시험)를 진행하고, 검사를 통과하면 [부트로더](#부트로더)가 [운영체제](https://en.wikipedia.org/wiki/Operating_system)를 로드 및 실행한다.
 
