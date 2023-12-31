@@ -7,10 +7,18 @@
 
 ![윈도우 NT 운영체제의 부팅 절차 트러블슈팅 (예시. 윈도우 10)](https://i0.wp.com/www.msnoob.com/wp-content/uploads/2019/01/boot-sequence.png?fit=1167%2C1107&ssl=1)
 
-## 시동 자체 시험
-**[시동 자체 시험](https://ko.wikipedia.org/wiki/시동_자체_시험)**(Power-on self-test), 일명 POST는 컴퓨터나 타 디지털 전자 장치가 전원을 공급받는 즉시 하드웨어 초기화 및 상태를 진단하는 [펌웨어](https://en.wikipedia.org/wiki/Firmware) 혹은 소프트웨어 루틴이다. POST는 부팅 초기에 [BIOS](#bios)와 [UEFI](#uefi) 모드에 공통적으로 진행되며, 검사를 통과하면 [부트로더](#부트로더)에 의해 운영체제가 로드 및 실행된다. 흔히 검은색 바탕에 [메인보드](https://ko.wikipedia.org/wiki/메인보드) 펌웨어 제조사의 로고가 표시되는 화면에 해당한다.
+전원이 켜진 컴퓨터의 CPU는 [리셋 벡터](https://en.wikipedia.org/wiki/Reset_vector)(reset vector)에 위치한 [명령어](Processor.md#명령어)를 가장 먼저 실행하도록 하드웨어적으로 설계되었다. [x86](https://en.wikipedia.org/wiki/X86) 아키텍처 경우, 해당 위치는 [리얼 모드](Processor.md#리얼-모드)에서 실제 메모리 주소 `FFFFFFF0h`(즉, 4 GB의 16 바이트 아래)로 고정되었다. 리셋 벡터는 [ROM](https://en.wikipedia.org/wiki/Read-only_memory)에 저장된 UEFI 혹은 BIOS 펌웨어의 [진입점](C.md#진입점)을 가리킨다.
 
-POST 진단 결과는 디스플레이 화면에 출력되거나 별도의 진단 도구로부터 확인할 수 있도록 저장된다. 만일 화면 출력 기능에 문제가 있을 경우를 대비하여 LED 또는 경고음을 통해 오류 코드를 알릴 수 있는 장치가 마련되어 있다.
+> UEFI 혹은 BIOS 펌웨어는 [RAM](Memory.md)에 로드되는 게 아니라, 아예 ROM을 시스템의 물리 메모리 일부로 인식하여 곧장 실행된다. 이러한 설계가 고안된 배경은 다음과 같으며, [하위호환](https://en.wikipedia.org/wiki/Backward_compatibility)을 위해 현재까지 이어지고 있다.<sup>[<a href="https://superuser.com/questions/988473/why-is-the-first-bios-instruction-located-at-0xfffffff0-top-of-ram
+">참고</a>]</sup>
+> 
+> 1. 1980년대에 [32비트](https://en.wikipedia.org/wiki/32-bit_computing)를 지원하는 [i386](https://en.wikipedia.org/wiki/I386) 등의 프로세서가 등장하였으며, 4 GB 표현 범위에 불가하였으나 당시에는 엄청난 기술이었다.
+> 1. RAM의 하위 1024 바이트는 이미 [인터럽트 벡터](https://en.wikipedia.org/wiki/Interrupt_vector_table)로 지정되어, 오히려 메모리의 최상위 주소들을 ROM에 대입하여 활용하는 방안이 검토되었다.
+
+ROM에 저장된 UEFI 혹은 BIOS 펌웨어가 실행되면 가장 먼저 [POST](#시동-자체-시험)를 진행하고, 검사를 통과하면 [부트로더](#부트로더)가 [운영체제](https://en.wikipedia.org/wiki/Operating_system)를 로드 및 실행한다.
+
+### 시동 자체 시험
+**[시동 자체 시험](https://ko.wikipedia.org/wiki/시동_자체_시험)**(Power-on self-test; POST)은 컴퓨터나 타 디지털 전자 장치가 전원을 공급받는 즉시 실행된 ([UEFI](#uefi) 혹은 [BIOS](#bios)) 펌웨어에서 하드웨어 초기화 및 상태를 진단하는 절차이다. 흔히 [메인보드](https://ko.wikipedia.org/wiki/메인보드) 제조사 또는 OEM 로고가 표시되는 화면에 해당한다. POST 진단 결과는 디스플레이 화면에 출력되거나 별도의 진단 도구로부터 확인할 수 있도록 저장된다. 만일 화면 출력 기능에 문제가 있을 경우를 대비하여 LED 또는 경고음을 통해 오류 코드를 알릴 수 있는 장치가 마련되어 있다.
 
 ## 부트로더
 **[부트로더](https://en.wikipedia.org/wiki/Bootloader)**(bootloader)는 컴퓨터 부팅 과정 중에서 설치된 운영체제의 [커널](Kernel.md)을 불러와 실행하는 프로그램이다. 다른 명칭으로 **[부트스트랩](#부트스트랩) 로더**(bootstrap loader) 또는 **부트 관리자**(boot manager)라고도 불린다.
@@ -26,13 +34,13 @@ POST 진단 결과는 디스플레이 화면에 출력되거나 별도의 진단
 컴퓨터에 전력이 공급되는 시점부터 운영체제가 로드될 때까지 자력으로 해내는 부트스트랩 과정을 일명 [부팅](#부팅)(booting)이라 부르게 된 것이다.
 
 # BIOS
-**[BIOS](https://en.wikipedia.org/wiki/BIOS)**(Basic Input/Output System)는 [부팅](#부팅) 과정에 하드웨어를 초기화 및 진단하고, [디스크](Disk.md)에 저장된 [부트로더](#부트로더)를 [메모리](Memory.md)에 로드하여 운영체제의 [커널](Kernel.md)을 실행시키는 [메인보드](https://en.wikipedia.org/wiki/Motherboard) [펌웨어](https://en.wikipedia.org/wiki/Firmware)이다. [IBM](https://en.wikipedia.org/wiki/IBM)에서 개발한 전매 소프트웨어였으나, [역설계](https://ko.wikipedia.org/wiki/역공학)를 성공한 이후 호환 PC 기종이 대거 생산되며 [사실상 표준](https://en.wikipedia.org/wiki/De_facto_standard)이 되었다. 새로운 [UEFI](#uefi)의 등장으로, 이를 구분하기 위해 "레거시" BIOS라고 흔히 언급된다.
+**[BIOS](https://en.wikipedia.org/wiki/BIOS)**(Basic Input/Output System)는 [부팅](#부팅) 과정에 하드웨어를 초기화 및 진단하고, [디스크](Disk.md)에 저장된 [부트로더](#부트로더)를 [메모리](Memory.md)에 로드하여 [운영체제](https://en.wikipedia.org/wiki/Operating_system)의 [커널](Kernel.md)을 실행시키는 [메인보드](https://en.wikipedia.org/wiki/Motherboard) [펌웨어](https://en.wikipedia.org/wiki/Firmware)이다. [IBM](https://en.wikipedia.org/wiki/IBM)에서 개발한 전매 소프트웨어였으나, [역설계](https://ko.wikipedia.org/wiki/역공학)를 성공한 이후 호환 PC 기종이 대거 생산되며 [사실상 표준](https://en.wikipedia.org/wiki/De_facto_standard)이 되었다. 새로운 [UEFI](#uefi)의 등장으로, 이를 구분하기 위해 "레거시" BIOS라고 흔히 언급된다.
 
 BIOS가 부트 장치를 탐색하는 과정은 다음과 같다.
 
-![BIOS 부팅 과정](https://upload.wikimedia.org/wikipedia/commons/2/20/Legacy_BIOS_boot_process_fixed.png)
+![BIOS 부팅 순서도 (개략)](https://upload.wikimedia.org/wikipedia/commons/2/20/Legacy_BIOS_boot_process_fixed.png)
 
-콜드 부트(cold boot), 다시 말해 물리적 전원 버튼 또는 전력 공급으로 부팅이 시작된 경우 메인보드의 [ROM](https://ko.wikipedia.org/wiki/고정_기억_장치) 혹은 [플래시 메모리](https://ko.wikipedia.org/wiki/플래시_메모리)에 저장된 BIOS가 실행된다. BIOS에 의한 [POST](#시동-자체-시험) 절차가 마무리되면 [INT](Processor.md#인터럽트) [19h](https://en.wikipedia.org/wiki/BIOS_interrupt_call)를 호출하여 부트로더를 탐색, 로드, 그리고 실행한다. 부트로더가 위치한 [저장소](Disk.md)를 "부트 장치(boot device)"라고 부른다.
+[콜드 부트](https://en.wikipedia.org/wiki/Reboot#Cold)(cold boot), 다시 말해 물리적 전원 버튼 또는 전력 공급으로 부팅이 시작된 경우 메인보드의 [ROM](https://en.wikipedia.org/wiki/Read-only_memory) 혹은 [플래시 메모리](https://ko.wikipedia.org/wiki/플래시_메모리)에 저장된 BIOS가 실행된다. BIOS에 의한 [POST](#시동-자체-시험) 절차가 마무리되면 [INT](Processor.md#인터럽트) [19h](https://en.wikipedia.org/wiki/BIOS_interrupt_call)를 호출하여 부트로더를 탐색, 로드, 그리고 실행한다. 부트로더가 위치한 [저장소](Disk.md)를 "부트 장치(boot device)"라고 부른다.
 
 BIOS가 부트로더를 탐색하는 과정은 다음과 같다:
 
