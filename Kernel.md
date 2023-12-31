@@ -13,12 +13,12 @@
 본 부문에서 자주 인용될 "서비스"란, 호출 가능한 커널 루틴 혹은 그 집합을 의미한다.
 
 ### 모놀리식 커널
-[모놀리식 커널](https://ko.wikipedia.org/wiki/모놀리식_커널)(monolithic kernel)은 모든 서비스가 단일 프로그램으로 빌드되어 [커널 공간](Processor.md#프로세서-모드)에서 처리하는 구조이다. 단조로운 구조에 관리가 매우 편하고, 단일 프로그램에서 모든 커널 작업 및 서비스가 수행되니 성능 속도가 매우 빠르다. 단, 커널 공간의 특성상 사소한 오류가 시스템 전체에 영향을 줄 수 있는 위험이 항상 존재한다. 운영체제 런타임 도중에 장치 드라이버를 언제든지 불러올 수 있는 모듈성(modularity)을 지원한다.
+[모놀리식 커널](https://ko.wikipedia.org/wiki/모놀리식_커널)(monolithic kernel)은 모든 서비스가 단일 프로그램으로 빌드되어 [커널 공간](Processor.md#권한-수준)에서 처리하는 구조이다. 단조로운 구조에 관리가 매우 편하고, 단일 프로그램에서 모든 커널 작업 및 서비스가 수행되니 성능 속도가 매우 빠르다. 단, 커널 공간의 특성상 사소한 오류가 시스템 전체에 영향을 줄 수 있는 위험이 항상 존재한다. 운영체제 런타임 도중에 장치 드라이버를 언제든지 불러올 수 있는 모듈성(modularity)을 지원한다.
 
 마이크로소프트의 [MS-DOS](https://ko.wikipedia.org/wiki/MS-DOS) 및 [윈도우 9x](https://ko.wikipedia.org/wiki/윈도우_9x) 시리즈가 모놀리식 커널를 사용하였다.
 
 ### 마이크로커널
-[마이크로커널](https://ko.wikipedia.org/wiki/마이크로커널)(microkernel)은 운영체제 구동에서 기초적이지만 필연적인 저급 커널 서비스만을 제외한 나머지를 [사용자 공간](Processor.md#프로세서-모드)으로 분리시킨 구조이다: [스케줄링](Processor.md#스케줄링), 메모리 관리, 기초적인 [IPC](Process.md#프로세스-간-통신)가 최소한으로 마련되어야 할 서비스이다. 한편, 사용자 모드에서 고급 커널 서비스를 제공하는 프로그램들을 서버(server)라고 부른다.
+[마이크로커널](https://ko.wikipedia.org/wiki/마이크로커널)(microkernel)은 운영체제 구동에서 기초적이지만 필연적인 저급 커널 서비스만을 제외한 나머지를 [사용자 공간](Processor.md#권한-수준)으로 분리시킨 구조이다: [스케줄링](Processor.md#스케줄링), 메모리 관리, 기초적인 [IPC](Process.md#프로세스-간-통신)가 최소한으로 마련되어야 할 서비스이다. 한편, 사용자 모드에서 고급 커널 서비스를 제공하는 프로그램들을 서버(server)라고 부른다.
 
 > 마이크로커널의 기초적인 IPC 서비스는 사용자 모드에 위치한 서버 혹은 장치 드라이버 간 통신을 위해 반드시 필요한 기능이다.
 
@@ -49,7 +49,7 @@ Executive는 특정 작업을 수행하는 여러 구성원들로 이루어진 n
 ## 입출력 관리자
 
 ### 입출력 요청 패킷
-[입출력 요청 패킷](https://en.wikipedia.org/wiki/I/O_request_packet)(I/O request packet; [IRP](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/ns-wdm-_irp))은 [WDM](Driver.md#윈도우-드라이버-모델) 및 [윈도우 NT](Windows.md) [장치 드라이버](Driver.md)가 다른 드라이버 또는 운영체제와 통신하기 위해 사용하는 [커널 모드](Processor.md#프로세서-모드) [구조체](C.md#구조체)이다. I/O 요청에 대한 정보들을 구조체 포인터 하나만으로 참조할 수 있으며, 즉시 처리가 불가하면 큐에 대기될 수 있다. I/O 완료는 [`IoCompleteRequest`](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-iocompleterequest) 루틴에 해당 IRP 구조체의 포인터를 전달하여 입출력 관리자로 보고된다.
+[입출력 요청 패킷](https://en.wikipedia.org/wiki/I/O_request_packet)(I/O request packet; [IRP](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/ns-wdm-_irp))은 [WDM](Driver.md#윈도우-드라이버-모델) 및 [윈도우 NT](Windows.md) [장치 드라이버](Driver.md)가 다른 드라이버 또는 운영체제와 통신하기 위해 사용하는 [커널 모드](Processor.md#권한-수준) [구조체](C.md#구조체)이다. I/O 요청에 대한 정보들을 구조체 포인터 하나만으로 참조할 수 있으며, 즉시 처리가 불가하면 큐에 대기될 수 있다. I/O 완료는 [`IoCompleteRequest`](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-iocompleterequest) 루틴에 해당 IRP 구조체의 포인터를 전달하여 입출력 관리자로 보고된다.
 
 일반적으로 IRP는 입출력 관리자가 사용자 모드의 입출력 요청에 대응하여 생성되지만 [PnP 관리자](#pnp-관리자), [전원 관리자](#전원-관리자) 등의 다른 시스템 구성요소에 의해 생성되기도 한다. 심지어 드라이버가 생성하여 타 드라이버에게 전달될 수 있다.
 

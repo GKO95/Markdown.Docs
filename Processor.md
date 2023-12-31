@@ -71,25 +71,22 @@ ALU는 기본적으로 opcode와 피연산자를 입력받고, 해당 opcode 작
 ### 프로세서 점유
 프로세서가 ([시스템](Process.md#시스템-프로세스)) [프로세스](Process.md) (또는 스레드)로부터 [이미지](https://ko.wikipedia.org/wiki/실행_파일) 코드를 연산하고 처리하는 데 할애한 시간을 **[프로세서 시간](https://ko.wikipedia.org/wiki/CPU_타임)**(processor time)이라고 부른다. 프로세스의 프로세서 시간은 [스케줄링](#스케줄링)이나 입출력 요청 등에 의해 대기 혹은 준비 상태에 진입하여 처리되지 않는 동안 반영되지 않는다. 일정한 간격으로 샘플링된 시간 동안 스레드가 얼마나 오래 처리되었는지를 토대로 프로세서 점유율(%)이 계산된다.
 
-## 프로세서 모드
+## 보호 모드
+
+### 권한 수준
 > *참고: [User mode and kernel mode - Windows drivers | Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/user-mode-and-kernel-mode)*
 
-**[보호 링](https://ko.wikipedia.org/wiki/보호_링)**(protection ring)은 데이터와 기능을 결함과 위협적인 행위로부터 보호하는 메커니즘이다.
+보호 모드의 x86 계열 프로세서는 시스템의 데이터와 기능을 위협적인 행위나 결함으로부터 보호하는 [보호 링](https://en.wikipedia.org/wiki/Protection_ring)(protection ring) 매커니즘을 사용한다.
 
 ![x86 프로세서의 보호 링 다이어그램](https://upload.wikimedia.org/wikipedia/commons/2/2f/Priv_rings.svg)
 
-보호 링은 시스템 운영체제의 [권한](https://en.wikipedia.org/wiki/Privilege_(computing))(privilege) 구조를 이루는 계층으로써, CPU 구조가 하드웨어적으로 어떤 [모드](https://ko.wikipedia.org/wiki/CPU_모드)에 있는지에 따라 권한에 의해 제한된 일부 명령어들 활용 가능여부가 결정된다. 해당 명령어들은 CPU 및 메모리와 같은 하드웨어를 직접적으로 상호작용하므로 자칫 잘못하면 시스템에 치명적인 문제를 야기한다.
+보호 링은 시스템 운영체제의 [권한](https://en.wikipedia.org/wiki/Privilege_(computing)) 구조를 이루는 계층으로써, CPU 구조가 하드웨어적으로 어떤 [모드](https://en.wikipedia.org/wiki/CPU_modes)에 있는지에 따라 권한에 의해 제한된 일부 명령어들 활용 가능여부가 결정된다. 해당 명령어들은 CPU 및 메모리와 같은 하드웨어를 직접적으로 상호작용하므로 자칫 잘못하면 시스템에 치명적인 문제를 야기한다.
 
-[윈도우 NT](Windows.md) 운영체제는 만일을 대비해 x86 프로세서가 제공하는 네 개의 링 계층 중에서 오로지 Ring 0 그리고 Ring 3만 사용한다:
+[윈도우 NT](Windows.md)는 만일을 대비해 x86 계열 프로세서가 제공하는 네 개의 계층 중에서 오로지 Ring 0 그리고 Ring 3만 사용한다:
 
-<table style="width: 80%; margin: auto;">
-<caption style="caption-side: top;">윈도우 NT에서 사용하는 x86 프로세서 모드</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/보호_링#수퍼바이저_모드">커널 모드</a> (<a href="Kernel.md#커널">슈퍼바이저</a> 모드)</th><th style="text-align: center;">사용자 모드</th></tr></thead>
-<tbody><tr style="text-align: center;"><td>Ring 0</td><td>Ring 3</td></tr><tr><td>시스템에 민감한 영향을 줄 수 있는 입출력 동작이나 메모리 접근에 아무런 제약을 받지 않고 아키텍처의 모든 작업을 수행할 수 있다.</td><td>하드웨어 상호작용 및 커널 구성요소 접근에 대한 제한이 존재한다. 커널 함수가 필요하면 <a href="WinAPI.md#시스템-서비스">시스템 호출</a>을 통해 CPU를 커널 모드로 전환해야 한다.</td></tr><tr style="text-align: center;"><td><a href="Process.md#가상-주소-공간">가상 주소 공간</a>: 커널 공간</td><td><a href="Process.md#가상-주소-공간">가상 주소 공간</a>: 사용자 공간</td></tr><tr style="text-align: center;"><td><a href="Kernel.md#커널">커널</a> 및 <a href="Driver.md">드라이버</a></td><td>응용 프로그램의 <a href="Process.md">프로세스</a></td></tr></tbody>
-</table>
+<table style="width: 80%; margin: auto;"><caption style="caption-side: top;">윈도우 NT에서 사용하는 x86 프로세서 모드</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/보호_링#수퍼바이저_모드">커널 모드</a> (일명 <a href="Kernel.md#커널">슈퍼바이저</a> 모드)</th><th style="text-align: center;">사용자 모드</th></tr></thead><tbody><tr style="text-align: center;"><td>Ring 0</td><td>Ring 3</td></tr><tr><td>시스템에 민감한 영향을 줄 수 있는 입출력 동작이나 메모리 접근에 아무런 제약을 받지 않고 아키텍처의 모든 작업을 수행할 수 있다.</td><td>하드웨어 상호작용 및 커널 구성요소 접근에 대한 제한이 존재한다. 커널 함수가 필요하면 <a href="WinAPI.md#시스템-서비스">시스템 호출</a>을 통해 CPU를 커널 모드로 전환해야 한다.</td></tr><tr style="text-align: center;"><td><a href="Process.md#가상-주소-공간">가상 주소 공간</a>: 커널 공간</td><td><a href="Process.md#가상-주소-공간">가상 주소 공간</a>: 사용자 공간</td></tr><tr style="text-align: center;"><td><a href="Kernel.md#커널">커널</a> 및 <a href="Driver.md">드라이버</a></td><td>응용 프로그램의 <a href="Process.md">프로세스</a></td></tr></tbody></table>
 
-이렇게 보호 링이 분류된 이유는 "더 많은 제어에는 더 큰 책임이 뒤따른다"는 관점에서 비롯된다. 커널 모드의 프로그램 오동작은 시스템 전체에 충돌을 일으켜 [블루스크린](BSOD.md)을 야기하는 원인이기 때문에 매우 신중하게 개발되어야 한다.
+커널 모드의 프로그램 오동작은 시스템 전체에 충돌을 일으켜 [블루스크린](BSOD.md)을 야기하는 원인이기 때문에 매우 신중하게 개발되어야 한다.
 
 # 스케줄링
 **[스케줄링](https://ko.wikipedia.org/wiki/스케줄링_(컴퓨팅))**(scheduling)이란, *작업*을 실행하기 위해 필요한 *리소스*를 할당시키는 행위를 가리킨다. 본 문서의 문맥에 의하면 *작업*은 [프로세스](Process.md) 또는 [스레드](Process.md#스레드)가 해당하며, *리소스*는 [프로세서](#프로세서)를 가리킨다. 즉, "프로세서에 프로세스 (또는 스레드)를 할당"하는 게 아니라는 점에서 확실한 개념에 유의하도록 한다. 스케줄링을 담당하는 프로그램을 [**스케줄러**](https://en.wikipedia.org/wiki/Scheduling_(computing)#SCHEDULER)라고 부른다. 스케줄링 덕분에 단일 코어 프로세서를 탑재한 운영체제에서도 [멀티태스킹](https://ko.wikipedia.org/wiki/다중작업)이 가능해져 여러 프로그램 및 기능을 동시에 실행할 수 있는 것처럼 구현한다.

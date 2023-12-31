@@ -67,7 +67,7 @@
 `HKLM\SYSTEM\CurrentControlSet\Control\WMI\GlobalLogger`에 세션 GUID를 이름으로 한 하위 레지스트리 키를 생성하여 세션 정보를 값으로 저장하는 방식이다. 시스템 부팅마다 운영되므로, 이를 방지하려면 Start 값을 0으로 설정하거나 전부 삭제해야 한다.
 
 ### 개인 추적 세션
-**[개인 추적 세션](https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/trace-session#private-trace-sessions)**(private trace session), 일명 사용자 모드 추적 세션(user-mode trace session)은 [사용자 모드](Processor.md#프로세서-모드)의 [프로세스](Process.md)에서 운영되는 추적 세션이며, 오로지 동일 프로세스의 추적 제공자가 생성한 메시지만 로깅한다 (위에서 소개한 일반 추적 세션들은 모두 [커널 모드](Processor.md#프로세서-모드)에서 운영된다). 비록 최대 64개의 동시 운영 가능한 세션 개수에 해당하지 않으나, 각 프로세스마다 운영할 수 있는 개인 추적 세션은 한 개로 제한된다.
+**[개인 추적 세션](https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/trace-session#private-trace-sessions)**(private trace session), 일명 사용자 모드 추적 세션(user-mode trace session)은 [사용자 모드](Processor.md#권한-수준)의 [프로세스](Process.md)에서 운영되는 추적 세션이며, 오로지 동일 프로세스의 추적 제공자가 생성한 메시지만 로깅한다 (위에서 소개한 일반 추적 세션들은 모두 [커널 모드](Processor.md#권한-수준)에서 운영된다). 비록 최대 64개의 동시 운영 가능한 세션 개수에 해당하지 않으나, 각 프로세스마다 운영할 수 있는 개인 추적 세션은 한 개로 제한된다.
 
 다음은 개인 추적 세션의 몇 가지 특징을 소개한다:
 
