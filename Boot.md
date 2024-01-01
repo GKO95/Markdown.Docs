@@ -81,7 +81,7 @@ UEFI가 부트 장치를 탐색하는 과정은 다음과 같다.
 텍스트 기반의 사용자 인터페이스를 갖춘 부트 매니저가 널러 배포되면서 사용자가 원하는 운영체제를 부트 옵션에서 선택할 수 있다.
 
 ## GUID 파티션 테이블
-**[GUID 파티션 테이블](https://en.wikipedia.org/wiki/GUID_Partition_Table)**(GUID Partition Table)
+**[GUID 파티션 테이블](https://en.wikipedia.org/wiki/GUID_Partition_Table)**(GUID Partition Table; GPT)
 
 ### EFI 시스템 파티션
 **[EFI 시스템 파티션](https://en.wikipedia.org/wiki/EFI_system_partition)**(EFI system partition; ESP)은 부팅될 때 UEFI 펌웨어가 불러올 파일들이 위치한 [데이터 저장 매체](Disk.md)의 [파티션](Disk.md#파티션)이다. UEFI 규격은 해당 파티션을 [FAT](https://en.wikipedia.org/wiki/File_Allocation_Table) [파일 시스템](https://en.wikipedia.org/wiki/File_system)에 기반할 것을 규정했으며, 안에는 다음과 같은 데이터 및 파일이 저장되어 있다.
