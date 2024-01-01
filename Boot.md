@@ -23,7 +23,7 @@ ROM에 저장된 UEFI 혹은 BIOS 펌웨어가 실행되면 가장 먼저 [POST]
 ## 부트로더
 **[부트로더](https://en.wikipedia.org/wiki/Bootloader)**(bootloader), 일명 **[부트스트랩](#부트스트랩) 로더**(bootstrap loader)는 컴퓨터 부팅 과정 중에서 설치된 운영체제의 [커널](Kernel.md)을 불러와 실행하는 프로그램이다. UEFI 부팅에서는 **부트 관리자**(boot manager)라는 용어가 흔히 언급된 걸 찾아볼 수 있다.
 
-* [윈도우 부트 관리자](https://en.wikipedia.org/wiki/Windows_Boot_Manager): 일명 `BOOTMGR`은 [윈도우 NT](Windows.md)를 위한 부트로더이다.
+* [윈도우 부트 관리자](#윈도우-부트-관리자): 일명 `BOOTMGR`은 [윈도우 NT](Windows.md)를 위한 부트로더이다.
 * [GNU GRUB](https://en.wikipedia.org/wiki/GNU_GRUB): GNU 프로젝트의 일환으로 UNIX 기반의 운영체제를 위한 부트로더이다.
 
 ### 부트스트랩
@@ -51,6 +51,8 @@ BIOS가 부트로더를 탐색하는 과정은 다음과 같다:
 이후 BIOS는 메모리로 불러온 부트 섹터에게 PC 제어권을 양도한다. 다만, BIOS는 시그니처 바이트를 확인하는 것 외에 부트 섹터의 내용물을 판독하지 않는다.
 
 ## 부트 섹터
+> *참고: [BIOS/MBR-based hard drive partitions | Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/configure-biosmbr-based-hard-drive-partitions)*
+
 **[부트 섹터](https://en.wikipedia.org/wiki/Boot_sector)**(boot sector)는 시스템을 부팅하기 위해 필요한 코드, 즉 [부트로더](#부트로더)가 담겨있는 [저장소](Disk.md)의 [섹터](Disk.md#섹터)이다. 일반적으로 [파티션](Disk.md#파티션)에 포함되지 않는 디스크의 가장 첫 섹터를 가리키며, 부트 섹터를 포함한 [디스크](Disk.md)를 "부트 장치(boot device)"라고 부른다.
 
 다음은 [IBM PC 호환기종](https://en.wikipedia.org/wiki/IBM_PC_compatible)에 사용되는 부트 섹터의 유형을 소개한다:
@@ -59,13 +61,17 @@ BIOS가 부트로더를 탐색하는 과정은 다음과 같다:
 * [볼륨 부트 레코드](#볼륨-부트-레코드)(VBR)
 
 ### 마스터 부트 레코드
-**[마스터 부트 레코드](https://en.wikipedia.org/wiki/Master_boot_record)**(master boot record; MBR)는 [IBM PC 호환기종](https://en.wikipedia.org/wiki/IBM_PC_compatible)을 위한 부트 섹터의 한 유형이며, [HDD](https://en.wikipedia.org/wiki/Hard_disk_drive) 또는 [SSD](https://en.wikipedia.org/wiki/Solid-state_drive) 등의 파티션을 나눌 수 있는 [대용량 저장 매체](Disk.md)([휴대용](https://en.wikipedia.org/wiki/Disk_enclosure) 포함)가 대상이다. 부트로더 뿐만 아니라, 해당 디스크의 [파티션 정보](https://en.wikipedia.org/wiki/Master_boot_record#PT)도 MBR에 저장되어 있다.
+**[마스터 부트 레코드](https://en.wikipedia.org/wiki/Master_boot_record)**(master boot record; MBR)는 [IBM PC 호환기종](https://en.wikipedia.org/wiki/IBM_PC_compatible)을 위한 부트 섹터의 한 유형이며, [HDD](https://en.wikipedia.org/wiki/Hard_disk_drive) 또는 [SSD](https://en.wikipedia.org/wiki/Solid-state_drive) 등의 파티션을 나눌 수 있는 [대용량 저장 매체](Disk.md)([휴대용](https://en.wikipedia.org/wiki/Disk_enclosure) 포함)가 대상이다. 부트로더 뿐만 아니라, 해당 디스크의 [파티션 정보](https://en.wikipedia.org/wiki/Master_boot_record#PT)도 MBR에 저장되어 있다 (최대 네 개의 주 파티션까지 지원). 하지만 MBR 파티션 크기는 512 바이트로 제한되어, 부팅 과정에 [VBR](#볼륨-부트-레코드)이 함께 동원되기도 한다.
+
+[윈도우 NT](Windows.md)의 경우, MBR의 부트로더는 [부트 플래그](https://en.wikipedia.org/wiki/Boot_flag)가 설정된 부팅 대상의 [활성 파티션](https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/computer-not-start-active-partition)(active partition)을 탐색하는 용도로 사용된다.
 
 ### 볼륨 부트 레코드
-**[볼륨 부트 레코드](https://en.wikipedia.org/wiki/Volume_boot_record)**(volume boot record; VBR)는 [IBM PC 호환기종](https://en.wikipedia.org/wiki/IBM_PC_compatible)을 위한 부트 섹터의 한 유형이며, 다음 두 경우가 대상이다.
+**[볼륨 부트 레코드](https://en.wikipedia.org/wiki/Volume_boot_record)**(volume boot record; VBR)는 [IBM PC 호환기종](https://en.wikipedia.org/wiki/IBM_PC_compatible)을 위한 부트 섹터의 한 유형이며, 간혹 **파티션 부트 레코드**(partition boot record; PBR)라고 언급되기도 한다. VBR은 다음 두 경우의 볼륨에서 찾아볼 수 있다.
 
-* 파티션을 나눌 수 없는 [플로피 디스크](https://en.wikipedia.org/wiki/Floppy_disk), [CD](https://en.wikipedia.org/wiki/Compact_disc) 및 [DVD](https://en.wikipedia.org/wiki/DVD) 등의 데이터 저장 매체의 부트 섹터가 해당한다.
-* 파티션을 나눌 수 있는 대용량 저장 매체에서 각 파티션의 첫 번째 섹터가 해당한다. 디스크 전반의 첫 번째 섹터는 여전히 MBR로써 파티션 정보를 저장하고 있다.
+1. 파티션을 나눌 수 없는 [플로피 디스크](https://en.wikipedia.org/wiki/Floppy_disk), [CD](https://en.wikipedia.org/wiki/Compact_disc) 및 [DVD](https://en.wikipedia.org/wiki/DVD) 등의 데이터 저장 매체의 부트 섹터가 해당한다.
+1. 파티션을 나눌 수 있는 대용량 저장 매체에서 각 파티션의 첫 번째 섹터가 해당한다. 디스크 전반의 첫 번째 섹터는 여전히 MBR로써 파티션 정보를 저장하고 있다.
+
+[윈도우 NT](Windows.md)에서 [MBR](#마스터-부트-레코드)이 활성 파티션을 발견할 경우, 해당 파티션의 VBR 부트로드는 활성 파티션으로부터 [`BOOTMGR`](#윈도우-부트-관리자) 파일을 탐색 및 실행한다.
 
 # UEFI
 > *참고: [Boot and UEFI - Windows drivers | Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/bringup/boot-and-uefi)*
@@ -79,6 +85,8 @@ UEFI가 부트 장치를 탐색하는 과정은 다음과 같다.
 시스템에 전원이 들어오면 부트 관리자는 [NVRAM](https://ko.wikipedia.org/wiki/비휘발성_메모리)에 저장된 설정을 확인하고, 이를 기반으로 특정 운영체제 부트로더 혹은 커널을 실행한다. UEFI는 컴퓨터 아키텍처마다 표준화된 파일 경로에 의존하여 부트로더를 스스로 찾아낼 수 있는데, USB 플래시 드라이브와 같은 장치로도 간편한 부팅을 가능케 한다.
 
 ## GUID 파티션 테이블
+> *참고: [UEFI/GPT-based hard drive partitions | Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/configure-biosmbr-based-hard-drive-partitions)*
+
 **[GUID 파티션 테이블](https://en.wikipedia.org/wiki/GUID_Partition_Table)**(GUID Partition Table; GPT)
 
 ### EFI 시스템 파티션
@@ -93,3 +101,6 @@ ESP는 디스크의 첫 번째 섹터를 사용하지 않기 때문에 [MBR](#�
 
 ### 호환성 지원 모듈
 **[호환성 지원 모듈](https://en.wikipedia.org/wiki/UEFI#CSM_booting)**(Compatibility Support Module; CSM)
+
+# 윈도우 부트 관리자
+**[윈도우 부트 관리자](https://en.wikipedia.org/wiki/Windows_Boot_Manager)**(Windows Boot Manager), 또는 간략히 **부트 관리자**는 [윈도우 NT](Windows.md)의 [부트로더](#부트로더)이다.
