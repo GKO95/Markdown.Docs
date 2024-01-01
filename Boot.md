@@ -21,7 +21,7 @@ ROM에 저장된 UEFI 혹은 BIOS 펌웨어가 실행되면 가장 먼저 [POST]
 **[시동 자체 시험](https://ko.wikipedia.org/wiki/시동_자체_시험)**(Power-on self-test; POST)은 컴퓨터나 타 디지털 전자 장치가 전원을 공급받는 즉시 실행된 ([UEFI](#uefi) 혹은 [BIOS](#bios)) 펌웨어에서 하드웨어 초기화 및 상태를 진단하는 절차이다. 흔히 [메인보드](https://ko.wikipedia.org/wiki/메인보드) 제조사 또는 OEM 로고가 표시되는 화면에 해당한다. POST 진단 결과는 디스플레이 화면에 출력되거나 별도의 진단 도구로부터 확인할 수 있도록 저장된다. 만일 화면 출력 기능에 문제가 있을 경우를 대비하여 LED 또는 경고음을 통해 오류 코드를 알릴 수 있는 장치가 마련되어 있다.
 
 ## 부트로더
-**[부트로더](https://en.wikipedia.org/wiki/Bootloader)**(bootloader)는 컴퓨터 부팅 과정 중에서 설치된 운영체제의 [커널](Kernel.md)을 불러와 실행하는 프로그램이다. 다른 명칭으로 **[부트스트랩](#부트스트랩) 로더**(bootstrap loader) 또는 **부트 관리자**(boot manager)라고도 불린다.
+**[부트로더](https://en.wikipedia.org/wiki/Bootloader)**(bootloader), 일명 **[부트스트랩](#부트스트랩) 로더**(bootstrap loader)는 컴퓨터 부팅 과정 중에서 설치된 운영체제의 [커널](Kernel.md)을 불러와 실행하는 프로그램이다. UEFI 부팅에서는 **부트 관리자**(boot manager)라는 용어가 흔히 언급된 걸 찾아볼 수 있다.
 
 * [윈도우 부트 관리자](https://en.wikipedia.org/wiki/Windows_Boot_Manager): 일명 `BOOTMGR`은 [윈도우 NT](Windows.md)를 위한 부트로더이다.
 * [GNU GRUB](https://en.wikipedia.org/wiki/GNU_GRUB): GNU 프로젝트의 일환으로 UNIX 기반의 운영체제를 위한 부트로더이다.
@@ -70,15 +70,28 @@ BIOS가 부트로더를 탐색하는 과정은 다음과 같다:
 # UEFI
 > *참고: [Boot and UEFI - Windows drivers | Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/bringup/boot-and-uefi)*
 
-**[UEFI](https://en.wikipedia.org/wiki/UEFI)**(Unified Extensible Firmware Interface)는 [BIOS](#bios)의 기술적 한계를 극복하기 위해 설계된 [펌웨어](https://en.wikipedia.org/wiki/Firmware) 구조를 정의하는 규격이다. [인텔](https://www.intel.com/)에서 최초로 *EFI* 규격을 개발하였으나, 차후 [UEFI 포럼](https://en.wikipedia.org/wiki/UEFI_Forum)이란 산업 [컨소시엄](https://en.wikipedia.org/wiki/Consortium)에 합류하며 2006년에 *UEFI* [개방형 표준](https://en.wikipedia.org/wiki/Open_standard)을 발표하였다.
+**[UEFI](https://en.wikipedia.org/wiki/UEFI)**(Unified Extensible Firmware Interface)는 [BIOS](#bios)의 기술적 한계를 극복하기 위해 설계된 [펌웨어](https://en.wikipedia.org/wiki/Firmware) 구조를 정의하는 규격이다. [인텔](https://www.intel.com/)에서 최초로 *EFI* 규격을 개발하였으나, 차후 [UEFI 포럼](https://en.wikipedia.org/wiki/UEFI_Forum)이란 산업 [컨소시엄](https://en.wikipedia.org/wiki/Consortium)에 합류하며 2006년에 *UEFI* [개방형 표준](https://en.wikipedia.org/wiki/Open_standard)을 발표하였다. 대표적으로 [TianoCore EDK II](https://en.wikipedia.org/wiki/TianoCore_EDK_II), [Pheonix SecureCore](https://www.phoenix.com/phoenix-securecore/), [InsydeH2O](https://www.insyde.com/products) 등이 구현되었으며, 이들을 통상 "UEFI 펌웨어"라고 부른다.
 
 UEFI가 부트 장치를 탐색하는 과정은 다음과 같다.
 
-![UEFI 부팅 과정](https://upload.wikimedia.org/wikipedia/commons/1/17/UEFI_boot_process.png)
+![UEFI 부팅 순서도 (개략)](https://upload.wikimedia.org/wikipedia/commons/1/17/UEFI_boot_process.png)
 
 시스템에 전원이 들어오면 부트 관리자는 [NVRAM](https://ko.wikipedia.org/wiki/비휘발성_메모리)에 저장된 설정을 확인하고, 이를 기반으로 특정 운영체제 부트로더 혹은 커널을 실행한다. UEFI는 컴퓨터 아키텍처마다 표준화된 파일 경로에 의존하여 부트로더를 스스로 찾아낼 수 있는데, USB 플래시 드라이브와 같은 장치로도 간편한 부팅을 가능케 한다.
 
 텍스트 기반의 사용자 인터페이스를 갖춘 부트 매니저가 널러 배포되면서 사용자가 원하는 운영체제를 부트 옵션에서 선택할 수 있다.
 
-## EFI 시스템 파티션
-[EFI 시스템 파티션](https://en.wikipedia.org/wiki/EFI_system_partition), 일명 ESP는 UEFI 시스템에 탑재된 [보조 기억 장치](https://en.wikipedia.org/wiki/Computer_data_storage#Secondary_storage)의 파티션으로써, 부팅 당시 UEFI 펌웨어는 설치된 운영체제 및 다양한 유틸리티를 실행하기 위해 ESP에 위치한 파일을 불러온다. ESP 안에는 다른 파티션에 설치된 모든 운영체제의 부트로더 또는 커널 이미지, 컴퓨터에 인식된 하드웨어 장치 중 펌웨어가 부팅 단계에서 필요로 하는 장치 드라이버 파일, 운영체제가 부팅되기 전에 먼저 실행되어야 하는 시스템 유틸리티 프로그램, 그리고 오류 로그와 같은 데이터 파일이 저장된다.
+## GUID 파티션 테이블
+**[GUID 파티션 테이블](https://en.wikipedia.org/wiki/GUID_Partition_Table)**(GUID Partition Table)
+
+### EFI 시스템 파티션
+**[EFI 시스템 파티션](https://en.wikipedia.org/wiki/EFI_system_partition)**(EFI system partition; ESP)은 부팅될 때 UEFI 펌웨어가 불러올 파일들이 위치한 [데이터 저장 매체](Disk.md)의 [파티션](Disk.md#파티션)이다. UEFI 규격은 해당 파티션을 [FAT](https://en.wikipedia.org/wiki/File_Allocation_Table) [파일 시스템](https://en.wikipedia.org/wiki/File_system)에 기반할 것을 규정했으며, 안에는 다음과 같은 데이터 및 파일이 저장되어 있다.
+
+* 설치된 모든 [운영체제](https://en.wikipedia.org/wiki/Operating_system)의 [부트로더](#부트로더) (실제 운영체제는 다른 파티션에 설치)
+* 부팅 단계에서 UEFI 펌웨어가 사용할 [컴퓨터 하드웨어](https://en.wikipedia.org/wiki/Computer_hardware)의 [장치 드라이버](Driver.md)
+* 운영체제 부팅 전에 먼저 실행되어야 할 시스템 유틸리티 프로그램
+* 데이터 파일 (예를 들어, 오류 로그 등)
+
+ESP는 디스크의 첫 번째 섹터를 사용하지 않기 때문에 [MBR](#마스터-부트-레코드)로 사용될 수 있다. 즉, UEFI 펌웨어는 [CSM](#호환성-지원-모듈)으로부터 레거시 BIOS 부팅을 충분히 지원할 수 있다. [GPT](#guid-파티션-테이블)는 EFI 시스템 파티션을 [GUID](https://en.wikipedia.org/wiki/Universally_unique_identifier) `C12A7328-F81F-11D2-BA4B-00A0C93EC93B`로 식별한다.
+
+### 호환성 지원 모듈
+**[호환성 지원 모듈](https://en.wikipedia.org/wiki/UEFI#CSM_booting)**(Compatibility Support Module; CSM)
