@@ -40,9 +40,7 @@ BIOS가 부트 장치를 탐색하는 과정은 다음과 같다.
 
 ![BIOS 부팅 순서도 (개략)](https://upload.wikimedia.org/wikipedia/commons/2/20/Legacy_BIOS_boot_process_fixed.png)
 
-[콜드 부트](https://en.wikipedia.org/wiki/Reboot#Cold)(cold boot), 다시 말해 물리적 전원 버튼 또는 전력 공급으로 부팅이 시작된 경우 메인보드의 [ROM](https://en.wikipedia.org/wiki/Read-only_memory) 혹은 [플래시 메모리](https://ko.wikipedia.org/wiki/플래시_메모리)에 저장된 BIOS가 실행된다. BIOS에 의한 [POST](#시동-자체-시험) 절차가 마무리되면 [INT](Processor.md#인터럽트) [19h](https://en.wikipedia.org/wiki/BIOS_interrupt_call)를 호출하여 부트로더를 탐색, 로드, 그리고 실행한다. 부트로더가 위치한 [저장소](Disk.md)를 "부트 장치(boot device)"라고 부른다.
-
-BIOS가 부트로더를 탐색하는 과정은 다음과 같다:
+[리셋 벡터](#부팅)가 가리킨 [ROM](https://en.wikipedia.org/wiki/Read-only_memory)에 저장된 BIOS 펌웨어가 실행되면 먼저 POST 진단을 진행한다. 하드웨어 진단을 통과하면, [INT](Processor.md#인터럽트) [19h](https://en.wikipedia.org/wiki/BIOS_interrupt_call)를 호출하여 부트로더를 탐색, 로드, 그리고 실행하도록 한다. 부트로더가 위치한 [저장 매체](Disk.md)를 "부트 장치(boot device)"라고 부르며, BIOS가 부트로더를 탐색하는 과정은 다음과 같다:
 
 1. BIOS 설정이 저장된 [비휘발성 메모리](https://en.wikipedia.org/wiki/Nonvolatile_BIOS_memory)(대표적으로 [CMOS](https://en.wikipedia.org/wiki/CMOS))로부터 부트 장치 목록을 지정한 순서대로 살펴본다.
 1. 부트 장치의 [부트 섹터](#부트-섹터)(즉, [MBR](#마스터-부트-레코드))를 메모리로 불러오고, 만일 해당 섹터를 읽을 수 없다면 다음 부트 장치로 넘어간다.
