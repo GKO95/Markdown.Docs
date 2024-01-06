@@ -1,5 +1,5 @@
 # WaaS
-[Windows as a Service](https://learn.microsoft.com/en-us/windows/deployment/update/waas-overview), 일명 WaaS는 [윈도우 NT](Windows.md)의 운영체제 파일, 레지스트리 값, 또는 시스템 상태 구성을 변경하는 모든 작업을 일컫는다. [윈도우 업데이트](#윈도우-업데이트), 역할 및 기능 추가, 또는 [드라이버](Driver.md) 설치 등이 전부 윈도우 서비스에 해당한다.
+[Windows as a Service](https://learn.microsoft.com/en-us/windows/deployment/update/waas-overview), 일명 WaaS는 [윈도우 NT](Windows.md)의 시스템 파일, 레지스트리, 시스템 상태 구성 등을 변경하는 모든 작업을 일컫는다. 과거에는 윈도우 OS 및 [서비스 팩](https://en.wikipedia.org/wiki/Service_pack)(現 누적 업데이트)이 3-5년 주기로 출시되면 이를 직접 구하여 설치해야 하였다. 윈도우 10부터 소규모 [업데이트](#윈도우-업데이트)가 2-4주 간격으로 제공되는 방식으로 바뀌며, 이를 "서비스(servicing)"이라고 부른다. 즉, 윈도우 이미지 및 업데이트 배포, 역할 및 기능 추가, 또는 [드라이버](Driver.md) 설치 등이 전부 윈도우 서비스에 해당한다.
 
 본 문서에 앞서 마이크로소프트에서 사용되는 소프트웨어 [업데이트 용어](https://learn.microsoft.com/en-us/troubleshoot/windows-client/deployment/standard-terminology-software-updates)를 소개한다.
 
