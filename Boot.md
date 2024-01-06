@@ -34,13 +34,13 @@ ROM에 저장된 UEFI 혹은 BIOS 펌웨어가 실행되면 가장 먼저 [POST]
 컴퓨터에 전력이 공급되는 시점부터 운영체제가 로드될 때까지 자력으로 해내는 부트스트랩 과정을 일명 [부팅](#부팅)(booting)이라 부르게 된 것이다.
 
 # BIOS
-**[BIOS](https://en.wikipedia.org/wiki/BIOS)**(Basic Input/Output System)는 [부팅](#부팅) 과정에 하드웨어를 초기화 및 진단하고, [디스크](Disk.md)에 저장된 [부트로더](#부트로더)를 [메모리](Memory.md)에 로드하여 [운영체제](https://en.wikipedia.org/wiki/Operating_system)의 [커널](Kernel.md)을 실행시키는 [메인보드](https://en.wikipedia.org/wiki/Motherboard) [펌웨어](https://en.wikipedia.org/wiki/Firmware)이다. [IBM](https://en.wikipedia.org/wiki/IBM)에서 개발한 전매 소프트웨어였으나, [역설계](https://ko.wikipedia.org/wiki/역공학)를 성공한 이후 호환 PC 기종이 대거 생산되며 [사실상 표준](https://en.wikipedia.org/wiki/De_facto_standard)이 되었다. 새로운 [UEFI](#uefi)의 등장으로, 이를 구분하기 위해 "레거시" BIOS라고 흔히 언급된다.
+**[BIOS](https://en.wikipedia.org/wiki/BIOS)**(Basic Input/Output System)는 [부팅](#부팅) 과정에 하드웨어를 초기화 및 진단하고, [디스크](Storage.md)에 저장된 [부트로더](#부트로더)를 [메모리](Memory.md)에 로드하여 [운영체제](https://en.wikipedia.org/wiki/Operating_system)의 [커널](Kernel.md)을 실행시키는 [메인보드](https://en.wikipedia.org/wiki/Motherboard) [펌웨어](https://en.wikipedia.org/wiki/Firmware)이다. [IBM](https://en.wikipedia.org/wiki/IBM)에서 개발한 전매 소프트웨어였으나, [역설계](https://ko.wikipedia.org/wiki/역공학)를 성공한 이후 호환 PC 기종이 대거 생산되며 [사실상 표준](https://en.wikipedia.org/wiki/De_facto_standard)이 되었다. 새로운 [UEFI](#uefi)의 등장으로, 이를 구분하기 위해 "레거시" BIOS라고 흔히 언급된다.
 
 BIOS가 부트 장치를 탐색하는 과정은 다음과 같다.
 
 ![BIOS 부팅 순서도 (개략)](https://upload.wikimedia.org/wikipedia/commons/2/20/Legacy_BIOS_boot_process_fixed.png)
 
-[리셋 벡터](#부팅)가 가리킨 [ROM](https://en.wikipedia.org/wiki/Read-only_memory)에 저장된 BIOS 펌웨어가 실행되면 먼저 POST 진단을 진행한다. 하드웨어 진단을 통과하면, [INT](Processor.md#인터럽트) [19h](https://en.wikipedia.org/wiki/BIOS_interrupt_call)를 호출하여 부트로더를 탐색, 로드, 그리고 실행하도록 한다. 부트로더가 위치한 [저장 매체](Disk.md)를 "부트 장치(boot device)"라고 부르며, BIOS가 부트로더를 탐색하는 과정은 다음과 같다:
+[리셋 벡터](#부팅)가 가리킨 [ROM](https://en.wikipedia.org/wiki/Read-only_memory)에 저장된 BIOS 펌웨어가 실행되면 먼저 [POST](#시동-자체-시험)를 진행한다. 하드웨어 초기화 및 진단을 통과하면 [INT](Processor.md#인터럽트) [19h](https://en.wikipedia.org/wiki/BIOS_interrupt_call)를 호출하여 부트로더를 탐색, 로드, 그리고 실행하도록 한다. 부트로더가 위치한 [저장 매체](Storage.md)를 "부트 장치(boot device)"라고 부르며, BIOS가 부트로더를 탐색하는 과정은 다음과 같다:
 
 1. BIOS 펌웨어는 [비휘발성 메모리](https://en.wikipedia.org/wiki/Nonvolatile_BIOS_memory)(대표적으로 [CMOS](https://en.wikipedia.org/wiki/CMOS))에 저장된 BIOS 설정으로부터 부트 장치 목록을 지정한 순서대로 살펴본다.
 1. 부트 장치의 [부트 섹터](#부트-섹터)(즉, [MBR](#마스터-부트-레코드))를 메모리로 불러오고, 만일 해당 섹터를 읽을 수 없다면 다음 부트 장치로 넘어간다.
@@ -51,7 +51,7 @@ BIOS가 부트 장치를 탐색하는 과정은 다음과 같다.
 ## 부트 섹터
 > *참고: [BIOS/MBR-based hard drive partitions | Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/configure-biosmbr-based-hard-drive-partitions)*
 
-**[부트 섹터](https://en.wikipedia.org/wiki/Boot_sector)**(boot sector)는 시스템을 부팅하기 위해 필요한 코드, 즉 [부트로더](#부트로더)가 담겨있는 [저장소](Disk.md)의 [섹터](Disk.md#섹터)이다. 일반적으로 [파티션](Disk.md#파티션)에 포함되지 않는 디스크의 가장 첫 섹터를 가리키며, 부트 섹터를 포함한 [디스크](Disk.md)를 "부트 장치(boot device)"라고 부른다.
+**[부트 섹터](https://en.wikipedia.org/wiki/Boot_sector)**(boot sector)는 시스템을 부팅하기 위해 필요한 코드, 즉 [부트로더](#부트로더)가 담겨있는 [저장소](Storage.md)의 [섹터](Storage.md#섹터)이다. 일반적으로 [파티션](Storage.md#파티션)에 포함되지 않는 디스크의 가장 첫 섹터를 가리키며, 부트 섹터를 포함한 [디스크](Storage.md)를 "부트 장치(boot device)"라고 부른다.
 
 다음은 [IBM PC 호환기종](https://en.wikipedia.org/wiki/IBM_PC_compatible)에 사용되는 부트 섹터의 유형을 소개한다:
 
@@ -59,7 +59,7 @@ BIOS가 부트 장치를 탐색하는 과정은 다음과 같다.
 * [볼륨 부트 레코드](#볼륨-부트-레코드)(VBR)
 
 ### 마스터 부트 레코드
-**[마스터 부트 레코드](https://en.wikipedia.org/wiki/Master_boot_record)**(master boot record; MBR)는 [IBM PC 호환기종](https://en.wikipedia.org/wiki/IBM_PC_compatible)을 위한 부트 섹터의 한 유형이며, [HDD](https://en.wikipedia.org/wiki/Hard_disk_drive) 또는 [SSD](https://en.wikipedia.org/wiki/Solid-state_drive) 등의 파티션을 나눌 수 있는 [대용량 저장 매체](Disk.md)([휴대용](https://en.wikipedia.org/wiki/Disk_enclosure) 포함)가 대상이다. 부트로더 뿐만 아니라, 해당 디스크의 [파티션 정보](https://en.wikipedia.org/wiki/Master_boot_record#PT)도 MBR에 저장되어 있다 (최대 네 개의 주 파티션까지 지원). 하지만 MBR 파티션 크기는 512 바이트로 제한되어, 부팅 과정에 [VBR](#볼륨-부트-레코드)이 함께 동원되기도 한다.
+**[마스터 부트 레코드](https://en.wikipedia.org/wiki/Master_boot_record)**(master boot record; MBR)는 [IBM PC 호환기종](https://en.wikipedia.org/wiki/IBM_PC_compatible)을 위한 부트 섹터의 한 유형이며, [HDD](https://en.wikipedia.org/wiki/Hard_disk_drive) 또는 [SSD](https://en.wikipedia.org/wiki/Solid-state_drive) 등의 파티션을 나눌 수 있는 [대용량 저장 매체](Storage.md)([휴대용](https://en.wikipedia.org/wiki/Disk_enclosure) 포함)가 대상이다. 부트로더 뿐만 아니라, 해당 디스크의 [파티션 정보](https://en.wikipedia.org/wiki/Master_boot_record#PT)도 MBR에 저장되어 있다 (최대 네 개의 주 파티션까지 지원). 하지만 MBR 파티션 크기는 512 바이트로 제한되어, 부팅 과정에 [VBR](#볼륨-부트-레코드)이 함께 동원되기도 한다.
 
 [윈도우 NT](Windows.md)의 경우, MBR의 부트로더는 [부트 플래그](https://en.wikipedia.org/wiki/Boot_flag)가 설정된 부팅 대상의 [활성 파티션](https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/computer-not-start-active-partition)(active partition)을 탐색하는 용도로 사용된다.
 
@@ -88,7 +88,7 @@ UEFI가 부트 장치를 탐색하는 과정은 다음과 같다.
 **[GUID 파티션 테이블](https://en.wikipedia.org/wiki/GUID_Partition_Table)**(GUID Partition Table; GPT)
 
 ### EFI 시스템 파티션
-**[EFI 시스템 파티션](https://en.wikipedia.org/wiki/EFI_system_partition)**(EFI system partition; ESP)은 부팅될 때 UEFI 펌웨어가 불러올 파일들이 위치한 [데이터 저장 매체](Disk.md)의 [파티션](Disk.md#파티션)이다. UEFI 규격은 해당 파티션을 [FAT](https://en.wikipedia.org/wiki/File_Allocation_Table) [파일 시스템](https://en.wikipedia.org/wiki/File_system)에 기반할 것을 규정했으며, 안에는 다음과 같은 데이터 및 파일이 저장되어 있다.
+**[EFI 시스템 파티션](https://en.wikipedia.org/wiki/EFI_system_partition)**(EFI system partition; ESP)은 부팅될 때 UEFI 펌웨어가 불러올 파일들이 위치한 [데이터 저장 매체](Storage.md)의 [파티션](Storage.md#파티션)이다. UEFI 규격은 해당 파티션을 [FAT](https://en.wikipedia.org/wiki/File_Allocation_Table) [파일 시스템](https://en.wikipedia.org/wiki/File_system)에 기반할 것을 규정했으며, 안에는 다음과 같은 데이터 및 파일이 저장되어 있다.
 
 * 설치된 모든 [운영체제](https://en.wikipedia.org/wiki/Operating_system)의 [부트로더](#부트로더) (실제 운영체제는 다른 파티션에 설치)
 * 부팅 단계에서 UEFI 펌웨어가 사용할 [컴퓨터 하드웨어](https://en.wikipedia.org/wiki/Computer_hardware)의 [장치 드라이버](Driver.md)

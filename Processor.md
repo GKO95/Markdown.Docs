@@ -35,7 +35,7 @@
 ALU는 기본적으로 opcode와 피연산자를 입력받고, 해당 opcode 작업의 결과물을 출력한다. 만일 [상태 레지스터](https://ko.wikipedia.org/wiki/상태_레지스터)로부터 입력을 받으면 [캐리](https://en.wikipedia.org/wiki/Carry_flag), [오버플로우](https://en.wikipedia.org/wiki/Overflow_flag) 여부 등의 상태가 이전 작업에서 발생하였는지 확인할 수 있으며, 현재 작업에서 발생한 상태 정보는 다시 상태 레지스터로 출력된다.
 
 ### 레지스터
-**[레지스터](https://ko.wikipedia.org/wiki/프로세서_레지스터)**(register)는 CPU에 내장되어 프로세서가 가장 빨리 접근할 수 있는 (8비트, 16비트, 32비트 등) [비트](https://ko.wikipedia.org/wiki/비트_(단위)) 단위의 소규모 임시 [저장공간](Disk.md)이다. 아래 그림은 [x86-64](https://ko.wikipedia.org/wiki/X86-64) 아키텍처의 프로세서에 탑재된 레지스터들이다.
+**[레지스터](https://ko.wikipedia.org/wiki/프로세서_레지스터)**(register)는 CPU에 내장되어 프로세서가 가장 빨리 접근할 수 있는 (8비트, 16비트, 32비트 등) [비트](https://ko.wikipedia.org/wiki/비트_(단위)) 단위의 소규모 임시 [저장공간](Storage.md)이다. 아래 그림은 [x86-64](https://ko.wikipedia.org/wiki/X86-64) 아키텍처의 프로세서에 탑재된 레지스터들이다.
 
 ![x86-64 아키텍처의 프로세서 레지스터](https://upload.wikimedia.org/wikipedia/commons/1/15/Table_of_x86_Registers_svg.svg)
 

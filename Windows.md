@@ -39,7 +39,7 @@
 
 * [프로세서](Processor.md)
 * [메모리](Memory.md)
-* [디스크](Disk.md)
+* [저장소](Storage.md)
 * [네트워크](Network.md)
 
 # 관리 프로그램
