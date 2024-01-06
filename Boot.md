@@ -80,7 +80,7 @@ UEFI가 부트 장치를 탐색하는 과정은 다음과 같다.
 
 ![UEFI 부팅 순서도 (개략)](https://upload.wikimedia.org/wikipedia/commons/1/17/UEFI_boot_process.png)
 
-시스템에 전원이 들어오면 부트 관리자는 [NVRAM](https://ko.wikipedia.org/wiki/비휘발성_메모리)에 저장된 설정을 확인하고, 이를 기반으로 특정 운영체제 부트로더 혹은 커널을 실행한다. UEFI는 컴퓨터 아키텍처마다 표준화된 파일 경로에 의존하여 부트로더를 스스로 찾아낼 수 있는데, USB 플래시 드라이브와 같은 장치로도 간편한 부팅을 가능케 한다.
+[리셋 벡터](#부팅)가 가리킨 [ROM](https://en.wikipedia.org/wiki/Read-only_memory)에 저장된 UEFI 펌웨어가 실행되면 먼저 [POST](#시동-자체-시험)를 진행한다. 하드웨어 초기화 및 진단을 통과하면 [GPT](#guid-파티션-테이블)로부터 [EFI 시스템 파티션](#efi-시스템-파티션)을 찾아 OS [부트로더](#부트로더)를 실행한다. 즉, BIOS와 달리 [부트 섹터](#부트-섹터)를 전혀 의존하지 않는다.
 
 ## GUID 파티션 테이블
 > *참고: [UEFI/GPT-based hard drive partitions | Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/configure-biosmbr-based-hard-drive-partitions)*
