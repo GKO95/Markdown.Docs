@@ -80,7 +80,7 @@ UEFI가 부트 장치를 탐색하는 과정은 다음과 같다.
 
 ![UEFI 부팅 순서도 (개략)](https://upload.wikimedia.org/wikipedia/commons/1/17/UEFI_boot_process.png)
 
-[리셋 벡터](#부팅)가 가리킨 [ROM](https://en.wikipedia.org/wiki/Read-only_memory)에 저장된 UEFI 펌웨어가 실행되면 먼저 [POST](#시동-자체-시험)를 진행한다. 하드웨어 초기화 및 진단을 통과하면 [GPT](#guid-파티션-테이블)로부터 [EFI 시스템 파티션](#efi-시스템-파티션)을 찾아 OS [부트로더](#부트로더)를 실행한다. 즉, BIOS와 달리 [부트 섹터](#부트-섹터)를 전혀 의존하지 않는다.
+[리셋 벡터](#부팅)가 가리킨 [ROM](https://en.wikipedia.org/wiki/Read-only_memory)에 저장된 UEFI 펌웨어가 실행되면 먼저 [POST](#시동-자체-시험)를 진행한다. 하드웨어 초기화 및 진단을 통과하면 [GPT](#guid-파티션-테이블)로부터 [EFI 시스템 파티션](#efi-시스템-파티션)을 찾아 OS [부트로더](#부트로더)를 실행한다. 즉, BIOS와 달리 [부트 섹터](#부트-섹터)에 전혀 의존하지 않는다.
 
 ## GUID 파티션 테이블
 > *참고: [UEFI/GPT-based hard drive partitions | Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/configure-biosmbr-based-hard-drive-partitions)*
