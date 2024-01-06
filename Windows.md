@@ -48,8 +48,3 @@
 * [성능 모니터](Performance_Monitor.md)
 * [이벤트 뷰어](Event_Viwer.md)
 * [파워셸](PowerShell.md)
-
-# 기타 프로그램
-* [Sysinternals](Sysinternals.md)
-* [WinDbg](WinDbg.md)
-* [Dependency Walker](http://www.dependencywalker.com/)
