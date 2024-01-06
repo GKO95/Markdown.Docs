@@ -42,7 +42,7 @@ BIOS가 부트 장치를 탐색하는 과정은 다음과 같다.
 
 [리셋 벡터](#부팅)가 가리킨 [ROM](https://en.wikipedia.org/wiki/Read-only_memory)에 저장된 BIOS 펌웨어가 실행되면 먼저 POST 진단을 진행한다. 하드웨어 진단을 통과하면, [INT](Processor.md#인터럽트) [19h](https://en.wikipedia.org/wiki/BIOS_interrupt_call)를 호출하여 부트로더를 탐색, 로드, 그리고 실행하도록 한다. 부트로더가 위치한 [저장 매체](Disk.md)를 "부트 장치(boot device)"라고 부르며, BIOS가 부트로더를 탐색하는 과정은 다음과 같다:
 
-1. BIOS 설정이 저장된 [비휘발성 메모리](https://en.wikipedia.org/wiki/Nonvolatile_BIOS_memory)(대표적으로 [CMOS](https://en.wikipedia.org/wiki/CMOS))로부터 부트 장치 목록을 지정한 순서대로 살펴본다.
+1. BIOS 펌웨어는 [비휘발성 메모리](https://en.wikipedia.org/wiki/Nonvolatile_BIOS_memory)(대표적으로 [CMOS](https://en.wikipedia.org/wiki/CMOS))에 저장된 BIOS 설정으로부터 부트 장치 목록을 지정한 순서대로 살펴본다.
 1. 부트 장치의 [부트 섹터](#부트-섹터)(즉, [MBR](#마스터-부트-레코드))를 메모리로 불러오고, 만일 해당 섹터를 읽을 수 없다면 다음 부트 장치로 넘어간다.
 1. 부트 섹터를 읽을 수 있는 경우, 일부 BIOS는 마지막 두 시그니처 바이트 `0x55`, `0xAA`까지 검증하고 부팅 장치로 인식한다.
 
