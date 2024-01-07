@@ -79,8 +79,30 @@
 컴포넌트 기반 서비스(Component-based servicing; CBS)는 [윈도우 비스타](Windows.md)부터 소개된 운영체제의 컴포넌트화 설계를 가리키며, [윈도우 업데이트](WaaS.md#윈도우-업데이트)나 [드라이버](Driver.md) 파일, 또는 시스템에 ([OpenSSH](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse) 서버와 같은) 추가 기능을 구현하는 선택적 [컴포넌트](#컴포넌트)를 이전 윈도우 OS보다 더 견고하고 안전하게 설치한다. 만일 부분적 혹은 부적합한 설치로 인한 불안정 이슈도 대응이 가능하다.
 
 ### 컴포넌트
-컴포넌트(component)는 시스템의 가장 기초적인 구성이며, 필요한 (바이너리, 레지스트리 값, [서비스](Service.md) 및 [보안 기술자](https://en.wikipedia.org/wiki/Security_descriptor) 등) 리소스들은 [매니페스트](https://ko.wikipedia.org/wiki/매니페스트_파일) 파일로부터 정의된다. [WinSxS](https://en.wikipedia.org/wiki/Side-by-side_assembly#WinSxS_(Windows_component_store))에는 모든 버전의 컴포넌트가 저장되어 있어 필요에 따라 시스템에 반영될 수 있다. 컴포넌트의 예시로 [파일 탐색기](https://ko.wikipedia.org/wiki/파일_탐색기), [메모장](https://ko.wikipedia.org/wiki/메모장_(소프트웨어)), [레지스트리 편집기](Registry.md#레지스트리-편집기), [ntdll.dll](WinAPI.md#ntdlldll), [ntoskrnl.exe](Kernel.md#nt-커널) 등이 해당한다.
+컴포넌트(component)는 시스템 이미지를 구성하거나 기능을 추가 및 제거하는 데 필요한 기본 요소들을 가리킨다: 실행 파일, 라이브러리, 드라이버 외에도 스크립트, PNG 및 ICO 이미지 등 의외의 파일도 윈도우 시스템의 기본 구성이면 컴포넌트에 해당한다. 이들은 [WinSxS](#winsxs) 폴더에서도 찾아볼 수 있다.
 
-> 매니페스트 파일들은 WinSxS 하에 있는 Manifests 폴더에 찾을 수 있다.
+* 실행 파일: [파일 탐색기](https://ko.wikipedia.org/wiki/파일_탐색기), [메모장](https://ko.wikipedia.org/wiki/메모장_(소프트웨어)), [명령 프롬프트](https://en.wikipedia.org/wiki/Cmd.exe) 등
+* 라이브러리: [ntdll.dll](WinAPI.md#ntdlldll), [kernel32.dll](https://en.wikipedia.org/wiki/Microsoft_Windows_library_files#KERNEL32.DLL), [hal.dll](Kernel.md#하드웨어-추상-계층) 등
+* 드라이버: ntfs.sys, kbdclass.sys, win32k.sys 등
+* 기타 등등
 
-다만, 시스템을 구성하는 컴포넌트들은 매우 중요하기 때문에 관리자도 변경할 수 없는 Trusted Installer 권한만이 다룰 수 있다.
+올바르지 않은 컴포넌트 접근은 시스템 전반에 악영향을 미칠 수 있기 때문에 Trusted Installer 권한만이 취급할 수 있다.
+
+## WinSxS
+> *참고: [Manage the Component Store | Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/manage-the-component-store)*
+
+**[WinSxS](https://en.wikipedia.org/wiki/Side-by-side_assembly)**(Windows side-by-side의 약칭)는 [컴포넌트](#컴포넌트) 저장소이며 `%SystemRoot%\WinSxS` 폴더에 해당한다. 윈도우 시스템을 구성하는 모든 컴포넌트가 안에 있으며, 만일 [업데이트](#윈도우-업데이트)로 새로운 버전의 컴포넌트가 배포되어도 롤백을 지원하는 차원에서 이전 버전의 컴포넌트를 일정 기간동안 보관한다.<sup>[<a href="https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/clean-up-the-winsxs-folder">출처</a>]</sup>
+
+WinSxS 폴더에 저장된 컴포넌트들은 [하드 링크](https://en.wikipedia.org/wiki/Hard_link)되어 타 윈도우 디렉토리에도 위치한다. 다음은 [KB5033375](https://support.microsoft.com/en-us/topic/december-12-2023-kb5033375-os-builds-22621-2861-and-22631-2861-90f983aa-efb6-4caa-9cab-7e5cfa00ed36) 12월 누적 업데이트가 설치된 윈도우 11, 버전 23H2 (빌드 22631.2861) 운영체제에서 [fsutil](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil) [hardlink](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-hardlink) 명령으로 C:\Windows\explorer.exe, 즉 파일 탐색기에 하드 링크된 목록을 살펴본다.
+
+```terminal
+fsutil hardlink list C:\Windows\explorer.exe
+```
+```
+\Windows\explorer.exe
+\Windows\WinSxS\amd64_microsoft-windows-explorer_31bf3856ad364e35_10.0.22621.2792_none_3182ca8bf563ac2d\explorer.exe
+```
+
+두 개의 파일 경로가 발견되었지만, 하드 링크의 특성상 이 둘은 [디스크](Storage.md)의 동일한 영역을 참조하기 때문에 사실상 한 개의 파일이다. 한 경로의 파일을 변경하면 나머지에도 동일하게 반영된다. 예시의 컴포넌트는 C:\Windows 디렉토리에 위치하였으나 System32, Drivers 등의 다른 디렉토리에도 다양한 컴포넌트가 분포되어 있으며, WinSxS는 이들을 한 폴더에서 모두 관리할 수 있도록 한다.
+
+운영체제 빌드가 22631.2861이지만, WinSxS에서 확인된 파일 버전은 [KB5032288](https://support.microsoft.com/en-us/topic/december-4-2023-kb5032288-os-builds-22621-2792-and-22631-2792-preview-538fbe4a-e9de-4312-85cd-d870444341d0) 12월 미리 보기 업데이트의 22621.2792로 확인되었다 (윈도우 11, 버전 23H2는 22H2와 공통된 운영체제 핵심 시스템 파일을 사용하기 때문에<sup>[<a href="https://support.microsoft.com/en-us/topic/windows-11-version-23h2-update-history-59875222-b990-4bd9-932f-91a5954de434">출처</a>]</sup> 빌드 번호 22621가 목격될 수 있다). KB5032288 이후로 파일 탐색기에 변경 사항이 없기 때문이며, WinSxS에서 파일을 최신 버전으로 유지하는 건 변함없다.
