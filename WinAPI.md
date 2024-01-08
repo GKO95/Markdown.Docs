@@ -4,7 +4,7 @@
 아직 [16비트](https://ko.wikipedia.org/wiki/16비트) 시스템이 대중화된 시기에 [32비트](https://ko.wikipedia.org/wiki/32비트) 윈도우 운영체제를 지원하는 API라는 것을 명시하기 위해 Win32라고 불렀다. 그러나 [64비트](https://ko.wikipedia.org/wiki/64비트)의 [x64](https://ko.wikipedia.org/wiki/X86-64) 및 [ARM64](https://ko.wikipedia.org/wiki/ARM_아키텍처)도 지원하면서 특정 아키텍처에 종속되지 않는 명칭으로 변경되었다.
 
 ## 시스템 서비스
-[시스템 서비스](https://ko.wikipedia.org/wiki/시스템_호출)(system services)는 [윈도우 커널](Kernel.md#nt-커널)에서 제공하는 기능을 [사용자 모드](Processor.md#권한-수준)에서 호출하는 일련의 절차를 가리킨다. 사용자 모드 프로세스는 [보호 링](Processor.md#권한-수준) 구조에 의해 커널 함수, 일명 [루틴](https://ko.wikipedia.org/wiki/함수_(컴퓨터_과학))(routine)을 직접 접근할 수 없으므로 [`Ntdll.dll`](#ntdlldll)에 내포된 진입점을 통해 [`Ntoskrnl.exe`](Kernel.md#nt-커널) 커널 이미지에 정의된 루틴을 호출하게 된다.
+[시스템 서비스](https://ko.wikipedia.org/wiki/시스템_호출)(system services)는 [윈도우 커널](Kernel.md#nt-커널)에서 제공하는 기능을 [사용자 모드](Processor.md#권한-수준)에서 호출하는 일련의 절차를 가리킨다. 사용자 모드 프로세스는 [보호 링](Processor.md#권한-수준) 구조에 의해 커널 함수, 일명 [루틴](https://ko.wikipedia.org/wiki/함수_(컴퓨터_과학))(routine)을 직접 접근할 수 없으므로 `Ntdll.dll`에 내포된 진입점을 통해 [`Ntoskrnl.exe`](Kernel.md#nt-커널) 커널 이미지에 정의된 루틴을 호출하게 된다.
 
 다음은 윈도우 API 중에서 `CreateFileW` 함수를 호출할 때의 시스템 서비스가 진행되는 과정을 순서대로 나열한다.
 
@@ -14,7 +14,7 @@
 <thead><tr><th style="text-align: center;">순서</th><th style="text-align: center;">바이너리</th><th style="text-align: center;">이름</th><th style="text-align: center;">함수</th><th style="text-align: center;">설명</th></tr></thead>
 <tbody>
 <tr><td style="text-align: center;">1</td><td style="text-align: center;"><code>Kernel32.dll</code></td><td style="text-align: center;"><a href="Subsystem.md#환경-서브시스템">환경 서브시스템 DLL</a></td><td style="text-align: center;"><a href="https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-createfilew"><code>KERNEL32!CreateFileW</code></a></td><td>시스템 서비스를 호출하는 WinAPI 함수; 그 외에 <code>User32.dll</code>, <code>Gdi32.dll</code> 등이 해당</td></tr>
-<tr><td style="text-align: center;">2</td><td style="text-align: center;"><code>Ntdll.dll</code></td><td style="text-align: center;"><a href="Windows.md#ntdlldll">Native API 라이브러리</a></td><td style="text-align: center;"><a href="https://learn.microsoft.com/en-us/windows/win32/api/winternl/nf-winternl-ntcreatefile"><code>ntdll!NtCreateFile</code></a></td><td>WinAPI로부터 요청한 사용자 모드의 루틴 진입점</td></tr>
+<tr><td style="text-align: center;">2</td><td style="text-align: center;"><code>Ntdll.dll</code></td><td style="text-align: center;"><a href="Subsystem.md#네이티브-이미지">Native API 라이브러리</a></td><td style="text-align: center;"><a href="https://learn.microsoft.com/en-us/windows/win32/api/winternl/nf-winternl-ntcreatefile"><code>ntdll!NtCreateFile</code></a></td><td>WinAPI로부터 요청한 사용자 모드의 루틴 진입점</td></tr>
 <tr><td style="text-align: center;">3</td><td style="text-align: center;"><code>Ntoskrnl.exe</code></td><td style="text-align: center;"><a href="Kernel.md#nt-커널">Executive</a></td><td style="text-align: center;"><a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/ntifs/nf-ntifs-ntcreatefile"><code>nt!NtCreateFile</code></a></td><td>WinAPI로부터 요청한 커널 모드의 루틴</td></tr></tbody>
 </table>
 
