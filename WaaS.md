@@ -54,7 +54,17 @@
 ## 서비스 채널
 [서비스 채널](https://learn.microsoft.com/ko-kr/windows/deployment/update/waas-overview#servicing-channels)(Servicing channel)은 설치된 윈도우 OS를 얼마나 자주 업데이트할 것인지 지정할 수 있도록 한다. 윈도우 클라이언트 OS에는 총 세 가지의 서비스 채널이 다음과 같이 존재한다:
 
-<table style="width: 95%; margin: auto;"><caption style="caption-side: top;">윈도우 업데이트 서비스 채널</caption><colgroup><col style="width: 30%;"/><col style="width: 70%;"/></colgroup><thead><tr><th style="text-align: center;">서비스 채널</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://learn.microsoft.com/en-us/windows/deployment/update/waas-overview#general-availability-channel">일반 공급 채널</a><br/>(General Availability; GA)</td><td>기능 업데이트를 매년 하반기에 출시하는 채널이다. 업데이트에 대한 설정이 구성되어 있지 않으면 장치는 기본적으로 해당 채널을 통해 가능한 즉시 업데이트를 설치한다. 이전에는 3월과 9월을 기점으로 출시되는 반기 채널(Semi-Annual Channel)이라고 불렸으나 <a href="https://en.wikipedia.org/wiki/Windows_11_version_history#Version_21H2_(original_release)">21H2</a> 버전 이후부터 GA로 <a href="https://blogs.windows.com/windowsexperience/2021/11/16/how-to-get-the-windows-10-november-2021-update/">변경</a>되었다.</td></tr><tr><td style="text-align: center;"><a href="https://learn.microsoft.com/ko-kr/windows/deployment/update/waas-overview#long-term-servicing-channel">장기 서비스 채널</a><br/>(Long-term Servicing Channel; LTSC)</td><td>기능 업데이트를 배제하고 오로지 품질 업데이트만 배포하여 장치의 보안성을 보장하는 채널이다. 윈도우 엔터프라이즈 LTSC 제품을 대상으로 품질 업데이트가 출시되지만 설치 여부는 사용자가 선택할 수 있다. LTSC는 ATM이나 의료기기와 같은 특수 장치를 위해서만 사용되어야 한다.</td></tr><tr><td style="text-align: center;"><a href="https://learn.microsoft.com/ko-kr/windows/deployment/update/waas-overview#long-term-servicing-channel">윈도우 참가자 프로그램</a><br/>(Windows Insider Program)</td><td>GA로 출시되기 전에 미리 기능 업데이트를 체험할 수 있는 채널이다. 참가자들은 해당 기능 업데이트가 GA에 출시되기 전에 마이크로소프트에 이슈를 보고하는 등의 피드백으로 기여할 수 있다.</td></tr></tbody></table>
+1. **[일반 공급 채널](https://learn.microsoft.com/en-us/windows/deployment/update/waas-overview#general-availability-channel)**(General Availability; GA)
+
+    기능 업데이트를 매년 하반기에 출시하는 채널이다. 업데이트에 대한 설정이 구성되어 있지 않으면 장치는 기본적으로 해당 채널을 통해 가능한 즉시 업데이트를 설치한다. 이전에는 3월과 9월을 기점으로 출시되는 반기 채널(Semi-Annual Channel)이라고 불렸으나 [21H2](https://en.wikipedia.org/wiki/Windows_11_version_history#Version_21H2_(original_release)) 버전 이후부터 GA로 [변경](https://blogs.windows.com/windowsexperience/2021/11/16/how-to-get-the-windows-10-november-2021-update/)되었다.
+
+1. **[장기 서비스 채널](https://learn.microsoft.com/en-us/windows/deployment/update/waas-overview#long-term-servicing-channel)**(Long-term Servicing Channel; LTSC)
+
+    기능 업데이트를 배제하고 오로지 품질 업데이트만 배포하여 장치의 보안성을 보장하는 채널이다. 윈도우 엔터프라이즈 LTSC 제품을 대상으로 품질 업데이트가 출시되지만 설치 여부는 사용자가 선택할 수 있다. LTSC는 ATM이나 의료기기와 같은 특수 장치를 위해서만 사용되어야 한다.
+
+1. **[윈도우 참가자 프로그램](https://learn.microsoft.com/en-us/windows/deployment/update/waas-overview#windows-insider)**(Windows Insider Program)
+
+    GA로 출시되기 전에 미리 기능 업데이트를 체험할 수 있는 채널이다. 참가자들은 해당 기능 업데이트가 GA에 출시되기 전에 마이크로소프트에 이슈를 보고하는 등의 피드백으로 기여할 수 있다.
 
 > 범용 및 특수 장치를 구분하는 가장 일반적인 방법으로 최신 빌드가 권장되는 [마이크로소프트 365](https://www.microsoft.com/Microsoft-365) 제품 설치 여부로 판단한다. 
 
@@ -78,15 +88,14 @@
 
 컴포넌트 기반 서비스(Component-based servicing; CBS)는 [윈도우 비스타](Windows.md)부터 소개된 운영체제의 컴포넌트화 설계를 가리키며, [윈도우 업데이트](WaaS.md#윈도우-업데이트)나 [드라이버](Driver.md) 파일, 또는 시스템에 ([OpenSSH](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse) 서버와 같은) 추가 기능을 구현하는 선택적 [컴포넌트](#컴포넌트)를 이전 윈도우 OS보다 더 견고하고 안전하게 설치한다. 만일 부분적 혹은 부적합한 설치로 인한 불안정 이슈도 대응이 가능하다.
 
-### 컴포넌트
-컴포넌트(component)는 시스템 이미지를 구성하거나 기능을 추가 및 제거하는 데 필요한 기본 요소들을 가리킨다: 실행 파일, 라이브러리, 드라이버 외에도 스크립트, PNG 및 ICO 이미지 등 의외의 파일도 윈도우 시스템의 기본 구성이면 컴포넌트에 해당한다. 이들은 [WinSxS](#winsxs) 폴더에서도 찾아볼 수 있다.
+## 컴포넌트
+컴포넌트(component)는 시스템 이미지를 구성하거나 추가 기능을 설치 및 제거하는데 필요한 기본 요소들을 가리키다.
 
-* 실행 파일: [파일 탐색기](https://ko.wikipedia.org/wiki/파일_탐색기), [메모장](https://ko.wikipedia.org/wiki/메모장_(소프트웨어)), [명령 프롬프트](https://en.wikipedia.org/wiki/Cmd.exe) 등
-* 라이브러리: [ntdll.dll](WinAPI.md#ntdlldll), [kernel32.dll](https://en.wikipedia.org/wiki/Microsoft_Windows_library_files#KERNEL32.DLL), [hal.dll](Kernel.md#하드웨어-추상-계층) 등
-* 드라이버: ntfs.sys, kbdclass.sys, win32k.sys 등
-* 기타 등등
+<table style="width: 95%; margin: auto;"><caption style="caption-side: top;">컴포넌트를 구성하는 파일</caption><colgroup><col style="width: 33.3%;"/><col/><col style="width: 33.3%;"/></colgroup><thead><tr><th style="text-align: center;">바이너리 파일</th><th style="text-align: center;"><a href="https://learn.microsoft.com/en-us/windows/win32/SbsCs/manifests">매니페스트 파일</a></th><th style="text-align: center;"><a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/install/catalog-files">카탈로그 파일</a></th></tr></thead><tbody><tr><td><a href="Process.md">실행 파일</a>, <a href="C.md#라이브러리">라이브러리</a>, <a href="Driver.md">드라이버</a> 등 시스템 이미지 내에서 실질적인 역할을 지닌 파일들이다: <a href="https://en.wikipedia.org/wiki/File_Explorer">explorer.exe</a>, <a href="WinAPI.md#시스템-서비스">ntdll.dll</a>, <a href="https://en.wikipedia.org/wiki/NTFS">ntfs.sys</a> 등.</td><td>해당 <a href="https://learn.microsoft.com/en-us/windows/win32/sbscs/about-side-by-side-assemblies-">SxS</a> 바이너리 파일의 의존성이나 메타데이터, 내장된 리소스 정보 등을 묘사한 .MANIFEST 확장자 파일이다.</td><td><a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function">암호화 해시</a>(일명 <a href="https://en.wikipedia.org/wiki/Public_key_fingerprint">지문</a>)에 일대일 대응하는 파일들을 여럿 포함하여 한꺼번에 디지털 서명하는 .CAT 확장자 파일이다.</td></tr></tbody></table>
 
-올바르지 않은 컴포넌트 접근은 시스템 전반에 악영향을 미칠 수 있기 때문에 Trusted Installer 권한만이 취급할 수 있다.
+> 매니페스트와 카탈로그 파일은 비주얼 스튜디오로 바이너리 파일을 빌드할 때 생성되는 부산물에 해당한다.
+
+모든 컴포넌트는 [WinSxS](#winsxs) 폴더에 저장되며, 올바르지 않은 컴포넌트 접근은 시스템 전반에 악영향을 미칠 수 있기 때문에 TrustedInstaller 권한만이 취급할 수 있다.
 
 ## WinSxS
 > *참고: [Manage the Component Store | Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/manage-the-component-store)*
