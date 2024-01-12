@@ -10,16 +10,7 @@ WER은 왓슨 서버로 전송되는 덤프와 별개로 로컬 시스템에서 
 HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps
 ```
 
-<table style="width: 90%; margin: auto;">
-<caption style="caption-side: top;">WER 레지스트리 값 설정</caption>
-<colgroup><col style="width: 15%;"/><col style="width: 45%;"/><col style="width: 15%;"/><col style="width: 25%;"/></colgroup>
-<thead><tr><th style="text-align: center;">레지스트리 값</th><th style="text-align: center;">설명</th><th style="text-align: center;">레지스트리 종류</th><th style="text-align: center;">기본값</th></tr></thead>
-<tbody>
-<tr><td style="text-align: center;"><code>DumpFolder</code></td><td>어플리케이션 충돌 덤프가 저장되는 경로이다.</td><td style="text-align: center;">REG_EXPAND_SZ</td><td><code>%LOCALAPPDATA%\CrashDumps</code></td></tr>
-<tr><td style="text-align: center;"><code>DumpCount</code></td><td>어플리케이션 충돌 덤프를 저장할 수 있는 최대 개수이다. 최대치에 도달한 상태에서 새로운 덤프가 생성되면 가장 오래된 덤프를 삭제한다.</td><td style="text-align: center;">REG_DWORD</td><td><code>0x0a</code>(10)</td></tr>
-<tr><td style="text-align: center;"><code>DumpType</code></td><td>어플리케이션 충돌 덤프 종류를 지정한다.<ul><li><code>0x00</code>: 커스텀 덤프</li><li><code>0x01</code>: <a href="Dump.md#미니-덤프">미니 덤프</a></li><li><code>0x02</code>: <a href="Dump.md#전체-덤프">전체 덤프</a></li></ul></td><td style="text-align: center;">REG_DWORD</td><td><code>0x01</code>(1)</td></tr>
-</tbody>
-</table>
+<table style="width: 90%; margin: auto;"><caption style="caption-side: top;">WER 레지스트리 값 설정</caption><colgroup><col style="width: 15%;"/><col style="width: 45%;"/><col style="width: 15%;"/><col style="width: 25%;"/></colgroup><thead><tr><th style="text-align: center;">레지스트리 값</th><th style="text-align: center;">설명</th><th style="text-align: center;">레지스트리 종류</th><th style="text-align: center;">기본값</th></tr></thead><tbody><tr><td style="text-align: center;"><code>DumpFolder</code></td><td>어플리케이션 충돌 덤프가 저장되는 경로이다.</td><td style="text-align: center;">REG_EXPAND_SZ</td><td><code>%LOCALAPPDATA%\CrashDumps</code></td></tr><tr><td style="text-align: center;"><code>DumpCount</code></td><td>어플리케이션 충돌 덤프를 저장할 수 있는 최대 개수이다. 최대치에 도달한 상태에서 새로운 덤프가 생성되면 가장 오래된 덤프를 삭제한다.</td><td style="text-align: center;">REG_DWORD</td><td><code>0x0a</code>(10)</td></tr><tr><td style="text-align: center;"><code>DumpType</code></td><td>어플리케이션 충돌 덤프 종류를 지정한다.<ul><li><code>0x00</code>: 커스텀 덤프</li><li><code>0x01</code>: <a href="Dump.md#미니-덤프">미니 덤프</a></li><li><code>0x02</code>: <a href="Dump.md#전체-덤프">전체 덤프</a></li></ul></td><td style="text-align: center;">REG_DWORD</td><td><code>0x01</code>(1)</td></tr></tbody></table>
 
 > 만일 아무런 레지스트리 값이 설정되어 있지 않은 상태에서 어플리케이션 충돌이 발생하면 명시된 기본값에 따라 덤프를 생성한다.
 
