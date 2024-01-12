@@ -1,14 +1,7 @@
 # 메모리
-[주기억장치](https://ko.wikipedia.org/wiki/주기억장치)(primary storage), 일명 메모리(memory)는 시스템에서 즉각적으로 사용할 데이터를 저장하는 하드웨어로 대표적인 예시가 [RAM](https://ko.wikipedia.org/wiki/랜덤_액세스_메모리)이다. 데이터를 저장하는 또 다른 하드웨어로 [HDD](https://ko.wikipedia.org/wiki/하드_디스크_드라이브) 및 [SSD](https://ko.wikipedia.org/wiki/솔리드_스테이트_드라이브), [CD](https://ko.wikipedia.org/wiki/콤팩트_디스크) 또는 [DVD](https://ko.wikipedia.org/wiki/DVD), [플래시 메모리](https://ko.wikipedia.org/wiki/플래시_메모리)와 같은 [보조기억장치](Storage.md)(secondaty storage)가 존재하나, 이 둘은 확연한 차이점을 지닌다.
+[메모리](https://en.wikipedia.org/wiki/Computer_memory)(memory)는 시스템에서 즉각적으로 사용할 데이터를 저장하는 [하드웨어](https://en.wikipedia.org/wiki/Computer_hardware)이며, 대표적으로 [RAM](https://ko.wikipedia.org/wiki/랜덤_액세스_메모리)이 있다. 메모리는 작업 속도가 매우 빠르며 [휘발성](https://en.wikipedia.org/wiki/Volatile_memory)인 특징을 가지고 있다. 또한 [프로세서](Processor.md)와 물리적으로 근접하여 연산시 데이터 접근 속도가 순식간이기 때문에 단기기억 역할을 담당한다. 그러므로 메모리는 시스템의 성능을 결정하는 중요한 요소로 작용한다.
 
-<table style="table-layout: fixed; width: 60%; margin: auto;">
-<caption style="caption-side: top;">주 및 보조기억장치의 비교</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">주기억장치</th><th style="text-align: center;">보조기억장치</th></tr></thead>
-<tbody style="text-align: center;"><tr><td>컴퓨터 메모리</td><td>디스크 및 드라이브</td></tr><tr><td>동작속도가 매우 빠르다.</td><td>동작속도가 상대적으로 느리다.</td></tr><tr><td>물리적으로 CPU와 가까이 위치한다.</td><td>물리적으로 CPU와 멀리 위치한다.</td></tr><tr><td>대용량 제작이 어렵고 비싸다.</td><td>대용량 제작이 용이하고 저렴하다.</td></tr><tr><td><a href="https://ko.wikipedia.org/wiki/휘발성_메모리">휘발성</a>이다.</td><td><a href="https://ko.wikipedia.org/wiki/비휘발성_메모리">비휘발성</a>이다.</td></tr></tbody>
-</table>
-
-[CPU](Processor.md)와 물리적으로 근접한 점과 빠른 데이터 접근속도는 순식간에 연산을 할 수 있도록 보조하기에 적합한 단기기억 역할을 담당한다. 하드웨어는 지속적으로 발전하고 있으나, 일반적으로 메모리와 디스크는 대략 100,000 배의 속도 차이를 갖는다. 그러므로 시스템의 성능을 결정하는 요소로 메모리가 함께 언급된다.
+> [HDD](Storage.md#디스크) 및 [SSD](https://ko.wikipedia.org/wiki/솔리드_스테이트_드라이브) 등의 [저장 장치](Storage.md)도 데이터를 저장하는 메모리로 분류되지만, 작업 속도가 느리고 [비휘발성](https://en.wikipedia.org/wiki/Non-volatile_random-access_memory)인 관계로 "보조 메모리"라고 부른다.
 
 본문을 진행하기 전에 [가상 주소 공간](Process.md#가상-주소-공간)을 읽을 것을 권장하며, 메모리의 이해를 돕기 위해 아래 [작업 관리자](https://ko.wikipedia.org/wiki/작업_관리자) 그림을 예시로 사용하여 설명한다.
 
@@ -19,14 +12,8 @@
 ## 페이징 파일
 [페이징 파일](https://learn.microsoft.com/en-us/windows/client-management/introduction-page-file)(paging file)은 가상 주소 공간의 [페이지](Process.md#페이지)를 RAM이 아닌 HDD 또는 SSD와 같은 보조기억장치에서 물리 메모리의 데이터 일부를 [페이징](https://ko.wikipedia.org/wiki/페이징)(paging) 기법으로 전달받아 원활한 시스템 성능을 유지하는데 기여하는 `pagefile.sys` 파일이다. 다음은 페이징 기법에 대한 간략한 설명이다.
 
-<table style="width: 80%; margin: auto;">
-<caption style="caption-side: top;">페이징 기법 및 설명</caption>
-<colgroup><col style="width: 15%;"/><col style="width: 30%;"/><col style="width: 55%;"/></colgroup>
-<thead><tr><th style="text-align: center;">페이징 기법</th><th style="text-align: center;">방향성</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody>
-<tr><td style="text-align: center;">페이징 아웃<br/>(Paging out)</td><td style="text-align: center;">페이지 프레임 → 페이징 파일</td><td>물리 메모리에 오랜 시간동안 머물고 있으나 사용 중이지 않은 커밋된 페이지를 드라이브로 옮겨 메모리 여유를 확보한다.</td></tr>
-<tr><td style="text-align: center;">페이징 인<br/>(Paging in)</td><td style="text-align: center;">페이징 파일 → 페이지 프레임</td><td>페이징 파일은 드라이브의 하드웨어적 한계로 인해 절대 물리 메모리를 대체할 수 없어, 참조되어야 할 페이지는 물리 메모리로 복귀되어야 한다.</td></tr>
-</tbody></table>
+<table style="width: 85%; margin: auto;"><caption style="caption-side: top;">페이징 기법 및 설명</caption>
+<colgroup><col style="width: 15%;"/><col style="width: 25%;"/><col style="width: 60%;"/></colgroup><thead><tr><th style="text-align: center;">페이징 기법</th><th style="text-align: center;">방향성</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;">페이징 아웃<br/>(Paging out)</td><td style="text-align: center;">페이지 프레임 → 페이징 파일</td><td>물리 메모리에 오랜 시간동안 머물고 있으나 사용 중이지 않은 커밋된 페이지를 드라이브로 옮겨 메모리 여유를 확보한다.</td></tr><tr><td style="text-align: center;">페이징 인<br/>(Paging in)</td><td style="text-align: center;">페이징 파일 → 페이지 프레임</td><td>페이징 파일은 드라이브의 하드웨어적 한계로 인해 절대 물리 메모리를 대체할 수 없어, 참조되어야 할 페이지는 물리 메모리로 복귀되어야 한다.</td></tr></tbody></table>
 
 [커밋된 메모리](#커밋된-메모리) 중 보조기억장치에서 찾아볼 수 없는 데이터 또한 페이징 파일에서 처리되는 걸 경향이 있다(예. 저장되지 않은 [메모장](https://ko.wikipedia.org/wiki/메모장_(소프트웨어)) 텍스트). 이와 반대로 `notepad.exe` 프로그램 이미지 혹은 저장된 `.txt` 파일 등과 같이 보조기억장치에 찾을 수 있는 데이터는 물리 메모리에서 곧바로 불러온다.
 
@@ -51,15 +38,9 @@
 ## 커밋된 메모리
 커밋된 메모리(committed memory)는 시스템 메모리에서 사용 중으로 인식된 [페이지](Process.md#페이지)이다. [프로세스](Process.md)의 사용자 공간에 커밋된 메모리는 두 유형으로 나뉘어진다.
 
-<table style="table-layout: fixed; width: 60%; margin: auto;">
-<caption style="caption-side: top;">개인 및 공유 메모리의 차이점</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+<table style="table-layout: fixed; width: 80%; margin: auto;"><caption style="caption-side: top;">개인 및 공유 메모리의 차이점</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">개인 메모리 (private memory)</th><th style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/공유_메모리">공유 메모리</a> (shared memory)</th></tr></thead>
-<tbody style="text-align: center;"><tr>
-<td>오로지 해당 프로세스만 접근할 수 있는 메모리이다.</td>
-<td>타 프로세스와 공유되는 메모리이며, 대표적으로 <code>.EXE</code> 혹은 <code>.DLL</code>와 같은 프로그램 이미지는 하나만으로 여러 프로세스가 공유한다.</td>
-</tr></tbody>
-</table>
+<tbody style="text-align: center;"><tr><td>오로지 해당 프로세스만 접근할 수 있는 메모리이다.</td><td>타 프로세스와 공유되는 메모리이며, .exe 혹은 .dll 같은 프로그램 이미지 하나로 여러 프로세스가 공유한다.</td></tr></tbody></table>
 
 시스템 관점에서 바라본 커밋된 메모리, 즉 커밋 총량(commit charge)은 모든 프로세스의 사용자 공간 및 커널로부터 커밋된 페이지의 합계이다. 커밋 총량이 도달할 수 있는 최대 크기인 커밋 한도(commit limit)는 페이지가 상주할 수 있는 "RAM + [페이징 파일](#페이징-파일)"로 계산된다. 커밋 총량이 한도에 도달할 시, 시스템은 여유 메모리가 생길 때까지 기다려야 하는 [응답 없음](https://ko.wikipedia.org/wiki/프리징_(컴퓨팅))(hang) 상태에 빠진다.
 
@@ -87,14 +68,8 @@
 ### 페이지 부재
 [페이지 부재](https://ko.wikipedia.org/wiki/페이지_부재)(page fault)는 프로세스의 페이지를 접근하려 하나 워킹 세트에 존재하지 않는 경우를 가리키며, 운영체제가 메모리를 관리하는 과정에서 일어나는 매우 자연스러운 현상이다. 페이지 부재는 하드웨어적 그리고 소프트웨어적 페이지 부재로 나뉘어진다.
 
-<table style="table-layout: fixed; width: 80%; margin: auto;">
-<caption style="caption-side: top;">하드 및 소프트 페이지 부재</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">하드 (혹은 메이저) 페이지 부재</th><th style="text-align: center;">소프트 (혹은 마이너) 페이지 부재</th></tr></thead>
-<tbody style="text-align: center;"><tr>
-<td>접근하려는 데이터가 보조기억장치의 페이징 파일로 상주하는 경우</td>
-<td>접근하려는 데이터가 물리 메모리에 상주하나 <a href="#캐시-메모리">모종의 이유</a>로 본래와 다른 곳에 위치하는 경우</td></tr></tbody>
-</table>
+* **하드 페이지 부재**: 일명 *메이저 페이지 부재*; 접근하려는 데이터가 보조기억장치의 페이징 파일로 상주하는 경우
+* **소프트 페이지 부재**: 일명 *마이너 페이지 부재*; 접근하려는 데이터가 물리 메모리에 상주하나 [모종의 이유](#캐시-메모리)로 본래와 다른 곳에 위치하는 경우
 
 하드 페이지 부재는 페이징 작업이 필요한 반면, 소프트 페이지 부재는 물리 메모리 내에서 처리되기 때문에 상대적으로 훨씬 빨리 해결될 수 있다.
 
@@ -110,34 +85,18 @@ RAM 중에서 사용 중인 영역이 있으면 이와 반대로 사용 가능�
 ### 여유 메모리
 필요로 하는 프로세스의 워킹 세트로 메모리를 제공할 수 있는 페이지 리스트들을 지칭한다.
 
-<table style="table-layout: fixed; width: 100%; margin: auto;">
-<caption style="caption-side: top;">여유 메모리 유형 및 설명</caption>
-<colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup>
-<thead><tr><th style="text-align: center;">페이지 리스트</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody><tr><td style="text-align: center;">영값 리스트<br/>(zero page list)</td><td>전부 영(0)으로 채워져 데이터가 없는 페이지들의 리스트이다. 휘발성의 RAM은 시스템이 부팅되기 직전에 아무런 데이터가 없으므로 모든 페이지가 영값 리스트에 해당한다.</td></tr>
-<tr><td style="text-align: center;">해제 리스트<br/>(free page list)</td><td>종료된 프로세스의 워킹 세트로부터 해제된 페이지들의 리스트이다. 워킹 세트로 있을 당시 데이터를 여전히 갖고 있으나, 차후 영값 페이지 스레드(zero page thread)에 의해 페이지는 전부 영으로 채워져 데이터가 말소되고 영값 페이지 리스트로 이전된다. 만일 영값 페이지가 고갈되면 해제 페이지 리스트로부터 제공받지만, 우선 커널로부터 데이터가 정화되어야 하므로 시간이 다소 소모된다.</td></tr></tbody>
-</table>
+<table style="table-layout: fixed; width: 95%; margin: auto;"><caption style="caption-side: top;">여유 메모리 유형 및 설명</caption><colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup><thead><tr><th style="text-align: center;">페이지 리스트</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;">영값 리스트<br/>(zero page list)</td><td>전부 영(0)으로 채워져 데이터가 없는 페이지들의 리스트이다. 휘발성의 RAM은 시스템이 부팅되기 직전에 아무런 데이터가 없으므로 모든 페이지가 영값 리스트에 해당한다.</td></tr><tr><td style="text-align: center;">해제 리스트<br/>(free page list)</td><td>종료된 프로세스의 워킹 세트로부터 해제된 페이지들의 리스트이다. 워킹 세트로 있을 당시 데이터를 여전히 갖고 있으나, 차후 영값 페이지 스레드(zero page thread)에 의해 페이지는 전부 영으로 채워져 데이터가 말소되고 영값 페이지 리스트로 이전된다. 만일 영값 페이지가 고갈되면 해제 페이지 리스트로부터 제공받지만, 우선 커널로부터 데이터가 정화되어야 하므로 시간이 다소 소모된다.</td></tr></tbody></table>
 
 ### 캐시 메모리
 워킹 세트의 트리밍 과정에서 처리되는 RAM 페이지들을 임시로 모아둔 페이지 리스트들을 지칭한다. RAM이 디스크의 [캐시](https://ko.wikipedia.org/wiki/캐시) 역할을 하므로써, [페이지 부재](#페이지-부재)를 메이저에서 마이너로 대체하여 디스크 입출력 작업을 완화하는 효과를 가져온다. 캐시 메모리를 이해하기 위해서 디스크에 데이터가 존재하는지 여부에 따라 RAM 혹은 페이징 파일 중 어디서 처리되는지 특성을 파악하고 있어야 한다.
 
-<table style="table-layout: fixed; width: 100%; margin: auto;">
-<caption style="caption-side: top;">캐시 메모리 유형 및 설명</caption>
-<colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup>
-<thead><tr><th style="text-align: center;">페이지 리스트</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody><tr><td style="text-align: center;">대기 페이지 리스트<br/>(standby page list)</td><td>트리밍되어 현재 사용 중이지 않는 페이지들의 리스트이다. 데이터를 말소하여 영값 페이지로 전환시킬 수 있으나, 그 전에 해당 데이터가 다시 필요하다면 곧바로 워킹 세트로 복귀될 수 있는 "대기" 상태이다. 대기 리스트에 속한 페이지로는 다음 유형들이 포함된다:<ol><li>디스크에 이미 존재하는 데이터를 담고 있는 페이지</li><li>트리밍되기 전에 이미 영으로 채워져 데이터 말소가 불필요한 영값 페이지</li></ol></td></tr>
-<tr><td style="text-align: center;">수정된 페이지 리스트<br/>(modified page list)</td><td>트리밍된 페이지 중에서 디스크에 저장이 필요한 페이지들의 리스트이다. 수정된 페이지는 사용 가능한 메모리가 아니지만, 시스템에 의해 데이터가 페이징 파일에 저장된 이후에는 대기 페이지 리스트로 이전된다. 대기 리스트에 속한 페이지로는 다음 유형들이 포함된다:<ol><li>수정된 리스트에 속한 페이지로는 새로 생성되거나 기존 파일로부터 수정되어 디스크에 찾아볼 수 없는 데이터를 담고 있는 페이지</li></ol></td></tr></tbody>
-</table>
+<table style="table-layout: fixed; width: 95%; margin: auto;"><caption style="caption-side: top;">캐시 메모리 유형 및 설명</caption><colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup><thead><tr><th style="text-align: center;">페이지 리스트</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;">대기 페이지 리스트<br/>(standby page list)</td><td>트리밍되어 현재 사용 중이지 않는 페이지들의 리스트이다. 데이터를 말소하여 영값 페이지로 전환시킬 수 있으나, 그 전에 해당 데이터가 다시 필요하다면 곧바로 워킹 세트로 복귀될 수 있는 "대기" 상태이다. 대기 리스트에 속한 페이지로는 다음 유형들이 포함된다:<ol><li>디스크에 이미 존재하는 데이터를 담고 있는 페이지</li><li>트리밍되기 전에 이미 영으로 채워져 데이터 말소가 불필요한 영값 페이지</li></ol></td></tr><tr><td style="text-align: center;">수정된 페이지 리스트<br/>(modified page list)</td><td>트리밍된 페이지 중에서 디스크에 저장이 필요한 페이지들의 리스트이다. 수정된 페이지는 사용 가능한 메모리가 아니지만, 시스템에 의해 데이터가 페이징 파일에 저장된 이후에는 대기 페이지 리스트로 이전된다. 대기 리스트에 속한 페이지로는 다음 유형들이 포함된다:<ol><li>수정된 리스트에 속한 페이지로는 새로 생성되거나 기존 파일로부터 수정되어 디스크에 찾아볼 수 없는 데이터를 담고 있는 페이지</li></ol></td></tr></tbody></table>
 
 ## 메모리 풀
 윈도우 NT 운영체제에서 [메모리 풀](https://learn.microsoft.com/en-us/windows/win32/memory/memory-pools)(memory pools)은 [커널](https://ko.wikipedia.org/wiki/커널_(컴퓨팅)) 혹은 [장치 드라이버](https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/what-is-a-driver-)에서 시스템 공간에 할당되고 관리되는 커널 [힙](https://ko.wikipedia.org/wiki/동적_메모리_할당#힙_영역) 메모리이다.
 
-<table style="table-layout: fixed; width: 80%; margin: auto;">
-<caption style="caption-side: top;">페이징 및 비페이징 풀</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">페이징 풀(paged pool)</th><th style="text-align: center;">비페이징 풀(nonpaged pool)</th></tr></thead>
-<tbody style="text-align: center;"><tr><td>페이징 파일로 이동될 수 있는 커널 메모리이다.</td><td>페이징 파일로 이동될 수 없는 커널 메모리이다.</td></tr></tbody>
-</table>
+* **페이징 풀**(paged pool): 페이징 파일로 이동될 수 있는 커널 메모리이다.
+* **비페이징 풀**(nonpaged pool): 페이징 파일로 이동될 수 없는 커널 메모리이다.
 
 운영체제 및 장치 드라이버는 [`ExAllocatePoolWithTag`](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-exallocatepoolwithtag) 루틴에 의해 할당 당시 4바이트 크기의 태그가 지정되는데, 이를 통해 해당 메모리를 할당한 드라이버 및 목적을 파악할 수 있다. 태그 목록은 [`pooltags.txt`](./references/pooltag.txt) 파일에서 찾아볼 수 있다.
 
