@@ -55,8 +55,8 @@ BIOS가 부트 장치를 탐색하는 과정은 다음과 같다.
 
 다음은 [IBM PC 호환기종](https://en.wikipedia.org/wiki/IBM_PC_compatible)에 사용되는 부트 섹터의 유형을 소개한다:
 
-* [마스터 부트 레코드](#마스터-부트-레코드)(MBR)
-* [볼륨 부트 레코드](#볼륨-부트-레코드)(VBR)
+* [마스터 부트 레코드](#마스터-부트-레코드)
+* [볼륨 부트 레코드](#볼륨-부트-레코드)
 
 ### 마스터 부트 레코드
 **[마스터 부트 레코드](https://en.wikipedia.org/wiki/Master_boot_record)**(master boot record; MBR)는 [IBM PC 호환기종](https://en.wikipedia.org/wiki/IBM_PC_compatible)을 위한 부트 섹터의 한 유형이며, [HDD](https://en.wikipedia.org/wiki/Hard_disk_drive) 또는 [SSD](https://en.wikipedia.org/wiki/Solid-state_drive) 등의 파티션을 나눌 수 있는 [대용량 저장 매체](Storage.md)([휴대용](https://en.wikipedia.org/wiki/Disk_enclosure) 포함)가 대상이다. 부트로더 뿐만 아니라, 해당 디스크의 [파티션 정보](https://en.wikipedia.org/wiki/Master_boot_record#PT)도 MBR에 저장되어 있다 (최대 네 개의 주 파티션까지 지원). 하지만 MBR 파티션 크기는 512 바이트로 제한되어, 부팅 과정에 [VBR](#볼륨-부트-레코드)이 함께 동원되기도 한다.
