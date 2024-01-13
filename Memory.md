@@ -1,62 +1,57 @@
 # 메모리
-[메모리](https://en.wikipedia.org/wiki/Computer_memory)(memory)는 시스템에서 즉각적으로 사용할 데이터를 저장하는 [하드웨어](https://en.wikipedia.org/wiki/Computer_hardware)이며, 대표적으로 [RAM](https://ko.wikipedia.org/wiki/랜덤_액세스_메모리)이 있다. 메모리는 작업 속도가 매우 빠르며 [휘발성](https://en.wikipedia.org/wiki/Volatile_memory)인 특징을 가지고 있다. 또한 [프로세서](Processor.md)와 물리적으로 근접하여 연산시 데이터 접근 속도가 순식간이기 때문에 단기기억 역할을 담당한다. 그러므로 메모리는 시스템의 성능을 결정하는 중요한 요소로 작용한다.
+**[메모리](https://en.wikipedia.org/wiki/Computer_memory)**(memory)는 시스템에서 즉각적으로 사용할 데이터를 저장하는 [하드웨어](https://en.wikipedia.org/wiki/Computer_hardware)이며, 대표적으로 [RAM](https://ko.wikipedia.org/wiki/랜덤_액세스_메모리)이 있다. 메모리는 작업 속도가 매우 빠르며 [휘발성](https://en.wikipedia.org/wiki/Volatile_memory)인 특징을 가지고 있다. 또한 [프로세서](Processor.md)와 물리적으로 근접하여 연산시 데이터 접근 속도가 순식간이기 때문에 단기기억 역할을 담당한다. 그러므로 메모리는 시스템의 성능을 결정하는 중요한 요소로 작용한다.
 
 > [HDD](Storage.md#디스크) 및 [SSD](https://ko.wikipedia.org/wiki/솔리드_스테이트_드라이브) 등의 [저장 장치](Storage.md)도 데이터를 저장하는 메모리로 분류되지만, 작업 속도가 느리고 [비휘발성](https://en.wikipedia.org/wiki/Non-volatile_random-access_memory)인 관계로 "보조 메모리"라고 부른다.
 
-본문을 진행하기 전에 [가상 주소 공간](Process.md#가상-주소-공간)을 읽을 것을 권장하며, 메모리의 이해를 돕기 위해 아래 [작업 관리자](https://ko.wikipedia.org/wiki/작업_관리자) 그림을 예시로 사용하여 설명한다.
+메모리의 이해를 돕기 위해 아래 [작업 관리자](https://ko.wikipedia.org/wiki/작업_관리자) 그림을 예시로 사용하여 설명한다.
 
 ![작업 관리자에서 확인한 메모리 성능 (<a href="https://ko.wikipedia.org/wiki/윈도우_11">윈도우 11</a>, 버전 22H2)](./images/memory_taskmgr.png)
 
-설치된 48 GB의 RAM 중에서 본 시스템은 47.9 GB를 활용하여, 8.6 GB가 사용 중(in use)이고 나머지 39.0 GB는 아직 [사용 가능](#사용-가능한-메모리)(available)하다. 괄호 안에 있는 38.4 MB는 사용 중인 RAM 내에서 압축된 메모리 크기를 가리키는데, 예를 들어 본래 100 MB 데이터를 61.6 MB만큼 절약한 것이다.
+48 GB의 물리 메모리(즉, RAM)가 설치된 본 시스템은 47.9 GB를 활용하며, 그 중에서 8.6 GB가 사용 중이고 나머지 39.0 GB는 [사용 가능](#사용-가능한-메모리)하다. 사용 중인 메모리에서 공간 절약이 가능하다면 압축을 하는데, 괄호 안의 38.4 MB는 결과적으로 압축된 메모리 크기를 가리킨다.
+
+## 가상 메모리
+**[가상 메모리](https://en.wikipedia.org/wiki/Virtual_memory)**(virtual memory)는 일종의 [메모리 관리](https://en.wikipedia.org/wiki/Memory_management_(operating_systems)) 기술이며, 컴퓨터에 탑재된 실제 물리 메모리와 무관하게 [운영체제](https://en.wikipedia.org/wiki/Operating_system)에 의해 표현된 "가상"의 메모리이다. 운영체제에서 실행된 ([커널](Kernel.md)을 포함한) 모든 프로그램들은 가상 메모리에서 실행되며, 가상 메모리의 [주소](#가상-주소-공간)는 프로세서에 탑재된 [MMU](Processor.md#메모리-관리-장치)에 의해 물리 메모리의 주소로 매핑되어 사용된다. 그리고 가상 메모리는 운영체제가 관리하는 [*가상 주소 공간*](Process.md#가상-주소-공간)에서 할당된다.
+
+> 가상 주소 공간(virtual address space; VAS)은 매우 중요한 개념 중 하나이지만, 자세한 내용은 *[프로세스](Process.md)* 문서를 참고하도록 한다.
+
+가상 메모리를 활용한 시스템은 다음과 같은 이점을 지닌다:
+
+1. 메모리 체계(예를 들어, 공유 메모리 등)를 커널에서 관리하기 때문에 프로그램 개발의 편리
+1. [페이징](#페이징-파일) 기술을 통해 물리적으로 사용할 수 있는 메모리보다 더 많은 주소 공간 확보
+1. 메모리 격리에 의한 시스템 보안 강화
+
+### 페이지
+**[페이지](https://en.wikipedia.org/wiki/Page_(computer_memory))**(page)는 가장 작은 단위의 가상 메모리 블록이며, 이와 매핑된 하나의 물리 메모리 조각을 **[페이지 프레임](https://en.wikipedia.org/wiki/Page_(computer_memory))**(page frame) 또는 간단히 **프레임**(frame)이라고 부른다. 일반적으로 페이지 (및 프레임) 크기는 4 KB로 고정된다. 페이지에는 세 가지 [상태](https://learn.microsoft.com/en-us/windows/win32/memory/page-state)가 존재하며, 이에 따라 가상 메모리의 가용 여부가 결정된다.
+
+<table style="width: 85%; margin: auto;"><caption style="caption-side: top;">가상 메모리의 페이지 상태</caption><colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup><thead><tr><th style="text-align: center;">상태</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;">여유<br/>(Free)</td><td>사용되고 있지 않는 가상 메모리이다.</td></tr><tr><td style="text-align: center;">예약됨<br/>(Reserved)</td><td>가상 주소 공간에 할당되었으나, 시스템 성능에 실질적으로 기여하지 않는 가상 메모리이다.</td></tr><tr><td style="text-align: center;"><a href="https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/introduction-to-the-page-file#system-committed-memory">커밋됨</a><br/>(Committed)</td><td>가상 주소 공간에는 할당된 동시에 시스템 성능에 실질적으로 기여하는 가상 메모리이다. 단, 해당 페이지에 R/W 작업이 있기 전에는 물리 메모리가 매핑되지 않는다. "물리 메모리 + <a href="#페이징-파일">페이징 파일</a>"이 커밋 한도(commit limit)이다.</td></tr></tbody></table>
 
 ## 페이징 파일
-[페이징 파일](https://learn.microsoft.com/en-us/windows/client-management/introduction-page-file)(paging file)은 가상 주소 공간의 [페이지](Process.md#페이지)를 RAM이 아닌 HDD 또는 SSD와 같은 보조기억장치에서 물리 메모리의 데이터 일부를 [페이징](https://ko.wikipedia.org/wiki/페이징)(paging) 기법으로 전달받아 원활한 시스템 성능을 유지하는데 기여하는 `pagefile.sys` 파일이다. 다음은 페이징 기법에 대한 간략한 설명이다.
+**[페이징 파일](https://learn.microsoft.com/en-us/windows/client-management/introduction-page-file)**(page file)은 [가상 메모리](#가상-메모리)의 [페이지](Process.md#페이지)를 물리 메모리가 아닌 [HDD](https://en.wikipedia.org/wiki/Hard_disk_drive)나 [SSD](https://en.wikipedia.org/wiki/Solid-state_drive)와 같은 [저장 장치](Storage.md)로 전달받을 수 있는 pagefile.sys 파일이다. 프로그램을 실행하거나 저장된 파일을 열 때 물리 메모리에 로드되지만, 파일을 편집하였으나 아직 저장되지 않는 등의 경우에는 아예 페이징 파일에서 처리되는 경향이 있다. 물리 메모리 용량이 대폭 증가하며 페이징 파일의 입지는 예전에 비해 상당히 퇴색되었으나, 일부 프로그램이나 메모리 덤프 수집에 여전히 필요한 존재이다.
+
+물리 메모리와 페이징 파일 간 데이터가 이동하는 [페이징](https://en.wikipedia.org/wiki/Memory_paging) 기법에 대하여 간랸히 설명한다.
 
 <table style="width: 85%; margin: auto;"><caption style="caption-side: top;">페이징 기법 및 설명</caption>
-<colgroup><col style="width: 15%;"/><col style="width: 25%;"/><col style="width: 60%;"/></colgroup><thead><tr><th style="text-align: center;">페이징 기법</th><th style="text-align: center;">방향성</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;">페이징 아웃<br/>(Paging out)</td><td style="text-align: center;">페이지 프레임 → 페이징 파일</td><td>물리 메모리에 오랜 시간동안 머물고 있으나 사용 중이지 않은 커밋된 페이지를 드라이브로 옮겨 메모리 여유를 확보한다.</td></tr><tr><td style="text-align: center;">페이징 인<br/>(Paging in)</td><td style="text-align: center;">페이징 파일 → 페이지 프레임</td><td>페이징 파일은 드라이브의 하드웨어적 한계로 인해 절대 물리 메모리를 대체할 수 없어, 참조되어야 할 페이지는 물리 메모리로 복귀되어야 한다.</td></tr></tbody></table>
+<colgroup><col style="width: 15%;"/><col style="width: 25%;"/><col style="width: 60%;"/></colgroup><thead><tr><th style="text-align: center;">메모리 페이징</th><th style="text-align: center;">방향성</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;">페이징 아웃<br/>(Paging out)</td><td style="text-align: center;">물리 메모리 → 페이징 파일</td><td>오랜 시간 물리 메모리에서 사용되지 않은 페이지를 저장 장치의 페이징 파일로 옮겨 메모리 여유를 확보한다.</td></tr><tr><td style="text-align: center;">페이징 인<br/>(Paging in)</td><td style="text-align: center;">페이징 파일 → 물리 메모리</td><td>페이징 파일은 저장 장치의 기술적 한계로 물리 메모리를 대체할 수 없으므로, 참조되어야 할 페이지는 물리 메모리로 복귀된다.</td></tr></tbody></table>
 
-[커밋된 메모리](#커밋된-메모리) 중 보조기억장치에서 찾아볼 수 없는 데이터 또한 페이징 파일에서 처리되는 걸 경향이 있다(예. 저장되지 않은 [메모장](https://ko.wikipedia.org/wiki/메모장_(소프트웨어)) 텍스트). 이와 반대로 `notepad.exe` 프로그램 이미지 혹은 저장된 `.txt` 파일 등과 같이 보조기억장치에 찾을 수 있는 데이터는 물리 메모리에서 곧바로 불러온다.
-
-페이징 파일 크기를 지정하려면 View advanced system settings 검색 (혹은 `systempropertiesadvanced.exe` 실행) 이후, "성능(Performance)" 그룹 내의 설정 버튼을 클릭한다. "성능 옵션(Performance Options)" 창이 나타나면 고급(Advanced) 탭으로 이동하여 가상 메모리 설정 버튼을 클릭한다.
+윈도우 OS는 페이징 파일 크기를 설정할 수 있으며 View advanced system settings 검색 (혹은 `systempropertiesadvanced.exe` 실행) 이후에 *Performance* 그룹의 설정 버튼을 클릭한다. Performance Options 창이 나타나면 Advanced 탭으로 이동하여 *Virtual memory* 그룹 하에 변경 버튼을 클릭한다.
 
 ![가상 메모리 다이얼로그 창](./images/memory_pagefile.png)
 
-기본적으로 시스템은 "모든 드라이브에 대한 페이징 파일 크기 자동 관리(Automatically manage paging file size for all drives)"로 설정되어 있다. 이는 OS 드라이브만 크기가 자동 조정되는 페이징 파일을 가지며, 나머지 드라이브에는 페이징 파일이 없는 것과 마찬가지이다. 각 드라이브마다 페이징 파일의 크기는 아래 세 가지 선택지로부터 지정된다.
+> 시스템은 기본적으로 "Automatically manage paging file size for all drives" 체크 박스가 설정되어 있으며, 이는 OS 드라이브만 *시스템이 관리하는 크기*인 한편 나머지는 *페이징 파일 없음*과 동일하다.
 
-* **사용자 지정 크기(Custom size)**: 사용자가 직접 페이징 파일의 처음 크기(Initial size) 및 확장될 수 있는 최대 크기(Maximum size)를 [메가바이트](https://ko.wikipedia.org/wiki/메가바이트) 단위로 지정한다 (참고: 1 [GB](https://ko.wikipedia.org/wiki/기가바이트) = 1024 MB).
+다음은 각 드라이브마다 설정할 수 있는 페이징 파일 크기에 대한 세 가지 선택지를 소개한다:
 
-* **시스템이 관리하는 크기(System manged size)**: Smss.exe [세션 관리자](Process.md#세션-관리자)에 의해 몇 가지의 요인들을 살펴본 이후 적합한 페이징 파일 크기로 결정된다:
+1. **사용자 지정 크기**(Custom size)
 
-    1. 커밋된 메모리 사용률이 90%에 도달하면 시스템은 페이징 파일을 RAM 용량(혹은 4 GB 중 가장 큰 걸로 선정)의 3배까지 확장할 수 있다. 예를 들어, 2 GB와 8 GB 메모리의 시스템은 각각 페이징 파일이 12 GB와 24 GB까지 늘어날 수 있다. 그러나 페이징 파일이 확장될 수 있는 크기는 해당 드라이브 용량의 1/8로 제한된다.
-    
-    1. [블루스크린](BSOD.md)이 발생하면 RAM에 상주한 데이터를 페이징 파일로 [덤프](BSOD.md#bsod-덤프-수집)하는 데, 만일 [자동 메모리 덤프](Dump.md#자동-메모리-덤프)에서 페이징 파일 공간이 부족하다면 재부팅이 될 때 필요한 크기만큼 확장시킨다. 반면 [커널](Dump.md#커널-메모리-덤프), [전체](Dump.md#전체-메모리-덤프), 그리고 [활성 메모리 덤프](Dump.md#활성-메모리-덤프)로 설정되었을 시, 페이징 파일은 애초부터 RAM과 동일한 크기이다.
+    직접 페이징 파일의 처음 크기(Initial size)와 확장될 수 있는 최대 크기(Maximum size)를 [메가바이트](https://en.wikipedia.org/wiki/Megabyte) 단위로 지정한다. 단, 지정한 크기만큼 저장 장치의 여유 공간이 줄어든다는 점은 충분히 인지하고 변경하도록 한다.
 
-* **페이징 파일 없음(No paging file)**: 페이징 파일을 사용하지 않는다.
+1. **시스템이 관리하는 크기**(System managed size)
 
-지정된 크기만큼의 보조기억장치 용량을 페이징 파일로 사용하기 때문에 저장공간이 줄어든다는 단점이 있다. 그리고 물리 메모리의 성능 및 용량이 대폭 발전되고 운영체제의 아키텍처가 64비트로 전환하면서 페이징 파일의 역할이 상당히 퇴색되었다.
+    [세션 관리자](Process.md#세션-관리자)는 몇 가지의 요인들을 기반하여 실시간으로 적합한 페이징 파일 크기를 유연하게 결정한다. 만일 시스템 메모리가 커밋 한도의 90%에 도달하면 페이징 파일의 크기가 확장되는데, 물리 메모리(혹은 4 GB 중 가장 큰 걸로 선정)의 세 배까지 늘어날 수 있다. 하지만 페이징 파일이 확장하여도 상주하는 드라이브 용량의 1/8로 크기가 제한된다.
 
-## 커밋된 메모리
-커밋된 메모리(committed memory)는 시스템 메모리에서 사용 중으로 인식된 [페이지](Process.md#페이지)이다. [프로세스](Process.md)의 사용자 공간에 커밋된 메모리는 두 유형으로 나뉘어진다.
+    [커널](Dump.md#커널-메모리-덤프), [전체](Dump.md#전체-메모리-덤프), 그리고 [활성 메모리 덤프](Dump.md#활성-메모리-덤프)로 구성되었으면 [BSOD](BSOD.md) 발생 시 덤프를 모두 수집할 수 있도록 페이징 파일 크기를 물리 메모리와 동일하게 조정한다. [자동 메모리 덤프](Dump.md#자동-메모리-덤프)일 경우, 커널 주소 공간을 수집하는 데 일반적으로 충분하다고 판단되는 크기로 조정한다. 반면 불충분하다면 `PagefileTooSmall` 레지스트리 서브키를 생성하는데, 해당 레지스트리 값의 존재 여부에 따라 [부팅](Boot.md) 때 페이징 파일 크기를 물리 메모리와 동일하게 설정한다.
 
-<table style="table-layout: fixed; width: 80%; margin: auto;"><caption style="caption-side: top;">개인 및 공유 메모리의 차이점</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">개인 메모리 (private memory)</th><th style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/공유_메모리">공유 메모리</a> (shared memory)</th></tr></thead>
-<tbody style="text-align: center;"><tr><td>오로지 해당 프로세스만 접근할 수 있는 메모리이다.</td><td>타 프로세스와 공유되는 메모리이며, .exe 혹은 .dll 같은 프로그램 이미지 하나로 여러 프로세스가 공유한다.</td></tr></tbody></table>
-
-시스템 관점에서 바라본 커밋된 메모리, 즉 커밋 총량(commit charge)은 모든 프로세스의 사용자 공간 및 커널로부터 커밋된 페이지의 합계이다. 커밋 총량이 도달할 수 있는 최대 크기인 커밋 한도(commit limit)는 페이지가 상주할 수 있는 "RAM + [페이징 파일](#페이징-파일)"로 계산된다. 커밋 총량이 한도에 도달할 시, 시스템은 여유 메모리가 생길 때까지 기다려야 하는 [응답 없음](https://ko.wikipedia.org/wiki/프리징_(컴퓨팅))(hang) 상태에 빠진다.
-
-> 작업 관리자 예시에서 커밋 총량과 한도가 각각 12.5 GB 및 54.9 GB로 측정되었다. 페이징 파일을 계산하면 총 7.0 GB(= 54.9 - 47.9) 중에서 3.9 GB(= 12.5 - 8.6)가 사용되고 있다.
-
-### 가상 메모리
-가상 메모리(virtual memory)는 프로세스의 사용자 공간에 할당된 "커밋된 페이지 + 예약된 페이지(reserved pages)"이다. 시스템 아키텍처 및 운영체제에 따라 각 프로세스는 가상 주소 공간에 할당할 수 있는 최대 크기가 정해져 있는데, 이를 초과하면 오류 코드 0xC000012D와 함께 프로세스가 충돌하여 종료된다. 그러므로 단일 프로세스에 페이지를 얼마나 더 할당할 수 있는지 가상 메모리를 통해 알아볼 수 있다.
-
-허나, 가상 메모리는 시스템 성능을 확인하는데 실질적으로 유용한 척도가 아니다:
-
-![대략 12 GB로 측정된 커밋된 메모리, 그리고 471 TB로 측정된 총 가상 메모리](./images/memory_virtual_committed.png)
-
-1. 예약된 페이지는 시스템 메모리와 아무런 상관이 없으므로, 시스템 관점에서는 무의미한 정보이다. 
-2. 64비트 아키텍처부터 프로세스의 사용자 공간은 최대 128 TB라는 엄청난 크기로 확장하여, [메모리 누수](https://ko.wikipedia.org/wiki/메모리_누수)가 일어나지 않는 한 용량이 부족할 일이 거의 없다.
-
-> 가상 메모리에 대한 정보는 작업 관리자에서도 찾아볼 수 없으며, 그 대신 [성능 모니터](Performance_Monitor.md) 혹은 [Sysinternals](Sysinternals.md)의 [VMMap](VMMap.md) 유틸리티 프로그램 등으로 확인할 수 있다.
+3. **페이징 파일 없음**(No paging file)
 
 ## 워킹 세트
 [워킹 세트](https://en.wikipedia.org/wiki/Working_set)(working set)는 프로세스의 사용자 및 커널 공간을 불문하고 [가상 주소 공간](Process.md#가상-주소-공간) 전체에 [커밋된 메모리](#커밋된-메모리)(= 개인 메모리 + 공유 메모리) 중에서 오로지 RAM에만 상주하고 있는 페이지를 가리킨다.
