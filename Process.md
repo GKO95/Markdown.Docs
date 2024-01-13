@@ -46,18 +46,6 @@
 
     ![가상 주소 공간과 물리 메모리의 관계](https://upload.wikimedia.org/wikipedia/commons/3/32/Virtual_address_space_and_physical_address_space_relationship.svg)
 
-### 페이지
-[페이지](https://ko.wikipedia.org/wiki/페이지_(컴퓨터_메모리))(page)는 가상 주소 공간에서 관리되는 가장 작은 단위의 메모리 블록이며, 이와 매핑된 하나의 물리 메모리 조각을 페이지 프레임(page frame) 혹은 간단히 프레임(frame)이라고 부른다. 페이지 및 프레임의 크기는 고정되어 있으며 일반적으로 4 KB이다.
-
-페이지에는 세 가지 [상태](https://learn.microsoft.com/en-us/windows/win32/memory/page-state)가 존재하며, 이에 따라 가상 메모리를 사용할 수 있는지 여부가 결정된다.
-
-<table style="width: 95%; margin: auto;">
-<caption style="caption-side: top;">가상 주소 공간의 페이지 상태</caption>
-<colgroup><col style="width: 10%;"/><col style="width: 90%;"/></colgroup>
-<thead><tr><th style="text-align: center;">상태</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody><tr><td style="text-align: center;">여유<br/>(Free)</td><td>가상 주소 공간에서 사용되고 있지 않는 가상 메모리이다.</td></tr><tr><td style="text-align: center;"><a href="Memory.md#가상-메모리">예약된</a><br/>(Reserved)</td><td>가상 주소 공간의 메모리를 차지하지만 시스템에서는 메모리를 사용하지 않는 것으로 인식한다.</td></tr><tr><td style="text-align: center;"><a href="Memory.md#커밋된-메모리">커밋된</a><br/>(Committed)</td><td>가상 주소 공간의 메모리를 차지하면서 시스템에서는 메모리를 사용하는 것으로 인식한다.<ul><li>페이지가 커밋되었다고 곧바로 물리 메모리를 할당받는 게 아니다.</li><li>시스템에 커밋된 메모리 전체 크기를 커밋 총량(commit charge)이라고 부르며 "<a href="Memory.md#메모리">물리 메모리</a> + <a href="Memory.md#페이징-파일">페이징 파일</a>" 크기만큼으로 제한된다.</li></ul></td></tr></tbody>
-</table>
-
 ## 핸들
 [핸들](https://ko.wikipedia.org/wiki/핸들_(컴퓨팅))(handle)은 프로세스가 파일이나 오브젝트와 같은 리소스에 접근하거나 불러오기 위해 사용하는 추상적인 [참조](C.md#포인터)이다. 일반적으로 핸들을 아래와 같이 선언한다.
 
