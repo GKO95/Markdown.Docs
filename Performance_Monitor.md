@@ -27,7 +27,7 @@
 \\Machine\Object(Instance)\Counter
 ```
 
-<table style="table-layout: fixed; width: 100%; margin: auto;">
+<table style="table-layout: fixed; width: 100%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">성능 모니터의 카운터 구성</caption>
 <colgroup><col style="width: 25%;"/><col style="width: 25%;"/><col style="width: 25%;"/><col style="width: 25%;"/></colgroup>
 <thead><tr><th style="text-align: center;"><code>Machine</code></th><th style="text-align: center;"><code>Object</code></th><th style="text-align: center;"><code>Instance</code></th><th style="text-align: center;"><code>Counter</code></th></tr></thead>

@@ -82,7 +82,7 @@ C++ 언어는 [컴파일 언어](Compiler.md)(compiled language)이다. C++ 컴�
 ### 주석
 [주석](https://learn.microsoft.com/en-us/cpp/cpp/comments-cpp)(comment)은 프로그램의 소스 코드로 취급하지 않아 실행되지 않는 영역이다. 흔히 코드에 대한 간단한 정보를 기입하기 위해 사용되는 데 C++ 언어에는 한줄 주석 그리고 블록 주석이 존재한다.
 
-<table style="table-layout: fixed; width: 80%; margin: auto;">
+<table style="table-layout: fixed; width: 80%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">C++ 주석 종류</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">한줄 주석</th><th style="text-align: center;">블록 주석</th></tr></thead>
@@ -108,7 +108,7 @@ C++ 언어는 [컴파일 언어](Compiler.md)(compiled language)이다. C++ 컴�
 ## 자료형
 [자료형](https://ko.wikipedia.org/wiki/자료형)(data type)은 데이터를 어떻게 표현할 지 결정하는 요소이며, C++에서는 다음과 같이 존재한다.
 
-<table style="width: 80%; margin: auto;"><caption style="caption-side: top;"><a href="https://learn.microsoft.com/en-us/cpp/cpp/fundamental-types-cpp">C++ 자료형</a></caption><colgroup><col style="width: 15%;"/><col style="width: 15%;"/><col style="width: 15%;"/><col/></colgroup><thead><tr><th style="text-align: center;">키워드</th><th style="text-align: center;">자료형</th><th style="text-align: center;">크기 (바이트)</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>char</code></td><td style="text-align: center;">문자</td><td style="text-align: center;">1</td><td>단일 ANSI 문자</td></tr><tr><td style="text-align: center;"><code>short</code></td><td style="text-align: center;">정수</td><td style="text-align: center;">2</td><td>가장 작은 정수 자료형</td></tr><tr><td style="text-align: center;"><code>int</code></td><td style="text-align: center;">정수</td><td style="text-align: center;">2 <sub>(최소)</sub></td><td>워드 크기의 기본 정수 자료형; <code>short</code>보다 작아서는 안되며, 32비트 시스템 이후로는 4바이트가 일반화되었다.</td></tr><tr><td style="text-align: center;"><code>long</code></td><td style="text-align: center;">정수</td><td style="text-align: center;">4 <sub>(최소)</sub></td><td>정수 자료형 <code>int</code>보다 작아서는 안되며, 4바이트와 8바이트 중 어느 크기를 채택하였는지 컴파일러마다 다르다.</td></tr><tr><td style="text-align: center;"><code>float</code></td><td style="text-align: center;">부동소수점</td><td style="text-align: center;">4</td><td>32비트 단정밀도 실수</td></tr><tr><td style="text-align: center;"><code>double</code></td><td style="text-align: center;">부동소수점</td><td style="text-align: center;">8</td><td>64비트 배정밀도 실수</td></tr><tr><td style="text-align: center;"><code>bool</code></td><td style="text-align: center;">논리형</td><td style="text-align: center;">1</td><td>참(<code>true</code>; 영 외의 정수) 혹은 거짓(<code>false</code>; 0)</td></tr><tr><td style="text-align: center;"><code>void</code></td><td style="text-align: center;">보이드</td><td style="text-align: center;">1</td><td>불특정 자료형</td></tr><tr><td style="text-align: center;"><code>auto</code></td><td style="text-align: center;">자동</td><td style="text-align: center;">N/A</td><td>컴파일러에 의해 적절한 자료형으로 자동 선택된다. 복잡한 자료형을 간략히 정의하는데 매우 유용하다.</td></tr></tbody/></table>
+<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://learn.microsoft.com/en-us/cpp/cpp/fundamental-types-cpp">C++ 자료형</a></caption><colgroup><col style="width: 15%;"/><col style="width: 15%;"/><col style="width: 15%;"/><col/></colgroup><thead><tr><th style="text-align: center;">키워드</th><th style="text-align: center;">자료형</th><th style="text-align: center;">크기 (바이트)</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>char</code></td><td style="text-align: center;">문자</td><td style="text-align: center;">1</td><td>단일 ANSI 문자</td></tr><tr><td style="text-align: center;"><code>short</code></td><td style="text-align: center;">정수</td><td style="text-align: center;">2</td><td>가장 작은 정수 자료형</td></tr><tr><td style="text-align: center;"><code>int</code></td><td style="text-align: center;">정수</td><td style="text-align: center;">2 <sub>(최소)</sub></td><td>워드 크기의 기본 정수 자료형; <code>short</code>보다 작아서는 안되며, 32비트 시스템 이후로는 4바이트가 일반화되었다.</td></tr><tr><td style="text-align: center;"><code>long</code></td><td style="text-align: center;">정수</td><td style="text-align: center;">4 <sub>(최소)</sub></td><td>정수 자료형 <code>int</code>보다 작아서는 안되며, 4바이트와 8바이트 중 어느 크기를 채택하였는지 컴파일러마다 다르다.</td></tr><tr><td style="text-align: center;"><code>float</code></td><td style="text-align: center;">부동소수점</td><td style="text-align: center;">4</td><td>32비트 단정밀도 실수</td></tr><tr><td style="text-align: center;"><code>double</code></td><td style="text-align: center;">부동소수점</td><td style="text-align: center;">8</td><td>64비트 배정밀도 실수</td></tr><tr><td style="text-align: center;"><code>bool</code></td><td style="text-align: center;">논리형</td><td style="text-align: center;">1</td><td>참(<code>true</code>; 영 외의 정수) 혹은 거짓(<code>false</code>; 0)</td></tr><tr><td style="text-align: center;"><code>void</code></td><td style="text-align: center;">보이드</td><td style="text-align: center;">1</td><td>불특정 자료형</td></tr><tr><td style="text-align: center;"><code>auto</code></td><td style="text-align: center;">자동</td><td style="text-align: center;">N/A</td><td>컴파일러에 의해 적절한 자료형으로 자동 선택된다. 복잡한 자료형을 간략히 정의하는데 매우 유용하다.</td></tr></tbody/></table>
 
 > [바이트](https://ko.wikipedia.org/wiki/바이트)(byte)란, 컴퓨터에서 메모리에 저장하는 가장 기본적인 단위이다. 자료형마다 크기가 정해진 이유는 효율적인 메모리 관리 차원도 있으나 CPU 연산과도 깊은 연관성을 갖는다. 한 바이트는 여덟 개의 [비트](https://ko.wikipedia.org/wiki/비트_(단위))(bit)로 구성된다.
 
@@ -142,7 +142,7 @@ unsigned short    // 표현 가능 범위:     +0 ~ +65535
 
     C 형식의 자료형 변환이 가지던 결함을 보완하기 위해 C++11부터 네 가지의 새로운 캐스팅 연산자가 소개되었다. C++에서는 다음 네 개의 연산자를 사용한 자료형 캐스팅을 권장한다.
 
-    <table style="width: 80%; margin: auto;"><caption style="caption-side: top;">C++ 캐스팅 연산자</caption><colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">설명 및 예시</th></tr></thead><tbody><tr><td rowspan="2" style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/static_cast"><code>static_cast</code></a></td><td>명시적 그리고 암묵적 변환에 사용되는 가장 일반적인 자료형 캐스팅 연산자이다.</td></tr><tr><td>
+    <table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C++ 캐스팅 연산자</caption><colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">설명 및 예시</th></tr></thead><tbody><tr><td rowspan="2" style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/static_cast"><code>static_cast</code></a></td><td>명시적 그리고 암묵적 변환에 사용되는 가장 일반적인 자료형 캐스팅 연산자이다.</td></tr><tr><td>
     
     ```cpp
     int variable = 3;
@@ -204,7 +204,7 @@ int variable1 = 3, variable2 = 4, variable3;
 
 변수의 "선언(declaration)"은 메모리 할당 여부와 관계없이 컴파일러에게 해당 변수의 존재성을 알리는 행위이다. 그러나 이미 변수를 정의하는 과정에서 컴파일러에게 변수의 존재를 알렸는데, 이 또한 변수를 선언한 것이다. 다음은 변수에 특수한 성질을 부여하는 선언 키워드를 소개한다.
 
-<table style="width: 80%; margin: auto;">
+<table style="width: 80%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">변수 선언 키워드 및 특징</caption>
 <colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup>
 <thead><tr><th style="text-align: center;">키워드</th><th style="text-align: center;">특징</th></tr></thead>
@@ -224,7 +224,7 @@ C/C++ 언어 [ISO 표준](https://github.com/cplusplus/draft)의 § 6.2 Declarat
 
 변수가 소스 코드 중에서 어디에 정의되었는지에 따라 지역 변수와 전역 변수로 구분된다. 
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%; margin-left: auto; margin-right: auto;">
 <caption>C 언어의 지역 및 전역 변수</caption>
 <colgroup><col style="width: 50%;"/></col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">지역 변수</th><th style="text-align: center;">전역 변수</th></tr></thead>
@@ -290,7 +290,7 @@ namespace1::variable = 3;
 ### `using` 키워드
 `using` 키워드는 네임스페이스 내의 데이터를 간편하게 접근할 수 있도록 한다. 즉, 네임스페이스를 별도로 명시하지 않아도 데이터 호출이 가능하게 한다. 하지만 무분별한 남용은 컴파일러가 어느 네임스페이스의 데이터를 호출하는 것인지 구별하지 못하게 하여 오류가 발생할 위험이 높다.
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%; margin-left: auto; margin-right: auto;">
 <caption>네임스페이스의 <code>using</code> 키워드 활용</caption>
 <colgroup><col style="width: 50%;"/></col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/namespace#Using-directives"><code>using</code> 지시문</a> (using-directive)</th><th style="text-align: center;"><a href="hhttps://en.cppreference.com/w/cpp/language/namespace#Using-declarations"><code>using</code> 선언</a> (using-declaration)</th></tr></thead>
@@ -314,7 +314,7 @@ std::cout << "Hello World!" << endl;
 [연산자](https://ko.wikipedia.org/wiki/연산자_(프로그래밍))(operator)는 피연산 데이터를 조작할 수 있는 가장 간단한 형태의 연산 요소이다. 연산자는 피연산자의 접두부, 접미부, 혹은 두 데이터 사이에 위치시켜 사용한다. 가독성을 위해 데이터와 연산자 사이에 공백을 넣어도 연산에는 아무런 영향을 주지 않는다. 다음은 [C/C++ 연산자](https://ko.wikipedia.org/wiki/C와_C++의_연산자)들을 간략히 소개한다.
 
 ### 산술 연산자
-<table style="width: 85%; margin: auto;">
+<table style="width: 85%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;"><a href="https://en.cppreference.com/w/cpp/language/operator_arithmetic">산술 연산자</a>(arithmetic operators)</caption>
 <colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup>
 <thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">산술</th><th style="text-align: center;">설명</th></tr></thead>
@@ -326,7 +326,7 @@ std::cout << "Hello World!" << endl;
 ### 증감 연산자
 [증가 연산자](https://en.cppreference.com/w/cpp/language/operator_incdec)(increment operator) `++` 및 [감소 연산자](https://en.cppreference.com/w/cpp/language/operator_incdec)(decrement operator) `--`는 데이터를 1만큼 증가 혹은 감소하는데 간략하게 한 줄로 표현한다.
 
-<table style="width: 85%; margin: auto;"><caption style="caption-side: top;">증감 연산자의 위치에 따른 비교</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">접두부</th><th style="text-align: center;">접미부</th></tr></thead><tbody><tr><td>피연산자를 1만큼 증가/감소시킨 다음에 표현식을 평가한다.</td><td>표현식을 평가한 다음에 피연산자를 1만큼 증가/감소시킨다.</td></tr><tr><td>
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">증감 연산자의 위치에 따른 비교</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">접두부</th><th style="text-align: center;">접미부</th></tr></thead><tbody><tr><td>피연산자를 1만큼 증가/감소시킨 다음에 표현식을 평가한다.</td><td>표현식을 평가한 다음에 피연산자를 1만큼 증가/감소시킨다.</td></tr><tr><td>
 
 ```cpp
 x = ++y;  // 동일: { y = y + 1; x = y; }
@@ -341,7 +341,7 @@ x = y--;  // 동일: { x = y; y = y - 1; }
 </td></tr></tbody></table>
 
 ### 비트 연산자
-<table style="width: 85%; margin: auto;">
+<table style="width: 85%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;"><a href="https://en.wikipedia.org/wiki/Bitwise_operations_in_C">비트 연산자</a>(bitwise operators)</caption>
 <colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup>
 <thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">비트연산</th><th style="text-align: center;">설명</th></tr></thead>
@@ -353,7 +353,7 @@ x = y--;  // 동일: { x = y; y = y - 1; }
 ### 할당 연산자
 단순 할당 연산자를 산술 및 비트 연산자와 조합하여 코드를 더욱 간결하게 작성할 수 있으며, 아래는 다양한 할당 연산자 중 일부만 보여준다.
 
-<table style="width: 85%; margin: auto;">
+<table style="width: 85%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;"><a href="https://en.cppreference.com/w/cpp/language/operator_assignment">할당 연산자</a>(assignment operators)</caption>
 <colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup>
 <thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">할당</th><th style="text-align: center;">설명</th></tr></thead>
@@ -385,7 +385,7 @@ x <<= y;  // 동일: x = x << y;
 ### 비교 연산자
 아래 비교 연산자의 설명은 참을 반환할 조건을 소개하며, 그 외에는 모두 `false`를 반환한다.
 
-<table style="width: 85%; margin: auto;">
+<table style="width: 85%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;"><a href="https://en.cppreference.com/w/cpp/language/operator_comparison">비교 연산자</a>(relational operators)</caption>
 <colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup>
 <thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">관계</th><th style="text-align: center;">설명</th></tr></thead>
@@ -397,7 +397,7 @@ x <<= y;  // 동일: x = x << y;
 ### 논리 연산자
 (논리 부정을 제외한) 아래 논리 연산자의 설명은 참을 반환할 조건을 소개하며, 그 외에는 모두 `false`를 반환한다.
 
-<table style="width: 85%; margin: auto;">
+<table style="width: 85%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;"><a href="https://en.cppreference.com/w/cpp/language/operator_logical">논리 연산자</a>(logical operators)</caption>
 <colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/><col style="width: "/></colgroup>
 <thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">논리</th><th style="text-align: center;">설명 </th></tr></thead>
@@ -411,7 +411,7 @@ x <<= y;  // 동일: x = x << y;
 
 > 한편, C++ 표준 라이브러리는 [줄바꿈 조작자](https://en.cppreference.com/w/cpp/io/manip/endl)(new-line manipulator) `std::endl`를 통해 자체적으로 텍스트 [줄바꿈](https://ko.wikipedia.org/wiki/새줄_문자)을 지원한다.
 
-<table style="table-layout: fixed; width: 90%; margin: auto;">
+<table style="table-layout: fixed; width: 90%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">C++ 텍스트 줄바꿈 구현 방법</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">탈출 문자</th><th style="text-align: center;">줄바꿈 조작자</th></tr></thead>
@@ -440,7 +440,7 @@ World!
 # 파일 입출력
 C++ 언어의 파일 입출력(일명 I/O)은 [`iostream`](https://en.cppreference.com/w/cpp/header/iostream) 헤더로부터 관련 함수들을 호출할 수 있으며, 단순 파일뿐만 아니라 터미널로부터 텍스트를 입력받거나 출력할 때에도 관여한다. [C](C.md) 언어의 [파일 입출력](C.md#파일-입출력)에서 소개한 [`stdio.h`](https://en.cppreference.com/w/cpp/header/cstdio) 헤더를 활용할 수 있지만, 본 장은 C++에 최적화된 입출력을 위주로 다룬다.
 
-<table style="width: 80%; margin: auto;">
+<table style="width: 80%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">C++ 파일 입출력 연산자</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">추출 연산자(extraction operator) <code>&gt;&gt;</code></th><th style="text-align: center;">삽입 연산자(insertion operator) <code>&lt;&lt;</code></th></tr></thead>
@@ -468,7 +468,7 @@ std::cout << static_cast<char>(variable);
 ## 파일 관리
 C++ 언어는 파일 입출력 스트림을 제공하는 [`fstream`](https://en.cppreference.com/w/cpp/header/fstream) 헤더에서 제공하는 [클래스](#클래스)를 통해 파일을 열고 닫을 수 있다.
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">파일 입출력 및 모드 옵션</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 10%;"/><col style="width: 40%;"/></colgroup>
 <thead><tr><th style="text-align: center;">파일 관리 코드</th><th colspan="2" style="text-align: center;">파일 열기 옵션: <a href="https://en.cppreference.com/w/cpp/io/ios_base/openmode"><code>openmode</code></a></th></tr></thead>
@@ -695,7 +695,7 @@ Hello World!
 # 컨테이너
 C++ 언어는 여러 데이터를 하나의 변수로 저장하는 공간인 [컨테이너](https://en.cppreference.com/w/cpp/container)(container)를 기본적으로 [표준 라이브러리](https://ko.wikipedia.org/wiki/C++_표준_라이브러리)로부터 제공한다. 아래는 C++ 컨테이너 유형에 대하여 간략하게 소개한다.
 
-<table style="width: 80%; margin: auto;">
+<table style="width: 80%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">C++ 컨테이너 유형</caption>
 <colgroup><col style="width: 25%;"/><col style="width: 75%;"/></colgroup>
 <thead><tr><th style="text-align: center;">유형</th><th style="text-align: center;">설명</th></tr></thead>
@@ -705,7 +705,7 @@ C++ 언어는 여러 데이터를 하나의 변수로 저장하는 공간인 [�
 ## 배열
 [배열](https://en.cppreference.com/w/cpp/language/array)(array)은 동일한 자료형의 데이터를 일련의 순서로 담는 [시퀀스 컨테이너](https://en.wikipedia.org/wiki/Sequence_container_(C++))이다. 전통적인 C 형식의 배열은 식별자 뒤에 대괄호 `[]`가 위치하여 배열이 담을 수 있는 데이터 용량 크기를 [정수 리터럴](https://en.cppreference.com/w/cpp/language/integer_literal)이나 [상수](#변수)로 지정한다. 배열의 데이터 초기화는 중괄호 `{}` 내에 항목을 순서대로 쉼표로 나누어 나열한다. 만일 배열 용량을 지정하지 않으면 데이터 개수만큼 크기가 정해지며, 아래는 배열을 정의하는 두 방식을 보여준다.
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">배열 크기를 지정하는 여부에 따른 C 형식의 배열 정의 방식</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">명시적 배열 크기</th><th style="text-align: center;">암묵적 배열 크기</th></tr></thead>
@@ -750,7 +750,7 @@ arr[2] = value3;
 ### 다차원 배열
 배열은 또 다른 배열을 요소로 가질 수 있으나, 자료형이 동일해야 하며 요소로 작용하는 배열들의 크기는 모두 같아야 하는 제약을 갖는다. 다차원 배열도 첫 번째 차원의 크기를 별도로 명시하지 않아도 되지만, 나머지 차원의 크기는 반드시 지정해야 한다.
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">다차원 배열의 1차원 크기를 지정하는 여부에 따른 정의 방식</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">명시적 배열 크기</th><th style="text-align: center;">암묵적 배열 크기</th></tr></thead>
@@ -818,7 +818,7 @@ char* ptr = "World!";    // 포인터를 활용한 문자열 표현 방법
 
 [`cstring`](https://en.cppreference.com/w/cpp/header/cstring) 헤더 파일은 아래와 같이 C 표준 라이브러리로부터 제공하는 문자열 관련 함수들을 제공한다.
 
-<table style="width: 80%; margin: auto;">
+<table style="width: 80%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">C 언어의 문자열 함수</caption>
 <colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup>
 <thead><tr><th style="text-align: center;">함수</th><th style="text-align: center;">설명</th></tr></thead>
@@ -849,7 +849,7 @@ std::cout << std::round(variable);
 
 함수를 정의하기 위해서 (1) 여러 문장의 코드들을 하나로 묶는 [블록](#구문)과 (2) [`return`](#return-반환문) 키워드에 의해 반환될 데이터 유형을 결정하는 [자료형](#자료형)이 반드시 필요하다. 함수 안에 새로운 함수를 정의하는 건 허용되지 않는다. 정의된 함수를 호출하여 사용하는 데, 함수명 뒤에 소괄호 `()` 기입 여부에 따라 의미하는 바가 다르다:
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">함수 식별자의 호출 방식에 따른 차이</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;"><code>function()</code> 호출</th><th style="text-align: center;"><code>function</code> 호출</th></tr></thead>
@@ -927,7 +927,7 @@ void function(std::string arg) {
 
 배열은 위와 동일한 구문으로 인자를 매개변수로 건네줄 수 없으며, 아래의 두 가지 방법이 존재한다:
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">배열을 매개변수로 전달하는 방법</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;"><a href="#배열">배열</a>로 선언</th><th style="text-align: center;"><a href="#포인터">포인터</a>로 선언</th></tr></thead>
@@ -1045,7 +1045,7 @@ std::cout << calling(callback, 1);
 
 [캡처 조항](https://en.cppreference.com/w/cpp/language/lambda#Lambda_capture)(capture clause)은 매개변수 이외에 유효범위 내에 선언된 변수를 람다 표현식으로 전달할 수 있는 수단을 제공한다. 유효범위 내의 변수를 캡처 조항에 명시하지 않고 람다 표현식에 호출하면 [MSVC](https://ko.wikipedia.org/wiki/마이크로소프트_비주얼_C++)의 경우에 [C3493](https://learn.microsoft.com/en-us/cpp/error-messages/compiler-errors-2/compiler-error-c3493) 오류가 발생한다. 다음은 캡처 조항을 활용하는 예시와 함께 코드에 대하여 설명한다.
 
-<table style="width: 100%; margin: auto;">
+<table style="width: 100%; margin-left: auto; margin-right: auto;">
 <caption>C++ 람다 표현식의 캡처 조항 예시</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">명시적 캡처</th><th style="text-align: center;">암시적 캡처</th></tr></thead>
@@ -1107,7 +1107,7 @@ lambda();
 
 프로그램 실행 (즉, 런타임) 도중에 함수를 호출하는데 소모되는 시간이 없으므로 속도가 소폭 향상되는 효과가 있으나, 과도한 사용은 프로그램 크기가 커지고 RAM 메모리를 더 많이 사용하는 단점으로 작용한다. 그러므로 인라인은 코드가 작지만 자주 사용되는 함수에 가장 적합하다.
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">인라인 함수를 활용한 코드 비교</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">인라인 함수가 적용된 코드</th><th style="text-align: center;">동일 코드</th></tr></thead>
@@ -1173,7 +1173,7 @@ int *ptr = &variable;
 
 메모리 주소에는 오로지 한 바이트의 데이터만 저장할 수 있다. 예를 들어, `int` 정수를 표현하려면 4바이트가 필요하므로 이웃하는 네 개의 메모리 주소가 하나의 데이터를 저장하는데 관여한다. 포인터의 자료형은 이러한 특성을 고려하여 가리키고 있는 메모리 주소로부터 어디까지 참조해야 완전한 데이터를 표현할 수 있는지 알려주는 역할을 한다. 그러므로 포인터에 [역참조 연산자](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_indirection_operator) `*`를 사용하면 자료형을 반영한 메모리 주소에 저장된 값을 반환한다.
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">포인터와 자료형의 관계</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">동일한 자료형</th><th style="text-align: center;">상이한 자료형</th></tr></thead>
@@ -1264,7 +1264,7 @@ int main() {
 
 C++ 언어는 [lvalue](#포인터)와 [rvalue](#포인터)에 따른 두 가지 유형의 참조를 지원한다:
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">C++의 lvalue 및 rvalue 참조</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;"><a href="https://learn.microsoft.com/en-us/cpp/cpp/lvalue-reference-declarator-amp">lvalue 참조</a> <code>&</code></th><th style="text-align: center;"><a href="https://learn.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp">rvalue 참조</a> <code>&&</code></th></tr></thead>
@@ -1380,7 +1380,7 @@ for (int index = 0; index < sizeof(variable); index++) {
 
 개발자는 원하는 데이터를 저장할 힙 영역의 메모리를 할당받아 사용할 수 있지만, 반면 사용하지 않게 된다면 개발자가 직접 할당받은 메모리를 해제하여 시스템에 반환해야 한다. 이러한 작업이 충분히 이루어지지 않는다면 메모리 누수(memory leak)가 발생하여 리소스 고갈로 프로세스 충돌을 야기한다.
 
-<table style="width: 80%; margin: auto;">
+<table style="width: 80%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">C++ 언어의 동적 할당 표현식</caption>
 <colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup>
 <thead><tr><th style="text-align: center;">표현식</th><th style="text-align: center;">설명</th></tr></thead>
@@ -1412,7 +1412,7 @@ C++ 언어는 여전히 전통적인 [C 형식 동적 메모리 할당](C.md#동
 # 클래스
 객체(object 혹은 instance)는 데이터를 저장할 수 있는 [변수](#변수)와 처리할 수 있는 [함수](#함수)를 하나로 묶은 데이터이다. 객체의 변수와 함수는 각각 필드(field)와 메소드(method)라고 불리며, 이를 통틀어 맴버(member)라고 칭하고 다음과 같이 접근한다.
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">객체의 맴버 유형별 호출 구문</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">필드 (유사 변수)</th><th style="text-align: center;">메소드 (유사 함수)</th></tr></thead>
@@ -1447,7 +1447,7 @@ std::cout << variable.at(2);
 1. 변수와 함수가 하나의 객체로 결합된다.
 1. 우연치 않은 수정을 방지하기 위해 변수 및 함수에 대한 직접적인 접근을 외부로부터 제한할 수 있다.
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">유형별 클래스 정의 및 객체화</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">명명된 클래스</th><th style="text-align: center;">익명 클래스</th></tr></thead>
@@ -1516,7 +1516,7 @@ std::cout << ptr->method();
 ## 생성자
 [생성자](https://en.cppreference.com/w/cpp/language/constructor)(constructor)는 객체화마다 자동으로 실행되는 특수한 보이드 메소드이다. 비록 생성자는 선택사항이지만, 정의한다면 반드시 클래스명과 동일해야 한다. 외부 코드로부터 객체화되기 때문에 생성자를 `public` 접근 지정자로 설정한다. 흔히 객체화 단계에서 맴버들을 초기화하는 용도로 사용된다.
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">생성자의 맴버 초기화 방식</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">직접 초기화(direct initialization)</th><th style="text-align: center;">목록 초기화(list initialization)</th></tr></thead>
@@ -1584,7 +1584,7 @@ public:
 
 아래는 메소드를 선언과 정의로 나누어 작성한 코드를 보여준다:
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">맴버 함수의 선언과 정의</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">선언과 정의 구분</th><th style="text-align: center;">동일 코드</th></tr></thead>
@@ -1617,7 +1617,7 @@ struct CLASS {
 
 일반 맴버와 달리, 정적 맴버는 클래스 내에서 선언만 되고 외부에서 별도로 정의되어야 한다:
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">정적 맴버의 선언과 정의</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">정적 필드</th><th style="text-align: center;">정적 메소드</th></tr></thead>
@@ -1741,7 +1741,7 @@ struct CLASS {
 
 파생 클래스는 기반 클래스에 이미 정의된 식별자의 맴버를 선언할 수 있으며, 이러한 경우 기반 클래스의 맴버 정의는 파생 클래스에 의해 묻힌다. 범위지정 연산자 `::`를 사용하여 파생 클래스에 묻힌 기반 클래스의 맴버를 접근할 수 있다. 파생 클래스는 여러 기반 클래스로부터 동시에 상속받을 수 있다.
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">기반 및 파생 클래스의 상속 관계</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">기반 클래스</th><th style="text-align: center;">파생 클래스</th></tr></thead>
@@ -1811,7 +1811,7 @@ int main() {
 ## 다형성
 [다형성](https://ko.wikipedia.org/wiki/다형성_(컴퓨터_과학))(polymorphism)은 "여러가지의 형태를 가진"이란 사전적 의미를 가지며, 프로그래밍 언어에서는 상황과 용도에 따라 달리 동작하는 것을 가리킨다.
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">C++ 언어의 다형성 유형</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">컴파일타임 다형성(compile-time polymorphism)</th><th style="text-align: center;">런타임 다형성(runtime polymorphism)</th></tr></thead>
@@ -1860,7 +1860,7 @@ int main() {
 
 오버라이딩이 되는 기반 클래스의 메소드는 [`virtual`](https://en.cppreference.com/w/cpp/language/virtual) 지정자로 정의된 가상 함수(virtual function)이다. 정의된 가상 함수는 기반 클래스를 객체화하여 곧바로 사용할 수 있으며, 또는 파생 클래스에서 오버라이딩을 하지 않은 채 객체화하여 사용될 수 있다. [상속](#상속)에서 보여준 예시 코드는 절대 함수 오버라이딩이 아니며 단순히 파생 클래스에 묻힌 것일 뿐이다.
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">가상 함수의 오버라이딩</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">기반 클래스</th><th style="text-align: center;">파생 클래스</th></tr></thead>
@@ -1939,7 +1939,7 @@ struct STRUCTURE {
 
 1. 구조체 맴버에 값을 할당하는 방법:
 
-    <table style="width: 95%; margin: auto;">
+    <table style="width: 95%; margin-left: auto; margin-right: auto;">
     <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
     <thead><tr><th style="text-align: center;">순차적 맴버 정의</th><th style="text-align: center;">명시적 맴버 정의</th></tr></thead>
     <tbody><tr style="vertical-align: top;"><td>
@@ -1961,7 +1961,7 @@ struct STRUCTURE {
 
 1. 구조체 선언과 동시에 변수를 함께 정의하는 방법:
 
-    <table style="width: 95%; margin: auto;">
+    <table style="width: 95%; margin-left: auto; margin-right: auto;">
     <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
     <thead><tr><th style="text-align: center;">명명된 구조체</th><th style="text-align: center;">익명 구조체</th></tr></thead>
     <tbody><tr style="vertical-align: top;"><td>
@@ -1986,7 +1986,7 @@ struct STRUCTURE {
 
 1. 구조체 맴버를 호출하는 방법:
 
-    <table style="width: 95%; margin: auto;">
+    <table style="width: 95%; margin-left: auto; margin-right: auto;">
     <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
     <thead><tr><th style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators">객체 맴버 연산자</a></th><th style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators">포인터 맴버 연산자</a></th></tr></thead>
     <tbody><tr style="vertical-align: top;"><td>
@@ -2034,7 +2034,7 @@ std::cout << sizeof(STRUCTURE);
 
 다음은 몇 가지 경우에 따라 데이터 구조 정렬이 어떻게 이루어진 것인지 설명한다:
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">맴버 구성에 따른 데이터 구조 정렬 비교</caption>
 <colgroup><col style="width: 33.3%;"/><col style="width: 33.4%;"/><col style="width: 33.3%;"/></colgroup>
 <thead><tr><th style="text-align: center;">8바이트: <code>char</code>-<code>int</code> 구조</th><th style="text-align: center;">8바이트: <code>char</code>-<code>short</code>-<code>int</code> 구조</th><th style="text-align: center;">12바이트: <code>char</code>-<code>int</code>-<code>short</code> 구조</th></tr></thead>
@@ -2096,7 +2096,7 @@ union UNION {
 
 1. 공용체 맴버에 값을 할당하는 방법:
 
-    <table style="width: 95%; margin: auto;">
+    <table style="width: 95%; margin-left: auto; margin-right: auto;">
     <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
     <thead><tr><th style="text-align: center;">최전방 맴버 자료형 기준</th><th style="text-align: center;">명시적 맴버 자료형 기준</th></tr></thead>
     <tbody><tr style="vertical-align: top;"><td>
@@ -2119,7 +2119,7 @@ union UNION {
 
 1. 공용체 선언과 동시에 변수를 함께 정의하는 방법:
 
-    <table style="width: 95%; margin: auto;">
+    <table style="width: 95%; margin-left: auto; margin-right: auto;">
     <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
     <thead><tr><th style="text-align: center;">명명된 공용체</th><th style="text-align: center;">익명 공용체</th></tr></thead>
     <tbody><tr style="vertical-align: top;"><td>
@@ -2144,7 +2144,7 @@ union UNION {
 
 1. 공용체 맴버를 호출하는 방법:
 
-    <table style="width: 95%; margin: auto;">
+    <table style="width: 95%; margin-left: auto; margin-right: auto;">
     <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
     <thead><tr><th style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators">객체 맴버 연산자</a></th><th style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators">포인터 맴버 연산자</a></th></tr></thead>
     <tbody><tr style="vertical-align: top;"><td>
@@ -2240,7 +2240,7 @@ using dtypeName = int;
 
 다음은 템플릿의 유형별 정의 그리고 홑화살괄호 `<>` 안에 자료형을 지정하여 객체화하는 예시 코드를 보여준다.
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">템플릿 유형별 정의 및 호출</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">함수 테블릿</th><th style="text-align: center;">클래스 템플릿</th></tr></thead>
@@ -2363,7 +2363,7 @@ catch(...)
 ## `throw` 키워드
 [`throw`](https://en.cppreference.com/w/cpp/language/throw) 키워드는 내에서 의도적으로 예외를 발생시키는데 사용된다. 자체 제작 함수나 클래스에서 설계되지 않은 방식으로 접근하거나 사용하려는 경우, 해당 문으로 오류를 일으켜서 프로세스 실행을 즉시 중단시키는 용도로 활용된다. 해당 키워드는 `try` 블록 내부 및 외부에서 동작 방식이 약간 다르다:
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;"><code>throw</code> 위치에 따른 동작 방식</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;"><code>try</code> 블록 내부</th><th style="text-align: center;"><code>try</code> 블록 외부</th></tr></thead>
@@ -2396,7 +2396,7 @@ C++ 언어가 컴파일되기 이전에 전처리기로부터 `#include`와 같�
 ## 매크로 정의
 [매크로](https://en.cppreference.com/w/cpp/preprocessor/replace)(macro)란 식별자가 있는 코드 조각이다. 코드 조각은 숫자나 문자와 같은 간단한 데이터가 될 수 있으며(객체형식 매크로; object-like macro), 전달인자를 받는 표현식이나 문장이 될 수도 있다(함수형식 매크로; function-like macro). 매크로는 `#define` 지시문으로 정의되며, 각 매크로에 해당하는 데이터 및 표현식이 소스 코드에 대체된다. 정의된 매크로는 `#undef` 지시자로 제거할 수 있다.
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">C++의 매크로 유형</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">객체형식 매크로</th><th style="text-align: center;">함수형식 매크로</th></tr></thead>
@@ -2537,7 +2537,7 @@ printf("%d", variable);
 
 [진입점](#진입점)인 `main()` 함수는 선언부가 없다는 점을 고려하면 메인 스크립트를 다음과 같이 구성할 수 있다.
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">헤더 파일과 소스 코드 나누기</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">헤더 파일: <code>main.hpp</code></th><th style="text-align: center;">소스 코드: <code>main.cpp</code></th></tr></thead>
@@ -2615,7 +2615,7 @@ void func(int x, float y) {
 
 아래는 프로그래밍 언어에서 흔히 사용되는 데이터와 기능들은 바로 사용할 수 있도록 미리 컴파일된 [표준 라이브러리](https://ko.wikipedia.org/wiki/C_표준_라이브러리)를 불러오는 헤더 파일 일부를 나열한다.
 
-<table style="width: 80%; margin: auto;">
+<table style="width: 80%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">C++ 표준 라이브러리의 헤더 파일</caption>
 <colgroup><col style="width: 18%;"/><col style="width: 12%;"/><col style="70%;"/></colgroup>
 <thead><tr><th style="text-align: center;">유형</th><th style="text-align: center;">헤더 파일</th><th style="text-align: center;">설명</th></tr></thead>
@@ -2629,7 +2629,7 @@ void func(int x, float y) {
 
 위에서 설명한 특징을 상기하며, 아래의 예시를 통해 `extern` 키워드에 의해 스크립트에 미치는 영향을 살펴본다.
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;"><code>extern</code> 키워드를 설명하기 위한 예시</caption>
 <colgroup><col style="width: 33.3%;"/><col style="width: 33.4%;"/><col style="width: 33.3%;"/></colgroup>
 <thead><tr><th style="text-align: center;">모듈 헤더 파일: <code>module.hpp</code></th><th style="text-align: center;">모듈 소스 코드: <code>module.cpp</code></th><th style="text-align: center;">메인 소스 코드: <code>main.cpp</code></th></tr></thead>
@@ -2707,7 +2707,7 @@ C 그리고 C++ 언어는 유사한 점이 상당히 많지만 엄밀히 다른 
 * C++ 언어로 작성된 함수를 C 프로젝트에서도 호환되도록 컴파일
 * C++ 프로젝트에서 C 언어로 작성된 함수를 호출하여 사용할 수 있도록 지원
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;"><code>extern "C"</code> 링크 선언 방법</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">함수마다 개별 지정</th><th style="text-align: center;">블록으로 묶음 지정</th></tr></thead>

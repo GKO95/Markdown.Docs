@@ -10,7 +10,7 @@ WinDbg는 흔히 어플리케이션 충돌이나 [블루스크린](BSOD.md)으�
 ### 환경 변수 설정
 WinDbg로부터 원활한 디버깅 작업을 진행하려면 아래와 같이 시스템 환경 변수를 설정하기를 권장한다.
 
-<table style="width: 80%; margin: auto;">
+<table style="width: 80%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">WinDbg 관련 환경 변수</caption>
 <colgroup><col style="width: 30%;"/><col style="width: 70%;"/></colgroup>
 <thead><tr><th style="text-align: center;">환경 변수</th><th style="text-align: center;">설명</th></tr></thead>
@@ -45,7 +45,7 @@ WinDbg에서 디버깅하고자 하는 스레드(어플리케이션 덤프 경�
 ## !analyze 확장도구
 [!analyze](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/-analyze)는 WinDbg에 기본적으로 탑재된 확장도구 중에서도 증상을 개략적으로 파악하는 데 유용하다. 하지만 해당 확장도구 또한 WinDbg와 마찬가지로 문제의 원인을 제시하는 도구가 아니며, 본 내용은 !analyze가 제시하는 자동 진단 내용이 무엇을 내포하는지 소개한다. !analyze 확장도구의 진단 내용은 [마이크로소프트 공식 문서](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/using-the--analyze-extension)에서 확인할 수 있다.
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">!analyze 출력화면 비교</caption>
 <thead><tr><th style="text-align: center;">충돌 소프트웨어</th><th style="text-align: center;">출력화면 및 설명</th></tr></thead>
 <colgroup><col style="width: 15%;" /><col style="width: 85%;" /></colgroup>

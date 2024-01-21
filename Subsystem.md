@@ -13,7 +13,7 @@
 
 환경 서브시스템은 크게 EXE 및 DLL 확장자의 프로세스와 라이브러리 유형으로 나뉘어진다.
 
-<table style="table-layout: fixed; width: 80%; margin: auto;">
+<table style="table-layout: fixed; width: 80%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">환경 서브시스템 프로세스 및 라이브러리 비교</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">환경 서브시스템 프로세스 (<code>EXE</code>)</th><th style="text-align: center;">환경 서브시스템 라이브러리 (<code>DLL</code>)</th></tr></thead>
@@ -42,7 +42,7 @@
 
 * Win32k.sys는 윈도우 서브시스템에서 핵심되는 기능이라고 소개한 장치 입력 및 프로그램 창을 처리하는 데 사용되는 커널 모드 장치 드라이버이다. 아래는 해당 장치 드라이버에 포함된 구성들을 소개한다.
 
-    <table style="width: 95%; margin: auto;"><caption style="caption-side: top;">Win32k.sys 장치 드라이버의 구성</caption><colgroup><col style="width: 30%;"/><col style="width: 70%;"/></colgroup><thead><tr><th style="text-align: center;">구성</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/창_관리자">창 관리자</a><br/>(Windows Manager)</td><td>바탕화면, 프로그램 창을 포함한 GUI 요소들을 생성하고 화면에 표시한다(콘솔 제외). 마우스 및 키보드 등의 장치 입력을 수신받아 GUI 요소에 상호작용 이벤트 처리에도 관여한다.</td></tr><tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/그래픽_장치_인터페이스">그랙픽 장치 인터페이스</a><br/>(Graphics Device Interface; GDI)</td><td>직선, 곡선, 도형 등의 그래픽 요소의 생성 및 조작, 폰트 렌더링, 색상 관리 등을 담당하는 함수나 서비스르 제공한다.</td></tr></tbody></table>
+    <table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">Win32k.sys 장치 드라이버의 구성</caption><colgroup><col style="width: 30%;"/><col style="width: 70%;"/></colgroup><thead><tr><th style="text-align: center;">구성</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/창_관리자">창 관리자</a><br/>(Windows Manager)</td><td>바탕화면, 프로그램 창을 포함한 GUI 요소들을 생성하고 화면에 표시한다(콘솔 제외). 마우스 및 키보드 등의 장치 입력을 수신받아 GUI 요소에 상호작용 이벤트 처리에도 관여한다.</td></tr><tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/그래픽_장치_인터페이스">그랙픽 장치 인터페이스</a><br/>(Graphics Device Interface; GDI)</td><td>직선, 곡선, 도형 등의 그래픽 요소의 생성 및 조작, 폰트 렌더링, 색상 관리 등을 담당하는 함수나 서비스르 제공한다.</td></tr></tbody></table>
 
 * Conhost.exe, 일명 "콘솔 호스트 프로세스"는 윈도우 7부터 소개되어 콘솔 창을 생성 및 관리를 담당한다. 본래 csrss.exe 직접 처리하였으나, 로컬 시스템 계정으로 실행된 서브시스템 프로세스로부터 일반 사용자에게 부여되어서 안 될 권한이 주어질 수 있는 보안 문제를 야기할 수 있어 소개되었다.
 

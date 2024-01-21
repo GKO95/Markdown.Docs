@@ -3,7 +3,7 @@
 
 OOP 언어는 "객체"라는 데이터를 위주로 프로그램을 개발되며, 아래는 객체에 대한 관련 용어을 간략히 소개한다:
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">OOP 핵심 용어의 간략 소개</caption>
 <colgroup><col style="width: 33.3%;"/><col style="width: 33.4%;"/><col style="width: 33.3%;"/></colgroup>
 <thead><tr><th style="text-align: center;">객체</th><th style="text-align: center;">맴버</th><th style="text-align: center;"><a href="#클래스">클래스</a></th></tr></thead>
@@ -22,7 +22,7 @@ OOP 언어는 "객체"라는 데이터를 위주로 프로그램을 개발되며
 
 프레임워크는 FCL(혹은 CoreFX) 그리고 CLR(혹은 CoreCLR)로 구성되어 있으며 아래의 표는 이들의 역할을 간략하게 설명한다:
 
-<table style="table-layout: fixed; width: 80%; margin: auto;">
+<table style="table-layout: fixed; width: 80%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">.NET 구성요소</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Framework_Class_Library">프레임워크 클래스 라이브러리</a>(FCL)</th><th style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/공통_언어_런타임">공통 언어 런타임</a>(CLR)</th></tr></thead>
@@ -43,7 +43,7 @@ OOP 언어는 "객체"라는 데이터를 위주로 프로그램을 개발되며
 
 [C# 9.0](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-9) 업데이트를 기점으로 비주얼 스튜디오에서 C# 콘솔 프로젝트를 생성할 때 [새로운 템플릿](https://learn.microsoft.com/en-us/dotnet/core/tutorials/top-level-templates)이 제공되며, 아래는 이전과 이후 소스 코드를 비교한다.
 
-<table style="table-layout: fixed; width: 95%; margin: auto;">
+<table style="table-layout: fixed; width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">C# 9.0 전후 콘솔 프로젝트 비교</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">C# 9.0 이전</th><th style="text-align: center;">C# 9.0 이후</th></tr></thead>
@@ -131,7 +131,7 @@ Console.WriteLine("Hello World!");
 
 ![비주얼 스튜디오의 C# 프로그래밍 언어 문서 주석 예시](./images/csharp_documentation_comment.png)
 
-<table style="table-layout: fixed; width: 95%; margin: auto;">
+<table style="table-layout: fixed; width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">C# 주석 종류</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">한줄/블록 주석</th><th style="text-align: center;"><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/documentation-comments">문서 주석</a></th></tr></thead>

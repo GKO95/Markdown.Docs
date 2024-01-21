@@ -3,7 +3,7 @@
 
 파이썬은 [인터프리트 언어](Interpreter.md)(interpreted language)이다. 버전은 크게 파이썬 2와 파이썬 3으로 분류되는데, 전자는 2020년 1월 1일부로 서비스가 종료되었다. 파이썬 1이라는 것도 존재하나, 가장 최신 버전 1.6.1이 2000년에 출시된 점을 고려하면 호환성과 실용성이 매우 떨어진다. 그러므로 본문은 파이썬 3을 위주로 프로그래밍을 설명한다.
 
-<table style="width: 80%; margin: auto;">
+<table style="width: 80%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">파이썬 <code>X.Y.Z</code> 버전</caption>
 <colgroup><col style="width: 20%;"/><col style="width: 50%;"/><col style="width: 30%;"/></colgroup>
 <thead><tr><th style="text-align: center;">버전</th><th style="text-align: center;">설명</th><th style="text-align: center;">비고</th></tr></thead>
@@ -45,7 +45,7 @@
 
 ![파이썬 3 설치 프로그램 추가 설치 사항](./images/python_interpreter_optional.png)
 
-<table style="width: 60%; margin: auto;">
+<table style="width: 60%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">파이썬 인터프리터 추가 설치 옵션</caption>
 <colgroup><col style="width: 30%;"/><col style="width: 70%;"/></colgroup>
 <thead><tr><th style="text-align: center;">옵션</th><th style="text-align: center;">설명</th></tr></thead>
@@ -117,7 +117,7 @@
 ### 주석
 [주석](https://peps.python.org/pep-0008/#comments)(comment)은 프로그램의 소스 코드로 취급하지 않아 실행되지 않는 영역이다. 흔히 코드에 대한 간단한 정보를 기입하기 위해 사용되는 데, 파이썬에는 두 가지의 주석이 존재한다.
 
-<table style="table-layout: fixed; width: 80%; margin: auto;">
+<table style="table-layout: fixed; width: 80%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">파이썬 주석 종류</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">블록 주석(block comment)</th><th style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Docstring">독스트링</a>(docstring)</th></tr></thead>
@@ -158,7 +158,7 @@
 
     출력 함수가 실행될 시, `print()`의 소괄호 `()` 안에 있는 데이터가 터미널에 나타난다.
 
-<table style="table-layout: fixed; width: 80%; margin: auto;">
+<table style="table-layout: fixed; width: 80%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">파이썬 콘솔 입출력 예시</caption>
 <colgroup><col style="width: 50%;"><col style="width: 50%;"></colgroup>
 <thead><tr><th style="text-align: center;">일반적인 문장</th><th style="text-align: center;">간결화된 문장</th></tr></thead>
@@ -255,7 +255,7 @@ NameError: name 'variable' is not defined
 ### 숫자 자료형
 [숫자 자료형](https://docs.python.org/3/library/stdtypes.html?#numeric-types-int-float-complex)(numeric data type)은 숫자로 표현되는 데이터들을 가리키며, 총 세 가지로 세분화된다.
 
-<table style="table-layout: fixed; width: 75%; margin: auto;">
+<table style="table-layout: fixed; width: 75%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">파이썬 숫자 자료형</caption>
 <colgroup><col/><col/><col/></colgroup>
 <thead><tr><th style="text-align: center;"><a href="https://docs.python.org/3/library/functions.html#int"><code>int</code></a></th><th style="text-align: center;"><a href="https://docs.python.org/3/library/functions.html#float"><code>float</code></a></th><th style="text-align: center;"><a href="https://docs.python.org/3/library/functions.html#complex"><code>complex</code></a></th></tr></thead>
@@ -271,7 +271,7 @@ NameError: name 'variable' is not defined
 ### 논리 자료형
 [논리 자료형](https://docs.python.org/3/library/stdtypes.html?#boolean-operations-and-or-not)(Boolean data type)은 문장이 참인지 거짓인지 판별하는 논리 조건에 사용되는 데이터 유형이다.
 
-<table style="table-layout: fixed; width: 75%; margin: auto;">
+<table style="table-layout: fixed; width: 75%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">파이썬 숫자 자료형</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;"><a href="https://docs.python.org/3/library/constants.html#True"><code>True</code></a></th><th style="text-align: center;"><a href="https://docs.python.org/3/library/constants.html#False"><code>False</code></a></th></tr></thead>
@@ -293,7 +293,7 @@ NameError: name 'variable' is not defined
 
 문자열 객체는 다른 데이터와 더하기 기호 `+`를 통해 공백없이 하나의 문자열로 연결할 수 있다. 문자열 간에만 사용할 수 있으므로 숫자 및 논리 자료형은 문자열로 변환해야 한다. 그 외에도 파이썬 3.6부터 추가된 접두사 `f`를 갖는 [서식화된 문자열 리터럴](https://docs.python.org/3/reference/lexical_analysis.html#f-strings)(formatted string literal), 일명 f-문자열에서 중괄호 `{}`를 통해 원하는 위치에 곧바로 데이터 삽입이 가능하다.
 
-<table style="table-layout: fixed; width: 80%; margin: auto;">
+<table style="table-layout: fixed; width: 80%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">파이썬 문자열 연결 및 서식화</caption>
 <colgroup><col style="width: 50%;"><col style="width: 50%;"></colgroup>
 <thead><tr><th style="text-align: center;">문자열 연결</th><th style="text-align: center;">서식화된 문자열 리터럴</th></tr></thead>
@@ -360,7 +360,7 @@ None
 ## 자료형 변환
 파이썬 프로그래밍 언어는 데이터를 타 자료형으로 변환할 수 있는 함수를 제공한다.
 
-<table style="width: 80%; margin: auto;">
+<table style="width: 80%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">파이썬 자료형 변환</caption>
 <colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup>
 <thead><tr><th style="text-align: center;">자료형 변환</th><th style="text-align: center;">예시</th></tr></thead>
@@ -646,7 +646,7 @@ variable[1] = "Hello World!"   # IndexError: list assignment index out of range
 
 리스트는 특정 연산자를 통해 항목을 추가하거나 반복시킬 수 있다. 아래의 연산은 리스트 객체에만 제한되지 않으며, 차후에 소개될 다른 시퀀스 객체에도 적용이 가능하다.
 
-<table style="width: 80%; margin: auto;">
+<table style="width: 80%; margin-left: auto; margin-right: auto;">
 <colgroup><col style="width: 33.3%;"/><col style="width: 33.3%;"/><col style="width: 33.3%;"/></colgroup>
 <thead><tr><th style="text-align: center;">시퀀스 연결</th><th style="text-align: center;">시퀀스 반복</th><th style="text-align: center;">시퀀스 항목 여부</th></tr></thead>
 <tbody><tr><td>
@@ -751,7 +751,7 @@ print(variable[0])              # TypeError: 'variable' object is not subscripta
 
 집합 객체 연산자는 수학의 [집합](https://ko.wikipedia.org/wiki/집합)에서 사용되는 연산과 동일하게 작용한다.
 
-<table style="width: 60%; margin: auto;">
+<table style="width: 60%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">집합 객체 연산자</caption>
 <colgroup><col style="width: 15%;"/><col style="width: 15%;"/><col style="width: 70;"/></colgroup>
 <thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">명칭</th><th style="text-align: center;">설명</th></tr></thead>
@@ -815,7 +815,7 @@ function()
 
 함수명 뒤에 소괄호 `()` 기입 여부에 따라 의미하는 바가 다르다:
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">함수 식별자의 호출 방식에 따른 차이</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;"><code>function()</code> 호출</th><th style="text-align: center;"><code>function</code> 호출</th></tr></thead>
@@ -910,7 +910,7 @@ Hello World!
 
 다음은 매개변수에 사용되는 연산자로 전달인자을 받는데 유연성을 제공한다. 이들은 프로그래밍 구문상 명확한 구별이 가능해야 하므로 반드시 일반 매개변수 뒤에 위치해야 한다.
 
-<table style="width: 100%; margin: auto;">
+<table style="width: 100%; margin-left: auto; margin-right: auto;">
 <caption>파이썬 함수의 매개변수 활용</caption>
 <colgroup><col style="width: 33.3%;"/><col style="width: 33.3%;"/><col style="width: 33.3%;"/></colgroup>
 <thead><tr><th style="text-align: center;"><code>arg =  value</code></th><th style="text-align: center;"><code>*args</code></th><th style="text-align: center;"><code>**kwargs</code></th></tr></thead>
@@ -1201,7 +1201,7 @@ print(CLASS.method(2, 3, 1))
 ## 매직 메소드
 [매직 메소드](https://docs.python.org/3/reference/datamodel.html#special-method-names)(magic method)는 특수한 목적을 가진 메소드로 식별자 양측에 던더(dunder; double underscore)가 있는 게 특징이다. 대표적으로 객체 초기화를 위한 `__init__()` 메소드가 있으며, 그 외에도 [연산자 오버로딩](#연산자-오버로딩)에 흔히 사용된다.
 
-<table style="width: 40%; margin: auto;">
+<table style="width: 40%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">연산자의 매직 메소드</caption>
 <colgroup><col style="width: 20%;"/><col style="width: 25%;"/><col style="width: 55%;"/></colgroup>
 <thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">명칭</th><th style="text-align: center;">매직 메소드</th></tr></thead>
@@ -1322,7 +1322,7 @@ print(instance.method(2, 3))
 ## 프로퍼티
 [프로퍼티](https://docs.python.org/3/library/functions.html#property)(property)는 하나의 속성을 getter, setter, 그리고 deleter 영역으로 나누어 [데이터 숨기기](https://en.wikipedia.org/wiki/Information_hiding)(data hiding)을 지원한다.
 
-<table style="width: 70%; margin: auto;">
+<table style="width: 70%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">프로퍼티의 데코레이터 및 설명</caption>
 <colgroup><col style="width: 15%;"/><col style="width: 30%;"/><col style="width: 55%;"/></colgroup>
 <thead><tr><th style="text-align: center;">프로퍼티</th><th style="text-align: center;">데코레이터</th><th style="text-align: center;">설명</th></tr></thead>
@@ -1394,7 +1394,7 @@ except:               # 예외 유형: 모든 유형의 예외 처리
 
 다음은 `try`-`except` 예외 처리문 쌍을 보조하는 문장이며, 이들은 선택사항이다.
 
-<table style="width: 70%; margin: auto;">
+<table style="width: 70%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">예외 처리문에 사용될 수 있는 키워드</caption>
 <colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup>
 <thead><tr><th style="text-align: center;">키워드</th><th style="text-align: center;">설명</th></tr></thead>
@@ -1427,7 +1427,7 @@ file.close()
 
     열고자 하는 파일경로 외에도 파일을 열기 위한 옵션을 설정할 수 있다.
 
-    <table style="width: 60%; margin: auto;"><caption><code>open()</code> 함수 플래그</caption><colgroup><col style="width: 15%;"/><col style="width: 45%;"/><col style="width: 40%;"/></colgroup><thead><tr><th style="text-align: center;">전달인자</th><th style="text-align: center;">설명</th><th style="text-align: center;">비고: 파일 존재 여부</th></tr></thead><tbody><tr><td style="text-align: center;"><code>r</code></td><td>읽기 모드 (기본값)</td><td>파일 부재 시 오류 반환</td></tr><tr><td style="text-align: center;"><code>x</code></td><td>생성 모드</td><td>파일 존재 시 오류 반환</td></tr><tr><td style="text-align: center;"><code>w</code></td><td>덮어쓰기 모드</td><td>파일 부재 시 새로 생성</td></tr><tr><td style="text-align: center;"><code>a</code></td><td>덧붙이기 모드</td><td>파일 부재 시 새로 생성</td></tr><tr><td style="text-align: center;"><code>rb</code></td><td>바이너리 읽기 모드</td><td>파일 부재 시 오류 반환</td></tr><tr><td style="text-align: center;"><code>wb</code></td><td>바이너리 쓰기 모드</td><td>파일 부재 시 새로 생성</td></tr></tbody></table>
+    <table style="width: 60%; margin-left: auto; margin-right: auto;"><caption><code>open()</code> 함수 플래그</caption><colgroup><col style="width: 15%;"/><col style="width: 45%;"/><col style="width: 40%;"/></colgroup><thead><tr><th style="text-align: center;">전달인자</th><th style="text-align: center;">설명</th><th style="text-align: center;">비고: 파일 존재 여부</th></tr></thead><tbody><tr><td style="text-align: center;"><code>r</code></td><td>읽기 모드 (기본값)</td><td>파일 부재 시 오류 반환</td></tr><tr><td style="text-align: center;"><code>x</code></td><td>생성 모드</td><td>파일 존재 시 오류 반환</td></tr><tr><td style="text-align: center;"><code>w</code></td><td>덮어쓰기 모드</td><td>파일 부재 시 새로 생성</td></tr><tr><td style="text-align: center;"><code>a</code></td><td>덧붙이기 모드</td><td>파일 부재 시 새로 생성</td></tr><tr><td style="text-align: center;"><code>rb</code></td><td>바이너리 읽기 모드</td><td>파일 부재 시 오류 반환</td></tr><tr><td style="text-align: center;"><code>wb</code></td><td>바이너리 쓰기 모드</td><td>파일 부재 시 새로 생성</td></tr></tbody></table>
 
 * [`close()`](https://docs.python.org/3/distutils/apiref.html#distutils.text_file.TextFile.close) 메소드
 
@@ -1547,7 +1547,7 @@ for variable in file:
 마지막 줄은 어딘가에.
 ```
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">파일 쓰기 모드 비교</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">덮어쓰기 모드: <code>W</code></th><th style="text-align: center;">덧붙여 쓰기 모드: <code>A</code></th></tr></thead>
@@ -1586,7 +1586,7 @@ with open("path\\filename.txt", "a") as file:
 # 모듈
 [모듈](https://docs.python.org/3/tutorial/modules.html)(module)은 부가적인 기능 및 데이터를 제공하는 파이썬 소스 코드이며, 이들은 일반 스크립트와 마찬가지로 `.PY` 확장자를 갖는다. 파이썬 모듈로부터 [변수](#변수), [함수](#함수), 그리고 [클래스](#클래스)를 불러올 수 있다:
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">파이썬 모듈 불러오기</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;"><a href="https://docs.python.org/3/reference/simple_stmts.html#the-import-statement"><code>import</code></a> 키워드</th><th style="text-align: center;"><a href="https://docs.python.org/3/reference/simple_stmts.html#from"><code>from</code></a> 키워드</th></tr></thead>
@@ -1652,7 +1652,7 @@ import package.module
 ### pip
 [pip](https://pip.pypa.io/en/stable/)는 파이썬 패키지 관리 소프트웨어이며 기본적으로 파이썬 인터프리터와 함께 설치된다. [GUI](https://ko.wikipedia.org/wiki/그래픽_사용자_인터페이스) 프로그램이 아니므로 패키지 설치 및 관리는 [명령 프롬프트](https://ko.wikipedia.org/wiki/Cmd.exe) 또는 [파워셸](https://ko.wikipedia.org/wiki/파워셸)과 같은 [터미널](https://ko.wikipedia.org/wiki/명령_줄_인터페이스)에서 처리되어야 한다.
 
-<table style="width: 50%; margin: auto;">
+<table style="width: 50%; margin-left: auto; margin-right: auto;">
 <caption><code>pip</code> 명령어</caption>
 <colgroup><col style="width: 20%;"/><col style="width: 30%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">옵션</th><th style="text-align: center;">설명</th><th style="text-align: center;">예시</th></tr></thead>
@@ -1687,7 +1687,7 @@ py -m venv .venv
 
 가상환경에 패키지를 설치하려면 사용 중인 [터미널](https://ko.wikipedia.org/wiki/명령_줄_인터페이스)에 가상환경을 활성시켜야 한다. 가상환경을 활성화하지 않은 채 패키지를 설치하면 시스템 전역의 인터프리터에 패키지를 설치하게 된다.
 
-<table style="width: 90%; margin: auto;">
+<table style="width: 90%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">터미널에 따른 가상환경 활성/비활성 명령</caption>
 <colgroup><col style="width: 10%;"/><col style="width: 30%;"/><col style="width: 30%;"/><col style="width: 30%;"/></colgroup>
 <thead><tr><th/><th style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/Cmd.exe">명령 프롬프트</a></th><th style="text-align: center;"><a href="PowerShell.md">파워셸</a></th><th style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/배시_(유닉스_셸)">Bash</a></th></tr></thead>

@@ -40,7 +40,7 @@ GPR 중에서 가장 기본적이면서 활발히 사용되는 `A`, `C`, `D`, �
 * `D` (Data): 산술 및 논리 연산을 보조하는 데이터 레지스터이며, 특히 정수의 곱셈이나 나눗셈 등에 흔히 활용된다.
 * `B` (Base): 배열, 문자열, 구조체 등의 데이터 기반 혹은 오프셋 메모리 주소를 저장하는 포인터 레지스터이다.
 
-<table style="width: 80%; margin: auto;"><caption style="caption-side: top;">x86-64 프로세서의 기본 GPR 명칭</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>R?X</code></td></tr><tr><td>-</td><td colspan="3"><code>E?X</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>?X</code></td></tr><tr><td colspan="2">-</td><td><code>?H</code></td><td><code>?L</code></td></tr></tbody></table>
+<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">x86-64 프로세서의 기본 GPR 명칭</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>R?X</code></td></tr><tr><td>-</td><td colspan="3"><code>E?X</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>?X</code></td></tr><tr><td colspan="2">-</td><td><code>?H</code></td><td><code>?L</code></td></tr></tbody></table>
 
 ### 포인터 레지스터
 [스택](https://ko.wikipedia.org/wiki/스택) 연산을 위한 메모리 주소를 다루며, 명칭 뒤에 [포인터](C.md#포인터)(pointer)를 의미하는 `P`가 있는 게 특징이다:
@@ -48,7 +48,7 @@ GPR 중에서 가장 기본적이면서 활발히 사용되는 `A`, `C`, `D`, �
 * `SP` (Stack Pointer): 스택의 최상위 주소를 가리키는 레지스터이며, [`push`](#push) 또는 [`pop`](#pop) 연산 시 자동으로 값이 변동된다.
 * `BP` (Base Pointer): [함수](C.md#함수)의 [스택 프레임](https://en.wikipedia.org/wiki/Call_stack#Structure)(stack frame), 일명 호출 스택(call stacK)의 기반 메모리 주소를 가리키는 레지스터이다.
 
-<table style="width: 80%; margin: auto;"><caption style="caption-side: top;">x86-64 프로세서의 포인터 레지스터 명칭</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>R?P</code></td></tr><tr><td>-</td><td colspan="3"><code>E?P</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>?P</code></td></tr><tr><td colspan="3">(64비트 모드에서만 지원)</td><td><code>?PL</code></td></tr></tbody><caption style="caption-side: bottom; text-align: left;"><sup>† 범용 레지스터처럼 16비트 레지스터를 상위 및 하위 8비트로 나누려는 데 의미를 두지 않았다.</sup></caption></table>
+<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">x86-64 프로세서의 포인터 레지스터 명칭</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>R?P</code></td></tr><tr><td>-</td><td colspan="3"><code>E?P</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>?P</code></td></tr><tr><td colspan="3">(64비트 모드에서만 지원)</td><td><code>?PL</code></td></tr></tbody><caption style="caption-side: bottom; text-align: left;"><sup>† 범용 레지스터처럼 16비트 레지스터를 상위 및 하위 8비트로 나누려는 데 의미를 두지 않았다.</sup></caption></table>
 
 ### 인덱스 레지스터
 [배열](C.md#배열) 혹은 [문자열](C.md#문자열)의 메모리 주소를 다루며, 명칭 뒤에 [인덱스](C.md#배열)(index)를 의미하는 `I`가 있는 게 특징이다:
@@ -56,12 +56,12 @@ GPR 중에서 가장 기본적이면서 활발히 사용되는 `A`, `C`, `D`, �
 * `SI` (Source Index): 배열 혹은 문자열의 원천 주소를 담는 레지스터이다.
 * `DI` (Destination Index): 배욜 혹은 문자열의 목적 주소를 담는 레지스터이다.
 
-<table style="width: 80%; margin: auto;"><caption style="caption-side: top;">x86-64 프로세서의 인덱스 레지스터 명칭</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>R?I</code></td></tr><tr><td>-</td><td colspan="3"><code>E?I</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>?I</code></td></tr><tr><td colspan="3">(64비트 모드에서만 지원)</td><td><code>?IL</code></td></tr></tbody><caption style="caption-side: bottom; text-align: left;"><sup>† 범용 레지스터처럼 16비트 레지스터를 상위 및 하위 8비트로 나누려는 데 의미를 두지 않았다.</sup></caption></table>
+<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">x86-64 프로세서의 인덱스 레지스터 명칭</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>R?I</code></td></tr><tr><td>-</td><td colspan="3"><code>E?I</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>?I</code></td></tr><tr><td colspan="3">(64비트 모드에서만 지원)</td><td><code>?IL</code></td></tr></tbody><caption style="caption-side: bottom; text-align: left;"><sup>† 범용 레지스터처럼 16비트 레지스터를 상위 및 하위 8비트로 나누려는 데 의미를 두지 않았다.</sup></caption></table>
 
 ### x64 확장 레지스터
 x86-64 아키텍처의 64비트 모드에서만 사용할 수 있는 GPR `R8` ~ `R15`는 본래 64비트를 위해 설계되었으므로, 하위 비트의 레지스터를 부르는 명칭을 달리 택하였다: 접미사에 `DWORD` (32비트), `WORD` (16비트), 그리고 `BYTE` (8비트) 자료형의 앞글자를 따서 분별한다.
 
-<table style="width: 80%; margin: auto;"><caption style="caption-side: top;">x86-64 프로세서의 64비트 전용 GPR 명칭</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>?</code></td></tr><tr><td>-</td><td colspan="3"><code>?D</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>?W</code></td></tr><tr><td colspan="3">-</td><td><code>?B</code></td></tr></tbody></table>
+<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">x86-64 프로세서의 64비트 전용 GPR 명칭</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>?</code></td></tr><tr><td>-</td><td colspan="3"><code>?D</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>?W</code></td></tr><tr><td colspan="3">-</td><td><code>?B</code></td></tr></tbody></table>
 
 ## 특수 레지스터
 특수 레지스터(Special-Purpose Register; SPR)는 [범용 레지스터](#범용-레지스터)와 달리, 특수한 목적을 위해서만 사용되는 레지스터를 가리킨다.
@@ -72,7 +72,7 @@ x86-64 아키텍처의 64비트 모드에서만 사용할 수 있는 GPR `R8` ~ 
 ### 명령어 포인터 레지스터
 일명 [IP](https://ko.wikipedia.org/wiki/프로그램_카운터)(instruction pointer) 레지스터는 다음에 실행할 명령어가 위치하는 메모리 주소를 가리킨다.
 
-<table style="width: 80%; margin: auto;"><caption style="caption-side: top;">x86-64 프로세서의 IP 레지스터 명칭</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>RIP</code></td></tr><tr><td>-</td><td colspan="3"><code>EIP</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>IP</code></td></tr></tbody></table>
+<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">x86-64 프로세서의 IP 레지스터 명칭</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>RIP</code></td></tr><tr><td>-</td><td colspan="3"><code>EIP</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>IP</code></td></tr></tbody></table>
 
 ### 플래그 레지스터
 산술 연산 및 현 시점에서 제동된 CPU 제약 등의 프로세서 상태를 담고 있는 [상태 레지스터](https://ko.wikipedia.org/wiki/상태_레지스터)이며, x86 계열의 CPU에서는 이를 [FLAGS 레지스터](https://en.wikipedia.org/wiki/FLAGS_register)라고 칭한다.
@@ -82,7 +82,7 @@ x86-64 아키텍처의 64비트 모드에서만 사용할 수 있는 GPR `R8` ~ 
 
 본 부문에 대한 설명을 진행하기 전, 우선 휘발성(volitile) 및 비휘발성(non-volitile) 레지스터가 무엇인지 소개한다.
 
-<table style="width: 80%; margin: auto;"><caption style="caption-side: top;">휘발성 및 비휘발성 레지스터 비교</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">휘발성(volitile)</th><th style="text-align: center;">비휘발성(non-volitile)</th></tr></thead><tbody><tr><td style="text-align: center;">호출자에 의해 저장(caller-saved)</td><td style="text-align: center;">피호출자에 의해 저장(callee-saved)</td></tr><tr><td>저장된 정보는 다른 함수로 인해 쉽게 덮어씌어질 수 있으며, 만일 복원하려면 호출자가 당시 값을 저장해야 한다.</td><td>피호출자가 반환된 이후에도, 해당 함수를 호출한 당시 호출자의 레지스터 값들은 피호출자에 의해 복원되어야 한다.</td></tr></tbody></table>
+<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">휘발성 및 비휘발성 레지스터 비교</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">휘발성(volitile)</th><th style="text-align: center;">비휘발성(non-volitile)</th></tr></thead><tbody><tr><td style="text-align: center;">호출자에 의해 저장(caller-saved)</td><td style="text-align: center;">피호출자에 의해 저장(callee-saved)</td></tr><tr><td>저장된 정보는 다른 함수로 인해 쉽게 덮어씌어질 수 있으며, 만일 복원하려면 호출자가 당시 값을 저장해야 한다.</td><td>피호출자가 반환된 이후에도, 해당 함수를 호출한 당시 호출자의 레지스터 값들은 피호출자에 의해 복원되어야 한다.</td></tr></tbody></table>
 
 ### x86 아키텍처 호출 규약
 > *참고: [x86 Architecture - Windows driver | Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/x86-architecture)*
@@ -109,7 +109,7 @@ x86-64 아키텍처의 64비트 모드에서만 사용할 수 있는 GPR `R8` ~ 
 
 호출 규약 `__cdecl`와 `__stdcall` 사이에는 호출된 함수를 정리(clean-up)하는 주체가 누구인지 달라진다: 전자는 호출자에게, 그리고 후자는 피호출자에게 책임을 묻는다. 여기서 스택 정리란, 위에서 언급한 휘발성 및 비휘발성 레지스터와 전혀 다른 개념이다.
 
-<table style="width: 80%; margin: auto;"><caption style="caption-side: top;"><code>__cdecl</code> 및 <code>__stdcall</code> 호출 규약의 휘발성 및 비휘발성 레지스터</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">휘발성(volitile)</th><th style="text-align: center;">비휘발성(non-volitile)</th></tr></thead><tbody><tr><td style="text-align: center;"><code>EAX</code>, <code>ECX</code>, <code>EDX</code></td><td style="text-align: center;">나머지 레지스터</td></tr></tbody></table>
+<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><code>__cdecl</code> 및 <code>__stdcall</code> 호출 규약의 휘발성 및 비휘발성 레지스터</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">휘발성(volitile)</th><th style="text-align: center;">비휘발성(non-volitile)</th></tr></thead><tbody><tr><td style="text-align: center;"><code>EAX</code>, <code>ECX</code>, <code>EDX</code></td><td style="text-align: center;">나머지 레지스터</td></tr></tbody></table>
 
 ### x86-64 아키텍처 호출 규약
 > *참고: [x64 Architecture - Windows driver | Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/x64-architecture)*
@@ -122,14 +122,14 @@ x86-64 아키텍처의 64비트 모드에서만 사용할 수 있는 GPR `R8` ~ 
 
 1. 정수나 메모리 주소는 `RAX` 레지스터, 부동소수점은 `XMM0` 레지스터를 통해 반환된다. 그러나 반환되는 데이터가 64비트 미만일 경우, 상위 비트는 영으로 정리되지 않은 채 하위 레지스터(즉, `EAX`, `AX` 등)를 활용한다.
 
-<table style="width: 80%; margin: auto;"><caption style="caption-side: top;">Microsoft x64 호출 규약의 휘발성 및 비휘발성 레지스터</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">휘발성(volitile)</th><th style="text-align: center;">비휘발성(non-volitile)</th></tr></thead><tbody><tr><td style="text-align: center;"><code>RAX</code>, <code>RCX</code>, <code>RDX</code>, <code>R8</code>, <code>R9</code>, <code>R10</code>, <code>R11</code></td><td style="text-align: center;"><code>RBX</code>, <code>RBP</code>, <code>RDI</code>, <code>RSI</code>, <code>RSP</code>, <code>R12</code>, <code>R13</code>, <code>R14</code>, <code>R15</code></td></tr></tbody></table>
+<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">Microsoft x64 호출 규약의 휘발성 및 비휘발성 레지스터</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">휘발성(volitile)</th><th style="text-align: center;">비휘발성(non-volitile)</th></tr></thead><tbody><tr><td style="text-align: center;"><code>RAX</code>, <code>RCX</code>, <code>RDX</code>, <code>R8</code>, <code>R9</code>, <code>R10</code>, <code>R11</code></td><td style="text-align: center;"><code>RBX</code>, <code>RBP</code>, <code>RDI</code>, <code>RSI</code>, <code>RSP</code>, <code>R12</code>, <code>R13</code>, <code>R14</code>, <code>R15</code></td></tr></tbody></table>
 
 # 구문
 [구문](https://ko.wikipedia.org/wiki/구문_(프로그래밍_언어))(syntax)은 프로그래밍 언어에서 문자 및 기호들의 조합이 올바른 문장 또는 표현식을 구성하였는지 정의하는 규칙이다. 어셈블리 코드를 작성하지 않더라도, 구문을 알고 있으면 디버깅 등의 트러블슈팅 목적으로도 유용하게 활용될 수 있다. 허나, 운영체제 및 [어셈블러](#어셈블러)에 따라 구문에 차이가 있음을 명시하도록 한다.
 
 어셈블리의 소스 코드는 [메모리 세그먼트](https://ko.wikipedia.org/wiki/X86_메모리_분할)<sub>([참고](https://en.wikipedia.org/wiki/File:Program_memory_layout.pdf))</sub> 중 다음 세 가지를 지원하며 (즉, [스택](https://ko.wikipedia.org/wiki/스택) 및 [힙](https://ko.wikipedia.org/wiki/동적_메모리_할당) 영역 제외), 이들은 `section` 키워드와 함께 명시하여 구분된다:
 
-<table style="width: 80%; margin: auto;">
+<table style="width: 80%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">어셈블리 언어의 프로그래밍 영역</caption>
 <colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup>
 <thead><tr><th style="text-align: center;">세그먼트</th><th style="text-align: center;">설명</th></tr></thead>

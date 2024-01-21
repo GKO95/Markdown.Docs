@@ -5,7 +5,7 @@
 
 아래는 일부 프로그래밍 언어의 인터프리터가 무엇으로부터 빌드되었는지 나열한다.
 
-<table style="table-layout: fixed; width: 50%; margin: auto;">
+<table style="table-layout: fixed; width: 50%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">프로그래밍 언어의 인터프리터 및 빌드에 사용된 언어</caption>
 <thead><tr><th style="text-align: center;">프로그래밍 언어</th><th style="text-align: center;">인터프리터</th><th style="text-align: center;">인터프리터 빌드 언어</th></tr></thead>
 <tbody>

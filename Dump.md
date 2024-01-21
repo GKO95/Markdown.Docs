@@ -9,7 +9,7 @@
 
 다음은 사용자 모드 덤프의 [종류](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/user-mode-dump-files)를 소개하며, 덤프 수집에 필요한 설정은 위에서 언급한 프로그램 문서를 참고하도록 한다.
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="text-align: center;">사용자 모드 덤프 종류</capation>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;"><a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/user-mode-dump-files#full">전체 덤프</a> (Full User-Mode Dump)</th><th style="text-align: center;"><a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/user-mode-dump-files#minidumps">미니 덤프</a> (Minidump)</th></tr></thead>
@@ -43,7 +43,7 @@ User Mini Dump File with Full Memory: Only application data is available
 ### 커널 메모리 덤프
 [커널 메모리 덤프](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/kernel-memory-dump)(Kernel Memory Dump)는 물리 메모리에서 사용자 공간을 제외한 커널 공간 주소의 데이터만을 수집한다. 비록 [전체 메모리 덤프](#전체-메모리-덤프)보다 필요한 페이징 파일이 작지만, RAM 크기와 할당된 [메모리 풀](Memory.md#메모리-풀) 용량 등 경우에 따라 수집되는 덤프 크기가 천차만별인 관계로 수치화된 정량이 없다.
 
-<table style="table-layout: fixed; width: 60%; margin: auto;">
+<table style="table-layout: fixed; width: 60%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">커널 메모리 덤프에 수집되는 정보</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">포함</th><th style="text-align: center;">제외</th></tr></thead>
@@ -73,7 +73,7 @@ User Mini Dump File with Full Memory: Only application data is available
 ### 활성 메모리 덤프
 [활성 메모리 덤프](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/active-memory-dump)(Active Memory Dump)는 트러블슈팅에 필요하지 않는 데이터가 필터링된 [전체 메모리 덤프](#전체-메모리-덤프)의 일종으로, 덤프 파일 크기는 전체 메모리 덤프보다 작다. 엄청난 크기의 물리 메모리가 탑재되었거나 (예를 들어 256 GB 이상의 RAM이 탑재된 서버), [하이퍼바이저](https://ko.wikipedia.org/wiki/하이퍼바이저) 호스트를 대상으로 덤프를 수집해야 하는 경우 등에 활용된다.
 
-<table style="table-layout: fixed; width: 60%; margin: auto;">
+<table style="table-layout: fixed; width: 60%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">활성 메모리 덤프에 수집되는 정보</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">포함</th><th style="text-align: center;">제외</th></tr></thead>

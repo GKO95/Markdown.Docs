@@ -10,7 +10,7 @@
 
 WSL은 두 종류의 아키텍처 설계가 있어 각각 장단점을 가진다. 자세한 내용은 [마이크로소프트 문서](https://learn.microsoft.com/en-us/windows/wsl/compare-versions)를 참고한다.
 
-<table style="table-layout: fixed; width: 95%; margin: auto;">
+<table style="table-layout: fixed; width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">WSL 버전 비교</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">WSL1</th><th style="text-align: center;">WSL2</th></tr></thead>

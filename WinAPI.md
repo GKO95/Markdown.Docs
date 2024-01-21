@@ -8,7 +8,7 @@
 
 다음은 윈도우 API 중에서 `CreateFileW` 함수를 호출할 때의 시스템 서비스가 진행되는 과정을 순서대로 나열한다.
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">WinAPI <code>CreateFileW</code> 함수의 시스템 서비스 호출 과정</caption>
 <colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 20%;"/><col style="width: 20%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;">순서</th><th style="text-align: center;">바이너리</th><th style="text-align: center;">이름</th><th style="text-align: center;">함수</th><th style="text-align: center;">설명</th></tr></thead>
@@ -30,7 +30,7 @@
 
 [컴포넌트 오브젝트 모델](https://ko.wikipedia.org/wiki/컴포넌트_오브젝트_모델)(Component Object Model; COM)은 마이크로소프트가 1993년에 프로세스 간 통신에 호환성을 보장하기 위해 표준화한 [어플리케이션 "이진" 인터페이스](https://ko.wikipedia.org/wiki/응용_프로그램_이진_인터페이스)이다. 본 내용을 진행하기 전에 API와 ABI의 차이점을 간단히 소개할 필요가 있다.
 
-<table style="width: 60%; margin: auto;">
+<table style="width: 60%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">API와 ABI의 차이점</caption>
 <colgroup><col style="width: 30%;"/><col style="width: 35%;"/><col style="width: 35%;"/></colgroup>
 <thead><tr><th style="text-align: center;">비교</th><th style="text-align: center;">API</th><th style="text-align: center;">ABI</th></tr></thead>

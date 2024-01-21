@@ -1,7 +1,7 @@
 # 윈도우 서비스
 [윈도우 서비스](https://ko.wikipedia.org/wiki/윈도우_서비스)(Windows Service)는 [서비스 제어 관리자](#서비스-제어-관리자)로부터 관리받는 프로그램이다.
 
-<table style="width: 80%; margin: auto;">
+<table style="width: 80%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">프로세스와 서비스의 차이</caption>
 <colgroup><col style="width: 15%;"/><col style="width: 45%;"/><col style="width: 20%;"/><col style="width: 20%;"/></colgroup>
 <thead><tr><th style="text-align: center;">프로그램</th><th style="text-align: center;">생명주기</th><th style="text-align: center;">복수 객체의 존재 가능</th><th style="text-align: center;">GUI 활용 가능</th></tr></thead>
@@ -57,7 +57,7 @@ HKLM\SYSTEM\CurrentControlSet\Services
 
 ![DLL 형태의 "Winmgmt" 서비스의 <code>ImagePath</code> 레지스트리 값](./images/svchost_winmgmt_imagepath.png)
 
-<table style="width: 60%; margin: auto;">
+<table style="width: 60%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">svchost.exe 플래그 설명</caption>
 <colgroup><col style="width: 10%;"/><col style="width: 85%;"/></colgroup>
 <thread><tr><th style="text-align: center;">플래그</th><th style="text-align: center;">설명</th></tr></thead>

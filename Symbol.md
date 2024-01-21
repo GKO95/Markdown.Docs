@@ -6,7 +6,7 @@
 ## 윈도우 심볼
 마이크로소프트 [윈도우](Windows.md)는 관측할 수 있는 정보의 유형과 제약에 따라 심볼을 세 가지로 나눈다.
 
-<table style="table-layout: fixed; width: 60%; margin: auto;">
+<table style="table-layout: fixed; width: 60%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">윈도우 운영체제 심볼 종류</caption>
 <colgroup><col style="width: 30%;"/></col style="width: 70%;"/></colgroup>
 <thead><tr><th style="text-align: center;">심볼</th><th style="text-align: center;">관측 가능한 데이터</th></tr></thead>
@@ -34,7 +34,7 @@
 
 * 심볼을 로컬에 캐싱하므로써 디버깅 성능 속도를 개선할 수 있다.
 
-<table style="table-layout: fixed; width: 80%; margin: auto;">
+<table style="table-layout: fixed; width: 80%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">심볼 캐싱 설정 구문</caption>
 <colgroup><col style="width: 40%"/><col style="width: 60%"/></colgroup>
 <thead><tr><th style="text-align: center;">구문</th><th style="text-align: center;">설명</th></tr></thead>
@@ -44,7 +44,7 @@
 
 * 심볼은 인터넷이나 사내망으로부터 심볼을 불러올 수 있다.
 
-<table style="table-layout: fixed; width: 80%; margin: auto;">
+<table style="table-layout: fixed; width: 80%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">심볼 서버 설정 구문</caption>
 <colgroup><col style="width: 40%"/><col style="width: 60%"/></colgroup>
 <thead><tr><th style="text-align: center;">구문</th><th style="text-align: center;">설명</th></tr></thead>

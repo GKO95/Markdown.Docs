@@ -38,7 +38,7 @@ CIM 표준은 다음 내용들을 소개한다:
 
 아래 예시는 운영체제 빌드 번호를 확인하기 위해 CIM 서버, 즉 [winmgmt](#wmi) [서비스](Service.md)로부터 [Win32_OperatingSystem](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem) [클래스](https://learn.microsoft.com/en-us/windows/win32/wmisdk/retrieving-a-class) 인스턴스를 반환받는 방법을 WMIC와 파워셸의 CimCmdlets 모듈을 사용하여 비교한다.
 
-<table style="width: 95%; margin: auto;"><caption style="caption-side: top;">WMI 명령 유티릴티 비교</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">WMIC</th><th style="text-align: center;">파워셸 CimCmdlets</th></tr></thead><tbody><tr style="vertical-align: top;"><td>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">WMI 명령 유티릴티 비교</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">WMIC</th><th style="text-align: center;">파워셸 CimCmdlets</th></tr></thead><tbody><tr style="vertical-align: top;"><td>
 
 ```terminal
 WMIC /OUTPUT:clipboard PATH Win32_OperatingSystem GET BuildNumber /VALUE

@@ -15,7 +15,7 @@
 ## 네트워크 노드
 [네트워크 노드](https://ko.wikipedia.org/wiki/노드_(네트워크))(network node)는 네트워크를 통해 전달되는 패킷의 재분배점 혹은 [통신 도착점](https://en.wikipedia.org/wiki/Communication_endpoint)(communication endpoint)이다. 물리적 네트워크 노드는 둘 중 하나로 분류된다:
 
-<table style="table-layout: fixed; width: 80%; margin: auto;">
+<table style="table-layout: fixed; width: 80%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">데이터 단말 및 통신 장치 비교</caption>
 <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
 <thead><tr><th style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/데이터_단말_장치">데이터 단말 장치</a> (data terminal equipment; DTE)</th><th style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/데이터_회선_종단_장치">데이터 통신 장치</a> (data communication equipment; DCE)</th></tr></thead>
@@ -37,7 +37,7 @@
 
 ![OSI 모형: 계층 번호가 작을수록 네트워크 통신망과 가깝다.](https://upload.wikimedia.org/wikipedia/commons/f/ff/Osi_model_trad.jpg)
 
-<table style="width: 80%; margin: auto;">
+<table style="width: 80%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">OSI 모형 네트워크 계층</caption>
 <colgroup><col style="width: 2%;"/><col style="width: 10%;"/><col style="width: 10%;"/><col/><col style="width: 10%;"/></colgroup>
 <thead><tr><th colspan="2" style="text-align: center;">계층</th><th style="text-align: center;"><a href="#프로토콜-데이터-단위">PDU</a></th><th style="text-align: center;">기능</th><th style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/통신_프로토콜">프로토콜</a></th></tr></thead>
@@ -73,7 +73,7 @@ TCP/IP에서 세션 계층은 두 개 이상의 통신 장치 또는 네트워�
 ## 전송 계층
 [전송 계층](https://ko.wikipedia.org/wiki/전송_계층)(transport layer)은 전달받은 데이터가 노드 내에서 이를 요청한 프로세스에게 전송될 수 있도록 가담하는 4번째 계층이다. 출발지 호스트의 한 어플리케이션에서 목적지 호스트의 다른 어플리케이션으로 일련의 데이터들을 전달하는 기능 및 절차적 방법을 제공하는 데, 대표적인 두 가지의 전송 프로토콜은 다음과 같다:
 
-<table style="width: 60%; margin: auto;">
+<table style="width: 60%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">전송 계층의 프로토콜 유형</caption>
 <colgroup><col style="width: 20%;"/><col style="width: 20%;"/><col/></colgroup>
 <thead><tr><th style="text-align: center;">전송 프로토콜</th><th style="text-align: center;">PDU</th><th style="text-align: center;">개요</th></tr></thead>
@@ -111,7 +111,7 @@ UDP와 달리, TCP 전송 프로토콜은 노드 간 통신 연결 확립을 보
 
 TCP의 연결지향형을 구현하기 위한 일환으로, 만일 클라이언트가 서버와의 연결을 시도한다면 다음 세 단계의 [핸드셰이킹](https://ko.wikipedia.org/wiki/핸드셰이킹)(handshaking) 절차를 거친다:
 
-<table style="width: 60%; margin: auto;">
+<table style="width: 60%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">TCP 핸드셰이킹 절차</caption>
 <colgroup><col style="width: 10%;"/><col style="width: 20%;"/><col style="width: 20%;"/><col/></colgroup>
 <thead><tr><th style="text-align: center;">단계</th><th style="text-align: center;">송신 노드</th><th style="text-align: center;">수신 노드</th><th style="text-align: center;">진행</th></tr></thead>

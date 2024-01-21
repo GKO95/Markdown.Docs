@@ -44,7 +44,7 @@
 
         우측 `CTRL`를 누르는 동시에 `SCROLL LOCK` 키를 두 번 클릭하여 시스템 충돌을 발생시키려면 사용하고 있는 키보드에 따라 지정된 레지스트리 키로 이동한 다음, 아래와 같이 `CrashOnCtrlScroll`이란 새로운 DWORD (32-bit) 레지스트리 값을 생성한다.
 
-        <table style="width: 80%; margin: auto;"><caption style="caption-side: top;"><code>CTRL</code>+<code>SCROLL</code> 단축키 강제 블루스크린 설정</caption><colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup><thead><tr><th style="text-align: center;">키보드</th><th style="text-align: center;">레지스트리 키</th></tr></thead><tbody><tr><td style="text-align: center;">PS/2</td><td><code>HKLM\SYSTEM\CurrentControlSet\Services\i8042prt\Parameters</code></td></tr><tr><td style="text-align: center;">USB</td><td><code>HKLM\SYSTEM\CurrentControlSet\Services\kbdhid\Parameters</code></td></tr><tr><td style="text-align: center;">가상 머신</td><td><code>HKLM\SYSTEM\CurrentControlSet\Services\hyperkbd\Parameters</code></td></tr></tbody></table>
+        <table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><code>CTRL</code>+<code>SCROLL</code> 단축키 강제 블루스크린 설정</caption><colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup><thead><tr><th style="text-align: center;">키보드</th><th style="text-align: center;">레지스트리 키</th></tr></thead><tbody><tr><td style="text-align: center;">PS/2</td><td><code>HKLM\SYSTEM\CurrentControlSet\Services\i8042prt\Parameters</code></td></tr><tr><td style="text-align: center;">USB</td><td><code>HKLM\SYSTEM\CurrentControlSet\Services\kbdhid\Parameters</code></td></tr><tr><td style="text-align: center;">가상 머신</td><td><code>HKLM\SYSTEM\CurrentControlSet\Services\hyperkbd\Parameters</code></td></tr></tbody></table>
 
         ![<code>CrashOnCtrlScroll</code> 레지스트리 값](./images/bsod_force_keyboard.png)
 
@@ -52,7 +52,7 @@
 
         현재 대부분의 키보드는 `SCROLL LOCK` 키가 없어 블루스크린을 강제할 대안의 단축키가 필요하다. 만일 `CrashOnCtrlScroll` 레지스트리 값이 이미 존재하면 대안 단축키가 인식되지 않으므로 삭제하도록 한다. 사용하고 있는 키보드에 따라 아래 레지스트리 키로 이동한 다음, 아래와 같이 두 DWORD (32-bit) 레지스트리 값을 생성한다.
 
-        <table style="width: 80%; margin: auto;"><caption style="caption-side: top;">대안 키보드 단축키 강제 블루스크린 설정</caption><colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup><thead><tr><th style="text-align: center;">키보드</th><th style="text-align: center;">레지스트리 키</th></tr></thead><tbody><tr><td style="text-align: center;">PS/2</td><td><code>HKLM\SYSTEM\CurrentControlSet\Services\i8042prt\crashdump</code></td></tr><tr><td style="text-align: center;">USB</td><td><code>HKLM\SYSTEM\CurrentControlSet\Services\kbdhid\crashdump</code></td></tr><tr><td style="text-align: center;">가상 머신</td><td><code>HKLM\SYSTEM\CurrentControlSet\Services\hyperkbd\crashdump</code></td></tr></tbody></table>
+        <table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">대안 키보드 단축키 강제 블루스크린 설정</caption><colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup><thead><tr><th style="text-align: center;">키보드</th><th style="text-align: center;">레지스트리 키</th></tr></thead><tbody><tr><td style="text-align: center;">PS/2</td><td><code>HKLM\SYSTEM\CurrentControlSet\Services\i8042prt\crashdump</code></td></tr><tr><td style="text-align: center;">USB</td><td><code>HKLM\SYSTEM\CurrentControlSet\Services\kbdhid\crashdump</code></td></tr><tr><td style="text-align: center;">가상 머신</td><td><code>HKLM\SYSTEM\CurrentControlSet\Services\hyperkbd\crashdump</code></td></tr></tbody></table>
 
         * `Dump1Keys`: 첫 번째 단축키 조합으로 좌측/우측 `SHIFT`, `CTRL`, 혹은 `ALT` 키 중 택한다.
         * `Dump2Key`: 두 번째 단축키 조합으로 두 번 클릭할 버튼을 지정한다. 레지스트리 값에 들어갈 데이터로 배열에 기입된 키보드 스캔 코드의 인덱스를 입력한다.
@@ -108,7 +108,7 @@ HKLM\SYSTEM\CurrentControlSet\Control\CrashControl
 
 CrashControl 레지스트리 키에서 설정할 수 있는 값들은 알파벳 순서대로 나열하였다:
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">CrashControl 레지스트리 키 구성</caption>
 <colgroup><col style="width: 25%;"/><col style="width: 15%;"/><col style="width: 60%;"/></colgroup>
 <thead><tr><th style="text-align: center;">레지스트리 값</th><th style="text-align: center;">종류</th><th style="text-align: center;">설명</th></tr></thead>
@@ -193,7 +193,7 @@ HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management
 
 Memory Management 레지스트리 키에서 설정할 수 있는 값들은 알파벳 순서대로 나열하였다:
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">Memory Management 레지스트리 키 구성</caption>
 <colgroup><col style="width: 25%;"/><col style="width: 15%;"/><col style="width: 60%;"/></colgroup>
 <thead><tr><th style="text-align: center;">레지스트리 값</th><th style="text-align: center;">종류</th><th style="text-align: center;">설명</th></tr></thead>
@@ -208,7 +208,7 @@ Memory Management 레지스트리 키에서 설정할 수 있는 값들은 알�
 
 다음은 전용 덤프를 설정하기 위해 필요한 레지스트리 값이다.
 
-<table style="width: 95%; margin: auto;">
+<table style="width: 95%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">CrashControl 레지스트리: 전용 덤프</caption>
 <colgroup><col style="width: 25%;"/><col style="width: 15%;"/><col style="width: 60%;"/></colgroup>
 <thead><tr><th style="text-align: center;">레지스트리 값</th><th style="text-align: center;">종류</th><th style="text-align: center;">설명</th></tr></thead>
@@ -246,7 +246,7 @@ Memory Management 레지스트리 키에서 설정할 수 있는 값들은 알�
 
 ![일반 파일 시스템과 충돌 덤프의 입출력 경로 비교](https://crashdmp.files.wordpress.com/2013/02/new_chart.png)
 
-<table style="width: 60%; margin: auto;"><caption style="caption-side: top;">파일 시스템과 충돌 덤프의 I/O <a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/driver-stacks">드라이버 스택</a></caption><colgroup><col style="width: 50%;" /><col style="width: 50%;" /></colgroup><thead><tr><th style="text-align: center;">파일 시스템</th><th style="text-align: center;">충돌 덤프</th></tr></thead><tbody style="text-align: center;"><tr style="vertical-align: bottom;"><td><a href="https://ko.wikipedia.org/wiki/파일_시스템">파일 시스템</a> <br/>↓<br/><a href="https://ko.wikipedia.org/wiki/볼륨_(컴퓨팅)">볼륨</a>/<a href="https://ko.wikipedia.org/wiki/디스크_파티션">파티션</a><br/>↓<br/><a href="https://en.wikipedia.org/wiki/Class_driver">클래스 드라이버</a><br/>↓</td><td>커널<br/>↓<br/>Crashdmp.sys<br/>(w/ 덤프 필터 드라이버)<br/>↓</td></tr><tr><td colspan="2">스토리지 포트 & 미니포트<br/>↓<br/>하드웨어 (저장소)</td></tr></tbody></table>
+<table style="width: 60%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">파일 시스템과 충돌 덤프의 I/O <a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/driver-stacks">드라이버 스택</a></caption><colgroup><col style="width: 50%;" /><col style="width: 50%;" /></colgroup><thead><tr><th style="text-align: center;">파일 시스템</th><th style="text-align: center;">충돌 덤프</th></tr></thead><tbody style="text-align: center;"><tr style="vertical-align: bottom;"><td><a href="https://ko.wikipedia.org/wiki/파일_시스템">파일 시스템</a> <br/>↓<br/><a href="https://ko.wikipedia.org/wiki/볼륨_(컴퓨팅)">볼륨</a>/<a href="https://ko.wikipedia.org/wiki/디스크_파티션">파티션</a><br/>↓<br/><a href="https://en.wikipedia.org/wiki/Class_driver">클래스 드라이버</a><br/>↓</td><td>커널<br/>↓<br/>Crashdmp.sys<br/>(w/ 덤프 필터 드라이버)<br/>↓</td></tr><tr><td colspan="2">스토리지 포트 & 미니포트<br/>↓<br/>하드웨어 (저장소)</td></tr></tbody></table>
 
 [NTFS](https://ko.wikipedia.org/wiki/NTFS) 또는 [볼륨](https://ko.wikipedia.org/wiki/볼륨_(컴퓨팅))/[파티션](https://ko.wikipedia.org/wiki/디스크_파티션) 드라이버에 문제가 있을 수 있어, 충돌 덤프 드라이버(Crashdmp.sys)는 이들을 우회하여 직접 디스크의 [페이징 파일](#페이징-파일)에 덤프를 저장한다.
 
@@ -263,7 +263,7 @@ BSOD 화면에서 덤프 수집이 100% 완료되었으면 시스템을 강제 �
 
 [CrashControl](#bsod-설정) 레지스트리 키에 설정된 덤프 저장 경로와 덤핑에 사용된 페이징 파일이 동일한 볼륨에 위치한지 여부에 따라 덤프 생성 절차가 달라진다.
 
-<table style="width: 95%; margin: auto;"><caption style="caption-side: top;">볼륨 일치 여부에 따른 덤프 생성 절차 비교</caption><colgroup><col style="width: 50%;" /><col style="width: 50%;" /></colgroup><thead><tr><th style="text-align: center;">볼륨 일치</th><th style="text-align: center;">볼륨 상이</th></tr></thead><tbody style="text-align: left;"><tr><td>SetRenameInformationFile 작업을 통해 페이징 파일의 이름을 지정된 덤프 파일명(대표적으로 MEMORY.DMP)으로 바꾼다.</td><td>SetRenameInformationFile 작업을 통해 페이징 파일의 이름을 임시로 DUMP7c83.tmp와 같은 형식의 이름으로 바꾼다.</td></tr></tbody></table>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">볼륨 일치 여부에 따른 덤프 생성 절차 비교</caption><colgroup><col style="width: 50%;" /><col style="width: 50%;" /></colgroup><thead><tr><th style="text-align: center;">볼륨 일치</th><th style="text-align: center;">볼륨 상이</th></tr></thead><tbody style="text-align: left;"><tr><td>SetRenameInformationFile 작업을 통해 페이징 파일의 이름을 지정된 덤프 파일명(대표적으로 MEMORY.DMP)으로 바꾼다.</td><td>SetRenameInformationFile 작업을 통해 페이징 파일의 이름을 임시로 DUMP7c83.tmp와 같은 형식의 이름으로 바꾼다.</td></tr></tbody></table>
 
 이후 smss.exe는 CrashControl 하에 MachineCrash이란 휘발성 하위 레지스트리 키를 생성하며 아래 값들을 포함한다.
 
