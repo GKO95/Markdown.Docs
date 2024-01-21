@@ -23,10 +23,10 @@ NotMyFault 유틸리티는 증상을 트러블슈팅하기 보다는 일부러 �
 ## 시스템 충돌
 총 여덟 가지의 시스템 충돌 요인 중 하나를 선택하여 Crash 버튼을 눌러 블루스크린을 발생시킨다.
 
-시스템 콘솔로 충돌을 일으키려면 아래의 명령어를 입력한다: `crash_type_num`에는 1-8 범위의 숫자가 입력되는데, 이들은 다이얼로그 창에 나열된 시스템 충돌 원인들을 순서에 대응한다. 예를 들어 Stack overflow로 충돌을 일으키려면 숫자 6을 기입한다.
+시스템 콘솔로 충돌을 일으키려면 아래의 명령어를 입력한다: `crash_type_num`에는 1-8 범위의 숫자가 입력되는데, 이들은 다이얼로그 창에 나열된 시스템 충돌 원인들을 순서에 대응한다. 아래는 6번 선택지의 Stack overflow로 충돌을 일으키기 위한 명령이다.
 
 ```terminal
-notmyfaultc crash crash_type_num
+notmyfaultc.exe crash 6
 ```
 
 ## 응답 없음
@@ -42,10 +42,10 @@ notmyfaultc crash crash_type_num
 </tbody>
 </table>
 
-시스템 콘솔로 시스템 혹은 드라이버 응답 없음을 일으키려면 아래의 명령어를 입력한다: `hang_type_num`에는 Hang with IRP의 1번 그리고 Hang with DPC의 2번만 입력할 수 있다.
+시스템 콘솔로 시스템 혹은 드라이버 응답 없음을 일으키려면 아래의 명령어를 입력한다 (단, 세 번째 선택지의 Deadlock은 터미널로 일으킬 수 없다). 아래는 2번 선택지인 Hang with DPC로 시스템 행을 일으키기 위한 명령이다.
 
 ```terminal
-notmyfaultc hang hang_type_num
+notmyfaultc.exe hang 2
 ```
 
 ## 메모리 누수
