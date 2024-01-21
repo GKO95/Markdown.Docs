@@ -3,10 +3,7 @@
 
 > 명령어 버전의 유티릴티는 notmyfaultc.exe 프로그램으로 충돌 및 프리징 증상을 일으킨다.
 
-<table style="table-layout: fixed; width: 100%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">NotMyFault 어플리케이션 화면</caption>
-<thead><tr><th style="text-align: center;">시스템 충돌</th><th style="text-align: center;">응답 없음</th><th style="text-align: center;">메모리 누수</th></tr></thead>
-<tbody><tr style="overflow: auto;"><td style="overflow: inherit;">
+<table style="table-layout: fixed; width: 100%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">NotMyFault 어플리케이션 화면</caption><thead><tr><th style="text-align: center;">시스템 충돌</th><th style="text-align: center;">시스템 행</th><th style="text-align: center;">메모리 누수</th></tr></thead><tbody><tr style="overflow: auto;"><td style="overflow: inherit;">
 
 ![NotMyFault 시스템 충돌 탭](./images/sysinternals_notmyfault_crash.png)
 </td><td style="overflow: inherit;">
@@ -15,8 +12,7 @@
 </td><td style="overflow: inherit;">
 
 ![NotMyFault 메모리 누수 탭](./images/sysinternals_notmyfault_leak.png)
-</td></tr></tbody>
-</table>
+</td></tr></tbody></table>
 
 NotMyFault 유틸리티는 증상을 트러블슈팅하기 보다는 일부러 증상을 일으켜 트러블슈팅을 연습할 수 있도록 하는 프로그램이다.
 
@@ -29,18 +25,11 @@ NotMyFault 유틸리티는 증상을 트러블슈팅하기 보다는 일부러 �
 notmyfaultc.exe crash 6
 ```
 
-## 응답 없음
+## 시스템 행
 총 세 가지의 응답 없음 증상을 일으키는 선택지가 있으며, 증상에 대한 설명은 아래 표를 참고한다.
 
-<table style="width: 80%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">NotMyFault 응답 없음 선택지</caption>
-<thead><tr><th style="text-align: center;">선택지</th><th style="text-align: center;">대상</th><th style="text-align: center;">증상</th></tr></thead>
-<tbody>
-<tr><td style="text-align: center; width: 20%">Hang with <a href="https://en.wikipedia.org/wiki/I/O_request_packet">IRP</a></td><td style="text-align: center; width: 20%">드라이버</td><td>myfault.sys 드라이버를 먹통으로 만들어 시스템 충돌도 일으킬 수 없다.</td></tr>
-<tr><td style="text-align: center; width: 20%">Hang with <a href="Processor.md#지연-프로시저-호출">DPC</a></td><td style="text-align: center; width: 20%">시스템</td><td>시스템 자체가 아무런 반응이 없어 강제 종료 혹은 <a href="BSOD.md#강제-시스템-충돌">시스템 충돌</a>을 일으켜야 한다.</td></tr>
-<tr><td style="text-align: center; width: 20%"><a href="https://ko.wikipedia.org/wiki/교착_상태">Deadlock</a></td><td style="text-align: center; width: 20%">어플리케이션</td><td>어플리케이션 자체가 아무런 반응이 없으며 <a href="Process.md">프로세스</a> 강제 종료도 되지 않는다.</td></tr>
-</tbody>
-</table>
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">NotMyFault 응답 없음 선택지</caption><colgroup><col style="width: 15%;"/><col style="width: 15%;"/><col style="width: 70%;"/></colgroup><thead><tr><th style="text-align: center;">선택지</th><th style="text-align: center;">대상</th><th style="text-align: center;">증상</th></tr></thead><tbody>
+<tr><td style="text-align: center;">Hang with <a href="https://en.wikipedia.org/wiki/I/O_request_packet">IRP</a></td><td style="text-align: center;">드라이버</td><td>myfault.sys 드라이버를 먹통으로 만들어 시스템 충돌도 일으킬 수 없다.</td></tr><tr><td style="text-align: center;">Hang with <a href="Processor.md#지연-프로시저-호출">DPC</a></td><td style="text-align: center;">시스템</td><td>시스템 자체가 아무런 반응이 없어 강제 종료 혹은 <a href="BSOD.md#강제-시스템-충돌">시스템 충돌</a>을 일으켜야 한다.</td></tr><tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/교착_상태">Deadlock</a></td><td style="text-align: center;">어플리케이션</td><td>어플리케이션 자체가 아무런 반응이 없으며 <a href="Process.md">프로세스</a> 강제 종료도 되지 않는다.</td></tr></tbody></table>
 
 시스템 콘솔로 시스템 혹은 드라이버 응답 없음을 일으키려면 아래의 명령어를 입력한다 (단, 세 번째 선택지의 Deadlock은 터미널로 일으킬 수 없다). 아래는 2번 선택지인 Hang with DPC로 시스템 행을 일으키기 위한 명령이다.
 
