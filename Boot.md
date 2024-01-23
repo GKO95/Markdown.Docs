@@ -21,9 +21,10 @@ ROM에 저장된 UEFI 혹은 BIOS 펌웨어가 실행되면 가장 먼저 [POST]
 **[시동 자체 시험](https://ko.wikipedia.org/wiki/시동_자체_시험)**(Power-on self-test; POST)은 컴퓨터나 타 디지털 전자 장치가 전원을 공급받는 즉시 실행된 ([UEFI](#uefi) 혹은 [BIOS](#bios)) 펌웨어에서 하드웨어 초기화 및 상태를 진단하는 절차이다. 흔히 [메인보드](https://ko.wikipedia.org/wiki/메인보드) 제조사 또는 OEM 로고가 표시되는 화면에 해당한다. POST 진단 결과는 디스플레이 화면에 출력되거나 별도의 진단 도구로부터 확인할 수 있도록 저장된다. 만일 화면 출력 기능에 문제가 있을 경우를 대비하여 LED 또는 경고음을 통해 오류 코드를 알릴 수 있는 장치가 마련되어 있다.
 
 ## 부트로더
-**[부트로더](https://en.wikipedia.org/wiki/Bootloader)**(bootloader), 일명 **[부트스트랩](#부트스트랩) 로더**(bootstrap loader)는 컴퓨터 부팅 과정 중에서 설치된 운영체제의 [커널](Kernel.md)을 불러와 실행하는 프로그램이다. UEFI 부팅에서는 **부트 관리자**(boot manager)라는 용어가 흔히 언급된 걸 찾아볼 수 있다.
+**[부트로더](https://en.wikipedia.org/wiki/Bootloader)**(bootloader), 일명 **[부트스트랩](#부트스트랩) 로더**(bootstrap loader)는 컴퓨터 부팅 과정 중에서 설치된 운영체제의 [커널](Kernel.md)을 불러와 실행하는 프로그램이다. 만일 여럿 부팅 선택지 메뉴를 제공한다면 흔히 **부트 관리자**(boot manager)라고 부르며, 선택된 별개의 OS 부트로더를 실행하는 [연쇄 로딩](https://en.wikipedia.org/wiki/Chain_loading)을 구현한다.
 
-* [윈도우 부트 관리자](#윈도우-부트-관리자): 일명 `BOOTMGR`은 [윈도우 NT](Windows.md)를 위한 부트로더이다.
+* [윈도우 부트 관리자](#윈도우-부트-관리자): 일명 [`BOOTMGR`](#bios)(혹은 [`bootmgfw.efi`](#uefi))는 비스타 이상의 [윈도우 NT](Windows.md)를 위한 부트 관리자이다.
+    * *[Winload.exe](https://en.wikipedia.org/wiki/Windows_Boot_Manager#winload.exe): 커널 및 드라이버를 로드하는 윈도우 OS 부트로더이다; UEFI에서는 Winload.efi가 해당한다.*
 * [GNU GRUB](https://en.wikipedia.org/wiki/GNU_GRUB): GNU 프로젝트의 일환으로 UNIX 기반의 운영체제를 위한 부트로더이다.
 
 ### 부트스트랩
