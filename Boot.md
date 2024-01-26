@@ -5,7 +5,7 @@
 
 아래는 시스템이 부팅되는 과정을 두 규격, [UEFI](#uefi)와 [BIOS](#bios)에 대하여 순차적으로 보여주는 도표이다.
 
-![윈도우 NT 운영체제의 부팅 절차 트러블슈팅 (예시. 윈도우 10)](https://i0.wp.com/www.msnoob.com/wp-content/uploads/2019/01/boot-sequence.png?fit=1167%2C1107&ssl=1)
+![윈도우 NT 운영체제의 부팅 절차 트러블슈팅 (예시. 윈도우 10)](https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/media/windows-boot-issues-troubleshooting/boot-sequence-thumb-expanded.png)
 
 전원이 켜진 컴퓨터의 CPU는 [리셋 벡터](https://en.wikipedia.org/wiki/Reset_vector)(reset vector)에 위치한 [명령어](Processor.md#명령어)를 가장 먼저 실행하도록 하드웨어적으로 설계되었다. [x86](https://en.wikipedia.org/wiki/X86) 아키텍처 경우, 해당 위치는 [리얼 모드](Processor.md#리얼-모드)에서 실제 메모리 주소 `FFFFFFF0h`(즉, 4 GB의 16 바이트 아래)로 고정되었다. 리셋 벡터는 [ROM](https://en.wikipedia.org/wiki/Read-only_memory)에 저장된 UEFI 혹은 BIOS 펌웨어의 [진입점](C.md#진입점)을 가리킨다.
 
