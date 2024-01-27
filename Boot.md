@@ -62,7 +62,7 @@ BIOS가 부트 장치를 탐색하는 과정은 다음과 같다.
 ### 마스터 부트 레코드
 **[마스터 부트 레코드](https://en.wikipedia.org/wiki/Master_boot_record)**(master boot record; MBR)는 [IBM PC 호환기종](https://en.wikipedia.org/wiki/IBM_PC_compatible)을 위한 부트 섹터의 한 유형이며, [HDD](https://en.wikipedia.org/wiki/Hard_disk_drive) 또는 [SSD](https://en.wikipedia.org/wiki/Solid-state_drive) 등의 파티션을 나눌 수 있는 [대용량 저장 매체](Storage.md)([휴대용](https://en.wikipedia.org/wiki/Disk_enclosure) 포함)가 대상이다. 부트로더 뿐만 아니라, 해당 디스크의 [파티션 정보](https://en.wikipedia.org/wiki/Master_boot_record#PT)도 MBR에 저장되어 있다 (최대 네 개의 주 파티션까지 지원). 하지만 MBR 파티션 크기는 512 바이트로 제한되어, 부팅 과정에 [VBR](#볼륨-부트-레코드)이 함께 동원되기도 한다.
 
-[윈도우 NT](Windows.md)의 경우, MBR의 부트로더는 [부트 플래그](https://en.wikipedia.org/wiki/Boot_flag)가 설정된 부팅 대상의 [활성 파티션](https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/computer-not-start-active-partition)(active partition)을 탐색하는 용도로 사용된다.
+[윈도우 NT](Windows.md)의 경우, MBR의 부트로더는 [부트 플래그](https://en.wikipedia.org/wiki/Boot_flag)가 설정된 부팅 대상의 시스템 파티션, 즉 [활성 파티션](https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/computer-not-start-active-partition)(active partition)을 탐색하는 용도로 사용된다.
 
 ### 볼륨 부트 레코드
 **[볼륨 부트 레코드](https://en.wikipedia.org/wiki/Volume_boot_record)**(volume boot record; VBR)는 [IBM PC 호환기종](https://en.wikipedia.org/wiki/IBM_PC_compatible)을 위한 부트 섹터의 한 유형이며, 간혹 **파티션 부트 레코드**(partition boot record; PBR)라고 언급되기도 한다. VBR은 다음 두 경우의 볼륨에서 찾아볼 수 있다.
@@ -70,7 +70,7 @@ BIOS가 부트 장치를 탐색하는 과정은 다음과 같다.
 1. 파티션을 나눌 수 없는 [플로피 디스크](https://en.wikipedia.org/wiki/Floppy_disk), [CD](https://en.wikipedia.org/wiki/Compact_disc) 및 [DVD](https://en.wikipedia.org/wiki/DVD) 등의 데이터 저장 매체의 부트 섹터가 해당한다.
 1. 파티션을 나눌 수 있는 대용량 저장 매체에서 각 파티션의 첫 번째 섹터가 해당한다. 디스크 전반의 첫 번째 섹터는 여전히 MBR로써 파티션 정보를 저장하고 있다.
 
-[윈도우 NT](Windows.md)에서 [MBR](#마스터-부트-레코드)이 활성 파티션을 발견할 경우, 해당 파티션의 VBR 부트로드는 활성 파티션으로부터 [`BOOTMGR`](#윈도우-부트-관리자) 파일을 탐색 및 실행한다.
+[윈도우 NT](Windows.md)의 [MBR](#마스터-부트-레코드)이 활성된 시스템 파티션을 발견하였을 시, 해당 파티션의 VBR 부트로드는 시스템 파티션에 저장된 [`BOOTMGR`](#윈도우-부트-관리자) 파일을 탐색 및 실행한다.
 
 # UEFI
 > *참고: [Boot and UEFI - Windows drivers | Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/bringup/boot-and-uefi)*
