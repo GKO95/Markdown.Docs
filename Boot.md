@@ -81,7 +81,7 @@ UEFI가 부트 장치를 탐색하는 과정은 다음과 같다.
 
 ![UEFI 부팅 순서도 (개략)](https://upload.wikimedia.org/wikipedia/commons/1/17/UEFI_boot_process.png)
 
-[리셋 벡터](#부팅)가 가리킨 [ROM](https://en.wikipedia.org/wiki/Read-only_memory)에 저장된 UEFI 펌웨어가 실행되면 먼저 [POST](#시동-자체-시험)를 진행한다. 하드웨어 초기화 및 진단을 통과하면 [GPT](#guid-파티션-테이블)로부터 [EFI 시스템 파티션](#efi-시스템-파티션)을 찾아 [부트 관리자](#부트로더)를 실행한다. 즉, BIOS와 달리 [부트 섹터](#부트-섹터)에 전혀 의존하지 않는다. 기본적으로 부트 경로는 `/BOOT/BOOT<MACHINE_TYPE_SHORT_NAME>.EFI`이며 [아키텍처](https://en.wikipedia.org/wiki/Instruction_set_architecture)에 따라 괄호에는 `IA32`, `X64`, `IA64`, `ARM` 또는 `AA64`이 대입된다.<sup>[<a href="https://unix.stackexchange.com/questions/565615/efi-boot-bootx64-efi-vs-efi-ubuntu-grubx64-efi-vs-boot-grub-x86-64-efi-gru">출처</a>]</sup> 일부 운영체제는 설치 시 자체 부트로더로 부트 경로를 변경할 수 있다 (예를 들어, [윈도우 NT](Windows.md)의 `bootmgfw.efi`). 
+[리셋 벡터](#부팅)가 가리킨 [ROM](https://en.wikipedia.org/wiki/Read-only_memory)에 저장된 UEFI 펌웨어가 실행되면 먼저 [POST](#시동-자체-시험)를 진행한다. 하드웨어 초기화 및 진단을 통과하면 [GPT](#guid-파티션-테이블)로부터 [EFI 시스템 파티션](#efi-시스템-파티션)을 찾아 [부트 관리자](#부트로더)를 실행한다. 즉, BIOS와 달리 [부트 섹터](#부트-섹터)에 전혀 의존하지 않는다. 부트 관리자의 기본 경로는 `/BOOT/BOOT<MACHINE_TYPE_SHORT_NAME>.EFI`이며 [아키텍처](https://en.wikipedia.org/wiki/Instruction_set_architecture)에 따라 괄호에는 `IA32`, `X64`, `IA64`, `ARM` 또는 `AA64`이 대입된다.<sup>[<a href="https://unix.stackexchange.com/questions/565615/efi-boot-bootx64-efi-vs-efi-ubuntu-grubx64-efi-vs-boot-grub-x86-64-efi-gru">출처</a>]</sup> [윈도우 NT](Windows.md)를 포함한 일부 운영체제는 설치 시, 메인보드에 탑재되어 UEFI 펌웨어 설정을 저장하는 [NVRAM](https://en.wikipedia.org/wiki/Non-volatile_random-access_memory)에 부트 경로를 자체적으로 제작한 부트로더로 변경하기도 한다. 
 
 ## GUID 파티션 테이블
 > *참고: [UEFI/GPT-based hard drive partitions | Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/configure-uefigpt-based-hard-drive-partitions)*
@@ -95,11 +95,13 @@ UEFI가 부트 장치를 탐색하는 과정은 다음과 같다.
 ### EFI 시스템 파티션
 **[EFI 시스템 파티션](https://en.wikipedia.org/wiki/EFI_system_partition)**(EFI system partition; ESP)은 부팅될 때 UEFI 펌웨어가 불러올 파일들이 위치한 [데이터 저장 매체](Storage.md)의 파티션이다. GUID `C12A7328-F81F-11D2-BA4B-00A0C93EC93B`로 식별되며 [FAT](https://en.wikipedia.org/wiki/File_Allocation_Table) [파일 시스템](https://en.wikipedia.org/wiki/File_system)에 기반할 것을 UEFI는 규정한다. ESP 안에는 다음과 같은 데이터 및 파일이 저장되어 있다.
 
-* 설치된 모든 [운영체제](https://en.wikipedia.org/wiki/Operating_system)의 [부트로더](#부트로더) (실제 운영체제는 다른 파티션에 설치)
-* 부팅 단계에서 UEFI 펌웨어가 사용할 [컴퓨터 하드웨어](https://en.wikipedia.org/wiki/Computer_hardware)의 [장치 드라이버](Driver.md)
-* 운영체제 부팅 전에 먼저 실행되어야 할 시스템 유틸리티 프로그램
-* 데이터 파일 (예를 들어, 오류 로그 등)
-
+* [UEFI 어플리케이션](https://en.wikipedia.org/wiki/UEFI#Applications)
+    * [OS](https://en.wikipedia.org/wiki/Operating_system) [부트로더](#부트로더): *윈도우 NT의 경우 [`bootmgfw.efi`](#윈도우-부트-관리자) 및 `winload.efi` 해당*
+    * [UEFI 셸](https://en.wikipedia.org/wiki/UEFI#UEFI_shell): *[x86-64](https://en.wikipedia.org/wiki/X86-64) 아키텍처는 `SHELLX64.efi`*
+* [장치 드라이버](Driver.md): *부팅 시 UEFI 펌웨어가 사용할 [컴퓨터 하드웨어](https://en.wikipedia.org/wiki/Computer_hardware) 대상*
+* 데이터 파일
+    * [Boot Configuration Data](https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/boot-options-in-windows#boot-configuration-data)(일명 BCD)
+    * 오류 로그
 
 ### 호환성 지원 모듈
 **[호환성 지원 모듈](https://en.wikipedia.org/wiki/UEFI#CSM_booting)**(Compatibility Support Module; CSM)은 UEFI 펌웨어가 MBR 파티션의 디스크로부터 레거시 BIOS 모드로 부팅하는 걸 지원하는 하위호환이다. GPT가 LBA 0를 활용하지 않는 점을 이용하여 레거시 BIOS 기반의 시스템 부팅이 가능하였으며, 이를 *BIOS-GPT*라고 불렀다. 하지만 2020년부터 인텔은 더 이상 CSM을 지원하지 않는다고 발표하였다.
