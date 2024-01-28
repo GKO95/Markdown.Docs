@@ -1,54 +1,48 @@
 # 네트워크
-[네트워크](https://ko.wikipedia.org/wiki/컴퓨터_네트워크)(network)는 [노드](#노드)에 상주하거나 제공된 리소스를 공유하는 컴퓨터의 집합이다. 컴퓨터는 유선, 무선, 그리고 광섬유로 구축된 망에서 흔히 사용되는 통신 프로토콜을 기반으로 데이터를 주고 받는다. 인터넷에서 웹사이트를 접근하거나 공용 스토리지 서버 및 프린터 공유, 그리고 이메일과 메신저 등을 주고 받을 수 있도록 어플리케이션이나 서비스를 지원한다.
+**[네트워크](https://en.wikipedia.org/wiki/Computer_network)**(network)는 [네트워크 장치](#네트워크-노드)가 제공하는, 또는 장치에 상주하는 리소스를 공유하는 컴퓨터의 집합이다. 컴퓨터는 [유선](https://en.wikipedia.org/wiki/Computer_network#Wired), [무선](https://en.wikipedia.org/wiki/Wireless_network), 그리고 [광섬유](https://en.wikipedia.org/wiki/Fiber-optic_communication)로 구축된 망에서 흔히 사용되는 통신 프로토콜을 기반으로 데이터를 주고 받는다. [인터넷](https://en.wikipedia.org/wiki/Internet)에서 웹사이트를 접근하거나 공용 스토리지 서버 및 프린터 공유, 그리고 이메일과 메신저 등을 주고 받을 수 있도록 어플리케이션이나 서비스를 지원한다.
 
-여기서 [인터넷](https://ko.wikipedia.org/wiki/인터넷)(Internet)이란, 여러 네트워크를 상호연결하는 [인터네트워킹](https://ko.wikipedia.org/wiki/인터네트워킹)(internetworking)의 줄임말이자 하나의 대명사가 되어버린 대표적인 네트워크이다.
+* [인터넷](https://en.wikipedia.org/wiki/Internet)(Internet): *여러 네트워크를 상호연결하는 [인터네트워킹](https://en.wikipedia.org/wiki/Internetworking)(internetworking)의 약어이자 하나의 대명사가 되어버린 대표적인 네트워크이다.*
 
 ## 네트워크 패킷
 > *참고: [What is packet? - Cloudflare.com](https://www.cloudflare.com/learning/network-layer/what-is-a-packet/) & [What are Network Packets and How Do They Work? - TechTarget.com](https://www.techtarget.com/searchnetworking/definition/packet)*
 
-[네트워크 패킷](https://ko.wikipedia.org/wiki/네트워크_패킷)(network packet), 간단히 패킷(packet)은 한 컴퓨터에서 다른 컴퓨터로 네트워크를 통해 전달하려는 데이터를 조각으로 나눈 것이다.
+**[네트워크 패킷](https://ko.wikipedia.org/wiki/네트워크_패킷)**(network packet), 간단히 **패킷**(packet)은 한 컴퓨터에서 다른 컴퓨터로 네트워크를 통해 전달하려는 데이터를 조각으로 나눈 것이다.
 
 데이터를 여러 패킷으로 나누면 전송 효율성과 신뢰성 향상에 기여할 수 있다. 데이터 전송에 사용 중인 [통신 채널](https://ko.wikipedia.org/wiki/채널_(통신))(동축 케이블, 광케이블, 라디오, 적외선 등) 경로는 해당 데이터가 완전히 전송될 때까지 다른 데이터가 이동할 수 없다. 그러므로 데이터를 패킷으로 작게 나누어 다양한 경로의 채널로 이동하는 [패킷 교환](https://ko.wikipedia.org/wiki/패킷_교환)(packet switching) 기법을 활용하면 통신 혼잡을 방지할 수 있다. 덕분에 네트워크에 연결된 하나의 컴퓨터가 다수의 다른 컴퓨터랑 동시다발적 통신이 가능하다.
 
 ![호스트 간에 네트워크를 거친 패킷 교환](https://upload.wikimedia.org/wikipedia/commons/f/f6/Packet_Switching.gif)
 
 ## 네트워크 노드
-[네트워크 노드](https://ko.wikipedia.org/wiki/노드_(네트워크))(network node)는 네트워크를 통해 전달되는 패킷의 재분배점 혹은 [통신 도착점](https://en.wikipedia.org/wiki/Communication_endpoint)(communication endpoint)이다. 물리적 네트워크 노드는 둘 중 하나로 분류된다:
+**[네트워크 노드](https://en.wikipedia.org/wiki/Node_(networking))**(network node)는 네트워크를 통해 전달되는 패킷의 재분배점 혹은 [통신 도착점](https://en.wikipedia.org/wiki/Communication_endpoint)(communication endpoint)이다. 물리적 네트워크 노드는 둘 중 하나로 분류된다:
 
-<table style="table-layout: fixed; width: 80%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">데이터 단말 및 통신 장치 비교</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/데이터_단말_장치">데이터 단말 장치</a> (data terminal equipment; DTE)</th><th style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/데이터_회선_종단_장치">데이터 통신 장치</a> (data communication equipment; DCE)</th></tr></thead>
-<tbody style="text-align: center;"><tr><td>정보를 네트워크 통신 신호로, 혹은 그 반대로 변환하는 장치</td><td>DTE 사이에 위치하여 신호 변환, 오류 정정, 클락 등을 제공하는 장치</td></tr>
-<tr><td>예시: 휴대전화, 프린터, <a href="#네트워크-호스트">호스트 컴퓨터</a> 등</td><td>예시: 모뎀, 허브, 브리지, 스위치 등</td></tr></tbody>
-</table>
+<table style="table-layout: fixed; width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">데이터 단말 및 통신 장치 비교</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/데이터_단말_장치">데이터 단말 장치</a> (data terminal equipment; DTE)</th><th style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/데이터_회선_종단_장치">데이터 통신 장치</a> (data communication equipment; DCE)</th></tr></thead><tbody style="text-align: center;"><tr><td>정보를 네트워크 통신 신호로, 혹은 그 반대로 변환하는 장치</td><td>DTE 사이에 위치하여 신호 변환, 오류 정정, 클락 등을 제공하는 장치</td></tr><tr><td>예시: 휴대전화, 프린터, <a href="#네트워크-호스트">호스트 컴퓨터</a> 등</td><td>예시: 모뎀, 허브, 브리지, 스위치 등</td></tr></tbody></table>
 
 컴퓨터 네트워크가 LAN 혹은 WAN일 경우, 데이터 전송에 임하는 모든 노드들은 반드시 네트워크 주소를 가져야 한다 (일반적으로 각 [NIC](https://ko.wikipedia.org/wiki/네트워크_인터페이스_컨트롤러)마다 한 개의 주소 할당). 인터넷 혹은 인트라넷일 경우, 대다수의 물리적 네트워크 노드는 IP 주소로 식별되는 호스트 컴퓨터이다.
 
 ### 네트워크 호스트
-[네트워크 호스트](https://ko.wikipedia.org/wiki/호스트_(네트워크))(network host)는 네트워크에 연결된 컴퓨터 혹은 기타 장치를 가리킨다. 호스트는 네트워크 사용자 혹은 타 호스트에 정보 리소스, 서비스, 또는 어플리케이션을 제공하는 [서버](https://ko.wikipedia.org/wiki/서버)(server)의 역할을 맡을 수 있다. 그리고 서버에서 제공하는 리소스 및 서비스에 접근하는 호스트를 [클라이언트](https://ko.wikipedia.org/wiki/클라이언트_(컴퓨팅))(client)라고 부른다. 네트워크에 연결된 모든 장치들을 가리키는 노드 중에서, 사용자 어플리케이션에 관여하는 서버 혹은 클라이언트가 호스트이다.
+**[네트워크 호스트](https://ko.wikipedia.org/wiki/호스트_(네트워크))**(network host)는 네트워크에 연결된 컴퓨터 혹은 기타 장치를 가리킨다. 호스트는 네트워크 사용자 혹은 타 호스트에 정보 리소스, 서비스, 또는 어플리케이션을 제공하는 [서버](https://ko.wikipedia.org/wiki/서버)(server)의 역할을 맡을 수 있다. 그리고 서버에서 제공하는 리소스 및 서비스에 접근하는 호스트를 [클라이언트](https://ko.wikipedia.org/wiki/클라이언트_(컴퓨팅))(client)라고 부른다. 네트워크에 연결된 모든 장치들을 가리키는 노드 중에서, 사용자 어플리케이션에 관여하는 서버 혹은 클라이언트가 호스트이다.
 
 # OSI 모형
 > *참고: [What is the OSI Model? - Cloudflare.com](https://www.cloudflare.com/learning/ddos/glossary/open-systems-interconnection-model-osi/)*
 
-[OSI 모형](https://ko.wikipedia.org/wiki/OSI_모형)(Open System Interconnection Reference Model)은 시스템 상호연결에 대한 공통 기반을 제공하기 위해 [국제 표준화 기구](https://ko.wikipedia.org/wiki/국제_표준화_기구)(International Organization for Standard; ISO)에서 고안한 개념적 모형이다. 네트워크 개념 및 활동을 설명하는데 훌륭한 프레임워크로써 현재까지도 OSI 모형은 IT 분야에서 네트워크 절차를 논의하거나 가르칠 때 반드시 언급된다. [ISO 7489-1](https://www.iso.org/standard/20269.html) 표준으로 지정되어 있다.
+**[OSI 모형](https://ko.wikipedia.org/wiki/OSI_모형)**(Open System Interconnection Reference Model)은 시스템 상호연결에 대한 공통 기반을 제공하기 위해 [국제 표준화 기구](https://ko.wikipedia.org/wiki/국제_표준화_기구)(International Organization for Standard; ISO)에서 고안한 개념적 모형이다. 네트워크 개념 및 활동을 설명하는데 훌륭한 프레임워크로써 현재까지도 OSI 모형은 IT 분야에서 네트워크 절차를 논의하거나 가르칠 때 반드시 언급된다. [ISO 7489-1](https://www.iso.org/standard/20269.html) 표준으로 지정되어 있다.
 
 총 일곱 개의 추상 계층으로 나뉘어져 있으며, 이들은 다음과 같이 나열된다.
 
 ![OSI 모형: 계층 번호가 작을수록 네트워크 통신망과 가깝다.](https://upload.wikimedia.org/wikipedia/commons/f/ff/Osi_model_trad.jpg)
 
-<table style="width: 80%; margin-left: auto; margin-right: auto;">
+<table style="width: 85%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;">OSI 모형 네트워크 계층</caption>
-<colgroup><col style="width: 2%;"/><col style="width: 10%;"/><col style="width: 10%;"/><col/><col style="width: 10%;"/></colgroup>
+<colgroup><col style="width: 3%;"/><col style="width: 12%;"/><col style="width: 15%;"/><col/><col style="width: 15%;"/></colgroup>
 <thead><tr><th colspan="2" style="text-align: center;">계층</th><th style="text-align: center;"><a href="#프로토콜-데이터-단위">PDU</a></th><th style="text-align: center;">기능</th><th style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/통신_프로토콜">프로토콜</a></th></tr></thead>
 <tbody>
 <tr><td style="text-align: center;">7</td><td><a href="#응용-계층">응용</a></td><td style="text-align: center;" rowspan="3">데이터</td><td>어플리케이션 간 데이터 교환 및 상호작용</td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/HTTP">HTTP</a>, <a href="https://ko.wikipedia.org/wiki/파일_전송_프로토콜">FTP</a></td></tr>
-<tr><td style="text-align: center;">6</td><td><a href="#표현-계층">표현</a></td><td>어플리케이션 간 전달되는 데이터의 서식화, 압축, 그리고 암호화 및 복호화</td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/ASCII">ASCII</a></td></tr>
+<tr><td style="text-align: center;">6</td><td><a href="#표현-계층">표현</a></td><td>어플리케이션 간 전달되는 데이터의 서식화, 압축, 암호화 및 복호화</td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/ASCII">ASCII</a></td></tr>
 <tr><td style="text-align: center;">5</td><td><a href="#세션-계층">세션</a></td><td>어플리케이션 간 통신에 필요한 세션을 구축 및 관리</td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/원격_프로시저_호출">RPC</a></td></tr>
-<tr><td style="text-align: center;">4</td><td><a href="#전송-계층">전송</a></td><td style="text-align: center;">데이터그램, 세그먼트</td><td>네트워크 상에서 어플리케이션 간 통신 프로토콜 정의</td><td style="text-align: center;"><a href="#사용자-데이터그램-프로토콜">UDP</a>, <a href="#전송-제어-프로토콜">TCP</a></td></tr>
+<tr><td style="text-align: center;">4</td><td><a href="#전송-계층">전송</a></td><td style="text-align: center;">데이터그램,<br/>세그먼트</td><td>네트워크 상에서 어플리케이션 간 통신 프로토콜 정의</td><td style="text-align: center;"><a href="#사용자-데이터그램-프로토콜">UDP</a>, <a href="#전송-제어-프로토콜">TCP</a></td></tr>
 <tr><td style="text-align: center;">3</td><td><a href="#네트워크-계층">네트워크</a></td><td style="text-align: center;"><a href="#네트워크-패킷">패킷</a></td><td><a href="https://ko.wikipedia.org/wiki/광역_통신망">WAN</a>과 같은 광범위적인 네트워크 간 통신 프로토콜 정의</td><td style="text-align: center;"><a href="#인터넷-프로토콜">IP</a> (<a href="https://ko.wikipedia.org/wiki/IPv4">v4</a>, <a href="https://ko.wikipedia.org/wiki/IPv6">v6</a>)</td></tr>
 <tr><td style="text-align: center;">2</td><td><a href="#데이터-링크-계층">데이터 링크</a></td><td style="text-align: center;">프레임</td><td><a href="https://ko.wikipedia.org/wiki/근거리_통신망">LAN</a>과 같은 네트워크 세그먼트 안에서 노드 간 통신 프로토콜 정의</td><td style="text-align: center;"><a href="#매체-접근-제어">MAC</a></td></tr>
-<tr><td style="text-align: center;">1</td><td><a href="#물리-계층">물리</a></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/비트_(단위)">비트</a>, <a href="https://en.wikipedia.org/wiki/Symbol_rate#Symbols">심볼</a></td><td>네트워크 상에서 노드 간 데이터 전송 규격 제공</td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/IEEE_802.3">IEEE 802.3</a>, <a href="https://ko.wikipedia.org/wiki/블루투스">블루투스</a></td></tr>
+<tr><td style="text-align: center;">1</td><td><a href="#물리-계층">물리</a></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/비트_(단위)">비트</a>, <a href="https://en.wikipedia.org/wiki/Symbol_rate#Symbols">심볼</a></td><td>네트워크 상에서 노드 간 데이터 전송 규격 제공</td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/IEEE_802.3">IEEE 802.3</a>,<br/><a href="https://ko.wikipedia.org/wiki/블루투스">블루투스</a></td></tr>
 </tbody>
 </table>
 
