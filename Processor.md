@@ -46,30 +46,38 @@ ALU는 기본적으로 opcode와 피연산자를 입력받고, 해당 opcode 작
 
 ![작업 관리자에서 표시된 CPU 성능 정보 예시](./images/processor_taskmgr.png)
 
+* [프로세서 시간](#프로세서-시간) (%)
 * [프로세서 클럭](#프로세서-클럭) (GHz)
 * [프로세서 코어](#프로세서-코어)
-* [프로세서 점유](#프로세서-점유) (%)
+
+### 프로세서 시간
+**[프로세서 시간](https://en.wikipedia.org/wiki/CPU_time)**(processor time), 일명 **프로세서 점유**(processor utilization)는 [프로세스](Process.md) (또는 [스레드](Process.md#스레드))로부터 [이미지](https://ko.wikipedia.org/wiki/실행_파일) 코드를 연산하고 처리하는 데 할애한 시간이다. 프로세스의 프로세서 시간은 [스케줄링](#스케줄링)이나 입출력 요청 등에 의해 대기 혹은 준비 상태에 진입하여 처리되지 않는 동안 반영되지 않는다. 일정한 간격으로 샘플링된 시간 동안 스레드가 얼마나 오래 처리되었는지를 토대로 프로세서 점유율(%)이 계산된다.
 
 ### 프로세서 클럭
 **[클럭 속도](https://ko.wikipedia.org/wiki/클럭_속도)**(clock rate 또는 clock speed), 일명 **클럭 주파수**(clock frequency)는 [메인보드](https://ko.wikipedia.org/wiki/메인보드)에 위치한 [클럭 발생기](https://en.wikipedia.org/wiki/Clock_generator)로부터 프로세서가 작업을 수행하는데 기준이 되는 [클럭 신호](https://ko.wikipedia.org/wiki/클럭_신호)가 얼마나 빈번히 생성될 수 있는지 나타내는 [헤르츠](https://ko.wikipedia.org/wiki/헤르츠)(Hz) 단위의 수치이다. 프로세서의 연산은 클럭 신호에 동기화되어, 주파수가 높을수록 동일한 시간동안 더 많은 작업을 수행할 수 있다. 그러나 클럭 속도는 프로세서가 초당 작업한 개수를 의미하는 게 절대 아니다.
 
 > 다시 말해, 위의 작업 관리자에서 클럭 속도가 4.24 GHz로 측정되었지만 프로세서가 초당 42.4억 개의 작업을 수행한 걸 의미하는 게 아니다. 이는 한 [명령어](#명령어)을 수행하는 데 opcode에 따라 필요한 클럭 주기가 다양하기 때문이다.
 
-* **[동적 주파수 스케일링](https://ko.wikipedia.org/wiki/동적_주파수_스케일링)**(dynamic frequency scaling)
+* **[동적 주파수 스케일링](https://en.wikipedia.org/wiki/Dynamic_frequency_scaling)**(dynamic frequency scaling)
 
-    일명 CPU 스로틀링(CPU throttling)은 전력 관리 기법으로, 전원 절약 및 CPU 발열 등의 필요에 따라 실시간으로 클럭 주파수를 자동 조절한다. 발열이 심할 경우에는 MHz 단위까지 내려가 마우스 및 키보드 응답 지연이 가시적으로 나타나기도 한다.
+    필요에 따라 CPU 클럭 주파수가 동적으로 변하는 기술이며, 발열로 인해 전력을 절약하거나 (일명 CPU 스로틀링; CPU throttling) 작업 처리 성능을 높이기 위해 사용된다. 인텔은 전자와 후자의 경우에 대해 각각 [SpeedStep](https://www.intel.com/content/www/us/en/support/articles/000007073/processors.html) 및 [Turbo Boost](https://www.intel.com/content/www/us/en/gaming/resources/turbo-boost.html)을 소개한다.
+
+    * `Processor Information\% Processor Performance`: 프로세서의 성능을 가리키는 속도가 기본 속도에 비해 비율을 계산한 것으로, 100% 보다 낮거나 높은지 여부에 따라 동적 주파수 스케일링 여부를 파악할 수 있다. 위의 예시에서 % Processor Performance는 대략 114.59%이다.
+
+    * `Processor Information\% Processor Utility`: 프로세서 시간이 아닌 클럭 주파수를 함께 고려하여 성능에 따른 작업 처리 능률을 나타내는 수치이다. 윈도우 8부터 [작업 관리자](https://en.wikipedia.org/wiki/Task_Manager_(Windows))의 프로세스 및 성능 탭의 CPU 사용량은 해당 카운터가 반영된다.<sup>[<a href="https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/cpu-usage-exceeds-100">출처</a>]</sup>
 
 ### 프로세서 코어
 **프로세서 코어**(processor core)는 CPU에서 연산을 담당하는 물리적인 [전자회로](https://ko.wikipedia.org/wiki/집적_회로)를 가리키며, 하나의 칩에 두 개 이상의 프로세서 코어를 가진 CPU를 [멀티 코어](https://ko.wikipedia.org/wiki/멀티_코어)라고 지칭한다. 프로세서 성능을 향상시키는데 [클럭 속도](#프로세서-클럭)의 기술적 제약을 극복하기 위해 하드웨어 제조사는 2005년에 처음으로 시장에 멀티 코어 CPU를 소개하였다. 멀티 코어 CPU는 여러 [스레드](Process.md#스레드)를 동시에 처리할 수 있는 장점을 지닌다.
 
 > 위의 작업 관리자는 시스템의 프로세서가 헥사코어, 즉 여섯 개의 코어를 가진 [AMD](https://www.amd.com) [Ryzen 5 5600X](https://www.amd.com/en/products/cpu/amd-ryzen-5-5600x)라고 표시하였다. 여기서 12개의 그래프 항목은 SMT에 의한 논리 프로세서 정보를 보여주는 것으로 아래 내용을 참고한다.
 
-* **[동시 멀티스레딩](https://ko.wikipedia.org/wiki/동시_멀티스레딩)**(simultaneous multithreading; SMT)
+* **[동시 멀티스레딩](https://en.wikipedia.org/wiki/Simultaneous_multithreading)**(simultaneous multithreading; SMT)
 
     하드웨어적 [멀티스레딩](https://ko.wikipedia.org/wiki/멀티스레딩)을 지원하는 경우, 프로세서 코어는 매 클럭 주기마다 다수의 스레드의 명령어를 처리할 수 있다. 하나의 물리 코어가 마치 두 개 이상의 프로세서 역할을 처리하는 것처럼 보여주어, 이를 논리 프로세서(logical processor)라고 부른다. 대표적으로 [인텔](https://www.intel.com)의 [하이퍼스레딩](https://ko.wikipedia.org/wiki/하이퍼스레딩), AMD의 [Zen 마이크로아키텍처](https://en.wikipedia.org/wiki/Zen_(microarchitecture)) 등이 SMT에 해당한다.
 
-### 프로세서 점유
-프로세서가 ([시스템](Process.md#시스템-프로세스)) [프로세스](Process.md) (또는 스레드)로부터 [이미지](https://ko.wikipedia.org/wiki/실행_파일) 코드를 연산하고 처리하는 데 할애한 시간을 **[프로세서 시간](https://ko.wikipedia.org/wiki/CPU_타임)**(processor time)이라고 부른다. 프로세스의 프로세서 시간은 [스케줄링](#스케줄링)이나 입출력 요청 등에 의해 대기 혹은 준비 상태에 진입하여 처리되지 않는 동안 반영되지 않는다. 일정한 간격으로 샘플링된 시간 동안 스레드가 얼마나 오래 처리되었는지를 토대로 프로세서 점유율(%)이 계산된다.
+* **[이기종 컴퓨팅](https://en.wikipedia.org/wiki/Heterogeneous_computing)**(heterogeneous computing)
+
+    CPU 안에 두 개의 다른 주파수를 가진 프로세서 코어가 존재하여, 높은 주파수의 성능 위주 P-코어와 낮은 주파수의 효율 위주 E-코어로 나뉘어진다. 인텔은 이러한 하이브리드 CPU 설계를 12세대 코어 프로세서 [*Alder Lake*](https://en.wikipedia.org/wiki/Alder_Lake)부터 도입하고 있으며, 그 외에도 [ARM](https://en.wikipedia.org/wiki/Arm_Holdings)의 [DynamIQ](https://www.arm.com/technologies/dynamiq) (옛 [big.LITTLE](https://en.wikipedia.org/wiki/ARM_big.LITTLE))가 대표적이다.
 
 ## 리얼 모드
 **[리얼 모드](https://en.wikipedia.org/wiki/Protected_mode)**(real mode)
