@@ -32,13 +32,13 @@
 * 본 부문에서 디바이스 스택을 논할 때 장치 드라이버를 위주로 설명하였으나, 실제로 스택을 구성하는 건 장치 드라이버와 직결된 [디바이스 객체](#디바이스-객체)이다.
 
 ### 디바이스 객체
-**[디바이스 객체](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-device-objects)**(device object; DO)는 시스템에 연결된 물리, 논리, 또는 가상 장치의 관계를 [PnP 관리자](Kernel.md#pnp-관리자)가 체계화할 수 있도록 데이터로 표현한 [DEVICE_OBJECT](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/ns-wdm-_device_object) [구조체](C.md#구조체)의 객체이다. 장치에 사용되는 드라이버마다 디바이스 객체가 생성되어 {[드라이버 객체](#드라이버-객체), 디바이스 객체} 쌍을 이루며, 드라이버가 처리할 [IRP](#입출력-요청-패킷)를 안내한다. 그리고 "장치 드라이버 순서에 따라 정렬된 디바이스 객체의 묶음"을 [**디바이스 스택**](https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/device-nodes-and-device-stacks#device-objects-and-device-stacks)이라 부른다.
+**[디바이스 객체](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-device-objects)**(device object; DO)는 시스템에 연결된 물리, 논리, 또는 가상 장치의 관계를 [PnP 관리자](Kernel.md#pnp-관리자)가 체계화할 수 있도록 데이터로 표현한 [DEVICE_OBJECT](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/ns-wdm-_device_object) [구조체](C.md#구조체)의 객체이다. 장치에 사용되는 드라이버마다 디바이스 객체가 생성되어 {[드라이버 객체](#드라이버-객체), 디바이스 객체} 쌍을 이루며, 드라이버가 처리할 [IRP](#입출력-요청-패킷)를 안내한다. 그리고 "장치 드라이버 순서에 따라 정렬된 *디바이스 객체* 묶음"을 [**디바이스 스택**](https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/device-nodes-and-device-stacks#device-objects-and-device-stacks)이라 부른다.
 
 아래는 Microsoft Virtual Disk와 동일한 디바이스 스택 구조를 보이는 가상의 *Proseware Gizmo* 장치와 함께 디바이스 객체의 유형을 소개한다.
 
 <table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">디바이스 객체 유형별 소개</caption><colgroup><col style="width: 25%;"><col style="width: 20%;"/><col style="width: 8%;"/><col style="width: 47%;"/></colgroup><thead><tr><th style="text-align: center;">예시</th><th colspan="2" style="text-align: center;">디바이스 객체</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td rowspan="3"><img src="https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/images/prosewaredevicenode03.png" alt="Microsoft Virtual Disk의 장치 드라이버"></td><td style="text-align: center;"><a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/filter-drivers">필터 디바이스 객체</a><br/>(filter device object)</td><td>Filter DO</td><td><a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/filter-drivers">필터 드라이버</a>와 쌍을 이루는 디바이스 객체이다.<ul><li>Microsoft Virtual Disk 대응 드라이버: <code>\Driver\partmgr</code></li><ul></td></tr><tr><td style="text-align: center;"><a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/function-drivers">기능 디바이스 객체</a><br/>(functional device object)</td><td>FDO</td><td><a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/function-drivers">기능 드라이버</a>와 쌍을 이루는 디바이스 객체이다.<ul><li>Microsoft Virtual Disk 대응 드라이버: <code>\Driver\disk</code></li><ul></td></tr><tr><td style="text-align: center;"><a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/bus-drivers">물리 디바이스 객체</a><br/>(physical device object)</td><td>PDO</td><td><a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/bus-drivers">버스 드라이버</a>와 쌍을 이루는 디바이스 객체이다. 버스가 새로 인식한 장치에 PDO를 생성하여 디바이스 스택의 기반을 마련한다.<ul><li>Microsoft Virtual Disk 대응 드라이버: <code>\Driver\storvsc</code></li><ul></td></tr></tbody></table>
 
-비록 디바이스 객체는 드라이버 객체와 쌍을 이루지만, 디바이스 스택은 결국 (후자가 아닌) 전자에 의해 만들어진다. Pci.sys (Microsoft Virtual Disk의 경우, storvsc.sys) 드라이버가 PDO를 생성한 이후, 시스템에서 불러온 Proseware.sys (Microsoft Virtual Disk의 경우, disk.sys) 드라이버의 FDO가 PDO 위에 올라가면서 디바이스 스택이 구성된다.
+Pci.sys (Microsoft Virtual Disk의 경우, storvsc.sys) 드라이버가 PDO를 생성한 이후, 시스템에서 불러온 Proseware.sys (Microsoft Virtual Disk의 경우, disk.sys) 드라이버는 [IoAttachDevice](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-ioattachdevice) 혹은 [IoAttachDeviceToDeviceStack](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-ioattachdevicetodevicestack) 루틴을 호출하여 자신의 디바이스 객체를 PDO 위에 올라간 FDO로 쌓으며 디바이스 스택이 구성된다.
 
 * `AttachedDevice`: 스택상 상위 디바이스 객체의 [포인터](C.md#포인터)를 가리킨다. Proseware.sys의 FDO 경우, 상위 디바이스 객체는 AfterThought.sys의 Filter DO가 해당한다. [WinDbg](WinDbg.md)에서 [`!devobj`](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/-devobj) 명령을 입력하면 `AttachedTo` 항목이 있어 하위 디바이스 객체를 알 수 있지만, 이는 DEVICE_OBJECT의 필드가 아니다.
 
@@ -61,4 +61,18 @@
 위의 예시로 소개한 Microsoft Virtual Disk도 PnP 관리자 과점에서 하나의 디바이스 노드로 트리를 구성한다.
 
 ## 입출력 요청 패킷
-**[입출력 요청 패킷](https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/i-o-request-packets)**(I/O request packet; [IRP](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/ns-wdm-_irp))은 장치로부터 무언가를 요청할 때, 이를 처리할 장치 드라이버에게 [입출력 관리자](kernel.md#입출력-관리자)가 전달하는 구조체이다.
+**[입출력 요청 패킷](https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/i-o-request-packets)**(I/O request packet; [IRP](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/ns-wdm-_irp))은 장치로부터 무언가를 요청할 때, 이를 처리할 장치 드라이버와 통신하기 위해 [입출력 관리자](kernel.md#입출력-관리자)가 전달하는 [구조체](C.md#구조체)이다. 정확히 말하자면, 생성된 IRP 구조체를 참조하는 [포인터](C.md#포인터)를 요청을 처리할 드라이버에게 전달되는 방식이다. 입출력 관리자는 IRP를 전달할 (드라이버가 아닌) 장치를 탐색하기 때문에 디바이스 스택의 최상위 계층에 해당하는 드라이버가 IRP를 가장 먼저 수신하고, 하위 계층으로 IRP를 전달하도록 설계해야 한다.<sup>[<a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/passing-irps-down-the-driver-stack">참고</a>]</sup>
+
+> 위의 *Proseware Gizmo* 장치 예시에서는 IRP를 가장 먼저 수신하는 드라이버는 (FDO의 Proseware.sys가 아닌) Filter DO의 AfterThought.sys이다.
+
+패킷은 다음과 같이 두 가지로 구성된다:
+
+![IRP를 구성하는 요소](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/images/2irpios.png)
+
+1. **헤더**, 또는 **패킷의 고정된 정보**: *입출력 관리자가 본래 요청에 대한 정보, 그리고 드라이버가 처리한 요청의 최종 상태를 포함한다.*
+1. **[입출력 스택 위치](#입출력-스택-위치)**
+
+### 입출력 스택 위치
+[입출력 스택 위치](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/i-o-stack-locations)(I/O stack location)는 IRP 헤더 다음에 위치하는 [IO_STACK_LOCATION](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/ns-wdm-_io_stack_location) 구조체들의 집합이다. 해당 IRP에 관여하는 각 드라이버당 I/O 스택 위치가 하나씩 연쇄하여 드라이버 계층을 이루며, 안에는 드라이버가 수행해야 할 작업을 결정하는 데 사용되는 매개변수, [함수 코드](C.md#함수), 그리고 [컨텍스트](https://en.wikipedia.org/wiki/Context_(computing))를 포함한다.
+
+*[IoGetCurrentIrpStackLocation](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-iogetcurrentirpstacklocation)* 함수를 호출한 드라이버는 IRP로부터 자신의 I/O 스택 위치 정보를 불러올 수 있다.
