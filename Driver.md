@@ -65,12 +65,15 @@ Pci.sys (Microsoft Virtual Disk의 경우, storvsc.sys) 드라이버가 PDO를 �
 
 > 위의 *Proseware Gizmo* 장치 예시에서는 IRP를 가장 먼저 수신하는 드라이버는 (FDO의 Proseware.sys가 아닌) Filter DO의 AfterThought.sys이다.
 
-패킷은 다음과 같이 두 가지로 구성된다:
+패킷의 구조체를 살펴보면 다음과 같이 구성된 걸 확인할 수 있다:
 
 ![IRP를 구성하는 요소](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/images/2irpios.png)
 
-1. **헤더**, 또는 **패킷의 고정된 정보**: *입출력 관리자가 본래 요청에 대한 정보, 그리고 드라이버가 처리한 요청의 최종 상태를 포함한다.*
+1. **헤더**, 또는 **패킷의 고정된 정보**: *입출력 관리자가 본래 요청에 대한 정보, 그리고 드라이버가 처리한 요청의 [최종 상태](#입출력-상태-블록)를 포함한다.*
 1. **[입출력 스택 위치](#입출력-스택-위치)**
+
+### 입출력 상태 블록
+**[입출력 상태 블록](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/i-o-status-blocks)**(I/O status block)는 IRP 헤더를 구성하는 요소 중 요청이 처리된 상태를 알리는 [IO_STATUS_BLOCK](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/ns-wdm-_io_status_block) 구조체이다.
 
 ### 입출력 스택 위치
 [입출력 스택 위치](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/i-o-stack-locations)(I/O stack location)는 IRP 헤더 다음에 위치하는 [IO_STACK_LOCATION](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/ns-wdm-_io_stack_location) 구조체들의 집합이다. 해당 IRP에 관여하는 각 드라이버당 I/O 스택 위치가 하나씩 연쇄하여 드라이버 계층을 이루며, 안에는 드라이버가 수행해야 할 작업을 결정하는 데 사용되는 매개변수, [함수 코드](C.md#함수), 그리고 [컨텍스트](https://en.wikipedia.org/wiki/Context_(computing))를 포함한다.
