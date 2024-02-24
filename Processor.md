@@ -113,14 +113,14 @@ ALU는 기본적으로 opcode와 피연산자를 입력받고, 해당 opcode 작
 
 <table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">프로세스 및 스레드 우선순위</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">프로세스 우선순위 클래스</th><th style="text-align: center;">스레드 우선순위 레벨</th></tr></thead><tbody><tr style="text-align: center;"><td><code>IDLE_PRIORITY_CLASS</code></td><td><code>THREAD_PRIORITY_IDLE</code></td></tr><tr style="text-align: center;"><td><code>BELOW_NORMAL_PRIORITY_CLASS</code></td><td><code>THREAD_PRIORITY_LOWEST</code></td></tr><tr style="text-align: center;"><td><code>NORMAL_PRIORITY_CLASS</code></td><td><code>THREAD_PRIORITY_BELOW_NORMAL</code></td></tr><tr style="text-align: center;"><td><code>ABOVE_NORMAL_PRIORITY_CLASS</code></td><td><code>THREAD_PRIORITY_NORMAL</code></td></tr><tr style="text-align: center;"><td><code>HIGH_PRIORITY_CLASS</code></td><td><code>THREAD_PRIORITY_ABOVE_NORMAL</code></td></tr><tr style="text-align: center;"><td><code>REALTIME_PRIORITY_CLASS</code></td><td><code>THREAD_PRIORITY_HIGHEST</code></td></tr><tr style="text-align: center;"><td>-</td><td><code>THREAD_PRIORITY_TIME_CRITICAL</code></td></tr></tbody></table>
 
-## 문맥 교환
-**[문맥](https://en.wikipedia.org/wiki/Context_(computing))**(context)은 프로세스 및 스레드가 중단된 시점으로부터 작업을 재개하기 위해 필요한 정보들이다: [스택](https://ko.wikipedia.org/wiki/콜_스택), [레지스터](https://ko.wikipedia.org/wiki/프로세서_레지스터) 등이 해당한다. 
+## 컨텍스트 교환
+**[컨텍스트](https://en.wikipedia.org/wiki/Context_(computing))**(context; 문맥)은 프로세스 및 스레드가 중단된 시점으로부터 작업을 재개하기 위해 필요한 정보들이다: [스택](https://ko.wikipedia.org/wiki/콜_스택), [레지스터](https://ko.wikipedia.org/wiki/프로세서_레지스터) 등이 해당한다. 
 
-**[문맥 교환](https://ko.wikipedia.org/wiki/문맥_교환)**(context switch)은 실행 중인 프로세스 및 스레드를 나중에 재개할 수 있도록 문맥을 저장하여 대기시키고, 처리되어야 할 문맥을 불러와 실행하는 절차를 가리킨다. 스케줄링과 함께 멀티태스킹을 가능하게 만드는 핵심 기능이다. 그러나 문맥 교환이 너무 빈번하게 일어나면 성능 저하의 요인으로 작용할 수 있다.
+**[컨텍스트 교환](https://en.wikipedia.org/wiki/Context_switch)**(context switch)은 실행 중인 프로세스 및 스레드를 나중에 재개할 수 있도록 컨텍스트를 저장하여 대기시키고, 처리되어야 할 컨텍스트를 불러와 실행하는 절차를 가리킨다. 스케줄링과 함께 멀티태스킹을 가능하게 만드는 핵심 기능이다. 그러나 컨텍스트 교환이 너무 빈번하게 일어나면 성능 저하의 요인으로 작용할 수 있다.
 
-> 프로세스의 문맥보다 스레드의 문맥 데이터가 더 작은 관계로, 멀티프로세스보다 멀티스레드의 문맥 교환 작업이 더 빨리 이루어진다.
+> 프로세스의 컨텍스트보0다 스레드의 컨텍스트 데이터가 더 작은 관계로, 멀티프로세스보다 멀티스레드의 컨텍스트 교환 작업이 더 빨리 이루어진다.
 
-일반적으로 문맥 교환이 이루어지는 요인으로 다음과 같다:
+일반적으로 컨텍스트 교환이 이루어지는 요인으로 다음과 같다:
 
 1. 스케줄링된 [퀀텀](#선점형-라운드-로빈) 소진
 2. [우선순위](#스케줄링-우선순위)에 의한 선점
