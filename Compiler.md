@@ -1,7 +1,7 @@
 # 컴파일러
 [컴파일러](https://ko.wikipedia.org/wiki/컴파일러)(compiler)는 하나의 프로그래밍 언어를 다른 언어로 변환(일명 컴파일; compile)하는 언어 처리 소프트웨어이다.
 
-컴파일러를 사용하는 대표적인 [C](C.md)/[C++](Cpp.md) 프로그래밍 언어는 [CPU](Processor.md)가 직접적으로 수행할 수 있는 [기계어](#기계어)로 컴파일되다 보니, 흔히 [고급 프로그래밍 언어](https://ko.wikipedia.org/wiki/고급_프로그래밍_언어)를 [저급 프로그래밍 언어](https://ko.wikipedia.org/wiki/저급_프로그래밍_언어)로 변환하는 국한적인 작업으로 오해한다. 하지만 [파이썬](Python.md) 및 [자바](ko.Java.md) 프로그래밍 언어는 [바이트코드](Interpreter.md#바이트코드)라는 [중간 언어](https://ko.wikipedia.org/wiki/중간_표현)로 변환하는 컴파일러가 존재하며, 심지어 [타입스크립트](TypeScript.md) 프로그래밍 언어의 컴파일러는 [자바스크립트](ko.JavaScript.md)라는 또 다른 고급 프로그래밍 언어로 변환한다.
+컴파일러를 사용하는 대표적인 [C](C.md)/[C++](Cpp.md) 프로그래밍 언어는 [CPU](Processor.md)가 직접적으로 수행할 수 있는 [기계어](#기계어)로 컴파일되다 보니, 흔히 [고급 프로그래밍 언어](https://ko.wikipedia.org/wiki/고급_프로그래밍_언어)를 [저급 프로그래밍 언어](https://ko.wikipedia.org/wiki/저급_프로그래밍_언어)로 변환하는 국한적인 작업으로 오해한다. 하지만 [파이썬](Python.md) 및 [자바](https://www.java.com/) 프로그래밍 언어는 [바이트코드](Interpreter.md#바이트코드)라는 [중간 언어](https://ko.wikipedia.org/wiki/중간_표현)로 변환하는 컴파일러가 존재하며, 심지어 [타입스크립트](TypeScript.md) 프로그래밍 언어의 컴파일러는 [자바스크립트](ko.JavaScript.md)라는 또 다른 고급 프로그래밍 언어로 변환한다.
 
 >  프로그래밍 언어는 설계된 당시의 철학과 기술적 한계를 효율적으로 극복하기 위해 여러 기술들을 복합적으로 작용하면서 컴파일 언어와 [인터프리트 언어](Interpreter.md)의 경계를 허물고 있다.
 
@@ -26,7 +26,7 @@ AOT 컴파일을 활용하는 대표적인 프로그래밍 언어로 C/C++가 �
 
 일반적으로 AOT 컴파일러의 부산물인 바이트코드를 런타임 도중에 기계어로 JIT 컴파일하여 실시간으로 실행한다. 개발한 프로그램을 최초로 실행할 때는 JIT 컴파일에 소비된 시간으로 지연이 불가피하지만, 자츰 컴파일 정보가 [캐싱](https://ko.wikipedia.org/wiki/캐시)되면서 성능 향상을 위한 런타임 [최적화](https://en.wikipedia.org/wiki/Adaptive_optimization)에 활용된다. 이와 같이 JIT 컴파일은 실행되는 코드를 지속적으로 분석하여 컴파일로 취할 수 있는 이점과 실점을 저울질한다.
 
-대표적인 JIT 컴파일 예시로 [.NET](Csharp.md#net) 기반의 프로그래밍 언어가 있다. [자바](ko.Java.md) [플랫폼](https://ko.wikipedia.org/wiki/자바_(소프트웨어_플랫폼))과 [자바스크립트](ko.JavaScript.md) [엔진](https://ko.wikipedia.org/wiki/자바스크립트_엔진)의 경우, 본래 인터프리터를 사용하였으나 성능 향상이 중시된 현재에는 JIT 컴파일로 대체되었다.
+대표적인 JIT 컴파일 예시로 [.NET](Csharp.md#net) 기반의 프로그래밍 언어가 있다. [자바](https://www.java.com/) [플랫폼](https://ko.wikipedia.org/wiki/자바_(소프트웨어_플랫폼))과 [자바스크립트](ko.JavaScript.md) [엔진](https://ko.wikipedia.org/wiki/자바스크립트_엔진)의 경우, 본래 인터프리터를 사용하였으나 성능 향상이 중시된 현재에는 JIT 컴파일로 대체되었다.
 
 # 같이 보기
 * [인터프리터](Interpreter.md)

@@ -9,9 +9,9 @@
 <caption style="caption-side: top;">프로그래밍 언어의 인터프리터 및 빌드에 사용된 언어</caption>
 <thead><tr><th style="text-align: center;">프로그래밍 언어</th><th style="text-align: center;">인터프리터</th><th style="text-align: center;">인터프리터 빌드 언어</th></tr></thead>
 <tbody>
-<tr><td style="text-align: center;"><a href="ko.Java.md">자바</a></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/자바_가상_머신">Java Virtual Machine</a></td><td style="text-align: center;"><a href="Cpp.md">C++</a></td></tr>
+<tr><td style="text-align: center;"><a href="https://www.java.com/">자바</a></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/자바_가상_머신">Java Virtual Machine</a></td><td style="text-align: center;"><a href="Cpp.md">C++</a></td></tr>
 <tr><td style="text-align: center;"><a href="Python.md">파이썬</a></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/C파이썬">CPython</a></td><td style="text-align: center;"><a href="C.md">C</a></td></tr>
-<tr><td style="text-align: center;"><a href="Python.md">파이썬</a></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/자이썬">Jython</a></td><td style="text-align: center;"><a href="ko.Java.md">자바</a></td></tr>
+<tr><td style="text-align: center;"><a href="Python.md">파이썬</a></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/자이썬">Jython</a></td><td style="text-align: center;"><a href="https://www.java.com/">자바</a></td></tr>
 </tbody>
 </table>
 
@@ -37,7 +37,7 @@
 
 대표적인 프로세스 VM으로 [자바 플랫폼](https://ko.wikipedia.org/wiki/자바_(소프트웨어_플랫폼))의 자바 가상 머신(Java virtual machine; JVM) 그리고 [.NET](Csharp.md#net)의 [공통 언어 런타임](https://ko.wikipedia.org/wiki/공통_언어_런타임)(Common Language Runtime; CLR)이 있다. 이들은 한 프로그래밍 언어에 국한되지 않고 다양한 언어를 지원할 수 있다.
 
-* JVM: [자바](ko.Java.md), 코틀린, 그루비 등
+* JVM: [자바](https://www.java.com/), 코틀린, 그루비 등
 * CLR: [C#](Csharp.md), F#, VB.NET 등
 
 위의 프로세스 VM들은 인터프리터 뿐만 아니라 지원하는 각 프로그래밍 언어의 소스 코드를 중간 언어로 변환하는 컴파일러를 가지고 있기 때문에 포괄적인 "가상 머신"이라고 언급된다. 파이썬 프로그래밍 언어도 마찬가지로 프로세스 VM이 존재하지만 한 가지 언어만을 지원하고 인터프리터의 성질이 상당히 부각되는 점에서 오히려 "인터프리터"라고 불린다.
