@@ -106,7 +106,7 @@ C++ 언어는 [컴파일 언어](Compiler.md)(compiled language)이다. C++ 컴�
 </table>
 
 ## 자료형
-[자료형](https://ko.wikipedia.org/wiki/자료형)(data type)은 데이터를 어떻게 표현할 지 결정하는 요소이며, C++에서는 다음과 같이 존재한다.
+[자료형](https://en.wikipedia.org/wiki/Data_type)(data type)은 데이터를 어떻게 표현할 지 결정하는 요소이며, C++에서는 다음과 같이 존재한다.
 
 <table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://learn.microsoft.com/en-us/cpp/cpp/fundamental-types-cpp">C++ 자료형</a></caption><colgroup><col style="width: 15%;"/><col style="width: 15%;"/><col style="width: 15%;"/><col/></colgroup><thead><tr><th style="text-align: center;">키워드</th><th style="text-align: center;">자료형</th><th style="text-align: center;">크기 (바이트)</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>char</code></td><td style="text-align: center;">문자</td><td style="text-align: center;">1</td><td>단일 ANSI 문자</td></tr><tr><td style="text-align: center;"><code>short</code></td><td style="text-align: center;">정수</td><td style="text-align: center;">2</td><td>가장 작은 정수 자료형</td></tr><tr><td style="text-align: center;"><code>int</code></td><td style="text-align: center;">정수</td><td style="text-align: center;">2 <sub>(최소)</sub></td><td>워드 크기의 기본 정수 자료형; <code>short</code>보다 작아서는 안되며, 32비트 시스템 이후로는 4바이트가 일반화되었다.</td></tr><tr><td style="text-align: center;"><code>long</code></td><td style="text-align: center;">정수</td><td style="text-align: center;">4 <sub>(최소)</sub></td><td>정수 자료형 <code>int</code>보다 작아서는 안되며, 4바이트와 8바이트 중 어느 크기를 채택하였는지 컴파일러마다 다르다.</td></tr><tr><td style="text-align: center;"><code>float</code></td><td style="text-align: center;">부동소수점</td><td style="text-align: center;">4</td><td>32비트 단정밀도 실수</td></tr><tr><td style="text-align: center;"><code>double</code></td><td style="text-align: center;">부동소수점</td><td style="text-align: center;">8</td><td>64비트 배정밀도 실수</td></tr><tr><td style="text-align: center;"><code>bool</code></td><td style="text-align: center;">논리형</td><td style="text-align: center;">1</td><td>참(<code>true</code>; 영 외의 정수) 혹은 거짓(<code>false</code>; 0)</td></tr><tr><td style="text-align: center;"><code>void</code></td><td style="text-align: center;">보이드</td><td style="text-align: center;">1</td><td>불특정 자료형</td></tr><tr><td style="text-align: center;"><code>auto</code></td><td style="text-align: center;">자동</td><td style="text-align: center;">N/A</td><td>컴파일러에 의해 적절한 자료형으로 자동 선택된다. 복잡한 자료형을 간략히 정의하는데 매우 유용하다.</td></tr></tbody/></table>
 
@@ -204,16 +204,11 @@ int variable1 = 3, variable2 = 4, variable3;
 
 변수의 "선언(declaration)"은 메모리 할당 여부와 관계없이 컴파일러에게 해당 변수의 존재성을 알리는 행위이다. 그러나 이미 변수를 정의하는 과정에서 컴파일러에게 변수의 존재를 알렸는데, 이 또한 변수를 선언한 것이다. 다음은 변수에 특수한 성질을 부여하는 선언 키워드를 소개한다.
 
-<table style="width: 80%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">변수 선언 키워드 및 특징</caption>
-<colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup>
-<thead><tr><th style="text-align: center;">키워드</th><th style="text-align: center;">특징</th></tr></thead>
-<tbody><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/constant_expression"><code>const</code></a></td><td>초기화된 이후로 변경이 불가한 상수(constant)로 지정한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/storage_duration#Static_local_variables"><code>static</code></a></td><td><a href="#함수">함수</a>를 탈출하여도 데이터가 소멸되지 않는 특수한 <a href="#지역-변수">지역 변수</a>, 일명 <a href="https://en.cppreference.com/w/cpp/language/storage_duration#Static_local_variables">정적 변수</a>이다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/language/extern"><code>extern</code></a></td><td>아직 정의되지 않은 변수 혹은 함수를 미리 호출할 수 있도록 선언만 하는 <a href="#외부-변수">외부 변수</a>이다.</td></tr></tbody>
-</table>
+<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">변수 선언 키워드 및 특징</caption><colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup><thead><tr><th style="text-align: center;">키워드</th><th style="text-align: center;">특징</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/constant_expression"><code>const</code></a></td><td>초기화된 이후로 변경이 불가한 상수(constant)로 지정한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/storage_duration#Static_local_variables"><code>static</code></a></td><td><a href="#함수">함수</a>를 탈출하여도 데이터가 소멸되지 않는 특수한 <a href="#지역-변수">지역 변수</a>, 일명 <a href="https://en.cppreference.com/w/cpp/language/storage_duration#Static_local_variables">정적 변수</a>이다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/language/extern"><code>extern</code></a></td><td>아직 정의되지 않은 변수 혹은 함수를 미리 호출할 수 있도록 선언만 하는 <a href="#외부-변수">외부 변수</a>이다.</td></tr></tbody></table>
 
 > 위에서 소개한 키워드, 특히 `static` 및 `extern`은 차후 함수와 [라이브러리](#라이브러리)를 소개하면서 다시 설명할 예정이다.
 
-C/C++ 언어 [ISO 표준](https://github.com/cplusplus/draft)의 § 6.2 Declarations and definitions 부문에 의하면 일반적인 변수의 선언은 정의와 동일하다고 간주한다. 단, 다음은 변수가 선언되었으나 정의되지 않은 예외를 나열한다:
+C/C++ 언어 [ISO 표준](https://github.com/cplusplus/draft)의 § 6.2 Declarations and definitions 부문에 의하면 일반적인 변수의 선언은 정의와 동일하다고 간주한다.<sup>[<a href="https://learn.microsoft.com/en-us/cpp/cpp/declarations-and-definitions-cpp">참고</a>]</sup> 단, 다음은 변수가 선언되었으나 정의되지 않은 예외를 나열한다:
 
 * 함수 전방선언
 * 함수 매개변수 선언
@@ -224,11 +219,7 @@ C/C++ 언어 [ISO 표준](https://github.com/cplusplus/draft)의 § 6.2 Declarat
 
 변수가 소스 코드 중에서 어디에 정의되었는지에 따라 지역 변수와 전역 변수로 구분된다. 
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;">
-<caption>C 언어의 지역 및 전역 변수</caption>
-<colgroup><col style="width: 50%;"/></col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">지역 변수</th><th style="text-align: center;">전역 변수</th></tr></thead>
-<tbody><tr><td>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption>C++의 지역 및 전역 변수</caption><colgroup><col style="width: 50%;"/></col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">지역 변수</th><th style="text-align: center;">전역 변수</th></tr></thead><tbody><tr><td>
 
 ```cpp
 int main () {
@@ -250,10 +241,7 @@ int main() {
     return 0;
 }
 ```
-</td></tr>
-<tr><td>블록 내부에서 정의된 변수이다. 지역 변수에 저장된 데이터는 블록 밖에서는 소멸되므로 외부에서 사용할 수 없다.</td><td>어떠한 블록에도 속하지 않은 외부에 정의된 변수이다. 전역 변수는 어느 블록에서라도 호출하여 지역 변수와 함께 사용할 수 있다.</td></tr>
-</tbody>
-</table>
+</td></tr><tr><td>블록 내부에서 정의된 변수이다. 지역 변수에 저장된 데이터는 블록 밖에서는 소멸되므로 외부에서 사용할 수 없다.</td><td>어떠한 블록에도 속하지 않은 외부에 정의된 변수이다. 전역 변수는 어느 블록에서라도 호출하여 지역 변수와 함께 사용할 수 있다.</td></tr></tbody></table>
 
 변수는 지정된 자료형 외의 데이터를 할당받을 수 있다. 아래 예시 코드는 문자 자료형 변수에 값 75로 초기화할 시, ASCII 코드에 의하여 대문자 'K'로 저장된다.
 
@@ -290,11 +278,7 @@ namespace1::variable = 3;
 ### `using` 키워드
 `using` 키워드는 네임스페이스 내의 데이터를 간편하게 접근할 수 있도록 한다. 즉, 네임스페이스를 별도로 명시하지 않아도 데이터 호출이 가능하게 한다. 하지만 무분별한 남용은 컴파일러가 어느 네임스페이스의 데이터를 호출하는 것인지 구별하지 못하게 하여 오류가 발생할 위험이 높다.
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;">
-<caption>네임스페이스의 <code>using</code> 키워드 활용</caption>
-<colgroup><col style="width: 50%;"/></col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/namespace#Using-directives"><code>using</code> 지시문</a> (using-directive)</th><th style="text-align: center;"><a href="hhttps://en.cppreference.com/w/cpp/language/namespace#Using-declarations"><code>using</code> 선언</a> (using-declaration)</th></tr></thead>
-<tbody><tr><td>스크립트 파일에서 해당 네임스페이스 전체를 생략한다.</td><td>네임스페이스 내의 개별 데이터를 선택적으로 간략화시킨다.</td></tr><tr><td>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption>네임스페이스의 <code>using</code> 키워드 활용</caption><colgroup><col style="width: 50%;"/></col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/namespace#Using-directives"><code>using</code> 지시문</a> (using-directive)</th><th style="text-align: center;"><a href="hhttps://en.cppreference.com/w/cpp/language/namespace#Using-declarations"><code>using</code> 선언</a> (using-declaration)</th></tr></thead><tbody><tr><td>스크립트 파일에서 해당 네임스페이스 전체를 생략한다.</td><td>네임스페이스 내의 개별 데이터를 선택적으로 간략화시킨다.</td></tr><tr><td>
 
 ```cpp
 using namespace std;
@@ -306,22 +290,13 @@ cout << "Hello World!" << endl;
 using std::endl;
 std::cout << "Hello World!" << endl;
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 ## 연산자
 [연산자](https://ko.wikipedia.org/wiki/연산자_(프로그래밍))(operator)는 피연산 데이터를 조작할 수 있는 가장 간단한 형태의 연산 요소이다. 연산자는 피연산자의 접두부, 접미부, 혹은 두 데이터 사이에 위치시켜 사용한다. 가독성을 위해 데이터와 연산자 사이에 공백을 넣어도 연산에는 아무런 영향을 주지 않는다. 다음은 [C/C++ 연산자](https://ko.wikipedia.org/wiki/C와_C++의_연산자)들을 간략히 소개한다.
 
 ### 산술 연산자
-<table style="width: 85%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;"><a href="https://en.cppreference.com/w/cpp/language/operator_arithmetic">산술 연산자</a>(arithmetic operators)</caption>
-<colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup>
-<thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">산술</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody>
-<tr><td style="text-align: center;"><code>+</code></td><td style="text-align: center;">덧셈</td><td>좌측과 우측 피연산자의 값을 더하여 반환한다.</td></tr><tr><td style="text-align: center;"><code>-</code></td><td style="text-align: center;">뺄셈</td><td>좌측 피연산자에서 우측 피연산자를 뺀 값을 반환한다.</td></tr><tr><td style="text-align: center;"><code>*</code></td><td style="text-align: center;">덧셈</td><td>좌측 피연산자를 우측 피연산자의 값만큼 곱하여, 즉 반복 덧셈하여 반환한다.</td></tr><tr><td style="text-align: center;"><code>/</code></td><td style="text-align: center;">나눗셈</td><td>좌측 피연산자에서 우측 피연산자를 나눈 <a href="https://ko.wikipedia.org/wiki/몫">몫</a>을 반환한다.</td></tr><tr><td style="text-align: center;"><code>%</code></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/모듈러_산술">모듈러</a></td><td>좌측 피연산자에서 우측 피연산자를 나눈 <a href="https://ko.wikipedia.org/wiki/나머지">나머지</a>를 반환한다.</td></tr>
-</tbody>
-</table>
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://en.cppreference.com/w/cpp/language/operator_arithmetic">산술 연산자</a>(arithmetic operators)</caption><colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">산술</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>+</code></td><td style="text-align: center;">덧셈</td><td>좌측과 우측 피연산자의 값을 더하여 반환한다.</td></tr><tr><td style="text-align: center;"><code>-</code></td><td style="text-align: center;">뺄셈</td><td>좌측 피연산자에서 우측 피연산자를 뺀 값을 반환한다.</td></tr><tr><td style="text-align: center;"><code>*</code></td><td style="text-align: center;">덧셈</td><td>좌측 피연산자를 우측 피연산자의 값만큼 곱하여, 즉 반복 덧셈하여 반환한다.</td></tr><tr><td style="text-align: center;"><code>/</code></td><td style="text-align: center;">나눗셈</td><td>좌측 피연산자에서 우측 피연산자를 나눈 <a href="https://ko.wikipedia.org/wiki/몫">몫</a>을 반환한다.</td></tr><tr><td style="text-align: center;"><code>%</code></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/모듈러_산술">모듈러</a></td><td>좌측 피연산자에서 우측 피연산자를 나눈 <a href="https://ko.wikipedia.org/wiki/나머지">나머지</a>를 반환한다.</td></tr></tbody></table>
 
 ### 증감 연산자
 [증가 연산자](https://en.cppreference.com/w/cpp/language/operator_incdec)(increment operator) `++` 및 [감소 연산자](https://en.cppreference.com/w/cpp/language/operator_incdec)(decrement operator) `--`는 데이터를 1만큼 증가 혹은 감소하는데 간략하게 한 줄로 표현한다.
@@ -341,24 +316,12 @@ x = y--;  // 동일: { x = y; y = y - 1; }
 </td></tr></tbody></table>
 
 ### 비트 연산자
-<table style="width: 85%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;"><a href="https://en.wikipedia.org/wiki/Bitwise_operations_in_C">비트 연산자</a>(bitwise operators)</caption>
-<colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup>
-<thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">비트연산</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody>
-<tr><td style="text-align: center;"><code>&</code></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/비트_연산#AND">AND</a></td><td>두 피연산자의 각 비트를 비교하여 모두 1이면 1을, 아니면 0을 계산하여 반환한다.</td></tr><tr><td style="text-align: center;"><code>|</code></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/비트_연산#OR">OR</a></td><td>두 피연산자의 각 비트를 비교하여 하나라도 1이 있으면 1을, 아니면 0을 계산하여 반환한다.</td></tr><tr><td style="text-align: center;"><code>^</code></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/비트_연산#XOR">XOR</a></td><td>두 피연산자의 각 비트를 비교하여 값이 같으면 0을, 다르면 1을 계산하여 반환한다.</td></tr><tr><td style="text-align: center;"><code>~</code></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/비트_연산#NOT">NOT</a></td><td>피연산자의 각 비트마다 반전시킨 값을 반환한다.</td></tr><tr><td style="text-align: center;"><code>&lt;&lt;</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operations_in_C#Left_shift_%3C%3C">좌향 시프트</a></td><td>피연산자(左)의 비트를 전반적으로 일정 값(右)만큼 왼쪽으로 이동시킨다.</td></tr><tr><td style="text-align: center;"><code>&gt;&gt;</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operations_in_C#Right_shift_%3E%3E">우향 시프트</a></td><td>피연산자(左)의 비트를 전반적으로 일정 값(右)만큼 오른쪽으로 이동시킨다.</td></tr>
-</tbody>
-</table>
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://en.wikipedia.org/wiki/Bitwise_operations_in_C">비트 연산자</a>(bitwise operators)</caption><colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">비트연산</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>&</code></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/비트_연산#AND">AND</a></td><td>두 피연산자의 각 비트를 비교하여 모두 1이면 1을, 아니면 0을 계산하여 반환한다.</td></tr><tr><td style="text-align: center;"><code>|</code></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/비트_연산#OR">OR</a></td><td>두 피연산자의 각 비트를 비교하여 하나라도 1이 있으면 1을, 아니면 0을 계산하여 반환한다.</td></tr><tr><td style="text-align: center;"><code>^</code></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/비트_연산#XOR">XOR</a></td><td>두 피연산자의 각 비트를 비교하여 값이 같으면 0을, 다르면 1을 계산하여 반환한다.</td></tr><tr><td style="text-align: center;"><code>~</code></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/비트_연산#NOT">NOT</a></td><td>피연산자의 각 비트마다 반전시킨 값을 반환한다.</td></tr><tr><td style="text-align: center;"><code>&lt;&lt;</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operations_in_C#Left_shift_%3C%3C">좌향 시프트</a></td><td>피연산자(左)의 비트를 전반적으로 일정 값(右)만큼 왼쪽으로 이동시킨다.</td></tr><tr><td style="text-align: center;"><code>&gt;&gt;</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operations_in_C#Right_shift_%3E%3E">우향 시프트</a></td><td>피연산자(左)의 비트를 전반적으로 일정 값(右)만큼 오른쪽으로 이동시킨다.</td></tr></tbody></table>
 
 ### 할당 연산자
 단순 할당 연산자를 산술 및 비트 연산자와 조합하여 코드를 더욱 간결하게 작성할 수 있으며, 아래는 다양한 할당 연산자 중 일부만 보여준다.
 
-<table style="width: 85%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;"><a href="https://en.cppreference.com/w/cpp/language/operator_assignment">할당 연산자</a>(assignment operators)</caption>
-<colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup>
-<thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">할당</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody>
-<tr><td style="text-align: center;"><code>=</code></td><td style="text-align: center;">단순 할당</td><td>피연산자(右)가 <a href="#변수">변수</a>와 같은 피할당자(左)로 할당된 값을 반환한다.</td></tr><tr><td style="text-align: center;"><code>+=</code></td><td style="text-align: center;">덧셈 대입</td><td>
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://en.cppreference.com/w/cpp/language/operator_assignment">할당 연산자</a>(assignment operators)</caption><colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">할당</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>=</code></td><td style="text-align: center;">단순 할당</td><td>피연산자(右)가 <a href="#변수">변수</a>와 같은 피할당자(左)로 할당된 값을 반환한다.</td></tr><tr><td style="text-align: center;"><code>+=</code></td><td style="text-align: center;">덧셈 대입</td><td>
 
 ```cpp
 x += y;  // 동일: x = x + y;
@@ -378,45 +341,24 @@ x &= y;  // 동일: x = x & y;
 ```cpp
 x <<= y;  // 동일: x = x << y;
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 ### 비교 연산자
 아래 비교 연산자의 설명은 참을 반환할 조건을 소개하며, 그 외에는 모두 `false`를 반환한다.
 
-<table style="width: 85%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;"><a href="https://en.cppreference.com/w/cpp/language/operator_comparison">비교 연산자</a>(relational operators)</caption>
-<colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup>
-<thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">관계</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody>
-<tr><td style="text-align: center;"><code>&gt;</code></td><td style="text-align: center;">초과</td><td>좌측 피연산자가 우측 피연산자보다 크면 <code>true</code>를 반환한다.</td></tr><tr><td style="text-align: center;"><code>&lt;</code></td><td style="text-align: center;">미만</td><td>좌측 피연산자가 우측 피연산자보다 작으면 <code>true</code>를 반환한다.</td></tr><tr><td style="text-align: center;"><code>&gt;=</code></td><td style="text-align: center;">이상</td><td>좌측 피연산자가 우측 피연산자보다 크거나 같으면 <code>true</code>를 반환한다.</td></tr><tr><td style="text-align: center;"><code>&lt;=</code></td><td style="text-align: center;">이하</td><td>좌측 피연산자가 우측 피연산자보다 작거나 같으면 <code>true</code>를 반환한다.</td></tr><tr><td style="text-align: center;"><code>==</code></td><td style="text-align: center;">동일</td><td>두 피연산자의 값이 같으면 <code>true</code>를 반환한다.</td></tr><tr><td style="text-align: center;"><code>!=</code></td><td style="text-align: center;">상이</td><td>두 피연산자의 값이 같지 않으면 <code>true</code>를 반환한다.</td></tr>
-</tbody>
-</table>
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://en.cppreference.com/w/cpp/language/operator_comparison">비교 연산자</a>(relational operators)</caption><colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">관계</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>&gt;</code></td><td style="text-align: center;">초과</td><td>좌측 피연산자가 우측 피연산자보다 크면 <code>true</code>를 반환한다.</td></tr><tr><td style="text-align: center;"><code>&lt;</code></td><td style="text-align: center;">미만</td><td>좌측 피연산자가 우측 피연산자보다 작으면 <code>true</code>를 반환한다.</td></tr><tr><td style="text-align: center;"><code>&gt;=</code></td><td style="text-align: center;">이상</td><td>좌측 피연산자가 우측 피연산자보다 크거나 같으면 <code>true</code>를 반환한다.</td></tr><tr><td style="text-align: center;"><code>&lt;=</code></td><td style="text-align: center;">이하</td><td>좌측 피연산자가 우측 피연산자보다 작거나 같으면 <code>true</code>를 반환한다.</td></tr><tr><td style="text-align: center;"><code>==</code></td><td style="text-align: center;">동일</td><td>두 피연산자의 값이 같으면 <code>true</code>를 반환한다.</td></tr><tr><td style="text-align: center;"><code>!=</code></td><td style="text-align: center;">상이</td><td>두 피연산자의 값이 같지 않으면 <code>true</code>를 반환한다.</td></tr></tbody></table>
 
 ### 논리 연산자
 (논리 부정을 제외한) 아래 논리 연산자의 설명은 참을 반환할 조건을 소개하며, 그 외에는 모두 `false`를 반환한다.
 
-<table style="width: 85%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;"><a href="https://en.cppreference.com/w/cpp/language/operator_logical">논리 연산자</a>(logical operators)</caption>
-<colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/><col style="width: "/></colgroup>
-<thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">논리</th><th style="text-align: center;">설명 </th></tr></thead>
-<tbody>
-<tr><td style="text-align: center;"><code>&&</code></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/논리곱">논리곱</a></td><td>좌측 그리고 우측 <a href="https://ko.wikipedia.org/wiki/명제">명제</a>(피연산자)가 모두 참이면 <code>true</code>를 반환한다.</td></tr><tr><td style="text-align: center;"><code>||</code></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/논리합">논리합</a></td><td>좌측 또는 우측 명제(피연산자)가 하나라도 참이면 <code>true</code>를 반환한다.</td></tr><tr><td style="text-align: center;"><code>!</code></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/부정_(논리학)">부정</a></td><td>명제(피연산자)가 참이면 거짓으로, 혹은 그 반대로 반전된 값을 반환한다.</td></tr>
-</tbody>
-</table>
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://en.cppreference.com/w/cpp/language/operator_logical">논리 연산자</a>(logical operators)</caption><colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/><col style="width: "/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">논리</th><th style="text-align: center;">설명 </th></tr></thead><tbody><tr><td style="text-align: center;"><code>&&</code></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/논리곱">논리곱</a></td><td>좌측 그리고 우측 <a href="https://ko.wikipedia.org/wiki/명제">명제</a>(피연산자)가 모두 참이면 <code>true</code>를 반환한다.</td></tr><tr><td style="text-align: center;"><code>||</code></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/논리합">논리합</a></td><td>좌측 또는 우측 명제(피연산자)가 하나라도 참이면 <code>true</code>를 반환한다.</td></tr><tr><td style="text-align: center;"><code>!</code></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/부정_(논리학)">부정</a></td><td>명제(피연산자)가 참이면 거짓으로, 혹은 그 반대로 반전된 값을 반환한다.</td></tr></tbody></table>
 
 ## 탈출 문자
 [탈출 문자](https://ko.wikipedia.org/wiki/이스케이프_문자)(escape character)는 백슬래시 기호 `\`를 사용하며, [문자열](#문자열)로부터 탈출하여 텍스트 데이터 내에서 특정 연산을 수행하도록 한다. 예시에서 `\n` 탈출 문자를 사용하여 문자열 줄바꿈을 구현한 것을 보여주었다.
 
 > 한편, C++ 표준 라이브러리는 [줄바꿈 조작자](https://en.cppreference.com/w/cpp/io/manip/endl)(new-line manipulator) `std::endl`를 통해 자체적으로 텍스트 [줄바꿈](https://ko.wikipedia.org/wiki/새줄_문자)을 지원한다.
 
-<table style="table-layout: fixed; width: 90%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">C++ 텍스트 줄바꿈 구현 방법</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">탈출 문자</th><th style="text-align: center;">줄바꿈 조작자</th></tr></thead>
-<tbody>
-<tr style="vertical-align: top; overflow-wrap: break-word;"><td>
+<table style="table-layout: fixed; width: 90%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C++ 텍스트 줄바꿈 구현 방법</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">탈출 문자</th><th style="text-align: center;">줄바꿈 조작자</th></tr></thead><tbody><tr style="vertical-align: top; overflow-wrap: break-word;"><td>
 
 ```cpp
 std::cout << "Hello,\nWorld!";
@@ -433,19 +375,12 @@ std::cout << "Hello" << std::endl << "World!";
 Hello,
 World!
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 # 파일 입출력
 C++ 언어의 파일 입출력(일명 I/O)은 [`iostream`](https://en.cppreference.com/w/cpp/header/iostream) 헤더로부터 관련 함수들을 호출할 수 있으며, 단순 파일뿐만 아니라 터미널로부터 텍스트를 입력받거나 출력할 때에도 관여한다. [C](C.md) 언어의 [파일 입출력](C.md#파일-입출력)에서 소개한 [`stdio.h`](https://en.cppreference.com/w/cpp/header/cstdio) 헤더를 활용할 수 있지만, 본 장은 C++에 최적화된 입출력을 위주로 다룬다.
 
-<table style="width: 80%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">C++ 파일 입출력 연산자</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">추출 연산자(extraction operator) <code>&gt;&gt;</code></th><th style="text-align: center;">삽입 연산자(insertion operator) <code>&lt;&lt;</code></th></tr></thead>
-<tbody>
-<tr><td>입력 받은 데이터를 빈 공간(띄어쓰기, 줄바꿈 등)마다 추출하여 순서대로 변수에 할당한다.</td><td>데이터를 자료형에 맞게 순서대로 파일 또는 터미널에 삽입, 즉 작성한다.</td></tr><tr><td>
+<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C++ 파일 입출력 연산자</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">추출 연산자(extraction operator) <code>&gt;&gt;</code></th><th style="text-align: center;">삽입 연산자(insertion operator) <code>&lt;&lt;</code></th></tr></thead><tbody><tr><td>입력 받은 데이터를 빈 공간(띄어쓰기, 줄바꿈 등)마다 추출하여 순서대로 변수에 할당한다.</td><td>데이터를 자료형에 맞게 순서대로 파일 또는 터미널에 삽입, 즉 작성한다.</td></tr><tr><td>
 
 ```cpp
 int variable;
@@ -457,9 +392,7 @@ std::cin >> variable;
 int variable = 51;
 std::cout << static_cast<char>(variable);
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 여기서 `std::cin` 및 `std::cout`은 각각 터미널 대상의 입출력 전역 스트림이며, 파일 스트림 객체로 지정하였다면 해당 파일로 입출력이 처리된다.
 
@@ -468,12 +401,7 @@ std::cout << static_cast<char>(variable);
 ## 파일 관리
 C++ 언어는 파일 입출력 스트림을 제공하는 [`fstream`](https://en.cppreference.com/w/cpp/header/fstream) 헤더에서 제공하는 [클래스](#클래스)를 통해 파일을 열고 닫을 수 있다.
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">파일 입출력 및 모드 옵션</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 10%;"/><col style="width: 40%;"/></colgroup>
-<thead><tr><th style="text-align: center;">파일 관리 코드</th><th colspan="2" style="text-align: center;">파일 열기 옵션: <a href="https://en.cppreference.com/w/cpp/io/ios_base/openmode"><code>openmode</code></a></th></tr></thead>
-<tbody>
-<tr><td rowspan="6">
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">파일 입출력 및 모드 옵션</caption><colgroup><col style="width: 50%;"/><col style="width: 10%;"/><col style="width: 40%;"/></colgroup><thead><tr><th style="text-align: center;">파일 관리 코드</th><th colspan="2" style="text-align: center;">파일 열기 옵션: <a href="https://en.cppreference.com/w/cpp/io/ios_base/openmode"><code>openmode</code></a></th></tr></thead><tbody><tr><td rowspan="6">
 
 ```cpp
 #include <fstream>
@@ -487,8 +415,7 @@ FILE.open("filename.txt");
 FILE.close();
 ```
 
-<td><code>std::ios::binary</code></td><td><a href="https://en.cppreference.com/w/cpp/io/c/FILE#Binary_and_text_modes">이진파일 모드</a></td><tr><td><code>std::ios::in</code></td><td>읽기 전용 모드 <sub>(대안 클래스: <a href="https://en.cppreference.com/w/cpp/io/basic_ifstream"><code>ifstream</code></a>)</sub></td></tr><tr><td><code>std::ios::out</code></td><td>쓰기 전용 모드 <sub>(대안 클래스: <a href="https://en.cppreference.com/w/cpp/io/basic_ofstream"><code>ofstream</code></a>)</sub></td></tr></td><td><code>std::ios::app</code></td><td>매 입력마다 스트림 끝으로 이동하여 덧붙여 쓰기</td></tr><tr><td><code>std::ios::ate</code></td><td>파일을 열었을 때 곧바로 스트림 끝으로 이동</td></tr><tr><td><code>std::ios::trunc</code></td><td>파일을 열기 직전에 내용을 전부 삭제</td></tr></tbody>
-</table>
+<td><code>std::ios::binary</code></td><td><a href="https://en.cppreference.com/w/cpp/io/c/FILE#Binary_and_text_modes">이진파일 모드</a></td><tr><td><code>std::ios::in</code></td><td>읽기 전용 모드 <sub>(대안 클래스: <a href="https://en.cppreference.com/w/cpp/io/basic_ifstream"><code>ifstream</code></a>)</sub></td></tr><tr><td><code>std::ios::out</code></td><td>쓰기 전용 모드 <sub>(대안 클래스: <a href="https://en.cppreference.com/w/cpp/io/basic_ofstream"><code>ofstream</code></a>)</sub></td></tr></td><td><code>std::ios::app</code></td><td>매 입력마다 스트림 끝으로 이동하여 덧붙여 쓰기</td></tr><tr><td><code>std::ios::ate</code></td><td>파일을 열었을 때 곧바로 스트림 끝으로 이동</td></tr><tr><td><code>std::ios::trunc</code></td><td>파일을 열기 직전에 내용을 전부 삭제</td></tr></tbody></table>
 
 C++ 언어의 파일 스트림은 입출력 양방향을 지원하지만, 열었을 당시 입력 혹은 출력 중 하나만 선택할 수 있다. 만일 `fstream`에 모드가 별도로 명시되지 않았을 시, 최초 파일 작업이 입력인지 출력인지에 따라 모드가 자동으로 결정된다. 혹은 `ifstream` 및 `ofstream`을 대신 사용할 수 있다.
 
