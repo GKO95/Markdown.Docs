@@ -122,7 +122,7 @@ C [런타임 라이브러리](https://ko.wikipedia.org/wiki/런타임_라이브�
 </table>
 
 ## 자료형
-[자료형](https://ko.wikipedia.org/wiki/자료형)(data type)은 데이터를 어떻게 표현할 지 결정하는 요소이며, C 언어에서는 다음과 같이 존재한다. 단, 본 문서는 ANSI C 언어를 기준으로 소개하므로, 이후 C99부터 소개된 일부 자료형(`bool`, `long long` 등)은 목록에 제외되었다.
+[자료형](https://en.wikipedia.org/wiki/Data_type)(data type)은 데이터를 어떻게 표현할 지 결정하는 요소이며, C 언어에서는 다음과 같이 존재한다. 단, 본 문서는 ANSI C 언어를 기준으로 소개하므로, 이후 C99부터 소개된 일부 자료형(`bool`, `long long` 등)은 목록에 제외되었다.
 
 <table style="width: 80%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side: top;"><a href="https://learn.microsoft.com/en-us/cpp/c-language/storage-of-basic-types">C 언어 자료형</a> (ANSI C 기준)</caption>
@@ -196,16 +196,11 @@ int variable1 = 3, variable2 = 4, variable3;
 
 변수의 "선언(declaration)"은 메모리 할당 여부와 관계없이 컴파일러에게 해당 변수의 존재성을 알리는 행위이다. 그러나 이미 변수를 정의하는 과정에서 컴파일러에게 변수의 존재를 알렸는데, 이 또한 변수를 선언한 것이다. 다음은 변수에 특수한 성질을 부여하는 선언 키워드를 소개한다.
 
-<table style="width: 80%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">변수 선언 키워드 및 특징</caption>
-<colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup>
-<thead><tr><th style="text-align: center;">키워드</th><th style="text-align: center;">특징</th></tr></thead>
-<tbody><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/constant_expression"><code>const</code></a></td><td>초기화된 이후로 변경이 불가한 상수(constant)로 지정한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/storage_duration#Static_local_variables"><code>static</code></a></td><td><a href="#함수">함수</a>를 탈출하여도 데이터가 소멸되지 않는 특수한 <a href="#지역-변수">지역 변수</a>, 일명 <a href="https://en.cppreference.com/w/cpp/language/storage_duration#Static_local_variables">정적 변수</a>이다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/language/extern"><code>extern</code></a></td><td>아직 정의되지 않은 변수 혹은 함수를 미리 호출할 수 있도록 선언만 하는 <a href="#외부-변수">외부 변수</a>이다.</td></tr></tbody>
-</table>
+<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">변수 선언 키워드 및 특징</caption><colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup><thead><tr><th style="text-align: center;">키워드</th><th style="text-align: center;">특징</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/constant_expression"><code>const</code></a></td><td>초기화된 이후로 변경이 불가한 상수(constant)로 지정한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/storage_duration#Static_local_variables"><code>static</code></a></td><td><a href="#함수">함수</a>를 탈출하여도 데이터가 소멸되지 않는 특수한 <a href="#지역-변수">지역 변수</a>, 일명 <a href="https://en.cppreference.com/w/cpp/language/storage_duration#Static_local_variables">정적 변수</a>이다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/language/extern"><code>extern</code></a></td><td>아직 정의되지 않은 변수 혹은 함수를 미리 호출할 수 있도록 선언만 하는 <a href="#외부-변수">외부 변수</a>이다.</td></tr></tbody></table>
 
 > 위에서 소개한 키워드, 특히 `static` 및 `extern`은 차후 함수와 [라이브러리](#라이브러리)를 소개하면서 다시 설명할 예정이다.
 
-C/C++ 언어 [ISO 표준](https://github.com/cplusplus/draft)의 § 6.2 Declarations and definitions 부문에 의하면 일반적인 변수의 선언은 정의와 동일하다고 간주한다. 단, 다음은 변수가 선언되었으나 정의되지 않은 예외를 나열한다:
+C/C++ 언어 [ISO 표준](https://github.com/cplusplus/draft)의 § 6.2 Declarations and definitions 부문에 의하면 일반적인 변수의 선언은 정의와 동일하다고 간주한다.<sup>[<a href="https://learn.microsoft.com/en-us/cpp/cpp/declarations-and-definitions-cpp">참고</a>]</sup> 단, 다음은 변수가 선언되었으나 정의되지 않은 예외를 나열한다:
 
 * 함수 전방선언
 * 함수 매개변수 선언
@@ -214,11 +209,7 @@ C/C++ 언어 [ISO 표준](https://github.com/cplusplus/draft)의 § 6.2 Declarat
 
 변수가 소스 코드 중에서 어디에 정의되었는지에 따라 지역 변수와 전역 변수로 구분된다. 
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;">
-<caption>C 언어의 지역 및 전역 변수</caption>
-<colgroup><col style="width: 50%;"/></col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">지역 변수</th><th style="text-align: center;">전역 변수</th></tr></thead>
-<tbody><tr><td>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption>C 언어의 지역 및 전역 변수</caption><colgroup><col style="width: 50%;"/></col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">지역 변수</th><th style="text-align: center;">전역 변수</th></tr></thead><tbody><tr><td>
 
 ```c
 int main () {
@@ -240,10 +231,7 @@ int main() {
     return 0;
 }
 ```
-</td></tr>
-<tr><td>블록 내부에서 정의된 변수이다. 지역 변수에 저장된 데이터는 블록 밖에서는 소멸되므로 외부에서 사용할 수 없다.</td><td>어떠한 블록에도 속하지 않은 외부에 정의된 변수이다. 전역 변수는 어느 블록에서라도 호출하여 지역 변수와 함께 사용할 수 있다.</td></tr>
-</tbody>
-</table>
+</td></tr><tr><td>블록 내부에서 정의된 변수이다. 지역 변수에 저장된 데이터는 블록 밖에서는 소멸되므로 외부에서 사용할 수 없다.</td><td>어떠한 블록에도 속하지 않은 외부에 정의된 변수이다. 전역 변수는 어느 블록에서라도 호출하여 지역 변수와 함께 사용할 수 있다.</td></tr></tbody></table>
 
 변수는 지정된 자료형 외의 데이터를 할당받을 수 있다. 아래 예시 코드는 문자 자료형 변수에 값 75로 초기화할 시, ASCII 코드에 의하여 대문자 'K'로 저장된다.
 
@@ -257,14 +245,7 @@ char variable = 75;    // ASCII에 의해 문자 'K'가 저장
 [연산자](https://ko.wikipedia.org/wiki/연산자_(프로그래밍))(operator)는 피연산 데이터를 조작할 수 있는 가장 간단한 형태의 연산 요소이다. 연산자는 피연산자의 접두부, 접미부, 혹은 두 데이터 사이에 위치시켜 사용한다. 가독성을 위해 데이터와 연산자 사이에 공백을 넣어도 연산에는 아무런 영향을 주지 않는다. 다음은 [C/C++ 연산자](https://ko.wikipedia.org/wiki/C와_C++의_연산자)들을 간략히 소개한다.
 
 ### 산술 연산자
-<table style="width: 85%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;"><a href="https://en.cppreference.com/w/cpp/language/operator_arithmetic">산술 연산자</a>(arithmetic operators)</caption>
-<colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup>
-<thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">산술</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody>
-<tr><td style="text-align: center;"><code>+</code></td><td style="text-align: center;">덧셈</td><td>좌측과 우측 피연산자의 값을 더하여 반환한다.</td></tr><tr><td style="text-align: center;"><code>-</code></td><td style="text-align: center;">뺄셈</td><td>좌측 피연산자에서 우측 피연산자를 뺀 값을 반환한다.</td></tr><tr><td style="text-align: center;"><code>*</code></td><td style="text-align: center;">덧셈</td><td>좌측 피연산자를 우측 피연산자의 값만큼 곱하여, 즉 반복 덧셈하여 반환한다.</td></tr><tr><td style="text-align: center;"><code>/</code></td><td style="text-align: center;">나눗셈</td><td>좌측 피연산자에서 우측 피연산자를 나눈 <a href="https://ko.wikipedia.org/wiki/몫">몫</a>을 반환한다.</td></tr><tr><td style="text-align: center;"><code>%</code></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/모듈러_산술">모듈러</a></td><td>좌측 피연산자에서 우측 피연산자를 나눈 <a href="https://ko.wikipedia.org/wiki/나머지">나머지</a>를 반환한다.</td></tr>
-</tbody>
-</table>
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://en.cppreference.com/w/cpp/language/operator_arithmetic">산술 연산자</a>(arithmetic operators)</caption><colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">산술</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>+</code></td><td style="text-align: center;">덧셈</td><td>좌측과 우측 피연산자의 값을 더하여 반환한다.</td></tr><tr><td style="text-align: center;"><code>-</code></td><td style="text-align: center;">뺄셈</td><td>좌측 피연산자에서 우측 피연산자를 뺀 값을 반환한다.</td></tr><tr><td style="text-align: center;"><code>*</code></td><td style="text-align: center;">덧셈</td><td>좌측 피연산자를 우측 피연산자의 값만큼 곱하여, 즉 반복 덧셈하여 반환한다.</td></tr><tr><td style="text-align: center;"><code>/</code></td><td style="text-align: center;">나눗셈</td><td>좌측 피연산자에서 우측 피연산자를 나눈 <a href="https://ko.wikipedia.org/wiki/몫">몫</a>을 반환한다.</td></tr><tr><td style="text-align: center;"><code>%</code></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/모듈러_산술">모듈러</a></td><td>좌측 피연산자에서 우측 피연산자를 나눈 <a href="https://ko.wikipedia.org/wiki/나머지">나머지</a>를 반환한다.</td></tr></tbody></table>
 
 ### 증감 연산자
 [증가 연산자](https://en.cppreference.com/w/cpp/language/operator_incdec)(increment operator) `++` 및 [감소 연산자](https://en.cppreference.com/w/cpp/language/operator_incdec)(decrement operator) `--`는 데이터를 1만큼 증가 혹은 감소하는데 간략하게 한 줄로 표현한다.
@@ -284,24 +265,12 @@ x = y--;  // 동일: { x = y; y = y - 1; }
 </td></tr></tbody></table>
 
 ### 비트 연산자
-<table style="width: 85%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;"><a href="https://en.wikipedia.org/wiki/Bitwise_operations_in_C">비트 연산자</a>(bitwise operators)</caption>
-<colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup>
-<thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">비트연산</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody>
-<tr><td style="text-align: center;"><code>&</code></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/비트_연산#AND">AND</a></td><td>두 피연산자의 각 비트를 비교하여 모두 1이면 1을, 아니면 0을 계산하여 반환한다.</td></tr><tr><td style="text-align: center;"><code>|</code></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/비트_연산#OR">OR</a></td><td>두 피연산자의 각 비트를 비교하여 하나라도 1이 있으면 1을, 아니면 0을 계산하여 반환한다.</td></tr><tr><td style="text-align: center;"><code>^</code></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/비트_연산#XOR">XOR</a></td><td>두 피연산자의 각 비트를 비교하여 값이 같으면 0을, 다르면 1을 계산하여 반환한다.</td></tr><tr><td style="text-align: center;"><code>~</code></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/비트_연산#NOT">NOT</a></td><td>피연산자의 각 비트마다 반전시킨 값을 반환한다.</td></tr><tr><td style="text-align: center;"><code>&lt;&lt;</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operations_in_C#Left_shift_%3C%3C">좌향 시프트</a></td><td>피연산자(左)의 비트를 전반적으로 일정 값(右)만큼 왼쪽으로 이동시킨다.</td></tr><tr><td style="text-align: center;"><code>&gt;&gt;</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operations_in_C#Right_shift_%3E%3E">우향 시프트</a></td><td>피연산자(左)의 비트를 전반적으로 일정 값(右)만큼 오른쪽으로 이동시킨다.</td></tr>
-</tbody>
-</table>
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://en.wikipedia.org/wiki/Bitwise_operations_in_C">비트 연산자</a>(bitwise operators)</caption><colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">비트연산</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>&</code></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/비트_연산#AND">AND</a></td><td>두 피연산자의 각 비트를 비교하여 모두 1이면 1을, 아니면 0을 계산하여 반환한다.</td></tr><tr><td style="text-align: center;"><code>|</code></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/비트_연산#OR">OR</a></td><td>두 피연산자의 각 비트를 비교하여 하나라도 1이 있으면 1을, 아니면 0을 계산하여 반환한다.</td></tr><tr><td style="text-align: center;"><code>^</code></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/비트_연산#XOR">XOR</a></td><td>두 피연산자의 각 비트를 비교하여 값이 같으면 0을, 다르면 1을 계산하여 반환한다.</td></tr><tr><td style="text-align: center;"><code>~</code></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/비트_연산#NOT">NOT</a></td><td>피연산자의 각 비트마다 반전시킨 값을 반환한다.</td></tr><tr><td style="text-align: center;"><code>&lt;&lt;</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operations_in_C#Left_shift_%3C%3C">좌향 시프트</a></td><td>피연산자(左)의 비트를 전반적으로 일정 값(右)만큼 왼쪽으로 이동시킨다.</td></tr><tr><td style="text-align: center;"><code>&gt;&gt;</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operations_in_C#Right_shift_%3E%3E">우향 시프트</a></td><td>피연산자(左)의 비트를 전반적으로 일정 값(右)만큼 오른쪽으로 이동시킨다.</td></tr></tbody></table>
 
 ### 할당 연산자
 단순 할당 연산자를 산술 및 비트 연산자와 조합하여 코드를 더욱 간결하게 작성할 수 있으며, 아래는 다양한 할당 연산자 중 일부만 보여준다.
 
-<table style="width: 85%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;"><a href="https://en.cppreference.com/w/cpp/language/operator_assignment">할당 연산자</a>(assignment operators)</caption>
-<colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup>
-<thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">할당</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody>
-<tr><td style="text-align: center;"><code>=</code></td><td style="text-align: center;">단순 할당</td><td>피연산자(右)가 <a href="#변수">변수</a>와 같은 피할당자(左)로 할당된 값을 반환한다.</td></tr><tr><td style="text-align: center;"><code>+=</code></td><td style="text-align: center;">덧셈 대입</td><td>
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://en.cppreference.com/w/cpp/language/operator_assignment">할당 연산자</a>(assignment operators)</caption><colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">할당</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>=</code></td><td style="text-align: center;">단순 할당</td><td>피연산자(右)가 <a href="#변수">변수</a>와 같은 피할당자(左)로 할당된 값을 반환한다.</td></tr><tr><td style="text-align: center;"><code>+=</code></td><td style="text-align: center;">덧셈 대입</td><td>
 
 ```c
 x += y;  // 동일: x = x + y;
@@ -321,33 +290,17 @@ x &= y;  // 동일: x = x & y;
 ```c
 x <<= y;  // 동일: x = x << y;
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 ### 비교 연산자
 아래 비교 연산자의 설명은 참을 반환할 조건을 소개하며, 그 외에는 모두 0을 반환한다.
 
-<table style="width: 85%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;"><a href="https://en.cppreference.com/w/cpp/language/operator_comparison">비교 연산자</a>(relational operators)</caption>
-<colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup>
-<thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">관계</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody>
-<tr><td style="text-align: center;"><code>&gt;</code></td><td style="text-align: center;">초과</td><td>좌측 피연산자가 우측 피연산자보다 크면 1을 반환한다.</td></tr><tr><td style="text-align: center;"><code>&lt;</code></td><td style="text-align: center;">미만</td><td>좌측 피연산자가 우측 피연산자보다 작으면 1을 반환한다.</td></tr><tr><td style="text-align: center;"><code>&gt;=</code></td><td style="text-align: center;">이상</td><td>좌측 피연산자가 우측 피연산자보다 크거나 같으면 1을 반환한다.</td></tr><tr><td style="text-align: center;"><code>&lt;=</code></td><td style="text-align: center;">이하</td><td>좌측 피연산자가 우측 피연산자보다 작거나 같으면 1을 반환한다.</td></tr><tr><td style="text-align: center;"><code>==</code></td><td style="text-align: center;">동일</td><td>두 피연산자의 값이 같으면 1을 반환한다.</td></tr><tr><td style="text-align: center;"><code>!=</code></td><td style="text-align: center;">상이</td><td>두 피연산자의 값이 같지 않으면 1을 반환한다.</td></tr>
-</tbody>
-</table>
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://en.cppreference.com/w/cpp/language/operator_comparison">비교 연산자</a>(relational operators)</caption><colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">관계</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>&gt;</code></td><td style="text-align: center;">초과</td><td>좌측 피연산자가 우측 피연산자보다 크면 1을 반환한다.</td></tr><tr><td style="text-align: center;"><code>&lt;</code></td><td style="text-align: center;">미만</td><td>좌측 피연산자가 우측 피연산자보다 작으면 1을 반환한다.</td></tr><tr><td style="text-align: center;"><code>&gt;=</code></td><td style="text-align: center;">이상</td><td>좌측 피연산자가 우측 피연산자보다 크거나 같으면 1을 반환한다.</td></tr><tr><td style="text-align: center;"><code>&lt;=</code></td><td style="text-align: center;">이하</td><td>좌측 피연산자가 우측 피연산자보다 작거나 같으면 1을 반환한다.</td></tr><tr><td style="text-align: center;"><code>==</code></td><td style="text-align: center;">동일</td><td>두 피연산자의 값이 같으면 1을 반환한다.</td></tr><tr><td style="text-align: center;"><code>!=</code></td><td style="text-align: center;">상이</td><td>두 피연산자의 값이 같지 않으면 1을 반환한다.</td></tr></tbody></table>
 
 ### 논리 연산자
 (논리 부정을 제외한) 아래 논리 연산자의 설명은 참을 반환할 조건을 소개하며, 그 외에는 모두 0을 반환한다.
 
-<table style="width: 85%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;"><a href="https://en.cppreference.com/w/cpp/language/operator_logical">논리 연산자</a>(logical operators)</caption>
-<colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/><col style="width: "/></colgroup>
-<thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">논리</th><th style="text-align: center;">설명 </th></tr></thead>
-<tbody>
-<tr><td style="text-align: center;"><code>&&</code></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/논리곱">논리곱</a></td><td>좌측 그리고 우측 <a href="https://ko.wikipedia.org/wiki/명제">명제</a>(피연산자)가 모두 참이면 1을 반환한다.</td></tr><tr><td style="text-align: center;"><code>||</code></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/논리합">논리합</a></td><td>좌측 또는 우측 명제(피연산자)가 하나라도 참이면 1을 반환한다.</td></tr><tr><td style="text-align: center;"><code>!</code></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/부정_(논리학)">부정</a></td><td>명제(피연산자)가 참이면 거짓으로, 혹은 그 반대로 반전된 값을 반환한다.</td></tr>
-</tbody>
-</table>
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://en.cppreference.com/w/cpp/language/operator_logical">논리 연산자</a>(logical operators)</caption><colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/><col style="width: "/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">논리</th><th style="text-align: center;">설명 </th></tr></thead><tbody><tr><td style="text-align: center;"><code>&&</code></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/논리곱">논리곱</a></td><td>좌측 그리고 우측 <a href="https://ko.wikipedia.org/wiki/명제">명제</a>(피연산자)가 모두 참이면 1을 반환한다.</td></tr><tr><td style="text-align: center;"><code>||</code></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/논리합">논리합</a></td><td>좌측 또는 우측 명제(피연산자)가 하나라도 참이면 1을 반환한다.</td></tr><tr><td style="text-align: center;"><code>!</code></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/부정_(논리학)">부정</a></td><td>명제(피연산자)가 참이면 거짓으로, 혹은 그 반대로 반전된 값을 반환한다.</td></tr></tbody></table>
 
 ## 탈출 문자
 [탈출 문자](https://ko.wikipedia.org/wiki/이스케이프_문자)(escape character)는 백슬래시 기호 `\`를 사용하며, [문자열](#문자열)로부터 탈출하여 텍스트 데이터 내에서 특정 연산을 수행하도록 한다. 예시에서 `\n` 탈출 문자를 사용하여 문자열 줄바꿈을 구현한 것을 보여주었다.
@@ -363,31 +316,21 @@ World!
 # 파일 입출력
 C 언어의 [파일 입출력](https://ko.wikipedia.org/wiki/C_파일_입출력)(일명 I/O)은 [`stdio.h`](https://en.cppreference.com/w/cpp/header/cstdio) 헤더로부터 관련 함수들을 호출할 수 있으며, 단순 파일뿐만 아니라 터미널로부터 텍스트를 입력받거나 출력할 때에도 관여한다. C 언어의 파일 입출력은 다른 프로그래밍 언어에 비해 신경써야 할 부분이 많아 별도의 장을 마련하여 소개한다.
 
-<table style="width: 85%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">C 언어의 파일 출력 함수</caption>
-<colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup>
-<thead><tr><th style="text-align: center;">출력 함수</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/io/putchar"><code>putchar</code></a></td><td>문자(character) 하나를 터미널에 출력한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/io/puts"><code>puts</code></a></td><td>일련의 문자들, 일명 <a href="#문자열">문자열</a>을 터미널에 출력한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/io/c/fprintf"><code>printf</code></a></td><td><a href="#형식-지정자">형식 지정자</a>에 따라 데이터를 터미널에 출력한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/io/c/fprintf"><code>fprintf</code></a></td><td><a href="https://ko.wikipedia.org/wiki/스트림_(컴퓨팅)">스트림</a>을 지정할 수 있는 출력 함수이다; <code>printf</code>는 "표준 출력" 스트림의 <code>fprintf(<a href="https://ko.wikipedia.org/wiki/표준_스트림#표준_출력_(stdout)">stdout</a>)</code>과 동일하다.
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C 언어의 파일 출력 함수</caption><colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup><thead><tr><th style="text-align: center;">출력 함수</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/io/putchar"><code>putchar</code></a></td><td>문자(character) 하나를 터미널에 출력한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/io/puts"><code>puts</code></a></td><td>일련의 문자들, 일명 <a href="#문자열">문자열</a>을 터미널에 출력한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/io/c/fprintf"><code>printf</code></a></td><td><a href="#형식-지정자">형식 지정자</a>에 따라 데이터를 터미널에 출력한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/io/c/fprintf"><code>fprintf</code></a></td><td><a href="https://ko.wikipedia.org/wiki/스트림_(컴퓨팅)">스트림</a>을 지정할 수 있는 출력 함수이다; <code>printf</code>는 "표준 출력" 스트림의 <code>fprintf(<a href="https://ko.wikipedia.org/wiki/표준_스트림#표준_출력_(stdout)">stdout</a>)</code>과 동일하다.
 
 ```c
 fprintf(stdout, "Number: %f", 3.14159);
 // Number: 3.141590
 ```
-</td></tr></tbody>
-</table>
+</td></tr></tbody></table>
 
-<table style="width: 85%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">C 언어의 파일 입력 함수</caption>
-<colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup>
-<thead><tr><th style="text-align: center;">입력 함수</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/io/getchar"><code>getchar</code></a></td><td>터미널로부터 문자(character) 하나를 입력받아 반환한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/io/gets"><code>gets</code></a></td><td>터미널로부터 입력받은 텍스트를 <a href="#문자열">문자열</a> 형태로 인자에 전달한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/io/c/fscanf"><code>scanf</code></a></td><td>터미널로부터 입력받은 텍스트를 <a href="#형식-지정자">형식 지정자</a>에 따른 자료형으로 변환하여 인자에 전달한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/io/c/fscanf"><code>fscanf</code></a></td><td><a href="https://ko.wikipedia.org/wiki/스트림_(컴퓨팅)">스트림</a>을 지정할 수 있는 입력 함수이다; <code>scanf</code>는 "표준 입력" 스트림의 <code>fscanf(<a href="https://ko.wikipedia.org/wiki/표준_스트림#표준_입력_(stdin)">stdin</a>)</code>과 동일하다.
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C 언어의 파일 입력 함수</caption><colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup><thead><tr><th style="text-align: center;">입력 함수</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/io/getchar"><code>getchar</code></a></td><td>터미널로부터 문자(character) 하나를 입력받아 반환한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/io/gets"><code>gets</code></a></td><td>터미널로부터 입력받은 텍스트를 <a href="#문자열">문자열</a> 형태로 인자에 전달한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/io/c/fscanf"><code>scanf</code></a></td><td>터미널로부터 입력받은 텍스트를 <a href="#형식-지정자">형식 지정자</a>에 따른 자료형으로 변환하여 인자에 전달한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/io/c/fscanf"><code>fscanf</code></a></td><td><a href="https://ko.wikipedia.org/wiki/스트림_(컴퓨팅)">스트림</a>을 지정할 수 있는 입력 함수이다; <code>scanf</code>는 "표준 입력" 스트림의 <code>fscanf(<a href="https://ko.wikipedia.org/wiki/표준_스트림#표준_입력_(stdin)">stdin</a>)</code>과 동일하다.
 
 ```c
 char variable[32];
 fscanf(stdin, "%s", variable);
 ```
-</td></tr></tbody>
-</table>
+</td></tr></tbody></table>
 
 > [스트림](https://ko.wikipedia.org/wiki/스트림_(컴퓨팅))(stream)이란 사전적 의미로 "물이 흐르는 개울"을 의미한다. 즉, 컴퓨터 통신 용어에서 스트림은 데이터가 흐르는 길을 의미한다.
 
@@ -396,12 +339,7 @@ fscanf(stdin, "%s", variable);
 ## 형식 지정자
 형식 지정자(format specifier)는 입출력 함수가 데이터를 어떻게 받아들일 것인지 결정한다. 이는 자료형 이외에도 [출력 함수](https://learn.microsoft.com/en-us/cpp/c-runtime-library/format-specification-syntax-printf-and-wprintf-functions)의 경우에는 화면에 어떻게 표시할 지, 그리고 [입력 함수](https://learn.microsoft.com/en-us/cpp/c-runtime-library/format-specification-fields-scanf-and-wscanf-functions)의 경우에는 입력된 데이터를 어떻게 수용할 지 등에 대하여 서식을 지정한다. 본 부문은 형식 지정자에 대한 개략적인 예시만을 소개한다.
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">입출력 함수의 형식 지정자</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">입력 함수</th><th style="text-align: center;">출력 함수</th></tr></thead>
-<tbody>
-<tr><td>본래 데이터의 성질이나 값이 변한다.</td><td>본래 데이터는 그대로 유지되나, 어떻게 표시되는지만 달라진다.</td></tr><tr><td>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">입출력 함수의 형식 지정자</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">입력 함수</th><th style="text-align: center;">출력 함수</th></tr></thead><tbody><tr><td>본래 데이터의 성질이나 값이 변한다.</td><td>본래 데이터는 그대로 유지되나, 어떻게 표시되는지만 달라진다.</td></tr><tr><td>
 
 ```c
 int variable = 0;
@@ -425,19 +363,12 @@ variable = 51 (char '3' equals to ASCII code 51)
 OUTPUT: 3
 variable = 51 (unchanged)
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 ## 파일 관리
 C 언어에서 파일을 열고 닫기 위해서는 각각 `fopen()` 및 `fclose()` 함수를 사용한다.
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">파일 입출력 및 모드 옵션</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 10%;"/><col style="width: 25%;"/><col style="width: 15%;"/></colgroup>
-<thead><tr><th style="text-align: center;">파일 관리 코드</th><th colspan="2" style="text-align: center;">파일 열기 옵션: <code>mode</code></th><th style="text-align: center;">부재시 생성 여부</th></tr></thead>
-<tbody>
-<tr><td rowspan="6">
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">파일 입출력 및 모드 옵션</caption><colgroup><col style="width: 50%;"/><col style="width: 10%;"/><col style="width: 25%;"/><col style="width: 15%;"/></colgroup><thead><tr><th style="text-align: center;">파일 관리 코드</th><th colspan="2" style="text-align: center;">파일 열기 옵션: <code>mode</code></th><th style="text-align: center;">부재시 생성 여부</th></tr></thead><tbody><tr><td rowspan="6">
 
 ```c
 FILE* fptr = fopen("filename.txt", mode);
@@ -446,14 +377,7 @@ FILE* fptr = fopen("filename.txt", mode);
 
 fclose(fptr);
 ```
-</td><td style="text-align: center;"><code>"r"</code></td><td>읽기 모드</td><td style="text-align: center;">❌</td></tr>
-<tr><td style="text-align: center;"><code>"w"</code></td><td>덮어쓰기 모드</td><td style="text-align: center;">⭕</td></tr>
-<tr><td style="text-align: center;"><code>"a"</code></td><td>덧붙이기 모드</td><td style="text-align: center;">⭕</td></tr>
-<tr><td style="text-align: center;"><code>"r+"</code></td><td>읽기 + 쓰기 모드</td><td style="text-align: center;">❌</td></tr>
-<tr><td style="text-align: center;"><code>"w+"</code></td><td>읽기 + 덮어쓰기 모드</td><td style="text-align: center;">⭕</td></tr>
-<tr><td style="text-align: center;"><code>"a+"</code></td><td>읽기 + 덧붙이기 모드</td><td style="text-align: center;">⭕</td></tr>
-</tbody>
-</table>
+</td><td style="text-align: center;"><code>"r"</code></td><td>읽기 모드</td><td style="text-align: center;">❌</td></tr><tr><td style="text-align: center;"><code>"w"</code></td><td>덮어쓰기 모드</td><td style="text-align: center;">⭕</td></tr><tr><td style="text-align: center;"><code>"a"</code></td><td>덧붙이기 모드</td><td style="text-align: center;">⭕</td></tr><tr><td style="text-align: center;"><code>"r+"</code></td><td>읽기 + 쓰기 모드</td><td style="text-align: center;">❌</td></tr><tr><td style="text-align: center;"><code>"w+"</code></td><td>읽기 + 덮어쓰기 모드</td><td style="text-align: center;">⭕</td></tr><tr><td style="text-align: center;"><code>"a+"</code></td><td>읽기 + 덧붙이기 모드</td><td style="text-align: center;">⭕</td></tr></tbody></table>
 
 [`fopen()`](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/fopen-wfopen) 함수는 파일을 성공적으로 열었을 때 파일 스트림 객체를 가리키는 `FILE` [자료형](#구조체) [포인터](#포인터)를 반환한다. 해당 포인터를 `fprintf()` 및 `fscanf()` 입출력 함수의 스트림으로 전달하면 파일을 작성하거나 읽어올 수 있다.
 
