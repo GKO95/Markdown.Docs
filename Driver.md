@@ -73,7 +73,7 @@ Pci.sys (Microsoft Virtual Disk의 경우, storvsc.sys) 드라이버가 PDO를 �
 1. **[입출력 스택 위치](#입출력-스택-위치)**
 
 ### 입출력 상태 블록
-**[입출력 상태 블록](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/i-o-status-blocks)**(I/O status block)는 IRP 헤더를 구성하는 요소 중 요청이 처리된 상태를 알리는 [IO_STATUS_BLOCK](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/ns-wdm-_io_status_block) 구조체이다.
+**[입출력 상태 블록](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/i-o-status-blocks)**(I/O status block)는 IRP 헤더를 구성하는 요소 중 요청이 처리된 상태를 알리는 [IO_STATUS_BLOCK](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/ns-wdm-_io_status_block) 구조체이다. IRP 처리가 완료되었을 시, I/O 상태 블록은 상위 계층의 *[IoCompletion](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nc-wdm-io_completion_routine)* 루틴에게 서비스가 성공적으로 실행되었는지 판단 기준 및 사유를 제공한다.
 
 ### 입출력 스택 위치
 [입출력 스택 위치](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/i-o-stack-locations)(I/O stack location)는 IRP 헤더 다음에 위치하는 [IO_STACK_LOCATION](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/ns-wdm-_io_stack_location) 구조체들의 집합이다. 해당 IRP에 관여하는 각 드라이버당 I/O 스택 위치가 하나씩 연쇄하여 드라이버 계층을 이루며, 안에는 드라이버가 수행해야 할 작업을 결정하는 데 사용되는 매개변수, [함수 코드](C.md#함수), 그리고 [컨텍스트](https://en.wikipedia.org/wiki/Context_(computing))를 포함한다.
