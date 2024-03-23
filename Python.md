@@ -3,21 +3,14 @@
 
 파이썬은 [인터프리트 언어](Interpreter.md)(interpreted language)이다. 버전은 크게 파이썬 2와 파이썬 3으로 분류되는데, 전자는 2020년 1월 1일부로 서비스가 종료되었다. 파이썬 1이라는 것도 존재하나, 가장 최신 버전 1.6.1이 2000년에 출시된 점을 고려하면 호환성과 실용성이 매우 떨어진다. 그러므로 본문은 파이썬 3을 위주로 프로그래밍을 설명한다.
 
-<table style="width: 80%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">파이썬 <code>X.Y.Z</code> 버전</caption>
-<colgroup><col style="width: 20%;"/><col style="width: 50%;"/><col style="width: 30%;"/></colgroup>
-<thead><tr><th style="text-align: center;">버전</th><th style="text-align: center;">설명</th><th style="text-align: center;">비고</th></tr></thead>
-<tbody><tr><td style="text-align: center;"><code>X</code> 메이저 버전</td><td>호환이 불가할 정도의 상당한 변화를 거친 업그레이드</td><td>파이썬 2와 3 분류</td></tr>
-<tr><td style="text-align: center;"><code>Y</code> 마이너 버전</td><td>새로운 기능이 추가될 때마다 증가하는 업데이트</td><td>마이너 버전 하위호환 보장</td></tr>
-<tr><td style="text-align: center;"><code>Z</code> 마이크로 버전</td><td>버그 수정 및 유지관리 패치</td><td>안정성 척도</td></tr></tbody>
-</table>
+<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">파이썬 <code>X.Y.Z</code> 버전</caption><colgroup><col style="width: 20%;"/><col style="width: 50%;"/><col style="width: 30%;"/></colgroup><thead><tr><th style="text-align: center;">버전</th><th style="text-align: center;">설명</th><th style="text-align: center;">비고</th></tr></thead><tbody><tr><td style="text-align: center;"><code>X</code> 메이저 버전</td><td>호환이 불가할 정도의 상당한 변화를 거친 업그레이드</td><td>파이썬 2와 3 분류</td></tr><tr><td style="text-align: center;"><code>Y</code> 마이너 버전</td><td>새로운 기능이 추가될 때마다 증가하는 업데이트</td><td>마이너 버전 하위호환 보장</td></tr><tr><td style="text-align: center;"><code>Z</code> 마이크로 버전</td><td>버그 수정 및 유지관리 패치</td><td>안정성 척도</td></tr></tbody></table>
 
 프로젝트에 활용될 [서드 파티](https://ko.wikipedia.org/wiki/서드_파티_개발자#서드파티) 라이브러리나 소프트웨어 연동에서 발생할 수 있는 호환성 문제를 사전에 방지하기 위해 인터프리터 버전을 신중히 선택해야 한다. 만일 단순히 프로그래밍 언어 공부가 목적이면 가장 최신 버전을 설치하여도 무방하다. 단, 인터프리터는 개발 환경 관리를 위해 버전 업데이트 기능이 자체적으로 결여되어 있다. 새로 출시된 버전을 설치하려면 해당 인터프리터를 별도로 설치해야 한다.
 
 아래는 대표적인 파이썬 인터프리터 일부를 나열한다.
 
 * [C파이썬](https://ko.wikipedia.org/wiki/C파이썬): [C](C.md) 프로그래밍 언어로 개발된 가장 널리 쓰이는 최초의 파이썬 인터프리터
-* [자이썬](https://ko.wikipedia.org/wiki/자이썬): [Java](ko.Java.md) 프로그래밍 언어로 개발된 파이썬 인터프리터
+* [자이썬](https://ko.wikipedia.org/wiki/자이썬): [Java](https://www.java.com/) 프로그래밍 언어로 개발된 파이썬 인터프리터
 * [아이언파이썬](https://ko.wikipedia.org/wiki/IronPython): [C#](Csharp.md) 프로그래밍 언어로 개발된 파이썬 인터프리터
 
 ## 설치
@@ -45,12 +38,7 @@
 
 ![파이썬 3 설치 프로그램 추가 설치 사항](./images/python_interpreter_optional.png)
 
-<table style="width: 60%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">파이썬 인터프리터 추가 설치 옵션</caption>
-<colgroup><col style="width: 30%;"/><col style="width: 70%;"/></colgroup>
-<thead><tr><th style="text-align: center;">옵션</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody>
-<tr><td style="text-align: center;">Documentation</td><td>파이썬 문서 파일</td></tr><tr><td style="text-align: center;"><a href="#pip">pip</a></td><td>파이썬 패키지 관리 소프트웨어</td></tr><tr><td style="text-align: center;">tcl/tk and IDLE</td><td>파이썬으로 프로그램 GUI 제작도구와 코드 편집기</td></tr><tr><td style="text-align: center;">Python test suite</td><td>파이썬 프로그램 동작을 시험하는 프레임워크</td></tr><tr><td style="text-align: center;">py launcher</td><td>파이썬 인터프리터 관리 프로그램</td></tr></tbody></table>
+<table style="width: 60%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">파이썬 인터프리터 추가 설치 옵션</caption><colgroup><col style="width: 30%;"/><col style="width: 70%;"/></colgroup><thead><tr><th style="text-align: center;">옵션</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;">Documentation</td><td>파이썬 문서 파일</td></tr><tr><td style="text-align: center;"><a href="#pip">pip</a></td><td>파이썬 패키지 관리 소프트웨어</td></tr><tr><td style="text-align: center;">tcl/tk and IDLE</td><td>파이썬으로 프로그램 GUI 제작도구와 코드 편집기</td></tr><tr><td style="text-align: center;">Python test suite</td><td>파이썬 프로그램 동작을 시험하는 프레임워크</td></tr><tr><td style="text-align: center;">py launcher</td><td>파이썬 인터프리터 관리 프로그램</td></tr></tbody></table>
 
 필자는 `pip`와 `py launcher`만은 반드시 설치한다. 나머지 옵션들은 사용하지 않으며, 사용자 인터페이스를 가진 프로그램을 만든다 하더라도 대표적인 GUI 프레임워크 중 하나인 [PySide2](https://en.wikipedia.org/wiki/PySide)를 사용하기 때문에 `tcl/tk`가 필요하지 않다. 코드 편집기 또한 IDLE보다 편한 것을 곧 소개할 예정이다.
 
@@ -117,13 +105,7 @@
 ### 주석
 [주석](https://peps.python.org/pep-0008/#comments)(comment)은 프로그램의 소스 코드로 취급하지 않아 실행되지 않는 영역이다. 흔히 코드에 대한 간단한 정보를 기입하기 위해 사용되는 데, 파이썬에는 두 가지의 주석이 존재한다.
 
-<table style="table-layout: fixed; width: 80%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">파이썬 주석 종류</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">블록 주석(block comment)</th><th style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Docstring">독스트링</a>(docstring)</th></tr></thead>
-<tbody>
-<tr><td>해시 기호 <code>#</code>로 표기되며 프로그램이 실행될 때 필터되는 주석이다.</td><td>세 쌍의 따옴표로 표기된 주석은 프로그램이 실행되는 <a href="https://ko.wikipedia.org/wiki/런타임">런타임</a>에도 유지된다.</td></tr>
-<tr style="vertical-align: top; overflow-wrap: break-word;"><td>
+<table style="table-layout: fixed; width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">파이썬 주석 종류</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">블록 주석(block comment)</th><th style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Docstring">독스트링</a>(docstring)</th></tr></thead><tbody><tr><td>해시 기호 <code>#</code>로 표기되며 프로그램이 실행될 때 필터되는 주석이다.</td><td>세 쌍의 따옴표로 표기된 주석은 프로그램이 실행되는 <a href="https://ko.wikipedia.org/wiki/런타임">런타임</a>에도 유지된다.</td></tr><tr style="vertical-align: top; overflow-wrap: break-word;"><td>
 
 ```python
 # 블록 주석:
@@ -137,9 +119,7 @@
 정의된 데이터에 간랸한 설명을 기입한다.
 """
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 일반 주석과 달리, 사용자가 정의한 데이터에 기입된 독스트링은 `__doc__`이란 특수한 변수에 저장되어 디버깅 과정에서도 정의된 데이터에 대한 설명을 확인할 수 있는 용도로 사용된다. 이를 기반으로 IDE 및 텍스트 편집기는 아래 사진처럼 데이터를 정의한 소스 코드를 찾아가지 않고서도 곧바로 내용을 살펴볼 수 있다.
 
@@ -158,12 +138,7 @@
 
     출력 함수가 실행될 시, `print()`의 소괄호 `()` 안에 있는 데이터가 터미널에 나타난다.
 
-<table style="table-layout: fixed; width: 80%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">파이썬 콘솔 입출력 예시</caption>
-<colgroup><col style="width: 50%;"><col style="width: 50%;"></colgroup>
-<thead><tr><th style="text-align: center;">일반적인 문장</th><th style="text-align: center;">간결화된 문장</th></tr></thead>
-<tbody>
-<tr style="vertical-align: top; overflow-wrap: break-word;"><td>
+<table style="table-layout: fixed; width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">파이썬 콘솔 입출력 예시</caption><colgroup><col style="width: 50%;"><col style="width: 50%;"></colgroup><thead><tr><th style="text-align: center;">일반적인 문장</th><th style="text-align: center;">간결화된 문장</th></tr></thead><tbody><tr style="vertical-align: top; overflow-wrap: break-word;"><td>
 
 ```python
 variable = input("입력: ")
@@ -181,9 +156,7 @@ print("출력:", input("입력: "))
 입력: Hello World!
 출력: Hello World!
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 하나의 `print()` 함수에서 두 개 이상의 데이터를 한꺼번에 출력하려면 쉼표 `,`를 사용하여 연속적으로 데이터를 나열할 수 있다. 단, 각 쉼표가 위치한 곳에는 항상 공백이 놓여진다. 그 외의 다른 방법은 [문자열 자료형](#문자열-자료형)을 설명하는 부분에서 소개한다.
 
@@ -255,12 +228,7 @@ NameError: name 'variable' is not defined
 ### 숫자 자료형
 [숫자 자료형](https://docs.python.org/3/library/stdtypes.html?#numeric-types-int-float-complex)(numeric data type)은 숫자로 표현되는 데이터들을 가리키며, 총 세 가지로 세분화된다.
 
-<table style="table-layout: fixed; width: 75%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">파이썬 숫자 자료형</caption>
-<colgroup><col/><col/><col/></colgroup>
-<thead><tr><th style="text-align: center;"><a href="https://docs.python.org/3/library/functions.html#int"><code>int</code></a></th><th style="text-align: center;"><a href="https://docs.python.org/3/library/functions.html#float"><code>float</code></a></th><th style="text-align: center;"><a href="https://docs.python.org/3/library/functions.html#complex"><code>complex</code></a></th></tr></thead>
-<tbody><tr style="text-align: center;"><td>소수점이 없는 정수</td><td>소수점을 포한한 64비트 실수</td><td>실수와 허수로 구성된 복소수</td></tr></tbody>
-</table>
+<table style="table-layout: fixed; width: 75%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">파이썬 숫자 자료형</caption><colgroup><col/><col/><col/></colgroup><thead><tr><th style="text-align: center;"><a href="https://docs.python.org/3/library/functions.html#int"><code>int</code></a></th><th style="text-align: center;"><a href="https://docs.python.org/3/library/functions.html#float"><code>float</code></a></th><th style="text-align: center;"><a href="https://docs.python.org/3/library/functions.html#complex"><code>complex</code></a></th></tr></thead><tbody><tr style="text-align: center;"><td>소수점이 없는 정수</td><td>소수점을 포한한 64비트 실수</td><td>실수와 허수로 구성된 복소수</td></tr></tbody></table>
 
 위의 숫자 자료형들은 산술 연산이 가능하다: 가장 기본적인 `+`, `-`, `*`, `/` 사칙 연산자부터 나눗셈의 몫 `//`과 나머지 `%` 그리고 제곱 `**`을 구할 수 있다. 산술 연산을 쉽게 읽을 수 있도록 숫자와 산술 연산자 사이에 공백을 넣어도 연산에는 아무런 영향을 주지 않으므로 무관한다.
 
@@ -271,12 +239,7 @@ NameError: name 'variable' is not defined
 ### 논리 자료형
 [논리 자료형](https://docs.python.org/3/library/stdtypes.html?#boolean-operations-and-or-not)(Boolean data type)은 문장이 참인지 거짓인지 판별하는 논리 조건에 사용되는 데이터 유형이다.
 
-<table style="table-layout: fixed; width: 75%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">파이썬 숫자 자료형</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;"><a href="https://docs.python.org/3/library/constants.html#True"><code>True</code></a></th><th style="text-align: center;"><a href="https://docs.python.org/3/library/constants.html#False"><code>False</code></a></th></tr></thead>
-<tbody><tr style="text-align: center;"><td>논리가 참일 때 반환; 0이 아닌 정수로 대체 가능</td><td>논리가 거짓일 때 반환; 정수 0으로 대체 가능</td></tr></tbody>
-</table>
+<table style="table-layout: fixed; width: 75%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">파이썬 숫자 자료형</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;"><a href="https://docs.python.org/3/library/constants.html#True"><code>True</code></a></th><th style="text-align: center;"><a href="https://docs.python.org/3/library/constants.html#False"><code>False</code></a></th></tr></thead><tbody><tr style="text-align: center;"><td>논리가 참일 때 반환; 0이 아닌 정수로 대체 가능</td><td>논리가 거짓일 때 반환; 정수 0으로 대체 가능</td></tr></tbody></table>
 
 대표적인 논리 조건으로써 두 데이터를 대조하는 [비교 연산자](https://docs.python.org/3/library/stdtypes.html?#comparisons)(relational operator)가 있다: 초과 `>`와 미만 `<`, 이상 `>=`과 이하 `<=`, 그리고 동일 `==`와 다름 `!=` 관계 부합 여부에 따라 논리적 참 혹은 거짓이 반환된다. 혹은 일치 여부를 확인하는 `is` 연산자와 같이 기호가 아닌 단어일 수도 있다.
 
@@ -293,12 +256,7 @@ NameError: name 'variable' is not defined
 
 문자열 객체는 다른 데이터와 더하기 기호 `+`를 통해 공백없이 하나의 문자열로 연결할 수 있다. 문자열 간에만 사용할 수 있으므로 숫자 및 논리 자료형은 문자열로 변환해야 한다. 그 외에도 파이썬 3.6부터 추가된 접두사 `f`를 갖는 [서식화된 문자열 리터럴](https://docs.python.org/3/reference/lexical_analysis.html#f-strings)(formatted string literal), 일명 f-문자열에서 중괄호 `{}`를 통해 원하는 위치에 곧바로 데이터 삽입이 가능하다.
 
-<table style="table-layout: fixed; width: 80%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">파이썬 문자열 연결 및 서식화</caption>
-<colgroup><col style="width: 50%;"><col style="width: 50%;"></colgroup>
-<thead><tr><th style="text-align: center;">문자열 연결</th><th style="text-align: center;">서식화된 문자열 리터럴</th></tr></thead>
-<tbody>
-<tr style="vertical-align: top;"><td>
+<table style="table-layout: fixed; width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">파이썬 문자열 연결 및 서식화</caption><colgroup><col style="width: 50%;"><col style="width: 50%;"></colgroup><thead><tr><th style="text-align: center;">문자열 연결</th><th style="text-align: center;">서식화된 문자열 리터럴</th></tr></thead><tbody><tr style="vertical-align: top;"><td>
 
 ```python
 A, B = 10.0, 파이썬
@@ -317,9 +275,7 @@ print(f"A는 {A},\n그리고 B는 {B}이다.")
 A는 10.0,
 그리고 B는 파이썬이다.
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 > 세 쌍의 따옴표는 다중 문자열 객체를 생성하며, 이는 단순히 Enter/Return 키를 눌러 줄바꿈이 가능하다.
 >
@@ -360,34 +316,25 @@ None
 ## 자료형 변환
 파이썬 프로그래밍 언어는 데이터를 타 자료형으로 변환할 수 있는 함수를 제공한다.
 
-<table style="width: 80%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">파이썬 자료형 변환</caption>
-<colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup>
-<thead><tr><th style="text-align: center;">자료형 변환</th><th style="text-align: center;">예시</th></tr></thead>
-<tbody>
-<tr>
-<td style="text-align: center;">정수 변환<br/><a href="https://docs.python.org/3/library/functions.html#int"><code>int()</code></a></td><td>
+<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">파이썬 자료형 변환</caption><colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup><thead><tr><th style="text-align: center;">자료형 변환</th><th style="text-align: center;">예시</th></tr></thead><tbody><tr><td style="text-align: center;">정수 변환<br/><a href="https://docs.python.org/3/library/functions.html#int"><code>int()</code></a></td><td>
 
 ```python
 print(int(3.14))        # 출력: 3 (정수만 반환; 반올림 아님)
 print(int("7"))         # 출력: 7 (실수나 문자 포함 시 변환 불가)
 ```
-</td></tr>
-<tr><td style="text-align: center;">실수 변환<br/><a href="https://docs.python.org/3/library/functions.html#float"><code>float()</code></a></td><td>
+</td></tr><tr><td style="text-align: center;">실수 변환<br/><a href="https://docs.python.org/3/library/functions.html#float"><code>float()</code></a></td><td>
 
 ```python
 print(float(7))         # 출력: 7.0
 print(float("3.14"))    # 출력: 3.14 (문자 포함 시 변환 불가)
 ```
-</td></tr>
-<tr><td style="text-align: center;">문자열 변환<br/><a href="https://docs.python.org/3/library/stdtypes.html#str"><code>str()</code></a></td><td>
+</td></tr><tr><td style="text-align: center;">문자열 변환<br/><a href="https://docs.python.org/3/library/stdtypes.html#str"><code>str()</code></a></td><td>
 
 ```python
 print(str(7))           # 출력: '7'
 print(str(3.14))        # 출력: '3.14'
 ```
-</td></tr></tbody>
-</table>
+</td></tr></tbody></table>
 
 ## 들여쓰기
 [들여쓰기](https://www.python.org/dev/peps/pep-0008/#indentation)(indentation)는 문장이나 [함수](#함수)(function), [클래스](#클래스)(class) 코드의 경계를 표시하는데 사용된다. 이를 통해 코드가 조건문 혹은 반복문에 속하는지, 또는 어느 조건문 혹은 반복문의 코드인지 구분한다. 들여쓰기는 콜론 `:`이 시작되는 이후부터 삽입되며 [탭](https://ko.wikipedia.org/wiki/Tab_키)(tab)이나 띄어쓰기 2칸 혹은 4칸으로 표현된다.
@@ -646,10 +593,7 @@ variable[1] = "Hello World!"   # IndexError: list assignment index out of range
 
 리스트는 특정 연산자를 통해 항목을 추가하거나 반복시킬 수 있다. 아래의 연산은 리스트 객체에만 제한되지 않으며, 차후에 소개될 다른 시퀀스 객체에도 적용이 가능하다.
 
-<table style="width: 80%; margin-left: auto; margin-right: auto;">
-<colgroup><col style="width: 33.3%;"/><col style="width: 33.3%;"/><col style="width: 33.3%;"/></colgroup>
-<thead><tr><th style="text-align: center;">시퀀스 연결</th><th style="text-align: center;">시퀀스 반복</th><th style="text-align: center;">시퀀스 항목 여부</th></tr></thead>
-<tbody><tr><td>
+<table style="width: 80%; margin-left: auto; margin-right: auto;"><colgroup><col style="width: 33.3%;"/><col style="width: 33.3%;"/><col style="width: 33.3%;"/></colgroup><thead><tr><th style="text-align: center;">시퀀스 연결</th><th style="text-align: center;">시퀀스 반복</th><th style="text-align: center;">시퀀스 항목 여부</th></tr></thead><tbody><tr><td>
 
 ```python
 [1, 2] + [2, 3, 4]
@@ -667,8 +611,7 @@ variable[1] = "Hello World!"   # IndexError: list assignment index out of range
 2 in [1, 2, 3]
 # 결과: True
 ```
-</td></tr></tbody>
-</table>
+</td></tr></tbody></table>
 
 ### 리스트 컴프리헨션
 [리스트 컴프리헨션](https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions)(list comprehension)은 `for` 반복문 (그리고 [`if`](#if-조건문) 조건문)을 활용한 프로그램적 규칙에 따라 리스트를 생성한다.
@@ -751,14 +694,7 @@ print(variable[0])              # TypeError: 'variable' object is not subscripta
 
 집합 객체 연산자는 수학의 [집합](https://ko.wikipedia.org/wiki/집합)에서 사용되는 연산과 동일하게 작용한다.
 
-<table style="width: 60%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">집합 객체 연산자</caption>
-<colgroup><col style="width: 15%;"/><col style="width: 15%;"/><col style="width: 70;"/></colgroup>
-<thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">명칭</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody>
-<tr><td style="text-align: center;"><code>|</code></td><td style="text-align: center;">합집합</td><td>두 집합의 합을 반환한다.</td></tr><tr><td style="text-align: center;"><code>&</code></td><td style="text-align: center;">교집합</td><td>두 집합에 존재하는 요소만 반환한다.</td></tr><tr><td style="text-align: center;"><code>-</code></td><td style="text-align: center;">여집합</td><td>피감수 집합에만 존재하며 감수 집합에 없는 요소를 반환한다.</td></tr><tr><td style="text-align: center;"><code>^</code></td><td style="text-align: center;">대칭차</td><td>한 집합에는 존재하나 둘 다 속하지 않는 요소를 반환한다.</td></tr>
-</tbody>
-</table>
+<table style="width: 60%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">집합 객체 연산자</caption><colgroup><col style="width: 15%;"/><col style="width: 15%;"/><col style="width: 70;"/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">명칭</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>|</code></td><td style="text-align: center;">합집합</td><td>두 집합의 합을 반환한다.</td></tr><tr><td style="text-align: center;"><code>&</code></td><td style="text-align: center;">교집합</td><td>두 집합에 존재하는 요소만 반환한다.</td></tr><tr><td style="text-align: center;"><code>-</code></td><td style="text-align: center;">여집합</td><td>피감수 집합에만 존재하며 감수 집합에 없는 요소를 반환한다.</td></tr><tr><td style="text-align: center;"><code>^</code></td><td style="text-align: center;">대칭차</td><td>한 집합에는 존재하나 둘 다 속하지 않는 요소를 반환한다.</td></tr></tbody></table>
 
 ## 제너레이터 함수
 [제너레이터](https://docs.python.org/3/glossary.html#term-generator)(generator)는 [`yield`](https://docs.python.org/3/reference/simple_stmts.html#yield) 키워드와 반복문을 통해 요소들을 프로그램적으로 직접 생성할 수 있는 [함수](#함수)이다. 요소들이 메모리에 저장되는 것이 아니라 코드를 통해 생성되는 것이기 때문에, 제너레이터 함수는 메모리 제한이 없는 점에서 무한한 개수의 데이터를 담을 수 있는 이점을 가진다.
@@ -815,11 +751,7 @@ function()
 
 함수명 뒤에 소괄호 `()` 기입 여부에 따라 의미하는 바가 다르다:
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">함수 식별자의 호출 방식에 따른 차이</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;"><code>function()</code> 호출</th><th style="text-align: center;"><code>function</code> 호출</th></tr></thead>
-<tbody><tr><td>함수에 정의된 코드를 실행한다.</td><td>함수 자체를 가리키며, 정의된 코드를 실행하지 않는다.</td></tr><tr style="vertical-align: top;"><td>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">함수 식별자의 호출 방식에 따른 차이</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;"><code>function()</code> 호출</th><th style="text-align: center;"><code>function</code> 호출</th></tr></thead><tbody><tr><td>함수에 정의된 코드를 실행한다.</td><td>함수 자체를 가리키며, 정의된 코드를 실행하지 않는다.</td></tr><tr style="vertical-align: top;"><td>
 
 ```python
 def function():
@@ -848,9 +780,7 @@ Hello World!
 ```terminal
 반환: <function function at 0x0000027FB6A57160>
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 ### 지역 변수 및 전역 변수
 파이썬 프로그래밍 언어에서 변수가 코드 중에서 어디에 정의되었는지에 따라 두 가지의 종류로 구분된다.
@@ -910,13 +840,7 @@ Hello World!
 
 다음은 매개변수에 사용되는 연산자로 전달인자을 받는데 유연성을 제공한다. 이들은 프로그래밍 구문상 명확한 구별이 가능해야 하므로 반드시 일반 매개변수 뒤에 위치해야 한다.
 
-<table style="width: 100%; margin-left: auto; margin-right: auto;">
-<caption>파이썬 함수의 매개변수 활용</caption>
-<colgroup><col style="width: 33.3%;"/><col style="width: 33.3%;"/><col style="width: 33.3%;"/></colgroup>
-<thead><tr><th style="text-align: center;"><code>arg =  value</code></th><th style="text-align: center;"><code>*args</code></th><th style="text-align: center;"><code>**kwargs</code></th></tr></thead>
-<tbody><tr>
-<td>전달인자가 없으면 기본값 <code>value</code>가 대신 매개변수에 할당된다.</td><td><a href="#시퀀스-언패킹">시퀀스 언패킹</a>으로 여러 개의 전달인자들을 하나의 튜플로 전달받는다.</td><td><a href="#딕셔너리 언패킹">딕셔너리 언패킹</a>으로 여러 개의 <code>key = value</code> 형식 전달인자들을 하나의 딕셔너리로 전달받는다.</td>
-</tr><tr style="vertical-align: top;"><td>
+<table style="width: 100%; margin-left: auto; margin-right: auto;"><caption>파이썬 함수의 매개변수 활용</caption><colgroup><col style="width: 33.3%;"/><col style="width: 33.3%;"/><col style="width: 33.3%;"/></colgroup><thead><tr><th style="text-align: center;"><code>arg =  value</code></th><th style="text-align: center;"><code>*args</code></th><th style="text-align: center;"><code>**kwargs</code></th></tr></thead><tbody><tr><td>전달인자가 없으면 기본값 <code>value</code>가 대신 매개변수에 할당된다.</td><td><a href="#시퀀스-언패킹">시퀀스 언패킹</a>으로 여러 개의 전달인자들을 하나의 튜플로 전달받는다.</td><td><a href="#딕셔너리 언패킹">딕셔너리 언패킹</a>으로 여러 개의 <code>key = value</code> 형식 전달인자들을 하나의 딕셔너리로 전달받는다.</td></tr><tr style="vertical-align: top;"><td>
 
 ```python
 def function(arg = "Python"):
@@ -958,8 +882,7 @@ Hello World!
 ```terminal
 {arg1: 3, arg2: 'ABC'}
 ```
-</td></tr></tbody>
-</table>
+</td></tr></tbody></table>
 
 ## 람다 표현식
 [람다 표현식](https://docs.python.org/3/tutorial/controlflow.html#lambda-expressions)(lambda expression), 일명 람다 함수(lambda function) 혹은 익명 함수(anonymous function)는 이름이 없는 (즉, 익명) 함수로써 단일 표현식으로만 값을 반환한다. 익명 함수는 `lambda` 키워드로 생성되어 흔히 일회용 함수 또는 [고차 함수](#고차-함수)의 전달인자로 사용된다. 비록 식별자가 필요하지 않는 익명 함수일지라도, 람다 표현식은 재호출을 위해 일반 함수처럼 식별자를 가질 수 있다.
@@ -1201,12 +1124,7 @@ print(CLASS.method(2, 3, 1))
 ## 매직 메소드
 [매직 메소드](https://docs.python.org/3/reference/datamodel.html#special-method-names)(magic method)는 특수한 목적을 가진 메소드로 식별자 양측에 던더(dunder; double underscore)가 있는 게 특징이다. 대표적으로 객체 초기화를 위한 `__init__()` 메소드가 있으며, 그 외에도 [연산자 오버로딩](#연산자-오버로딩)에 흔히 사용된다.
 
-<table style="width: 40%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">연산자의 매직 메소드</caption>
-<colgroup><col style="width: 20%;"/><col style="width: 25%;"/><col style="width: 55%;"/></colgroup>
-<thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">명칭</th><th style="text-align: center;">매직 메소드</th></tr></thead>
-<tbody><tr><td style="text-align: center;"><code>+</code></td><td>산술: 덧셈</td><td><code>__add__(self, arg)</code></td></tr><tr><td style="text-align: center;"><code>-</code></td><td>산술: 뺄셈</td><td><code>__sub__(self, arg)</code></td></tr><tr><td style="text-align: center;"><code>*</code></td><td>산술: 곱셉</td><td><code>__mul__(self, arg)</code></td></tr><tr><td style="text-align: center;"><code>/</code></td><td>산술: 나눗셈</td><td><code>__truediv__(self, arg)</code></td></tr><tr><td style="text-align: center;"><code>&</code></td><td>논리: AND</td><td><code>__and__(self, arg)</code></td></tr><tr><td style="text-align: center;"><code>|</code></td><td>논리: OR</td><td><code>__or__(self, arg)</code></td></tr><tr><td style="text-align: center;"><code>^</code></td><td>논리: XOR</td><td><code>__xor__(self, arg)</code></td></tr><tr><td style="text-align: center;"><code>()</code></td><td>인자호출</td><td><code>__call__(self, arg)</code></td></tr></tbody>
-</table>
+<table style="width: 40%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">연산자의 매직 메소드</caption><colgroup><col style="width: 20%;"/><col style="width: 25%;"/><col style="width: 55%;"/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">명칭</th><th style="text-align: center;">매직 메소드</th></tr></thead><tbody><tr><td style="text-align: center;"><code>+</code></td><td>산술: 덧셈</td><td><code>__add__(self, arg)</code></td></tr><tr><td style="text-align: center;"><code>-</code></td><td>산술: 뺄셈</td><td><code>__sub__(self, arg)</code></td></tr><tr><td style="text-align: center;"><code>*</code></td><td>산술: 곱셉</td><td><code>__mul__(self, arg)</code></td></tr><tr><td style="text-align: center;"><code>/</code></td><td>산술: 나눗셈</td><td><code>__truediv__(self, arg)</code></td></tr><tr><td style="text-align: center;"><code>&</code></td><td>논리: AND</td><td><code>__and__(self, arg)</code></td></tr><tr><td style="text-align: center;"><code>|</code></td><td>논리: OR</td><td><code>__or__(self, arg)</code></td></tr><tr><td style="text-align: center;"><code>^</code></td><td>논리: XOR</td><td><code>__xor__(self, arg)</code></td></tr><tr><td style="text-align: center;"><code>()</code></td><td>인자호출</td><td><code>__call__(self, arg)</code></td></tr></tbody></table>
 
 ### 연산자 오버로딩
 [연산자 오버로딩](https://ko.wikipedia.org/wiki/연산자_오버로딩)(operator overloading)은 특정 클래스에서 연산자가 어떻게 동작할 지 정의하는 작업이다. 이를 위해 매직 메소드가 사용되며, 오버로드된 연산자는 해당 클래스에서만 적용된다.
@@ -1322,13 +1240,7 @@ print(instance.method(2, 3))
 ## 프로퍼티
 [프로퍼티](https://docs.python.org/3/library/functions.html#property)(property)는 하나의 속성을 getter, setter, 그리고 deleter 영역으로 나누어 [데이터 숨기기](https://en.wikipedia.org/wiki/Information_hiding)(data hiding)을 지원한다.
 
-<table style="width: 70%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">프로퍼티의 데코레이터 및 설명</caption>
-<colgroup><col style="width: 15%;"/><col style="width: 30%;"/><col style="width: 55%;"/></colgroup>
-<thead><tr><th style="text-align: center;">프로퍼티</th><th style="text-align: center;">데코레이터</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody>
-<tr><td style="text-align: center;">Getter</td><td><code>@property</code></td><td>프로퍼티로부터 값을 반환받는 맴버이다.</td></tr><tr><td style="text-align: center;">Setter</td><td><code>@&lt;프로퍼티명&gt;.setter</code></td><td>프로퍼티의 값을 설정하는 맴버이다.</td></tr><tr><td style="text-align: center;">Deleter</td><td><code>@&lt;프로퍼티명&gt;.deleter</td><td>프로퍼티가 제거될 때 실행되는 맴버이다.</td></tr></tbody>
-</table>
+<table style="width: 70%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">프로퍼티의 데코레이터 및 설명</caption><colgroup><col style="width: 15%;"/><col style="width: 30%;"/><col style="width: 55%;"/></colgroup><thead><tr><th style="text-align: center;">프로퍼티</th><th style="text-align: center;">데코레이터</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;">Getter</td><td><code>@property</code></td><td>프로퍼티로부터 값을 반환받는 맴버이다.</td></tr><tr><td style="text-align: center;">Setter</td><td><code>@&lt;프로퍼티명&gt;.setter</code></td><td>프로퍼티의 값을 설정하는 맴버이다.</td></tr><tr><td style="text-align: center;">Deleter</td><td><code>@&lt;프로퍼티명&gt;.deleter</td><td>프로퍼티가 제거될 때 실행되는 맴버이다.</td></tr></tbody></table>
 
 속성을 나누므로써 수정되어서는 안될 민감한 코드를 setter 및 deleter 영역에 숨기고 getter만을 통해서 데이터를 반환한다. 정의된 형태는 메소드와 유사하지만 실제로 사용할 때는 소괄호 `()` 없이 속성처럼 사용된다. 프로퍼티의 setter와 deleter는 선택사항이지만, getter는 반드시 정의되어야 한다.
 
@@ -1394,12 +1306,7 @@ except:               # 예외 유형: 모든 유형의 예외 처리
 
 다음은 `try`-`except` 예외 처리문 쌍을 보조하는 문장이며, 이들은 선택사항이다.
 
-<table style="width: 70%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">예외 처리문에 사용될 수 있는 키워드</caption>
-<colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup>
-<thead><tr><th style="text-align: center;">키워드</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody><tr><td style="text-align: center;"><a href="#else-조건문"><code>else</code></a></td><td><code>try</code> 문에서 예외가 발생하지 않으면 실행되는 코드를 포함한다.</td></tr><tr><td style="text-align: center;"><a href="https://docs.python.org/3/reference/compound_stmts.html#finally"><code>fianlly</code></a></td><td><code>try</code> 문에서 예외가 발생 여부와 무관하게 마지막에 반드시 실행되는 코드를 포함한다.</td></tr></tbody>
-</table>
+<table style="width: 70%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">예외 처리문에 사용될 수 있는 키워드</caption><colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup><thead><tr><th style="text-align: center;">키워드</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="#else-조건문"><code>else</code></a></td><td><code>try</code> 문에서 예외가 발생하지 않으면 실행되는 코드를 포함한다.</td></tr><tr><td style="text-align: center;"><a href="https://docs.python.org/3/reference/compound_stmts.html#finally"><code>fianlly</code></a></td><td><code>try</code> 문에서 예외가 발생 여부와 무관하게 마지막에 반드시 실행되는 코드를 포함한다.</td></tr></tbody></table>
 
 ## `raise` 문
 [`raise`](https://docs.python.org/3/reference/simple_stmts.html#raise) 문은 의도적으로 예외를 발생시키는데 사용된다. 자체 제작 [함수](#함수)나 [클래스](#클래스)에서 설계되지 않은 방식으로 접근하거나 사용하려는 경우, 해당 문으로 오류를 일으켜서 프로세스 실행을 즉시 중단시키는 용도로 활용된다.
@@ -1547,11 +1454,7 @@ for variable in file:
 마지막 줄은 어딘가에.
 ```
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">파일 쓰기 모드 비교</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">덮어쓰기 모드: <code>W</code></th><th style="text-align: center;">덧붙여 쓰기 모드: <code>A</code></th></tr></thead>
-<tbody><tr><td>기존의 모든 내용들을 삭제하여 처음부터 새로 작성한다.</td><td>기존의 모든 내용들을 유지한 채 맨 끝 단락에서부터 작성한다.</td></tr><tr style="vertical-align: top;"><td>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">파일 쓰기 모드 비교</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">덮어쓰기 모드: <code>W</code></th><th style="text-align: center;">덧붙여 쓰기 모드: <code>A</code></th></tr></thead><tbody><tr><td>기존의 모든 내용들을 삭제하여 처음부터 새로 작성한다.</td><td>기존의 모든 내용들을 유지한 채 맨 끝 단락에서부터 작성한다.</td></tr><tr style="vertical-align: top;"><td>
 
 ```python
 with open("path\\filename.txt", "w") as file:
@@ -1577,20 +1480,14 @@ with open("path\\filename.txt", "a") as file:
 두 번째 줄은 저기에.
 마지막 줄은 어딘가에.텍스트 덧붙여 쓰기!
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 성공적으로 파일 작성을 완료하였으면 `write()` 메소드는 작성된 내용의 바이트 개수를 반환한다.
 
 # 모듈
 [모듈](https://docs.python.org/3/tutorial/modules.html)(module)은 부가적인 기능 및 데이터를 제공하는 파이썬 소스 코드이며, 이들은 일반 스크립트와 마찬가지로 `.PY` 확장자를 갖는다. 파이썬 모듈로부터 [변수](#변수), [함수](#함수), 그리고 [클래스](#클래스)를 불러올 수 있다:
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">파이썬 모듈 불러오기</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;"><a href="https://docs.python.org/3/reference/simple_stmts.html#the-import-statement"><code>import</code></a> 키워드</th><th style="text-align: center;"><a href="https://docs.python.org/3/reference/simple_stmts.html#from"><code>from</code></a> 키워드</th></tr></thead>
-<tbody><tr><td>기입된 모듈에 정의된 모든 데이터와 코드를 불러온다.</td><td>기입된 모듈로부터 <code>import</code> 키워드를 통해 원하는 데이터나 코드를 선택적으로, 혹은 <code>*</code> <a href="https://ko.wikipedia.org/wiki/와일드카드_문자">와일드카드 문자</a>로 전부 불러온다.</td></tr><tr style="vertical-align: top;"><td>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">파이썬 모듈 불러오기</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;"><a href="https://docs.python.org/3/reference/simple_stmts.html#the-import-statement"><code>import</code></a> 키워드</th><th style="text-align: center;"><a href="https://docs.python.org/3/reference/simple_stmts.html#from"><code>from</code></a> 키워드</th></tr></thead><tbody><tr><td>기입된 모듈에 정의된 모든 데이터와 코드를 불러온다.</td><td>기입된 모듈로부터 <code>import</code> 키워드를 통해 원하는 데이터나 코드를 선택적으로, 혹은 <code>*</code> <a href="https://ko.wikipedia.org/wiki/와일드카드_문자">와일드카드 문자</a>로 전부 불러온다.</td></tr><tr style="vertical-align: top;"><td>
 
 ```python
 # 모듈 불러오기
@@ -1608,9 +1505,7 @@ from module import variable, function, classes
 # 모듈에 정의된 함수 호출
 function()
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 불러온 모듈이나 변수, 함수, 그리고 클래스는 `as` 키워드를 통해 별칭을 지정할 수 있다. 이는 복잡하거나 긴 모듈명을 간단한 이름으로 호출하거나, 혹은 기존 데이터의 식별자와 중첩하여 발생할 수 있는 네이밍 충돌 문제를 방지하기 위해 사용된다.
 
@@ -1652,12 +1547,7 @@ import package.module
 ### pip
 [pip](https://pip.pypa.io/en/stable/)는 파이썬 패키지 관리 소프트웨어이며 기본적으로 파이썬 인터프리터와 함께 설치된다. [GUI](https://ko.wikipedia.org/wiki/그래픽_사용자_인터페이스) 프로그램이 아니므로 패키지 설치 및 관리는 [명령 프롬프트](https://ko.wikipedia.org/wiki/Cmd.exe) 또는 [파워셸](https://ko.wikipedia.org/wiki/파워셸)과 같은 [터미널](https://ko.wikipedia.org/wiki/명령_줄_인터페이스)에서 처리되어야 한다.
 
-<table style="width: 50%; margin-left: auto; margin-right: auto;">
-<caption><code>pip</code> 명령어</caption>
-<colgroup><col style="width: 20%;"/><col style="width: 30%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">옵션</th><th style="text-align: center;">설명</th><th style="text-align: center;">예시</th></tr></thead>
-<tbody><tr><td style="text-align: center;"><code>install</code></td><td>패키지 설치</td><td><code>pip install &lt;패키지&gt;</code></td></tr><tr><td style="text-align: center;"><code>uninstall</code></td><td>패키지 제거</td><td><code>pip uninstall &lt;패키지&gt;</code></td></tr><tr><td style="text-align: center;"><code>list</code></td><td>설치된 패키지 나열</td><td><code>pip list</code></td></tr></tbody>
-</table>
+<table style="width: 50%; margin-left: auto; margin-right: auto;"><caption><code>pip</code> 명령어</caption><colgroup><col style="width: 20%;"/><col style="width: 30%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">옵션</th><th style="text-align: center;">설명</th><th style="text-align: center;">예시</th></tr></thead><tbody><tr><td style="text-align: center;"><code>install</code></td><td>패키지 설치</td><td><code>pip install &lt;패키지&gt;</code></td></tr><tr><td style="text-align: center;"><code>uninstall</code></td><td>패키지 제거</td><td><code>pip uninstall &lt;패키지&gt;</code></td></tr><tr><td style="text-align: center;"><code>list</code></td><td>설치된 패키지 나열</td><td><code>pip list</code></td></tr></tbody></table>
 
 [윈도우 OS](https://ko.wikipedia.org/wiki/마이크로소프트_윈도우)에서 pip를 사용할 경우, 단독적인 `pip`가 아닌 `python -m pip` 명령어를 사용하는 것을 권장한다(macOS 및 리눅스 제외). 이는 컴퓨터 환경설정에서 지정된 파이썬 인터프리터의 pip를 접속한다는 것을 의미하므로 인터프리터 간의 패키지 관리에 혼돈을 줄일 수 있다.
 
@@ -1687,13 +1577,7 @@ py -m venv .venv
 
 가상환경에 패키지를 설치하려면 사용 중인 [터미널](https://ko.wikipedia.org/wiki/명령_줄_인터페이스)에 가상환경을 활성시켜야 한다. 가상환경을 활성화하지 않은 채 패키지를 설치하면 시스템 전역의 인터프리터에 패키지를 설치하게 된다.
 
-<table style="width: 90%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">터미널에 따른 가상환경 활성/비활성 명령</caption>
-<colgroup><col style="width: 10%;"/><col style="width: 30%;"/><col style="width: 30%;"/><col style="width: 30%;"/></colgroup>
-<thead><tr><th/><th style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/Cmd.exe">명령 프롬프트</a></th><th style="text-align: center;"><a href="PowerShell.md">파워셸</a></th><th style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/배시_(유닉스_셸)">Bash</a></th></tr></thead>
-<tbody><tr>
-<td style="text-align: center;">활성</td>
-<td>
+<table style="width: 90%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">터미널에 따른 가상환경 활성/비활성 명령</caption><colgroup><col style="width: 10%;"/><col style="width: 30%;"/><col style="width: 30%;"/><col style="width: 30%;"/></colgroup><thead><tr><th/><th style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/Cmd.exe">명령 프롬프트</a></th><th style="text-align: center;"><a href="PowerShell.md">파워셸</a></th><th style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/배시_(유닉스_셸)">Bash</a></th></tr></thead><tbody><tr><td style="text-align: center;">활성</td><td>
 
 ```terminal
 .venv\Scripts\activate.bat
@@ -1708,15 +1592,11 @@ py -m venv .venv
 ```bash
 source .venv/bin/activate
 ```
-</td>
-</tr><tr>
-<td style="text-align: center;">비활성</td><td colspan="3">
+</td></tr><tr><td style="text-align: center;">비활성</td><td colspan="3">
 
 ```terminal
 deactivate
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 여기서 가상환경 비활성화에 입력한 명령은 `.venv\Scripts\deactivate`를 실행하는 것과 동일하다. 만일 프로젝트 경로를 다른 위치로 옮기면 `deactivate` 명령어가 동작하지 않아 손수 경로를 찾아 `deactivate` 파일을 실행해야 한다.
