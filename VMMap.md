@@ -40,17 +40,7 @@ VMMap은 선택된 단 하나의 프로세스에서 커널 공간을 제외한 �
 
     > 힙 메모리 관리자 또는 [.NET](https://ko.wikipedia.org/wiki/닷넷) 런타임으로부터 할당된 메모리는 별도 메모리 유형으로 분류된다.
 
-<table style="width: 70%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">개인 메모리 하위 유형</caption>
-<colgroup><col style="width: 25%;"/><col style="width: 75%;"/></colgroup>
-<thead><tr><th style="text-align: center;">개인 메모리</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody>
-<tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/동적_메모리_할당#힙_영역">힙</a><br/>(Heap)</td><td><a href="https://www.ibm.com/docs/en/i/7.2?topic=memory-heap-manager">힙 관리자</a>(Heap Manager)로부터 관리되며, 흔히 <a href="https://ko.wikipedia.org/wiki/런타임_라이브러리">C 런타임 라이브러리</a>(CRT)의 <a href="https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/malloc"><code>malloc</code></a> 또는 윈도우 API의 <a href="https://learn.microsoft.com/en-us/windows/win32/api/heapapi/nf-heapapi-heapalloc"><code>HeapAlloc</code></a> 및 <a href="https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-localalloc"><code>LocalAlloc</code></a> 등으로 할당받는다.</td></tr>
-<tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/쓰레기_수집_(컴퓨터_과학)">관리된 힙</a><br/>(Managed Heap)</td><td>.NET <a href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/">가비지 컬렉터</a>(garbage collector)로부터 할당 및 사용되는 메모리이다.</td></tr>
-<tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/콜_스택">스택</a><br/>(Stack)</td><td>개별 <a href="Process.md#스레드">스레드</a>마다 함수의 매개변수, 변수, 그리고 함수의 호출이 기록되하며 필요에 따라 용량이 커질 수 있다.</td></tr>
-<tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/페이지_테이블">페이지 테이블</a><br/>(Page Table)</td><td>프로세스의 페이지 정보를 관리하는 커널 모드의 워킹 세트 메모리이다.</td></tr>
-</tbody>
-</table>
+<table style="width: 70%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">개인 메모리 하위 유형</caption><colgroup><col style="width: 25%;"/><col style="width: 75%;"/></colgroup><thead><tr><th style="text-align: center;">개인 메모리</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/동적_메모리_할당#힙_영역">힙</a><br/>(Heap)</td><td><a href="https://www.ibm.com/docs/en/i/7.2?topic=memory-heap-manager">힙 관리자</a>(Heap Manager)로부터 관리되며, 흔히 <a href="https://ko.wikipedia.org/wiki/런타임_라이브러리">C 런타임 라이브러리</a>(CRT)의 <a href="https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/malloc"><code>malloc</code></a> 또는 윈도우 API의 <a href="https://learn.microsoft.com/en-us/windows/win32/api/heapapi/nf-heapapi-heapalloc"><code>HeapAlloc</code></a> 및 <a href="https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-localalloc"><code>LocalAlloc</code></a> 등으로 할당받는다.</td></tr><tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/쓰레기_수집_(컴퓨터_과학)">관리된 힙</a><br/>(Managed Heap)</td><td>.NET <a href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/">가비지 컬렉터</a>(garbage collector)로부터 할당 및 사용되는 메모리이다.</td></tr><tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/콜_스택">스택</a><br/>(Stack)</td><td>개별 <a href="Process.md#스레드">스레드</a>마다 함수의 매개변수, 변수, 그리고 함수의 호출이 기록되하며 필요에 따라 용량이 커질 수 있다.</td></tr><tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/페이지_테이블">페이지 테이블</a><br/>(Page Table)</td><td>프로세스의 페이지 정보를 관리하는 커널 모드의 워킹 세트 메모리이다.</td></tr></tbody></table>
 
 * **공유 가능한(Shareable)**
 
@@ -60,14 +50,7 @@ VMMap은 선택된 단 하나의 프로세스에서 커널 공간을 제외한 �
 
     아래는 공유 가능한 메모리에 속하는 하위 유형의 메모리들을 소개한다:
 
-<table style="width: 70%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">굥유 가능한 메모리 하위 유형</caption>
-<colgroup><col style="width: 25%;"/><col style="width: 75%;"/></colgroup>
-<thead><tr><th style="text-align: center;">공유 가능한 메모리</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody>
-<tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/메모리_맵_파일">매핑된 파일</a><br/>(Mapped File)</td><td>디스크에 있는 파일들을 나태낸 메모리이다. 상세 항목에서 해당 파일의 경로를 확인할 수 있다.</td></tr>
-</tbody>
-</table>
+<table style="width: 70%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">굥유 가능한 메모리 하위 유형</caption><colgroup><col style="width: 25%;"/><col style="width: 75%;"/></colgroup><thead><tr><th style="text-align: center;">공유 가능한 메모리</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/메모리_맵_파일">매핑된 파일</a><br/>(Mapped File)</td><td>디스크에 있는 파일들을 나태낸 메모리이다. 상세 항목에서 해당 파일의 경로를 확인할 수 있다.</td></tr></tbody></table>
 
 * **이미지(Image)**
 
