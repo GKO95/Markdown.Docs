@@ -175,7 +175,7 @@ A는 10.0 ,
 > [탈출 문자](https://ko.wikipedia.org/wiki/이스케이프_문자)(escape character)는 백슬래시 기호 `\`를 사용하여 문자열로부터 탈출해 텍스트 내에서 특정 연산을 수행한다: `\n` 탈출 문자를 사용하여 문자열 줄바꿈을 구현한다.
 
 ## 변수
-변수(variable)는 할당 기호 `=`를 사용하여 데이터를 할당(assignment)받을 수 있는 저장공간이다. 아래 예시는 `variable`이란 식별자의 변수에 숫자 3을 할당한다. 시스템 관점에서 바라보면 `variable`이란 이름에 숫자 3이란 데이터를 엮는 절차를 [네임 바인딩](https://docs.python.org/3/reference/executionmodel.html#naming-and-binding)(name binding)이라고 하며, 비로서 해당 식별자가 변수로 "정의(definition)"되었다고 한다.
+변수(variable)는 [네임 바인딩](https://docs.python.org/3/reference/executionmodel.html#naming-and-binding) 기법을 통해 엮인 데이터를 접근하는 [식별자](#식별자)이며, 간단히 설명하자면 데이터에 이름을 붙인 것이다. 아래 코드는 상수 3의 데이터를 `variable`이란 식별자로 호출하도록 하며, 비로서 해당 식별자가 변수로 "정의(definition)"되었다고 한다.
 
 ```python
 # 변수 "variable"의 정의
@@ -187,12 +187,10 @@ variable = 3
 ```python
 variable
 print(variable)
-```
-```terminal
-NameError: name 'variable' is not defined
+# NameError: name 'variable' is not defined
 ```
 
-> 이러한 언어적 특징은 [C](C.md#변수)/[C++](Cpp.md#변수)와 같은 타 프로그래밍에서 자주 인용되는 "선언(declaration)" 및 "초기화(initialization)"란 용어가 파이썬 공식 문서에서 드믈게 언급된다.
+* [C](C.md#변수)/[C++](Cpp.md#변수)와 같은 타 프로그래밍에서 자주 인용되는 "선언(declaration)" 및 "초기화(initialization)"란 용어가 파이썬 공식 문서에서 매우 드믈게 언급된다.
 
 거의 모든 프로그래밍 언어는 할당 기호를 기준으로 왼쪽에는 피할당자(변수), 오른쪽에는 할당자(데이터 혹은 변수)가 위치한다. 반대로 놓여질 경우, 오류가 발생하거나 원치 않는 결과가 도출될 수 있다. 파이썬의 변수는 기존과 다른 유형의 데이터를 언제든지 새로 할당받을 수 있다.
 
