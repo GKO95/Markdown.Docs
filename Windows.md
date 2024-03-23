@@ -45,6 +45,6 @@
 # 관리 프로그램
 다음은 시스템 상태를 모니터링 및 관리할 수 있는 프로그램을 나열한다.
 
-* [성능 모니터](Performance_Monitor.md)
+* [성능 모니터](Perfmon.md)
 * [이벤트 뷰어](Event_Viwer.md)
 * [파워셸](PowerShell.md)

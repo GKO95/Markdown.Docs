@@ -27,7 +27,7 @@
 ![비주얼 스튜디오의 프로젝트 속성 중 IMAGE_FILE_LARGE_ADDRESS_AWARE 플래그](./images/process_large_addresses.png)
 
 ## 시스템 프로세스
-시스템 프로세스(system processes)는 운영체제 구동을 위해 반드시 존재하는 프로세스들을 가리킨다. 이들은 작업 관리자의 *세부 정보* 탭이나 [프로세스 탐색기](Process_Explorer.md)를 통해 직접 확인이 가능하다.
+시스템 프로세스(system processes)는 운영체제 구동을 위해 반드시 존재하는 프로세스들을 가리킨다. 이들은 작업 관리자의 *세부 정보* 탭이나 [프로세스 탐색기](Procexp.md)를 통해 직접 확인이 가능하다.
 
 * **[유휴 프로세스](https://en.wikipedia.org/wiki/System_Idle_Process)**(Idle process)
 

@@ -5,7 +5,7 @@
 
 <ul><li><dl><b>시스템 기본 프로그램</b><ul><li><a href="WER.md">Windows Error Reporting</a></li><li><a href="https://ko.wikipedia.org/wiki/작업_관리자">작업 관리자</a></li></ul></dl></li>
 <li><dl><b>설치 프로그램</b><ul><li><a href="WinDbg.md">WinDbg</a></li><li><a href="https://www.microsoft.com/en-us/download/details.aspx?id=103453">Debug Diagnostic Tool v2</a></li></ul></dl></li>
-<li><dl><b><a href="Sysinternals.md">Sysinternals</a></b><ul><li><a href="ProcDump.md">ProcDump</a></li><li><a href="Process_Monitor.md">프로세스 탐색기</a></li></ul></dl></li></ul>
+<li><dl><b><a href="Sysinternals.md">Sysinternals</a></b><ul><li><a href="ProcDump.md">ProcDump</a></li><li><a href="Procmon.md">프로세스 탐색기</a></li></ul></dl></li></ul>
 
 다음은 사용자 모드 덤프의 [종류](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/user-mode-dump-files)를 소개하며, 덤프 수집에 필요한 설정은 위에서 언급한 프로그램 문서를 참고하도록 한다.
 

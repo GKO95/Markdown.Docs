@@ -28,7 +28,7 @@
 
 * [Tracelog](https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/tracelog)
 * [TraceView](https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/traceview)
-* [Logman](Performance_Monitor.md#logman)
+* [Logman](Perfmon.md#logman)
 * [Windows Performance Recorder](WPR.md) (또는 [Xperf](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-8.1-and-8/hh162920(v=win.10)))
 
 ## 추적 세션
