@@ -106,7 +106,7 @@ cargo new <프로젝트명>
 
 다음은 러스트 프로그래밍 언어에서 구문에 관여하는 요소들을 소개한다:
 
-* **[표현식](https://ko.wikipedia.org/wiki/식_(프로그래밍))(expression)**
+* **[표현식](https://en.wikipedia.org/wiki/Expression_(computer_science))(expression)**
     
     값을 반환하는 구문적 존재를 가리킨다. 표현식에 대한 결과를 도출하는 것을 평가(evaluate)라고 부른다.
     
@@ -124,13 +124,24 @@ cargo new <프로젝트명>
     2               // 정수 리터럴
     ```
 
-* **[문장](https://ko.wikipedia.org/wiki/문_(프로그래밍))(statement)**
+* **[문장](https://en.wikipedia.org/wiki/Statement_(computer_science))(statement)**
     
     실질적으로 무언가를 실행하는 구문적 존재를 가리킨다: 흔히 하나 이상의 표현식으로 구성되지만, [`break`](#break-문) 및 [`continue`](#continue-문)와 같이 독립적으로 사용되는 문장도 있다. 러스트 프로그래밍 언어는 [세미콜론](https://ko.wikipedia.org/wiki/새줄_문자)(semicolon) `;`을 기준으로 문장을 분별한다. 
 
     ```rust
     let variable = 2 + 3;      // 숫자 5를 "variable" 변수에 초기화
     if 2 < 3 { statement; }    // 논리가 참이면 "statement" 문장 실행
+    ```
+
+* **[블록](https://en.wikipedia.org/wiki/Block_(programming))(block)**
+
+    한 개 이상의 문장들을 한꺼번에 관리할 수 있도록 묶어놓은 소스 코드상 그룹이다. 블록 안에 또 다른 블록이 상주할 수 있으며, 이를 네스티드 블록(nested block)이라고 부른다. 러스트에서는 한 쌍의 중괄호 `{}`로 표시된다.
+
+    ```rust
+    {
+        let variable = 2 + 3;
+        if 2 < 3 { statement; }
+    }
     ```
 
 ### 식별자
@@ -187,7 +198,7 @@ u16             // 표현 가능 범위:     +0 ~ +65535
 그 외의 자료형들은 차후 러스트 프로그래밍 언어에 대한 개념을 소개하면서 함께 설명할 예정이다.
 
 ### 자료형 변환
-자료형 변환(type conversion)은 데이터를 다른 자료형으로 바꾸는 작업이며, 불가피하게 데이터가 손실될 수 있으므로 유의하도록 한다. 러스트는 일반적으로 [강제 변환](https://doc.rust-lang.org/reference/type-coercions.html)(coercion)이란 암시적 자료형 변환을 지원하지 않으며, 자동 변환은 오로지 특정 위치의 코드에서 제한된 자료형에만 국한된다.
+[자료형 변환](https://doc.rust-lang.org/reference/expressions/operator-expr.html#type-cast-expressions)(type conversion)은 데이터를 다른 자료형으로 바꾸는 작업이며, 불가피하게 데이터가 손실될 수 있으므로 유의하도록 한다. 러스트는 일반적으로 [강제 변환](https://doc.rust-lang.org/reference/type-coercions.html)(coercion)이란 암시적 자료형 변환을 지원하지 않으며, 자동 변환은 오로지 특정 위치의 코드에서 제한된 자료형에만 국한된다.
 
 * **[자료형 캐스팅](https://doc.rust-lang.org/reference/expressions/operator-expr.html#type-cast-expressions)**(type casting)
 
@@ -240,3 +251,55 @@ let variable: u8 = 3;
 
 ## 연산자
 [연산자](https://en.wikipedia.org/wiki/Operator_(computer_programming))(operator)는 피연산 데이터를 조작할 수 있는 가장 간단한 형태의 연산 요소이다. 연산자는 피연산자의 접두부, 접미부, 혹은 두 데이터 사이에 위치시켜 사용한다. 가독성을 위해 데이터와 연산자 사이에 공백을 넣어도 연산에는 아무런 영향을 주지 않는다. 다음은 [러스트 연산자](https://doc.rust-lang.org/book/appendix-02-operators.html)들을 간략히 소개한다.
+
+### 산술 연산자
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://doc.rust-lang.org/reference/expressions/operator-expr.html#arithmetic-and-logical-binary-operators">산술 연산자</a>(arithmetic operators)</caption><colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">산술</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/ops/trait.Add.html"><code>+</code></a></td><td style="text-align: center;">덧셈</td><td>좌측과 우측 피연산자의 값을 더하여 반환한다.</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/ops/trait.Sub.html"><code>-</code></a></td><td style="text-align: center;">뺄셈</td><td>좌측 피연산자에서 우측 피연산자를 뺀 값을 반환한다.</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/ops/trait.Mul.html"><code>*</code></a></td><td style="text-align: center;">덧셈</td><td>좌측 피연산자를 우측 피연산자의 값만큼 곱하여, 즉 반복 덧셈하여 반환한다.</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/ops/trait.Div.html"><code>/</code></a></td><td style="text-align: center;">나눗셈</td><td>좌측 피연산자에서 우측 피연산자를 나눈 <a href="https://en.wikipedia.org/wiki/Quotient">몫</a>을 반환한다.</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/ops/trait.Rem.html"><code>%</code></a></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Modular_arithmetic">모듈러</a></td><td>좌측 피연산자에서 우측 피연산자를 나눈 <a href="https://en.wikipedia.org/wiki/Remainder">나머지</a>를 반환한다.</td></tr></tbody></table>
+
+### 비트 연산자
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://en.wikipedia.org/wiki/Bitwise_operation">비트 연산자</a>(bitwise operators)</caption><colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">비트연산</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/ops/trait.BitAnd.html"><code>&</code></a></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operation#AND">AND</a></td><td>두 피연산자의 각 비트를 비교하여 모두 1이면 1을, 아니면 0을 계산하여 반환한다.</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/ops/trait.BitOr.html"><code>|</code></a></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operation#OR">OR</a></td><td>두 피연산자의 각 비트를 비교하여 하나라도 1이 있으면 1을, 아니면 0을 계산하여 반환한다.</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/ops/trait.BitXor.html"><code>^</code></a></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operation#XOR">XOR</a></td><td>두 피연산자의 각 비트를 비교하여 값이 같으면 0을, 다르면 1을 계산하여 반환한다.</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/ops/trait.Not.html"><code>!</code></a></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operation#NOT">NOT</a></td><td>피연산자의 각 비트마다 반전시킨 값을 반환한다.</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/ops/trait.Shl.html"><code>&lt;&lt;</code></a></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operations_in_C#Left_shift_%3C%3C">좌향 시프트</a></td><td>피연산자(左)의 비트를 전반적으로 일정 값(右)만큼 왼쪽으로 이동시킨다.</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/ops/trait.Shr.html"><code>&gt;&gt;</code></a></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operations_in_C#Right_shift_%3E%3E">우향 시프트</a></td><td>피연산자(左)의 비트를 전반적으로 일정 값(右)만큼 오른쪽으로 이동시킨다.</td></tr></tbody></table>
+
+### 할당 연산자
+단순 할당 연산자를 산술 및 비트 연산자와 조합하여 코드를 더욱 간결하게 작성할 수 있으며, 아래는 다양한 할당 연산자 중 일부만 보여준다.
+
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://doc.rust-lang.org/reference/expressions/operator-expr.html#compound-assignment-expressions">할당 연산자</a>(assignment operators)</caption><colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">할당</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/reference/expressions/operator-expr.html#basic-assignments"><code>=</code></a></td><td style="text-align: center;">단순 할당</td><td>피연산자(右)가 <a href="#변수">변수</a>와 같은 피할당자(左)로 할당된 값을 반환한다.</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/ops/trait.AddAssign.html"><code>+=</code></a></td><td style="text-align: center;">덧셈 대입</td><td>
+
+```rust
+x += y;  // 동일: x = x + y;
+```
+</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/ops/trait.MulAssign.html"><code>*=</code></a></td><td style="text-align: center;">곱셈 대입</td><td>
+
+```rust
+x *= y;  // 동일: x = x * y;
+```
+</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/ops/trait.BitAndAssign.html"><code>&=</code></a></td><td style="text-align: center;">AND 대입</td><td>
+
+```rust
+x &= y;  // 동일: x = x & y;
+```
+</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/ops/trait.ShlAssign.html"><code>&lt;&lt;=</code></a></td><td style="text-align: center;">좌향 시프트 대입</td><td>
+
+```rust
+x <<= y;  // 동일: x = x << y;
+```
+</td></tr></tbody></table>
+
+### 비교 연산자
+아래 비교 연산자의 설명은 참을 반환할 조건을 소개하며, 그 외에는 모두 0을 반환한다.
+
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://doc.rust-lang.org/reference/expressions/operator-expr.html#comparison-operators">비교 연산자</a>(comparison operators)</caption><colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">관계</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>&gt;</code></td><td style="text-align: center;">초과</td><td>좌측 피연산자가 우측 피연산자보다 크면 1을 반환한다.</td></tr><tr><td style="text-align: center;"><code>&lt;</code></td><td style="text-align: center;">미만</td><td>좌측 피연산자가 우측 피연산자보다 작으면 1을 반환한다.</td></tr><tr><td style="text-align: center;"><code>&gt;=</code></td><td style="text-align: center;">이상</td><td>좌측 피연산자가 우측 피연산자보다 크거나 같으면 1을 반환한다.</td></tr><tr><td style="text-align: center;"><code>&lt;=</code></td><td style="text-align: center;">이하</td><td>좌측 피연산자가 우측 피연산자보다 작거나 같으면 1을 반환한다.</td></tr><tr><td style="text-align: center;"><code>==</code></td><td style="text-align: center;">동일</td><td>두 피연산자의 값이 같으면 1을 반환한다.</td></tr><tr><td style="text-align: center;"><code>!=</code></td><td style="text-align: center;">상이</td><td>두 피연산자의 값이 같지 않으면 1을 반환한다.</td></tr></tbody></table>
+
+### 논리 연산자
+(논리 부정을 제외한) 아래 논리 연산자의 설명은 참을 반환할 조건을 소개하며, 그 외에는 모두 0을 반환한다.
+
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://doc.rust-lang.org/reference/expressions/operator-expr.html#lazy-boolean-operators">논리 연산자</a>(logical operators)</caption><colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/><col style="width: "/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">논리</th><th style="text-align: center;">설명 </th></tr></thead><tbody><tr><td style="text-align: center;"><code>&&</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Logical_conjunction">논리곱</a></td><td>좌측 그리고 우측 <a href="https://en.wikipedia.org/wiki/Proposition">명제</a>(피연산자)가 모두 참이면 1을 반환한다.</td></tr><tr><td style="text-align: center;"><code>||</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Logical_disjunction">논리합</a></td><td>좌측 또는 우측 명제(피연산자)가 하나라도 참이면 1을 반환한다.</td></tr><tr><td style="text-align: center;"><code>!</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Negation">부정</a></td><td>명제(피연산자)가 참이면 거짓으로, 혹은 그 반대로 반전된 값을 반환한다.</td></tr></tbody></table>
+
+## 탈출 문자
+[탈출 문자](https://en.wikipedia.org/wiki/Escape_character)(escape character)는 백슬래시 기호 `\`를 사용하며, [문자열](#문자열)로부터 탈출하여 텍스트 데이터 내에서 특정 연산을 수행하도록 한다. 예시에서 `\n` 탈출 문자를 사용하여 문자열 줄바꿈을 구현한 것을 보여주었다.
+
+```rust
+println!("Hello,\nWorld!");
+```
+```terminal
+Hello,
+World!
+```
