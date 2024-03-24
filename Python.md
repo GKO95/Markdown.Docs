@@ -159,7 +159,7 @@ print("출력:", input("입력: "))
 </td></tr></tbody></table>
 
 ### 탈출 문자
-[탈출 문자](https://ko.wikipedia.org/wiki/이스케이프_문자)(escape character)는 백슬래시 기호 `\`를 사용하여 [문자열](#문자열-자료형)로부터 탈출해 텍스트 내에서 특정 연산을 수행한다: `\n` 탈출 문자를 사용하여 문자열 줄바꿈을 구현한다.
+[탈출 문자](https://en.wikipedia.org/wiki/Escape_character)(escape character)는 백슬래시 기호 `\`를 사용하여 [문자열](#문자열-자료형)로부터 탈출해 텍스트 내에서 특정 연산을 수행한다: `\n` 탈출 문자를 사용하여 문자열 줄바꿈을 구현한다.
 
 ```python
 print("Hello,\nWorld!")
