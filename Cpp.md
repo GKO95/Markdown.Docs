@@ -240,7 +240,7 @@ char variable = 75;    // ASCII에 의해 문자 'K'가 저장
 거의 모든 프로그래밍 언어는 할당 기호를 기준으로 왼쪽에는 피할당자(변수), 오른쪽에는 피할당자로 전달하려는 표현식(값 혹은 데이터)이 위치한다. 반대로 놓여질 경우, 오류가 발생하거나 원치 않는 결과가 도출될 수 있다.
 
 ## 네임스페이스
-[네임스페이스](https://ko.wikipedia.org/wiki/이름공간)(namespace)는 식별자의 유일성을 보장하기 위한 [영역범위](https://learn.microsoft.com/en-us/cpp/cpp/scope-visual-cpp)(scope)를 설정하여 데이터를 분류 공간이다. `namespace` 키워드를 통해 네임스페이스를 지정하고 블록 안에 변수, 함수, 클래스 등의 데이터들이 선언될 수 있다. 네임스페이스 안에 선언된 데이터들은 범위지정 연산자(scope resolution operator) `::`를 통해 호출이 가능하다.
+[네임스페이스](https://en.wikipedia.org/wiki/Namespace)(namespace)는 식별자의 유일성을 보장하기 위한 [영역범위](https://learn.microsoft.com/en-us/cpp/cpp/scope-visual-cpp)(scope)를 설정하여 데이터를 분류 공간이다. `namespace` 키워드를 통해 네임스페이스를 지정하고 블록 안에 변수, 함수, 클래스 등의 데이터들이 선언될 수 있다. 네임스페이스 안에 선언된 데이터들은 범위지정 연산자(scope resolution operator) `::`를 통해 호출이 가능하다.
 
 ```cpp
 // 네임스페이스 및 변수 선언
@@ -281,7 +281,7 @@ std::cout << "Hello World!" << endl;
 </td></tr></tbody></table>
 
 ## 연산자
-[연산자](https://ko.wikipedia.org/wiki/연산자_(프로그래밍))(operator)는 피연산 데이터를 조작할 수 있는 가장 간단한 형태의 연산 요소이다. 연산자는 피연산자의 접두부, 접미부, 혹은 두 데이터 사이에 위치시켜 사용한다. 가독성을 위해 데이터와 연산자 사이에 공백을 넣어도 연산에는 아무런 영향을 주지 않는다. 다음은 [C/C++ 연산자](https://ko.wikipedia.org/wiki/C와_C++의_연산자)들을 간략히 소개한다.
+[연산자](https://en.wikipedia.org/wiki/Operator_(computer_programming))(operator)는 피연산 데이터를 조작할 수 있는 가장 간단한 형태의 연산 요소이다. 연산자는 피연산자의 접두부, 접미부, 혹은 두 데이터 사이에 위치시켜 사용한다. 가독성을 위해 데이터와 연산자 사이에 공백을 넣어도 연산에는 아무런 영향을 주지 않는다. 다음은 [C/C++ 연산자](https://ko.wikipedia.org/wiki/C와_C++의_연산자)들을 간략히 소개한다.
 
 ### 산술 연산자
 <table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://en.cppreference.com/w/cpp/language/operator_arithmetic">산술 연산자</a>(arithmetic operators)</caption><colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">산술</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>+</code></td><td style="text-align: center;">덧셈</td><td>좌측과 우측 피연산자의 값을 더하여 반환한다.</td></tr><tr><td style="text-align: center;"><code>-</code></td><td style="text-align: center;">뺄셈</td><td>좌측 피연산자에서 우측 피연산자를 뺀 값을 반환한다.</td></tr><tr><td style="text-align: center;"><code>*</code></td><td style="text-align: center;">덧셈</td><td>좌측 피연산자를 우측 피연산자의 값만큼 곱하여, 즉 반복 덧셈하여 반환한다.</td></tr><tr><td style="text-align: center;"><code>/</code></td><td style="text-align: center;">나눗셈</td><td>좌측 피연산자에서 우측 피연산자를 나눈 <a href="https://ko.wikipedia.org/wiki/몫">몫</a>을 반환한다.</td></tr><tr><td style="text-align: center;"><code>%</code></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/모듈러_산술">모듈러</a></td><td>좌측 피연산자에서 우측 피연산자를 나눈 <a href="https://ko.wikipedia.org/wiki/나머지">나머지</a>를 반환한다.</td></tr></tbody></table>
