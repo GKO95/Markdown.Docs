@@ -136,7 +136,7 @@
 
 * **출력 함수 [`print()`](https://docs.python.org/3/library/functions.html#print)**
 
-    출력 함수가 실행될 시, `print()`의 소괄호 `()` 안에 있는 데이터가 터미널에 나타난다.
+    출력 함수가 실행될 시, `print()`의 소괄호 `()` 안에 있는 데이터가 터미널에 나타난다. 두 개 이상의 데이터를 한꺼번에 출력하려면 쉼표 `,`를 사용하여 연속적으로 데이터를 나열할 수 있으나, 각 쉼표가 위치한 곳에는 항상 공백이 놓여진다. 그 외의 다른 방법은 [*문자열 자료형*](#문자열-자료형)에서 소개한다.
 
 <table style="table-layout: fixed; width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">파이썬 콘솔 입출력 예시</caption><colgroup><col style="width: 50%;"><col style="width: 50%;"></colgroup><thead><tr><th style="text-align: center;">일반적인 문장</th><th style="text-align: center;">간결화된 문장</th></tr></thead><tbody><tr style="vertical-align: top; overflow-wrap: break-word;"><td>
 
@@ -158,21 +158,16 @@ print("출력:", input("입력: "))
 ```
 </td></tr></tbody></table>
 
-하나의 `print()` 함수에서 두 개 이상의 데이터를 한꺼번에 출력하려면 쉼표 `,`를 사용하여 연속적으로 데이터를 나열할 수 있다. 단, 각 쉼표가 위치한 곳에는 항상 공백이 놓여진다. 그 외의 다른 방법은 [문자열 자료형](#문자열-자료형)을 설명하는 부분에서 소개한다.
+### 탈출 문자
+[탈출 문자](https://ko.wikipedia.org/wiki/이스케이프_문자)(escape character)는 백슬래시 기호 `\`를 사용하여 [문자열](#문자열-자료형)로부터 탈출해 텍스트 내에서 특정 연산을 수행한다: `\n` 탈출 문자를 사용하여 문자열 줄바꿈을 구현한다.
 
 ```python
-A = 10.0
-B = "파이썬"
-
-# 텍스트와 숫자의 혼합된 데이터를 쉼표(,)를 사용해 나열한다.
-print("A는", A , ", \n그리고 B는", B, "이다.")
+print("Hello,\nWorld!")
 ```
 ```terminal
-A는 10.0 ,
-그리고 B는 파이썬 이다.
+Hello,
+World!
 ```
-
-> [탈출 문자](https://ko.wikipedia.org/wiki/이스케이프_문자)(escape character)는 백슬래시 기호 `\`를 사용하여 문자열로부터 탈출해 텍스트 내에서 특정 연산을 수행한다: `\n` 탈출 문자를 사용하여 문자열 줄바꿈을 구현한다.
 
 ## 변수
 변수(variable)는 [네임 바인딩](https://docs.python.org/3/reference/executionmodel.html#naming-and-binding) 기법을 통해 엮인 데이터를 접근하는 [식별자](#식별자)이며, 간단히 설명하자면 데이터에 이름을 붙인 것이다. 아래 코드는 상수 3의 데이터를 `variable`이란 식별자로 호출하도록 하며, 비로서 해당 식별자가 변수로 "정의(definition)"되었다고 한다.
