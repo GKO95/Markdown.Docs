@@ -1,7 +1,7 @@
 # 러스트
 > *출처: [The Rust Programming Language <sub>(영문)</sub>](https://doc.rust-lang.org/book/)*
 
-[러스트](https://www.rust-lang.org/)(Rust)는 성능과 보안이 매우 강조된 프로그래밍 언어이며, 특히 자료형 및 메모리 관리 측에서 강점을 지닌다. 뿐만 아니라, 하드웨어 제어가 가능하다는 점에서 [펌웨어](https://ko.wikipedia.org/wiki/펌웨어) 개발에도 활용할 수 있다. 이러한 특성들에 의해 [C++](Cpp.md) 언어와 유사한 성능을 지닌 동시에 훌륭한 보안성이 보장되어 [마이크로소프트](https://www.microsoft.com/), [구글](https://www.google.com/), [아마존](https://www.amazon.com/) 등의 주요 IT 기업의 관심과 지원을 받고 있다.
+[러스트](https://www.rust-lang.org/)(Rust)는 성능과 보안이 매우 강조된 [정적 정형](https://en.wikipedia.org/wiki/Type_system#Static_type_checking) 프로그래밍 언어이며, 특히 자료형 및 메모리 관리 측에서 강점을 지닌다. 뿐만 아니라, 하드웨어 제어가 가능하다는 점에서 [펌웨어](https://ko.wikipedia.org/wiki/펌웨어) 개발에도 활용할 수 있다. 이러한 특성들에 의해 [C++](Cpp.md) 언어와 유사한 성능을 지닌 동시에 훌륭한 보안성이 보장되어 [마이크로소프트](https://www.microsoft.com/), [구글](https://www.google.com/), [아마존](https://www.amazon.com/) 등의 주요 IT 기업의 관심과 지원을 받고 있다.
 
 ## 설치
 러스트 프로그래밍 언어를 실행하는 데 필요한 [툴체인](https://ko.wikipedia.org/wiki/툴체인)은 공식 홈페이지에서 rustup_init.exe를 [다운로드](https://www.rust-lang.org/tools/install) 받아 설치한다.
@@ -139,18 +139,12 @@ cargo new <프로젝트명>
 1. 알파벳, 숫자, 밑줄 `_`만 허용 (그 외 특수문자 및 공백 사용 불가)
 1. 식별자의 첫 문자는 숫자가 될 수 없음
 1. 대소문자 구분 필수
-1. [예약어](https://ko.wikipedia.org/wiki/예약어) 금지
+1. [예약어](https://doc.rust-lang.org/book/appendix-01-keywords.html) 금지
 
 ### 주석
 [주석](https://doc.rust-lang.org/reference/comments.html)(comment)은 프로그램의 소스 코드로 취급하지 않아 실행되지 않는 영역이다. 흔히 코드에 대한 간단한 정보를 기입하기 위해 사용되는 데, 크게 비문서 주석 그리고 문서 주석로 나뉘어진다.
 
-<table style="table-layout: fixed; width: 90%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">러스트 주석 종류</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">비문서 주석(non-doc comments)</th><th style="text-align: center;">문서 주석(doc comments)</th></tr></thead>
-<tbody>
-<tr><td>일반적인 <a href="C.md">C</a>/<a href="C.md">C++</a> 언어 형식의 <a href="C.md#주석">주석</a>과 동일하다.</td><td>문서 주석은 한줄(<code>///</code>) 그리고 블록(<code>/** */</code>)으로 입력할 수 있으며, 데이터에 대한 간략한 설명을 기입하는 데 사용된다.</td></tr>
-<tr style="vertical-align: top; overflow-wrap: break-word;"><td>
+<table style="table-layout: fixed; width: 90%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">러스트 주석 종류</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">비문서 주석(non-doc comments)</th><th style="text-align: center;">문서 주석(doc comments)</th></tr></thead><tbody><tr><td>일반적인 <a href="C.md">C</a>/<a href="C.md">C++</a> 언어 형식의 <a href="C.md#주석">주석</a>과 동일하다.</td><td>문서 주석은 한줄(<code>///</code>) 그리고 블록(<code>/** */</code>)으로 입력할 수 있으며, 데이터에 대한 간략한 설명을 기입하는 데 사용된다.</td></tr><tr style="vertical-align: top; overflow-wrap: break-word;"><td>
 
 ```rust
 /*
@@ -170,16 +164,14 @@ cargo new <프로젝트명>
 
 /// 한줄 문서 주석: 코드 한 줄을 차지하는 주석이다.
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 일반 주석과 달리, 사용자가 정의한 데이터에 기입된 문서 주석은 `doc`이란 특수한 속성에 저장되어 정의된 데이터에 대한 설명을 정의한 소스 코드를 찾아가지 않고서도 곧바로 내용을 살펴볼 수 있다.
 
 ![VS Code에서의 문서 주석 활용 예시](./images/rust_doccomments.png)
 
 ## 자료형
-[자료형](https://ko.wikipedia.org/wiki/자료형)(data type)은 데이터를 어떻게 표현할 지 결정하는 요소이며, 러스트에서는 다음과 같이 존재한다.
+[자료형](https://doc.rust-lang.org/book/ch03-02-data-types.html)(data type)은 데이터를 어떻게 표현할 지 결정하는 요소이며, 러스트에서는 다음과 같이 존재한다.
 
 <table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">러스트의 <a href="https://doc.rust-lang.org/stable/book/ch03-02-data-types.html#scalar-types">원시 스칼라 자료형</a></caption><colgroup><col style="width: 20%;"/><col style="width: 15%;"/><col style="width: 15%;"/><col/></colgroup><thead><tr><th style="text-align: center;">키워드</th><th style="text-align: center;">자료형</th><th style="text-align: center;">크기 (바이트)</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>i8</code><br/><i>(<a href="https://ko.wikipedia.org/wiki/Signed와_unsigned#unsigned_int">unsigned</a>: <code style="font-style: normal;">u8</code>)</i></td><td style="text-align: center;"><a href="https://doc.rust-lang.org/reference/types/numeric.html">숫자</a></td><td style="text-align: center;">1</td><td>1바이트 정수</td></tr><tr><td style="text-align: center;"><code>i16</code><br/><i>(unsigned: <code style="font-style: normal;">u16</code>)</i></td><td style="text-align: center;">숫자</td><td style="text-align: center;">2</td><td>2바이트 정수</td></tr><tr><td style="text-align: center;"><code>i32</code><br/><i>(unsigned: <code style="font-style: normal;">u32</code>)</i></td><td style="text-align: center;">숫자</td><td style="text-align: center;">4</td><td>4바이트 정수</td></tr><tr><td style="text-align: center;"><code>i64</code><br/><i>(unsigned: <code style="font-style: normal;">u64</code>)</i></td><td style="text-align: center;">숫자</td><td style="text-align: center;">8</td><td>8바이트 정수</td></tr><tr><td style="text-align: center;"><code>i128</code><br/><i>(unsigned: <code style="font-style: normal;">u128</code>)</i></td><td style="text-align: center;">숫자</td><td style="text-align: center;">16</td><td>16바이트 정수</td></tr><tr><td style="text-align: center;"><code>isize</code><br/><i>(unsigned: <code style="font-style: normal;">usize</code>)</i></td><td style="text-align: center;">숫자</td><td style="text-align: center;">16 <sub>(최소)</sub></td><td><a href="#포인터">포인터</a> 크기의 정수; 예를 들어 x86는 32비트, 그리고 x64는 64비트 정수로 계산된다.</td></tr><tr><td style="text-align: center;"><code>f32</code></td><td style="text-align: center;">숫자</td><td style="text-align: center;">4</td><td>32비트 <a href="https://en.wikipedia.org/wiki/Single-precision_floating-point_format">단정밀도 실수</a></td></tr><tr><td style="text-align: center;"><code>f64</code></td><td style="text-align: center;">숫자</td><td style="text-align: center;">8</td><td>64비트 <a href="https://en.wikipedia.org/wiki/Double-precision_floating-point_format">배정밀도 실수</a></td></tr><tr><td style="text-align: center;"><code>f128</code></td><td style="text-align: center;">숫자</td><td style="text-align: center;">16</td><td>128비트 <a href="https://en.wikipedia.org/wiki/Quadruple-precision_floating-point_format">4배정밀도 실수</a></td></tr><tr><td style="text-align: center;"><code>bool</code></td><td style="text-align: center;"><a href="https://doc.rust-lang.org/reference/types/boolean.html">논리</a></td><td style="text-align: center;">1</td><td>참(<code>true</code>; 1) 혹은 거짓(<code>false</code>; 0)</td></tr><tr><td style="text-align: center;"><code>char</code></td><td style="text-align: center;"><a href="https://doc.rust-lang.org/reference/types/textual.html">텍스트</a></td><td style="text-align: center;">4</td><td>단일 <a href="https://en.wikipedia.org/wiki/UTF-32">UTF-32</a> 문자: 0x0000-0xD7FF 또는 0xE000-0x10FFFF</td></tr></tbody/></table>
 
@@ -195,23 +187,21 @@ u16             // 표현 가능 범위:     +0 ~ +65535
 그 외의 자료형들은 차후 러스트 프로그래밍 언어에 대한 개념을 소개하면서 함께 설명할 예정이다.
 
 ### 자료형 변환
-자료형 변환(type conversion)은 데이터를 다른 자료형으로 바꾸는 작업이며, 불가피하게 데이터가 손실될 수 있으므로 유의하도록 한다. 러스트는 일반적으로 [강제 변환](https://doc.rust-lang.org/reference/type-coercions.html)(coercion)이란 암시적 자료형 변환을 지원하지 않으며, 오로지 특정 위치의 코드에서 제한된 자료형으로만 자동 변환이 일어난다.
+자료형 변환(type conversion)은 데이터를 다른 자료형으로 바꾸는 작업이며, 불가피하게 데이터가 손실될 수 있으므로 유의하도록 한다. 러스트는 일반적으로 [강제 변환](https://doc.rust-lang.org/reference/type-coercions.html)(coercion)이란 암시적 자료형 변환을 지원하지 않으며, 자동 변환은 오로지 특정 위치의 코드에서 제한된 자료형에만 국한된다.
 
 * **[자료형 캐스팅](https://doc.rust-lang.org/reference/expressions/operator-expr.html#type-cast-expressions)**(type casting)
 
-    명시적 자료형 변환에 해당하며, 데이터의 우변에 이진 연산자 [`as`](https://doc.rust-lang.org/reference/expressions/operator-expr.html#type-cast-expressions)와 함께 변환 자료형을 기입하여 좌변으로 해당 값을 전달한다.
+    명시적 자료형 변환에 해당하며, 데이터의 우변에 이진 연산자 [`as`](https://doc.rust-lang.org/reference/expressions/operator-expr.html#type-cast-expressions)와 함께 변환 자료형을 기입하여 lvalue로 전달한다. 암시적 자료형을 시도할 경우, 러스트는 자료형 불일치라는 명목으로 컴파일 오류를 알린다.
 
     ```rust
-    let variable: i16 = 13;
-    let unsigned: u16 = variable as u16;
+    let variable = 'A';
+    println!("The ascii value of the variable is {}", variable as u8);
     ```
 
-    만일 `as` 연산자가 없었더라면 암시적 자료형 변환에 해당하기 때문에 러스트는 자료형 불일치라는 명목으로 컴파일 오류를 알린다.
-
 ### `size_of` 함수
-[`size_of`](https://doc.rust-lang.org/std/mem/fn.size_of.html) [함수](#함수)는 자료형의 메모리에 할당된 바이트 크기를 반환한다. 정확한 설명은 "배열의 다음 요소 간 오프셋"을 반환하며, 이때 데이터 정렬을 위해 삽입된 패딩도 함께 계산된다.
+[`size_of`](https://doc.rust-lang.org/std/mem/fn.size_of.html) [함수](#함수)는 자료형의 메모리 크기를 바이트로 반환한다. 정확한 설명은 "배열의 다음 요소 간 오프셋"을 반환하며, [데이터 정렬](C.md#데이터-구조-정렬)에 삽입된 패딩도 포함한다.
 
-* [`size_of_val`](https://doc.rust-lang.org/std/mem/fn.size_of_val.html): (자료형을 알 수 없는 경우) 참조된 값의 메모리 할당 크기를 반환한다.
+* [`size_of_val`](https://doc.rust-lang.org/std/mem/fn.size_of_val.html): (자료형을 알 수 없는 경우) 참조된 값의 메모리 할당 크기를 동적으로 확인하여 반환한다.
 
 ```rust
 std::mem::size_of::<char>();        // 크기: 4바이트
@@ -219,3 +209,34 @@ std::mem::size_of::<char>();        // 크기: 4바이트
 let variable: u128 = 0;
 std::mem::size_of_val(&variable);   // 크기: 16바이트
 ```
+
+## 변수
+[변수](https://doc.rust-lang.org/stable/book/ch03-01-variables-and-mutability.html)(variable)는 [네임 바인딩](https://en.wikipedia.org/wiki/Name_binding) 기법을 통해 지정된 [자료형](#자료형)의 데이터와 엮여 접근하는 데 사용되는 [식별자](#식별자)이며, 간단히 설명하자면 데이터에 이름을 붙인 것이다. 아래 코드는 `variable` 변수를 "선언(declaration)"한 다음 상수 3을 바인딩한다. 여기서 최초 바인딩을 "초기화(initialization)"라고 부르며, 초기화되지 않은 채 변수 호출은 허용되지 않지만 선언된 이후 나중에 바인딩될 수 있다.<sup>[<a href="https://doc.rust-lang.org/rust-by-example/variable_bindings/declare.html">출처</a>]</sup>
+
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption>러스트의 불변 및 가변 변수</caption><colgroup><col style="width: 50%;"/></col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">불변(immutable) 변수</th><th style="text-align: center;">가변(mutable) 변수</th></tr></thead><tbody><tr style="vertical-align: top;"><td>
+
+```rust
+let variable = 3;
+```
+</td><td>
+
+```rust
+let mut variable = 3;
+```
+</td></tr><tr><td>초기화 이후에 변수는 다른 값으로 변경될 수 없으며, 이는 러스트의 기본적인 특성 중 하나이다.</td><td>타 프로그래밍 언어처럼 초기화가 이루어진 이후에도 <a href="https://doc.rust-lang.org/reference/expressions/operator-expr.html#assignment-expressions">할당 표현식</a>을 통해 새로운 값을 전달 받을 수 있도록 선언된 변수이다.</td></tr></tbody></table>
+
+* [`let`](https://doc.rust-lang.org/std/keyword.let.html) 키워드: 현 코드 [영역범위](https://doc.rust-lang.org/rust-by-example/variable_bindings/scope.html) 내에 새로운 변수를 소개하는 데 사용된다.
+* [`mut`](https://doc.rust-lang.org/std/keyword.mut.html) 키워드: 다른 데이터에 바인딩할 수 있는 가변 변수를 선언하는 목적으로도 활용된다.
+
+컴파일러는 데이터의 값과 사용처를 기반하여 변수의 자료형을 추론할 수 있으나, 다음과 같이 명시적으로 변수에 자료형을 지정할 수 있다.
+
+```rust
+let variable: u8 = 3;
+```
+
+<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">변수 선언 키워드 및 특징</caption><colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup><thead><tr><th style="text-align: center;">키워드</th><th style="text-align: center;">특징</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/keyword.const.html"><code>const</code></a></td><td>어디서나 사용할 수 있는 불변의 전역 변수이며, 반드시 자료형과 함께 선언되어야 한다.</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/keyword.static.html"><code>static</code></a></td><td><code>const</code> 키워드와 특징이 동일하지만 메모리 위치를 나타내어, 사실상 전역 변수로 사용된다.</td></tr></tbody></table>
+
+거의 모든 프로그래밍 언어는 할당 기호를 기준으로 왼쪽에는 피할당자(변수), 오른쪽에는 피할당자로 전달하려는 표현식(값 혹은 데이터)이 위치한다. 반대로 놓여질 경우, 오류가 발생하거나 원치 않는 결과가 도출될 수 있다.
+
+## 연산자
+[연산자](https://en.wikipedia.org/wiki/Operator_(computer_programming))(operator)는 피연산 데이터를 조작할 수 있는 가장 간단한 형태의 연산 요소이다. 연산자는 피연산자의 접두부, 접미부, 혹은 두 데이터 사이에 위치시켜 사용한다. 가독성을 위해 데이터와 연산자 사이에 공백을 넣어도 연산에는 아무런 영향을 주지 않는다. 다음은 [러스트 연산자](https://doc.rust-lang.org/book/appendix-02-operators.html)들을 간략히 소개한다.
