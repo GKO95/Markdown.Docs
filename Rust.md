@@ -24,13 +24,13 @@
 ### 통합 개발 환경
 [통합 개발 환경](https://ko.wikipedia.org/wiki/통합_개발_환경)(integrated development environment; IDE)은 최소한 프로그래밍 언어의 소스 코드 편집, 프로그램 빌드, 그리고 디버깅 기능을 제공하는 소프트웨어 개발 프로그램이다. 툴체인은 러스트 코드를 컴퓨터가 실행할 수 있도록 하는 개발 도구이지만 러스트 코드 편집기는 아니다. 러스트 코드를 작성하고 프로그램으로 실행하여 문제가 발생하면 검토할 수 있는 IDE가 절대적으로 필요하다.
 
-* [비주얼 스튜디오 코드](https://code.visualstudio.com/download), 일명 VS Code는 마이크로소프트에서 개발한 무료 소스 코드 편집기이다. 비록 기술적으로 IDE는 아니지만, [rust-analyzer 확장도구](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)를 설치하면 코드 자동완성, 자료형 정의, 구문 하이라이트 등의 기능들을 제공한다. 코드 디버깅을 하려면 아래를 함께 설치한다.
+* [비주얼 스튜디오 코드](https://code.visualstudio.com/download)<sup>[<a href="https://code.visualstudio.com/docs/languages/rust">참고</a>]</sup>, 일명 VS Code는 마이크로소프트에서 개발한 무료 소스 코드 편집기이다. 비록 기술적으로 IDE는 아니지만, [rust-analyzer 확장도구](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)를 설치하면 코드 자동완성, 자료형 정의, 구문 하이라이트 등의 기능들을 제공한다. 코드 디버깅을 하려면 아래를 함께 설치한다.
 
     * [마이크로소프트 C++](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) (윈도우 운영체제)
     * [CodeLLDB](https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb) (macOS 또는 리눅스 운영체제)
 
 ## 프로젝트
-> *참고: [Rust with Visual Studio Code](https://code.visualstudio.com/docs/languages/rust)*
+> *참고: [Managing Growing Projects with Packages, Crates, and Modules - The Rust Programming Language](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html)*
 
 러스트 프로그래밍 언어는 [`cargo`](https://doc.rust-lang.org/rust-by-example/cargo.html)라는 공식 패키지 관리 도구를 통해 프로젝트를 관리한다.
 
@@ -87,10 +87,14 @@ VS Code 편집기에 rust-analyzer 확장도구를 사용하면 `main()` 진입�
 
 크레이트는 아래와 같이 두 유형으로 나뉘어진다:
 
-<table style="width: 70%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">이진 및 라이브러리 크레이트 비교</caption><colgroup><col style="width: 16%;"/><col style="width: 44%;"/><col style="width: 44%;"/></colgroup>
-<thead><tr><th></th><th style="text-align: center;">이진 크레이트 (binary crate)</th><th style="text-align: center;">라이브러리 크레이트 (library crate)</th></tr></thead><tbody><td style="text-align: center;">설명</td><td style="text-align: center;"><code>.EXE</code> 실행 프로그램</td><td style="text-align: center;"><code>.RLIB</code> 라이브러리 파일</td></tbody><tbody><td style="text-align: center;">크레이트 루트</td><td style="text-align: center;"><code>src/main.rs</code></td><td style="text-align: center;"><code>src/lib.rs</code></td></tbody><tbody><td style="text-align: center;"><code>main</code> 진입점</td><td style="text-align: center;">⭕</td><td style="text-align: center;">❌</td></tbody></table>
+<table style="width: 70%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">이진 및 라이브러리 크레이트 비교</caption><colgroup><col style="width: 16%;"/><col style="width: 44%;"/><col style="width: 44%;"/></colgroup><thead><tr><th></th><th style="text-align: center;">이진 크레이트 (binary crate)</th><th style="text-align: center;">라이브러리 크레이트 (library crate)</th></tr></thead><tbody><td style="text-align: center;">설명</td><td style="text-align: center;"><code>.EXE</code> 실행 프로그램</td><td style="text-align: center;"><code>.RLIB</code> 라이브러리 파일</td></tbody><tbody><td style="text-align: center;">크레이트 루트</td><td style="text-align: center;"><code>src/main.rs</code></td><td style="text-align: center;"><code>src/lib.rs</code></td></tbody><tbody><td style="text-align: center;"><code>main</code> 진입점</td><td style="text-align: center;">⭕</td><td style="text-align: center;">❌</td></tbody></table>
 
-러스트 프로그래밍에서 크레이트를 이야기하면 흔히 "라이브러리 크레이트"를 가리키며, 이는 일반 프로그래밍 언어에서의 "[라이브러리](C.md#라이브러리)"와 혼용되어 언급되기도 한다.
+* [`std`](https://doc.rust-lang.org/std/index.html) 크레이트: 일명 "러스트 표준 라이브러리(Rust Standard Library)"는 러스트 소프트웨어의 기반이 되어 [자료형](#자료형), 표준 매크로, 그리고 다양한 [모듈](#모듈)을 제공한다. 모든 크레이트는 기본적으로 [`use`](https://doc.rust-lang.org/std/keyword.use.html) 키워드를 사용해 아래와 같이 표준 라이브러리를 불러올 수 있다.
+
+    ```rust
+    // 표준 라이브러리의 프로세스 환경 모듈
+    use std::env;
+    ```
 
 ### 패키지
 패키지(package)는 하나 이상의 [크레이트](#크레이트)를 다루는 [번들](https://en.wikipedia.org/wiki/Product_bundling#Software)(bundle)이다. 각 패키지는 여러 개의 이진 크레이트를 다룰 수 있지만, 라이브러리 크레이트는 오로지 하나만 가능하다. 패키지의 특징 중 하나는 [`Cargo.toml`](#cargotoml) 파일을 가지고 있다는 점인데, 이는 크레이트를 어떻게 빌드를 할 것인지 설명한다.
@@ -180,6 +184,45 @@ cargo new <프로젝트명>
 일반 주석과 달리, 사용자가 정의한 데이터에 기입된 문서 주석은 `doc`이란 특수한 속성에 저장되어 정의된 데이터에 대한 설명을 정의한 소스 코드를 찾아가지 않고서도 곧바로 내용을 살펴볼 수 있다.
 
 ![VS Code에서의 문서 주석 활용 예시](./images/rust_doccomments.png)
+
+## 형식 데이터
+> *참고: [Formatted print - Rust By Example](https://doc.rust-lang.org/rust-by-example/hello/print.html)*
+
+다음은 지정된 형식에 따른 데이터 처리에 관여하는 러스트의 매크로들을 소개한다.
+
+* **콘솔 출력**
+
+    지정된 형식대로 텍스트를 콘솔에 나타나도록 출력하는 데 사용된다.
+
+    <table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">러스트의 출력 매크로</caption><colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup><thead><tr><th style="text-align: center;">출력 매크로</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/macro.print.html"><code>print!</code></a></td><td>주어진 형식 지정자에 따라 텍스트를 터미널에 출력한다.</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/macro.println.html"><code>println!</code></a></td><td>주어진 형식 지정자에 따라 텍스트를 터미널에 출력하며 <code>'\n'</code> 줄바꿈이 기본적으로 보장된다.
+    
+    ```rust
+    println!("Format: {:b}", 5);
+    ```
+    </td></tr></tbody></table>
+
+* **버퍼 입력**
+
+    지정된 형식대로 텍스트를 버퍼로 전달하도록 입력하는 데 사용된다. 유의할 점으로, 본 매크로는 콘솔창의 사용자 텍스트를 입력으로 받는 매크로가 절대 아니다. 핵심 입출력 기능 및 특성을 제공하는 [`std::io`](https://doc.rust-lang.org/std/io/)의 [`Write`](https://doc.rust-lang.org/std/io/trait.Write.html) 특성이 요구된다.
+
+    <table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">러스트의 입력 매크로</caption><colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup><thead><tr><th style="text-align: center;">입력 매크로</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/macro.write.html"><code>write!</code></a></td><td>주어진 형식 지정자 따른 텍스트를 터미널에 출력한다.</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/macro.writeln.html"><code>writeln!</code></a></td><td>주어진 형식 지정자 따른 텍스트를 터미널에 출력하며 <code>'\n'</code> 줄바꿈이 기본적으로 보장된다.
+
+    ```rust
+    use std::io::Write;
+    writeln!(&mut buffer, "Output: {:b}", 5);
+    ```
+    </td></tr></tbody></table>
+
+### 탈출 문자
+[탈출 문자](https://en.wikipedia.org/wiki/Escape_character)(escape character)는 백슬래시 기호 `\`를 사용하며, [문자열](#문자열)로부터 탈출하여 텍스트 데이터 내에서 특정 연산을 수행하도록 한다. 예시에서 `\n` 탈출 문자를 사용하여 문자열 줄바꿈을 구현한 것을 보여주었다.
+
+```rust
+println!("Hello,\nWorld!");
+```
+```terminal
+Hello,
+World!
+```
 
 ## 자료형
 [자료형](https://doc.rust-lang.org/book/ch03-02-data-types.html)(data type)은 데이터를 어떻게 표현할 지 결정하는 요소이며, 러스트에서는 다음과 같이 존재한다.
@@ -292,14 +335,3 @@ x <<= y;  // 동일: x = x << y;
 (논리 부정을 제외한) 아래 논리 연산자의 설명은 참을 반환할 조건을 소개하며, 그 외에는 모두 0을 반환한다.
 
 <table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://doc.rust-lang.org/reference/expressions/operator-expr.html#lazy-boolean-operators">논리 연산자</a>(logical operators)</caption><colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/><col style="width: "/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">논리</th><th style="text-align: center;">설명 </th></tr></thead><tbody><tr><td style="text-align: center;"><code>&&</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Logical_conjunction">논리곱</a></td><td>좌측 그리고 우측 <a href="https://en.wikipedia.org/wiki/Proposition">명제</a>(피연산자)가 모두 참이면 1을 반환한다.</td></tr><tr><td style="text-align: center;"><code>||</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Logical_disjunction">논리합</a></td><td>좌측 또는 우측 명제(피연산자)가 하나라도 참이면 1을 반환한다.</td></tr><tr><td style="text-align: center;"><code>!</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Negation">부정</a></td><td>명제(피연산자)가 참이면 거짓으로, 혹은 그 반대로 반전된 값을 반환한다.</td></tr></tbody></table>
-
-## 탈출 문자
-[탈출 문자](https://en.wikipedia.org/wiki/Escape_character)(escape character)는 백슬래시 기호 `\`를 사용하며, [문자열](#문자열)로부터 탈출하여 텍스트 데이터 내에서 특정 연산을 수행하도록 한다. 예시에서 `\n` 탈출 문자를 사용하여 문자열 줄바꿈을 구현한 것을 보여주었다.
-
-```rust
-println!("Hello,\nWorld!");
-```
-```terminal
-Hello,
-World!
-```
