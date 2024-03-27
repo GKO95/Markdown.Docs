@@ -6,6 +6,9 @@
 ### 보안 식별자
 **[보안 식별자](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-identifiers)**(security identifier; SID)는 사용자, 그룹, 그리고 컴퓨터 계정을 식별하는 가변 크기의 데이터 구조이다. 네트워크상 각 계정마다 최초로 생성되면 고유의 SID가 부여된다. 윈도우 내부 프로세스들은 계정의 (사용자 이름이나 그룹명이 아닌) SID를 조회한다.
 
+## 로컬 보안 기관
+**[로컬 보안 기관](https://learn.microsoft.com/en-us/windows/win32/secauthn/lsa-authentication)**(Local Security Authority; LSA)은 사용자를 인증하고 로컬 시스템에 로그온을 시키는 보호된 서브시스템이다. LSA는 또한 시스템상 로컬 보안의 모든 측면에 대한 정보(통칭 로컬 보안 정책; Local Security Policy)를 관리한다.
+
 # 로그온 세션
 **[로그온 세션](https://en.wikipedia.org/wiki/Login_session)**(logon session)은 단일 사용자가 컴퓨터 시스템에 [로그온](#로그온) 때 구축되는 [세션](https://en.wikipedia.org/wiki/Session_(computer_science))이다. 로그온 세션은 사용자에 의해 실행된 프로세스 및 시스템 객체들로 구성되었으며, 로그아웃 할 시 실행된 프로세스들은 모두 종료된다.
 
