@@ -3,6 +3,9 @@
 
 **[로그온](https://en.wikipedia.org/wiki/Login)**(logon)은 개인이 컴퓨터 시스템 또는 프로그램에 접속하기 위한 식별 및 인증 절차이다. [윈도우](Windows.md) [운영체제](https://en.wikipedia.org/wiki/Operating_system)는 모든 사용자가 로컬 및 네트워크 리소스를 접근하려면 반드시 유효한 계정을 통해 로그온 할 것을 요한다. 먼저 (1) 사용자 인증이 이루어진 다음, (2) 인증된 사용자의 권한을 확인하여 리소스 접근을 제어하고 보호한다. 가장 기본적인 사용자 로그온 인증 방식으로 비밀번호 기반이 존재한다.
 
+### 보안 식별자
+**[보안 식별자](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-identifiers)**(security identifier; SID)는 사용자, 그룹, 그리고 컴퓨터 계정을 식별하는 가변 크기의 데이터 구조이다. 네트워크상 각 계정마다 최초로 생성되면 고유의 SID가 부여된다. 윈도우 내부 프로세스들은 계정의 (사용자 이름이나 그룹명이 아닌) SID를 조회한다.
+
 # 로그온 세션
 **[로그온 세션](https://en.wikipedia.org/wiki/Login_session)**(logon session)은 단일 사용자가 컴퓨터 시스템에 [로그온](#로그온) 때 구축되는 [세션](https://en.wikipedia.org/wiki/Session_(computer_science))이다. 로그온 세션은 사용자에 의해 실행된 프로세스 및 시스템 객체들로 구성되었으며, 로그아웃 할 시 실행된 프로세스들은 모두 종료된다.
 
@@ -18,6 +21,9 @@
 > [로컬 고유 식별자](https://learn.microsoft.com/en-us/windows/win32/secgloss/l-gly)(locally unique identifier; LUID)는 시스템이 재시작할 때까지 고유성을 보장하는 운영체제로부터 생성된 64비트 값이다.
 
 컴퓨터가 실행되는 동안 로그온 ID는 고유하며, 다른 로그온 세션과 동일한 ID를 가질 수 없다. 그러나 사용 가능한 로그온 ID 집합은 컴퓨터가 시작될 때 초기화된다. [`GetTokenInformation`](https://learn.microsoft.com/en-us/windows/win32/api/securitybaseapi/nf-securitybaseapi-gettokeninformation) 함수로 불러온 [접근 토근](#접근-토큰) 정보를 반영하는 [TOKEN_STATISTICS](https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-token_statistics) 구조체에서 AuthenticationId 맴버는 로그온 ID를 나타낸다.
+
+### 로그온 SID
+로그온 SID(Logon SID)는 로그온 세션을 식별하는 [보안 식별자](#보안-식별자)이다. 로그온 세션 도중 DACL에서 로그온 SID를 사용하여 접근을 제어할 수 있다. 로그온 SID는 사용자가 로그오프를 할 때까지 유효하다. 컴퓨터가 실행되는 동안 로그온 SID는 고유하며, 다른 로그온 세션과 동일한 SID를 가질 수 없다. 그러나 사용 가능한 로그온 ID 집합은 컴퓨터가 시작될 때 초기화된다. [`GetTokenInformation`](https://learn.microsoft.com/en-us/windows/win32/api/securitybaseapi/nf-securitybaseapi-gettokeninformation) 함수로 불러온 [접근 토근](#접근-토큰)의 [TOKEN_GROUPS](https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-token_groups) 구조체로부터 로그온 SID를 확인한다.
 
 ## 윈도우 스테이션
 **[윈도우 스테이션](https://learn.microsoft.com/en-us/windows/win32/winstation/window-stations)**(window station)은 사용자의 [프로세스](Process.md)와 이를 화면에 표시할 [데스크탑](#데스크탑)을 관리한다. 윈도우 스테이션은 [클립보드](https://learn.microsoft.com/en-us/windows/win32/dataxchg/clipboard) 및 [아톰 테이블](https://learn.microsoft.com/en-us/windows/win32/dataxchg/about-atom-tables)을 가지며, 안에 실행된 모든 프로세스가 이를 접근하여 활용할 수 있다. 로그온 세션마다 사용자와 상호작용이 가능한 유일한 윈도우 스테이션인 "Winsta0"가 한 개 존재한다. 그 외의 나머지는 상호작용이 불가하며, 대표적으로 다음 윈도우 스테이션이 해당한다.
