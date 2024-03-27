@@ -12,6 +12,13 @@
 * 기본 토큰(primary token)
 * 기장 토큰(Impersonation token)
 
+### 로그온 식별자
+**[로그온 식별자](https://learn.microsoft.com/en-us/windows/win32/secgloss/l-gly)**(logon identifier), 일명 **로그온 ID**는 로그온 세션을 식별하며 사용자가 로그오프를 할 때까지 유효한 LUID이다.
+
+> [로컬 고유 식별자](https://learn.microsoft.com/en-us/windows/win32/secgloss/l-gly)(locally unique identifier; LUID)는 시스템이 재시작할 때까지 고유성을 보장하는 운영체제로부터 생성된 64비트 값이다.
+
+컴퓨터가 실행되는 동안 로그온 ID는 고유하며, 다른 로그온 세션과 동일한 ID를 가질 수 없다. 그러나 사용 가능한 로그온 ID 집합은 컴퓨터가 시작될 때 초기화된다. [`GetTokenInformation`](https://learn.microsoft.com/en-us/windows/win32/api/securitybaseapi/nf-securitybaseapi-gettokeninformation) 함수로 불러온 [접근 토근](#접근-토큰) 정보를 반영하는 [TOKEN_STATISTICS](https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-token_statistics) 구조체에서 AuthenticationId 맴버는 로그온 ID를 나타낸다.
+
 ## 윈도우 스테이션
 **[윈도우 스테이션](https://learn.microsoft.com/en-us/windows/win32/winstation/window-stations)**(window station)은 사용자의 [프로세스](Process.md)와 이를 화면에 표시할 [데스크탑](#데스크탑)을 관리한다. 윈도우 스테이션은 [클립보드](https://learn.microsoft.com/en-us/windows/win32/dataxchg/clipboard) 및 [아톰 테이블](https://learn.microsoft.com/en-us/windows/win32/dataxchg/about-atom-tables)을 가지며, 안에 실행된 모든 프로세스가 이를 접근하여 활용할 수 있다. 로그온 세션마다 사용자와 상호작용이 가능한 유일한 윈도우 스테이션인 "Winsta0"가 한 개 존재한다. 그 외의 나머지는 상호작용이 불가하며, 대표적으로 다음 윈도우 스테이션이 해당한다.
 
