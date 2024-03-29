@@ -6,6 +6,14 @@
 ### 보안 식별자
 **[보안 식별자](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-identifiers)**(security identifier; SID)는 사용자, 그룹, 그리고 컴퓨터 계정을 식별하는 가변 크기의 데이터 구조이다. 네트워크상 각 계정마다 최초로 생성되면 고유의 SID가 부여된다. 윈도우 내부 프로세스들은 계정의 (사용자 이름이나 그룹명이 아닌) SID를 조회한다.
 
+## 인증서
+**인증서**(certificate)는 한 개체와 개체의 공개키 정보를 담는 [디지털 서명](https://en.wikipedia.org/wiki/Digital_signature)으로, 언급한 두 정보의 연관성을 입증한다. 신뢰할 수 있는 조직 (또는 개체), 일명 [인증 기관](https://en.wikipedia.org/wiki/Certificate_authority)에서 개체의 존재를 검증한 이후 인증서를 발행한다.
+
+인증서는 다른 정보들을 담을 수 있다: 예를 들어, X.509는 인증서 형식 및 일련번호, 서명에 사용된 알고리즘, 인증서를 발행한 인증 기관명, 인증을 요청한 개체의 이름과 공개키, 그리고 인증 기관의 서명을 포함한다.
+
+### 자격 증명
+[자격 증명](https://en.wikipedia.org/wiki/Credential#Information_technology)(credential)은 사용자 또는 자동화 프로세스 등을 포함한 [보안 주체](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-principals)가 스스로를 식별하기 위해 이전에 인증한 로그온 데이터를 가리킨다: 비밀번호, 케르베로스 프로토콜 티켓 등이 해당한다.
+
 ## 로컬 보안 기관
 **[로컬 보안 기관](https://learn.microsoft.com/en-us/windows/win32/secauthn/lsa-authentication)**(Local Security Authority; LSA)은 사용자를 인증하고 로컬 시스템에 로그온을 시키는 보호된 서브시스템이다. LSA는 또한 시스템상 로컬 보안의 모든 측면에 대한 정보(통칭 로컬 보안 정책; Local Security Policy)를 관리한다.
 
