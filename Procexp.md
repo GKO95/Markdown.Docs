@@ -1,8 +1,10 @@
 # 프로세스 탐색기
-[프로세스 탐색기](https://aka.ms/procexp)(Process Explorer)는 간단히 소개하자면 더 많은 기능들이 탑재된 "IT 관리자용" [작업 관리자](https://ko.wikipedia.org/wiki/작업_관리자_(윈도우))라고 설명할 수 있다. 실행 중인 프로세스 뿐만 아니라 로드된 [DLL](C.md#라이브러리)이나 [드라이버](Driver.md), 할당된 [스레드](Process.md#스레드) 및 [핸들](Process.md#핸들), 프로세스의 부모와 자식 관계를 [트리 구조](https://ko.wikipedia.org/wiki/트리_구조)로 보여주는 등의 정보를 실시간으로 확인할 수 있다.
+**[프로세스 탐색기](https://aka.ms/procexp)**(Process Explorer; 일명 Procexp)는 다양한 기능들이 탑재된 "IT 관리자용" [작업 관리자](https://ko.wikipedia.org/wiki/작업_관리자_(윈도우))이다. 실행 중인 [프로세스](Process.md#프로세스) 뿐만 아니라 로드된 [모듈](C.md#라이브러리)([드라이버](Driver.md) 포함), 생성된 [스레드](Process.md#스레드)와 [핸들](Process.md#핸들), 세분화된 성능 수치 등을 실시간으로 확인할 수 있다. 아래는 프로세스 탐색기가 실행되는 장면의 스크린샷을 보여준다.
 
 > 사용자의 선호도에 따라 작업 관리자를 대신하여 프로세스 탐색기가 실행되도록 레지스트리를 설정하는 옵션을 제공한다.
 
 ![프로세스 탐색기 유틸리티 프로그램](./images/sysinternals_procexp.png)
+
+구체적인 프로세스 및 시스템 정보를 확인하기 위해 관리자 권한으로 실행할 시, 런타임 때 PROCEXP.sys [드라이버](Driver.md#드라이버)를 `%WinDir%\System32\Drivers` 디렉토리에 생성 및 설치한다. 해당 드라이버는 [사용자](Processor.md#권한-수준)와 [커널 모드](Processor.md#권한-수준)의 시스템 정보를 가져오는 데 필요하며, 프로세스 모니터가 실행되면 [System](Process.md#시스템-프로세스) 프로세스에 로드된다.
 
 * **[십자선](https://ko.wikipedia.org/wiki/십자선) 아이콘**: 해당 아이콘을 마우스 버튼으로 누르고 있으면 커서가 십자선으로 변경된다. 십자선을 GUI 요소 위에 올려놓고 누르고 있던 마우스 버튼을 떼면 어느 프로세스에 속하는지 확인할 수 있다.
