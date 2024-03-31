@@ -3,18 +3,11 @@
 
 아래 프로그램들을 사용자 모드 덤프를 수집하는 데 사용된다:
 
-<ul><li><dl><b>시스템 기본 프로그램</b><ul><li><a href="WER.md">Windows Error Reporting</a></li><li><a href="https://ko.wikipedia.org/wiki/작업_관리자">작업 관리자</a></li></ul></dl></li>
-<li><dl><b>설치 프로그램</b><ul><li><a href="WinDbg.md">WinDbg</a></li><li><a href="https://www.microsoft.com/en-us/download/details.aspx?id=103453">Debug Diagnostic Tool v2</a></li></ul></dl></li>
-<li><dl><b><a href="Sysinternals.md">Sysinternals</a></b><ul><li><a href="ProcDump.md">ProcDump</a></li><li><a href="Procmon.md">프로세스 탐색기</a></li></ul></dl></li></ul>
+<ul><li><dl><b>시스템 기본 프로그램</b><ul><li><a href="WER.md">Windows Error Reporting</a></li><li><a href="https://ko.wikipedia.org/wiki/작업_관리자">작업 관리자</a></li></ul></dl></li><li><dl><b>설치 프로그램</b><ul><li><a href="WinDbg.md">WinDbg</a></li><li><a href="https://www.microsoft.com/en-us/download/details.aspx?id=103453">Debug Diagnostic Tool v2</a></li></ul></dl></li><li><dl><b><a href="Sysinternals.md">Sysinternals</a></b><ul><li><a href="ProcDump.md">ProcDump</a></li><li><a href="Procmon.md">프로세스 탐색기</a></li></ul></dl></li></ul>
 
 다음은 사용자 모드 덤프의 [종류](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/user-mode-dump-files)를 소개하며, 덤프 수집에 필요한 설정은 위에서 언급한 프로그램 문서를 참고하도록 한다.
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;">
-<caption style="text-align: center;">사용자 모드 덤프 종류</capation>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;"><a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/user-mode-dump-files#full">전체 덤프</a> (Full User-Mode Dump)</th><th style="text-align: center;"><a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/user-mode-dump-files#minidumps">미니 덤프</a> (Minidump)</th></tr></thead>
-<tbody><tr><td>프로세스의 사용자 주소 공간에 커밋된 <a href="Memory.md">메모리</a>를 전부 수집한 어플리케이션 덤프이다. 프로그램 실행 이미지, <a href="Process.md#핸들">핸들</a> 테이블, 그리고 덤프가 수집되었을 당시 스택을 재현하는 데 유용한 추가 정보 등을 포함한다.</td><td>증상에 따라 프로세스의 사용자 주소 공간에서 정보를 선택적으로 수집한다. 일반적으로 <a href="Process.md#스레드">스레드 스택</a> 위주로 수집되지만, 경우에 따라 전체 덤프보다 더 많이 혹은 참조된 모듈 단 하나만을 포함하기도 한다.</td></tr></tbody>
-</table>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="text-align: center;">사용자 모드 덤프 종류</capation><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;"><a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/user-mode-dump-files#full">전체 덤프</a> (Full User-Mode Dump)</th><th style="text-align: center;"><a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/user-mode-dump-files#minidumps">미니 덤프</a> (Minidump)</th></tr></thead><tbody><tr><td>프로세스의 사용자 주소 공간에 커밋된 <a href="Memory.md">메모리</a>를 전부 수집한 어플리케이션 덤프이다. 프로그램 실행 이미지, <a href="Process.md#핸들">핸들</a> 테이블, 그리고 덤프가 수집되었을 당시 스택을 재현하는 데 유용한 추가 정보 등을 포함한다.</td><td>증상에 따라 프로세스의 사용자 주소 공간에서 정보를 선택적으로 수집한다. 일반적으로 <a href="Process.md#스레드">스레드 스택</a> 위주로 수집되지만, 경우에 따라 전체 덤프보다 더 많이 혹은 참조된 모듈 단 하나만을 포함하기도 한다.</td></tr></tbody></table>
 
 덤프를 [WinDbg](WinDbg.md)로 열어보면 아래와 같은 문구를 통해 전체 혹은 미니 덤프인지 식별할 수 있다.
 
@@ -43,17 +36,7 @@ User Mini Dump File with Full Memory: Only application data is available
 ### 커널 메모리 덤프
 [커널 메모리 덤프](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/kernel-memory-dump)(Kernel Memory Dump)는 물리 메모리에서 사용자 공간을 제외한 커널 공간 주소의 데이터만을 수집한다. 비록 [전체 메모리 덤프](#전체-메모리-덤프)보다 필요한 페이징 파일이 작지만, RAM 크기와 할당된 [메모리 풀](Memory.md#메모리-풀) 용량 등 경우에 따라 수집되는 덤프 크기가 천차만별인 관계로 수치화된 정량이 없다.
 
-<table style="table-layout: fixed; width: 60%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">커널 메모리 덤프에 수집되는 정보</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">포함</th><th style="text-align: center;">제외</th></tr></thead>
-<tbody style="text-align: center;">
-<tr><td><a href="Kernel.md">윈도우 커널</a></td><td>비할당 메모리</td></tr>
-<tr><td><a href="Driver.md">커널 모드 드라이버</a></td><td>사용자 모드 어플리케이션</td></tr>
-<tr><td>커널 모드 프로그램</td><td>-</td></tr>
-<tr><td><a href="Kernel.md#하드웨어-추상-계층">하드웨어 추상화 계층</a></td><td>-</td></tr>
-</tbody>
-</table>
+<table style="table-layout: fixed; width: 60%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">커널 메모리 덤프에 수집되는 정보</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">포함</th><th style="text-align: center;">제외</th></tr></thead><tbody style="text-align: center;"><tr><td><a href="Kernel.md">윈도우 커널</a></td><td>비할당 메모리</td></tr><tr><td><a href="Driver.md">커널 모드 드라이버</a></td><td>사용자 모드 어플리케이션</td></tr><tr><td>커널 모드 프로그램</td><td>-</td></tr><tr><td><a href="Kernel.md#하드웨어-추상-계층">하드웨어 추상화 계층</a></td><td>-</td></tr></tbody></table>
 
 ### 작은 메모리 덤프
 [작은 메모리 덤프](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/small-memory-dump)(Small Memory Dump)는 [KB](https://ko.wikipedia.org/wiki/킬로바이트) 단위의 저용량 덤프를 생성하는데, 운영체제에 따라 크기가 64 KB, 128 KB, 혹은 256 KB 이상이 될 수 있다. 데이터는 제한적이지만, [커널 메모리 덤프](#커널-메모리-덤프) 수집이 불가할 정도로 디스크 여유 공간이 부족한 경우에 아래와 같은 정보를 제공하여 증상을 파악하는데 도움이 될 수 있다.
@@ -73,18 +56,7 @@ User Mini Dump File with Full Memory: Only application data is available
 ### 활성 메모리 덤프
 [활성 메모리 덤프](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/active-memory-dump)(Active Memory Dump)는 트러블슈팅에 필요하지 않는 데이터가 필터링된 [전체 메모리 덤프](#전체-메모리-덤프)의 일종으로, 덤프 파일 크기는 전체 메모리 덤프보다 작다. 엄청난 크기의 물리 메모리가 탑재되었거나 (예를 들어 256 GB 이상의 RAM이 탑재된 서버), [하이퍼바이저](https://ko.wikipedia.org/wiki/하이퍼바이저) 호스트를 대상으로 덤프를 수집해야 하는 경우 등에 활용된다.
 
-<table style="table-layout: fixed; width: 60%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">활성 메모리 덤프에 수집되는 정보</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">포함</th><th style="text-align: center;">제외</th></tr></thead>
-<tbody style="text-align: center;">
-<tr><td><a href="Kernel.md">윈도우 커널</a></td><td>비할당 메모리</td></tr>
-<tr><td><a href="Driver.md">커널 모드 드라이버</a></td><td>게스트 VM 페이지</td></tr>
-<tr><td>커널 모드 프로그램</td><td>파일 캐시</td></tr>
-<tr><td>사용자 모드 어플리케이션</td><td>-</td></tr>
-<tr><td><a href="Kernel.md#하드웨어-추상-계층">하드웨어 추상화 계층</a></td><td>-</td></tr>
-</tbody>
-</table>
+<table style="table-layout: fixed; width: 60%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">활성 메모리 덤프에 수집되는 정보</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">포함</th><th style="text-align: center;">제외</th></tr></thead><tbody style="text-align: center;"><tr><td><a href="Kernel.md">윈도우 커널</a></td><td>비할당 메모리</td></tr><tr><td><a href="Driver.md">커널 모드 드라이버</a></td><td>게스트 VM 페이지</td></tr><tr><td>커널 모드 프로그램</td><td>파일 캐시</td></tr><tr><td>사용자 모드 어플리케이션</td><td>-</td></tr><tr><td><a href="Kernel.md#하드웨어-추상-계층">하드웨어 추상화 계층</a></td><td>-</td></tr></tbody></table>
 
 ## 보조 덤프 정보
 > *참고: [Bugcheck Secondary Dump Data | Microsoft Learn](https://learn.microsoft.com/en-us/shows/inside/bugcheck-secondary-dump-data)*
