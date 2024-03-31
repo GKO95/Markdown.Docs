@@ -15,25 +15,17 @@
 
 > [자동 변수](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_automatic_variables)(automatic variables)란, 파워셸에 대한 상태 정보가 저장된 읽기 전용 변수이며 파워셸에서 자체적으로 생성하고 관리한다.
 
-<table style="table-layout: fixed; width: 100%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">파워셸의 객체 지향 데이터와 이에 속한 맴버</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead style="text-align: left;">
-<tr><th>
+<table style="table-layout: fixed; width: 100%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">파워셸의 객체 지향 데이터와 이에 속한 맴버</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead style="text-align: left;"><tr><th>
 
 ```powershell
 $PSVersionTable
 ```
-</th>
-<th>
+</th><th>
 
 ```powershell
 $PSVersionTable.PSVersion
 ```
-</th></tr>
-</thead>
-<tbody>
-<tr style="vertical-align: top; overflow-wrap: break-word;"><td>
+</th></tr></thead><tbody><tr style="vertical-align: top; overflow-wrap: break-word;"><td>
 
 ```terminal
 Name                           Value
@@ -47,17 +39,14 @@ WSManStackVersion              3.0
 PSRemotingProtocolVersion      2.3
 SerializationVersion           1.1.0.1
 ```
-</td>
-<td>
+</td><td>
 
 ```terminal
 Major  Minor  Build  Revision
 -----  -----  -----  --------
 5      1      22621  963
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 반환된 객체의 유형 및 메소드나 이벤트 등의 맴버를 확인하려면 [`Get-Memeber`](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/get-member)를 통해 확인을 해야 하며, 이에 대한 내용은 [파이프라인](#파이프라인)을 참고하도록 한다.
 
@@ -81,30 +70,22 @@ Cmdlet          Add-AppxVolume                                     2.0.1.0    Ap
 
 파워셸 cmdlet에 대한 도움말은 [`Get-Help`](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/get-help)로 해당 명령어에 대한 설명, 매개변수 및 사용 예시 등을 확인할 수 있다. 그 외에 alias 및 매개변수로 도움말을 찾아보는 방법도 존재한다. 허나, 최신 버전의 파워셸은 도움말 파일이 기본적으로 없는 관계로 별도 설치가 필요할 수 있다.
 
-<table style="table-layout: fixed; width: 100%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">Cmdlet 도움말 호출 방식</caption>
-<thead><tr><th style="text-align: center;"><code>Get-Help</code> Cmdlet</th><th style="text-align: center;"><code>Help</code> Alias</th><th style="text-align: center;"><code>-?</code> 매개변수</th></tr></thead>
-<tbody>
-<tr style="vertical-align: top; overflow-wrap: break-word;"><td>
+<table style="table-layout: fixed; width: 100%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">Cmdlet 도움말 호출 방식</caption><thead><tr><th style="text-align: center;"><code>Get-Help</code> Cmdlet</th><th style="text-align: center;"><code>Help</code> Alias</th><th style="text-align: center;"><code>-?</code> 매개변수</th></tr></thead><tbody><tr style="vertical-align: top; overflow-wrap: break-word;"><td>
 
 ```powershell
 Get-Help Get-Process
 ```
-</td>
-<td>
+</td><td>
 
 ```powershell
 Help Get-Process
 ```
-</td>
-<td>
+</td><td>
 
 ```powershell
 Get-Process -?
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 Cmdlet은 사용자가 파워셸 또는 .NET을 활용하여 직접 제작하거나 온라인 커뮤니티에서 공유되고 있는 것을 가져와서 사용할 수도 있다.
 
@@ -279,12 +260,7 @@ Write-Output "Hello World!"
 ## 변수
 [변수](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_variables)(variable)는 데이터를 저장할 수 있는 공간이며, 변수명에는 달러 기호 `$`가 접두사로 붙는다. 변수명은 알파벳, 숫자, 그리고 특수문자로 구성될 수 있으며 대소문자 구분이 없다. 만일 띄어쓰기, 대시, 해시 기호 등의 특수문자를 사용하려면 중괄호 `{}`를 사용하도록 한다. 파워셸 변수는 자료형과 무관하게 `=` 기호를 사용하여 아무런 데이터를 할당받을 수 있다.
 
-<table style="table-layout: fixed; width: 80%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">파워셸 변수명 지정 예시</caption>
-<colgroup><col style="width: 50%;"><col style="width: 50%;"></colgroup>
-<thead><tr><th style="text-align: center;">일반</th><th style="text-align: center;">특수문자 적극 활용</th></tr></thead>
-<tbody>
-<tr style="vertical-align: top; overflow-wrap: break-word;"><td>
+<table style="table-layout: fixed; width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">파워셸 변수명 지정 예시</caption><colgroup><col style="width: 50%;"><col style="width: 50%;"></colgroup><thead><tr><th style="text-align: center;">일반</th><th style="text-align: center;">특수문자 적극 활용</th></tr></thead><tbody><tr style="vertical-align: top; overflow-wrap: break-word;"><td>
 
 ```powershell
 $variable = "Hello, World!"
@@ -302,9 +278,7 @@ ${var: 1-1.Sample}
 ```terminal
 Hello, World!
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 파워셸은 세 가지 유형의 변수를 제공한다:
 
