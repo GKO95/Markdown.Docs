@@ -1,5 +1,5 @@
 # 윈도우 NT
-[윈도우 NT](https://ko.wikipedia.org/wiki/윈도우_NT)(Windows NT)는 [마이크로소프트](https://ko.wikipedia.org/wiki/마이크로소프트)에서 개발한 [윈도우](https://ko.wikipedia.org/wiki/마이크로소프트_윈도우)(Windows) 계열 중 하나이며, 전세계적으로 가장 널리 사용되고 있는 현역 [운영체제](https://ko.wikipedia.org/wiki/운영체제)(operating system; OS)이다. 본래 NT는 기존 운영체제인 [MS-DOS](https://ko.wikipedia.org/wiki/MS-DOS)를 대체할 "신기술(New Technology)"을 염두하여 붙인 이름이지만, 현재는 아무런 의미가 없는 제품군 명칭으로 자리잡았다. 이름은 다소 생소할 수 있으나 사실상 배포되고 있는 거의 모든 윈도우 제품이 윈도우 NT 계열에 해당한다.
+[윈도우 NT](https://ko.wikipedia.org/wiki/윈도우_NT)(Windows NT)는 [마이크로소프트](https://ko.wikipedia.org/wiki/마이크로소프트)에서 개발한 [윈도우](https://ko.wikipedia.org/wiki/마이크로소프트_윈도우)(Windows) 계열 중 하나이며, 전세계적으로 가장 널리 사용되고 있는 현역 [운영체제](https://ko.wikipedia.org/wiki/운영체제)(operating system; OS)이다. 본래 NT는 기존 운영체제인 [MS-DOS](https://en.wikipedia.org/wiki/MS-DOS)를 대체할 "신기술(New Technology)"을 염두하여 붙인 이름이지만, 현재는 아무런 의미가 없는 제품군 명칭으로 자리잡았다. 이름은 다소 생소할 수 있으나 사실상 배포되고 있는 거의 모든 윈도우 제품이 윈도우 NT 계열에 해당한다.
 
 다음은 2023년 3월 21일 기준에 작성된 윈도우 NT 제품 목록이다.
 
@@ -13,7 +13,7 @@
 <tbody><tr style="vertical-align: top; overflow-wrap: break-word; text-align: center;"><td><a href="https://ko.wikipedia.org/wiki/윈도우_서버_2003">윈도우 서버 2003</a></td><td><a href="https://ko.wikipedia.org/wiki/윈도우_서버_2008">윈도우 서버 2008</a> (<a href="https://ko.wikipedia.org/wiki/윈도우_서버_2008_R2">R2</a>)</td><td><a href="https://ko.wikipedia.org/wiki/윈도우_서버_2012">윈도우 서버 2012</a> (<a href="https://ko.wikipedia.org/wiki/윈도우_서버_2012#윈도우_서버_2012_R2">R2</a>)</td><td><a href="https://ko.wikipedia.org/wiki/윈도우_서버_2016">윈도우 서버 2016</a></td><td><a href="https://ko.wikipedia.org/wiki/윈도우_서버_2019">윈도우 서버 2019</a></td><td><a href="https://ko.wikipedia.org/wiki/윈도우_서버_2022">윈도우 서버 2022</a></td></tr></tbody>
 </table>
 
-> 윈도우 NT와 함께 서비스 중인 운영체제로 [윈도우 IoT](https://ko.wikipedia.org/wiki/윈도우_IoT)가 있으며, 서비스 종료된 윈도우 제품으로 MS-DOS, [윈도우 9x](https://ko.wikipedia.org/wiki/윈도우_9x), [윈도우 모바일](https://ko.wikipedia.org/wiki/윈도우_모바일), 그리고 [윈도우 폰](https://ko.wikipedia.org/wiki/윈도우_폰)이 있다.
+> 윈도우 NT와 함께 서비스 중인 운영체제로 [윈도우 IoT](https://ko.wikipedia.org/wiki/윈도우_IoT)가 있으며, 단종된 윈도우 제품으로 [MS-DOS](https://github.com/microsoft/MS-DOS), [윈도우 9x](https://ko.wikipedia.org/wiki/윈도우_9x), [윈도우 모바일](https://ko.wikipedia.org/wiki/윈도우_모바일), 그리고 [윈도우 폰](https://ko.wikipedia.org/wiki/윈도우_폰)이 있다.
 
 비록 윈도우 NT는 클라이언트와 서버로 운영체제가 구분되지만 동일한 빌드의 커널을 사용한다. 예시로 윈도우 8.1과 윈도우 서버 2012 R2 운영체제의 커널은 빌드 9600으로 일치한다. 핵심 커널은 같지만 두 운영체제로 나뉘어진 이유는 성능 최적화 대상과 목적, 그리고 이에 따른 기술 사양과 기능에 차이가 존재하기 때문이다.
 
