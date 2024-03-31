@@ -14,7 +14,4 @@
 
 ![프로세스 모니터의 부트 로깅 활성화 창](./images/sysinternals_procmon_bootlog.png)
 
-부트 로깅이 활성화되면 PROCMON.sys 드라이버는 [HKLM\System\CurrentControlSet\Services](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree) 레지스트리 키에 부팅(Start: 0x0) 시 실행되는 커널(Type: 0x1) 서비스로 등록된다. 부트 로깅 당시에 수집된 데이터는 `%SystemRoot%\Procmon.PMB` 파일에 저장된다.
-
-## 프로세스 트리
-프로세스 모니터가 캡처를 시작할 때부터 프로세스가 실행 그리고/또는 종료된 시점이 함께 기록되므로, 이를 기반하여 각 프로세스의 생명주기와 이미 종료된 프로세스의 부모와 자식 관계까지 파악할 수 있다.
+부트 로깅이 활성화되면 PROCMON.sys 드라이버는 부팅 시 실행되는 커널 [서비스](Service.md#서비스-제어-관리자)로 등록된다. 부트 로깅 시 수집된 데이터는 `%SystemRoot%\Procmon.PMB` 파일에 저장된다.
