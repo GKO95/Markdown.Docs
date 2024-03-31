@@ -27,14 +27,7 @@
 \\Machine\Object(Instance)\Counter
 ```
 
-<table style="table-layout: fixed; width: 100%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">성능 모니터의 카운터 구성</caption>
-<colgroup><col style="width: 25%;"/><col style="width: 25%;"/><col style="width: 25%;"/><col style="width: 25%;"/></colgroup>
-<thead><tr><th style="text-align: center;"><code>Machine</code></th><th style="text-align: center;"><code>Object</code></th><th style="text-align: center;"><code>Instance</code></th><th style="text-align: center;"><code>Counter</code></th></tr></thead>
-<tbody><tr style="text-align: center;">
-<td>로컬 혹은 원격 머신</td><td>시스템 객체 (일명 카운터집합; counterset)<br/><sub style="font-style: italic;">프로세서, 프로세스, 메모리, 디스크, 네트워크 등</sub></td><td>시스템 객체의 세부 항목 (일명 인스턴스)<br/><sub style="font-style: italic;">CPU 코어 번호, 프로세스명, 디스크 드라이브 등</sub></td><td>시스템 객체의 상태 및 활동 데이터<br/><sub style="font-style: italic;">CPU 사용량, 프로세스 메모리 점유율, 디스크 전송률 등</sub></td>
-</tr></tbody>
-</table>
+<table style="table-layout: fixed; width: 100%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">성능 모니터의 카운터 구성</caption><colgroup><col style="width: 25%;"/><col style="width: 25%;"/><col style="width: 25%;"/><col style="width: 25%;"/></colgroup><thead><tr><th style="text-align: center;"><code>Machine</code></th><th style="text-align: center;"><code>Object</code></th><th style="text-align: center;"><code>Instance</code></th><th style="text-align: center;"><code>Counter</code></th></tr></thead><tbody><tr style="text-align: center;"><td>로컬 혹은 원격 머신</td><td>시스템 객체 (일명 카운터집합; counterset)<br/><sub style="font-style: italic;">프로세서, 프로세스, 메모리, 디스크, 네트워크 등</sub></td><td>시스템 객체의 세부 항목 (일명 인스턴스)<br/><sub style="font-style: italic;">CPU 코어 번호, 프로세스명, 디스크 드라이브 등</sub></td><td>시스템 객체의 상태 및 활동 데이터<br/><sub style="font-style: italic;">CPU 사용량, 프로세스 메모리 점유율, 디스크 전송률 등</sub></td></tr></tbody></table>
 
 성능 카운터로부터 데이터를 수신받는 주체를 소비자(consumer)라고 부르며 성능 모니터 이외에도 [작업 관리자](https://ko.wikipedia.org/wiki/작업_관리자), [리소스 모니터](https://en.wikipedia.org/wiki/Resource_Monitor), [`logman.exe`](#logman) 등의 프로그램이 해당한다. 반면, 소비자가 호출한 카운터의 성능 데이터를 생성 및 발행하는 소프트웨어 구성요소를 제공자(provider)라고 부른다. [윈도우 비스타](https://ko.wikipedia.org/wiki/윈도우_비스타)를 기점으로 사용자 모드 제공자는 두 버전으로 나뉘어진다.
 
