@@ -32,11 +32,11 @@
 
 <table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">페이징 기법 및 설명</caption><colgroup><col style="width: 15%;"/><col style="width: 25%;"/><col style="width: 60%;"/></colgroup><thead><tr><th style="text-align: center;">메모리 페이징</th><th style="text-align: center;">방향성</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;">페이징 아웃<br/>(Paging out)</td><td style="text-align: center;">물리 메모리 → 페이징 파일</td><td>오랜 시간 물리 메모리에서 사용되지 않은 페이지를 저장 장치의 페이징 파일로 옮겨 메모리 여유를 확보한다.</td></tr><tr><td style="text-align: center;">페이징 인<br/>(Paging in)</td><td style="text-align: center;">페이징 파일 → 물리 메모리</td><td>페이징 파일은 저장 장치의 기술적 한계로 물리 메모리를 대체할 수 없으므로, 참조되어야 할 페이지는 물리 메모리로 복귀된다.</td></tr></tbody></table>
 
-윈도우 OS는 페이징 파일 크기를 설정할 수 있으며 View advanced system settings 검색 (혹은 `systempropertiesadvanced.exe` 실행) 이후에 *Performance* 그룹의 설정 버튼을 클릭한다. Performance Options 창이 나타나면 Advanced 탭으로 이동하여 *Virtual memory* 그룹 하에 변경 버튼을 클릭한다.
+페이징 파일 크기를 설정하려면 **고급 시스템 설정 보기** 검색 (혹은 `systempropertiesadvanced.exe` 실행) 이후에 *성능* 그룹의 "설정 (<u>S</u>)..." 버튼을 클릭한다. 나타난 **성능 옵션** 창의 고급 탭으로 이동하여 *가상 메모리* 그룹 하에 "변경 (<u>C</u>)..." 버튼을 클릭한다.
 
 ![가상 메모리 다이얼로그 창](./images/memory_pagefile.png)
 
-> 시스템은 기본적으로 "Automatically manage paging file size for all drives" 체크 박스가 설정되어 있으며, 이는 OS 드라이브만 *시스템이 관리하는 크기*인 한편 나머지는 *페이징 파일 없음*과 동일하다.
+> 시스템은 기본적으로 "모든 드라이브에 대한 페이징 파일 크기 자동 관리 (<u>A</u>)" 체크 박스가 설정되어 있으며, 이는 OS 드라이브만 *시스템이 관리하는 크기*인 한편 나머지는 *페이징 파일 없음*과 동일하다.
 
 다음은 각 드라이브마다 설정할 수 있는 페이징 파일 크기에 대한 세 가지 선택지를 소개한다:
 
