@@ -51,15 +51,22 @@
 [세션 관리자](https://ko.wikipedia.org/wiki/세션_관리자_하위_시스템)(Session Manager; smss.exe)는 윈도우 운영체제에서 가장 최초로 생성되는 사용자 모드 프로세스이다.
 
 ## 핸들
-[핸들](https://ko.wikipedia.org/wiki/핸들_(컴퓨팅))(handle)은 프로세스가 파일이나 오브젝트와 같은 리소스에 접근하거나 불러오기 위해 사용하는 추상적인 [참조](C.md#포인터)이다. 일반적으로 핸들을 아래와 같이 선언한다.
+> *참고: [Pushing the Limits of Windows: Handles - Microsoft Community Hub](https://techcommunity.microsoft.com/t5/windows-blog-archive/pushing-the-limits-of-windows-handles/ba-p/723848)*
 
-```c
-typedef void* HANDLE;
-```
+**[핸들](https://en.wikipedia.org/wiki/Handle_(computing))**(handle)은 프로세스 차원에서 [파일](FileSystem.md)이나 [레지스트리](Registry.md) 등의 [커널 객체](Kernel.md#커널-객체) 리소스를 접근할 수 있도록 하는 "추상적인" [참조](C.md#포인터)이다. 할당된 커널 객체의 포인터는 사용자 모드에 직접 노출되지 않는 대신 연동된 핸들을 통해 객체를 참조하도록 설계되었다. [커널 모드](Processor.md#권한-수준)에는 각 프로세스마다 주어진 **핸들 테이블**이 존재하며, 핸들과 해당 커널 객체의 포인터를 아래와 같이 관리한다.
 
-비록 핸들은 `void` 자료형 포인터로 나타날지언정, 가상 메모리상 데이터가 위치한 주소를 직접적으로 가리키는 포인터와 엄밀히 다른 존재이다. 가상 주소 공간 안에는 리소스들의 포인터가 나열된 배열 혹은 테이블이 있는데, 여기서 원하는 리소스에 접근하기 위한 테이블 진입점을 색인하는 요소가 바로 핸들이다. 만일 어떠한 이유로 리소스 포인터가 바뀌었다 하여도, 테이블에서의 해당 리소스 진입점은 여전하기 때문에 핸들의 유효성이 그대로 유지된다는 점에서 "추상적"인 참조라고 언급하였다.
+<table style="width: 65%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">핸들 테이블을 묘사한 예시</caption><colgroup><col style="width: 10%;"/><col style="width: 30%;"/><col style="width: 30%;"/><col style="width: 30%;"/></colgroup><thead><tr><th style="text-align: center;">인덱스</th><th style="text-align: center;">커널 객체 포인터</th><th style="text-align: center;">접근 마스크</th><th style="text-align: center;">플래그</th></tr></thead><tbody><tr><td style="text-align: center;">1</td><td style="text-align: center;">0xF0000000</td><td style="text-align: center;">0x????????</td><td style="text-align: center;">0x00000000</td></tr><tr><td style="text-align: center;">2</td><td style="text-align: center;">NULL</td><td style="text-align: center;">(N/A)</td><td style="text-align: center;">(N/A)</td></tr><tr><td style="text-align: center;">3</td><td style="text-align: center;">0xF0000010</td><td style="text-align: center;">0x????????</td><td style="text-align: center;">0x00000001</td></tr></tbody><caption style="caption-side: bottom; text-align: left;"><i><sub>† 출처: <a href="https://www.oreilly.com/library/view/windows-via-cc/9780735639904/ch03s02.html">A Process’ Kernel Object Handle Table - Windows® via C/C++, 5th Edition</a></sub></i></caption></table>
 
-리소스의 핸들을 생성 및 제거하는 것을 각각 열고(open) 닫는다(close)고 표현한다. 더 이상 사용되지 않는 리소스의 열린 핸들을 전부 닫아주지 않으면 프로세스가 종료될 때까지 테이블 및 메모리에 리소스가 계속 잔여하는 [핸들 누수](https://ko.wikipedia.org/wiki/핸들_누수)(handle leak) 문제가 발생한다.
+커널 객체의 접근을 위해 [CreateFile](https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-createfilew), [CreateNamedPipe](https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-createnamedpipea) 등의 함수를 호출할 시, 만일 핸들 테이블에 존재하지 않으면 (접근 마스크 및 플래그 일치 여부 포함) 해당 커널 객체를 위한 메모리를 초기화하고 새로운 인덱스 번호를 할당 및 반환한다. 즉, 테이블의 인덱스가 바로 핸들이며 테이블에 의해 매핑된 커널 객체로 접근이 가능한 것이다.
+
+핸들은 포인터와 달리 추상적으로 참조하여 다음과 같은 특성을 지닌다.
+
+1. 핸들 테이블은 프로세스마다 각각 존재하며, 이들의 인덱스(즉, 핸들)와 커널 객체 포인터 간의 매핑은 서로 상이한다.
+1. 한 커널 객체에 대한 핸들은 프로세스마다 다르기 때문에, 해당 데이터의 무단 접근은 기존 핸들을 단순히 타 프로세스로 전달하는 걸로 불가하다.
+
+커널 객체의 포인터에 핸들을 연동 및 끊는 행위를 "핸들을 열다(open)" 그리고 "핸들을 닫다(close)"라고 표현한다. 만일 더 이상 사용하지 않는 핸들을 제때 닫지 않으면 커널 객체가 잔여하여 [핸들 누수](https://en.wikipedia.org/wiki/Handle_leak)가 일어나고, 상황에 따라 [메모리 누수](https://en.wikipedia.org/wiki/Memory_leak)를 함께 야기한다.
+
+* 같이 보기: *[Debug Tutorial Part 5: Handle Leaks - CodeProject](https://www.codeproject.com/articles/6988/debug-tutorial-part-5-handle-leaks)*
 
 # 스레드
 [스레드](https://ko.wikipedia.org/wiki/스레드_(컴퓨팅))(thread)는 프로세스의 프로그램 이미지 코드를 실행하기 위해 [CPU](Processor.md)에서 처리할 수 있는 작업 흐름의 단위이다. 프로세스는 기본적으로 하나의 스레드를 갖는데 개발자의 설계에 의해 추가로 생성하여 두 개 이상의 스레드를 활용할 수 있고, 동일한 가상 주소 공간에 상주하기 때문에 서로의 리소스를 아무런 제약없이 공유할 수 있다. 그러나 프로세스에는 최소한 하나의 스레드가 존재해야 하므로, 모든 스레드가 종료되면 해당 프로세스는 자동적으로 함께 종료된다.

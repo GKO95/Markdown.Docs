@@ -49,6 +49,29 @@ Executive는 특정 작업을 수행하는 여러 구성원들로 이루어진 n
 
 다시 말해, 한 프로세스에 관여된 커널 객체의 핸들을 모두 닫아도 타 프로세스에 열린 핸들이 있다면 해당 객체는 시스템에 의해 제거되지 않고 존재를 유지한다. 하지만 포인터 참조 카운트 개수에 특이 사항이 발견되면 중지코드 [0x18 REFERENCE_BY_POINTER](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0x18--reference-by-pointer) 사유의 [BSOD](BSOD.md)가 발생한다.
 
+다음은 [커널 메모리 덤프](Dump.md#커널-메모리-덤프)로부터 notepad.exe 프로세스의 커널 객체 일부에 대한 핸들 및 포인터 카운트를 살펴본 예시이다.
+
+```windbg
+0: kd> !handle 0 f ffff86023505c0c0
+
+PROCESS ffff86023505c0c0
+    SessionId: 1  Cid: 1c98    Peb: 5f0b2f4000  ParentCid: 1320
+    DirBase: 290be000  ObjectTable: ffffb101ae3cab00  HandleCount: 245.
+    Image: notepad.exe
+
+Handle table at ffffb101ae3cab00 with 245 entries in use
+
+0004: Object: ffff86023592ffe0  GrantedAccess: 001f0003 (Protected) (Inherit) Entry: ffffb101af4f8010
+Object: ffff86023592ffe0  Type: (ffff86022dace6c0) Event
+    ObjectHeader: ffff86023592ffb0 (new version)
+        HandleCount: 1  PointerCount: 32768
+
+0008: Object: ffff8602359300e0  GrantedAccess: 001f0003 (Protected) (Inherit) Entry: ffffb101af4f8020
+Object: ffff8602359300e0  Type: (ffff86022dace6c0) Event
+    ObjectHeader: ffff8602359300b0 (new version)
+        HandleCount: 1  PointerCount: 32769
+```
+
 ## 입출력 관리자
 **[입출력 관리자](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/windows-kernel-mode-i-o-manager)**(I/O manager)
 
