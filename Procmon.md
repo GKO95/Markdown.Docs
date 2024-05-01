@@ -10,8 +10,8 @@
 프로세스 모니터는 런타임 때 PROCMON.sys [드라이버](Driver.md#드라이버)를 `%WinDir%\System32\Drivers` 디렉토리에 생성 및 설치하기 위해 반드시 관리자 권한으로 실행된다. 해당 드라이버는 [사용자](Processor.md#권한-수준)와 [커널 모드](Processor.md#권한-수준)의 시스템 정보를 가져오는 데 필요하며, 프로세스 모니터가 실행되면 [System](Process.md#시스템-프로세스) 프로세스에 로드된다.
 
 ## 부트 로깅
-**부트 로깅**(boot logging)은 프로세스 모니터가 제공하는 기능 중 하나이며, [세션 관리자](Process.md#세션-관리자)가 시작하는 시점부터 [부팅](Boot.md) 과정에서 발생한 이벤트들을 수집 및 기록한다. GUI 창의 메뉴에서 Options > Enable Boot Logging으로 이동하면 아래와 같은 화면이 나타난다.
+**부트 로깅**(boot logging)은 프로세스 모니터가 제공하는 기능 중 하나이며, [세션 관리자](Process.md#세션-관리자)가 시작하는 시점부터 [부팅](Boot.md) 과정에서 발생한 이벤트들을 수집 및 기록한다. GUI 창의 메뉴에서 Options > Enable Boot Logging으로 이동하여 나타나는 아래 화면에서, 또는 명령어로 /EnableBootLogging 옵션을 주어 설정할 수 있다.
 
 ![프로세스 모니터의 부트 로깅 활성화 창](./images/sysinternals_procmon_bootlog.png)
 
-부트 로깅이 활성화되면 PROCMON.sys 드라이버는 부팅 시 실행되는 커널 [서비스](Service.md#서비스-제어-관리자)로 등록된다. 부트 로깅 시 수집된 데이터는 `%SystemRoot%\Procmon.PMB` 파일에 저장된다.
+부트 로깅이 활성화되면 PROCMON.sys 드라이버가 커널 [서비스](Service.md#서비스-제어-관리자)로 등록되어 부팅 시 실행된다. 수집되는 부트 로그는 `%SystemRoot%\Procmon.PMB` 파일로 저장되며, 프로세스 모니터가 해당 파일의 존재를 발견하면 사용자로부터 로그로 저장할 지 여부를 확인한다. 명령어로는 /ConvertBootLog 옵션과 함께 로그 파일명을 지정하여 저장할 수 있다.
