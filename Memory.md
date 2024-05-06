@@ -1,18 +1,23 @@
 # 메모리
-**[메모리](https://en.wikipedia.org/wiki/Computer_memory)**(memory)는 시스템에서 즉각적으로 사용할 데이터를 저장하는 [하드웨어](https://en.wikipedia.org/wiki/Computer_hardware)이며, 대표적으로 [RAM](https://ko.wikipedia.org/wiki/랜덤_액세스_메모리)이 있다. 메모리는 작업 속도가 매우 빠르며 [휘발성](https://en.wikipedia.org/wiki/Volatile_memory)인 특징을 가지고 있다. 또한 [프로세서](Processor.md)와 물리적으로 근접하여 연산시 데이터 접근 속도가 순식간이기 때문에 단기기억 역할을 담당한다. 그러므로 메모리는 시스템의 성능을 결정하는 중요한 요소로 작용한다.
+**[메모리](https://en.wikipedia.org/wiki/Computer_memory)**(memory)는 시스템에서 즉각적으로 사용할 데이터를 저장하는 공간이다. 흔히 물리 메모리 (일명 주요 메모리)인 [RAM](https://ko.wikipedia.org/wiki/랜덤_액세스_메모리)을 언급하는 경우가 대다수이며, 작업 속도가 매우 빠르고 [휘발성](https://en.wikipedia.org/wiki/Volatile_memory)인 특징을 가지고 있다. 또한 [프로세서](Processor.md)와 물리적으로 근접하여 연산시 데이터 접근 속도가 순식간이기 때문에 단기기억 역할을 담당한다. 그러므로 메모리는 시스템의 성능을 결정하는 중요한 요소로 작용한다.
 
-> [HDD](Storage.md#디스크) 및 [SSD](https://ko.wikipedia.org/wiki/솔리드_스테이트_드라이브) 등의 [저장 장치](Storage.md)도 데이터를 저장하는 메모리로 분류되지만, 작업 속도가 느리고 [비휘발성](https://en.wikipedia.org/wiki/Non-volatile_random-access_memory)인 관계로 "보조 메모리"라고 부른다.
+다음은 물리 메모리 (일명 주요 메모리)를 제외한 다른 유형의 메모리를 각각 소개한다.
 
-메모리의 이해를 돕기 위해 아래 [작업 관리자](https://ko.wikipedia.org/wiki/작업_관리자) 그림을 예시로 사용하여 설명한다.
+* [보조 메모리](Storage.md): *데이터를 오래 저장할 수 있는 [비휘발성](https://en.wikipedia.org/wiki/Non-volatile_random-access_memory) 메모리이며, 대표적으로 [HDD](Storage.md#디스크) 및 [SSD](https://ko.wikipedia.org/wiki/솔리드_스테이트_드라이브) 등의 저장 장치가 해당한다.*
+* [가상 메모리](#가상-메모리): *하드웨어 실존 여부와 무관하게 [운영체제](https://en.wikipedia.org/wiki/Operating_system)로부터 표현된 메모리이며, 구성원으로 [페이징 파일](#페이징-파일)이 존재한다.*
+
+각 메모리가 의미하는 바가 무엇인지 이해를 돕기 위해 다음 8 GB 물리 메모리가 설치된 시스템의 [작업 관리자](https://ko.wikipedia.org/wiki/작업_관리자)를 예시로 설명한다.
 
 ![작업 관리자에서 확인한 메모리 성능 (<a href="https://ko.wikipedia.org/wiki/윈도우_11">윈도우 11</a>, 버전 22H2)](./images/memory_taskmgr.png)
 
-48 GB의 물리 메모리(즉, RAM)가 설치된 본 시스템은 47.9 GB를 활용하며, 그 중에서 8.6 GB가 사용 중이고 나머지 39.0 GB는 [사용 가능](#사용-가능한-메모리)하다. 사용 중인 메모리에서 공간 절약이 가능하다면 압축을 하는데, 괄호 안의 38.4 MB는 결과적으로 [압축된 메모리](Process.md#시스템-프로세스) 크기를 가리킨다.
+시스템의 실질적 메모리 사용은 4.2 GB이며, 아래와 같이 수치를 살펴볼 수 있다. 자세한 내용을 이해하려면 하기 부문들을 읽기를 적극 권장한다.
+
+<table style="table-layout: fixed; width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">물리 메모리의 구성원 소개</caption><colgroup><col style="width: 15%;"/><col style="width: 12%;"/><col style="width: 8%;"/><col/></colgroup><thead><tr><th style="text-align: center;">메모리 구성</th><th style="text-align: center;">그룹</th><th style="text-align: center;">유형</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><b><a href="#작업-집합">사용 중</a></b><br/>(1.2 GB)</td><td style="text-align: center;">-</td><td style="text-align: center;">-</td><td><a href="Kernel.md">커널</a> 및 <a href="Driver.md">드라이버</a>, <a href="Process.md#프로세스">프로세스</a>을 포함한 시스템 전반에서 사용 중인 물리 메모리 크기이다.<ul><li>사용 중인 메모리 내에서도 공간 절약이 가능하여 <a href="Process.md#시스템-프로세스">압축</a>된 메모리는 151 MB이다.</li></ul></td></tr><tr><td rowspan="3" style="text-align: center;"><b>사용 가능</b><br/>(2.4 GB)</td><td rowspan="2" style="text-align: center;"><i>여유</i><br/>(448 MB)</td><td style="text-align: center;">영값</td><td>메모리가 전부 영값으로 비워져 (혹은 채워져) 아무런 데이터가 없어 곧장 사용될 수 있다.<ul><li>오로지 영값으로 정리된 페이지만 타 프로그램에서 확보하여 사용할 수 있다.</li></ul></td></tr><tr><td style="text-align: center;">해제</td><td>프로그램이 종료되면서 함께 해제된 메모리이다. 당시 데이터가 잔여하기 때문에 차후 시스템 스레드에 의해 영값으로 정리된다.<ul><li>영값 페이지가 고갈될 시 대신 제공하지만, 데이터를 정리하는 데 시간이 다소 소모된다.</li></ul></td></tr><tr><td rowspan="2" style="text-align: center;"><i><a href="https://en.wikipedia.org/wiki/Cache_(computing)">캐시</a></i><br/>(2.5 GB)</td><td style="text-align: center;">대기</td><td>물리 메모리에 프로세스의 가상 메모리와 매핑되었을 당시 데이터가 잔여하여, 만일 프로세스가 해당 페이지를 다시 필요할 경우 단순 매핑만으로 곧바로 사용할 수 있다.</td></tr><tr><td style="text-align: center;"><b>기타</b><br/>(544 MB)</td><td style="text-align: center;">수정</td><td>물리 메모리에 프로세스의 가상 메모리와 매핑되었을 당시 데이터를 먼저 디스크에 저장을 완료한 다음에 대기 페이지로 전환되기 때문에 <i>사용 중</i> 또는 <i>사용 가능</i> 메모리에 속하지 않는다.</td></tr></tbody></table>
 
 ## 가상 메모리
-**[가상 메모리](https://en.wikipedia.org/wiki/Virtual_memory)**(virtual memory)는 일종의 [메모리 관리](https://en.wikipedia.org/wiki/Memory_management_(operating_systems)) 기술이며, 컴퓨터에 탑재된 실제 물리 메모리와 무관하게 [운영체제](https://en.wikipedia.org/wiki/Operating_system)에 의해 표현된 "가상"의 메모리이다. 운영체제에서 실행된 ([커널](Kernel.md)을 포함한) 모든 프로그램들은 가상 메모리에서 실행되며, 가상 메모리의 [주소](#가상-주소-공간)는 프로세서에 탑재된 [MMU](Processor.md#메모리-관리-장치)에 의해 물리 메모리의 주소로 매핑되어 사용된다. 그리고 가상 메모리는 운영체제가 관리하는 [*가상 주소 공간*](Process.md#가상-주소-공간)에서 할당된다.
+**[가상 메모리](https://en.wikipedia.org/wiki/Virtual_memory)**(virtual memory)는 일종의 [메모리 관리](https://en.wikipedia.org/wiki/Memory_management_(operating_systems)) 기술이며, 컴퓨터에 탑재된 실제 물리 메모리와 무관하게 [운영체제](https://en.wikipedia.org/wiki/Operating_system)에 의해 표현된 "가상"의 메모리이다. ([커널](Kernel.md)을 포함한) 모든 프로그램들은 가상 메모리에서 실행되며, 각 프로세스마다 주어진 [가상 주소 공간](Process.md#가상-주소-공간)(일명 VAS)에 메모리를 할당받는다. 가상 공간에 할당된 메모리의 주소는 프로세서에 내장된 [MMU](https://en.wikipedia.org/wiki/Memory_management_unit)에 의해 물리 메모리의 주소로 변환되어 접근된다.
 
-> 가상 주소 공간(virtual address space; VAS)은 매우 중요한 개념 중 하나이지만, 자세한 내용은 *[프로세스](Process.md)* 문서를 참고하도록 한다.
+> 윈도우 운영체제의 가상 메모리는 "물리 메모리 + [페이징 파일](#페이징-파일)"로 구성되며, 후자는 차후 본문에서 소개할 예정이다.
 
 가상 메모리를 활용한 시스템은 다음과 같은 이점을 지닌다:
 
@@ -21,12 +26,28 @@
 1. 메모리 격리에 의한 시스템 보안 강화
 
 ### 페이지
-**[페이지](https://en.wikipedia.org/wiki/Page_(computer_memory))**(page)는 가장 작은 단위의 가상 메모리 블록이며, 이와 매핑된 하나의 물리 메모리 조각을 **[페이지 프레임](https://en.wikipedia.org/wiki/Page_(computer_memory))**(page frame) 또는 간단히 **프레임**(frame)이라고 부른다. 일반적으로 페이지 (및 프레임) 크기는 4 KB로 고정된다. 페이지에는 세 가지 [상태](https://learn.microsoft.com/en-us/windows/win32/memory/page-state)가 존재하며, 이에 따라 가상 메모리의 가용 여부가 결정된다.
+**[페이지](https://en.wikipedia.org/wiki/Page_(computer_memory))**(page)는 운영체제에서 관리하는 가장 작은 단위의 가상 메모리 조각이며, 일반적으로 4 KB로 고정된다. 페이지와 일대일 매핑된 물리 메모리의 주소 영역을 **[페이지 프레임](https://en.wikipedia.org/wiki/Page_(computer_memory))**(page frame; 일명 프레임)이라고 부른다. 페이지에는 세 가지 [상태](https://learn.microsoft.com/en-us/windows/win32/memory/page-state)가 존재하며, 이에 따라 가상 메모리의 가용 여부가 결정된다.
 
-<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">가상 메모리의 페이지 상태</caption><colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup><thead><tr><th style="text-align: center;">상태</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;">여유<br/>(Free)</td><td>사용되고 있지 않는 가상 메모리이다.</td></tr><tr><td style="text-align: center;">예약됨<br/>(Reserved)</td><td>가상 주소 공간에 할당되었으나, 시스템 성능에 실질적으로 기여하지 않는 가상 메모리이다.</td></tr><tr><td style="text-align: center;"><a href="https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/introduction-to-the-page-file#system-committed-memory">커밋됨</a><br/>(Committed)</td><td>가상 주소 공간에는 할당된 동시에 시스템 성능에 실질적으로 기여하는 가상 메모리이다. 해당 페이지에 R/W 작업이 있기 전에는 물리 메모리가 매핑되지 않는다. "물리 메모리 + <a href="#페이징-파일">페이징 파일</a>"이 커밋 한도(commit limit)이다.</td></tr></tbody></table>
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">가상 메모리의 페이지 상태</caption><colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup><thead><tr><th style="text-align: center;">상태</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;">여유<br/>(Free)</td><td>사용되고 있지 않는 가상 메모리이다.</td></tr><tr><td style="text-align: center;">예약됨<br/>(Reserved)</td><td>가상 주소 공간에 할당되었으나, 시스템 성능에 실질적으로 기여하지 않는 가상 메모리이다. 힙 메모리 간에</td></tr><tr><td style="text-align: center;"><a href="https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/introduction-to-the-page-file#system-committed-memory">커밋됨</a><br/>(Committed)</td><td>가상 주소 공간에는 할당된 동시에 시스템 성능에 실질적으로 기여하는 가상 메모리이다. 해당 페이지에 R/W 작업이 있기 전에는 물리 메모리가 매핑되지 않는다. "물리 메모리 + <a href="#페이징-파일">페이징 파일</a>"이 커밋 한도(commit limit)이다.</td></tr></tbody></table>
 
-## 페이징 파일
-**[페이징 파일](https://learn.microsoft.com/en-us/windows/client-management/introduction-page-file)**(page file)은 [가상 메모리](#가상-메모리)의 [페이지](Process.md#페이지)를 물리 메모리가 아닌 [HDD](https://en.wikipedia.org/wiki/Hard_disk_drive)나 [SSD](https://en.wikipedia.org/wiki/Solid-state_drive)와 같은 [저장 장치](Storage.md)로 전달받을 수 있는 pagefile.sys 파일이다. 프로그램을 실행하거나 저장된 파일을 열 때 물리 메모리에 로드되지만, 파일을 편집하였으나 아직 저장되지 않는 등의 경우에는 아예 페이징 파일에서 처리되는 경향이 있다. 물리 메모리 용량이 대폭 증가하며 페이징 파일의 입지는 예전에 비해 상당히 퇴색되었으나, 일부 프로그램이나 메모리 덤프 수집에 여전히 필요한 존재이다.
+### 주소 변환
+
+## 작업 집합
+**[작업 집합](https://en.wikipedia.org/wiki/Working_set)**(working set)은 커밋된 가상 메모리 중에서 물리 메모리에 상주하는 페이지들을 가리킨다.
+
+> 그러므로 작업 관리자의 *사용 중* 메모리는 시스템 전반의 작업 집합을 의미한다.
+
+프로세서에 의해 처리되어야 할 코드는 반드시 (페이징 파일이 아닌) 물리 메모리에 상주해야 하기 때문에 작업 집합은 시스템 성능과 직결된다. 온전한 시스템 성능을 유지하는 차원에서, 운영체제는 작업 집합이 특정 크기에 도달하였을 경우 (즉, 물리 메모리가 고갈되려 할 때) 오랜 기간동안 사용되지 않은 페이지를 "트리밍(trimming)"한다. 간단히 말해, 물리 메모리에 상주하는 일부 페이지를 다른 [임시 공간](#페이징-파일)에 옮겨 여유 공간을 확보하는 작업이다.
+
+트리밍이 된 페이지는 물리 메모리에 더 이상 매핑되지 않아, 만일 해당 페이지을 시도하면 [페이지 부재](https://en.wikipedia.org/wiki/Page_fault)가 발생한다. 다만, 운영체제가 메모리를 관리하는 과정에서 일어나는 매우 자연스러운 현상이기 때문에 일반적인 경우에는 문제가 되지 않는다.
+
+1. [마이너 페이지 부재](https://en.wikipedia.org/wiki/Page_fault#Minor): 접근하려는 페이지가 아직 물리 메모리에 상주하는 경우
+1. [메이저 페이지 부재](https://en.wikipedia.org/wiki/Page_fault#Major): 접근하려는 페이지가 (물리 메모리에 찾을 수 없어) 저장 장치의 페이징 파일로부터 불러와야 할 경우
+
+마이너와 메이저는 각각 소프트 및 하드 페이지 부재라고도 불리며, 전자는 물리 메모리 내에서 처리되기 때문에 상대적으로 훨씬 빨리 해결될 수 있다.
+
+### 페이징 파일
+**[페이징 파일](https://learn.microsoft.com/en-us/windows/client-management/introduction-page-file)**(page file)은 가상 메모리의 페이지를 물리 메모리가 아닌 [HDD](https://en.wikipedia.org/wiki/Hard_disk_drive)나 [SSD](https://en.wikipedia.org/wiki/Solid-state_drive)와 같은 [저장 장치](Storage.md)로 전달받을 수 있는 pagefile.sys 파일이다. 프로그램을 실행하거나 저장된 파일을 열 때 물리 메모리에 로드되지만, 파일을 편집하였으나 아직 저장되지 않는 등의 경우에는 아예 페이징 파일에서 처리되는 경향이 있다. 물리 메모리 용량이 대폭 증가하며 페이징 파일의 입지는 예전에 비해 상당히 퇴색되었으나, 일부 프로그램이나 메모리 덤프 수집에 여전히 필요한 존재이다.
 
 물리 메모리와 페이징 파일 간 데이터가 이동하는 [페이징](https://en.wikipedia.org/wiki/Memory_paging) 기법에 대하여 간랸히 설명한다.
 
@@ -50,41 +71,7 @@
 
     [커널](Dump.md#커널-메모리-덤프), [전체](Dump.md#전체-메모리-덤프), 그리고 [활성 메모리 덤프](Dump.md#활성-메모리-덤프)로 구성되었으면 [BSOD](BSOD.md) 발생 시 덤프를 모두 수집할 수 있도록 페이징 파일 크기를 물리 메모리와 동일하게 조정한다. [자동 메모리 덤프](Dump.md#자동-메모리-덤프)일 경우, 커널 주소 공간을 수집하는 데 일반적으로 충분하다고 판단되는 크기로 조정한다. 반면 불충분하다면 `PagefileTooSmall` 레지스트리 서브키를 생성하는데, 해당 레지스트리 값의 존재 여부에 따라 [부팅](Boot.md) 때 페이징 파일 크기를 물리 메모리와 동일하게 설정한다.
 
-3. **페이징 파일 없음**(No paging file)
-
-## 작업 집합
-**[작업 집합](https://en.wikipedia.org/wiki/Working_set)**(working set)은 프로세스의 사용자 및 커널 공간을 불문하고 [가상 주소 공간](Process.md#가상-주소-공간) 전체에 [커밋된 메모리](#커밋된-메모리)(= 개인 메모리 + 공유 메모리) 중에서 오로지 RAM에만 상주하고 있는 페이지를 가리킨다.
-
-> 작업 관리자에서 사용 중(in use)인 RAM 크기에 대응하지만, `\Process(_Total)\Working Set` 카운터는 공유 메모리가 중복 계산되어 더 크게 측정된 점을 유의하도록 한다.
-
-운영체제는 건전한 시스템 상태를 유지하기 위해, 작업 집합이 특정 크기에 도달하면 오랜 기간동안 사용되지 않은 메모리를 페이징 아웃시키는 트리밍(trimming) 작업을 진행한다. [메모리 관리자](https://ko.wikipedia.org/wiki/메모리_관리_장치)는 프로세스 혹은 [스레드](Process.md#스레드)에 주어진 [메모리 우선순위](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/ns-processthreadsapi-memory_priority_information)에 따라 낮은 순위부터 트리밍한다. 트리밍은 실행 중인 모든 프로세스에 거쳐 처리되는데, 이는 권한이 매우 높은 작업으로 트리밍이 전부 끝날 때까지 기다려야 한다.
-
-### 페이지 부재
-**[페이지 부재](https://ko.wikipedia.org/wiki/페이지_부재)**(page fault)는 프로세스의 페이지를 접근하려 하나 작업 집합에 존재하지 않는 경우를 가리키며, 운영체제가 메모리를 관리하는 과정에서 일어나는 매우 자연스러운 현상이다. 페이지 부재는 하드웨어적 그리고 소프트웨어적 페이지 부재로 나뉘어진다.
-
-* **하드 페이지 부재**: 일명 *메이저 페이지 부재*; 접근하려는 데이터가 보조기억장치의 페이징 파일로 상주하는 경우
-* **소프트 페이지 부재**: 일명 *마이너 페이지 부재*; 접근하려는 데이터가 물리 메모리에 상주하나 [모종의 이유](#캐시-메모리)로 본래와 다른 곳에 위치하는 경우
-
-하드 페이지 부재는 페이징 작업이 필요한 반면, 소프트 페이지 부재는 물리 메모리 내에서 처리되기 때문에 상대적으로 훨씬 빨리 해결될 수 있다.
-
-## 사용 가능한 메모리
-RAM 중에서 사용 중인 영역이 있으면 이와 반대로 사용 가능한 메모리(available memory) 영역도 존재한다. 사용 가능한 메모리는 작업 관리자에 표시된 메모리 구성(memory composition), [리소스 모니터](https://en.wikipedia.org/wiki/Resource_Monitor), 혹은 Sysinternals의 [RAMMap](RAMMap.md) 유틸리티 프로그램 등으로 확인할 수 있다.
-
-![리소스 모니터에 표시된 프로세스 및 실제 RAM의 메모리 구성별 사용량](./images/memory_resmon.png)
-
-커밋 총량에 비해 사용 가능한 메모리가 다소 여유로울 수 있는데, 비록 페이지가 커밋되었다 하여도 곧바로 물리 메모리를 할당받는 게 아니기 때문이다. 본 부문에서는 페이지 리스트(page list)란 용어가 자주 언급되는 데, 이는 RAM에 상주하는 페이지들의 묶음을 가리킨다.
-
-> 결론부터 말하자면, 사용 가능한 메모리는 "[여유 메모리](#여유-메모리) (free memory) + [대기 페이지 리스트](#캐시-메모리) (standby page list)"로 계산된다.
-
-### 여유 메모리
-필요로 하는 프로세스의 작업 집합로 메모리를 제공할 수 있는 페이지 리스트들을 지칭한다.
-
-<table style="table-layout: fixed; width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">여유 메모리 유형 및 설명</caption><colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup><thead><tr><th style="text-align: center;">페이지 리스트</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;">영값 리스트<br/>(zero page list)</td><td>전부 영(0)으로 채워져 데이터가 없는 페이지들의 리스트이다. 휘발성의 RAM은 시스템이 부팅되기 직전에 아무런 데이터가 없으므로 모든 페이지가 영값 리스트에 해당한다.</td></tr><tr><td style="text-align: center;">해제 리스트<br/>(free page list)</td><td>종료된 프로세스의 작업 집합으로부터 해제된 페이지들의 리스트이다. 작업 집합으로 있을 당시 데이터를 여전히 갖고 있으나, 차후 영값 페이지 스레드(zero page thread)에 의해 페이지는 전부 영으로 채워져 데이터가 말소되고 영값 페이지 리스트로 이전된다. 만일 영값 페이지가 고갈되면 해제 페이지 리스트로부터 제공받지만, 우선 커널로부터 데이터가 정화되어야 하므로 시간이 다소 소모된다.</td></tr></tbody></table>
-
-### 캐시 메모리
-작업 집합의 트리밍 과정에서 처리되는 RAM 페이지들을 임시로 모아둔 페이지 리스트들을 지칭한다. RAM이 디스크의 [캐시](https://ko.wikipedia.org/wiki/캐시) 역할을 하므로써, [페이지 부재](#페이지-부재)를 메이저에서 마이너로 대체하여 디스크 입출력 작업을 완화하는 효과를 가져온다. 캐시 메모리를 이해하기 위해서 디스크에 데이터가 존재하는지 여부에 따라 RAM 혹은 페이징 파일 중 어디서 처리되는지 특성을 파악하고 있어야 한다.
-
-<table style="table-layout: fixed; width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">캐시 메모리 유형 및 설명</caption><colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup><thead><tr><th style="text-align: center;">페이지 리스트</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;">대기 페이지 리스트<br/>(standby page list)</td><td>트리밍되어 현재 사용 중이지 않는 페이지들의 리스트이다. 데이터를 말소하여 영값 페이지로 전환시킬 수 있으나, 그 전에 해당 데이터가 다시 필요하다면 곧바로 작업 집합으로 복귀될 수 있는 "대기" 상태이다. 대기 리스트에 속한 페이지로는 다음 유형들이 포함된다:<ol><li>디스크에 이미 존재하는 데이터를 담고 있는 페이지</li><li>트리밍되기 전에 이미 영으로 채워져 데이터 말소가 불필요한 영값 페이지</li></ol></td></tr><tr><td style="text-align: center;">수정된 페이지 리스트<br/>(modified page list)</td><td>트리밍된 페이지 중에서 디스크에 저장이 필요한 페이지들의 리스트이다. 수정된 페이지는 사용 가능한 메모리가 아니지만, 시스템에 의해 데이터가 페이징 파일에 저장된 이후에는 대기 페이지 리스트로 이전된다. 대기 리스트에 속한 페이지로는 다음 유형들이 포함된다:<ol><li>수정된 리스트에 속한 페이지로는 새로 생성되거나 기존 파일로부터 수정되어 디스크에 찾아볼 수 없는 데이터를 담고 있는 페이지</li></ol></td></tr></tbody></table>
+1. **페이징 파일 없음**(No paging file)
 
 ## 메모리 풀
 윈도우 NT 운영체제에서 [메모리 풀](https://learn.microsoft.com/en-us/windows/win32/memory/memory-pools)(memory pools)은 [커널](https://ko.wikipedia.org/wiki/커널_(컴퓨팅)) 혹은 [장치 드라이버](https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/what-is-a-driver-)에서 시스템 공간에 할당되고 관리되는 커널 [힙](https://ko.wikipedia.org/wiki/동적_메모리_할당#힙_영역) 메모리이다.
@@ -92,7 +79,7 @@ RAM 중에서 사용 중인 영역이 있으면 이와 반대로 사용 가능�
 * **페이징 풀**(paged pool): 페이징 파일로 이동될 수 있는 커널 메모리이다.
 * **비페이징 풀**(nonpaged pool): 페이징 파일로 이동될 수 없는 커널 메모리이다.
 
-운영체제 및 장치 드라이버는 [`ExAllocatePoolWithTag`](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-exallocatepoolwithtag) 루틴에 의해 할당 당시 4바이트 크기의 태그가 지정되는데, 이를 통해 해당 메모리를 할당한 드라이버 및 목적을 파악할 수 있다. 태그 목록은 [`pooltags.txt`](./references/pooltag.txt) 파일에서 찾아볼 수 있다.
+운영체제 및 장치 드라이버는 [ExAllocatePoolWithTag](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-exallocatepoolwithtag) 루틴에 의해 할당 당시 4바이트 크기의 태그가 지정되는데, 이를 통해 해당 메모리를 할당한 드라이버 및 목적을 파악할 수 있다. 태그 목록은 [`pooltags.txt`](./references/pooltag.txt) 파일에서 찾아볼 수 있다.
 
 컴퓨터 과학에서 언급하는 "[메모리 풀](https://ko.wikipedia.org/wiki/메모리_풀)"과 동일한 개념으로 페이징 및 비페이징 풀로부터 할당받을 수 있는 총 커널 메모리 크기는 한정되어 있다. 운영체제와 아키텍처에 따라 한정된 용량은 상이하는 데, 64비트 NT 10 (윈도우 10 & 11, 서버 2016 등) 경우에는 각각 16 TB 그리고 RAM과 동일하거나 혹은 16 GB 중에서 가장 작은 크기로 선정된다.
 
