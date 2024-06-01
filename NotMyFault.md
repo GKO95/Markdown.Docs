@@ -1,5 +1,5 @@
 # NotMyFault
-[NotMyFault](https://aka.ms/notmyfault), 직역하자면 "제가 한 게 아니에요"는 시스템 [충돌](BSOD.md), [응답 없음](https://ko.wikipedia.org/wiki/프리징_(컴퓨팅)), 그리고 [메모리 누수](https://ko.wikipedia.org/wiki/메모리_누수)를 의도적으로 일으키는 [Sysinternals](Sysinternals.md) 유틸리티 프로그램이다. 재미있는 사실은 이러한 문제를 일으키는 범인은 정말 따로 존재하는 데 바로 myfault.sys 드라이버이다. GUI 또는 명령어로 실행할 수 있는 프로그램이며, 반드시 관리자 권한으로 실행되어야 한다.
+**[NotMyFault](https://aka.ms/notmyfault)**, 직역하자면 "제가 한 게 아니에요"는 시스템 [충돌](BSOD.md), [응답 없음](https://ko.wikipedia.org/wiki/프리징_(컴퓨팅)), 그리고 [메모리 누수](https://ko.wikipedia.org/wiki/메모리_누수)를 의도적으로 일으키는 [Sysinternals](Sysinternals.md) 유틸리티 프로그램이다. 증상을 트러블슈팅하기 보다는 일부러 증상을 일으켜 트러블슈팅을 연습할 수 있도록 하는 프로그램이다. GUI 또는 명령어로 실행할 수 있는 프로그램이며, 반드시 관리자 권한으로 실행되어야 한다.
 
 > 명령어 버전의 유티릴티는 notmyfaultc.exe 프로그램으로 충돌 및 프리징 증상을 일으킨다.
 
@@ -14,7 +14,7 @@
 ![NotMyFault 메모리 누수 탭](./images/sysinternals_notmyfault_leak.png)
 </td></tr></tbody></table>
 
-NotMyFault 유틸리티는 증상을 트러블슈팅하기 보다는 일부러 증상을 일으켜 트러블슈팅을 연습할 수 있도록 하는 프로그램이다.
+NotMyFault는 런타임 때 myfault.sys [드라이버](Driver.md#드라이버)를 `%WinDir%\System32\Drivers` 디렉토리에 생성 및 설치하기 위해 반드시 관리자 권한으로 실행된다. 해당 드라이버는 커널 모드에서 의도적으로 충돌 및 누수 등을 일으키기 위해 필요하며, NotMyFault가 실행되면 [System](Process.md#시스템-프로세스) 프로세스에 로드된다.
 
 ## 시스템 충돌
 총 여덟 가지의 시스템 충돌 요인 중 하나를 선택하여 Crash 버튼을 눌러 블루스크린을 발생시킨다.
