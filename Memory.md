@@ -31,7 +31,9 @@
 <table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">가상 메모리의 페이지 상태</caption><colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup><thead><tr><th style="text-align: center;">상태</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;">여유<br/>(Free)</td><td>사용되고 있지 않는 가상 메모리이다.</td></tr><tr><td style="text-align: center;">예약됨<br/>(Reserved)</td><td>가상 주소 공간에 할당되었으나, 시스템 성능에 실질적으로 기여하지 않는 가상 메모리이다.</td></tr><tr><td style="text-align: center;"><a href="https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/introduction-to-the-page-file#system-committed-memory">커밋됨</a><br/>(Committed)</td><td>가상 주소 공간에는 할당된 동시에 시스템 성능에 실질적으로 기여하는 가상 메모리이다. 해당 페이지에 R/W 작업이 있기 전에는 물리 메모리가 매핑되지 않는다. "물리 메모리 + <a href="#페이징-파일">페이징 파일</a>"이 커밋 한도(commit limit)이다.</td></tr></tbody></table>
 
 ### 메모리 관리 장치
-**[메모리 관리 장치](https://en.wikipedia.org/wiki/Memory_management_unit)**(memory management unit; MMU)는 프로세서에 내장되어 있는 반도체로 가상 메모리에서 물리 메모리로 주소를 변환하는 역할을 전담한다.
+> *참고: [Converting Virtual Addresses to Physical Addresses - Windows drivers | Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/converting-virtual-addresses-to-physical-addresses)*
+
+**[메모리 관리 장치](https://en.wikipedia.org/wiki/Memory_management_unit)**(memory management unit; MMU)는 [프로세서](Processor.md)에 내장되어 있는 반도체로 가상 메모리에서 물리 메모리로 주소를 변환하는 역할을 전담한다. 메모리 주소를 변환하는 절차는 결국 프로세서 아키텍처에 의해 정의되며, 변환 과정에 대한 상세한 내용은 [페이지 테이블](PageTable.md) 문서를 참고한다.
 
 ## 작업 집합
 **[작업 집합](https://en.wikipedia.org/wiki/Working_set)**(working set)은 커밋된 가상 메모리 중에서 물리 메모리에 상주하는 페이지들을 가리킨다.
