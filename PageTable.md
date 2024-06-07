@@ -108,6 +108,10 @@ PDE at C0602068            PTE at C040DF70
 contains 0000000001B09063  contains 0000000002DEC121
 pfn 1b09      ---DA--KWEV  pfn 2dec      -G--A--KREV
 
+0: kd> u nt!KeBugCheckEx L1
+nt!KeBugCheckEx:
+81beef4c 55              push    ebp
+
 0: kd> !kext.dd 00000000`001a8000+8*0x002 L1
 #  1a8010 001ab001
 
@@ -119,10 +123,6 @@ pfn 1b09      ---DA--KWEV  pfn 2dec      -G--A--KREV
 
 0: kd> !kext.db 00000000`02dec000+1*0xF4C L1
 # 2decf4c 55 U...............
-
-0: kd> u nt!KeBugCheckEx L1
-nt!KeBugCheckEx:
-81beef4c 55              push    ebp
 ```
 
 ### 32비트 페이징, 2 MB 페이지, PAE 활성
@@ -217,6 +217,10 @@ PXE at FFFFCEE773B9D7F8    PPE at FFFFCEE773AFFFC8    PDE at FFFFCEE75FFF91C0   
 contains 0A0000001857F867  contains 0A00000018582867  contains 0A000000185C8867  contains 010000000174A025
 pfn 1857f     ---DA--UWEV  pfn 18582     ---DA--UWEV  pfn 185c8     ---DA--UWEV  pfn 174a      ----A--UREV
 
+0: kd> u KERNEL32!BaseThreadInitThunk+0x14 L1
+KERNEL32!BaseThreadInitThunk+0x14:
+00007ffe`47017344 8bc8            mov     ecx,eax
+
 0: kd> !kext.dq 00000000`18573000+8*0x0FF L1
 #185737f8 0a000000`1857f867
 
@@ -231,10 +235,6 @@ pfn 1857f     ---DA--UWEV  pfn 18582     ---DA--UWEV  pfn 185c8     ---DA--UWEV 
 
 0: kd> !kext.dw 00000000`0174A000+1*0x344 L1
 # 174a344 c88b
-
-0: kd> u KERNEL32!BaseThreadInitThunk+0x14 L1
-KERNEL32!BaseThreadInitThunk+0x14:
-00007ffe`47017344 8bc8            mov     ecx,eax
 ```
 
 # ARM64 페이지 테이블
