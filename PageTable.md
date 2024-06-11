@@ -128,6 +128,107 @@ nt!KeBugCheckEx:
 ### 32비트 페이징, 2 MB 페이지, PAE 활성
 ![With PAE; 2 MB pages](https://upload.wikimedia.org/wikipedia/commons/0/05/X86_Paging_PAE_2M.svg)
 
+이번 예시는 System 프로세스로부터 커널 충돌을 야기한 스택에서 nt!KeBugCheckEx 코드가 실제 물리 메모리의 어느 주소에 위치하는지 확인한다. 그 전에 먼저 PAE가 활성화가 된 시스템이란 걸 아래와 같이 검증한다.
+
+```
+0: kd> .formats cr0
+Evaluate expression:
+  Hex:     80010033
+  Decimal: -2147418061
+  Decimal (unsigned) : 2147549235
+  Octal:   20000200063
+  Binary:  10000000 00000001 00000000 00110011
+  Chars:   ...3
+  Time:    ***** Invalid
+  Float:   low -9.1907e-041 high -1.#QNAN
+  Double:  -1.#QNAN
+0: kd> .formats cr4
+Evaluate expression:
+  Hex:     001406e9
+  Decimal: 1312489
+  Decimal (unsigned) : 1312489
+  Octal:   00005003351
+  Binary:  00000000 00010100 00000110 11101001
+  Chars:   ....
+  Time:    Fri Jan 16 13:34:49 1970
+  Float:   low 1.83919e-039 high 0
+  Double:  6.48456e-318
+```
+
+다음은 System 프로세스와 nt!KeBugCheckEx 코드가 위치한 가상 메모리 주소와 이를 물리 메모리 주소로 변환하기 위해 필요한 정보들을 살펴본다.
+
+```windbg
+0: kd> !mex.crash
+Dump Info
+============================================
+Computer Name:  Not Found
+Windows 10 Kernel Version 19041 MP (2 procs) Free x86 compatible
+Product: WinNt, suite: TerminalServer SingleUserTS
+Edition build lab: 19041.1.x86fre.vb_release.191206-1406
+Kernel base = 0x82800000 PsLoadedModuleList = 0x82ac4d98
+
+Bugcheck details
+============================================
+Bugcheck code 00000080
+Arguments 004f4454 00000000 00000000 00000000
+
+Crashing Stack
+============================================
+ # ChildEBP RetAddr      
+00 87c52e08 83032bde     nt!KeBugCheckEx
+01 87c52e38 82a8e89a     hal!HalBugCheckSystem+0x6d
+02 87c52ec4 8303480d     nt!WheaReportHwError+0x418
+03 87c52ed8 8299a6da     hal!HalHandleNMI+0xea
+    <Intermediate frames may have been skipped due to lack of complete unwind>
+04 87c52ed8 82a59b77 (T) nt!KiTrap02+0x322
+    <Intermediate frames may have been skipped due to lack of complete unwind>
+05 87c52fe8 00000000 (T) nt!PpmIdleGuestExecute+0x1a
+
+0: kd> r cr3
+cr3=001a8000
+0: kd> !process 0 0 System
+PROCESS 8636c040  SessionId: none  Cid: 0004    Peb: 00000000  ParentCid: 0000
+    DirBase: 001a8000  ObjectTable: 88202d80  HandleCount: 2307.
+    Image: System
+
+0: kd> .formats nt!KeBugCheckEx
+Evaluate expression:
+  Hex:     8297ef4c
+  Decimal: -2103972020
+  Decimal (unsigned) : 2190995276
+  Octal:   20245767514
+  Binary:  10000010 10010111 11101111 01001100
+  Chars:   ...L
+  Time:    ***** Invalid
+  Float:   low -2.23248e-037 high -1.#QNAN
+  Double:  -1.#QNAN
+```
+
+System 프로세스의 메모리 주소 변환에 필요한 Page Directory를 가리키는 포인터 테이블은 CR3 레지스터(혹은 DirBase)가 반환한 `0x001a8000` 물리 메모리 주소에 위치한다. 주소 변환에 있어 다음 페이지로 진입할 포인터를 가리키는 인덱스들은 다음과 같으며, 유도 과정도 함께 소개한다.
+
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">레벨에 따른 페이지 테이블의 인덱스 및 엔트리 (4 KB w/ PAE)</caption><colgroup><col style="width: 10%;"/><col style="width: 20%;"/><col style="width: 25%;"/><col style="width: 15%;"/><col style="width: 30%;"/></colgroup><thead><tr><th rowspan="2" style="text-align: center;">레벨</th><th rowspan="2" style="text-align: center;">테이블</th><th colspan="2" style="text-align: center; border-bottom-style: none;">인덱스</th><th rowspan="2" style="text-align: center;">엔트리 / 데이터</th></tr><tr><th style="text-align: center;">이진수</th><th style="text-align: center;">십육진수</th></tr></thead><tbody><tr><td style="text-align: center;">2</td><td>Page Dir.Pointer Table</td><td style="text-align: center;"><code>10</code></td><td style="text-align: center;"><code>0x002</code></td><td><code>001ab001</code></td></tr><tr><td style="text-align: center;">1</td><td>Page Directory</td><td style="text-align: center;"><code>000010 100</code></td><td style="text-align: center;"><code>0x014</code></td><td><code>01b09063</code></td></tr><tr><td style="text-align: center;">0</td><td>Page</td><td style="text-align: center;"><code>10111 11101111 01001100</code></td><td style="text-align: center;"><code>0x17EF4C</code></td><td><code>55</code> (BYTE)</td></tr></tbody></table>
+
+```windbg
+0: kd> !pte nt!KeBugCheckEx
+                    VA 8297ef4c
+PDE at C06020A0            PTE at C0414BF0
+contains 0000000002C009E3  contains 0000000000000000
+pfn 2c00      -GLDA--KWEV    LARGE PAGE pfn 2d7e
+
+0: kd> u nt!KeBugCheckEx L1
+nt!KeBugCheckEx:
+8297ef4c 55              push    ebp
+
+0: kd> !kext.dd 00000000`001a8000+8*0x002 L1
+#  1a8010 001ab001
+
+0: kd> !kext.dd 00000000`001ab000+8*0x014 L1
+#  1ab068 01b09063
+
+0: kd> !kext.db 00000000`02c00000+1*0x17EF4C L1
+# 2d7ef4c 55 U...............
+```
+
 ## x86-64 페이지 테이블
 
 ### 64비트 페이징, 4 KB 페이지
