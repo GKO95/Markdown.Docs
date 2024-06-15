@@ -1,7 +1,7 @@
 # 블루스크린
 ![윈도우 11 블루스크린 화면 예시](./images/bsod_sample.png)
 
-[블루스크린](https://ko.wikipedia.org/wiki/블루스크린), 일명 BSOD(Blue Screen of Death; 죽음의 파란 화면)는 시스템을 망가뜨릴 수 있는 손상이 가해지는 것을 방지하기 위한 파란색 ([윈도우 참가자 프로그램](https://support.microsoft.com/en-us/windows/windows-참가자-프로그램에-참여하기-ef20bb3d-40f4-20cc-ba3c-a72c844b563c)일 경우 초록색) 화면이며, 블루스크린 원인을 알려주는 [버그 검사 코드](#버그-검사-코드)를 표시하고 분석에 필요한 [메모리 덤프](Dump.md#커널-모드-덤프) 파일을 생성한다. 시스템은 아래의 사유가 발생하면 블루스크린이 나타난다.
+**[블루스크린](https://ko.wikipedia.org/wiki/블루스크린)**, 일명 BSOD(Blue Screen of Death; 죽음의 파란 화면)는 시스템을 망가뜨릴 수 있는 손상이 가해지는 것을 방지하기 위한 파란색 ([윈도우 참가자 프로그램](https://support.microsoft.com/en-us/windows/windows-참가자-프로그램에-참여하기-ef20bb3d-40f4-20cc-ba3c-a72c844b563c)일 경우 초록색) 화면이며, 블루스크린 원인을 알려주는 [버그 검사 코드](#버그-검사-코드)를 표시하고 분석에 필요한 [메모리 덤프](Dump.md#커널-모드-덤프) 파일을 생성한다. 시스템은 아래의 사유가 발생하면 블루스크린이 나타난다.
 
 > 윈도우 부팅 시 나타나는 또 다른 파란색 오류 화면인 "[복구 모드](WinRE.md#복구-모드)"는 BSOD와 전혀 다른 증상이므로 혼돈하지 않도록 유의한다.
 
@@ -9,7 +9,7 @@
 * **유효하지 않은 동작**: 운영체제가 본래 설계에 벗어난 동작을 하였을 때, 복구가 불가하다고 판정되면 커널 초기화를 명분으로 발생한다 (예시. [0x133 DPC_WATCHDOG_VIOLATION](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0x133-dpc-watchdog-violation)).
 
 ## 버그 검사 코드
-버그 검사 코드(bug check code) 혹은 중지코드(stop code)는 블루스크린이 발생한 원인을 설명하는 [십육진수](https://ko.wikipedia.org/wiki/십육진법)의 운영체제 오류 번호이다. [`KeBugCheckEx()`](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-kebugcheckex) 함수에서 중지코드를 전달받는 첫 번째 매개변수의 명칭인 `BugCheckCode`에서 유래되었다. 해당 함수는 네 개의 추가 매개변수들이 있어 증상의 유형이나 문제가 발생한 [메모리 주소](C.md#포인터) 등의 구체적인 정보를 제공한다.
+**[버그 검사 코드](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-code-reference2)**(bug check code) 혹은 중지코드(stop code)는 블루스크린이 발생한 원인을 설명하는 [십육진수](https://ko.wikipedia.org/wiki/십육진법)의 운영체제 오류 번호이다. [`KeBugCheckEx()`](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-kebugcheckex) 함수에서 중지코드를 전달받는 첫 번째 매개변수의 명칭인 `BugCheckCode`에서 유래되었다. 해당 함수는 네 개의 추가 매개변수들이 있어 증상의 유형이나 문제가 발생한 [메모리 주소](C.md#포인터) 등의 구체적인 정보를 제공한다.
 
 시스템에 발생한 BSOD 이력과 중지코드를 확인하려면 [이벤트 뷰어](https://ko.wikipedia.org/wiki/이벤트_뷰어)의 시스템 이벤트 로그에서 Kernel-Power 41을 살펴보도록 한다.
 
@@ -174,7 +174,7 @@ WriteBitmapDump: page written = 52505, MB per sec = 41.
 ## 페이징 파일
 > *참고: [How to determine the appropriate page file size for 64-bit versions of Windows - Windows Client | Microsoft Learn](https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/how-to-determine-the-appropriate-page-file-size-for-64-bit-versions-of-windows)*
 
-[페이징 파일](Memory.md#페이징-파일)(paging file)은 HDD나 SSD와 같은 디스크 저장공간에 상주하여 물리 메모리를 보조하며, BSOD가 발생할 덤프를 저장하는 공간으로도 활용된다. 즉, 페이징 파일에 충분한 공간이 확보되지 않을 경우에 덤프 수집이 실패할 수 있다. 페이징 파일이 크게 설정할 수 있으나 그만큼 저장공간의 여유가 줄어드는 점에 유의해야 하기 때문에, 아래는 필자가 각 덤프 종류마다 추천하는 페이징 파일 크기이다.
+**[페이징 파일](Memory.md#페이징-파일)**(paging file)은 HDD나 SSD와 같은 디스크 저장공간에 상주하여 물리 메모리를 보조하며, BSOD가 발생할 덤프를 저장하는 공간으로도 활용된다. 즉, 페이징 파일에 충분한 공간이 확보되지 않을 경우에 덤프 수집이 실패할 수 있다. 페이징 파일이 크게 설정할 수 있으나 그만큼 저장공간의 여유가 줄어드는 점에 유의해야 하기 때문에, 아래는 필자가 각 덤프 종류마다 추천하는 페이징 파일 크기이다.
 
 * **[전체 메모리 덤프](Dump.md#전체-메모리-덤프)**: RAM 크기 + 257 MB  (잠재적 [보조 덤프 정보](Dump.md#보조-덤프-정보) & 덤프 헤더 고려) 이상
 * **[커널](Dump.md#커널-메모리-덤프), [활성](Dump.md#활성-메모리-덤프), [작은](Dump.md#작은-메모리-덤프), 그리고 [자동 메모리 덤프](Dump.md#자동-메모리-덤프)**: 시스템이 관리하는 크기
@@ -190,7 +190,7 @@ Memory Management 레지스트리 키에서 설정할 수 있는 값들은 알�
 <table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">Memory Management 레지스트리 키 구성</caption><colgroup><col style="width: 25%;"/><col style="width: 15%;"/><col style="width: 60%;"/></colgroup><thead><tr><th style="text-align: center;">레지스트리 값</th><th style="text-align: center;">종류</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td><code>ExistingPageFiles</code></td><td style="text-align: center;">REG_MULTI_SZ</td><td>[변경 금지] 덤프 헤더 파일을 찾기 위해 살펴볼 마지막 부팅 당시에 등록된 페이징 파일이 나열되어 있다. 시스템 내부 동작을 위한 레지스트리 값이다.</td></tr><tr><td><code>PagingFiles</code></td><td style="text-align: center;">REG_MULTI_SZ</td><td>설정된 페이징 파일이 다음 부팅 때 세션 관리자에 의해 반영된다.<br/><ul><li><code>?:\pagefile.sys</code>: OS 드라이브에만 "시스템이 관리하는 크기"로 설정</li><li><code>C:\pagefile.sys 2048 4096</code>: C 드라이브에 최초 2 GB, 최대 4 GB 설정</li><li><code>D:\pagefile.sys 0 0</code>: D 드라이브에 "시스템이 관리하는 크기"로 설정</li></ul></td></tr></tbody></table>
 
 ## 전용 덤프
-전용 덤프(dedicated dump)는 가상 메모리로 사용이 불가한, 오로지 덤프 수집만을 위해 존재하는 페이징 파일을 가리킨다. 윈도우 7 이전까지만 해도 OS 드라이브에 용량이 부족할 시, 타 드라이브에 메모리 덤프를 수집하려면 전용 덤프가 유일한 방법이었다. 비록 전용 덤프의 활용도가 축소되었으나, 아래의 두 가지 특징을 지닌다.
+**[전용 덤프](https://learn.microsoft.com/en-us/archive/blogs/ntdebugging/how-to-use-the-dedicateddumpfile-registry-value-to-overcome-space-limitations-on-the-system-drive-when-capturing-a-system-memory-dump)**(dedicated dump)는 가상 메모리로 사용이 불가한, 오로지 덤프 수집만을 위해 존재하는 페이징 파일을 가리킨다. 윈도우 7 이전까지만 해도 OS 드라이브에 용량이 부족할 시, 타 드라이브에 메모리 덤프를 수집하려면 전용 덤프가 유일한 방법이었다. 비록 전용 덤프의 활용도가 축소되었으나, 아래의 두 가지 특징을 지닌다.
 
 1. 페이징 파일이 존재하여도 메모리 덤프를 수집할 때에는 전용 덤프가 사용된다.
 2. 전용 덤프를 구성할 디스크 용량이 부족하면 아예 반영이 되지 않는다.
