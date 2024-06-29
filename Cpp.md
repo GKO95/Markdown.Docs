@@ -610,22 +610,12 @@ Hello World!
 # 컨테이너
 C++ 언어는 여러 데이터를 하나의 변수로 저장하는 공간인 [컨테이너](https://en.cppreference.com/w/cpp/container)(container)를 기본적으로 [표준 라이브러리](https://ko.wikipedia.org/wiki/C++_표준_라이브러리)로부터 제공한다. 아래는 C++ 컨테이너 유형에 대하여 간략하게 소개한다.
 
-<table style="width: 80%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">C++ 컨테이너 유형</caption>
-<colgroup><col style="width: 25%;"/><col style="width: 75%;"/></colgroup>
-<thead><tr><th style="text-align: center;">유형</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody><tr><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Sequence_container_(C++)">시퀀스 컨테이너</a><br/>(sequence)</td><td>저장된 다수의 데이터, 일명 요소가 순번을 가져 순차적인 호출이 가능하다.</td></tr><tr><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Associative_containers">연관 컨테이너</a><br/>(associative)</td><td>키(key)와 값(value)이 하나씩 서로 연관 및 정돈된 자료구조로 탐색에 적합하다.</td></tr><tr><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Unordered_associative_containers_(C++))(unordered associative containers">비정돈 연관 컨테이너</a><br/>(unordered associative)</td><td>키와 값이 하나씩 서로 연관되었으나 정돈되지 않은, 즉 <a href="https://ko.wikipedia.org/wiki/해시_테이블">해시</a> 자료구조의 컨테이너이다.</td></tr></tbody>
-</table>
+<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C++ 컨테이너 유형</caption><colgroup><col style="width: 25%;"/><col style="width: 75%;"/></colgroup><thead><tr><th style="text-align: center;">유형</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Sequence_container_(C++)">시퀀스 컨테이너</a><br/>(sequence)</td><td>저장된 다수의 데이터, 일명 요소가 순번을 가져 순차적인 호출이 가능하다.</td></tr><tr><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Associative_containers">연관 컨테이너</a><br/>(associative)</td><td>키(key)와 값(value)이 하나씩 서로 연관 및 정돈된 자료구조로 탐색에 적합하다.</td></tr><tr><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Unordered_associative_containers_(C++))(unordered associative containers">비정돈 연관 컨테이너</a><br/>(unordered associative)</td><td>키와 값이 하나씩 서로 연관되었으나 정돈되지 않은, 즉 <a href="https://ko.wikipedia.org/wiki/해시_테이블">해시</a> 자료구조의 컨테이너이다.</td></tr></tbody></table>
 
 ## 배열
 [배열](https://en.cppreference.com/w/cpp/language/array)(array)은 동일한 자료형의 데이터를 일련의 순서로 담는 [시퀀스 컨테이너](https://en.wikipedia.org/wiki/Sequence_container_(C++))이다. 전통적인 C 형식의 배열은 식별자 뒤에 대괄호 `[]`가 위치하여 배열이 담을 수 있는 데이터 용량 크기를 [정수 리터럴](https://en.cppreference.com/w/cpp/language/integer_literal)이나 [상수](#변수)로 지정한다. 배열의 데이터 초기화는 중괄호 `{}` 내에 항목을 순서대로 쉼표로 나누어 나열한다. 만일 배열 용량을 지정하지 않으면 데이터 개수만큼 크기가 정해지며, 아래는 배열을 정의하는 두 방식을 보여준다.
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">배열 크기를 지정하는 여부에 따른 C 형식의 배열 정의 방식</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">명시적 배열 크기</th><th style="text-align: center;">암묵적 배열 크기</th></tr></thead>
-<tbody>
-<tr><td>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">배열 크기를 지정하는 여부에 따른 C 형식의 배열 정의 방식</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">명시적 배열 크기</th><th style="text-align: center;">암묵적 배열 크기</th></tr></thead><tbody><tr><td>
 
 ```cpp
 int arr[size] = {value1, value2, ... };
@@ -635,9 +625,7 @@ int arr[size] = {value1, value2, ... };
 ```cpp
 int arr[] = {value1, value2, ... };
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 한 번 정의된 배열의 크기는 변경이 불가하다. 초기 데이터 개수는 배열 용량을 초과해서는 안되지만, 반면에 데이터 개수가 용량을 미치지 못하면 나머지는 `0` 혹은 `NULL`로 초기화된다.
 
@@ -665,12 +653,7 @@ arr[2] = value3;
 ### 다차원 배열
 배열은 또 다른 배열을 요소로 가질 수 있으나, 자료형이 동일해야 하며 요소로 작용하는 배열들의 크기는 모두 같아야 하는 제약을 갖는다. 다차원 배열도 첫 번째 차원의 크기를 별도로 명시하지 않아도 되지만, 나머지 차원의 크기는 반드시 지정해야 한다.
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">다차원 배열의 1차원 크기를 지정하는 여부에 따른 정의 방식</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">명시적 배열 크기</th><th style="text-align: center;">암묵적 배열 크기</th></tr></thead>
-<tbody>
-<tr><td>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">다차원 배열의 1차원 크기를 지정하는 여부에 따른 정의 방식</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">명시적 배열 크기</th><th style="text-align: center;">암묵적 배열 크기</th></tr></thead><tbody><tr><td>
 
 ```cpp
 int arr[size1][size2] = {
@@ -688,9 +671,7 @@ int arr[][size2] = {
     ...
 };
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 ### 배열의 크기
 [`sizeof`](#sizeof-연산자) 연산자가 배열에 사용되면 배열의 크기가 아닌, 배열이 차지하는 총 바이트 수를 반환한다. 배열의 각 요소마다 자료형만큼 메모리를 차지하므로 배열의 크기를 구하기 위해서는 다음과 같은 표현식을 사용한다. 자료형의 요소들로 구성된 배열을 해당 자료형으로 나누면 요소의 개수가 계산된다.
@@ -733,12 +714,7 @@ char* ptr = "World!";    // 포인터를 활용한 문자열 표현 방법
 
 [`cstring`](https://en.cppreference.com/w/cpp/header/cstring) 헤더 파일은 아래와 같이 C 표준 라이브러리로부터 제공하는 문자열 관련 함수들을 제공한다.
 
-<table style="width: 80%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">C 언어의 문자열 함수</caption>
-<colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup>
-<thead><tr><th style="text-align: center;">함수</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/string/byte/strcat"><code>strcat</code></a></td><td>배열의 문자열에 다른 배열의 문자열을 덧붙인다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/string/byte/strcpy"><code>strcpy</code></a></td><td>배열의 문자열을 다른 배열로 복사한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/string/byte/strlen"><code>strlen</code></a></td><td>널 문자를 제외한 문자열 길이를 반환한다.</td></tr></tbody>
-</table>
+<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C 언어의 문자열 함수</caption><colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup><thead><tr><th style="text-align: center;">함수</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/string/byte/strcat"><code>strcat</code></a></td><td>배열의 문자열에 다른 배열의 문자열을 덧붙인다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/string/byte/strcpy"><code>strcpy</code></a></td><td>배열의 문자열을 다른 배열로 복사한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/string/byte/strlen"><code>strlen</code></a></td><td>널 문자를 제외한 문자열 길이를 반환한다.</td></tr></tbody></table>
 
 ### 문자열 자료형
 C++ 표준 라이브러리는 [`iostream`](#파일-입출력) (구체적으로 [`string`](https://en.cppreference.com/w/cpp/header/string)) 헤더로부터 자체적으로 문자열 자료형 [`std::string`](https://en.cppreference.com/w/cpp/string/basic_string)을 제공한다. 문자열 자료형은 매우 편리하지만, [윈도우 API](WinAPI.md) 또는 [POSIX](https://ko.wikipedia.org/wiki/POSIX) 등에서는 불가피하게 C 형식 문자열을 사용해야 할 경우가 흔히 발생한다.
@@ -764,11 +740,7 @@ std::cout << std::round(variable);
 
 함수를 정의하기 위해서 (1) 여러 문장의 코드들을 하나로 묶는 [블록](#구문)과 (2) [`return`](#return-반환문) 키워드에 의해 반환될 데이터 유형을 결정하는 [자료형](#자료형)이 반드시 필요하다. 함수 안에 새로운 함수를 정의하는 건 허용되지 않는다. 정의된 함수를 호출하여 사용하는 데, 함수명 뒤에 소괄호 `()` 기입 여부에 따라 의미하는 바가 다르다:
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">함수 식별자의 호출 방식에 따른 차이</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;"><code>function()</code> 호출</th><th style="text-align: center;"><code>function</code> 호출</th></tr></thead>
-<tbody><tr><td>함수에 정의된 코드를 실행한다.</td><td>함수의 <a href="#포인터">메모리 주소</a>를 가리키며, 정의된 코드를 실행하지 않는다.</td></tr><tr style="vertical-align: top;"><td>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">함수 식별자의 호출 방식에 따른 차이</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;"><code>function()</code> 호출</th><th style="text-align: center;"><code>function</code> 호출</th></tr></thead><tbody><tr><td>함수에 정의된 코드를 실행한다.</td><td>함수의 <a href="#포인터">메모리 주소</a>를 가리키며, 정의된 코드를 실행하지 않는다.</td></tr><tr style="vertical-align: top;"><td>
 
 ```cpp
 int function() {
@@ -801,9 +773,7 @@ printf("반환: %p", variable);
 ```terminal
 반환: 00000000249513ED
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 함수가 정의하기도 전에 호출되면 순차적으로 실행되는 C++ 언어 특성상 존재하지 않는 함수를 호출하는 것으로 간주되어 오류가 발생한다. 함수 [프로토타입](https://en.cppreference.com/w/c/language/function_declaration)(prototype), 일명 전방선언(forward declaration)은 컴파일러에게 미리 함수의 존재를 알려주어 정의되기 전에 호출할 수 있다. 프로토타입은 선택사항이며, 우선적으로 선언될 수 있게 스크립트 상단부에 기입하는 게 일반적이다.
 
@@ -842,11 +812,7 @@ void function(std::string arg) {
 
 배열은 위와 동일한 구문으로 인자를 매개변수로 건네줄 수 없으며, 아래의 두 가지 방법이 존재한다:
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">배열을 매개변수로 전달하는 방법</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;"><a href="#배열">배열</a>로 선언</th><th style="text-align: center;"><a href="#포인터">포인터</a>로 선언</th></tr></thead>
-<tbody><tr style="vertical-align: top;"><td>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">배열을 매개변수로 전달하는 방법</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;"><a href="#배열">배열</a>로 선언</th><th style="text-align: center;"><a href="#포인터">포인터</a>로 선언</th></tr></thead><tbody><tr style="vertical-align: top;"><td>
 
 ```cpp
 void function(int arg[]);
@@ -874,9 +840,7 @@ void function(int *arg) {
     return;
 }
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 배열 자체를 호출하면 배열의 첫 번째 요소의 메모리 주소를 가져오기 때문에 가능하다. 특히 배열의 각 요소가 할당된 메모리 주소는 연쇄적이므로, 바로 옆 (`int` 정수형이면 +4) 메모리 주소에는 배열의 다음 요소가 저장된 메모리 공간이다.
 
@@ -960,12 +924,7 @@ std::cout << calling(callback, 1);
 
 [캡처 조항](https://en.cppreference.com/w/cpp/language/lambda#Lambda_capture)(capture clause)은 매개변수 이외에 유효범위 내에 선언된 변수를 람다 표현식으로 전달할 수 있는 수단을 제공한다. 유효범위 내의 변수를 캡처 조항에 명시하지 않고 람다 표현식에 호출하면 [MSVC](https://ko.wikipedia.org/wiki/마이크로소프트_비주얼_C++)의 경우에 [C3493](https://learn.microsoft.com/en-us/cpp/error-messages/compiler-errors-2/compiler-error-c3493) 오류가 발생한다. 다음은 캡처 조항을 활용하는 예시와 함께 코드에 대하여 설명한다.
 
-<table style="width: 100%; margin-left: auto; margin-right: auto;">
-<caption>C++ 람다 표현식의 캡처 조항 예시</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">명시적 캡처</th><th style="text-align: center;">암시적 캡처</th></tr></thead>
-<tbody><tr>
-<td>캡쳐 조항에 유효범위 내에 위치한 변수를 선택적으로 기입할 때, 변수 앞에 <code>&</code> 기호 여부에 따라 "값에 의한" 혹은 "<a href="#참조">참조</a>에 의한" 캡처가 구분된다.</td><td>유효범위의 변수를 기본적으로 "값에 의한" <code>[=]</code> 혹은 "참조에 의한" <code>[&]</code> 캡처하여, 개별적으로 변수를 명시하여 별도 캡처 조항을 지정할 수 있다.</td></tr><tr style="vertical-align: top;"><td>
+<table style="width: 100%; margin-left: auto; margin-right: auto;"><caption>C++ 람다 표현식의 캡처 조항 예시</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">명시적 캡처</th><th style="text-align: center;">암시적 캡처</th></tr></thead><tbody><tr><td>캡쳐 조항에 유효범위 내에 위치한 변수를 선택적으로 기입할 때, 변수 앞에 <code>&</code> 기호 여부에 따라 "값에 의한" 혹은 "<a href="#참조">참조</a>에 의한" 캡처가 구분된다.</td><td>유효범위의 변수를 기본적으로 "값에 의한" <code>[=]</code> 혹은 "참조에 의한" <code>[&]</code> 캡처하여, 개별적으로 변수를 명시하여 별도 캡처 조항을 지정할 수 있다.</td></tr><tr style="vertical-align: top;"><td>
 
 ```cpp
 int  number = 3;
@@ -1006,14 +965,12 @@ letter = 'C';
 
 lambda();
 ```
-</td></tr>
-<tr style="vertical-align: top;"><td colspan="2">
+</td></tr><tr style="vertical-align: top;"><td colspan="2">
 
 ```terminal
 3C
 ```
-</td></tr></tbody>
-</table>
+</td></tr></tbody></table>
 
 ## 인라인 함수
 [인라인 함수](https://en.cppreference.com/w/cpp/language/inline)(inline function)는 인라인 확장에 사용될 `inline` 키워드로 지정된 함수이다.
@@ -1022,11 +979,7 @@ lambda();
 
 프로그램 실행 (즉, 런타임) 도중에 함수를 호출하는데 소모되는 시간이 없으므로 속도가 소폭 향상되는 효과가 있으나, 과도한 사용은 프로그램 크기가 커지고 RAM 메모리를 더 많이 사용하는 단점으로 작용한다. 그러므로 인라인은 코드가 작지만 자주 사용되는 함수에 가장 적합하다.
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">인라인 함수를 활용한 코드 비교</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">인라인 함수가 적용된 코드</th><th style="text-align: center;">동일 코드</th></tr></thead>
-<tbody><tr style="vertical-align: top;"><td>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">인라인 함수를 활용한 코드 비교</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">인라인 함수가 적용된 코드</th><th style="text-align: center;">동일 코드</th></tr></thead><tbody><tr style="vertical-align: top;"><td>
 
 ```cpp
 // 인라인 함수
@@ -1047,9 +1000,7 @@ int main() {
     return 0;
 }
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 ## 재귀 함수
 [재귀 함수](https://ko.wikipedia.org/wiki/재귀_(컴퓨터_과학))(recursive function)는 스스로를 호출하는 함수이다. 재귀 함수는 반드시 스스로를 호출하는 반복으로부터 탈출하는 기저 조건(base case)이 필요하다. 기저 조건이 없으면 무한 재귀가 발생하는데 프로그램 실행에 기여하는 [메모리](#스택-영역)가 부족하여 충돌이 발생한다.
@@ -1088,11 +1039,7 @@ int *ptr = &variable;
 
 메모리 주소에는 오로지 한 바이트의 데이터만 저장할 수 있다. 예를 들어, `int` 정수를 표현하려면 4바이트가 필요하므로 이웃하는 네 개의 메모리 주소가 하나의 데이터를 저장하는데 관여한다. 포인터의 자료형은 이러한 특성을 고려하여 가리키고 있는 메모리 주소로부터 어디까지 참조해야 완전한 데이터를 표현할 수 있는지 알려주는 역할을 한다. 그러므로 포인터에 [역참조 연산자](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_indirection_operator) `*`를 사용하면 자료형을 반영한 메모리 주소에 저장된 값을 반환한다.
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">포인터와 자료형의 관계</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">동일한 자료형</th><th style="text-align: center;">상이한 자료형</th></tr></thead>
-<tbody><tr style="vertical-align: top;"><td>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">포인터와 자료형의 관계</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">동일한 자료형</th><th style="text-align: center;">상이한 자료형</th></tr></thead><tbody><tr style="vertical-align: top;"><td>
 
 ```cpp
 int variable = 365;
@@ -1120,9 +1067,7 @@ printf("%p\n%d\n", ptr, *ptr);
 000000526132F5E4 (주소)
 109              (값)
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 여기서 역참조 연산자의 `*`와 포인터 선언에 사용된 별표는 기호만 동일한 뿐, 연관성이 없는 전혀 다른 존재이다. 만일 `variable` 변수의 값이 변하면 해당 메모리 주소를 참조하는 `ptr` 포인터의 역참조로도 관측이 가능하다. "참조에 의한 호출(call by reference)"은 이러한 매커니즘을 기반하며, 이미 함수에서 [배열](#배열)을 매개변수로 전달하는 방법을 소개할 때 선보였다.
 
@@ -1179,12 +1124,7 @@ int main() {
 
 C++ 언어는 [lvalue](#포인터)와 [rvalue](#포인터)에 따른 두 가지 유형의 참조를 지원한다:
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">C++의 lvalue 및 rvalue 참조</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;"><a href="https://learn.microsoft.com/en-us/cpp/cpp/lvalue-reference-declarator-amp">lvalue 참조</a> <code>&</code></th><th style="text-align: center;"><a href="https://learn.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp">rvalue 참조</a> <code>&&</code></th></tr></thead>
-<tbody>
-<tr><td>이미 정의된 변수에 별칭을 선언하는 것과 같다. 특히 함수의 매개변수의 참조에 의한 호출을 포인터보다 안전하게 구현하는데 활용된다.</td><td>(표현식으로부터 평가된 값과 같은) 임시 데이터를 곧바로 참조하여 불필요한 변수 정의를 배제할 수 있다.</td></tr><tr><td>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C++의 lvalue 및 rvalue 참조</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;"><a href="https://learn.microsoft.com/en-us/cpp/cpp/lvalue-reference-declarator-amp">lvalue 참조</a> <code>&</code></th><th style="text-align: center;"><a href="https://learn.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp">rvalue 참조</a> <code>&&</code></th></tr></thead><tbody><tr><td>이미 정의된 변수에 별칭을 선언하는 것과 같다. 특히 함수의 매개변수의 참조에 의한 호출을 포인터보다 안전하게 구현하는데 활용된다.</td><td>(표현식으로부터 평가된 값과 같은) 임시 데이터를 곧바로 참조하여 불필요한 변수 정의를 배제할 수 있다.</td></tr><tr><td>
 
 ```cpp
 int variable = 3;
@@ -1218,9 +1158,7 @@ std::cout << ref;
 7
 8
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 ## 엔디언
 [엔디언](https://ko.wikipedia.org/wiki/엔디언)(endianess)이란 컴퓨터가 메모리로부터 데이터를 표현하기 위해 바이트 단위의 정보를 어떻게 정렬할 것인지를 가리킨다. 특히 포인터가 메모리 주소를 접근 및 호출하기 때문에 엔디언의 기본적인 개념 이해는 필요하다고 본다.
@@ -1295,12 +1233,7 @@ for (int index = 0; index < sizeof(variable); index++) {
 
 개발자는 원하는 데이터를 저장할 힙 영역의 메모리를 할당받아 사용할 수 있지만, 반면 사용하지 않게 된다면 개발자가 직접 할당받은 메모리를 해제하여 시스템에 반환해야 한다. 이러한 작업이 충분히 이루어지지 않는다면 메모리 누수(memory leak)가 발생하여 리소스 고갈로 프로세스 충돌을 야기한다.
 
-<table style="width: 80%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">C++ 언어의 동적 할당 표현식</caption>
-<colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup>
-<thead><tr><th style="text-align: center;">표현식</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/new"><code>new</code></a></td><td>힙 영역의 메모리 공간에 데이터 크기만큼 동적 할당 및 저장한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/new#Placement_new"><code>new()</code></a></td><td>지정된 메모리 주소에 힙 영역의 메모리 공간에 데이터 크기만큼 동적 할당 및 저장한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/delete"><code>delete</code></a></td><td>동적 할당받은 메모리를 해제한다.</td></tr></tbody>
-</table>
+<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C++ 언어의 동적 할당 표현식</caption><colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup><thead><tr><th style="text-align: center;">표현식</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/new"><code>new</code></a></td><td>힙 영역의 메모리 공간에 데이터 크기만큼 동적 할당 및 저장한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/new#Placement_new"><code>new()</code></a></td><td>지정된 메모리 주소에 힙 영역의 메모리 공간에 데이터 크기만큼 동적 할당 및 저장한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/delete"><code>delete</code></a></td><td>동적 할당받은 메모리를 해제한다.</td></tr></tbody></table>
 
 ```cpp
 // 동적 할당: 정수 3
@@ -1327,11 +1260,7 @@ C++ 언어는 여전히 전통적인 [C 형식 동적 메모리 할당](C.md#동
 # 클래스
 객체(object 혹은 instance)는 데이터를 저장할 수 있는 [변수](#변수)와 처리할 수 있는 [함수](#함수)를 하나로 묶은 데이터이다. 객체의 변수와 함수는 각각 필드(field)와 메소드(method)라고 불리며, 이를 통틀어 맴버(member)라고 칭하고 다음과 같이 접근한다.
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">객체의 맴버 유형별 호출 구문</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">필드 (유사 변수)</th><th style="text-align: center;">메소드 (유사 함수)</th></tr></thead>
-<tbody><tr style="vertical-align: top;"><td>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">객체의 맴버 유형별 호출 구문</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">필드 (유사 변수)</th><th style="text-align: center;">메소드 (유사 함수)</th></tr></thead><tbody><tr style="vertical-align: top;"><td>
 
 ```cpp
 instance.field
@@ -1341,9 +1270,7 @@ instance.field
 ```cpp
 instance.method()
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 현재까지 다룬 내용 중에서 객체에 해당되는 데이터로는 [문자열 객체](#문자열-자료형)와 [시퀀스 객체](#배열-클래스)가 있다.
 
@@ -1362,11 +1289,7 @@ std::cout << variable.at(2);
 1. 변수와 함수가 하나의 객체로 결합된다.
 1. 우연치 않은 수정을 방지하기 위해 변수 및 함수에 대한 직접적인 접근을 외부로부터 제한할 수 있다.
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">유형별 클래스 정의 및 객체화</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">명명된 클래스</th><th style="text-align: center;">익명 클래스</th></tr></thead>
-<tbody><tr style="vertical-align: top;"><td>명명된 식별자를 통해 해당 클래스를 언제든지 객체화할 수 있다.</td><td>흔히 네스티드(nested) 구조에서 코드 일관성을 보여주기 위해 사용된다.</td></tr><tr style="vertical-align: top;"><td>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">유형별 클래스 정의 및 객체화</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">명명된 클래스</th><th style="text-align: center;">익명 클래스</th></tr></thead><tbody><tr style="vertical-align: top;"><td>명명된 식별자를 통해 해당 클래스를 언제든지 객체화할 수 있다.</td><td>흔히 네스티드(nested) 구조에서 코드 일관성을 보여주기 위해 사용된다.</td></tr><tr style="vertical-align: top;"><td>
 
 ```cpp
 class CLASS {
@@ -1404,9 +1327,7 @@ public:
     }
 } instance;
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 ### 접근 지정자
 [접근 지정자](https://en.cppreference.com/w/cpp/language/access)(access specifier)는 외부 코드 및 [상속](#상속)으로부터 맴버들을 접근할 수 있는 권한을 설정하며, 대표적인 세 가지 유형을 소개한다.
@@ -1431,11 +1352,7 @@ std::cout << ptr->method();
 ## 생성자
 [생성자](https://en.cppreference.com/w/cpp/language/constructor)(constructor)는 객체화마다 자동으로 실행되는 특수한 보이드 메소드이다. 비록 생성자는 선택사항이지만, 정의한다면 반드시 클래스명과 동일해야 한다. 외부 코드로부터 객체화되기 때문에 생성자를 `public` 접근 지정자로 설정한다. 흔히 객체화 단계에서 맴버들을 초기화하는 용도로 사용된다.
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">생성자의 맴버 초기화 방식</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">직접 초기화(direct initialization)</th><th style="text-align: center;">목록 초기화(list initialization)</th></tr></thead>
-<tbody><tr style="vertical-align: top;"><td>생성자의 블록 내에서 각 맴버를 할당 연산자(<code>=</code>)로 초기화하는 일반적인 방법이다.</td><td>직접 초기화가 불가능한 <a href="#상수">상수</a> 맴버의 초기화가 가능하다.</td></tr><tr style="vertical-align: top;"><td>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">생성자의 맴버 초기화 방식</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">직접 초기화(direct initialization)</th><th style="text-align: center;">목록 초기화(list initialization)</th></tr></thead><tbody><tr style="vertical-align: top;"><td>생성자의 블록 내에서 각 맴버를 할당 연산자(<code>=</code>)로 초기화하는 일반적인 방법이다.</td><td>직접 초기화가 불가능한 <a href="#상수">상수</a> 맴버의 초기화가 가능하다.</td></tr><tr style="vertical-align: top;"><td>
 
 ```cpp
 class CLASS {
@@ -1471,9 +1388,7 @@ public:
 // 클래스 객체화
 CLASS intance(2, 3.14);
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 생성자는 오버로딩될 수 있어 한 개 이상이 정의될 수 있다. 그 중에서 아무런 전달인자를 받지 않는 생성자를 기본 생성자(default constructor)라고 칭한다.
 
@@ -1499,11 +1414,7 @@ public:
 
 아래는 메소드를 선언과 정의로 나누어 작성한 코드를 보여준다:
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">맴버 함수의 선언과 정의</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">선언과 정의 구분</th><th style="text-align: center;">동일 코드</th></tr></thead>
-<tbody><tr style="vertical-align: top;"><td>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">맴버 함수의 선언과 정의</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">선언과 정의 구분</th><th style="text-align: center;">동일 코드</th></tr></thead><tbody><tr style="vertical-align: top;"><td>
 
 ```cpp
 struct CLASS {
@@ -1521,9 +1432,7 @@ struct CLASS {
 
 };
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 ### 정적 맴버
 [정적 맴버](https://en.cppreference.com/w/cpp/language/static)(static member)는 클래스로부터 생성된 객체의 개수와 무관하게 오로지 하나의 데이터만 존재하여 공유되는 `static` 키워드로 명시된 맴버이다. 해당 유형의 맴버는 객체화가 필요없이 클래스로부터 직접 호출이 가능하다.
@@ -1532,11 +1441,7 @@ struct CLASS {
 
 일반 맴버와 달리, 정적 맴버는 클래스 내에서 선언만 되고 외부에서 별도로 정의되어야 한다:
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">정적 맴버의 선언과 정의</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">정적 필드</th><th style="text-align: center;">정적 메소드</th></tr></thead>
-<tbody><tr style="vertical-align: top;"><td>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">정적 맴버의 선언과 정의</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">정적 필드</th><th style="text-align: center;">정적 메소드</th></tr></thead><tbody><tr style="vertical-align: top;"><td>
 
 ```cpp
 using namespace std;
@@ -1584,9 +1489,7 @@ int main() {
 8
 9
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 ### 상수 맴버 함수
 [상수 맴버 함수](https://learn.microsoft.com/en-us/cpp/cpp/const-cpp#const-member-functions)(constant member function)는 객체를 변경하지 않는 "읽기 전용"이 보장된 메소드이며 매개변수 선언 이후에 `const` 키워드를 기입하여 선언한다. 클래스가 상수로 객체화된 경우에만 호출이 가능하며, 아래와 같은 성질을 지닌다:
@@ -1656,11 +1559,7 @@ struct CLASS {
 
 파생 클래스는 기반 클래스에 이미 정의된 식별자의 맴버를 선언할 수 있으며, 이러한 경우 기반 클래스의 맴버 정의는 파생 클래스에 의해 묻힌다. 범위지정 연산자 `::`를 사용하여 파생 클래스에 묻힌 기반 클래스의 맴버를 접근할 수 있다. 파생 클래스는 여러 기반 클래스로부터 동시에 상속받을 수 있다.
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">기반 및 파생 클래스의 상속 관계</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">기반 클래스</th><th style="text-align: center;">파생 클래스</th></tr></thead>
-<tbody><tr style="vertical-align: top;"><td>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">기반 및 파생 클래스의 상속 관계</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">기반 클래스</th><th style="text-align: center;">파생 클래스</th></tr></thead><tbody><tr style="vertical-align: top;"><td>
 
 ```cpp
 using namespace std;
@@ -1719,20 +1618,12 @@ int main() {
 [파생 클래스] 소멸자
 [기반 클래스] 소멸자
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 ## 다형성
 [다형성](https://ko.wikipedia.org/wiki/다형성_(컴퓨터_과학))(polymorphism)은 "여러가지의 형태를 가진"이란 사전적 의미를 가지며, 프로그래밍 언어에서는 상황과 용도에 따라 달리 동작하는 것을 가리킨다.
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">C++ 언어의 다형성 유형</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">컴파일타임 다형성(compile-time polymorphism)</th><th style="text-align: center;">런타임 다형성(runtime polymorphism)</th></tr></thead>
-<tbody><tr style="vertical-align: top; text-align: center;"><td>컴파일 시 이루어지는 다형성<br/>(일명 정적 다형성; static polymorphism)</td><td>프로그램 실행 시 이루어지는 다형성<br/>(일명 동적 다형성; dynamic polymorphism)</td></tr><tr style="vertical-align: top; text-align: center;"><td>예시: <a href="#연산자-오버로딩">연산자 오버로딩</a></td><td>예시: <a href="#함수-오버로딩">함수 오버로딩</a>, <a href="#함수-오버라이딩">함수 오버라이딩</a></td></tr>
-</tbody>
-</table>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C++ 언어의 다형성 유형</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">컴파일타임 다형성(compile-time polymorphism)</th><th style="text-align: center;">런타임 다형성(runtime polymorphism)</th></tr></thead><tbody><tr style="vertical-align: top; text-align: center;"><td>컴파일 시 이루어지는 다형성<br/>(일명 정적 다형성; static polymorphism)</td><td>프로그램 실행 시 이루어지는 다형성<br/>(일명 동적 다형성; dynamic polymorphism)</td></tr><tr style="vertical-align: top; text-align: center;"><td>예시: <a href="#연산자-오버로딩">연산자 오버로딩</a></td><td>예시: <a href="#함수-오버로딩">함수 오버로딩</a>, <a href="#함수-오버라이딩">함수 오버라이딩</a></td></tr></tbody></table>
 
 ### 연산자 오버로딩
 [연산자 오버로딩](https://en.cppreference.com/w/cpp/language/operators)(operator overloading)은 연산자가 특정 클래스 및 해당 객체에서 어떻게 동작할 지 `operator` 키워드로 재정의하는 컴파일타임 다형성이다. 한 개의 연산자에 전달받은 인자의 자료형 및 개수에 따라 여러 정의가 가능하다.
@@ -1775,11 +1666,7 @@ int main() {
 
 오버라이딩이 되는 기반 클래스의 메소드는 [`virtual`](https://en.cppreference.com/w/cpp/language/virtual) 지정자로 정의된 가상 함수(virtual function)이다. 정의된 가상 함수는 기반 클래스를 객체화하여 곧바로 사용할 수 있으며, 또는 파생 클래스에서 오버라이딩을 하지 않은 채 객체화하여 사용될 수 있다. [상속](#상속)에서 보여준 예시 코드는 절대 함수 오버라이딩이 아니며 단순히 파생 클래스에 묻힌 것일 뿐이다.
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">가상 함수의 오버라이딩</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">기반 클래스</th><th style="text-align: center;">파생 클래스</th></tr></thead>
-<tbody><tr style="vertical-align: top;"><td>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">가상 함수의 오버라이딩</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">기반 클래스</th><th style="text-align: center;">파생 클래스</th></tr></thead><tbody><tr style="vertical-align: top;"><td>
 
 ```cpp
 struct CLASS1 {
@@ -1801,9 +1688,7 @@ struct CLASS2 : public CLASS1 {
     }
 };
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 기반 클래스의 가상 함수는 아무런 정의가 없이 `=0` 구문이 뒤에 붙는 [순수 가상 함수](https://en.cppreference.com/w/cpp/language/abstract_class)(pure virtual function)로 선언될 수 있다. 그리고 최소한 한 개 이상의 순수 가상 함수를 갖는 클래스를 추상 클래스(abstract class)라고 부른다.
 
@@ -1854,10 +1739,7 @@ struct STRUCTURE {
 
 1. 구조체 맴버에 값을 할당하는 방법:
 
-    <table style="width: 95%; margin-left: auto; margin-right: auto;">
-    <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-    <thead><tr><th style="text-align: center;">순차적 맴버 정의</th><th style="text-align: center;">명시적 맴버 정의</th></tr></thead>
-    <tbody><tr style="vertical-align: top;"><td>
+    <table style="width: 95%; margin-left: auto; margin-right: auto;"><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">순차적 맴버 정의</th><th style="text-align: center;">명시적 맴버 정의</th></tr></thead><tbody><tr style="vertical-align: top;"><td>
     
     ```cpp
     struct STRUCTURE variable = { 'A', 3 };
@@ -1870,16 +1752,11 @@ struct STRUCTURE {
         .field1 = 'A'
     };
     ```
-    </td></tr><tr><td>구조체에서 맴버를 선언한 순서대로 데이터를 나열한다.</td><td>구조체 맴버를 직접 명시하고 할당함으로 순서의 영향을 받지 않는다.</td></tr>
-    </tbody>
-    </table>
+    </td></tr><tr><td>구조체에서 맴버를 선언한 순서대로 데이터를 나열한다.</td><td>구조체 맴버를 직접 명시하고 할당함으로 순서의 영향을 받지 않는다.</td></tr></tbody></table>
 
 1. 구조체 선언과 동시에 변수를 함께 정의하는 방법:
 
-    <table style="width: 95%; margin-left: auto; margin-right: auto;">
-    <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-    <thead><tr><th style="text-align: center;">명명된 구조체</th><th style="text-align: center;">익명 구조체</th></tr></thead>
-    <tbody><tr style="vertical-align: top;"><td>
+    <table style="width: 95%; margin-left: auto; margin-right: auto;"><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">명명된 구조체</th><th style="text-align: center;">익명 구조체</th></tr></thead><tbody><tr style="vertical-align: top;"><td>
     
     ```cpp
     struct STRUCTURE {
@@ -1895,16 +1772,11 @@ struct STRUCTURE {
         int   field2;
     } variable = { 'A', 3 };
     ```
-    </td></tr><tr style="vertical-align: top;"><td>차후 해당 구조체로부터 다른 변수를 정의하는 등 재활용이 가능하다.</td><td>재활용이 불가하지만, 사실상 이름을 지정할 필요가 없는 네스티드(nested), 즉 다른 사용자 정의 자료형 내에 흔히 사용된다.</td></tr>
-    </tbody>
-    </table>
+    </td></tr><tr style="vertical-align: top;"><td>차후 해당 구조체로부터 다른 변수를 정의하는 등 재활용이 가능하다.</td><td>재활용이 불가하지만, 사실상 이름을 지정할 필요가 없는 네스티드(nested), 즉 다른 사용자 정의 자료형 내에 흔히 사용된다.</td></tr></tbody></table>
 
 1. 구조체 맴버를 호출하는 방법:
 
-    <table style="width: 95%; margin-left: auto; margin-right: auto;">
-    <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-    <thead><tr><th style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators">객체 맴버 연산자</a></th><th style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators">포인터 맴버 연산자</a></th></tr></thead>
-    <tbody><tr style="vertical-align: top;"><td>
+    <table style="width: 95%; margin-left: auto; margin-right: auto;"><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators">객체 맴버 연산자</a></th><th style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators">포인터 맴버 연산자</a></th></tr></thead><tbody><tr style="vertical-align: top;"><td>
     
     ```cpp
     std::cout << variable.field1
@@ -1916,9 +1788,7 @@ struct STRUCTURE {
     STRUCTURE *ptr = &variable;
     std::cout << ptr->field1 << ptr->field2;
     ```
-    </td></tr><tr style="vertical-align: top;"><td>객체 맴버 연산자 <code>.</code>를 활용한 "값에 의한 호출"이다.</td><td>포인터 맴버 연산자 <code>-&gt;</code>를 활용한 "참조에 의한 호출"이다.</td></tr>
-    </tbody>
-    </table>
+    </td></tr><tr style="vertical-align: top;"><td>객체 맴버 연산자 <code>.</code>를 활용한 "값에 의한 호출"이다.</td><td>포인터 맴버 연산자 <code>-&gt;</code>를 활용한 "참조에 의한 호출"이다.</td></tr></tbody></table>
 
 각 맴버에 새로운 값을 할당하는 건 [배열](#배열)과 마찬가지로 가능하지만, 만일 모든 맴버들을 한꺼번에 할당할 필요가 있다면 [캐스팅](#자료형-변환)을 활용할 수 있다.
 
@@ -1949,11 +1819,7 @@ std::cout << sizeof(STRUCTURE);
 
 다음은 몇 가지 경우에 따라 데이터 구조 정렬이 어떻게 이루어진 것인지 설명한다:
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">맴버 구성에 따른 데이터 구조 정렬 비교</caption>
-<colgroup><col style="width: 33.3%;"/><col style="width: 33.4%;"/><col style="width: 33.3%;"/></colgroup>
-<thead><tr><th style="text-align: center;">8바이트: <code>char</code>-<code>int</code> 구조</th><th style="text-align: center;">8바이트: <code>char</code>-<code>short</code>-<code>int</code> 구조</th><th style="text-align: center;">12바이트: <code>char</code>-<code>int</code>-<code>short</code> 구조</th></tr></thead>
-<tbody><tr style="vertical-align: top;"><td>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">맴버 구성에 따른 데이터 구조 정렬 비교</caption><colgroup><col style="width: 33.3%;"/><col style="width: 33.4%;"/><col style="width: 33.3%;"/></colgroup><thead><tr><th style="text-align: center;">8바이트: <code>char</code>-<code>int</code> 구조</th><th style="text-align: center;">8바이트: <code>char</code>-<code>short</code>-<code>int</code> 구조</th><th style="text-align: center;">12바이트: <code>char</code>-<code>int</code>-<code>short</code> 구조</th></tr></thead><tbody><tr style="vertical-align: top;"><td>
 
 ```cpp
 struct STRUCTURE {
@@ -1993,9 +1859,7 @@ struct STRUCTURE {
 // ------ Addr: 0x0000000C
 };
 ```
-</td></tr><tr style="vertical-align: top;"><td>정렬에 의해 맴버 간 여분이 발생하면 메모리의 연속성을 위해 패딩으로 메워진다.</td><td>구조체 자체의 정렬을 위해, 구조체 크기는 정렬 크기의 배수이어야 한다. 맨 마지막 맴버의 자료형 크기가 정렬 크기에 미치지 못하면 나머지를 패딩으로 채운다.</td><td>비록 <code>short</code> 자료형이 2바이트 정렬인 관계로 <code>char</code> 자료형 맴버 사이에 1바이트 패딩이 메워지지만, <code>int</code> 자료형에 의한 4바이트 크기의 정렬 경계 내에 두 맴버를 모두 담아낼 수 있기 때문이다.</td></tr>
-</tbody>
-</table>
+</td></tr><tr style="vertical-align: top;"><td>정렬에 의해 맴버 간 여분이 발생하면 메모리의 연속성을 위해 패딩으로 메워진다.</td><td>구조체 자체의 정렬을 위해, 구조체 크기는 정렬 크기의 배수이어야 한다. 맨 마지막 맴버의 자료형 크기가 정렬 크기에 미치지 못하면 나머지를 패딩으로 채운다.</td><td>비록 <code>short</code> 자료형이 2바이트 정렬인 관계로 <code>char</code> 자료형 맴버 사이에 1바이트 패딩이 메워지지만, <code>int</code> 자료형에 의한 4바이트 크기의 정렬 경계 내에 두 맴버를 모두 담아낼 수 있기 때문이다.</td></tr></tbody></table>
 
 ## 공용체
 [공용체](https://en.cppreference.com/w/cpp/language/union)(union)는 여러 내부 변수, 일명 맴버(member)들을 자료형과 무관하게 하나의 단일 데이터로 통합시킨 사용자 정의 자료형이며, `union` 키워드로 정의된다. 각 맴버마다 주어진 메모리가 있는 [구조체](#구조체)와 달리, 공용체의 맴버들은 하나의 메모리를 공용한다. 즉, 공용체의 한 맴버에 값이 변경되면 나머지 맴버에도 영향을 미친다.
@@ -2011,10 +1875,7 @@ union UNION {
 
 1. 공용체 맴버에 값을 할당하는 방법:
 
-    <table style="width: 95%; margin-left: auto; margin-right: auto;">
-    <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-    <thead><tr><th style="text-align: center;">최전방 맴버 자료형 기준</th><th style="text-align: center;">명시적 맴버 자료형 기준</th></tr></thead>
-    <tbody><tr style="vertical-align: top;"><td>
+    <table style="width: 95%; margin-left: auto; margin-right: auto;"><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">최전방 맴버 자료형 기준</th><th style="text-align: center;">명시적 맴버 자료형 기준</th></tr></thead><tbody><tr style="vertical-align: top;"><td>
     
     ```cpp
     union UNION variable = { 365 };
@@ -2028,16 +1889,11 @@ union UNION {
     // field1 = 'm' (0x0000006d)
     // field2 = 365 (0x0000016d)
     ```
-    </td></tr><tr><td>숫자 365(<code>0x16d</code>) 중에서 가장 먼저 선언된 문자형 맴버에 의해 1바이트만 공용체에 저장되어, <code>field2</code>에는 숫자 109(<code>0x6d</code>)만 출력된다. </td><td>공용체 맴버를 직접 명시하고 할당하면 해당 맴버의 자료형에 따라 값이 저장되어, <code>field2</code>에는 숫자 365(<code>0x16d</code>)가 온전히 출력된다.</td></tr>
-    </tbody>
-    </table>
+    </td></tr><tr><td>숫자 365(<code>0x16d</code>) 중에서 가장 먼저 선언된 문자형 맴버에 의해 1바이트만 공용체에 저장되어, <code>field2</code>에는 숫자 109(<code>0x6d</code>)만 출력된다. </td><td>공용체 맴버를 직접 명시하고 할당하면 해당 맴버의 자료형에 따라 값이 저장되어, <code>field2</code>에는 숫자 365(<code>0x16d</code>)가 온전히 출력된다.</td></tr></tbody></table>
 
 1. 공용체 선언과 동시에 변수를 함께 정의하는 방법:
 
-    <table style="width: 95%; margin-left: auto; margin-right: auto;">
-    <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-    <thead><tr><th style="text-align: center;">명명된 공용체</th><th style="text-align: center;">익명 공용체</th></tr></thead>
-    <tbody><tr style="vertical-align: top;"><td>
+    <table style="width: 95%; margin-left: auto; margin-right: auto;"><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">명명된 공용체</th><th style="text-align: center;">익명 공용체</th></tr></thead><tbody><tr style="vertical-align: top;"><td>
     
     ```cpp
     union UNION {
@@ -2053,16 +1909,11 @@ union UNION {
         int   field2;
     } variable = { 365 };
     ```
-    </td></tr><tr style="vertical-align: top;"><td>차후 해당 공용체로부터 다른 변수를 정의하는 등 재활용이 가능하다.</td><td>재활용이 불가하지만, 사실상 이름을 지정할 필요가 없는 네스티드(nested), 즉 다른 사용자 정의 자료형 내에 흔히 사용된다.</td></tr>
-    </tbody>
-    </table>
+    </td></tr><tr style="vertical-align: top;"><td>차후 해당 공용체로부터 다른 변수를 정의하는 등 재활용이 가능하다.</td><td>재활용이 불가하지만, 사실상 이름을 지정할 필요가 없는 네스티드(nested), 즉 다른 사용자 정의 자료형 내에 흔히 사용된다.</td></tr></tbody></table>
 
 1. 공용체 맴버를 호출하는 방법:
 
-    <table style="width: 95%; margin-left: auto; margin-right: auto;">
-    <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-    <thead><tr><th style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators">객체 맴버 연산자</a></th><th style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators">포인터 맴버 연산자</a></th></tr></thead>
-    <tbody><tr style="vertical-align: top;"><td>
+    <table style="width: 95%; margin-left: auto; margin-right: auto;"><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators">객체 맴버 연산자</a></th><th style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators">포인터 맴버 연산자</a></th></tr></thead><tbody><tr style="vertical-align: top;"><td>
     
     ```cpp
     std::cout << variable.field1
@@ -2074,9 +1925,7 @@ union UNION {
     UNION *ptr = &variable;
     std::cout << ptr->field1 << ptr->field2;
     ```
-    </td></tr><tr style="vertical-align: top;"><td>객체 맴버 연산자 <code>.</code>를 활용한 "값에 의한 호출"이다.</td><td>포인터 맴버 연산자 <code>-&gt;</code>를 활용한 "참조에 의한 호출"이다.</td></tr>
-    </tbody>
-    </table>
+    </td></tr><tr style="vertical-align: top;"><td>객체 맴버 연산자 <code>.</code>를 활용한 "값에 의한 호출"이다.</td><td>포인터 맴버 연산자 <code>-&gt;</code>를 활용한 "참조에 의한 호출"이다.</td></tr></tbody></table>
 
 ## 열거형
 [열거형](https://en.cppreference.com/w/cpp/language/enum)(enumeration)은 열거된 항목, 일명 열거자(enumerator)들을 정수로 순번을 매기며, `enum` 키워드 정의된다. [구조체](#구조체)와 [공용체](#공용체)처럼 커스텀 자료형을 제작하는 게 아닌, 정수를 [식별자](#식별자)로 대신 치환하여 소스 코드 가독성을 높여주는 역할을 한다. 다음은 열거형에 대한 유의사항이다:
@@ -2155,11 +2004,7 @@ using dtypeName = int;
 
 다음은 템플릿의 유형별 정의 그리고 홑화살괄호 `<>` 안에 자료형을 지정하여 객체화하는 예시 코드를 보여준다.
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">템플릿 유형별 정의 및 호출</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">함수 테블릿</th><th style="text-align: center;">클래스 템플릿</th></tr></thead>
-<tbody><tr style="vertical-align: top;"><td>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">템플릿 유형별 정의 및 호출</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">함수 테블릿</th><th style="text-align: center;">클래스 템플릿</th></tr></thead><tbody><tr style="vertical-align: top;"><td>
 
 ```cpp
 // 함수 템플릿 정의
@@ -2195,9 +2040,7 @@ FUNCTION<int, float>(1, 3.0)
 // 클래스 템플릿 객체화
 CLASS<int, float> instance(1, 3.0);
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 > 클래스 템플릿은 클래스가 아니다: 클래스처럼 [헤더 파일과 소스 파일로 나누어서 관리하는 것](#클래스-파일)은 C++ 프로그래밍 언어에서 지원하지 않는다.
 
@@ -2278,14 +2121,7 @@ catch(...)
 ## `throw` 키워드
 [`throw`](https://en.cppreference.com/w/cpp/language/throw) 키워드는 내에서 의도적으로 예외를 발생시키는데 사용된다. 자체 제작 함수나 클래스에서 설계되지 않은 방식으로 접근하거나 사용하려는 경우, 해당 문으로 오류를 일으켜서 프로세스 실행을 즉시 중단시키는 용도로 활용된다. 해당 키워드는 `try` 블록 내부 및 외부에서 동작 방식이 약간 다르다:
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;"><code>throw</code> 위치에 따른 동작 방식</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;"><code>try</code> 블록 내부</th><th style="text-align: center;"><code>try</code> 블록 외부</th></tr></thead>
-<tbody>
-<tr><td>표현식으로부터 평가된 자료형을 <code>catch</code> 예외 처리문으로 전달한다. <code>catch</code>는 전달된 값이 아닌 자료형에 따라 구별하여 예외 처리한다.
-
-</td><td><a href="https://en.cppreference.com/w/cpp/error/terminate"><code>std::terminate()</code></a>와 동일, 즉 프로그램을 종료한다.</td></tr><tr><td colspan="2">
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><code>throw</code> 위치에 따른 동작 방식</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;"><code>try</code> 블록 내부</th><th style="text-align: center;"><code>try</code> 블록 외부</th></tr></thead><tbody><tr><td>표현식으로부터 평가된 자료형을 <code>catch</code> 예외 처리문으로 전달한다. <code>catch</code>는 전달된 값이 아닌 자료형에 따라 구별하여 예외 처리한다.</td><td><a href="https://en.cppreference.com/w/cpp/error/terminate"><code>std::terminate()</code></a>와 동일, 즉 프로그램을 종료한다.</td></tr><tr><td colspan="2">
 
 ```cpp
 try
@@ -2301,9 +2137,7 @@ catch(char e)
     // catch: 문자형
 }
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 # 전처리기
 C++ 언어가 컴파일되기 이전에 전처리기로부터 `#include`와 같은 전처리기 지시문이 우선적으로 처리된다. 전처리기 지시문은 C++ 컴파일러 설정 및 프로그래밍의 편리성을 제공한다. 본 장에서는 일부 유용한 전처리기 지시문에 대하여 소개한다.
@@ -2311,11 +2145,7 @@ C++ 언어가 컴파일되기 이전에 전처리기로부터 `#include`와 같�
 ## 매크로 정의
 [매크로](https://en.cppreference.com/w/cpp/preprocessor/replace)(macro)란 식별자가 있는 코드 조각이다. 코드 조각은 숫자나 문자와 같은 간단한 데이터가 될 수 있으며(객체형식 매크로; object-like macro), 전달인자를 받는 표현식이나 문장이 될 수도 있다(함수형식 매크로; function-like macro). 매크로는 `#define` 지시문으로 정의되며, 각 매크로에 해당하는 데이터 및 표현식이 소스 코드에 대체된다. 정의된 매크로는 `#undef` 지시자로 제거할 수 있다.
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">C++의 매크로 유형</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">객체형식 매크로</th><th style="text-align: center;">함수형식 매크로</th></tr></thead>
-<tbody><tr style="vertical-align: top;"><td>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C++의 매크로 유형</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">객체형식 매크로</th><th style="text-align: center;">함수형식 매크로</th></tr></thead><tbody><tr style="vertical-align: top;"><td>
 
 ```cpp
 #define MACRO    7
@@ -2343,9 +2173,7 @@ printf("%d", MACRO(3, 4));
 ```terminal
 12
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 한 번 정의된 매크로는 런타임 도중에 변경이 불가하다. 정의된 매크로는 마치 전역 변수인 마냥 헤더 파일에서 `#include`와 같은 포함 지시문을 통해 다른 스크립트에서도 사용할 수 있다.
 
@@ -2452,11 +2280,7 @@ printf("%d", variable);
 
 [진입점](#진입점)인 `main()` 함수는 선언부가 없다는 점을 고려하면 메인 스크립트를 다음과 같이 구성할 수 있다.
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">헤더 파일과 소스 코드 나누기</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">헤더 파일: <code>main.hpp</code></th><th style="text-align: center;">소스 코드: <code>main.cpp</code></th></tr></thead>
-<tbody><tr style="vertical-align: top;"><td>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">헤더 파일과 소스 코드 나누기</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">헤더 파일: <code>main.hpp</code></th><th style="text-align: center;">소스 코드: <code>main.cpp</code></th></tr></thead><tbody><tr style="vertical-align: top;"><td>
 
 ```cpp
 #include <iostream>
@@ -2482,9 +2306,7 @@ void func(int x, float y) {
     cout << x + y << endl;
 }
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 위의 소스 파일의 헤더 파일 포함은 결과적으로 `#include` 지시문으로 인해 다음과 같이 표현된 것과 동일하다.
 
@@ -2530,12 +2352,7 @@ void func(int x, float y) {
 
 아래는 프로그래밍 언어에서 흔히 사용되는 데이터와 기능들은 바로 사용할 수 있도록 미리 컴파일된 [표준 라이브러리](https://ko.wikipedia.org/wiki/C_표준_라이브러리)를 불러오는 헤더 파일 일부를 나열한다.
 
-<table style="width: 80%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">C++ 표준 라이브러리의 헤더 파일</caption>
-<colgroup><col style="width: 18%;"/><col style="width: 12%;"/><col style="70%;"/></colgroup>
-<thead><tr><th style="text-align: center;">유형</th><th style="text-align: center;">헤더 파일</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody><tr><td style="text-align: center;"><a href="#파일-입출력">표준 입출력</a></td><td style="text-align: center;"><code>iostream</code></td><td>표준 입출력 관련 데이터를 제공한다: <code>cin</code>, <code>cout</code> 등</td></tr><tr><td style="text-align: center;"><a href="#파일-입출력">파일 입출력</a></td><td style="text-align: center;"><code>fstream</code></td><td>파일 입출력 관련 데이터 및 기능을 제공하며, <code>iostream</code> 헤더를 포함한다.</td></tr><tr><td style="text-align: center;"><a href="#문자열-자료형">문자열</a></td><td style="text-align: center;"><code>string</code></td><td>문자열 관련 데이터 및 기능을 제공한다: <code>string</code> 자료형 등</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/header/chrono">날짜 및 시간</a></td><td style="text-align: center;"><code>chrono</code></td><td>날짜 및 시간과 관련된 함수를 제공한다.</td></tr></tbody>
-</table>
+<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C++ 표준 라이브러리의 헤더 파일</caption><colgroup><col style="width: 18%;"/><col style="width: 12%;"/><col style="70%;"/></colgroup><thead><tr><th style="text-align: center;">유형</th><th style="text-align: center;">헤더 파일</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="#파일-입출력">표준 입출력</a></td><td style="text-align: center;"><code>iostream</code></td><td>표준 입출력 관련 데이터를 제공한다: <code>cin</code>, <code>cout</code> 등</td></tr><tr><td style="text-align: center;"><a href="#파일-입출력">파일 입출력</a></td><td style="text-align: center;"><code>fstream</code></td><td>파일 입출력 관련 데이터 및 기능을 제공하며, <code>iostream</code> 헤더를 포함한다.</td></tr><tr><td style="text-align: center;"><a href="#문자열-자료형">문자열</a></td><td style="text-align: center;"><code>string</code></td><td>문자열 관련 데이터 및 기능을 제공한다: <code>string</code> 자료형 등</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/header/chrono">날짜 및 시간</a></td><td style="text-align: center;"><code>chrono</code></td><td>날짜 및 시간과 관련된 함수를 제공한다.</td></tr></tbody></table>
 
 헤더 파일 개수나 선언된 데이터가 매우 많은 경우, 프로젝트 빌드 시간을 줄이기 위한 방안으로 헤더 파일을 중간체 형태로 미리 변환시킨 [컴파일된 헤더](https://en.wikipedia.org/wiki/Precompiled_header)(precompiled header)를 활용하기도 한다. 허나 컴파일된 헤더를 사용하면 컴파일 작업 자체에는 시간이 다소 걸리는 단점이 있어, 용량이 작은 프로젝트나 자주 수정을 해야 하는 헤더 파일이 있다면 오히려 비효율적이다. MSVC 컴파일러에서는 `pch.h` 혹은 `stdafx.h`가 해당한다.
 
@@ -2544,11 +2361,7 @@ void func(int x, float y) {
 
 위에서 설명한 특징을 상기하며, 아래의 예시를 통해 `extern` 키워드에 의해 스크립트에 미치는 영향을 살펴본다.
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;"><code>extern</code> 키워드를 설명하기 위한 예시</caption>
-<colgroup><col style="width: 33.3%;"/><col style="width: 33.4%;"/><col style="width: 33.3%;"/></colgroup>
-<thead><tr><th style="text-align: center;">모듈 헤더 파일: <code>module.hpp</code></th><th style="text-align: center;">모듈 소스 코드: <code>module.cpp</code></th><th style="text-align: center;">메인 소스 코드: <code>main.cpp</code></th></tr></thead>
-<tbody><tr style="vertical-align: top;"><td>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><code>extern</code> 키워드를 설명하기 위한 예시</caption><colgroup><col style="width: 33.3%;"/><col style="width: 33.4%;"/><col style="width: 33.3%;"/></colgroup><thead><tr><th style="text-align: center;">모듈 헤더 파일: <code>module.hpp</code></th><th style="text-align: center;">모듈 소스 코드: <code>module.cpp</code></th><th style="text-align: center;">메인 소스 코드: <code>main.cpp</code></th></tr></thead><tbody><tr style="vertical-align: top;"><td>
 
 ```cpp
 #include <iostream>
@@ -2583,10 +2396,7 @@ int main() {
     return 0;
 }
 ```
-</td></tr><tr><td colspan="3">위의 예시에서 두 소스 코드 <code>module.cpp</code>와 <code>main.cpp</code>는 하나의 헤더 파일 <code>module.hpp</code>에 의해 링커로부터 서로 연동된다. <code>extern</code> 키워드에 의해 변수는 여러 번 선언이 가능하지만, 실제 코드에서 사용하기 위해서는 단 한 번의 정의가 필요하다. <code>module.cpp</code>에서의 <code>variable</code>를 정의한 이유가 바로 이러한 이유가 배경이 된 것이다.
-</td></tr>
-</tbody>
-</table>
+</td></tr><tr><td colspan="3">위의 예시에서 두 소스 코드 <code>module.cpp</code>와 <code>main.cpp</code>는 하나의 헤더 파일 <code>module.hpp</code>에 의해 링커로부터 서로 연동된다. <code>extern</code> 키워드에 의해 변수는 여러 번 선언이 가능하지만, 실제 코드에서 사용하기 위해서는 단 한 번의 정의가 필요하다. <code>module.cpp</code>에서의 <code>variable</code>를 정의한 이유가 바로 이러한 이유가 배경이 된 것이다.</td></tr></tbody></table>
 
 위의 예시에서 자칫 잘못하면 경우에 따라 MSVC 컴파일러 기준으로 두 가지 오류가 발생할 수 있다.
 
@@ -2622,11 +2432,7 @@ C 그리고 C++ 언어는 유사한 점이 상당히 많지만 엄밀히 다른 
 * C++ 언어로 작성된 함수를 C 프로젝트에서도 호환되도록 컴파일
 * C++ 프로젝트에서 C 언어로 작성된 함수를 호출하여 사용할 수 있도록 지원
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;"><code>extern "C"</code> 링크 선언 방법</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">함수마다 개별 지정</th><th style="text-align: center;">블록으로 묶음 지정</th></tr></thead>
-<tbody><tr style="vertical-align: top;"><td>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><code>extern "C"</code> 링크 선언 방법</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">함수마다 개별 지정</th><th style="text-align: center;">블록으로 묶음 지정</th></tr></thead><tbody><tr style="vertical-align: top;"><td>
 
 ```cpp
 extern "C" void function(int, float);
@@ -2638,9 +2444,7 @@ extern "C" {
     void function(int, float);
 }
 ```
-</td></tr>
-</tbody>
-</table>
+</td></tr></tbody></table>
 
 C 언어에서는 `extern "C"`에 대한 개념이 전무하기 때문에, 이로 인해 발생할 수 있는 문제를 방지하는 차원에서 아래와 같이 전처리기와 매크로를 활용하여 C++ 프로젝트에서만 언어 연동이 인식되도록 조치한다.
 

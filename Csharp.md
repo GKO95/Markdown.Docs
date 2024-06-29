@@ -16,8 +16,7 @@ OOP 언어는 "객체"라는 데이터를 위주로 프로그램을 개발되며
 
 프레임워크는 FCL(혹은 CoreFX) 그리고 CLR(혹은 CoreCLR)로 구성되어 있으며 아래의 표는 이들의 역할을 간략하게 설명한다:
 
-<table style="table-layout: fixed; width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">.NET 구성요소</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Framework_Class_Library">프레임워크 클래스 라이브러리</a>(FCL)</th><th style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/공통_언어_런타임">공통 언어 런타임</a>(CLR)</th></tr></thead><tbody>
-<tr><td>.NET 프로그램 개발에 필요한 <a href="https://ko.wikipedia.org/wiki/표준_라이브러리">표준 라이브러리</a>를 제공한다.</td><td><a href="Compiler.md#jit-컴파일">JIT 컴파일러</a>를 통해 .NET 프로그램을 컴파일 및 실행한다.</td></tr></tbody></table>
+<table style="table-layout: fixed; width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">.NET 구성요소</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Framework_Class_Library">프레임워크 클래스 라이브러리</a>(FCL)</th><th style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/공통_언어_런타임">공통 언어 런타임</a>(CLR)</th></tr></thead><tbody><tr><td>.NET 프로그램 개발에 필요한 <a href="https://ko.wikipedia.org/wiki/표준_라이브러리">표준 라이브러리</a>를 제공한다.</td><td><a href="Compiler.md#jit-컴파일">JIT 컴파일러</a>를 통해 .NET 프로그램을 컴파일 및 실행한다.</td></tr></tbody></table>
 
 ### .NET 프레임워크
 [.NET 프레임워크](https://ko.wikipedia.org/wiki/닷넷_프레임워크)(.NET Framework)는 .NET 이전에 활발히 사용되던 [윈도우 NT](Windows.md) 데스크탑에서만 사용할 수 있는 프레임워크이다. 비록 2020년 11월부로 [.NET Core](#net)(현재 .NET)가 주요 프레임워크로 전환되었으나, 마이크로소프트는  [누적 업데이트](WaaS.md#업데이트)를 배포하는 등 .NET 프레임워크를 [윈도우 OS](Windows.md)에서 제거할 계획이 없음을 [발표](https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-5#net-5-doesnt-replace-net-framework)했다. 다만, 새로운 어플리케이션 개발에 있어서는 [.NET 6](https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-6) 버전 이상을 사용하는 걸 적극 권장한다.
@@ -52,9 +51,7 @@ namespace Experiment
 ```cs
 Console.WriteLine("Hello World!");
 ```
-</td></tr><tr><td><code>Main()</code> 진입점이 C# 프로젝트명의 <a href="#네임스페이스">네임스페이스</a> 안에 위치한다. 객체지향 프로그래밍의 성격이 잘 드러나는 정석적인 코드이다.</td><td><code>Main()</code> 진입점이 컴파일러에 의해 <a href="#전역-네임스페이스">전역 네임스페이스</a>에 생성된다. <a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/program-structure/top-level-statements">최상위 문장</a>(top-level statements)은 코드를 간결하게 표현하지만 암묵적인 규칙들이 존재한다.</td></tr>
-</tbody>
-</table>
+</td></tr><tr><td><code>Main()</code> 진입점이 C# 프로젝트명의 <a href="#네임스페이스">네임스페이스</a> 안에 위치한다. 객체지향 프로그래밍의 성격이 잘 드러나는 정석적인 코드이다.</td><td><code>Main()</code> 진입점이 컴파일러에 의해 <a href="#전역-네임스페이스">전역 네임스페이스</a>에 생성된다. <a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/program-structure/top-level-statements">최상위 문장</a>(top-level statements)은 코드를 간결하게 표현하지만 암묵적인 규칙들이 존재한다.</td></tr></tbody></table>
 
 본 문서는 가독성을 위해 후자에서 선보인 최상위 문장이 작용한 코드를 예시로 활용할 예정이다.
 

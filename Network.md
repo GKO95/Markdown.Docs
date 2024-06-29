@@ -54,13 +54,7 @@ TCP/IP에서 세션 계층은 두 개 이상의 통신 장치 또는 네트워�
 ## 전송 계층
 [전송 계층](https://ko.wikipedia.org/wiki/전송_계층)(transport layer)은 전달받은 데이터가 노드 내에서 이를 요청한 프로세스에게 전송될 수 있도록 가담하는 4번째 계층이다. 출발지 호스트의 한 어플리케이션에서 목적지 호스트의 다른 어플리케이션으로 일련의 데이터들을 전달하는 기능 및 절차적 방법을 제공하는 데, 대표적인 두 가지의 전송 프로토콜은 다음과 같다:
 
-<table style="width: 60%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">전송 계층의 프로토콜 유형</caption>
-<colgroup><col style="width: 20%;"/><col style="width: 20%;"/><col/></colgroup>
-<thead><tr><th style="text-align: center;">전송 프로토콜</th><th style="text-align: center;">PDU</th><th style="text-align: center;">개요</th></tr></thead>
-<tbody><tr><td style="text-align: center;"><a href="#사용자-데이터그램-프로토콜">UDP</a></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Datagram">데이터그램</a></td><td>빠르고 간단하지만 목적지 도달을 보장하지 못하는 <a href="https://en.wikipedia.org/wiki/Connectionless_communication">비연결형</a>(connectionless) </td></tr>
-<tr><td style="text-align: center;"><a href="#전송-제어-프로토콜">TCP</a></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol#TCP_segment_structure">세그먼트</a></td><td>구조는 복잡하지만 안정적인 통신을 중시하는 <a href="https://en.wikipedia.org/wiki/Connection-oriented_communication">연결지향형</a>(connection-oriented)</td></tr></tbody>
-</table>
+<table style="width: 60%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">전송 계층의 프로토콜 유형</caption><colgroup><col style="width: 20%;"/><col style="width: 20%;"/><col/></colgroup><thead><tr><th style="text-align: center;">전송 프로토콜</th><th style="text-align: center;">PDU</th><th style="text-align: center;">개요</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="#사용자-데이터그램-프로토콜">UDP</a></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Datagram">데이터그램</a></td><td>빠르고 간단하지만 목적지 도달을 보장하지 못하는 <a href="https://en.wikipedia.org/wiki/Connectionless_communication">비연결형</a>(connectionless) </td></tr><tr><td style="text-align: center;"><a href="#전송-제어-프로토콜">TCP</a></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol#TCP_segment_structure">세그먼트</a></td><td>구조는 복잡하지만 안정적인 통신을 중시하는 <a href="https://en.wikipedia.org/wiki/Connection-oriented_communication">연결지향형</a>(connection-oriented)</td></tr></tbody></table>
 
 * 다중화(multiplexing): 송신하려는 각 포트의 데이터그램 및 세그먼트를 모두 거두어 하나의 패킷 페이로드로 캡슐화하는 작업이다.
 * 역다중화(demultiplexing): 수신받은 패킷으로부터 각 데이터그램과 세그먼트를 올바른 포트로 전달하는 작업니다.
@@ -92,14 +86,7 @@ UDP와 달리, TCP 전송 프로토콜은 노드 간 통신 연결 확립을 보
 
 TCP의 연결지향형을 구현하기 위한 일환으로, 만일 클라이언트가 서버와의 연결을 시도한다면 다음 세 단계의 [핸드셰이킹](https://ko.wikipedia.org/wiki/핸드셰이킹)(handshaking) 절차를 거친다:
 
-<table style="width: 60%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">TCP 핸드셰이킹 절차</caption>
-<colgroup><col style="width: 10%;"/><col style="width: 20%;"/><col style="width: 20%;"/><col/></colgroup>
-<thead><tr><th style="text-align: center;">단계</th><th style="text-align: center;">송신 노드</th><th style="text-align: center;">수신 노드</th><th style="text-align: center;">진행</th></tr></thead>
-<tbody><tr><td style="text-align: center;">1</td><td style="text-align: center;">클라이언트</td><td style="text-align: center;">서버</td><td><code>SYN</code> 플래그가 설정된 페이로드 없는 bodyless 세그먼트를 전송한다.</td></tr>
-<tr><td style="text-align: center;">2</td><td style="text-align: center;">서버</td><td style="text-align: center;">클라이언트</td><td><code>SYN | ACK</code> 플래그가 설정된 bodyless 세그먼트로 응답한다.</td></tr>
-<tr><td style="text-align: center;">3</td><td style="text-align: center;">클라이언트</td><td style="text-align: center;">서버</td><td><code>ACK</code> 플래그가 설정된 bodyless 세그먼트로 응답한다.</td></tr></tbody>
-</table>
+<table style="width: 60%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">TCP 핸드셰이킹 절차</caption><colgroup><col style="width: 10%;"/><col style="width: 20%;"/><col style="width: 20%;"/><col/></colgroup><thead><tr><th style="text-align: center;">단계</th><th style="text-align: center;">송신 노드</th><th style="text-align: center;">수신 노드</th><th style="text-align: center;">진행</th></tr></thead><tbody><tr><td style="text-align: center;">1</td><td style="text-align: center;">클라이언트</td><td style="text-align: center;">서버</td><td><code>SYN</code> 플래그가 설정된 페이로드 없는 bodyless 세그먼트를 전송한다.</td></tr><tr><td style="text-align: center;">2</td><td style="text-align: center;">서버</td><td style="text-align: center;">클라이언트</td><td><code>SYN | ACK</code> 플래그가 설정된 bodyless 세그먼트로 응답한다.</td></tr><tr><td style="text-align: center;">3</td><td style="text-align: center;">클라이언트</td><td style="text-align: center;">서버</td><td><code>ACK</code> 플래그가 설정된 bodyless 세그먼트로 응답한다.</td></tr></tbody></table>
 
 세그먼트의 각 헤더에 저장된 `Sequence #` 시퀀스 번호로부터 원본 데이터를 구성하는 몇 번째 조각인지 식별이 가능하다. 세그먼트를 수신받은 노드는 시퀀스 번호에 대응하는 `Acknowledgement #`로 응답하는데, 이들을 취합하여 전송한 모든 세그먼트가 목적지에 도달하였는지 판단한다. 모든 세그먼트가 목적지에 도달한 게 확인되면 `FIN` 플래그로 치환한 TCP 핸드셰이크 절차를 진행한다.
 

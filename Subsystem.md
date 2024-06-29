@@ -13,13 +13,7 @@
 
 환경 서브시스템은 크게 EXE 및 DLL 확장자의 프로세스와 라이브러리 유형으로 나뉘어진다.
 
-<table style="table-layout: fixed; width: 80%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">환경 서브시스템 프로세스 및 라이브러리 비교</caption>
-<colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
-<thead><tr><th style="text-align: center;">환경 서브시스템 프로세스 (<code>EXE</code>)</th><th style="text-align: center;">환경 서브시스템 라이브러리 (<code>DLL</code>)</th></tr></thead>
-<tbody style="text-align: center;"><tr><td>해당 환경 서브시스템으로 링크된 프로그램들의 상태를 관리하는 사용자 모드 프로세스이다.</td><td>해당 환경 서브시스템의 프로그램이 기능 및 리소스를 요청할 수 있는 인터페이스(<a href="WinAPI.md">윈도우 API</a> 등)를 제공한다.</td></tr>
-<tr><td>예시: <a href="https://ko.wikipedia.org/wiki/클라이언트/서버_런타임_하위_시스템">Csrss.exe</a>(Client/Server Runtime Subsystem)</td><td>예시: <a href="https://ko.wikipedia.org/wiki/윈도우_라이브러리_파일#KERNEL32.DLL">Kernel32.dll</a>, <a href="https://ko.wikipedia.org/wiki/윈도우_라이브러리_파일#USER32.DLL">User32.dll</a>, <a href="https://ko.wikipedia.org/wiki/윈도우_라이브러리_파일#GDI32.DLL">Gdi32.dll</a> 등</td></tr></tbody>
-</table>
+<table style="table-layout: fixed; width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">환경 서브시스템 프로세스 및 라이브러리 비교</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">환경 서브시스템 프로세스 (<code>EXE</code>)</th><th style="text-align: center;">환경 서브시스템 라이브러리 (<code>DLL</code>)</th></tr></thead><tbody style="text-align: center;"><tr><td>해당 환경 서브시스템으로 링크된 프로그램들의 상태를 관리하는 사용자 모드 프로세스이다.</td><td>해당 환경 서브시스템의 프로그램이 기능 및 리소스를 요청할 수 있는 인터페이스(<a href="WinAPI.md">윈도우 API</a> 등)를 제공한다.</td></tr><tr><td>예시: <a href="https://ko.wikipedia.org/wiki/클라이언트/서버_런타임_하위_시스템">Csrss.exe</a>(Client/Server Runtime Subsystem)</td><td>예시: <a href="https://ko.wikipedia.org/wiki/윈도우_라이브러리_파일#KERNEL32.DLL">Kernel32.dll</a>, <a href="https://ko.wikipedia.org/wiki/윈도우_라이브러리_파일#USER32.DLL">User32.dll</a>, <a href="https://ko.wikipedia.org/wiki/윈도우_라이브러리_파일#GDI32.DLL">Gdi32.dll</a> 등</td></tr></tbody></table>
 
 만일 사용자 프로세스가 서브시스템 라이브러리(일명 서브시스템 DLL)에게 어떠한 기능를 요청할 시, 다음 작업 처리 방식이 서브시스템 DLL에서 이루어진다:
 

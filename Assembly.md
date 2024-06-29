@@ -129,12 +129,7 @@ x86-64 아키텍처의 64비트 모드에서만 사용할 수 있는 GPR `R8` ~ 
 
 어셈블리의 소스 코드는 [메모리 세그먼트](https://ko.wikipedia.org/wiki/X86_메모리_분할)<sub>([참고](https://en.wikipedia.org/wiki/File:Program_memory_layout.pdf))</sub> 중 다음 세 가지를 지원하며 (즉, [스택](https://ko.wikipedia.org/wiki/스택) 및 [힙](https://ko.wikipedia.org/wiki/동적_메모리_할당) 영역 제외), 이들은 `section` 키워드와 함께 명시하여 구분된다:
 
-<table style="width: 80%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">어셈블리 언어의 프로그래밍 영역</caption>
-<colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup>
-<thead><tr><th style="text-align: center;">세그먼트</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody><tr><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Code_segment"><code>.text</code></a></td><td>프로세서가 실행할 코드가 기입된다; MASM의 경우 <a href="https://en.wikipedia.org/wiki/Code_segment"><code>.code</code></a> 사용을 권장한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Data_segment"><code>.data</code></a></td><td>초기화된 변수 및 상수를 선언하며, 런타임에 변경이 불가하다.</td></tr><tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/.bss"><code>.bss</code></a></td><td>초기화되지 않거나 영값을 가진 변수를 선언하며, 흔히 버퍼로 사용된다.</td></tr></tbody>
-</table>
+<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">어셈블리 언어의 프로그래밍 영역</caption><colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup><thead><tr><th style="text-align: center;">세그먼트</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Code_segment"><code>.text</code></a></td><td>프로세서가 실행할 코드가 기입된다; MASM의 경우 <a href="https://en.wikipedia.org/wiki/Code_segment"><code>.code</code></a> 사용을 권장한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Data_segment"><code>.data</code></a></td><td>초기화된 변수 및 상수를 선언하며, 런타임에 변경이 불가하다.</td></tr><tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/.bss"><code>.bss</code></a></td><td>초기화되지 않거나 영값을 가진 변수를 선언하며, 흔히 버퍼로 사용된다.</td></tr></tbody></table>
 
 ```nasm
 global _main     ; 전역으로 선언된 _main 함수

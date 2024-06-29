@@ -11,16 +11,7 @@ title: VMMap
 
 VMMap은 선택된 단 하나의 프로세스에서 커널 공간을 제외한 가상 주소 공간, 즉 사용자 공간을 어떻게 사용하고 있는지 보여준다. 만일 64비트 프로세스라면 128 TB([윈도우 서버 2012](https://ko.wikipedia.org/wiki/윈도우_서버_2012)까지는 8 TB)의 사용자 공간이 VMMap에 표시된다. 아래는 창 상단에 위치한 세 개의 그래프가 각각 무엇을 의미하는지 설명한다.
 
-<table style="width: 90%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">VMMap 요약 그래프에 대한 개요</caption>
-<colgroup><col style="width: 25%"/><col style="width: 75%"/></colgroup>
-<thead><tr><th style="text-align: center;">그래프</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody>
-<tr><td style="text-align: center;"><a href="Memory.md#커밋된-메모리">커밋</a> 요약 그래프<br/>(Commit Summary Graph)</td><td>메모리 유형마다 프로세스의 가상 주소 공간에 할당된 커밋된 용량을 표시한다. 즉, 여유(free) 및 예약된(reserved) <a href="Process.md#페이지">페이지</a>를 제외한 오로지 커밋된 페이지만이 계산된 수치이다.</td></tr>
-<tr><td style="text-align: center;">개인 요약 그래프<br/>(Private Summary Graph)</td><td>커밋된 메모리 중에서 공유되지 않은 프로세스 개인만을 위한 용량을 표시한다. 성능 카운터: <code>\Process(*)\Private Bytes</code></td></tr>
-<tr><td style="text-align: center;"><a href="Memory.md#작업-집합">작업 집합</a> 요약 그래프<br/>(Working Set Summary Graph)</td><td>커밋된 메모리 중에서 <a href="Memory.md">RAM</a>에 상주하고 있는 작업 집합 용량을 표시한다. 성능 카운터: <code>\Process(*)\Working Set</code></td></tr>
-</tbody>
-</table>
+<table style="width: 90%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">VMMap 요약 그래프에 대한 개요</caption><colgroup><col style="width: 25%"/><col style="width: 75%"/></colgroup><thead><tr><th style="text-align: center;">그래프</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="Memory.md#커밋된-메모리">커밋</a> 요약 그래프<br/>(Commit Summary Graph)</td><td>메모리 유형마다 프로세스의 가상 주소 공간에 할당된 커밋된 용량을 표시한다. 즉, 여유(free) 및 예약된(reserved) <a href="Process.md#페이지">페이지</a>를 제외한 오로지 커밋된 페이지만이 계산된 수치이다.</td></tr><tr><td style="text-align: center;">개인 요약 그래프<br/>(Private Summary Graph)</td><td>커밋된 메모리 중에서 공유되지 않은 프로세스 개인만을 위한 용량을 표시한다. 성능 카운터: <code>\Process(*)\Private Bytes</code></td></tr><tr><td style="text-align: center;"><a href="Memory.md#작업-집합">작업 집합</a> 요약 그래프<br/>(Working Set Summary Graph)</td><td>커밋된 메모리 중에서 <a href="Memory.md">RAM</a>에 상주하고 있는 작업 집합 용량을 표시한다. 성능 카운터: <code>\Process(*)\Working Set</code></td></tr></tbody></table>
 
 그래프에 표시된 각 색상들은 메모리 유형들을 나타내며, 이들에 대한 수치적 정보는 그래프 아래에 위치한 두 개의 도표들로부터 확인할 수 있다.
 
