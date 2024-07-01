@@ -10,12 +10,7 @@ WinDbg는 흔히 어플리케이션 충돌이나 [블루스크린](BSOD.md)으�
 ### 환경 변수 설정
 WinDbg로부터 원활한 디버깅 작업을 진행하려면 아래와 같이 시스템 환경 변수를 설정하기를 권장한다.
 
-<table style="width: 80%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">WinDbg 관련 환경 변수</caption>
-<colgroup><col style="width: 30%;"/><col style="width: 70%;"/></colgroup>
-<thead><tr><th style="text-align: center;">환경 변수</th><th style="text-align: center;">설명</th></tr></thead>
-<tbody><tr><td style="text-align: center;"><code>_NT_SYMBOL_PATH</code></td><td><a href="Symbol.md">심볼</a>(symbol) 서버 및 캐시 경로를 지정한다.</td></tr><tr><td style="text-align: center;"><code>_NT_DEBUGGER_EXTENSION_PATH</code></td><td>WinDbg 디버깅 확장도구가 위치한 폴더 경로를 명시한다: <a href="https://www.microsoft.com/en-us/download/details.aspx?id=53304">MEX</a> 확장도구 등</td></tr></tbody>
-</table>
+<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">WinDbg 관련 환경 변수</caption><colgroup><col style="width: 30%;"/><col style="width: 70%;"/></colgroup><thead><tr><th style="text-align: center;">환경 변수</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>_NT_SYMBOL_PATH</code></td><td><a href="Symbol.md">심볼</a>(symbol) 서버 및 캐시 경로를 지정한다.</td></tr><tr><td style="text-align: center;"><code>_NT_DEBUGGER_EXTENSION_PATH</code></td><td>WinDbg 디버깅 확장도구가 위치한 폴더 경로를 명시한다: <a href="https://www.microsoft.com/en-us/download/details.aspx?id=53304">MEX</a> 확장도구 등</td></tr></tbody></table>
 
 ## 인터페이스
 WinDbg에서 제공하는 화면이나 기능 등의 인터페이스에 대하여 소개한다.
@@ -45,12 +40,7 @@ WinDbg에서 디버깅하고자 하는 스레드(어플리케이션 덤프 경�
 ## !analyze 확장도구
 [!analyze](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/-analyze)는 WinDbg에 기본적으로 탑재된 확장도구 중에서도 증상을 개략적으로 파악하는 데 유용하다. 하지만 해당 확장도구 또한 WinDbg와 마찬가지로 문제의 원인을 제시하는 도구가 아니며, 본 내용은 !analyze가 제시하는 자동 진단 내용이 무엇을 내포하는지 소개한다. !analyze 확장도구의 진단 내용은 [마이크로소프트 공식 문서](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/using-the--analyze-extension)에서 확인할 수 있다.
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top;">!analyze 출력화면 비교</caption>
-<thead><tr><th style="text-align: center;">충돌 소프트웨어</th><th style="text-align: center;">출력화면 및 설명</th></tr></thead>
-<colgroup><col style="width: 15%;" /><col style="width: 85%;" /></colgroup>
-<tbody>
-<tr><td rowspan="2" style="text-align: center;">어플리케이션</td><td>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">!analyze 출력화면 비교</caption><thead><tr><th style="text-align: center;">충돌 소프트웨어</th><th style="text-align: center;">출력화면 및 설명</th></tr></thead><colgroup><col style="width: 15%;" /><col style="width: 85%;" /></colgroup><tbody><tr><td rowspan="2" style="text-align: center;">어플리케이션</td><td>
 
 ```windbg
 0:000> !analyze -v
@@ -69,9 +59,7 @@ NumberParameters: 2
    Parameter[1]: 0000000000000000
 Attempt to write to address 0000000000000000
 ```
-</td></tr>
-<tr><td><a href="C.md#예외-처리">예외</a>가 발생한 메모리 주소와 <a href="https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/596a1078-e883-4972-9bbc-49e60bebca55">NTSTATUS</a> 코드를 알려주고 구체적인 정황을 매개변수로 설명한다. 위의 덤프에서는 0xC0000005 STATUS_ACCESS_VIOLATION이란 유효하지 않은 메모리에 데이터를 작성하려는 시도를 확인하였다.</td></tr>
-<tr><td rowspan="2" style="text-align: center;">운영체제</td><td>
+</td></tr><tr><td><a href="C.md#예외-처리">예외</a>가 발생한 메모리 주소와 <a href="https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/596a1078-e883-4972-9bbc-49e60bebca55">NTSTATUS</a> 코드를 알려주고 구체적인 정황을 매개변수로 설명한다. 위의 덤프에서는 0xC0000005 STATUS_ACCESS_VIOLATION이란 유효하지 않은 메모리에 데이터를 작성하려는 시도를 확인하였다.</td></tr><tr><td rowspan="2" style="text-align: center;">운영체제</td><td>
 
 ```windbg
 0: kd> !analyze -v
@@ -92,10 +80,7 @@ Arg2: 0000000000000002, IRQL
 Arg3: 0000000000000000, value 0 = read operation, 1 = write operation
 Arg4: fffff803999612d0, address which referenced memory
 ```
-</td></tr>
-<tr><td><a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-code-reference2">Bugcheck</a>와 구체적인 정황을 소개하는 네 개의 매개변수를 알려준다. 위의 덤프는 DISPATCH_LEVEL 이상의 IRQL에서 유효하지 않는 메모리 주소에 데이터 작성을 시도하였음을 알리는 bugcheck <a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0xd1--driver-irql-not-less-or-equal">0xD1 DRIVER_IRQL_NOT_LESS_OR_EQUAL</a>로 확인되었다.</td></tr>
-</tbody>
-</table>
+</td></tr><tr><td><a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-code-reference2">Bugcheck</a>와 구체적인 정황을 소개하는 네 개의 매개변수를 알려준다. 위의 덤프는 DISPATCH_LEVEL 이상의 IRQL에서 유효하지 않는 메모리 주소에 데이터 작성을 시도하였음을 알리는 bugcheck <a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0xd1--driver-irql-not-less-or-equal">0xD1 DRIVER_IRQL_NOT_LESS_OR_EQUAL</a>로 확인되었다.</td></tr></tbody></table>
 
 이후 공통사항으로 레지스터에 저장된 데이터와 충돌이 발생한 스택을 화면에 출력한다. [어셈블리](Assembly.md)와 스택 기반의 [메모리](Memory.md) 할당 등의 컴퓨터공학 및 윈도우 운영체제에 대한 이해도가 요구된다. 본 문서에서는 WinDbg를 사용하여 분석하기 위해 알아야 할 사항과 명령, 그리고 방법론을 위주로 소개한다.
 
