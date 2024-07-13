@@ -1,9 +1,26 @@
 # 프로세스
-[프로세스](https://en.wikipedia.org/wiki/Process_(computing))(process)는 [.exe](https://en.wikipedia.org/wiki/.exe) 확장자 파일 유형과 같은 [어플리케이션](https://en.wikipedia.org/wiki/Application_software) 등의 [프로그램](https://en.wikipedia.org/wiki/Computer_program)을 실행하기 위해 필요한 데이터와 리소스를 담는 컨테이너이다. 프로세스와 프로그램은 엄연히 다른 존재이며, 후자는 [C](C.md)/[C++](Cpp.md) 등의 프로그래밍 언어로 작성된 코드를 [기계어](https://en.wikipedia.org/wiki/Machine_code)의 집합체로 컴파일하여 생성된 부산물이다. 즉 프로그램은 동작 방식이 단순 코드로 작성된 [이미지](https://en.wikipedia.org/wiki/Executable)에 불과하며, 이를 실행에 옮기는 주체가 바로 프로세스이다.
+**[프로세스](https://en.wikipedia.org/wiki/Process_(computing))**(process)는 [프로그램](https://en.wikipedia.org/wiki/Computer_program)을 실행하기 위해 필요한 데이터와 리소스를 담는 컨테이너이다. 프로그램은 동작 코드가 [기계어](https://en.wikipedia.org/wiki/Machine_code)로 컴파일된 [이미지](https://en.wikipedia.org/wiki/Executable)에 불과하며, [윈도우](Windows.md)에서의 대표적인 프로그램 확장자로 [EXE](https://en.wikipedia.org/wiki/.exe) 및 [DLL](https://en.wikipedia.org/wiki/Dynamic-link_library) 등이 존재한다. [운영체제](https://en.wikipedia.org/wiki/Operating_system)는 실행하려는 프로그램 이미지를 (필요한 라이브러리들과 함께) [커널](Kernel.md)에 의해 생성된 [가상 주소 공간](#가상-주소-공간)에 로드하여 프로세스를 실행한다.
 
-> 객체지향 프로그래밍 개념에 빗대어 프로세스를 프로그램의 객체(instance)라고 상당수의 문서에서 자주 언급되는 편이다.
+### 시스템 프로세스
+**시스템 프로세스**(system processes)는 운영체제 구동을 위해 반드시 존재하는 프로세스들을 가리킨다. 이들은 작업 관리자의 *세부 정보* 탭이나 [프로세스 탐색기](Procexp.md)를 통해 직접 확인이 가능하다.
 
-동일한 프로그램에서 실행되어도, [가상 주소 공간](#가상-주소-공간)에 의해 각 프로세스는 서로에게 영향을 미치지 않으며 자신만의 작업을 수행할 수 있다.
+* **[유휴 프로세스](https://en.wikipedia.org/wiki/System_Idle_Process)**(Idle process)
+
+    [프로세서](Processor.md#프로세서)가 아무런 작업을 하지 않고 있음을 나타내기 위한 실체가 없는 PID 0의 가짜 프로세스이다. 만일 유휴 프로세스의 프로세서 사용량이 90%로 집계된 경우, 이는 반대로 프로세서의 10%만이 실제로 실행 중인 프로세스를 처리하는 작업에 동원되고 있음을 의미한다. 이러한 이유로 유휴 프로세스의 [스레드](#스레드) 개수는 시스템의 [논리 프로세서](Processor.md#논리-프로세서) 개수와 일치한다.
+
+* **시스템 프로세스**(System process)
+
+    [Ntoskrnl.exe](Kernel.md#nt-커널) 또는 로드된 [드라이버](Driver.md) 등의 [커널](Kernel.md#커널) 스레드를 반영하기 위한 PID가 4로 고정된 특수한 프로세스이다. 시스템 프로세스는 "프로세스 자체"를 가리키는 게 아닌, [커널 모드](Processor.md#권한-수준)에서 생성된 "시스템 스레드의 집합"을 지칭한다. 시스템 스레드는 일반 사용자 모드 스레드와 동일한 속성과 컨텍스트을 지니고 있으나, [프로세스 공간](#가상-주소-공간)의 주소가 존재하지 않으며 오로지 [시스템 공간](#가상-주소-공간)의 코드만 실행한다.
+
+    > 즉 어떤 프로세스라도 장치 드라이버를 통해 스레드를 생성하면 이 또한 시스템 스레드가 되기 때문에 트러블슈팅 과정에서 유의해야 한다.
+
+    * *보안 시스템 프로세스(Secure System process)*
+
+        [VTL1](Hypervisor.md#가상-보안-모드) 보안 커널 주소 공간, 핸들, 그리고 시스템 스레드가 상주하는 프로세스이다. [스케줄링](Processor.md#스케줄링), 객체 및 메모리 관리는 VTL0 커널에서 이루어지기 때문에 실질적인 운영체제 동작에는 아무런 관여를 하지 않는다. 해당 프로세스는 단순히 사용자에게 [VBS](Hypervisor.md#가상화-기반-보안)가 활성화되었음을 가시화하는 게 전부이다.
+
+* **[메모리 압축 프로세스](https://en.wikipedia.org/wiki/Virtual_memory_compression)**(Memory Compression process)
+
+    프로세스의 가상 주소 공간으로부터 [페이징 아웃](Memory.md#페이징-파일) 될 페이지를 [HDD](https://ko.wikipedia.org/wiki/하드_디스크_드라이브) 또는 [SSD](https://ko.wikipedia.org/wiki/솔리드_스테이트_드라이브)와 같은 [보조기억장치](Storage.md)로 보내기 전에 압축시켜 [물리 메모리](Memory.md)에 상주시키는 기법을 활용할 수 있다. 이때 타 프로세스의 [작업 집합](Memory.md#작업-집합)으로부터 방출되어 압축된 [대기 메모리](Memory.md#캐시-메모리)가 바로 메모리 압축 프로세스의 사용자 주소 공간에 저장된다. 그러므로 메모리 압축 프로세스의 작업 집합은 작업 관리자의 메모리 성능에 표시된 "(압축)" 크기와 일치한다.
 
 ## 가상 주소 공간
 > *참고: [Pushing the Limits of Windows: Virtual Memory](https://techcommunity.microsoft.com/t5/windows-blog-archive/pushing-the-limits-of-windows-virtual-memory/ba-p/723750)*
@@ -25,30 +42,6 @@
 여기서 IMAGE_FILE_LARGE_ADDRESS_AWARE 플래그는 프로세스의 사용자 공간을 2 GB 제한보다 확장할 지 여부를 결정하는 어플리케이션 빌드 항목이다. 비주얼 스튜디오에서는 프로젝트 속성 중 `/LARGEADDRESSAWARE` 구성을 아래 그림과 같이 참고한다.
 
 ![비주얼 스튜디오의 프로젝트 속성 중 IMAGE_FILE_LARGE_ADDRESS_AWARE 플래그](./images/process_large_addresses.png)
-
-## 시스템 프로세스
-시스템 프로세스(system processes)는 운영체제 구동을 위해 반드시 존재하는 프로세스들을 가리킨다. 이들은 작업 관리자의 *세부 정보* 탭이나 [프로세스 탐색기](Procexp.md)를 통해 직접 확인이 가능하다.
-
-* **[유휴 프로세스](https://en.wikipedia.org/wiki/System_Idle_Process)**(Idle process)
-
-    [프로세서](Processor.md#프로세서)가 아무런 작업을 하지 않고 있음을 나타내기 위한 실체가 없는 PID 0의 가짜 프로세스이다. 만일 유휴 프로세스의 프로세서 사용량이 90%로 집계된 경우, 이는 반대로 프로세서의 10%만이 실제로 실행 중인 프로세스를 처리하는 작업에 동원되고 있음을 의미한다. 이러한 이유로 유휴 프로세스의 [스레드](#스레드) 개수는 시스템의 [논리 프로세서](Processor.md#논리-프로세서) 개수와 일치한다.
-
-* **시스템 프로세스**(System process)
-
-    [Ntoskrnl.exe](Kernel.md#nt-커널) 또는 로드된 [드라이버](Driver.md) 등의 [커널](Kernel.md#커널) 스레드를 반영하기 위한 PID 4의 특수한 프로세스이다. 시스템 프로세스는 "프로세스 자체"를 가리키는 게 아닌, [커널 모드](Processor.md#권한-수준)에서 생성된 "시스템 스레드의 집합"을 지칭한다. 시스템 스레드는 일반 사용자 모드 스레드와 동일한 속성과 컨텍스트을 지니고 있으나, [프로세스 공간](#가상-주소-공간)의 주소가 존재하지 않으며 오로지 [시스템 공간](#가상-주소-공간)의 코드만 실행한다.
-
-    > 즉 어떤 프로세스라도 장치 드라이버를 통해 스레드를 생성하면 이 또한 시스템 스레드가 되기 때문에 트러블슈팅 과정에서 유의해야 한다.
-
-    * *보안 시스템 프로세스(Secure System process)*
-
-        [VTL1](Hypervisor.md#가상-보안-모드) 보안 커널 주소 공간, 핸들, 그리고 시스템 스레드가 상주하는 프로세스이다. [스케줄링](Processor.md#스케줄링), 객체 및 메모리 관리는 VTL0 커널에서 이루어지기 때문에 실질적인 운영체제 동작에는 아무런 관여를 하지 않는다. 해당 프로세스는 단순히 사용자에게 [VBS](Hypervisor.md#가상화-기반-보안)가 활성화되었음을 가시화하는 게 전부이다.
-
-* **[메모리 압축 프로세스](https://en.wikipedia.org/wiki/Virtual_memory_compression)**(Memory Compression process)
-
-    프로세스의 가상 주소 공간으로부터 [페이징 아웃](Memory.md#페이징-파일) 될 페이지를 [HDD](https://ko.wikipedia.org/wiki/하드_디스크_드라이브) 또는 [SSD](https://ko.wikipedia.org/wiki/솔리드_스테이트_드라이브)와 같은 [보조기억장치](Storage.md)로 보내기 전에 압축시켜 [물리 메모리](Memory.md)에 상주시키는 기법을 활용할 수 있다. 이때 타 프로세스의 [작업 집합](Memory.md#작업-집합)으로부터 방출되어 압축된 [대기 메모리](Memory.md#캐시-메모리)가 바로 메모리 압축 프로세스의 사용자 주소 공간에 저장된다. 그러므로 메모리 압축 프로세스의 작업 집합은 작업 관리자의 메모리 성능에 표시된 "(압축)" 크기와 일치한다.
-
-### 세션 관리자
-[세션 관리자](https://ko.wikipedia.org/wiki/세션_관리자_하위_시스템)(Session Manager; smss.exe)는 윈도우 운영체제에서 가장 최초로 생성되는 사용자 모드 프로세스이다.
 
 ## 핸들
 > *참고: [Pushing the Limits of Windows: Handles - Microsoft Community Hub](https://techcommunity.microsoft.com/t5/windows-blog-archive/pushing-the-limits-of-windows-handles/ba-p/723848)*
