@@ -226,7 +226,7 @@ std::mem::size_of_val(&variable);   // 크기: 16바이트
 ## 변수
 [변수](https://doc.rust-lang.org/stable/book/ch03-01-variables-and-mutability.html)(variable)는 [네임 바인딩](https://en.wikipedia.org/wiki/Name_binding) 기법을 통해 지정된 [자료형](#자료형)의 데이터와 엮여 접근하는 데 사용되는 [식별자](#식별자)이며, 간단히 설명하자면 데이터에 이름을 붙인 것이다. 아래 코드는 `variable` 변수를 "선언(declaration)"한 다음 상수 3을 바인딩한다. 여기서 최초 바인딩을 "초기화(initialization)"라고 부르며, 초기화되지 않은 채 변수 호출은 허용되지 않지만 선언된 이후 나중에 바인딩될 수 있다.<sup>[<a href="https://doc.rust-lang.org/rust-by-example/variable_bindings/declare.html">출처</a>]</sup>
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption>러스트의 불변 및 가변 변수</caption><colgroup><col style="width: 50%;"/></col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">불변(immutable) 변수</th><th style="text-align: center;">가변(mutable) 변수</th></tr></thead><tbody><tr style="vertical-align: top;"><td>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption>러스트의 불변 및 가변 변수, 그리고 키워드 소개</caption><colgroup><col style="width: 50%;"/></col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">불변(immutable) 변수</th><th style="text-align: center;">가변(mutable) 변수</th></tr></thead><tbody><tr style="vertical-align: top;"><td>
 
 ```rust
 let variable = 3;
@@ -236,18 +236,13 @@ let variable = 3;
 ```rust
 let mut variable = 3;
 ```
-</td></tr><tr><td>초기화 이후에 변수는 다른 값으로 변경될 수 없으며, 이는 러스트의 기본적인 특성 중 하나이다.</td><td>타 프로그래밍 언어처럼 초기화가 이루어진 이후에도 <a href="https://doc.rust-lang.org/reference/expressions/operator-expr.html#assignment-expressions">할당 표현식</a>을 통해 새로운 값을 전달 받을 수 있도록 선언된 변수이다.</td></tr></tbody></table>
-
-* [`let`](https://doc.rust-lang.org/std/keyword.let.html) 키워드: 현 코드 [영역범위](https://doc.rust-lang.org/rust-by-example/variable_bindings/scope.html) 내에 새로운 변수를 소개하는 데 사용된다.
-* [`mut`](https://doc.rust-lang.org/std/keyword.mut.html) 키워드: 다른 데이터에 바인딩할 수 있는 가변 변수를 선언하는 목적으로도 활용된다.
+</td></tr><tr><td>초기화 이후에 변수는 다른 값으로 변경될 수 없으며, 이는 러스트의 기본적인 특성 중 하나이다.</td><td>타 프로그래밍 언어처럼 초기화가 이루어진 이후에도 <a href="https://doc.rust-lang.org/reference/expressions/operator-expr.html#assignment-expressions">할당 표현식</a>을 통해 새로운 값을 전달 받을 수 있도록 선언된 변수이다.</td></tr><tr><td><ul><li><a href="https://doc.rust-lang.org/std/keyword.let.html"><code>let</code></a>: 현 코드 <a href="https://doc.rust-lang.org/rust-by-example/variable_bindings/scope.html">영역범위</a> 내에 새로운 변수를 소개하는 데 사용된다.</li><li><a href="https://doc.rust-lang.org/std/keyword.const.html"><code>const</code></a>: 어디서나 사용할 수 있는 불변의 전역 상수이며, 반드시 자료형과 함께 선언되어야 한다.</li><li><a href="https://doc.rust-lang.org/std/keyword.static.html"><code>static</code></a>: 메모리 주소를 나타내기 때문에, 이를 참조하면 데이터 변경이 가능하여 사실상 전역 변수로 사용된다.</li><ul></td><td><ul><li><a href="https://doc.rust-lang.org/std/keyword.mut.html"><code>mut</code></a>: 다른 데이터에 바인딩할 수 있는 가변 변수를 선언하는 목적으로도 활용되며, <code>let</code> 및 <code>static</code> 키워드와 함께 사용될 수 있다.</li><ul></td></tr></tbody></table>
 
 컴파일러는 데이터의 값과 사용처를 기반하여 변수의 자료형을 추론할 수 있으나, 다음과 같이 명시적으로 변수에 자료형을 지정할 수 있다.
 
 ```rust
 let variable: u8 = 3;
 ```
-
-<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">변수 선언 키워드 및 특징</caption><colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup><thead><tr><th style="text-align: center;">키워드</th><th style="text-align: center;">특징</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/keyword.const.html"><code>const</code></a></td><td>어디서나 사용할 수 있는 불변의 전역 변수이며, 반드시 자료형과 함께 선언되어야 한다.</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/keyword.static.html"><code>static</code></a></td><td><code>const</code> 키워드와 특징이 동일하지만 메모리 위치를 나타내어, 사실상 전역 변수로 사용된다.</td></tr></tbody></table>
 
 거의 모든 프로그래밍 언어는 할당 기호를 기준으로 왼쪽에는 피할당자(변수), 오른쪽에는 피할당자로 전달하려는 표현식(값 혹은 데이터)이 위치한다. 반대로 놓여질 경우, 오류가 발생하거나 원치 않는 결과가 도출될 수 있다.
 
