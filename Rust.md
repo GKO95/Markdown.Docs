@@ -156,7 +156,7 @@ cargo new <프로젝트명>
     <table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">러스트의 출력 매크로</caption><colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup><thead><tr><th style="text-align: center;">출력 매크로</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/macro.print.html"><code>print!</code></a></td><td>주어진 형식 지정자에 따라 텍스트를 터미널에 출력한다.</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/macro.println.html"><code>println!</code></a></td><td>주어진 형식 지정자에 따라 텍스트를 터미널에 출력하며 <code>'\n'</code> 줄바꿈이 기본적으로 보장된다.
     
     ```rust
-    println!("Format: {:b}", 5);
+    println!("Format: {:?}", 5);
     ```
     </td></tr></tbody></table>
 
@@ -168,9 +168,11 @@ cargo new <프로젝트명>
 
     ```rust
     use std::io::Write;
-    writeln!(&mut buffer, "Output: {:b}", 5);
+    writeln!(&mut buffer, "Output: {:?}", 5);
     ```
     </td></tr></tbody></table>
+
+텍스트 안에 포함된 중괄호 `{}`에는 인자로 전달된 데이터가 삽입 및 서식된다. 특히 예시에 기입된 [`{:?}`](https://doc.rust-lang.org/std/fmt/trait.Debug.html)은 디버깅 목적으로 실사용에 적용하기 불안정하지만 프로그램 코드를 이해하는 데 도움을 준다. 자세한 내용은 [`std::fmt`](https://doc.rust-lang.org/std/fmt/index.html) 모듈을 참고하도록 한다.
 
 ### 탈출 문자
 [탈출 문자](https://en.wikipedia.org/wiki/Escape_character)(escape character)는 백슬래시 기호 `\`를 사용하며, [문자열](#문자열)로부터 탈출하여 텍스트 데이터 내에서 특정 연산을 수행하도록 한다. 예시에서 `\n` 탈출 문자를 사용하여 문자열 줄바꿈을 구현한 것을 보여주었다.
@@ -289,6 +291,76 @@ x <<= y;  // 동일: x = x << y;
 (논리 부정을 제외한) 아래 논리 연산자의 설명은 참을 반환할 조건을 소개하며, 그 외에는 모두 `false`를 반환한다.
 
 <table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://doc.rust-lang.org/reference/expressions/operator-expr.html#lazy-boolean-operators">논리 연산자</a>(logical operators)</caption><colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/><col style="width: "/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">논리</th><th style="text-align: center;">설명 </th></tr></thead><tbody><tr><td style="text-align: center;"><code>&&</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Logical_conjunction">논리곱</a></td><td>좌측 그리고 우측 <a href="https://en.wikipedia.org/wiki/Proposition">명제</a>(피연산자)가 모두 참이면 <code>true</code>를 반환한다.</td></tr><tr><td style="text-align: center;"><code>||</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Logical_disjunction">논리합</a></td><td>좌측 또는 우측 명제(피연산자)가 하나라도 참이면 <code>true</code>를 반환한다.</td></tr><tr><td style="text-align: center;"><code>!</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Negation">부정</a></td><td>명제(피연산자)가 참이면 거짓으로, 혹은 그 반대로 반전된 값을 반환한다.</td></tr></tbody></table>
+
+# 복합 자료형
+러스트 언어는 여러 데이터를 하나의 변수로 저장하는 [복합 자료형](https://doc.rust-lang.org/book/ch03-02-data-types.html#compound-types)(compound type)을 기본적으로 제공한다. 아래는 러스트의 대표적인 두 유형의 복합 자료형을 간략하게 소개한다.
+
+## 배열
+**[배열](https://doc.rust-lang.org/book/ch03-02-data-types.html#the-array-type)**(array)은 동일한 자료형의 데이터를 일련의 순서로 담는 복합 자료형이다. 배열을 선언할 때 자료형을 지정하는 구문에 대괄호 `[]`를 활용하여 데이터 유형 및 용량 크기를 ([정수 리터럴](https://doc.rust-lang.org/reference/tokens.html#numbers)이나 [상수](#변수)로) 기입하며, 한 번 정의된 크기는 변경이 불가하다.
+
+```rust
+let arr : [u8 ; 3] = [value1, value2, value3];
+```
+
+배열 초기화만으로 러스트 컴파일러는 배열의 자료형과 크기를 추론할 수 있으므로 생략 가능하다. 초기화 방법은 위의 예시를 포함한 두 가지 방법이 존재한다.
+
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">러스트의 배열 초기화 방식</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">개별적 요소 초기화</th><th style="text-align: center;">반복적 요소 초기화</th></tr></thead><tbody><tr><td>
+
+```rust
+let arr = [value1, value2, value3];
+```
+</td><td>
+
+```rust
+let arr = [0; 3]; // 값 0을 세 번 연속 초기화
+```
+</td></tr></tbody></table>
+
+* 메모리 접근 안정성이 부각되는 러스트 언어의 특성상, 배열 초기화는 요소 개수를 초과하거나 미달해서는 컴파일러 오류가 발생한다.
+
+배열의 각 요소에 할당된 데이터는 대괄호 `[]`를 사용해 0번부터 시작하는 인덱스 위치를 호출할 수 있다. 만일 `mut` 키워드를 추가하면 각 요소의 데이터를 변경할 수 있는 가변 배열로 선언된다.
+
+```rust
+let mut arr = [value1, value2, value3];
+
+println!("{}", arr[0]);     // 출력: value1
+println!("{}", arr[1]);     // 출력: value2
+
+arr[1] = value4;
+println!("{:?}", arr[1]);   // 출력: [value1, value4, value3]
+```
+
+### 다차원 배열
+배열은 또 다른 배열을 요소로 가질 수 있으나, 자료형이 동일해야 하며 요소로 작용하는 배열들의 크기는 모두 같아야 하는 제약을 갖는다.
+
+```rust
+let arr : [[u8; 3]; 2] = [[1, 2, 3],
+                          [4, 5, 6]];
+
+println!("{}", arr[0][1]);  // 출력: 2
+println!("{}", arr[1][2]);  // 출력: 6
+```
+
+## 튜플
+**[튜플](https://doc.rust-lang.org/book/ch03-02-data-types.html#the-tuple-type)**(tuple)은 다양한 자료형의 데이터를 일련의 순서로 담는 복합 자료형이다. 튜플을 선언할 때 자료형을 지정하는 구문에 소괄호 `()`를 활용하여 데이터 유형을 순서대로 기입하며, 한 번 정의된 튜플 크기와 자료형 순서는 변경이 불가하다.
+
+```rust
+let tuple : (i32, char, bool) = (3, 'A', true);
+```
+
+튜플 초기화만으로 러스트 컴파일러는 튜플의 자료형과 크기를 추론할 수 있으므로 생략 가능하다.
+
+튜플의 각 요소에 할당된 데이터는 맴버 접근 연산자 `.`를 사용해 0번부터 시작하는 인덱스 위치를 호출할 수 있다. 만일 `mut` 키워드를 추가하면 각 요소의 데이터를 변경할 수 있는 가변 튜플로 선언된다.
+
+```rust
+let mut tuple = (3, 'A', true);
+
+println!("{}", tuple.0);    // 출력: 3
+println!("{}", tuple.1);    // 출력: A
+
+tuple.1 = 'B';
+println!("{:?}", tuple);    // 출력: (3, 'B', true)
+```
 
 # 모듈
 > *참고: [Defining Modules to Control Scope and Privacy - The Rust Programming Language](https://doc.rust-lang.org/book/ch07-02-defining-modules-to-control-scope-and-privacy.html)*
