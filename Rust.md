@@ -362,6 +362,140 @@ tuple.1 = 'B';
 println!("{:?}", tuple);    // 출력: (3, 'B', true)
 ```
 
+# 제어문
+제어문(control statement)은 코드 실행을 제어하는 문장을 가리키며, 프로그래밍에 있어 기초적이면서 가장 흔히 사용되는 코드 유형 중 하나이다. 제어문을 크게 세 분류로 나누면 [조건문](#조건문), [반복문](#반복문), 그리고 [이동문](#이동문)이 존재한다.
+
+## 조건문
+조건문(conditional statement)은 주어진 조건의 논리에 따라서 코드 실행 여부를 결정하는 제어문이다:
+
+### `if` 조건문
+[`if`](https://doc.rust-lang.org/reference/expressions/if-expr.html) 조건문은 조건 혹은 논리가 참일 경우 코드를 실행하며, 거짓일 경우에는 코드를 실행하지 않는다.
+
+```rust
+if condition {
+    statements;
+}
+```
+
+* **`else` 조건문**
+
+    단독으로 사용될 수 없으며 반드시 `if` 조건문 이후에 사용되어야 한다. 조건부가 거짓으로 판정되면 실행할 코드를 포함한다.
+
+    ```rust
+    if condition {
+        statements;
+    }
+    else {
+        statements; 
+    }
+    ```
+
+* **`else if` 조건문**
+
+    `else`와 `if` 조건문의 조합으로 이전 조건이 거짓일 때 새로운 조건을 제시한다.
+
+    ```rust
+    if condition {
+        statements;
+    }
+    else if condition {
+        statements;
+    }
+    else {
+        statements;
+    }
+    ```
+
+### `match` 조건문
+[`match`](https://doc.rust-lang.org/reference/expressions/match-expr.html) 조건문은 전달받은 인자를 쉼표로 구분된 각 matcharm을 위에서부터 순서대로 패턴 일치 여부를 비교하여, 참일 경우 해당 지점부터 코드를 실행하고 거짓일 경우에는 순서로 넘어간다. 선택사항으로 마지막 `_` matcharm 가지는 어떠한 경우에도 부합하지 않으면 실행되는 패턴이다.
+
+```rust
+match argument {
+    matcharm => expression,
+    matcharm => expression,
+    _ => expression
+}
+```
+
+`match` 조건문은 타 프로그래밍 언어에서 소개되는 [`switch`](C.md#switch-조건문) 조건문과 유사하지만, 더 범용적인 "패턴 일치" 여부를 확인하는 점에서 차이가 존재한다. 파이썬 3.10부터 소개된 [`match`](Python.md#match-조건문) 조건문 또한 이와 동일한 방식으로 동작한다. 자세한 내용은 러스트의 [패턴 구문](https://doc.rust-lang.org/book/ch18-03-pattern-syntax.html)을 참고하도록 한다.
+
+## 반복문
+반복문(loop statement)은 주어진 조건의 논리에 따라서 코드를 얼마나 반복적으로 실행할 지 결정하는 제어문이다:
+
+### `loop` 반복문
+[`loop`](https://doc.rust-lang.org/reference/expressions/loop-expr.html#infinite-loops) 반복문은 안에 정의된 코드를 무조건 반복적으로 실행한다.
+
+```rust
+loop {
+    statements;
+}
+```
+
+반복 실행을 중단하기 위해서는 [`break`](#break-탈출문) 탈출문이 필요하다. 비록 반복문으로 소개하였으나, 아래와 같이 탈출문을 활용한 값을 반환하는 표현식처럼 코드를 작성할 수 있다 (`loop` 반복문 한정).
+
+```rust
+let mut counter = 0;
+
+let variable = loop {
+    counter += 1;
+    if counter > 10 {
+        // counter = 11이 되면 진입되어 실행
+        break counter * 10;
+    }
+};
+
+println!("{}", variable);
+```
+```
+110
+```
+
+### `while` 반복문
+[`while`](https://doc.rust-lang.org/reference/expressions/loop-expr.html#predicate-loops) 반복문은 조건 혹은 논리가 참일 동안 코드를 반복적으로 실행하며, 거짓일 경우에는 반복문을 종료한다.
+
+```rust
+while condition {
+    statements;
+}
+```
+
+### `for` 반복문
+[`for`](https://doc.rust-lang.org/reference/expressions/loop-expr.html#iterator-loops) 반복문은 유효한 범위 내에서 코드를 반복적으로 실행하고, 범위의 모든 값이 반복되면 종료한다.
+
+```rust
+for index in iterator {
+    statements;
+}
+```
+
+여기서 변수 `index`는 `iterable`에서 값을 얻고, 내부의 실행문은 더 이상 불러올 값이 없을 때까지 하나씩 반복한다. 흔히 반복문에 사용되는 `iterable` 데이터로 [배열](#배열), [문자열](#문자열) 등이 있다.
+
+## 이동문
+이동문(jump statement)은 아무런 조건이 필요없이 코드 실행 지점을 이동시키는 제어문이다:
+
+### `break` 탈출문
+[`break`](https://doc.rust-lang.org/reference/expressions/loop-expr.html#break-expressions) 탈출문은 (1) 반복문을 조기 종료시키거나, (2) `switch` 조건문에서 경우에 따라 실행되어야 할 코드를 구분짓기 위해 사용된다.
+
+### `continue` 연속문
+[`continue`](https://doc.rust-lang.org/reference/expressions/loop-expr.html#continue-expressions) 연속문은 반복문을 종료하지 않은 채 나머지 실행 코드를 전부 무시하고 반복문의 조건부로 되돌아간다.
+
+### `return` 반환문
+[`return`](https://doc.rust-lang.org/reference/expressions/return-expr.html) 반환문은 [함수](#함수)를 종료하면서 지정된 자료형으로 데이터를 반환한다. 하단에 코드가 남아 있음에도 불구하고 반환문이 실행되면 함수는 즉시 종료된다.
+
+```rust
+// return 반환문이 있는 사용자 정의 함수
+fn function() -> i32 {
+    println!("Hello World!");
+    return 1 + 2;
+}
+
+println!("{}", function());    
+```
+```terminal
+Hello World!
+3
+```
+
 # 모듈
 > *참고: [Defining Modules to Control Scope and Privacy - The Rust Programming Language](https://doc.rust-lang.org/book/ch07-02-defining-modules-to-control-scope-and-privacy.html)*
 
