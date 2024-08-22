@@ -496,6 +496,11 @@ Hello World!
 3
 ```
 
+# 소유권
+> *참고: [What is Ownership? - The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)*
+
+러스트 언어가 타 프로그래밍 언어에 비해 어려운 이유 중 하나는 바로 메모리 관리를 소유권(ownership)이란 새로운 개념을 도입하였기 때문이다. 본 장은 소유권의 개념과 동작을 소개한다.
+
 # 모듈
 > *참고: [Defining Modules to Control Scope and Privacy - The Rust Programming Language](https://doc.rust-lang.org/book/ch07-02-defining-modules-to-control-scope-and-privacy.html)*
 
