@@ -1,7 +1,7 @@
 # 인터넷 프로토콜 스위트
 **[인터넷 프로토콜 스위트](https://en.wikipedia.org/wiki/Internet_protocol_suite)**(Internet protocol suite), 일명 **TCP/IP**는 [인터넷](https://en.wikipedia.org/wiki/Internet)을 포함한 [컴퓨터 네트워크](Network.md)에서 정보를 주고받는 데 사용되는 [통신규약](https://en.wikipedia.org/wiki/Communication_protocol)의 모음을 정리한 프레임워크이다. 1970년대부터 1990년대까지 이어진 [프로토콜 전쟁](https://en.wikipedia.org/wiki/Protocol_Wars) 당시 기술적, 상업적 측면에서 우위를 점하여 "[사실상 표준](https://en.wikipedia.org/wiki/De_facto)"이 되었으나, 당시 TCP/IP와 대립하던 [OSI 모형](https://en.wikipedia.org/wiki/OSI_model)(Open System Interconnection model)은 네트워크 개념 및 활동을 설명하는 데 훌륭한 프레임워크로써 IT 분야에서 네트워크 절차를 논의하거나 가르칠 때 반드시 언급된다.
 
-![TCP/IP 모델을 예시로 보여주는 계층간 PDU 관계](https://upload.wikimedia.org/wikipedia/commons/3/3b/UDP_encapsulation.svg)
+![네트워크 호스트 간 TCP/IP 통신 흐름](https://upload.wikimedia.org/wikipedia/commons/c/c4/IP_stack_connections.svg)
 
 총 네 개의 계층으로 나뉘어져 있으며, 이들은 다음과 같이 나열된다.
 
@@ -17,6 +17,8 @@
 
 ### 프로토콜 데이터 단위
 **[프로토콜 데이터 단위](https://en.wikipedia.org/wiki/Protocol_data_unit)**(protocol data unit; PDU)는 네트워크를 통해 다른 노드로 전송되는 단일 정보 단위이며, 프로토콜마다 정의된 제어 정보와 사용자 데이터로 구성되어 있다. 다시 말해, PDU는 해당 프로토콜에서 정보를 전송할 때 취급하는 데이터 유형을 가리킨다.
+
+![TCP/IP 모델을 예시로 보여주는 계층간 PDU 관계](https://upload.wikimedia.org/wikipedia/commons/3/3b/UDP_encapsulation.svg)
 
 일반적으로 PDU는 [헤더](https://en.wikipedia.org/wiki/Header_(computing))와 [페이로드](https://en.wikipedia.org/wiki/Payload_(computing))로 구성된다: 전자는 PDU의 출발지 및 목적지 등의 [메타데이터](https://en.wikipedia.org/wiki/Metadata)를 포함하며, 후자는 상위 계층에서 활용될 PDU 혹은 데이터를 캡슐화한다. 위의 [TCP/IP](TCPIP.md) 모델을 예시로 들어, 어플리케이션 계층의 HTTP 프로토콜 데이터는 전송 계층의 UDP 프로토콜의 페이로드에 포함된다. 이러한 페이로드의 캡슐화는 국지적인 로컬 네트워크 프로토콜을 공용 프로토콜에 숨기므로써 네트워크 장벽을 너머 수신되어서도 활용할 수 있도록 한다.
 
@@ -53,15 +55,23 @@
 ### 전송 제어 프로토콜
 **[전송 제어 프로토콜](https://en.wikipedia.org/wiki/Transmission_Control_Protocol)**(Transmission Control Protocol; TCP)은 TCP/IP에서 사용하는 핵심 전송 프로토콜 중 하나로 [세그먼트](https://en.wikipedia.org/wiki/Transmission_Control_Protocol#TCP_segment_structure)(segment)를 취급한다.
 
-> 세그먼트란, 사전적으로 "파편"을 의미하며 전달하려는 응용 계층의 데이터를 여러 조각으로 쪼개어 별도 패킷으로 전송할 수 있기 때문이다.
+세그먼트란, 사전적으로 "파편"을 의미하며 전달하려는 어플리케이션 계층의 데이터를 여러 조각으로 쪼개어 별도 패킷으로 전송할 수 있다. TCP 전송 프로토콜은 노드 간 통신 연결 확립을 보장하는 연결지향형(connection-oriented)으로써 본래 IP 설계 목적을 보완한다. 그러기 위해 세그먼트 헤더에는 출발지 및 목적지 소켓 외에도 시퀀스 번호, 플래그, 체크섬 등 다양한 정보를 포함한다.
 
-UDP와 달리, TCP 전송 프로토콜은 노드 간 통신 연결 확립을 보장하는 연결지향형(connection-oriented)으로써 본래 IP 설계 목적을 보완한다. 그러기 위해 세그먼트 헤더에는 출발지 및 목적지 소켓 외에도 시퀀스 번호, 플래그, 체크섬 등 다양한 정보를 포함한다.
+클라이언트의 어플리케이션이 서버와 TCP 통신을 시도할 시, 3방향 [핸드셰이킹](https://en.wikipedia.org/wiki/Handshake_(computing))을 절차를 통해 확실한 통신 연결을 보장한다.
 
-TCP의 연결지향형을 구현하기 위한 일환으로, 만일 클라이언트가 서버와의 연결을 시도한다면 다음 세 단계의 [핸드셰이킹](https://ko.wikipedia.org/wiki/핸드셰이킹)(handshaking) 절차를 거친다:
+![TCP 통신 연결을 위한 3방향 핸드셰이킹](https://upload.wikimedia.org/wikipedia/commons/9/98/Tcp-handshake.svg)
 
-<table style="width: 60%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">TCP 핸드셰이킹 절차</caption><colgroup><col style="width: 10%;"/><col style="width: 20%;"/><col style="width: 20%;"/><col/></colgroup><thead><tr><th style="text-align: center;">단계</th><th style="text-align: center;">송신 노드</th><th style="text-align: center;">수신 노드</th><th style="text-align: center;">진행</th></tr></thead><tbody><tr><td style="text-align: center;">1</td><td style="text-align: center;">클라이언트</td><td style="text-align: center;">서버</td><td><code>SYN</code> 플래그가 설정된 페이로드 없는 bodyless 세그먼트를 전송한다.</td></tr><tr><td style="text-align: center;">2</td><td style="text-align: center;">서버</td><td style="text-align: center;">클라이언트</td><td><code>SYN | ACK</code> 플래그가 설정된 bodyless 세그먼트로 응답한다.</td></tr><tr><td style="text-align: center;">3</td><td style="text-align: center;">클라이언트</td><td style="text-align: center;">서버</td><td><code>ACK</code> 플래그가 설정된 bodyless 세그먼트로 응답한다.</td></tr></tbody></table>
+<table style="width: 75%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">TCP 연결 핸드셰이킹 절차</caption><colgroup><col style="width: 8%;"/><col style="width: 15%;"/><col style="width: 15%;"/><col/></colgroup><thead><tr><th style="text-align: center;">단계</th><th style="text-align: center;">송신 노드</th><th style="text-align: center;">수신 노드</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;">1</td><td style="text-align: center;">클라이언트</td><td style="text-align: center;">서버</td><td><code>SYN</code> 플래그가 설정된 페이로드 없는 bodyless 세그먼트를 전송한다.</td></tr><tr><td style="text-align: center;">2</td><td style="text-align: center;">서버</td><td style="text-align: center;">클라이언트</td><td><code>SYN | ACK</code> 플래그가 설정된 bodyless 세그먼트로 응답한다.</td></tr><tr><td style="text-align: center;">3</td><td style="text-align: center;">클라이언트</td><td style="text-align: center;">서버</td><td><code>ACK</code> 플래그가 설정된 bodyless 세그먼트로 응답한다.</td></tr></tbody></table>
 
-세그먼트의 각 헤더에 저장된 `Sequence #` 시퀀스 번호로부터 원본 데이터를 구성하는 몇 번째 조각인지 식별이 가능하다. 세그먼트를 수신받은 노드는 시퀀스 번호에 대응하는 `Acknowledgement #`로 응답하는데, 이들을 취합하여 전송한 모든 세그먼트가 목적지에 도달하였는지 판단한다. 모든 세그먼트가 목적지에 도달한 게 확인되면 `FIN` 플래그로 치환한 TCP 핸드셰이크 절차를 진행한다.
+세그먼트의 각 헤더에 저장된 `Sequence #` 시퀀스 번호로부터 원본 데이터를 구성하는 몇 번째 조각인지 식별이 가능하다. 세그먼트를 수신받은 노드는 시퀀스 번호에 대응하는 `Acknowledgement #`로 응답하는데, 이들을 취합하여 전송한 모든 세그먼트가 목적지에 도달하였는지 판단한다. 위의 3방향 핸드셰이킹을 완료하여 TCP 연결이 구축되면, 본격적으로 [어플리케이션 계층](#어플리케이션-계층)의 데이터 전송이 이루어진다.
+
+데이터 전송을 완료하여 더 이상의 통신이 필요없을 시, 클라이언트 혹은 서버에서 4방향 핸드셰이킹을 개시하여 구축된 TCP 연결을 종료한다. 때문에 아래 다이어그램은 "클라이언트-서버"가 아닌 "발신자-수신자" 관계로 소개한다.
+
+![TCP 통신 종료를 위한 4방향 핸드셰이킹](https://upload.wikimedia.org/wikipedia/commons/5/55/TCP_CLOSE.svg)
+
+<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">TCP 종료 핸드셰이킹 절차</caption><colgroup><col style="width: 8%;"/><col style="width: 15%;"/><col style="width: 15%;"/><col/></colgroup><thead><tr><th style="text-align: center;">단계</th><th style="text-align: center;">송신 노드</th><th style="text-align: center;">수신 노드</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;">1</td><td style="text-align: center;">발신자</td><td style="text-align: center;">수신자</td><td><code>FIN</code> 플래그가 설정된 bodyless 세그먼트로 TCP 종료 요청을 알린다.</td></tr><tr><td style="text-align: center;">2</td><td style="text-align: center;">수신자</td><td style="text-align: center;">발신자</td><td><code>ACK</code> 플래그가 설정된 bodyless 세그먼트로 발신자의 <code>FIN</code>에 응답한다.</td></tr><tr><td style="text-align: center;">3</td><td style="text-align: center;">수신자</td><td style="text-align: center;">발신자</td><td><code>FIN</code> 플래그가 설정된 bodyless 세그먼트로 수신자도 (더 이상 전송할 데이터가 없을 시) TCP 종료 준비가 되었음을 알린다.</td></tr><tr><td style="text-align: center;">4</td><td style="text-align: center;">발신자</td><td style="text-align: center;">수신자</td><td><code>ACK</code> 플래그가 설정된 bodyless 세그먼트로 수신자의 <code>FIN</code>에 응답한다.</td></tr></tbody></table>
+
+이러한 4방향 핸드셰이킹을 마쳤으면 수신자 측에서 발신자의 요청에 따른 TCP 연결을 종료한다.
 
 ## 인터넷 계층
 **[인터넷 계층](https://en.wikipedia.org/wiki/Internet_layer)**(internet layer)은 데이터가 도달해야 할 네트워크로 전송될 수 있도록 관여하는 계층이다. 해당 계층의 PDU인 [패킷](Network.md#네트워크-패킷)은 [광역 통신망](https://en.wikipedia.org/wiki/Wide_area_network)(wide area network; WAN)을 연결하는 [라우터](https://en.wikipedia.org/wiki/Router_(computing))를 통해 목적지까지 점차적으로 [라우팅](https://en.wikipedia.org/wiki/Routing)되어 도달하는 데, 이러한 과정을 [패킷 포워딩](https://en.wikipedia.org/wiki/Packet_forwarding)이라 부른다.
