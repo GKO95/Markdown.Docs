@@ -1,7 +1,3 @@
----
-category: Sysinternals
-title: VMMap
----
 # VMMap
 [VMMap](https://learn.microsoft.com/en-us/sysinternals/downloads/vmmap)는 [프로세스](Process.md)의 [가상 메모리](Process.md#가상-주소-공간)를 분석하는 [Sysinternals](Sysinternals.md) 유틸리티 프로그램이다.
 
