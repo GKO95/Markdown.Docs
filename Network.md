@@ -12,6 +12,14 @@
 
 ![호스트 간에 네트워크를 거친 패킷 교환](https://upload.wikimedia.org/wikipedia/commons/f/f6/Packet_Switching.gif)
 
+### 네트워크 트래픽
+> *참고: [What is Network Traffic? Definition, Types & Management Techopedia](https://www.techopedia.com/definition/29917/network-traffic)*
+
+**[네트워크 트래픽](https://en.wikipedia.org/wiki/Network_traffic)**(network traffic)은 주어진 시간에 네트워크를 통해 움직이는 데이터의 양을 가리킨다. 데이터는 대체로 [네트워크 패킷](#네트워크-패킷)에 감싸여 이동하며, 이는 네트워크에 부하를 가한다. 비정상적인 트래픽 용량은 공격 징후를 시사할 수 있기 때문에, 적절한 네트워크 트래픽 분석은 네트워크 보안에 이점을 제공한다.
+
+### 방화벽
+**[방화벽](https://en.wikipedia.org/wiki/Firewall_(computing))**(firewall)은 정해진 규칙에 따라 송수신 네트워크 트래픽을 모니터링 및 제어하는 네트워크 보안 시스템이다. 일반적으로 신뢰할 수 있는 네트워크 그렇지 못한 네트워크 간 장벽을 세워 통신을 차단한다. 물리적인 장치에 의한 *하드웨어 방화벽*, 그리고 시스템 내에서 동작하는 *소프트웨어 방화벽* (예를 들어, [윈도우 방화벽](https://learn.microsoft.com/en-us/windows/security/operating-system-security/network-security/windows-firewall/) 등)으로 나뉘어진다.
+
 ## 네트워크 노드
 **[네트워크 노드](https://en.wikipedia.org/wiki/Node_(networking))**(network node)는 네트워크를 통해 전달되는 패킷의 재분배점 혹은 [통신 도착점](https://en.wikipedia.org/wiki/Communication_endpoint)(communication endpoint)이다. 물리적 네트워크 노드는 둘 중 하나로 분류된다:
 
