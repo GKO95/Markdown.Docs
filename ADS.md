@@ -1,12 +1,20 @@
-# 액티브 디렉터리
-**[액티브 디렉토리](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview)**(Active Directory)
+# 액티브 디렉토리
+**[액티브 디렉토리](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview)**(Active Directory; AD)는 마이크로소프트에서 개발한 [디렉토리 서비스](https://en.wikipedia.org/wiki/Directory_service)이다; [윈도우](Windows.md) 환경에 특화된 [도메인](https://en.wikipedia.org/wiki/Windows_domain)에 등록된 사용자, 장치, 보안 주체 등의 [네트워크](Network.md) 리소스들을 조직화하여 관리하는 특수한 데이터베이스이다.
 
-# 도메인
+액티브 디렉토리를 구성하기 위한 필수 사항들은 다음과 같다:
 
-## 도메인 이름 시스템
+* 윈도우 서버 OS
+* 윈도우 도메인
+* [액티브 디렉토리 도메인 서비스](#액티브-디렉토리-도메인-서비스)(일명 AD DS)
+   * [도메인 네임 시스템](#도메인-네임-시스템) (일명 DNS)
+
+## 액티브 디렉토리 도메인 서비스
+**[액티브 디렉토리 도메인 서비스](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview)**(Active Directory Domain Service; AD DS)
+
+## 도메인 네임 시스템
 > *참고: [Reviewing DNS Concepts | Microsoft Learn](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/plan/reviewing-dns-concepts)*
 
-**[도메인 이름 시스템](https://en.wikipedia.org/wiki/Domain_Name_System)**(domain name system; DNS)은 외우기 어려운 숫자 조합의 [IPv4](TCPIP.md#인터넷-프로토콜) 또는 [IPv6](TCPIP.md#인터넷-프로토콜) 주소를 간단한 [호스트명](https://en.wikipedia.org/wiki/Hostname)으로 접근할 수 있도록 한다. 예를 들어, [`www.example.com`](https://www.example.com/) 호스트명을 DNS에 건네면 *93.184.216.34* (IPv4) 및 *2606:2800:220:1:248:1893:25c8:1946* (IPv6) 주소로 변환한다.
+**[도메인 네임 시스템](https://en.wikipedia.org/wiki/Domain_Name_System)**(domain name system; DNS)은 외우기 어려운 숫자 조합의 [IPv4](TCPIP.md#인터넷-프로토콜) 또는 [IPv6](TCPIP.md#인터넷-프로토콜) 주소를 간단한 [호스트명](https://en.wikipedia.org/wiki/Hostname)으로 접근할 수 있도록 한다. 예를 들어, [`www.example.com`](https://www.example.com/) 호스트명을 DNS에 건네면 *93.184.216.34* (IPv4) 및 *2606:2800:220:1:248:1893:25c8:1946* (IPv6) 주소로 변환한다.
 
 클라이언트 PC는 먼저 시스템에 등록된 로컬 DNS 서버와 통신하여 호스트명의 IP 주소를 요청한다.
 
