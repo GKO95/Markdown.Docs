@@ -86,6 +86,30 @@
 
 패킷의 헤더에는 출발지 및 목적지 주소가 들어있고, 그 외에도 전송 계층의 프로토콜 유형과 [TTL](https://en.wikipedia.org/wiki/Time_to_live) (IPv4 한정) 정보도 포함되어 있다. TTL은 "time to live"의 약자로, 라우터를 통해 다음 네트워크 세그먼트로 넘어가는 [홉](https://en.wikipedia.org/wiki/Hop_(networking))(hop) 횟수를 제한시켜 목적지에 도달하지 못할 시 해당 패킷이 소실되어 통신 대역을 낭비하는 것을 방지한다. IPv6에서는 홉 제한(hop limit)이라고 부른다.
 
+아래는 가상의 CONTOSO-CLIENT1 컴퓨터에 [ipconfig](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/ipconfig) 명령으로 확보한 IP 정보 예제이다.
+
+```
+PS C:\Windows\System32> ipconfig /all
+
+Windows IP Configuration
+
+   Host Name . . . . . . . . . . . . : CONTOSO-CLIENT1
+   Primary Dns Suffix  . . . . . . . :
+   Node Type . . . . . . . . . . . . : Hybrid
+   IP Routing Enabled. . . . . . . . : No
+   WINS Proxy Enabled. . . . . . . . : No
+
+Ethernet adapter Ethernet:
+
+   Connection-specific DNS Suffix  . :
+   Description . . . . . . . . . . . : Microsoft Hyper-V Network Adapter
+   DHCP Enabled. . . . . . . . . . . : No
+   IPv4 Address. . . . . . . . . . . : 192.168.1.1(Preferred)
+   Subnet Mask . . . . . . . . . . . : 255.255.0.0
+   Default Gateway . . . . . . . . . : 192.168.1.10
+   DNS Servers . . . . . . . . . . . : 168.126.63.1
+```
+
 ## 링크 계층
 **[링크 계층](https://en.wikipedia.org/wiki/Link_layer)**(link layer)은 [네트워크 세그먼트](https://en.wikipedia.org/wiki/Network_segment) 안에서 데이터가 도달해야 할 노드로 전송될 수 있도록 관여하는 계층이다.
 
