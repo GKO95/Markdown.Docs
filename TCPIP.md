@@ -28,6 +28,12 @@
 * [HTTP](https://en.wikipedia.org/wiki/HTTP): 웹 브라우저에서 World Wide Web(일명 WWW)의 웹사이트를 표현하는 프로토콜
     * [HTTPS](https://en.wikipedia.org/wiki/HTTPS): [TLS/SSL](https://en.wikipedia.org/wiki/Transport_Layer_Security)로 암호화된 보안 통신을 제공하는 HTTP의 확장판
 
+### SMB
+**[서버 메시지 블록](https://en.wikipedia.org/wiki/Server_Message_Block)**(server message block; SMB)
+
+### RPC
+**[원격 프로시저 호출](https://en.wikipedia.org/wiki/Remote_procedure_call)**(remote procedure call; RPC)
+
 ## 전송 계층
 **[전송 계층](https://en.wikipedia.org/wiki/Transport_layer)**(transport layer)은 전달받은 데이터가 노드 내에서 이를 요청한 프로세스에게 전송될 수 있도록 가담하는 계층이다. 출발지 호스트의 한 어플리케이션에서 목적지 호스트의 다른 어플리케이션으로 일련의 데이터들을 전달하는 기능 및 절차적 방법을 제공하는데, 대표적인 두 가지의 전송 프로토콜은 다음과 같다:
 
