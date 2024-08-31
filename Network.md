@@ -30,11 +30,5 @@
 ### 네트워크 호스트
 **[네트워크 호스트](https://en.wikipedia.org/wiki/Host_(network))**(network host)는 네트워크에 연결된 컴퓨터 혹은 기타 장치를 가리킨다. 호스트는 네트워크 사용자 혹은 타 호스트에 정보 리소스, 서비스, 또는 어플리케이션을 제공하는 [서버](https://en.wikipedia.org/wiki/Server_(computing))(server)의 역할을 맡을 수 있다. 그리고 서버에서 제공하는 리소스 및 서비스에 접근하는 호스트를 [클라이언트](https://en.wikipedia.org/wiki/Client_(computing))(client)라고 부른다. 네트워크에 연결된 모든 장치들을 가리키는 노드 중에서, 사용자 어플리케이션에 관여하는 서버 혹은 클라이언트가 호스트이다.
 
-## 네트워크 도메인
-**[네트워크 도메인](https://en.wikipedia.org/wiki/Network_domain)**(network domain)
-
-### 도메인 이름
-**[도메인 이름](https://en.wikipedia.org/wiki/Domain_name)**(domain name)
-
 ## 인터넷 서비스 제공자
 **[인터넷 서비스 제공자](https://en.wikipedia.org/wiki/Internet_service_provider)**(internet service provider; ISP)

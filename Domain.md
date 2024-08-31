@@ -1,4 +1,10 @@
 # 도메인
+> *참고: [Windows domain - Wikipedia](https://en.wikipedia.org/wiki/Windows_domain)*
+
+**[네트워크 도메인](https://en.wikipedia.org/wiki/Network_domain)**(network domain), 또는 간단히 **도메인**(domain)
+
+### 도메인 이름
+**[도메인 이름](https://en.wikipedia.org/wiki/Domain_name)**(domain name)
 
 ## 도메인 네임 시스템
 > *참고: [Reviewing DNS Concepts | Microsoft Learn](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/plan/reviewing-dns-concepts)*
