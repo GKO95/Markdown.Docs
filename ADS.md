@@ -36,7 +36,7 @@
 
 * [백업 도메인 컨트롤러](https://en.wikipedia.org/wiki/Domain_controller_(Windows)#Backup_domain_controller)(Backup Domain Controller; BDC): 도메인 데이터베이스 읽기 작업만 수행할 수 있으며 (예를 들어, 사용자 인증 등), PDC 이외의 구성된 나머지 DC가 해당한다. 만일 PDC가 실패할 경우, BDC 중 하나가 PDC로 승격되어 대체한다.
 
-[액티브 디렉토리](#액티브-디렉토리) 환경에서는 모든 DC가 도메인 데이터베이스의 읽기 및 쓰기 권한을 가지게 된 다중 마스터(multi-master) 모델을 채택하였다. 즉, PDC와 BDC의 개념이 사라졌다. 이는 방대하고 복잡해진 네트워크 환경을 지원할 수 있도록 변경된 설계이다. 
+[액티브 디렉토리](#액티브-디렉토리) 환경에서는 모든 DC가 도메인 데이터베이스의 읽기 및 쓰기 권한을 가지게 된 다중 마스터(multi-master) 모델을 채택하였다. 이는 방대하고 복잡해진 네트워크 환경을 지원할 수 있도록 변경된 설계이다. 그러므로 BDC 개념이 사라지면서, PDC는 (복제된게 아닌) 본래 도메인 컨트롤러를 의미하게 되었다.
 
 ### FSMO 역할
 **[유동적 단일 마스터 작업](https://learn.microsoft.com/en-us/troubleshoot/windows-server/active-directory/fsmo-roles)**(Flexible Single Master Operation; FSMO) 역할은 여러 AD DC가 동시 다발적으로 변경 작업을 수행할 수 있는 다중 마스터 모델에서, 충돌 또는 혼돈이 일어날 시 운영에 치명적일 수 있는 특정 작업을 한 DC에 전임하도록 분류한 역할들이다. 아래는 현재 AD 환경에 주어진 FSMO 역할들을 나열한다.
