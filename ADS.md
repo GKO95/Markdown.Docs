@@ -41,11 +41,11 @@
 ### FSMO 역할
 **[유동적 단일 마스터 작업](https://learn.microsoft.com/en-us/troubleshoot/windows-server/active-directory/fsmo-roles)**(Flexible Single Master Operation; FSMO) 역할은 여러 AD DC가 동시 다발적으로 변경 작업을 수행할 수 있는 다중 마스터 모델에서, 충돌 또는 혼돈이 일어날 시 운영에 치명적일 수 있는 특정 작업을 한 DC에 전임하도록 분류한 역할들이다. 아래는 현재 AD 환경에 주어진 FSMO 역할들을 나열한다.
 
-* [스키마 마스터](https://learn.microsoft.com/en-us/troubleshoot/windows-server/active-directory/fsmo-roles#schema-master-fsmo-role) (Schema Master)
-* [도메인 네이밍 마스터](https://learn.microsoft.com/en-us/troubleshoot/windows-server/active-directory/fsmo-roles#domain-naming-master-fsmo-role) (Domain Naming Master)
-* [RID 관리자](https://learn.microsoft.com/en-us/troubleshoot/windows-server/active-directory/fsmo-roles#rid-master-fsmo-role) (RID Manager)
-* [PDC 에뮬레이터](https://learn.microsoft.com/en-us/troubleshoot/windows-server/active-directory/fsmo-roles#pdc-emulator-fsmo-role) (PDC Emulator)
-* [인프라구조 마스터](https://learn.microsoft.com/en-us/troubleshoot/windows-server/active-directory/fsmo-roles#infrastructure-master-fsmo-role) (Infrastructure Master)
+* [스키마 마스터](https://learn.microsoft.com/en-us/troubleshoot/windows-server/active-directory/fsmo-roles#schema-master-fsmo-role)
+* [도메인 네이밍 마스터](https://learn.microsoft.com/en-us/troubleshoot/windows-server/active-directory/fsmo-roles#domain-naming-master-fsmo-role)
+* [RID 관리자](https://learn.microsoft.com/en-us/troubleshoot/windows-server/active-directory/fsmo-roles#rid-master-fsmo-role)
+* [PDC 에뮬레이터](https://learn.microsoft.com/en-us/troubleshoot/windows-server/active-directory/fsmo-roles#pdc-emulator-fsmo-role)
+* [인프라구조 마스터](https://learn.microsoft.com/en-us/troubleshoot/windows-server/active-directory/fsmo-roles#infrastructure-master-fsmo-role)
 
 ### 전역 카탈로그
 **[전역 카탈로그](https://learn.microsoft.com/en-us/windows/win32/ad/global-catalog)**(global catalog; GC)로 승격된 DC는 자신이 속한 도메인의 개체에 대해서는 완전 복제, 그리고 포레스트에 속한 그 외의 모든 개체는 읽기 전용 부분 복제를 가진다.
