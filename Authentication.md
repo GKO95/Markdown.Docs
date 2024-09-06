@@ -41,6 +41,3 @@
 > *참고: [NTLM Overview | Microsoft Learn](https://learn.microsoft.com/en-us/windows-server/security/kerberos/ntlm-overview)*
 
 **[NT LAN 관리자](https://en.wikipedia.org/wiki/NTLM)**(NT LAN Manager; NTLM)는 마이크로소프트에서 개발한 [시도-응답 인증 프로토콜](https://en.wikipedia.org/wiki/Challenge%E2%80%93response_authentication)이다.
-
-# 인증서
-**[인증서](https://en.wikipedia.org/wiki/Authorization_certificate)**(certificate)
