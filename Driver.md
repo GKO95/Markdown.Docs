@@ -30,6 +30,7 @@
 장치 관리자의 *Device Stack* 속성은 명칭대로 [스택](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)) 구조이기 때문에 장치 드라이버의 개입 순서를 직관적으로 파악할 수 있다; 위의 예시에서 Microsoft Virtual Disk 디바이스 스택의 (1) 버스 드라이버는 `\Driver\storvsc`이며, (2) 시스템은 장치의 기능 드라이버로 `\Driver\disk`가 가장 적합하다고 판단하였으며, (3) 마지막으로 `\Driver\partmgr`를 상위 필터 드라이버로 장식하였다.
 
 * 본 부문에서 디바이스 스택을 논할 때 장치 드라이버를 위주로 설명하였으나, 실제로 스택을 구성하는 건 장치 드라이버와 직결된 [디바이스 객체](#디바이스-객체)이다.
+* 흔히 드라이버의 "상위(upper)" 및 "하위(lower)" 여부를 구분짓는 상대적 기준으로 *하드웨어와 멀어질수록 전자*, 반면 *근접할수록 후자*에 해당한다.
 
 ### 디바이스 객체
 **[디바이스 객체](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-device-objects)**(device object; DO)는 시스템에 연결된 물리, 논리, 또는 가상 장치의 관계를 [PnP 관리자](Kernel.md#pnp-관리자)가 체계화할 수 있도록 데이터로 표현한 [DEVICE_OBJECT](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/ns-wdm-_device_object) [구조체](C.md#구조체)의 객체이다. 장치에 사용되는 드라이버마다 디바이스 객체를 생성하여 {[드라이버 객체](#드라이버-객체), 디바이스 객체} 쌍이 이루어지는데, PnP 관리자에서 구축한 디바이스 객체 간의 관계도로부터 드라이버가 처리할 [IRP](#입출력-요청-패킷)가 안내될 수 있는 거다.
@@ -71,17 +72,15 @@
 
 위의 예시로 소개한 Microsoft Virtual Disk도 PnP 관리자 과점에서 하나의 디바이스 노드로 트리를 구성한다.
 
-## 입출력 요청 패킷
-**[입출력 요청 패킷](https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/i-o-request-packets)**(I/O request packet; [IRP](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/ns-wdm-_irp))은 매번 프로그램이 장치로부터 작업을 요청할 때마다, 해당 장치에 연동된 드라이버와의 통신 수단으로 [입출력 관리자](kernel.md#입출력-관리자)가 생성하는 [구조체](C.md#구조체)이다. 생성된 IRP 구조체 [포인터](C.md#포인터)는 요청을 처리할 드라이버에게 전달되는 방식이다. 입출력 관리자는 IRP를 전달받을 (드라이버가 아닌) 장치를 탐색하기 때문에 디바이스 스택의 최상위 계층에 해당하는 드라이버가 IRP를 가장 먼저 수신하고, 하위 계층으로 IRP를 전달하도록 설계해야 한다.<sup>[<a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/passing-irps-down-the-driver-stack">참고</a>]</sup>
-
-> 위의 *Proseware Gizmo* 장치 예시에서는 IRP를 가장 먼저 수신하는 드라이버는 (FDO의 Proseware.sys가 아닌) Filter DO의 AfterThought.sys이다.
-
-패킷의 구조체를 살펴보면 다음과 같이 구성된 걸 확인할 수 있다:
+# 입출력 요청 패킷
+**[입출력 요청 패킷](https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/i-o-request-packets)**(I/O request packet; [IRP](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/ns-wdm-_irp))은 매번 프로그램이 장치로부터 작업을 요청할 때마다, 해당 장치에 연동된 드라이버와의 통신 수단으로 [입출력 관리자](kernel.md#입출력-관리자)가 생성하는 패킷 데이터이다. 요청 패킷은 다음과 같이 구성된다:
 
 ![IRP를 구성하는 요소](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/images/2irpios.png)
 
-1. **헤더**, 또는 **패킷의 고정된 정보**: *입출력 관리자가 본래 요청에 대한 정보, 그리고 드라이버가 처리한 요청의 [최종 상태](#입출력-상태-블록)를 포함한다.*
-1. **[입출력 스택 위치](#입출력-스택-위치)**
+1. *헤더*, 혹은 *패킷의 고정된 정보*: [`_IRP`](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/ns-wdm-_irp) 구조체는 본래 입출력 요청, 드라이버가 처리한 요청의 [최종 상태](#입출력-상태-블록), 입출력 스택 위치의 정보 등을 관리한다.
+1. *[입출력 스택 위치](#입출력-스택-위치)*: 한 개 이상의 [`_IO_STACK_LOCATION`](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/ns-wdm-_io_stack_location) 구조체로, (IRP를 처리하는) 입출력 스택에 관여하는 드라이버의 위치를 나타낸다.
+
+입출력 관리자는 IRP를 전달받을 (드라이버가 아닌) 장치를 탐색하기 때문에 디바이스 스택의 최상위 계층에 해당하는 드라이버가 IRP를 가장 먼저 수신하고, 하위 계층으로 IRP를 전달하도록 설계해야 한다.<sup>[<a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/passing-irps-down-the-driver-stack">참고</a>]</sup> 위의 *Proseware Gizmo* 장치 예시에서는 IRP를 가장 먼저 수신하는 드라이버는 (FDO의 Proseware.sys가 아닌) Filter DO의 AfterThought.sys이다.
 
 ### 입출력 상태 블록
 **[입출력 상태 블록](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/i-o-status-blocks)**(I/O status block)는 IRP 헤더를 구성하는 요소 중 요청이 처리된 상태를 알리는 [IO_STATUS_BLOCK](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/ns-wdm-_io_status_block) 구조체이다. IRP 처리가 완료되었을 시, I/O 상태 블록은 상위 계층의 *[IoCompletion](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nc-wdm-io_completion_routine)* 루틴에게 서비스가 성공적으로 실행되었는지 판단 기준 및 사유를 제공한다.
@@ -89,4 +88,3 @@
 ### 입출력 스택 위치
 [입출력 스택 위치](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/i-o-stack-locations)(I/O stack location)는 IRP 헤더 다음에 위치하는 [IO_STACK_LOCATION](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/ns-wdm-_io_stack_location) 구조체들의 집합이다. 해당 IRP에 관여하는 각 드라이버당 I/O 스택 위치가 하나씩 연쇄하여 드라이버 계층을 이루며, 안에는 드라이버가 수행해야 할 작업을 결정하는 데 사용되는 매개변수, [함수 코드](C.md#함수), 그리고 [컨텍스트](https://en.wikipedia.org/wiki/Context_(computing))를 포함한다.
 
-*[IoGetCurrentIrpStackLocation](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-iogetcurrentirpstacklocation)* 함수를 호출한 드라이버는 IRP로부터 자신의 I/O 스택 위치 정보를 불러올 수 있다.
