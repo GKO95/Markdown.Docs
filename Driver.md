@@ -59,7 +59,9 @@
 * `NextDevice`: 해당 객체를 생성한 장치 드라이버의 또 다른 디바이스 개체를 가리키는 포인터이다.
 
 ### 디바이스 노드
-개별 장치마다 보유하는 [디바이스 스택](#디바이스-스택)은 유일무이하고, 부모의 기능 드라이버는 자식의 버스 드라이버로 상속되는 걸 설명하였다. PnP 관리자는 장치의 부모와 자식 관계를 아래 그림과 같이 [*디바이스 트리*](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/device-tree)로 체계화하였으며, 각 [노드](https://en.wikipedia.org/wiki/Node_(computer_science))는 장치 "그 자체"를 나타내는 일명 **[디바이스 노드](https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/device-nodes-and-device-stacks)**(device node)이다.
+개별 장치마다 보유하는 [디바이스 스택](#디바이스-스택)은 유일무이하고, 부모의 기능 드라이버는 자식의 버스 드라이버로 상속되는 걸 설명하였다. [PnP 관리자](Kernel.md#pnp-관리자)는 장치의 부모와 자식 관계를 아래 그림과 같이 [*디바이스 트리*](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/device-tree)로 체계화하였으며, 각 [노드](https://en.wikipedia.org/wiki/Node_(computer_science))는 장치 "그 자체"를 나타내는 일명 **[디바이스 노드](https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/device-nodes-and-device-stacks)**(device node)이다.
+
+* 여기서 최하단에 위치한 "루트 장치(Root Device)"란 디바이스 노드 실체는 디바이스 트리를 관리하는 *[PnP 관리자](Kernel.md#pnp-관리자)*이다.
 
 > 장치 관리자에서 디바이스 트리를 직관적으로 보고 싶을 경우, 메뉴에서 *View > Devices by connection*으로 변경한다.
 
