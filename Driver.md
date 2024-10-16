@@ -50,18 +50,21 @@
 
 1. 버스 드라이버는 열거하여 감지한 각 장치에 대해 PDO를 생성하고 시스템에 알린다.
 1. 시스템은 감지된 장치에 가장 적합한 드라이버를 찾은 다음, 이를 기능 드라이버로 로드한다.
-1. 기능 드라이버는 생성한 FDO를 스택상 PDO 위에 얹히는, 즉 attach 하여 디바이스 스택을 완성한다.
+1. 기능 드라이버는 [IoCreateDevice](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-iocreatedevice) 루틴을 호출하여 해당 드라이버의 디바이스 개체(즉, FDO)를 생성한다.
+1. 기능 드라이버는 [IoAttachDeviceToDeviceStack](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-ioattachdevicetodevicestack) (혹은 [IoAttachDevice](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-ioattachdevice)) 루틴으로 FDO를 PDO 위에 얹혀(즉, attach) 디바이스 스택을 완성한다.
 
-예시를 기준으로 설명하면 Pci.sys (Microsoft Virtual Disk의 경우, storvsc.sys) 드라이버가 PDO를 생성한 이후, 시스템에서 불러온 Proseware.sys (Microsoft Virtual Disk의 경우, disk.sys) 드라이버는 [IoAttachDevice](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-ioattachdevice) 혹은 [IoAttachDeviceToDeviceStack](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-ioattachdevicetodevicestack) 루틴을 호출하여 자신의 디바이스 개체를 PDO 위에 올라간 FDO로 쌓으며 디바이스 스택이 구성된다.
+생성한 FDO를 스택상 PDO 위에 얹히는, 즉 attach 하여 디바이스 스택을 완성한다.
+
+예시를 기준으로 설명하면 Pci.sys (Microsoft Virtual Disk의 경우, storvsc.sys) 드라이버가 PDO를 생성한 이후, 시스템에서 불러온 Proseware.sys (Microsoft Virtual Disk의 경우, disk.sys) 드라이버는 자신의 디바이스 개체를 PDO 위에 올라간 FDO로 쌓으며 디바이스 스택이 구성된다.
 
 * `AttachedDevice`: 스택상 상위 디바이스 개체의 [포인터](C.md#포인터)를 가리킨다. Proseware.sys의 FDO 경우, 상위 디바이스 개체는 AfterThought.sys의 Filter DO가 해당한다. [WinDbg](WinDbg.md)에서 [`!devobj`](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/-devobj) 명령을 입력하면 `AttachedTo` 항목이 있어 하위 디바이스 개체를 알 수 있지만 정식 DEVICE_OBJECT의 필드가 아니다.
 * `DriverObject`: 해당 객체를 생성한 장치 드라이버의 드라이버 객체를 가리키는 포인터이다.
 * `NextDevice`: 해당 객체를 생성한 장치 드라이버의 또 다른 디바이스 개체를 가리키는 포인터이다.
 
 ### 디바이스 노드
-개별 장치마다 보유하는 [디바이스 스택](#디바이스-스택)은 유일무이하고, 부모의 기능 드라이버는 자식의 버스 드라이버로 상속되는 걸 설명하였다. [PnP 관리자](Kernel.md#pnp-관리자)는 장치의 부모와 자식 관계를 아래 그림과 같이 [*디바이스 트리*](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/device-tree)로 체계화하였으며, 각 [노드](https://en.wikipedia.org/wiki/Node_(computer_science))는 장치 "그 자체"를 나타내는 일명 **[디바이스 노드](https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/device-nodes-and-device-stacks)**(device node)이다.
+개별 장치마다 보유하는 [디바이스 스택](#디바이스-스택)은 유일무이하고, 부모의 기능 드라이버는 자식의 버스 드라이버로 상속되는 걸 설명하였다. PnP 관리자는 장치의 부모와 자식 관계를 아래 그림과 같이 [*디바이스 트리*](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/device-tree)로 체계화하였으며, 각 [노드](https://en.wikipedia.org/wiki/Node_(computer_science))는 장치 "그 자체"를 나타내는 일명 **[디바이스 노드](https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/device-nodes-and-device-stacks)**(device node)이다.
 
-* 여기서 최하단에 위치한 "루트 장치(Root Device)"란 디바이스 노드 실체는 디바이스 트리를 관리하는 *[PnP 관리자](Kernel.md#pnp-관리자)*이다.
+* 여기서 최하단에 위치한 "루트 장치(Root Device)"란 디바이스 노드 실체는 디바이스 트리를 관리하는 [PnP 관리자](Kernel.md#pnp-관리자)이다.
 
 > 장치 관리자에서 디바이스 트리를 직관적으로 보고 싶을 경우, 메뉴에서 *View > Devices by connection*으로 변경한다.
 
