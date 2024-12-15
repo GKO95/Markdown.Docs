@@ -9,6 +9,7 @@ A collection of personal markdown documents from studies, research, and experime
 - [x] [C (programming language)](C.md)
 - [x] [C++](Cpp.md)
 - [ ] [C#](Csharp.md)
+- [ ] [PowerShell](PowerShell.md)
 - [x] [Python](Python.md)
 - [ ] [Rust](Rust.md)
 - [ ] [TypeScript](TypeScript.md)
