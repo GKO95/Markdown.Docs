@@ -74,6 +74,8 @@
                 0x43,0x44,0x57,0x58,0x00,0x46,0x00,0x00,0x00,0x00,
                 0x00,0x7B,0x79,0x70 };
             ```
+        
+        만일 `Dump1Keys`를 0x2, 그리고 `Dump2Key`를 0x1로 설정하였다면 "우측 `CTRL` 키를 누른 상태에서 [<code>&#x0060;</code>](https://en.wikipedia.org/wiki/Backtick) 키를 두 번 클릭"하여 BSOD를 일으킨다.
 
 * **[전원 버튼](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/forcing-a-system-crash-with-the-power-button)**
 
@@ -91,13 +93,21 @@
 
     ![<code>PowerButtonBugcheck</code> 레지스트리 값](./images/bsod_force_power.png)
 
-* **[WinDbg](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/forcing-a-system-crash-from-the-debugger)**
-
-    [WinDbg](WinDbg.md)는 윈도우 운영체제를 [디버깅](https://ko.wikipedia.org/wiki/디버그)하는 프로그램으로 커널 모드에서 [`.crash`](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/-crash--force-system-crash-) 명령어를 입력하여 시스템 강제 충돌을 일으킬 수 있다. `KeBugCheck()` 루틴으로부터 [0xE2 MANUALLY_INITIATED_CRASH](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0xe2--manually-initiated-crash)가 반환되는데, 만일 시스템 충돌이 발생하지 않으면 중단점 탈출을 시도한다.
-
 * **[NotMyFault](NotMyFault.md)**
 
     [Sysinternals](Sysinternals.md) 유틸리티 중에서 몇 가지 방식으로 시스템 충돌을 일으킬 수 있는 프로그램이다. 비록 시스템 응답이 없는 상태에서 적합하지 않으나, 일반적인 상황에서 BSOD를 일으킬 때는 유용하다.
+
+* **[WinDbg](WinDbg.md)**
+
+    [WinDbg](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/forcing-a-system-crash-from-the-debugger)는 윈도우 운영체제를 [디버깅](https://ko.wikipedia.org/wiki/디버그)하는 프로그램으로 커널 모드에서 [`.crash`](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/-crash--force-system-crash-) 명령어를 입력하여 시스템 강제 충돌을 일으킬 수 있다. `KeBugCheck()` 루틴으로부터 [0xE2 MANUALLY_INITIATED_CRASH](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0xe2--manually-initiated-crash)가 반환되는데, 만일 시스템 충돌이 발생하지 않으면 중단점 탈출을 시도한다.
+
+* **[DTrace](DTrace.md)**
+
+    [윈도우 10, 버전 2004](https://en.wikipedia.org/wiki/Windows_10,_version_2004) (일명 20H1) 혹은 [윈도우 서버 2022](https://en.wikipedia.org/wiki/Windows_Server_2022)부터 [DTrace](https://en.wikipedia.org/wiki/DTrace)를 지원하며, 아래 명령을 입력하여 BSOD를 일으킬 수 있다.
+
+    ```d
+    dtrace -wn "BEGIN{panic()}"
+    ```
 
 # BSOD 설정
 [BSOD](#블루스크린)가 발생하면 시스템은 기본적으로 [자동 메모리 덤프](Dump.md#자동-메모리-덤프)(혹은 [커널 메모리 덤프](Dump.md#커널-메모리-덤프))를 생성하고 재부팅한다. 하지만 상황에 따라 덤프 유형이나 BSOD 동작을 달리 설정해야 하는 경우가 존재한다. 아래 레지스트리 키에서 덤프를 설정할 수 있으며 변경 사항을 적용하려면 반드시 재부팅이 필요하다.
