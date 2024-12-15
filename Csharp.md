@@ -10,13 +10,13 @@ OOP 언어는 "객체"라는 데이터를 위주로 프로그램을 개발되며
 
 .NET 컴파일러 플랫폼, 일명 <a href="https://en.wikipedia.org/wiki/Roslyn_(compiler)">Roslyn</a>은 소스 코드에서 이진코드가 아닌 [바이트코드](https://ko.wikipedia.org/wiki/바이트코드)를 [공통 중간 언어](https://ko.wikipedia.org/wiki/공통_중간_언어)(Common Intermediate Language; CIL)로 채택한 [어셈블리](https://learn.microsoft.com/en-us/dotnet/standard/assembly/) 파일을 생성한다. 바이트코드 특성상 컴퓨터가 읽을 수 있는 기계어는 아니지만 아키텍처 독립 언어로 크로스 플랫폼 지원이 가능하여, C# 언어 이외에도 .NET은 [비주얼 베이직](https://ko.wikipedia.org/wiki/비주얼_베이직_닷넷), [F#](https://ko.wikipedia.org/wiki/F_샤프), 그리고 [파워셸](PowerShell.md) 언어도 지원한다.
 
-> 어셈블리는 .exe 혹은 .dll 파일로 컴파일되지만, <a href="https://ko.wikipedia.org/wiki/기계어">기계어</a>가 아니기 때문에 단독적으로 실행이 불가하며 .NET CLR의 추가 [JIT 컴파일](Compiler.md#jit-컴파일)이 반드시 필요하다.
+> 어셈블리는 .exe 혹은 .dll 파일로 컴파일되지만, <a href="https://ko.wikipedia.org/wiki/기계어">기계어</a>가 아니기 때문에 단독적으로 실행이 불가하며 .NET CLR의 추가 [JIT 컴파일](Programming.md#jit-컴파일)이 반드시 필요하다.
 
 ![.NET 공통 언어 기반(CLI)](https://upload.wikimedia.org/wikipedia/commons/8/85/Overview_of_the_Common_Language_Infrastructure.svg)
 
 프레임워크는 FCL(혹은 CoreFX) 그리고 CLR(혹은 CoreCLR)로 구성되어 있으며 아래의 표는 이들의 역할을 간략하게 설명한다:
 
-<table style="table-layout: fixed; width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">.NET 구성요소</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Framework_Class_Library">프레임워크 클래스 라이브러리</a>(FCL)</th><th style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/공통_언어_런타임">공통 언어 런타임</a>(CLR)</th></tr></thead><tbody><tr><td>.NET 프로그램 개발에 필요한 <a href="https://ko.wikipedia.org/wiki/표준_라이브러리">표준 라이브러리</a>를 제공한다.</td><td><a href="Compiler.md#jit-컴파일">JIT 컴파일러</a>를 통해 .NET 프로그램을 컴파일 및 실행한다.</td></tr></tbody></table>
+<table style="table-layout: fixed; width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">.NET 구성요소</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Framework_Class_Library">프레임워크 클래스 라이브러리</a>(FCL)</th><th style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/공통_언어_런타임">공통 언어 런타임</a>(CLR)</th></tr></thead><tbody><tr><td>.NET 프로그램 개발에 필요한 <a href="https://ko.wikipedia.org/wiki/표준_라이브러리">표준 라이브러리</a>를 제공한다.</td><td><a href="Programming.md#jit-컴파일">JIT 컴파일러</a>를 통해 .NET 프로그램을 컴파일 및 실행한다.</td></tr></tbody></table>
 
 ### .NET 프레임워크
 [.NET 프레임워크](https://ko.wikipedia.org/wiki/닷넷_프레임워크)(.NET Framework)는 .NET 이전에 활발히 사용되던 [윈도우 NT](Windows.md) 데스크탑에서만 사용할 수 있는 프레임워크이다. 비록 2020년 11월부로 [.NET Core](#net)(현재 .NET)가 주요 프레임워크로 전환되었으나, 마이크로소프트는  [누적 업데이트](WaaS.md#업데이트)를 배포하는 등 .NET 프레임워크를 [윈도우 OS](Windows.md)에서 제거할 계획이 없음을 [발표](https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-5#net-5-doesnt-replace-net-framework)했다. 다만, 새로운 어플리케이션 개발에 있어서는 [.NET 6](https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-6) 버전 이상을 사용하는 걸 적극 권장한다.

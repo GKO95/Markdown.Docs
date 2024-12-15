@@ -1,7 +1,7 @@
 # 파이썬
 [파이썬](https://www.python.org/)(Python)은 웹 프로그래밍, 과학연구, 인공지능을 포함한 수많은 영역에서 응용 가능한 [다중 패러다임](https://ko.wikipedia.org/wiki/다중_패러다임_프로그래밍_언어) [고급 프로그래밍 언어](https://ko.wikipedia.org/wiki/고급_프로그래밍_언어)이다. 파이썬은 다른 프로그래밍 언어에 비해 매우 간편하여 프로그래밍 입문자에게 적합하고 커뮤니티가 매우 건재하다. 또한 [넘파이](ko.NumPy.md), [텐서플로우](ko.TensorFlow.md), [OpenCV](ko.OpenCV.md) 등의 다양한 [서드 파티](https://ko.wikipedia.org/wiki/서드_파티_개발자#서드파티) 라이브러리 생태계가 잘 갖춰져 있어 광범위한 활용도를 보여주는 강력한 프로그래밍 언어이다.
 
-파이썬은 [인터프리트 언어](Interpreter.md)(interpreted language)이다. 버전은 크게 파이썬 2와 파이썬 3으로 분류되는데, 전자는 2020년 1월 1일부로 서비스가 종료되었다. 파이썬 1이라는 것도 존재하나, 가장 최신 버전 1.6.1이 2000년에 출시된 점을 고려하면 호환성과 실용성이 매우 떨어진다. 그러므로 본문은 파이썬 3을 위주로 프로그래밍을 설명한다.
+파이썬은 [인터프리트 언어](Programming.md#인터프리터)(interpreted language)이다. 버전은 크게 파이썬 2와 파이썬 3으로 분류되는데, 전자는 2020년 1월 1일부로 서비스가 종료되었다. 파이썬 1이라는 것도 존재하나, 가장 최신 버전 1.6.1이 2000년에 출시된 점을 고려하면 호환성과 실용성이 매우 떨어진다. 그러므로 본문은 파이썬 3을 위주로 프로그래밍을 설명한다.
 
 <table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">파이썬 <code>X.Y.Z</code> 버전</caption><colgroup><col style="width: 20%;"/><col style="width: 50%;"/><col style="width: 30%;"/></colgroup><thead><tr><th style="text-align: center;">버전</th><th style="text-align: center;">설명</th><th style="text-align: center;">비고</th></tr></thead><tbody><tr><td style="text-align: center;"><code>X</code> 메이저 버전</td><td>호환이 불가할 정도의 상당한 변화를 거친 업그레이드</td><td>파이썬 2와 3 분류</td></tr><tr><td style="text-align: center;"><code>Y</code> 마이너 버전</td><td>새로운 기능이 추가될 때마다 증가하는 업데이트</td><td>마이너 버전 하위호환 보장</td></tr><tr><td style="text-align: center;"><code>Z</code> 마이크로 버전</td><td>버그 수정 및 유지관리 패치</td><td>안정성 척도</td></tr></tbody></table>
 

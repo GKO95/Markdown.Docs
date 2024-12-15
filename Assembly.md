@@ -15,7 +15,7 @@
 * [WinDbg](WinDbg.md)
 
 ### 어셈블러
-**[어셈블러](https://ko.wikipedia.org/wiki/어셈블리어#어셈블러)**(assembler)는 어셈블리 언어를 기계어로 변환하는 프로그램이다. 얼핏 [컴파일러](Compiler.md)와 유사하지만, 어셈블러는 프로그래밍 언어를 변환하는 게 아니라 단순히 어셈블리 코드를 대응하는 기계어로 변환한다. 대표적인 어셈블러로 인텔의 [NASM](https://ko.wikipedia.org/wiki/넷와이드_어셈블러)<sub>([공식 홈페이지](https://www.nasm.us/))</sub>, 마이크로소프트의 [MASM](https://learn.microsoft.com/en-us/cpp/assembler/masm/microsoft-macro-assembler-reference)<sub>([공식 홈페이지](http://www.masm32.com/))</sub> 등이 존재한다.
+**[어셈블러](https://ko.wikipedia.org/wiki/어셈블리어#어셈블러)**(assembler)는 어셈블리 언어를 기계어로 변환하는 프로그램이다. 얼핏 [컴파일러](Programming.md#컴파일러)와 유사하지만, 어셈블러는 프로그래밍 언어를 변환하는 게 아니라 단순히 어셈블리 코드를 대응하는 기계어로 변환한다. 대표적인 어셈블러로 인텔의 [NASM](https://ko.wikipedia.org/wiki/넷와이드_어셈블러)<sub>([공식 홈페이지](https://www.nasm.us/))</sub>, 마이크로소프트의 [MASM](https://learn.microsoft.com/en-us/cpp/assembler/masm/microsoft-macro-assembler-reference)<sub>([공식 홈페이지](http://www.masm32.com/))</sub> 등이 존재한다.
 
 어셈블러를 통해 어셈블리 언어에서 기계어로 변환되면 부산물로 [오브젝트 파일](https://ko.wikipedia.org/wiki/목적_파일)(object file)이 생성된다. 오브젝트 파일은 파편적인 코드이므로, 다른 코드와 연동시키기 위해서는 [링커](https://ko.wikipedia.org/wiki/링커_(컴퓨팅))(linker)의 작업을 필요하다. 이를 통해 정적 및 동적 [라이브러리](C.md#라이브러리)의 함수나 구조체를 가져올 수 있게 된다.
 

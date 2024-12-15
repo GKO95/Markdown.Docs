@@ -2,7 +2,7 @@
 [타입스크립트](https://ko.wikipedia.org/wiki/타입스크립트)(TypeScript)는 마이크로소프트에서 개발한 [자바스크립트](ko.JavaScript.md) ECMAScript 2015의 상위 프로그래밍 언어이다. 자바스크립트는 런타임 도중에 자료형 검사 및 오류 검증 등을 처리하는 [동적 프로그래밍 언어](https://ko.wikipedia.org/wiki/동적_프로그래밍_언어)이지만, 여기에 [정적 프로그램 분석](https://ko.wikipedia.org/wiki/정적_프로그램_분석)을 제공하는 게 타입스크립트의 설계 목적이다. 자바스크립트와 엄청난 호환성을 자랑하여 함께 병행되어 사용되는 경우를 쉽게 찾아볼 수 있다.
 
 ## 컴파일러
-자바스크립트와 달리, 타입스크립트는 [컴파일 언어](Compiler.md)(compiled language)이지만 [기계어](https://ko.wikipedia.org/wiki/기계어)가 아닌 자바스크립트 언어로 변환한다. 타입스크립트 컴파일러 `tsc`는 npm로부터 사용되기 때문에 반드시 [Node.js](ko.JavaScript.md#nodejs)이 먼저 설치되어야 한다.
+자바스크립트와 달리, 타입스크립트는 [컴파일 언어](Programming.md#컴파일러)(compiled language)이지만 [기계어](https://ko.wikipedia.org/wiki/기계어)가 아닌 자바스크립트 언어로 변환한다. 타입스크립트 컴파일러 `tsc`는 npm로부터 사용되기 때문에 반드시 [Node.js](ko.JavaScript.md#nodejs)이 먼저 설치되어야 한다.
 
 ### 비주얼 스튜디오
 비주얼 스튜디오에서는 타입스크립트 프로젝트 생성을 지원하며, 그 안에는 이미 컴파일러와 같은 필요한 패키지들이 로컬 경로에 들어있는 것을 확인할 수 있다.
