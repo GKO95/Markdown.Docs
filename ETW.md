@@ -13,7 +13,7 @@
 
 > 추적 제공자 목록은 [세션](#추적-세션)을 구축하는 [추적 제어자](#추적-제어자) 역할의 프로그램 또는 도구를 통해 확인할 수 있다.
 
-<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">추적 제공자의 control GUID 및 명칭 예시</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">GUID</th><th style="text-align: center;">제공자</th></tr></thead><tbody><tr><td style="text-align: center;">A0E9B465-B939-57D7-B27D-95D8E925FF57</td><td style="text-align: center;">Application Error</td></tr><tr><td style="text-align: center;">A68CA8B7-004F-D7B6-A698-07E2DE0F1F5D</td><td style="text-align: center;">Microsoft-Windows-Kernel-General</td></tr><tr><td style="text-align: center;">0EAD09BD-2157-539A-8D6D-C87F95B64D70</td><td style="text-align: center;">Windows Error Reporting</td></tr></tbody></table>
+<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">추적 제공자의 control GUID 및 명칭 예시</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">GUID</th><th style="text-align: center;">제공자</th></tr></thead><tbody><tr><td style="text-align: center;">{A0E9B465-B939-57D7-B27D-95D8E925FF57}</td><td style="text-align: center;">Application Error</td></tr><tr><td style="text-align: center;">{A68CA8B7-004F-D7B6-A698-07E2DE0F1F5D}</td><td style="text-align: center;">Microsoft-Windows-Kernel-General</td></tr><tr><td style="text-align: center;">{0EAD09BD-2157-539A-8D6D-C87F95B64D70}</td><td style="text-align: center;">Windows Error Reporting</td></tr></tbody></table>
 
 ### 추적 소비자
 **[추적 소비자](https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/trace-consumer)**(trace consumer)는 [제공자](#추적-제공자)로부터 수신한 추적 메시지를 사용자가 읽을 수 있는 서식으로 변환하는 어플리케이션 및 도구를 가리킨다. 다음은 추적 소비자 역할을 수행할 수 있는 프로그램 및 도구를 소개한다.
@@ -76,6 +76,6 @@
 * `!wmitrace` 확장도구는 개인 추적 세션을 지원하지 않으므로 WinDbg와 같은 디버거로 메시지를 볼 수 없다.
 
 ## 이벤트 추적 로그
-[이벤트 추적 로그](https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/trace-log)(event trace log; ETL)는 하나 이상의 ETW 세션에서 생성된 메시지가 압축되어 저장된 .etl 확장자 파일이다. 텍스트 로그에 비해 용량이 작으며, 프로그램에 의해 간편하게 분석될 수 있는 장점을 지닌다. 하지만 직접 분석하려면 텍스트 형식으로 변환되어야 하며, 이때 해당 ETL 로그를 생성한 윈도우 구성요소의 [심볼](Symbol.md) 파일이 필요하다.
+**[이벤트 추적 로그](https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/trace-log)**(event trace log; ETL)는 하나 이상의 ETW 세션에서 생성된 메시지가 압축되어 저장된 .etl 확장자 파일이다. 텍스트 로그에 비해 용량이 작으며, 프로그램에 의해 간편하게 분석될 수 있는 장점을 지닌다. 하지만 직접 분석하려면 텍스트 형식으로 변환되어야 하며, 이때 해당 ETL 로그를 생성한 윈도우 구성요소의 [심볼](Symbol.md) 파일이 필요하다.
 
 ETL을 분석할 수 있는 대표적인 도구 중 하나가 바로 [Windows Performance Analyzer](https://learn.microsoft.com/en-us/windows-hardware/test/wpt/windows-performance-analyzer)이다.
