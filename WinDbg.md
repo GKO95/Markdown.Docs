@@ -95,14 +95,15 @@ Arg4: fffff803999612d0, address which referenced memory
 ## 커널 모드 디버깅
 > *출처: [Get started with WinDbg (kernel-mode) - Windows drivers | Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/getting-started-with-windbg--kernel-mode-)*
 
-커널을 디버깅하기 위해서는 두 개의 컴퓨터가 필요하다: 디버거를 실행하는 *호스트 컴퓨터*, 그리고 디버깅을 당하는 *타겟 컴퓨터*이다.
+커널 디버깅을 논할 때 흔히 컴퓨터 유형을 두 가지로 분류하여 언급한다.
 
-1. 윈도우 보안 기능들([보안 부팅](https://en.wikipedia.org/wiki/UEFI#Secure_Boot) 및 [BitLocker](https://en.wikipedia.org/wiki/BitLocker) 등)을 일시적으로 비활성화한다.
-1. 타겟 컴퓨터의 [디버깅 모드](https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/bcdedit--debug)를 활성화한다.
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="text-align: center;">커널 디버깅의 두 가지 컴퓨터 유형</capation><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">호스트 컴퓨터 (host computer)</th><th style="text-align: center;">타깃 컴퓨터 (target computer)</th></tr></thead><tbody><tr style="text-align: center;"><td>WinDbg를 실행하여 디버깅을 행하는 컴퓨터를 가리킨다.</td><td>WinDbg에 연결되어 디버깅을 당하는 컴퓨터를 가리킨다.</td></tr></tbody></table>
 
-    ```terminal
-    bcdedit /debug on
-    ```
+타깃 컴퓨터의 윈도우 부팅 옵션에서 [디버깅 모드](https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/bcdedit--debug) 활성화가 필수이며, 만일 [보안 부팅](https://learn.microsoft.com/en-us/windows-hardware/drivers/bringup/secure-boot) 비활성화가 요구되면 [BIOS](Boot.md#BIOS) 혹은 [UEFI](Boot.md#UEFI)에서 설정되어야 한다. 디버깅 모드를 활성화하려면 관리자 권한의 터미널에서 아래 명령을 입력한다.
+
+```
+bcdedit /debug on
+```
 
 # 스택 해석하기
 [스레드](Process.md#스레드) [스택](https://ko.wikipedia.org/wiki/스택)을 읽는 절차는 당시 프로그램 혹은 시스템이 어떠한 작업을 하였는지 이해하려는 디버깅의 기초이자 핵심되는 작업 중 하나이다. 본 내용은 가급적 [WinDbg](#windbg)에서 제공하는 기본 명령만을 사용하여 스택을 해석하는 방법을 소개한다.
