@@ -1,16 +1,14 @@
 # WinDbg
-[WinDbg](https://ko.wikipedia.org/wiki/WinDbg)<sub>([다운로드](https://apps.microsoft.com/store/detail/windbg-preview/9PGJGD53TN86))</sub>, 일명 윈도우 디버거(Windows Debugger)는 [윈도우](Windows.md)에서 실행되는 [어플리케이션](Process.md) 및 시스템 전체를 [디버깅](https://ko.wikipedia.org/wiki/디버그)하는 트러블슈팅 프로그램이다.
-
-> 만일 윈도우 7 혹은 8.1 운영체제를 사용하거나, 혹은 Preview가 아닌 버전을 설치하려면 윈도우 [SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-sdk/)를 통해 설치를 진행한다.
+[WinDbg](https://ko.wikipedia.org/wiki/WinDbg)<sub>([다운로드](https://apps.microsoft.com/store/detail/windbg-preview/9PGJGD53TN86))</sub>, 일명 윈도우 디버거(Windows Debugger)는 [윈도우](Windows.md)에서 실행되는 [어플리케이션](Process.md) 및 시스템 전체를 [디버깅](https://ko.wikipedia.org/wiki/디버그)하는 트러블슈팅 프로그램이다. 만일 레거시 버전의 WinDbg를 사용하려면 [윈도우 SDK](https://aka.ms/windowssdk)를 설치하도록 한다.
 
 ![WinDbg의 간단한 활용 예시: 하이퍼-V 가상 머신에서 NotMyFault.exe로 트리거된 bugcheck 0xD1 DRIVER_IRQL_NOT_LESS_OR_EQUAL 분석](./images/windbg_bugcheck_d1.png)
 
-WinDbg는 흔히 어플리케이션 충돌이나 [블루스크린](BSOD.md)으로 생성된 [덤프](Dump.md) 파일을 분석하는 데 사용되며, 그 외에도 실시간 디버깅 및 TTD (Time Travel Debugging; 시간여행 디버깅) 등이 가능하다. 단, WinDbg는 [근본적인 원인 분석](https://en.wikipedia.org/wiki/Root_cause_analysis)을 위한 보조 도구에 불과하며 윈도우에서 발생한 모든 문제를 해결해 주는 게 아니다. 덤프에 남겨진 단서로부터 논리적이고 체계적인 방법론을 동원하여 합리적인 견해를 주장 및 조치 방안을 제시할 수 있어야 한다.
+WinDbg는 흔히 어플리케이션 충돌이나 [블루스크린](BSOD.md)으로 생성된 [덤프](Dump.md) 파일을 분석하는 데 사용되며, 그 외에도 실시간 및 TTD 디버깅이 가능하다. 단, WinDbg는 [근본적인 원인 분석](https://en.wikipedia.org/wiki/Root_cause_analysis)을 위한 보조 도구에 불과하며 윈도우에서 발생한 모든 문제를 해결해 주는 게 아니다. 덤프에 남겨진 단서로부터 논리적이고 체계적인 방법론을 동원하여 합리적인 견해를 주장 및 조치 방안을 제시할 수 있어야 한다.
 
 ### 환경 변수 설정
 WinDbg로부터 원활한 디버깅 작업을 진행하려면 아래와 같이 시스템 환경 변수를 설정하기를 권장한다.
 
-<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">WinDbg 관련 환경 변수</caption><colgroup><col style="width: 30%;"/><col style="width: 70%;"/></colgroup><thead><tr><th style="text-align: center;">환경 변수</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>_NT_SYMBOL_PATH</code></td><td><a href="Symbol.md">심볼</a>(symbol) 서버 및 캐시 경로를 지정한다.</td></tr><tr><td style="text-align: center;"><code>_NT_DEBUGGER_EXTENSION_PATH</code></td><td>WinDbg 디버깅 확장도구가 위치한 폴더 경로를 명시한다: <a href="https://www.microsoft.com/en-us/download/details.aspx?id=53304">MEX</a> 확장도구 등</td></tr></tbody></table>
+<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">WinDbg 관련 환경 변수</caption><colgroup><col style="width: 35%;"/><col style="width: 60%;"/></colgroup><thead><tr><th style="text-align: center;">환경 변수</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>_NT_SYMBOL_PATH</code></td><td><a href="Symbol.md">심볼</a> 서버 및 캐시 경로를 지정한다.</td></tr><tr><td style="text-align: center;"><code>_NT_DEBUGGER_EXTENSION_PATH</code></td><td>WinDbg의 확장도구가 위치한 디렉토리를 명시한다 (<a href="https://en.wikipedia.org/wiki/Semicolon">세미콜론</a>으로 구분).</td></tr></tbody></table>
 
 ## 인터페이스
 WinDbg에서 제공하는 화면이나 기능 등의 인터페이스에 대하여 소개한다.
@@ -38,7 +36,7 @@ WinDbg에서 디버깅하고자 하는 스레드(어플리케이션 덤프 경�
 ![WinDbg 명령창의 출력화면에 텍스트 하이라이트](./images/windbg_text_highlight.png)
 
 ## !analyze 확장도구
-[!analyze](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/-analyze)는 WinDbg에 기본적으로 탑재된 확장도구 중에서도 증상을 개략적으로 파악하는 데 유용하다. 하지만 해당 확장도구 또한 WinDbg와 마찬가지로 문제의 원인을 제시하는 도구가 아니며, 본 내용은 !analyze가 제시하는 자동 진단 내용이 무엇을 내포하는지 소개한다. !analyze 확장도구의 진단 내용은 [마이크로소프트 공식 문서](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/using-the--analyze-extension)에서 확인할 수 있다.
+[**!analyze**](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/-analyze)는 WinDbg에 기본적으로 탑재된 확장도구 중에서도 증상을 개략적으로 파악하는 데 유용하다. 하지만 해당 확장도구 또한 WinDbg와 마찬가지로 문제의 원인을 제시하는 도구가 아니며, 본 내용은 !analyze가 제시하는 자동 진단 내용이 무엇을 내포하는지 소개한다. !analyze 확장도구의 진단 내용은 [마이크로소프트 공식 문서](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/using-the--analyze-extension)에서 확인할 수 있다.
 
 <table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">!analyze 출력화면 비교</caption><thead><tr><th style="text-align: center;">충돌 소프트웨어</th><th style="text-align: center;">출력화면 및 설명</th></tr></thead><colgroup><col style="width: 15%;" /><col style="width: 85%;" /></colgroup><tbody><tr><td rowspan="2" style="text-align: center;">어플리케이션</td><td>
 
@@ -83,6 +81,17 @@ Arg4: fffff803999612d0, address which referenced memory
 </td></tr><tr><td><a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-code-reference2">Bugcheck</a>와 구체적인 정황을 소개하는 네 개의 매개변수를 알려준다. 위의 덤프는 DISPATCH_LEVEL 이상의 IRQL에서 유효하지 않는 메모리 주소에 데이터 작성을 시도하였음을 알리는 bugcheck <a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0xd1--driver-irql-not-less-or-equal">0xD1 DRIVER_IRQL_NOT_LESS_OR_EQUAL</a>로 확인되었다.</td></tr></tbody></table>
 
 이후 공통사항으로 레지스터에 저장된 데이터와 충돌이 발생한 스택을 화면에 출력한다. [어셈블리](Assembly.md)와 스택 기반의 [메모리](Memory.md) 할당 등의 컴퓨터공학 및 윈도우 운영체제에 대한 이해도가 요구된다. 본 문서에서는 WinDbg를 사용하여 분석하기 위해 알아야 할 사항과 명령, 그리고 방법론을 위주로 소개한다.
+
+## MEX 확장도구
+**MEX**<sub>([다운로드](https://www.microsoft.com/en-us/download/details.aspx?id=53304))</sub>는 WinDbg에 기본적으로 포함되지 않은 확장도구이지만, 디버깅에 유용한 다양한 기능을 제공한다. MEX를 사용하려면 해당 DLL을 [`.load`](https://learn.microsoft.com/en-us/windows-hardware/drivers/debuggercmds/-load---loadby--load-extension-dll-) 명령으로 불러오거나 _NT_DEBUGGER_EXTENSION_PATH 환경 변수에 DLL이 위치한 디렉토리를 지정할 수 있다. MEX 명령어 목록은 아래와 같이 검색할 수 있다.
+
+```windbg
+0: kd> !mex.help
+Mex currently has 255 extensions available.  Please specify a keyword to search.
+Or browse by category:
+
+All PowerShell[6] SystemCenter[3] Networking[12] Process[5] Mex[2] Kernel[27] DotNet[32] Decompile[15] Utility[40] Thread[27] Binaries[6] General[22] 
+```
 
 # 실시간 디버깅
 [WinDbg](#windbg)는 이미 증상이 나타나 생성된 [덤프](Dump.md) 외에도 [프로세스](Process.md)나 [커널](Kernel.md)에 직접 붙어(attach) 실행되는 도중에 실시간으로 [중단점](https://en.wikipedia.org/wiki/Breakpoint)을 설정하는 등의 [디버깅](https://en.wikipedia.org/wiki/Debugging)이 가능하다. 디버깅 대상에 따라 필요한 준비가 다르며, 본 내용은 [사용자](#사용자-모드-디버깅) 및 [커널 모드](#커널-모드-디버깅)에 따라 분류하여 소개한다.
