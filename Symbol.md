@@ -41,6 +41,15 @@
 SETX _NT_SYMBOL_PATH SRV*C:\Symbols*https://msdl.microsoft.com/download/symbols
 ```
 
+### 심볼 서버 목록
+다음은 개발자들을 위해 기업에서 공개한 심볼 서버들의 목록을 정리한다.
+
+* 마이크로소프트: https://msdl.microsoft.com/download/symbols
+* 구글 크롬: https://chromium-browser-symsrv.commondatastorage.googleapis.com
+* 엔비디아: https://driver-symbols.nvidia.com
+* 인텔: https://software.intel.com/sites/downloads/symbols
+* AMD: https://download.amd.com/dir/bin
+
 ## 심볼 검증
 > *출처: [SymChk - Windows drivers | Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/symchk)*
 
