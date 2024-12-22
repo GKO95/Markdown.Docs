@@ -3,7 +3,7 @@
 
 **[인증](https://learn.microsoft.com/en-us/windows-server/security/windows-authentication/windows-authentication-overview)**(authentication)은 시스템에서 식별된 사용자가 실제로 본인이 맞는지 검증하는 절차이다: [비밀번호](https://learn.microsoft.com/en-us/windows-server/security/kerberos/passwords-overview), [스마트카드](https://en.wikipedia.org/wiki/Smart_card), [생체인증](https://en.wikipedia.org/wiki/Biometrics) 등이 해당한다. 네트워크 리소스를 비인가된 사용자로부터 접근을 원천 차단하며, 인가된 사용자는 원격에서도 안전하게 접근할 수 있는 보안을 제공한다.
 
-* 한편, 유사한 용어인 [authorization](https://en.wikipedia.org/wiki/Authorization)은 인증이 완료된 사용자가 해당 리소스를 접근할 "권한"이 있는지 확인하는 것으로 별개의 절차임을 유의하도록 한다.
+* 한편, 유사한 용어인 [*authorization*](https://en.wikipedia.org/wiki/Authorization)은 인증이 완료된 사용자가 해당 리소스를 접근할 "권한"이 있는지 확인하는 것으로 별개의 절차임을 유의하도록 한다.
 
 ## 인증 프로토콜
 **[인증 프로토콜](https://en.wikipedia.org/wiki/Authentication_protocol)**(authentication protocol)은 두 개체 간 인증 데이터를 전송하기 위해 설계된 [통신 프로토콜](https://en.wikipedia.org/wiki/Communication_protocol)이다.
