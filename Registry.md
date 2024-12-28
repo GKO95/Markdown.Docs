@@ -1,5 +1,7 @@
 # 레지스트리
-**[레지스트리](https://learn.microsoft.com/en-us/windows/win32/sysinfo/registry)**(registry)는 [윈도우](Windows.md) [운영체제](https://en.wikipedia.org/wiki/Operating_system)의 시스템 및 어플리케이션의 설정 정보를 담는 데이터베이스이다. 사용자는 [레지스트리 편집기](https://en.wikipedia.org/wiki/Windows_Registry#Registry_editors), [PowerShell](PowerShell.md) 등의 방법으로 편집할 수 있으나 잘못된 변경은 시스템 전체를 망가뜨릴 수 있는 위험이 있기에 매우 조심해야 한다.
+**[레지스트리](https://learn.microsoft.com/en-us/windows/win32/sysinfo/registry)**(registry)는 [윈도우](Windows.md) [운영체제](https://en.wikipedia.org/wiki/Operating_system)의 시스템 및 어플리케이션의 설정 정보를 담는 데이터베이스이다. 사용자는 [레지스트리 편집기](https://en.wikipedia.org/wiki/Windows_Registry#Registry_editors), [PowerShell](PowerShell.md) 등의 방법으로 편집할 수 있으나 잘못된 변경은 시스템 전체를 망가뜨릴 수 있는 위험이 있기에 매우 조심해야 한다. 
+
+* [윈도우 10](https://en.wikipedia.org/wiki/Windows_10)의 [참가자 빌드 17063](https://blogs.windows.com/windows-insider/2017/12/19/announcing-windows-10-insider-preview-build-17063-pc/)부터 메모리 관리 능력을 극대화하기 위해, [커널 모드](Processor.md#권한-수준)의 [페이징 풀](Memory.md#메모리-풀)에 저장된 레지스트리 데이터는 [사용자 모드](Processor.md#권한-수준)의 "레지스트리(Registry)" [프로세스](Process.md)로 옮겨졌다.
 
 ## 레지스트리 구조
 ![레지스트리 구조](https://learn.microsoft.com/en-us/windows/win32/sysinfo/images/regtree.png)

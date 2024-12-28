@@ -38,7 +38,7 @@ HKLM\SYSTEM\CurrentControlSet\Services
 # 서비스 호스트
 > *참고: [Service Host - Win32 apps | Microsoft Laern](https://learn.microsoft.com/en-us/windows/win32/wsw/service-host)*
 
-**[서비스 호스트](https://en.wikipedia.org/wiki/Svchost.exe)**(일명 svchost.exe)는 하나 이상의 .dll 확장자의 파일 형식의 [서비스](#윈도우-서비스)를 탑재할 수 있는 [시스템 프로세스](Process.md#시스템-프로세스)이다. 윈도우 OS 빌드에 따라 svchost.exe의 동작 방식에는 차이가 존재하며, 이들의 장단점은 각각 다음과 같다.
+**[서비스 호스트](https://en.wikipedia.org/wiki/Svchost.exe)**(일명 svchost.exe)는 하나 이상의 .dll 확장자의 파일 형식의 [서비스](#윈도우-서비스)를 탑재할 수 있는 [프로세스](Process.md)이다. 윈도우 OS 빌드에 따라 svchost.exe의 동작 방식에는 차이가 존재하며, 이들의 장단점은 각각 다음과 같다.
 
 <table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">윈도우 빌드에 따른 svchost.exe의 동작 차이</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Windows_10,_version_1607">윈도우 10 버전 1607</a> 및 <a href="https://en.wikipedia.org/wiki/Windows_Server_2016">서버 2016</a> 이하</th><th style="text-align: center;"><a href="https://learn.microsoft.com/en-us/windows/application-management/svchost-service-refactoring">윈도우 10 버전 1703</a> 및 <a href="https://en.wikipedia.org/wiki/Windows_Server_2019">서버 2019</a> 이상</th></tr></thead><tbody><tr><td>라이브러리 특성을 활용하여 여러 서비스가 단일 svchost.exe 프로세스 내에서 리소스를 공유한다.</td><td><a href="Memory.md">물리 메모리</a>가 3.5 GB 이상이면 (별도 설정이 없는 한) svchost.exe는 오로지 하나의 서비스만 탑재하도록 변경되었다.</td></tr><tr><td><ul><li><b>장점</b>: 리소스 소모량 감소에 의한 메모리 공간 절약</li><li><b>단점</b>: 한 서비스의 충돌이 svchost.exe에 호스팅된 타 서비스에 영향</li></ul></td><td><ul><li><b>장점</b>: 서비스 충돌 등으로부터 내구성 증진; 수월해진 디버깅 작업</li><li><b>단점</b>: 메모리 사용량 증가</li></ul></td></tr></tbody></table>
 
