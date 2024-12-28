@@ -18,7 +18,7 @@ WinDbg에서 제공하는 화면이나 기능 등의 인터페이스에 대하�
 
 * **사용자 모드 덤프**
 
-    콜론 `:`을 기준으로 좌측과 우측은 각각 현재 디버깅 중인 [프로세스](Process.md)와 [스레드](Process.md#스레드) 번호를 가리킨다; 이들은 WinDbg에서 부여한 상대적인 번호로 PID와 TID가 절대 아니다. 즉, 아래 그림은 WinDbg에서 인지한 0번 프로세스의 0번 스레드를 살펴보고 있음을 의미한다.
+    콜론 `:`을 기준으로 좌측과 우측은 각각 현재 디버깅 중인 [프로세스](Process.md)와 [스레드](Thread.md) 번호를 가리킨다; 이들은 WinDbg에서 부여한 상대적인 번호로 PID와 TID가 절대 아니다. 즉, 아래 그림은 WinDbg에서 인지한 0번 프로세스의 0번 스레드를 살펴보고 있음을 의미한다.
 
     ![WinDbg 명령창의 입력단: 어플리케이션 덤프](./images/windbg_wnd_command_user.png)
 
@@ -161,7 +161,7 @@ bcdedit /dbgsettings NET hostip:192.168.0.1 port:50000
 만일 UEFI 기반인 2세대 VM일 경우, 가상 머신의 *Settings... > Security*로 이동하여 보안 부팅을 해제한다. 이후 KDNET 설정 과정은 *[네트워크 커널 디버깅 설정](#네트워크-커널-디버깅-설정)* 부분을 참고한다.
 
 # 스택 해석하기
-[스레드](Process.md#스레드) [스택](https://ko.wikipedia.org/wiki/스택)을 읽는 절차는 당시 프로그램 혹은 시스템이 어떠한 작업을 하였는지 이해하려는 디버깅의 기초이자 핵심되는 작업 중 하나이다. 본 내용은 가급적 [WinDbg](#windbg)에서 제공하는 기본 명령만을 사용하여 스택을 해석하는 방법을 소개한다.
+[스레드](Thread.md) [스택](https://ko.wikipedia.org/wiki/스택)을 읽는 절차는 당시 프로그램 혹은 시스템이 어떠한 작업을 하였는지 이해하려는 디버깅의 기초이자 핵심되는 작업 중 하나이다. 본 내용은 가급적 [WinDbg](#windbg)에서 제공하는 기본 명령만을 사용하여 스택을 해석하는 방법을 소개한다.
 
 아래는 [Bugcheck](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-code-reference2) [0xD1 DRIVER_IRQL_NOT_LESS_OR_EQUAL](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0xd1--driver-irql-not-less-or-equal)에 의해 생성된 전체 메모리 덤프를 예시로 스택 해석을 설명한다. WinDbg에서 [`k*`](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/k--kb--kc--kd--kp--kp--kv--display-stack-backtrace-) 명령어는 스택을 역추적하여 화면에 출력하며, [와일드카드](https://ko.wikipedia.org/wiki/와일드카드_문자)에 어떤 문자를 입력하는지에 따라 표시되는 정보가 다소 달라진다.
 

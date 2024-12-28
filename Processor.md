@@ -51,7 +51,7 @@ ALU는 기본적으로 opcode와 피연산자를 입력받고, 해당 opcode 작
 * [프로세서 코어](#프로세서-코어)
 
 ### 프로세서 시간
-**[프로세서 시간](https://en.wikipedia.org/wiki/CPU_time)**(processor time), 일명 **프로세서 점유**(processor utilization)는 [프로세스](Process.md) (또는 [스레드](Process.md#스레드))로부터 [이미지](https://ko.wikipedia.org/wiki/실행_파일) 코드를 연산하고 처리하는 데 할애한 시간이다. 프로세스의 프로세서 시간은 [스케줄링](#스케줄링)이나 입출력 요청 등에 의해 대기 혹은 준비 상태에 진입하여 처리되지 않는 동안 반영되지 않는다. 일정한 간격으로 샘플링된 시간 동안 스레드가 얼마나 오래 처리되었는지를 토대로 프로세서 점유율(%)이 계산된다.
+**[프로세서 시간](https://en.wikipedia.org/wiki/CPU_time)**(processor time), 일명 **프로세서 점유**(processor utilization)는 [프로세스](Process.md) (또는 [스레드](Thread.md))로부터 [이미지](https://ko.wikipedia.org/wiki/실행_파일) 코드를 연산하고 처리하는 데 할애한 시간이다. 프로세스의 프로세서 시간은 [스케줄링](#스케줄링)이나 입출력 요청 등에 의해 대기 혹은 준비 상태에 진입하여 처리되지 않는 동안 반영되지 않는다. 일정한 간격으로 샘플링된 시간 동안 스레드가 얼마나 오래 처리되었는지를 토대로 프로세서 점유율(%)이 계산된다.
 
 ### 프로세서 클럭
 **[클럭 속도](https://ko.wikipedia.org/wiki/클럭_속도)**(clock rate 또는 clock speed), 일명 **클럭 주파수**(clock frequency)는 [메인보드](https://ko.wikipedia.org/wiki/메인보드)에 위치한 [클럭 발생기](https://en.wikipedia.org/wiki/Clock_generator)로부터 프로세서가 작업을 수행하는데 기준이 되는 [클럭 신호](https://ko.wikipedia.org/wiki/클럭_신호)가 얼마나 빈번히 생성될 수 있는지 나타내는 [헤르츠](https://ko.wikipedia.org/wiki/헤르츠)(Hz) 단위의 수치이다. 프로세서의 연산은 클럭 신호에 동기화되어, 주파수가 높을수록 동일한 시간동안 더 많은 작업을 수행할 수 있다. 그러나 클럭 속도는 프로세서가 초당 작업한 개수를 의미하는 게 절대 아니다.
@@ -67,7 +67,7 @@ ALU는 기본적으로 opcode와 피연산자를 입력받고, 해당 opcode 작
     * `Processor Information\% Processor Utility`: 프로세서 시간이 아닌 클럭 주파수를 함께 고려하여 성능에 따른 작업 처리 능률을 나타내는 수치이다. 윈도우 8부터 [작업 관리자](https://en.wikipedia.org/wiki/Task_Manager_(Windows))의 프로세스 및 성능 탭의 CPU 사용량은 해당 카운터가 반영된다.<sup>[<a href="https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/cpu-usage-exceeds-100">출처</a>]</sup>
 
 ### 프로세서 코어
-**프로세서 코어**(processor core)는 CPU에서 연산을 담당하는 물리적인 [전자회로](https://ko.wikipedia.org/wiki/집적_회로)를 가리키며, 하나의 칩에 두 개 이상의 프로세서 코어를 가진 CPU를 [멀티 코어](https://ko.wikipedia.org/wiki/멀티_코어)라고 지칭한다. 프로세서 성능을 향상시키는데 [클럭 속도](#프로세서-클럭)의 기술적 제약을 극복하기 위해 하드웨어 제조사는 2005년에 처음으로 시장에 멀티 코어 CPU를 소개하였다. 멀티 코어 CPU는 여러 [스레드](Process.md#스레드)를 동시에 처리할 수 있는 장점을 지닌다.
+**프로세서 코어**(processor core)는 CPU에서 연산을 담당하는 물리적인 [전자회로](https://ko.wikipedia.org/wiki/집적_회로)를 가리키며, 하나의 칩에 두 개 이상의 프로세서 코어를 가진 CPU를 [멀티 코어](https://ko.wikipedia.org/wiki/멀티_코어)라고 지칭한다. 프로세서 성능을 향상시키는데 [클럭 속도](#프로세서-클럭)의 기술적 제약을 극복하기 위해 하드웨어 제조사는 2005년에 처음으로 시장에 멀티 코어 CPU를 소개하였다. 멀티 코어 CPU는 여러 [스레드](Thread.md)를 동시에 처리할 수 있는 장점을 지닌다.
 
 > 위의 작업 관리자는 시스템의 프로세서가 헥사코어, 즉 여섯 개의 코어를 가진 [AMD](https://www.amd.com) [Ryzen 5 5600X](https://www.amd.com/en/products/cpu/amd-ryzen-5-5600x)라고 표시하였다. 여기서 12개의 그래프 항목은 SMT에 의한 논리 프로세서 정보를 보여주는 것으로 아래 내용을 참고한다.
 
@@ -101,7 +101,7 @@ ALU는 기본적으로 opcode와 피연산자를 입력받고, 해당 opcode 작
 커널 모드의 프로그램 오동작은 시스템 전체에 충돌을 일으켜 [블루스크린](BSOD.md)을 야기하는 원인이기 때문에 매우 신중하게 개발되어야 한다.
 
 # 스케줄링
-**[스케줄링](https://en.wikipedia.org/wiki/Scheduling_(computing))**(scheduling)이란, 작업([스레드](Process.md#스레드))을 실행하기 위해 필요한 리소스([프로세서](#프로세서))를 할당시키는 행위를 가리키며, 이를 담당하는 코드를 [**스케줄러**](https://en.wikipedia.org/wiki/Scheduling_(computing)#SCHEDULER)라고 부른다. 스케줄링 기술은 단일 코어 프로세서 시스템에서도 다수의 프로그램 및 기능을 동시에 실행하는 [멀티태스킹](https://en.wikipedia.org/wiki/Computer_multitasking)을 가능케 한다. 스케줄되지 않은 프로세서는 [유휴 프로세스](https://en.wikipedia.org/wiki/System_Idle_Process)의 스레드를 실행하여 (외부 인터럽트가 발생할 때까지) CPU를 중단시키는 [HLT](https://en.wikipedia.org/wiki/HLT_(x86_instruction)) 명령을 반복적으로 수행한다.
+**[스케줄링](https://en.wikipedia.org/wiki/Scheduling_(computing))**(scheduling)이란, 작업([스레드](Thread.md))을 실행하기 위해 필요한 리소스([프로세서](#프로세서))를 할당시키는 행위를 가리키며, 이를 담당하는 코드를 [**스케줄러**](https://en.wikipedia.org/wiki/Scheduling_(computing)#SCHEDULER)라고 부른다. 스케줄링 기술은 단일 코어 프로세서 시스템에서도 다수의 프로그램 및 기능을 동시에 실행하는 [멀티태스킹](https://en.wikipedia.org/wiki/Computer_multitasking)을 가능케 한다. 스케줄되지 않은 프로세서는 [유휴 프로세스](https://en.wikipedia.org/wiki/System_Idle_Process)의 스레드를 실행하여 (외부 인터럽트가 발생할 때까지) CPU를 중단시키는 [HLT](https://en.wikipedia.org/wiki/HLT_(x86_instruction)) 명령을 반복적으로 수행한다.
 
 * 다시 말해, 유휴 프로세스는 아무런 작업을 하지 않음을 의미한다. 해당 프로세스의 [CPU 사용량](#프로세서-시간)이 90%라면 시스템 전반이 사용하는 CPU는 10%이다.
 
@@ -111,7 +111,7 @@ ALU는 기본적으로 opcode와 피연산자를 입력받고, 해당 opcode 작
 라운드 로빈이란, 모든 프로세스가 우선순위 상관없이 동일한 시간동안 균등하게 작업을 처리될 수 있는 스케줄링 알고리즘이다. 프로세스는 작업을 처리하기 위해 주어진 고정 시간, 즉 [퀀텀](https://en.wikipedia.org/wiki/Preemption_(computing)#Time_slice)(quantum)이란 일회성 시간제 티켓을 스케줄러로부터 할당 받는다. 퀀텀이 소진되면 프로세서는 완료 여부와 상관 없이 해당 작업을 즉시 중단하고 [큐](https://ko.wikipedia.org/wiki/큐_(자료_구조))의 맨 뒤로 되돌아가 스케줄링이 될 다음 순서까지 기다린다. 한편, 프로세서는 큐에 대기하다 퀀텀을 할당 받은 다음 프로세스를 처리한다.
 
 ### 스케줄링 우선순위
-**[스케줄링 우선순위](https://learn.microsoft.com/en-us/windows/win32/procthread/scheduling-priorities)**(scheduling priorities)는 [프로세스](Process.md#프로세스) 또는 [스레드](Process.md#스레드)가 타 객체에 비해 CPU로부터 얼마나 먼저 처리되어야 하는지 알리는 [필드](Cpp.md#클래스) 값이다. 우선순위 범위는 1 - 31이며 높을수록 스케줄링 최상위 우선권을 가진다. 특수한 경우의 우선순위 0은 오로지 시스템 운영 및 보안을 위한 것으로 [영값 페이지 커널 스레드](Memory.md#여유-메모리) 등에 사용된다. 동일한 우선순위 간에는 라운드 로빈 알고리즘에 의해 공평하게 스케줄링한 다음 차우선순위로 넘어간다.
+**[스케줄링 우선순위](https://learn.microsoft.com/en-us/windows/win32/procthread/scheduling-priorities)**(scheduling priorities)는 [프로세스](Process.md#프로세스) 또는 [스레드](Thread.md)가 타 객체에 비해 CPU로부터 얼마나 먼저 처리되어야 하는지 알리는 [필드](Cpp.md#클래스) 값이다. 우선순위 범위는 1 - 31이며 높을수록 스케줄링 최상위 우선권을 가진다. 특수한 경우의 우선순위 0은 오로지 시스템 운영 및 보안을 위한 것으로 [영값 페이지 커널 스레드](Memory.md#여유-메모리) 등에 사용된다. 동일한 우선순위 간에는 라운드 로빈 알고리즘에 의해 공평하게 스케줄링한 다음 차우선순위로 넘어간다.
 
 다음은 [윈도우 NT](Windows.md) 운영체제의 우선순위 체계이며, 우선순위 클래스와 레벨의 조합으로부터 각 스레드의 기초 우선순위(base priority)가 형성된다.
 
@@ -131,7 +131,7 @@ ALU는 기본적으로 opcode와 피연산자를 입력받고, 해당 opcode 작
 3. 프로세스의 [대기 상태](#프로세스-상태) 전환
 
 ## 프로세스 상태
-**[프로세스 상태](https://en.wikipedia.org/wiki/Process_state)**(process state)는 생성된 프로세스가 현 시점에 어떠한 상태에 있는지 나타내며, 이에 따라 스케줄링 여부가 결정한다. 비록 "프로세스"라고 언급을 하였으나 정확히 말하면 이미지 코드를 실행하는 프로세스의 "[스레드](Process.md#스레드)"를 가리킨다. 다음은 프로세스 상태의 각 [종류](https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.threadstate)마다 소개한다.
+**[프로세스 상태](https://en.wikipedia.org/wiki/Process_state)**(process state)는 생성된 프로세스가 현 시점에 어떠한 상태에 있는지 나타내며, 이에 따라 스케줄링 여부가 결정한다. 비록 "프로세스"라고 언급을 하였으나 정확히 말하면 이미지 코드를 실행하는 프로세스의 "[스레드](Thread.md)"를 가리킨다. 다음은 프로세스 상태의 각 [종류](https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.threadstate)마다 소개한다.
 
 ![프로세스 상태를 함께 나타낸 생명 주기 다이어그램](https://www.researchgate.net/profile/Xiangyu-Lin-2/publication/346492253/figure/fig3/AS:963825763368962@1606805377750/Process-state-transition.png)
 
@@ -149,7 +149,7 @@ ALU는 기본적으로 opcode와 피연산자를 입력받고, 해당 opcode 작
 
 위의 그림을 정리하면 다음과 같다:
 
-1. 이벤트로부터 발생한 인터럽트를 전달받은 프로세서는 이를 처리하기 위해 현재 실행 중이던 [스레드](Process.md#스레드)를 잠시 중단한다.
+1. 이벤트로부터 발생한 인터럽트를 전달받은 프로세서는 이를 처리하기 위해 현재 실행 중이던 [스레드](Thread.md)를 잠시 중단한다.
 1. 프로세서는 차후 작업을 재개할 수 있도록 중단된 스레드의 [상태](https://en.wikipedia.org/wiki/State_(computer_science))를 저장한다.
 1. 프로세서는 해당 인터럽트에 대응하는 ISR을 실행하여 이벤트를 처리한다.
 1. ISR이 마무리되면 프로세서는 일시적으로 중단한 스레드 실행을 재개한다.
