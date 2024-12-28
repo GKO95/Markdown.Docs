@@ -42,6 +42,3 @@
 커널 개체의 포인터에 핸들을 연동 및 끊는 행위를 "핸들을 열다(open)" 그리고 "핸들을 닫다(close)"라고 표현한다. 만일 더 이상 사용하지 않는 핸들을 제때 닫지 않으면 커널 개체가 잔여하여 [핸들 누수](https://en.wikipedia.org/wiki/Handle_leak)가 일어나고, 상황에 따라 [메모리 누수](https://en.wikipedia.org/wiki/Memory_leak)를 함께 야기한다.
 
 * 같이 보기: *[Debug Tutorial Part 5: Handle Leaks - CodeProject](https://www.codeproject.com/articles/6988/debug-tutorial-part-5-handle-leaks)*
-
-# 스레드
-[스레드](https://ko.wikipedia.org/wiki/스레드_(컴퓨팅))(thread)는 프로세스의 프로그램 이미지 코드를 실행하기 위해 [CPU](Processor.md)에서 처리할 수 있는 작업 흐름의 단위이다. 프로세스는 기본적으로 하나의 스레드를 갖는데 개발자의 설계에 의해 추가로 생성하여 두 개 이상의 스레드를 활용할 수 있고, 동일한 가상 주소 공간에 상주하기 때문에 서로의 리소스를 아무런 제약없이 공유할 수 있다. 그러나 프로세스에는 최소한 하나의 스레드가 존재해야 하므로, 모든 스레드가 종료되면 해당 프로세스는 자동적으로 함께 종료된다.
