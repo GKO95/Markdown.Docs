@@ -47,8 +47,9 @@
 * *[Reference counting - Wikipedia](https://en.wikipedia.org/wiki/Reference_counting)*
 
 # 프로세스의 생성 및 종료
-> 본 장은 [C](C.md)/[C++](Cpp.md) 언어로 개발된 Windows 어플리케이션을 위주로 설명한다. [WinAPI](WinAPI.md) 외에 [C 런타임 라이브러리](C.md#c-런타임-라이브러리), 일명 CRT가 함께 언급될 것을 유의한다.
+본 장은 [C](C.md) 언어로 개발된 [윈도우](Windows.md) 어플리케이션을 위주로 설명한다. 즉, [Win32 API](WinAPI.md) 이외에 [C 런타임 라이브러리](C.md#c-런타임-라이브러리)(CRT)가 함께 언급되어 개념을 설명한다.
 
+## 프로세스 생성
 [CreateProcess](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-createprocessw) 함수는 [Win32 API](WinAPI.md), 즉 [윈도우 OS](Windows.md)에서 자체적으로 제공하는 [프로세스](#프로세스) 생성 함수이다. 해당 함수는 가장 먼저 프로세스 [커널 개체](Kernel.md#커널-개체), 그 다음 [가상 주소 공간](#가상-주소-공간)을 생성한다. 확보된 가상 주소 공간에 프로그램 실행에 필요한 이미지와 관련 모듈들을 로드한다. 프로그램 이미지에는 시작 함수(startup function)가 내재되어 [진입 함수](C.md#진입점) 실행 외에도 CRT에서 필요한 [메모리](Memory.md) 할당 및 [객체](Cpp.md#클래스) 생성 등을 사전에 작업한다.
 
 <table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">어플리케이션 유형에 따라 <a href="https://en.wikipedia.org/wiki/Microsoft_Visual_C++">MSVC</a> <a href="https://en.wikipedia.org/wiki/Linker_(computing)">링커</a>가 지정하는 프로그램 시작 함수</caption><colgroup><col style="width: 30%;"/><col style="width: 70%;"/></colgroup><thead><tr><th style="text-align: center;">시작 함수</th><th style="text-align: center;">기본 대상</th></tr></thead><tbody><tr><td style="text-align: center;"><code>mainCRTStartup</code><br/>(혹은 <code>wmainCRTStartup</code>)</td><td><a href="https://learn.microsoft.com/en-us/cpp/build/reference/subsystem-specify-subsystem">/SUBSYSTEM:CONSOLE</a>를 사용하는, 즉 <a href="https://en.wikipedia.org/wiki/Command-line_interface">CLI</a> 어플리케이션<ul><li><code>main</code> (혹은 <code>wmain</code>) 함수를 진입점으로 호출한다.</li></ul></td></tr><tr><td style="text-align: center;"><code>WinMainCRTStartup</code><br/>(혹은 <code>wWinMainCRTStartup</code>)</td><td><a href="https://learn.microsoft.com/en-us/cpp/build/reference/subsystem-specify-subsystem">/SUBSYSTEM:WINDOWS</a>를 사용하는, 즉 <a href="https://en.wikipedia.org/wiki/Graphical_user_interface">GUI</a> 어플리케이션<ul><li><code>__stdcall</code>로 정의된 <code>WinMain</code> (혹은 <code>wWinMain</code>) 함수를 진입점으로 호출한다.</li></ul></td></tr></tbody></table>
@@ -59,6 +60,7 @@
 
 * 프로세스 및 기본 스레드가 생성된 다음, 추가 [스레드](Thread.md)의 생성 및 종료 과정은 [*스레드의 생성 및 종료*](Thread.md#스레드의-생성-및-종료) 내용을 참고하도록 한다.
 
+## 프로세스 종료
 CRT 구조상 _tWinMain 혹은 _tmain 진입점 함수가 종료하여 반환한 상태 코드는 `nMainRetVal` 변수로 전달된다. 그리고 이를 인자로 전달받은 CRT의 [exit](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/exit-exit-exit) 함수는 생성된 [객체](Cpp.md#클래스) 소멸 및 할당된 [메모리](Memory.md) 해제를 진행한 다음, 마무리로 Win32의 [ExitProcess](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-exitprocess) 함수를 호출하여 프로세스를 종료한다. 이때 프로세스 커널 개체의 참조 카운트가 차감되어, 만일 카운트가 0에 달하면 개체는 OS에 의해 자동 소멸된다. 하지만 모종의 이유로 참조 카운트가 1 이상의 경우, 프로세스가 종료되었지만 커널 개체가 소멸될 수 없어 잔여하는 [좀비 프로세스](https://en.wikipedia.org/wiki/Zombie_process)가 되어버린다.
 
 ### 잘못된 프로세스 종료 방법
