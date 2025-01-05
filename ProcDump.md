@@ -1,18 +1,12 @@
 # ProcDump
-[ProcDump](https://aka.ms/procdump)는 [프로세스](ko.Process)의 [사용자 모드 덤프](Dump.md#사용자-모드-덤프)를 수집하는 [CLI](https://ko.wikipedia.org/wiki/명령_줄_인터페이스) 기반의 [Sysinternals](Sysinternals.md) 유틸리티 프로그램이다.
+[**ProcDump**](https://aka.ms/procdump)는 [프로세스](Process.md)의 [사용자 모드 덤프](Dump.md#사용자-모드-덤프)를 수집하는 [CLI](https://ko.wikipedia.org/wiki/명령_줄_인터페이스) 기반의 [Sysinternals](Sysinternals.md) 유틸리티 프로그램이다.
 
 ![ProcDump 유틸리티 프로그램](./images/sysinternals_procdump.png)
 
-실행 중인 어플리케이션으로부터 곧바로 덤프를 수집할 수 있으며, [충돌](https://ko.wikipedia.org/wiki/충돌_(컴퓨팅)#애플리케이션_충돌) 및 [응답 없음](https://ko.wikipedia.org/wiki/프리징_(컴퓨팅)), 그리고 [CPU](ko.Processor) 점유율이나 [메모리](Memory.md) 사용량 등의 [성능 카운터](https://learn.microsoft.com/en-us/windows/win32/perfctrs/performance-counters-portal)(performance counter) 수치를 기반으로 덤프를 수집하는 조건을 설정할 수 있다. 이는 서버 관리자나 프로그램 개발자가 비정상적인 [리소스](https://ko.wikipedia.org/wiki/시스템_리소스) 활동이 발생하였을 때 원인을 판단할 수 있는 자료가 된다. 덤프 수집이 완료되면 ProcDump는 종료된다.
-
-ProcDump의 덤프 수집에는 두 가지의 치명적인 단점이 있다:
+프로세스의 충돌 및 종료, 예외 처리, 또는 [프로세서](Processor.md)나 [메모리](Memory.md) 등의 [성능 카운터](Perfmon.md#성능-카운터)가 특정 수치에 도달하는 등의 조건부 덤프 수집도 가능하다. ProcDump의 덤프 수집에는 두 가지의 결함을 지닌다:
 
 1. 현재 실행 중이거나, 혹은 ProcDump의 `-x` 매개변수로 실행된 프로세스에만 적용된다.
 2. 동명의 프로세스가 여럿 존재하면 반드시 PID를 통해 덤프를 수집하고자 하는 프로세스를 지목해야 한다.
-
-> 이러한 단점들에 의해 실행이 되자마자 금방 종료되는 경우의 프로세스 덤프는 ProcDump로 수집이 불가능하며, 대안으로 [WER](WER.md) 그리고 [Debug Diagnostic Tool v2](https://www.microsoft.com/en-us/download/details.aspx?id=103453) 프로그램이 있다.
-
-본 문서는 분량상 ProcDump에 대한 모든 설정을 다루지 않으며, 중요하다고 판단되는 내용들을 위주로 설명한다. 자세한 내용과 예시는 [마이크로소프트 공식 문서](https://learn.microsoft.com/en-us/sysinternals/downloads/procdump)를 참고한다.
 
 ## 덤프 종류
 ProcDump는 아래의 덤프 종류를 생성할 수 있다.
