@@ -14,7 +14,15 @@ User Mini Dump File with Full Memory: Only application data is available
 
 다음 프로그램들은 사용자 모드 덤프를 수집하는 데 사용된다:
 
-<ul><li><dl><b>시스템 기본 프로그램</b><ul><li><a href="WER.md">Windows Error Reporting</a></li><li><a href="TaskMgr.md">작업 관리자</a></li></ul></dl></li><li><dl><b>설치 프로그램</b><ul><li><a href="WinDbg.md">WinDbg</a></li><li><s><a href="https://www.microsoft.com/en-us/download/details.aspx?id=103453">Debug Diagnostic Tool v2</a></s>&nbsp;<sub>(최신 <a href="Windows.md">윈도우 OS</a>에서는 부적합)</sub></li></ul></dl></li><li><dl><b><a href="Sysinternals.md">Sysinternals</a></b><ul><li><a href="ProcDump.md">ProcDump</a></li><li><a href="Procmon.md">프로세스 탐색기</a></li></ul></dl></li></ul>
+* **시스템 기본 프로그램**
+    * [Windows Error Reporting](WER.md)
+    * [작업 관리자](TaskMgr.md)
+* **설치 프로그램**
+    * [WinDbg](WinDbg.md)
+    * <s>Debug Diagnostic Tool v2</s>&nbsp;<sub>(최신 [윈도우 OS](Windows.md)에서는 부적합 판단)</sub>
+* **[Sysinternals](Sysinternals.md)**
+    * [ProcDump](ProcDump.md)
+    * [프로세스 탐색기](Procexp.md)
 
 ## 시간여행 디버깅
 **[시간여행 디버깅](https://aka.ms/ttd)**(time-travel debugging; TTD)은 [프로세스](Process.md)가 실행되는 일정 구간 동안에 수집된 덤프와 시간에 따른 추적 정보를 토대로 타임라인을 형성하여 원하는 시점으로 자유롭게 이동할 수 있는 디버거 세션이다. 아래는 TTD 추적 정보를 수집할 수 있는 프로그램을 나열한다.
