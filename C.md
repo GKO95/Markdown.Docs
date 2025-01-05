@@ -1,29 +1,44 @@
 # C
-[C 언어](https://learn.microsoft.com/en-us/cpp/c-language/)는 [유닉스](https://ko.wikipedia.org/wiki/유닉스)(UNIX) 컴퓨터를 위한 소프트웨어 제작을 위해 개발된 [B 언어](https://ko.wikipedia.org/wiki/B_(프로그래밍_언어))의 후속작이다. 현재 C 언어는 가장 널리 사용되고 있는 프로그래밍 언어로 [C++](Cpp.md), [C#](Csharp.md), [파이썬](Python.md), 자바 등 여러 프로그래밍 언어에 영향을 주었다. C 언어는 다른 프로그래밍 언어에 비해 매우 빠른 처리 속도와 훌륭한 호환성을 가지고 있어 [응용 프로그램](https://ko.wikipedia.org/wiki/응용_소프트웨어) 및 [펌웨어](https://ko.wikipedia.org/wiki/펌웨어) 개발에 여전히 활용되고 있다.
+> 본 문서는 1989년에 출판된 [ANSI C](https://en.wikipedia.org/wiki/ANSI_C) 표준을 기준으로 C 언어를 설명한다.
 
-C 언어에 필요한 컴파일러는 흔히 소스 코드 편집, 프로그램 빌드, 그리고 [디버깅](https://ko.wikipedia.org/wiki/디버그) 기능을 제공하는 [통합 개발 환경](https://ko.wikipedia.org/wiki/통합_개발_환경)(integrated development environment; IDE)을 설치하면 대체로 권장되는 [컴파일러](#컴파일러)가 함께 설치된다.
+[**C 프로그래밍 언어**](https://learn.microsoft.com/en-us/cpp/c-language/)는 [UNIX](https://en.wikipedia.org/wiki/Unix) 컴퓨터의 소프트웨어 제작을 위해 개발된 [B 언어](https://en.wikipedia.org/wiki/B_(programming_language))의 후속작이다. 현재 C 언어는 가장 널리 사용되고 있는 프로그래밍 언어로 [C++](Cpp.md), [C#](Csharp.md), [파이썬](Python.md), 자바 등 여러 프로그래밍 언어에 영향을 주었다. C 언어는 다른 프로그래밍 언어에 비해 매우 빠른 처리 속도와 훌륭한 호환성을 가지고 있어 [응용 프로그램](https://en.wikipedia.org/wiki/Application_software) 및 [펌웨어](https://en.wikipedia.org/wiki/Firmware) 개발에 여전히 활용되고 있다.
 
-> [비주얼 스튜디오 코드](https://code.visualstudio.com/)(Visual Studio Code; VS Code)는 엄연히 말해 "텍스트 편집기"이며, 아래의 IDE를 사용할 것을 권장한다.
+C 언어의 소스 코드 편집 외에도 프로그램 빌드 및 [디버깅](https://en.wikipedia.org/wiki/Debugging) 등의 기능을 제공하는 [통합 개발 환경](https://en.wikipedia.org/wiki/Integrated_development_environment)(일명 IDE) 일부를 소개한다.
 
-* [비주얼 스튜디오](https://visualstudio.microsoft.com/) <sub>(윈도우, macOS)</sub>
-* [엑스코드](https://developer.apple.com/xcode/) <sub>(macOS)</sub>
-* [CLion](https://www.jetbrains.com/clion/) <sub>(윈도우, macOS, 리눅스)</sub>
+* [비주얼 스튜디오](https://visualstudio.microsoft.com/) <sub>([Windows](Windows.md), [macOS](https://en.wikipedia.org/wiki/MacOS))</sub>
+* [엑스코드](https://developer.apple.com/xcode/) <sub>([macOS](https://en.wikipedia.org/wiki/MacOS))</sub>
+* [CLion](https://www.jetbrains.com/clion/) <sub>([Windows](Windows.md), [macOS](https://en.wikipedia.org/wiki/MacOS), [Linux](https://en.wikipedia.org/wiki/Linux))</sub>
+
+### C 표준 라이브러리
+**[C 표준 라이브러리](https://en.wikipedia.org/wiki/C_standard_library)**(C standard library)는 국제 표준의 ANSI C에서 명시한 [표준 라이브러리](https://en.wikipedia.org/wiki/Standard_library)이며, [매크로](#매크로-정의) 및 [자료형](#자료형) 정의, 그리고 ([문자열 조작](#문자열), [입출력 처리](#파일-입출력), [메모리 관리](#동적-할당) 등) 특정 작업을 위한 함수들을 제공한다. 다양한 [운영체제](https://en.wikipedia.org/wiki/Operating_system) 또는 C 컴파일러에서 표준 라이브러리를 제공하고, [헤더 파일](#헤더-파일)로 불러와 활용할 수 있다.
+
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C 표준 라이브러리의 헤더 파일</caption><colgroup><col style="width: 15%;"/><col style="width: 15%;"/><col style="70%;"/></colgroup><thead><tr><th style="text-align: center;">헤더 파일</th><th style="text-align: center;">기술</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td><code>&lt;stdlib.h&gt;</code></td><td>표준 라이브러리</td><td>범목적 기능을 제공한다: <a href="#문자열">문자열 조작</a>, <a href="#동적-할당">메모리 할당</a>, 프로그램 유틸리티 등</td></tr><tr><td><code>&lt;stdio.h&gt;</code></td><td><a href="#파일-입출력">기본 입출력</a></td><td>일반적인 입출력 함수를 제공한다.</td></tr><tr><td><code>&lt;time.h&gt;</code></td><td><a href="https://en.wikipedia.org/wiki/C_date_and_time_functions">날짜 및 시간</a></td><td>날짜 및 시간과 관련된 함수를 제공한다.</td></tr><tr><td><code>&lt;math.h&gt;</code></td><td><a href="https://en.wikipedia.org/wiki/C_mathematical_functions">수식</a></td><td>수학적 함수를 제공한다.</td></tr></tbody></table>
+
+<sup>_† 참고: [C Standard Library header files - cppreference.com](https://en.cppreference.com/w/c/header)_</sup>
+
+동 시간대 기획된 또 다른 표준 라이브러리인 [C POSIX 라이브러리](https://en.wikipedia.org/wiki/C_POSIX_library)는 [POSIX](https://en.wikipedia.org/wiki/POSIX) 시스템 대상의 규격이며, 본 문서는 ISO 표준 규격을 위주로 설명한다.
 
 ## 컴파일러
-C 언어는 [컴파일 언어](Programming.md#컴파일러)(compiled language)이다. C 컴파일러는 [국제 표준화 기구](https://www.iso.org/home.html)(International Organization for Standardization; ISO)에서 표준을 발표한 년도에 따라 버전이 나뉘어진다. 가장 널리 사용되고 있는 버전으로는 ANSI C(일명 C89)와 C99가 있다. 본 문서는 <span style="color: red;">*ANSI C 컴파일러 기준*</span>으로 C 언어를 설명한다.
+[**컴파일 언어**](Programming.md#컴파일러)에 해당하는 C 언어는 영문으로 작성된 코드를 [컴파일러](Programming.md#컴파일러)를 통해 컴퓨터가 직접 수행할 수 있는 기계어로 변환한 [이진 파일](https://en.wikipedia.org/wiki/Binary_file)을 생성한다. [국제 표준화 기구](https://www.iso.org/home.html)(ISO)의 표준에 따라 C 언어가 동작할 것을 규정하여, 서로 다른 컴파일러 간에도 [이식](https://en.wikipedia.org/wiki/Porting) 호환을 지원한다. 아래는 대표적인 C 언어 컴파일러들을 나열한다.
 
-컴파일러는 개발사와 목적에 따라 다양한 종류가 존재하지만, 전부 동일한 ISO 표준에 따라 동작하므로 일반적인 경우에는 어떤 컴파일러를 사용하던 무관하다. 아래는 대표적인 C 언어 컴파일러들을 나열한다.
+* [Microsoft Visual C++](https://en.wikipedia.org/wiki/Microsoft_Visual_C++) (일명 MSVC)
+    * [C Runtime Library](#c-런타임-라이브러리)
+* [GNU C Compiler](https://en.wikipedia.org/wiki/GNU_Compiler_Collection) (일명 GCC)
+* [Clang](https://en.wikipedia.org/wiki/Clang)
 
-* [Microsoft Visual C++](https://ko.wikipedia.org/wiki/마이크로소프트_비주얼_C%2B%2B) (일명 MSVC): 마이크로소프트
-* [GNU C Compiler](https://ko.wikipedia.org/wiki/GNU_C_컴파일러) (일명 GCC): GNU 프로젝트
-* [Clang](https://ko.wikipedia.org/wiki/클랭): LLVM Developer Group, 애플
+### C 런타임 라이브러리
+**[C 런타임 라이브러리](https://en.wikipedia.org/wiki/Microsoft_Windows_library_files#CRT)**(C runtime library), 일명 **CRT**는 [윈도우 OS](Windows.md) 환경에 특화된 [C 표준 라이브러리](#c-표준-라이브러리)와 관련 데이터 및 기능을 제공하는 [Microsoft Visual C++](#컴파일러)의 일환이다. ANSI C에서 [프로세스](Process.md)를 종료하는데 제시한 [exit](https://en.cppreference.com/w/c/program/exit) 함수의 경우, CRT는 윈도우 OS가 제공하는 [Win32 API](WinAPI.md)의 [ExitProcess](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-exitprocess) 함수를 활용한 [exit](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/exit-exit-exit) 함수를 소개한다.
+
+* *Universal C Runtime Library (UCRT)* : 비주얼 스튜디오 2015부터 소개된 C 표준 라이브러리<sup>(1)</sup>, POSIX 확장<sup>(2)</sup> 및 마이크로소프트 전용<sup>(3)</sup>의 [함수](#함수), [매크로](#매크로-정의), 그리고 [전역 변수](#변수)를 통합 제공하는 새롭게 소개된 CRT이다. [Windows 10](Windows.md)부터 UCRT는 시스템 컴포넌트로 추가되었으며, 비주얼 스튜디오를 설치하면 UCRT를 활용할 수 있도록 [Windows SDK](https://aka.ms/windowssdk)의 일부가 함께 설치된다.
+
+    * *VCRuntime Library* : (UCRT에서 제외된) 컴파일러에 특화된 구성들을 위주로 제공하는 별개의 CRT이다.
 
 ## 프로젝트
 다음은 비주얼 스튜디오 2022을 위주로 C 언어 프로젝트 구축에 대하여 설명한다.
 
 ![비주얼 스튜디오 C 언어 프로그래밍 화면](./images/visual_studio_c.png)
 
-엑스코드와 달리, 비주얼 스튜디오는 C 언어를 위한 별도 프로젝트 생성 옵션이 존재하지 않는다. 대안으로 [C++](Cpp.md)에서 빈 프로젝트(Empty Project)를 생성한 다음, 소스 코드를 .c 확장자로 직접 추가할 수 있다. MSVC 컴파일러는 C++를 주요 대상으로 설계된 컴파일러이지만, C 언어도 함께 지원하기 때문이다.
+비주얼 스튜디오는 C 언어를 위한 별도 프로젝트 생성 옵션이 존재하지 않는다. 대안으로 [C++](Cpp.md)에서 빈 프로젝트(Empty Project)를 생성한 다음, 소스 코드를 .c 확장자로 직접 추가할 수 있다. MSVC 컴파일러는 C++를 주요 대상으로 설계된 컴파일러이지만 C 언어도 함께 지원한다.
 
 아래는 C 언어 프로그램을 실행하는 가장 기초적인 코드와 함께 코드에 대한 설명이다.
 
@@ -31,10 +46,8 @@ C 언어는 [컴파일 언어](Programming.md#컴파일러)(compiled language)�
 * `int main() { ... }`: C 언어가 시작되는 함수, 일명 [진입점](#진입점)이다.
 * `return 0;`: 함수를 종료하며 0 값을 반환하는 데, 이는 `EXIT_SUCCESS`에 대응하며 성공적으로 프로그램이 종료되었음을 의미한다.
 
-### C 런타임 라이브러리
+### CRT 보안 강화 함수
 > *출처: [Security Features in the CRT | Microsoft Learn](https://learn.microsoft.com/en-us/cpp/c-runtime-library/security-features-in-the-crt)*
-
-C [런타임 라이브러리](https://ko.wikipedia.org/wiki/런타임_라이브러리), 일명 CRT는 C/C++ 프로그램이 [런타임 환경](https://ko.wikipedia.org/wiki/런타임_시스템)에서 동작하기 위해 필요한 함수들의 집합체이다. 대표적으로 메모리 할당 및 해제, 파일 입출력, 문자열 조작, 예외 처리 등이 해당한다. 매우 기초적이지만 필연적인 기능이므로, 일부 핵심 CRT(예를 들어 `malloc`, `printf`, `strcpy` 등)는 운영체제가 설치될 때 함께 내장되기도 한다. 런타임 라이브러리는 개발자나 서드 파티의 (정적 혹은 동적) [라이브러리](#라이브러리)와 전혀 다른 개념이므로 혼돈되어서는 안된다.
 
 비주얼 스튜디오 2015 이후부터 `_s` 접미사가 붙은 안정성이 강화된 새로운 CRT 함수들이 소개되며(예를 들어 [`printf_s`](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/printf-s-printf-s-l-wprintf-s-wprintf-s-l), [`strcpy_s`](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/strcpy-s-wcscpy-s-mbscpy-s) 등), 기존의 옛 CRT 함수들을 사용하려 할 시 [C4996](https://learn.microsoft.com/en-us/cpp/error-messages/compiler-warnings/compiler-warning-level-3-c4996) 컴파일러 경고가 나타난다. 하지만 옛 CRT의 활용이 권장되지 않을 뿐, 사라진 게 아니므로 경고를 무시하려면 아래와 같이 매크로를 소스 코드 또는 프로젝트에 정의한다.
 
@@ -1577,10 +1590,6 @@ void func(int x, float y) {
 * **`#include "header.h"`**
     
     현재 소스 파일이 위치한 경로를 위주로 헤더 파일을 찾는다. 만일 찾지 못하였을 시, `#include <header.h>`와 같이 지정된 경로에서 헤더 파일을 재탐색한다. 일반적으로 사용자 정의 헤더 파일에 사용된다.
-
-아래는 프로그래밍 언어에서 흔히 사용되는 데이터와 기능들은 바로 사용할 수 있도록 미리 컴파일된 [표준 라이브러리](https://ko.wikipedia.org/wiki/C_표준_라이브러리)를 불러오는 헤더 파일 일부를 나열한다.
-
-<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C 표준 라이브러리의 헤더 파일</caption><colgroup><col style="width: 18%;"/><col style="width: 12%;"/><col style="70%;"/></colgroup><thead><tr><th style="text-align: center;">유형</th><th style="text-align: center;">헤더 파일</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="#파일-입출력">표준 입출력</a></td><td style="text-align: center;"><code>stdio</code></td><td>파일 입출력 함수를 제공한다: <code>printf()</code>, <code>scanf()</code> 등</td></tr><tr><td style="text-align: center;">표준 라이브러리</td><td style="text-align: center;"><code>stdlib</code></td><td>메모리 할당, 예외처리를 포함한 범목적 기능들을 제공한다: <code>malloc()</code>, <code>free()</code> 등</td></tr><tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/C_날짜와_시간_함수">날짜 및 시간</a></td><td style="text-align: center;"><code>time</code></td><td>날짜 및 시간과 관련된 함수를 제공한다: <code>time()</code>, <code>clock()</code> 등</td></tr><tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/C_수식_함수">수식</a></td><td style="text-align: center;"><code>math</code></td><td>수학적 함수를 제공한다: <code>exp()</code>, <code>cos()</code> 등</td></tr></tbody></table>
 
 헤더 파일 개수나 선언된 데이터가 매우 많은 경우, 프로젝트 빌드 시간을 줄이기 위한 방안으로 헤더 파일을 중간체 형태로 미리 변환시킨 [컴파일된 헤더](https://en.wikipedia.org/wiki/Precompiled_header)(precompiled header)를 활용하기도 한다. 허나 컴파일된 헤더를 사용하면 컴파일 작업 자체에는 시간이 다소 걸리는 단점이 있어, 용량이 작은 프로젝트나 자주 수정을 해야 하는 헤더 파일이 있다면 오히려 비효율적이다. MSVC 컴파일러에서는 `pch.h` 혹은 `stdafx.h`가 해당한다.
 
