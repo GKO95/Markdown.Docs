@@ -11,6 +11,27 @@
 **[스레드 로컬 스토리지](https://en.wikipedia.org/wiki/Thread-local_storage)**(thread local storage; TLS)
 
 # 스레드 동기화
+**[스레드 동기화](https://en.wikipedia.org/wiki/Synchronization_(computer_science))**(thread synchronization)는 두 개 이상의 [스레드](#스레드)가 동시에 [공유 리소스](https://en.wikipedia.org/wiki/Shared_resource)를 접근하지 못하도록 보장하는 매커니즘을 일컫는다.
+
+### 원자적 연산
+**[원자적 연산](https://en.wikipedia.org/wiki/Linearizability)**(atomic operation)
+
+### 인터락 함수
+**[인터락 함수](https://learn.microsoft.com/en-us/windows/win32/sync/interlocked-variable-access)**(interlocked functions)
+
+### 스핀락
+**[스핀락](https://en.wikipedia.org/wiki/Spinlock)**(spinlock)
+
+### 임계 구역
+**[임계 구역](https://en.wikipedia.org/wiki/Critical_section)**(critical section)
+
+## 동기화 개체
+**[동기화 개체](https://learn.microsoft.com/en-us/windows/win32/sync/synchronization-objects)**(synchronization object)
+
+* [이벤트 개체](https://learn.microsoft.com/en-us/windows/win32/sync/event-objects)(event object)
+* [뮤텍스 개체](https://learn.microsoft.com/en-us/windows/win32/sync/mutex-objects)(mutex object)
+* [세마포어 개체](https://learn.microsoft.com/en-us/windows/win32/sync/semaphore-objects)(semaphore object)
+* [대기 가능한 타이머 개체](https://learn.microsoft.com/en-us/windows/win32/sync/waitable-timer-objects)(waitable timer object)
 
 # 스레드 생명주기
 본 장은 [C](C.md) 언어로 개발된 [윈도우](Windows.md) 어플리케이션을 위주로 설명한다. 즉, [Win32 API](WinAPI.md) 이외에 [C 런타임 라이브러리](C.md#c-런타임-라이브러리)(CRT)가 함께 언급되어 개념을 설명한다.
