@@ -46,7 +46,7 @@
 * *[Debug Tutorial Part 5: Handle Leaks - CodeProject](https://www.codeproject.com/articles/6988/debug-tutorial-part-5-handle-leaks)*
 * *[Reference counting - Wikipedia](https://en.wikipedia.org/wiki/Reference_counting)*
 
-# 프로세스의 생성 및 종료
+# 프로세스 생명주기
 본 장은 [C](C.md) 언어로 개발된 [윈도우](Windows.md) 어플리케이션을 위주로 설명한다. 즉, [Win32 API](WinAPI.md) 이외에 [C 런타임 라이브러리](C.md#c-런타임-라이브러리)(CRT)가 함께 언급되어 개념을 설명한다.
 
 ## 프로세스 생성
@@ -58,7 +58,7 @@
 
 그러므로 CreateProcess 함수는 이후 [기본 스레드](Thread.md#기본-스레드) 커널 개체를 생성하여 위에서 소개한 시작 함수를 본격적으로 실행한다. 이 과정에서 생성된 프로세스 및 기본 스레드 [핸들](#핸들)은 각각 [PROCESS_INFORMATION](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/ns-processthreadsapi-process_information) 구조체의 `hProcess`와 `hThread` 필드에 할당된다. 비록 방금 생성된 프로세스이지만 핸들의 참조 카운트가 두 개로 확인된 이유가 이러한 동작 원리에 의한 것이다.
 
-* 프로세스 및 기본 스레드가 생성된 다음, 추가 [스레드](Thread.md)의 생성 및 종료 과정은 [*스레드의 생성 및 종료*](Thread.md#스레드의-생성-및-종료) 내용을 참고하도록 한다.
+* 프로세스 및 기본 스레드가 생성된 다음, 추가 [스레드](Thread.md)의 생성 및 종료 과정은 [*스레드 생명주기*](Thread.md#스레드-생명주기) 내용을 참고하도록 한다.
 
 ## 프로세스 종료
 CRT 구조상 _tWinMain 혹은 _tmain 진입점 함수가 종료하여 반환한 상태 코드는 `nMainRetVal` 변수로 전달된다. 그리고 이를 인자로 전달받은 CRT의 [exit](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/exit-exit-exit) 함수는 생성된 [객체](Cpp.md#클래스) 소멸 및 할당된 [메모리](Memory.md) 해제를 진행한 다음, 마무리로 Win32의 [ExitProcess](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-exitprocess) 함수를 호출하여 프로세스를 종료한다. 이때 프로세스 커널 개체의 참조 카운트가 차감되어, 만일 카운트가 0에 달하면 개체는 OS에 의해 자동 소멸된다. 하지만 모종의 이유로 참조 카운트가 1 이상의 경우, 프로세스가 종료되었지만 커널 개체가 소멸될 수 없어 잔여하는 [좀비 프로세스](https://en.wikipedia.org/wiki/Zombie_process)가 되어버린다.
