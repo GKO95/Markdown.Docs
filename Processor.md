@@ -1,5 +1,5 @@
 # 프로세서
-**[프로세서](https://ko.wikipedia.org/wiki/중앙_처리_장치)**(processor), 또는 CPU로 알려진 하드웨어는 프로그램의 [기계어](https://ko.wikipedia.org/wiki/기계어)를 처리하는 [전자회로](https://ko.wikipedia.org/wiki/전자_회로)이다. 프로그램을 실행하기 위해 필요한 시스템의 다양한 작업들은 [명령어 집합](https://ko.wikipedia.org/wiki/명령어_집합)에 의해 정의되어 있으며, 대표적으로 [x86](https://ko.wikipedia.org/wiki/X86)과 [ARM](https://ko.wikipedia.org/wiki/ARM_아키텍처) 계열 명령어 집합 아키텍처가 존재한다. 프로세서에서 처리하는 명령어 집합이 무엇인지에 따라 [운영체제](https://ko.wikipedia.org/wiki/운영체제)의 아키텍처가 함께 결정된다.
+**[프로세서](https://ko.wikipedia.org/wiki/중앙_처리_장치)**(processor), 또는 CPU로 알려진 하드웨어는 프로그램의 [기계어](https://ko.wikipedia.org/wiki/기계어)를 처리하는 [전자회로](https://en.wikipedia.org/wiki/Electronic_circuit)이다. 프로그램을 실행하기 위해 필요한 시스템의 다양한 작업들은 [명령어 집합](https://en.wikipedia.org/wiki/Instruction_set_architecture)에 의해 정의되어 있으며, 대표적으로 [x86](https://en.wikipedia.org/wiki/X86)과 [ARM](https://en.wikipedia.org/wiki/ARM_architecture_family) 계열 명령어 집합 아키텍처가 존재한다. 프로세서에서 처리하는 명령어 집합이 무엇인지에 따라 [운영체제](https://en.wikipedia.org/wiki/Operating_system)의 아키텍처가 함께 결정된다.
 
 ### 명령어
 > *출처: [Intel® 64 and IA-32 Architectures Software Developer Manuals](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html)*
@@ -8,8 +8,8 @@
 
 ![MIPS32 Add Immediate 명령의 구조](https://upload.wikimedia.org/wikipedia/commons/2/2a/Mips32_addi.svg)
 
-1. [명령 코드](https://ko.wikipedia.org/wiki/명령_코드)(일명 opcode)는 덧셈, 복사, 이동 등의 프로세서가 수행할 연산 작업을 명시한다.
-1. [피연산자](https://ko.wikipedia.org/wiki/피연산자#컴퓨터_과학)는 opcode에 따라 아예 없거나 한 개 이상이 [레지스터](#레지스터), [리터럴](C.md#구문) 및 [상수](C.md#변수), 또는 [메모리 주소](C.md#포인터)로서 활용된다.
+1. [명령 코드](https://en.wikipedia.org/wiki/Opcode)(일명 opcode)는 덧셈, 복사, 이동 등의 프로세서가 수행할 연산 작업을 명시한다.
+1. [피연산자](https://en.wikipedia.org/wiki/Operand#Computer_science)는 opcode에 따라 아예 없거나 한 개 이상이 [레지스터](#레지스터), [리터럴](C.md#구문) 및 [상수](C.md#변수), 또는 [메모리 주소](C.md#포인터)로서 활용된다.
 
 본 문서에서는 명령어가 무엇인지 소개하며, 자세한 내용은 [어셈블리](Assembly.md#명령어) 문서에서 다룬다. 만일 어떠한 명령어가 있는지 확인하고 싶다면 위의 참고 링크로부터 다운로드한 소프트웨어 개발자 매뉴얼 문서에서 *Volume 2: Instruction Set Reference, A-Z*를 참고한다.
 
@@ -23,26 +23,29 @@
 * [레지스터](#레지스터)
 
 ### 제어 장치
-**[제어 장치](https://en.wikipedia.org/wiki/Control_unit)**(Control Unit; CU)는 프로세서의 연산 작업을 지휘하는 CPU의 구성요소이다. [명령어](#명령어)로부터 식별된 opcode는 [이진 디코더](https://ko.wikipedia.org/wiki/복호화#복호기_(디코더,_decoder))에 의해 해당 연산 작업을 수행하는데 필요한 타이밍 및 제어 신호로 변환된다. 결과적으로 CPU와 타 장치들 간 데이터 흐름을 지휘하기 위해 대부분의 컴퓨터 리소스를 관리한다.
+**[제어 장치](https://en.wikipedia.org/wiki/Control_unit)**(Control Unit; CU)는 프로세서의 연산 작업을 지휘하는 CPU의 구성요소이다. [명령어](#명령어)로부터 식별된 opcode는 [이진 디코더](https://en.wikipedia.org/wiki/Binary_decoder)에 의해 해당 연산 작업을 수행하는데 필요한 타이밍 및 제어 신호로 변환된다. 결과적으로 CPU와 타 장치들 간 데이터 흐름을 지휘하기 위해 대부분의 컴퓨터 리소스를 관리한다.
 
 ### 산술 논리 장치
-**[산술 논리 장치](https://ko.wikipedia.org/wiki/산술_논리_장치)**(Arithmetic Logic Unit; ALU)는 CPU의 구성요소 중 이진 정수의 [산술](https://ko.wikipedia.org/wiki/산술) 및 [비트 연산](https://ko.wikipedia.org/wiki/비트_연산)을 담당하면서도 실질적인 컴퓨터 연산처리에서 가장 핵심되는 장치이다.
+**[산술 논리 장치](https://en.wikipedia.org/wiki/Arithmetic_logic_unit)**(Arithmetic Logic Unit; ALU)는 CPU의 구성요소 중 이진 정수의 [산술](https://en.wikipedia.org/wiki/Arithmetic) 및 [비트 연산](https://en.wikipedia.org/wiki/Bitwise_operation)을 담당하면서도 실질적인 컴퓨터 연산처리에서 가장 핵심되는 장치이다.
 
-> [부동소수점](https://ko.wikipedia.org/wiki/부동소수점) 연산을 담당하는 [FPU](https://ko.wikipedia.org/wiki/부동소수점_장치)가 있으나, 주로 수학 계산을 위해 사용되며 초창기 CPU에는 내장되지 않은 장치이다.
+> [부동소수점](https://en.wikipedia.org/wiki/Floating-point_arithmetic) 연산을 담당하는 [FPU](https://en.wikipedia.org/wiki/Floating-point_unit)가 있으나, 주로 수학 계산을 위해 사용되며 초창기 CPU에는 내장되지 않은 장치이다.
 
 ![프로세서 ALU의 입출력 데이터를 표현한 다이어그램](https://upload.wikimedia.org/wikipedia/commons/0/0f/ALU_block.gif)
 
-ALU는 기본적으로 opcode와 피연산자를 입력받고, 해당 opcode 작업의 결과물을 출력한다. 만일 [상태 레지스터](https://ko.wikipedia.org/wiki/상태_레지스터)로부터 입력을 받으면 [캐리](https://en.wikipedia.org/wiki/Carry_flag), [오버플로우](https://en.wikipedia.org/wiki/Overflow_flag) 여부 등의 상태가 이전 작업에서 발생하였는지 확인할 수 있으며, 현재 작업에서 발생한 상태 정보는 다시 상태 레지스터로 출력된다.
+ALU는 기본적으로 opcode와 피연산자를 입력받고, 해당 opcode 작업의 결과물을 출력한다. 만일 [상태 레지스터](https://en.wikipedia.org/wiki/Status_register)로부터 입력을 받으면 [캐리](https://en.wikipedia.org/wiki/Carry_flag), [오버플로우](https://en.wikipedia.org/wiki/Overflow_flag) 여부 등의 상태가 이전 작업에서 발생하였는지 확인할 수 있으며, 현재 작업에서 발생한 상태 정보는 다시 상태 레지스터로 출력된다.
 
 ### 레지스터
-**[레지스터](https://ko.wikipedia.org/wiki/프로세서_레지스터)**(register)는 CPU에 내장되어 프로세서가 가장 빨리 접근할 수 있는 (8비트, 16비트, 32비트 등) [비트](https://ko.wikipedia.org/wiki/비트_(단위)) 단위의 소규모 임시 [저장공간](Storage.md)이다. 아래 그림은 [x86-64](https://ko.wikipedia.org/wiki/X86-64) 아키텍처의 프로세서에 탑재된 레지스터들이다.
+**[레지스터](https://ko.wikipedia.org/wiki/프로세서_레지스터)**(register)는 CPU에 내장되어 프로세서가 가장 빨리 접근할 수 있는 (8비트, 16비트, 32비트 등) [비트](https://en.wikipedia.org/wiki/Bit) 단위의 소규모 임시 [저장공간](Storage.md)이다. 아래 그림은 [x86-64](https://en.wikipedia.org/wiki/X86-64) 아키텍처의 프로세서에 탑재된 레지스터들이다.
 
 ![x86-64 아키텍처의 프로세서 레지스터](https://upload.wikimedia.org/wikipedia/commons/1/15/Table_of_x86_Registers_svg.svg)
 
 하드웨어 기능을 제어하는 [제어 레지스터](https://en.wikipedia.org/wiki/Control_register)(CR)나 작업 상태를 나타내는 [FLAGS 레지스터](https://en.wikipedia.org/wiki/FLAGS_register)(RFLASG)와 같이 일부는 특수한 목적을 지닌다. 한편, 다양한 용도로 활용될 수 있는 [범용 레지스터](Assembly.md#범용-레지스터)는 [어셈블리](Assembly.md) 언어를 참고하도록 한다.
 
+### CPU 캐시
+**[CPU 캐시](https://en.wikipedia.org/wiki/CPU_cache)**(CPU cache)는 [메모리](Memory.md)의 데이터를 접근하는데 소모되는 시간 및 에너지를 절약하기 위한 도입된 CPU상 [하드웨어 캐시](https://en.wikipedia.org/wiki/Cache_(computing)#HARDWARE)이다. 용량은 작지만 매우 빠른 메모리로 프로세서 코어와 근접하여 자주 사용되는 메모리 주소의 데이터 복사본을 저장한다. 대부분 CPU는 (L1, L2, 흔히 L3, 그리고 간혹 L4까지) [캐시 계층](https://en.wikipedia.org/wiki/Cache_hierarchy)을 가진다.
+
 ## 프로세서 규격
-아래 [작업 관리자](https://ko.wikipedia.org/wiki/작업_관리자_(윈도우))에 나타난 CPU 성능 정보를 예시로 시스템에 영향을 미치는 프로세서의 규격에 대해 설명한다.
+아래 [작업 관리자](TaskMgr.md)에 나타난 CPU 성능 정보를 예시로 시스템에 영향을 미치는 프로세서의 규격에 대해 설명한다.
 
 ![작업 관리자에서 표시된 CPU 성능 정보 예시](./images/processor_taskmgr.png)
 
@@ -51,10 +54,10 @@ ALU는 기본적으로 opcode와 피연산자를 입력받고, 해당 opcode 작
 * [프로세서 코어](#프로세서-코어)
 
 ### 프로세서 시간
-**[프로세서 시간](https://en.wikipedia.org/wiki/CPU_time)**(processor time), 일명 **프로세서 점유**(processor utilization)는 [프로세스](Process.md) (또는 [스레드](Thread.md))로부터 [이미지](https://ko.wikipedia.org/wiki/실행_파일) 코드를 연산하고 처리하는 데 할애한 시간이다. 프로세스의 프로세서 시간은 [스케줄링](#스케줄링)이나 입출력 요청 등에 의해 대기 혹은 준비 상태에 진입하여 처리되지 않는 동안 반영되지 않는다. 일정한 간격으로 샘플링된 시간 동안 스레드가 얼마나 오래 처리되었는지를 토대로 프로세서 점유율(%)이 계산된다.
+**[프로세서 시간](https://en.wikipedia.org/wiki/CPU_time)**(processor time), 일명 **프로세서 점유**(processor utilization)는 [프로세스](Process.md) (또는 [스레드](Thread.md))로부터 [이미지](https://en.wikipedia.org/wiki/Executable) 코드를 연산하고 처리하는 데 할애한 시간이다. 프로세스의 프로세서 시간은 [스케줄링](#스케줄링)이나 입출력 요청 등에 의해 대기 혹은 준비 상태에 진입하여 처리되지 않는 동안 반영되지 않는다. 일정한 간격으로 샘플링된 시간 동안 스레드가 얼마나 오래 처리되었는지를 토대로 프로세서 점유율(%)이 계산된다.
 
 ### 프로세서 클럭
-**[클럭 속도](https://ko.wikipedia.org/wiki/클럭_속도)**(clock rate 또는 clock speed), 일명 **클럭 주파수**(clock frequency)는 [메인보드](https://ko.wikipedia.org/wiki/메인보드)에 위치한 [클럭 발생기](https://en.wikipedia.org/wiki/Clock_generator)로부터 프로세서가 작업을 수행하는데 기준이 되는 [클럭 신호](https://ko.wikipedia.org/wiki/클럭_신호)가 얼마나 빈번히 생성될 수 있는지 나타내는 [헤르츠](https://ko.wikipedia.org/wiki/헤르츠)(Hz) 단위의 수치이다. 프로세서의 연산은 클럭 신호에 동기화되어, 주파수가 높을수록 동일한 시간동안 더 많은 작업을 수행할 수 있다. 그러나 클럭 속도는 프로세서가 초당 작업한 개수를 의미하는 게 절대 아니다.
+**[클럭 속도](https://en.wikipedia.org/wiki/Clock_rate)**(clock rate 또는 clock speed), 일명 **클럭 주파수**(clock frequency)는 [메인보드](https://en.wikipedia.org/wiki/Motherboard)에 위치한 [클럭 발생기](https://en.wikipedia.org/wiki/Clock_generator)로부터 프로세서가 작업을 수행하는데 기준이 되는 [클럭 신호](https://en.wikipedia.org/wiki/Clock_signal)가 얼마나 빈번히 생성될 수 있는지 나타내는 [헤르츠](https://en.wikipedia.org/wiki/Hertz)(Hz) 단위의 수치이다. 프로세서의 연산은 클럭 신호에 동기화되어, 주파수가 높을수록 동일한 시간동안 더 많은 작업을 수행할 수 있다. 그러나 클럭 속도는 프로세서가 초당 작업한 개수를 의미하는 게 절대 아니다.
 
 > 다시 말해, 위의 작업 관리자에서 클럭 속도가 4.24 GHz로 측정되었지만 프로세서가 초당 42.4억 개의 작업을 수행한 걸 의미하는 게 아니다. 이는 한 [명령어](#명령어)을 수행하는 데 opcode에 따라 필요한 클럭 주기가 다양하기 때문이다.
 
@@ -64,10 +67,10 @@ ALU는 기본적으로 opcode와 피연산자를 입력받고, 해당 opcode 작
 
     * `Processor Information\% Processor Performance`: 프로세서의 성능을 가리키는 속도가 기본 속도에 비해 비율을 계산한 것으로, 100% 보다 낮거나 높은지 여부에 따라 동적 주파수 스케일링 여부를 파악할 수 있다. 위의 예시에서 % Processor Performance는 대략 114.59%이다.
 
-    * `Processor Information\% Processor Utility`: 프로세서 시간이 아닌 클럭 주파수를 함께 고려하여 성능에 따른 작업 처리 능률을 나타내는 수치이다. 윈도우 8부터 [작업 관리자](https://en.wikipedia.org/wiki/Task_Manager_(Windows))의 프로세스 및 성능 탭의 CPU 사용량은 해당 카운터가 반영된다.<sup>[<a href="https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/cpu-usage-exceeds-100">출처</a>]</sup>
+    * `Processor Information\% Processor Utility`: 프로세서 시간이 아닌 클럭 주파수를 함께 고려하여 성능에 따른 작업 처리 능률을 나타내는 수치이다. 윈도우 8부터 [작업 관리자](TaskMgr.md)의 프로세스 및 성능 탭의 CPU 사용량은 해당 카운터가 반영된다.<sup>[<a href="https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/cpu-usage-exceeds-100">출처</a>]</sup>
 
 ### 프로세서 코어
-**프로세서 코어**(processor core)는 CPU에서 연산을 담당하는 물리적인 [전자회로](https://ko.wikipedia.org/wiki/집적_회로)를 가리키며, 하나의 칩에 두 개 이상의 프로세서 코어를 가진 CPU를 [멀티 코어](https://ko.wikipedia.org/wiki/멀티_코어)라고 지칭한다. 프로세서 성능을 향상시키는데 [클럭 속도](#프로세서-클럭)의 기술적 제약을 극복하기 위해 하드웨어 제조사는 2005년에 처음으로 시장에 멀티 코어 CPU를 소개하였다. 멀티 코어 CPU는 여러 [스레드](Thread.md)를 동시에 처리할 수 있는 장점을 지닌다.
+**프로세서 코어**(processor core)는 CPU에서 연산을 담당하는 물리적인 [전자회로](https://en.wikipedia.org/wiki/Integrated_circuit)를 가리키며, 하나의 칩에 두 개 이상의 프로세서 코어를 가진 CPU를 [멀티 코어](https://en.wikipedia.org/wiki/Multi-core_processor)라고 지칭한다. 프로세서 성능을 향상시키는데 [클럭 속도](#프로세서-클럭)의 기술적 제약을 극복하기 위해 하드웨어 제조사는 2005년에 처음으로 시장에 멀티 코어 CPU를 소개하였다. 멀티 코어 CPU는 여러 [스레드](Thread.md)를 동시에 처리할 수 있는 장점을 지닌다.
 
 > 위의 작업 관리자는 시스템의 프로세서가 헥사코어, 즉 여섯 개의 코어를 가진 [AMD](https://www.amd.com) [Ryzen 5 5600X](https://www.amd.com/en/products/cpu/amd-ryzen-5-5600x)라고 표시하였다. 여기서 12개의 그래프 항목은 SMT에 의한 논리 프로세서 정보를 보여주는 것으로 아래 내용을 참고한다.
 
