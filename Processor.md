@@ -42,7 +42,9 @@ ALU는 기본적으로 opcode와 피연산자를 입력받고, 해당 opcode 작
 하드웨어 기능을 제어하는 [제어 레지스터](https://en.wikipedia.org/wiki/Control_register)(CR)나 작업 상태를 나타내는 [FLAGS 레지스터](https://en.wikipedia.org/wiki/FLAGS_register)(RFLASG)와 같이 일부는 특수한 목적을 지닌다. 한편, 다양한 용도로 활용될 수 있는 [범용 레지스터](Assembly.md#범용-레지스터)는 [어셈블리](Assembly.md) 언어를 참고하도록 한다.
 
 ### CPU 캐시
-**[CPU 캐시](https://en.wikipedia.org/wiki/CPU_cache)**(CPU cache)는 [메모리](Memory.md)의 데이터를 접근하는데 소모되는 시간 및 에너지를 절약하기 위한 도입된 CPU상 [하드웨어 캐시](https://en.wikipedia.org/wiki/Cache_(computing)#HARDWARE)이다. 용량은 작지만 매우 빠른 메모리로 프로세서 코어와 근접하여 자주 사용되는 메모리 주소의 데이터 복사본을 저장한다. 대부분 CPU는 (L1, L2, 흔히 L3, 그리고 간혹 L4까지) [캐시 계층](https://en.wikipedia.org/wiki/Cache_hierarchy)을 가진다.
+**[CPU 캐시](https://en.wikipedia.org/wiki/CPU_cache)**(CPU cache)는 [메모리](Memory.md)의 데이터를 접근하는데 소모되는 시간 및 에너지를 절약하기 위한 도입된 CPU상 [하드웨어 캐시](https://en.wikipedia.org/wiki/Cache_(computing)#HARDWARE)이다. 용량은 작지만 매우 빠른 메모리로 프로세서 코어와 근접하여 자주 사용되는 메모리 주소의 데이터 복사본을 저장한다. 단, 메모리에서 CPU로 캐싱되는 데이터는 (필요한 만큼의 크기가 아닌) "[캐시 라인](https://en.wikipedia.org/wiki/CPU_cache#Cache_entries)"이란 고정된 크기만큼 복사된다.
+
+* 대부분 CPU는 L1 및 L2, 그리고 L3 이상의 [캐시 계층](https://en.wikipedia.org/wiki/Cache_hierarchy)을 가진다.
 
 ## 프로세서 규격
 아래 [작업 관리자](TaskMgr.md)에 나타난 CPU 성능 정보를 예시로 시스템에 영향을 미치는 프로세서의 규격에 대해 설명한다.
