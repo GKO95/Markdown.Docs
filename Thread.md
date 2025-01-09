@@ -11,22 +11,22 @@
 **[스레드 로컬 스토리지](https://en.wikipedia.org/wiki/Thread-local_storage)**(thread local storage; TLS)
 
 # 스레드 동기화
-**[스레드 동기화](https://en.wikipedia.org/wiki/Synchronization_(computer_science))**(thread synchronization)는 두 개 이상의 [스레드](#스레드)가 동시에 [공유 리소스](https://en.wikipedia.org/wiki/Shared_resource)를 접근하지 못하도록 보장하는 매커니즘을 일컫는다. 두 개 이상의 스레드 간 동기화가 적절히 조치되지 않을 시, 비록 개별 스레드가 정상적으로 수행하였을지언정 결과적으로 의도치 않은 동작을 초래할 수 있다.
+**[스레드 동기화](https://en.wikipedia.org/wiki/Synchronization_(computer_science))**(thread synchronization)는 두 개 이상의 [스레드](#스레드)가 동시에 [공유 리소스](https://en.wikipedia.org/wiki/Shared_resource)를 접근하지 못하도록 보장하는 매커니즘을 일컫는다. 다양한 방법으로 구현할 수 있으며, 본 장은 이들을 특징을 소개하는 위주로 설명한다. 스레드 간 동기화가 적절히 조치되지 않을 시, 비록 개별 스레드의 코드가 정상적으로 수행하였을지언정 결과적으로 의도치 않은 동작을 초래할 수 있다.
 
-만일 스레드가 아래의 코드를 수행할 시, 다음은 동기화의 부재로 발생할 수 있는 사례를 소개한다.
+다음은 동기화의 부재로 발생할 수 있는 사례를 소개하며, 스레드는 아래의 코드를 수행한다고 가정한다.
 
 ```nasm
 ADD [counter], 1
 ```
 
-여기서 `counter`에 5라는 정수가 할당되었을 경우, 가산 작업을 두 번 시행하기 (즉, 정수 7로 만들기) 위해 스레드 A와 B를 동시에 실행하였다고 가정한다:
+만일 `counter`에 정수 5가 할당되었을 경우, 이를 7로 값을 증가하기 위해 스레드 A와 B를 동시에 실행할 때 일어날 수 있는 작업을 순차적으로 보여준다:
 
 1. 스레드 A가 `counter`로부터 정수 5 값을 읽는다.
 1. 스레드 B가 `counter`로부터 정수 5 값을 읽는다.
 1. 스레드 A가 읽은 값에 1을 더한 정수 6을 `counter`에 반환한다.
 1. 스레드 B가 읽은 값에 1을 더한 정수 6을 `counter`에 반환한다.
 
-스레드 동기화는 다양한 방법으로 구현할 수 있으며, 본 장은 이들을 특징을 소개하는 위주로 설명한다.
+결국 (정수 7이 아닌) 정수 6이 저장되어 의도한 바와 다른 결과가 나타났다.
 
 ## 임계 구역
 **[임계 구역](https://en.wikipedia.org/wiki/Critical_section)**(critical section)
