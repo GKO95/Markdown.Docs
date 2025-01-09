@@ -13,6 +13,13 @@
 
 본 문서에서는 명령어가 무엇인지 소개하며, 자세한 내용은 [어셈블리](Assembly.md#명령어) 문서에서 다룬다. 만일 어떠한 명령어가 있는지 확인하고 싶다면 위의 참고 링크로부터 다운로드한 소프트웨어 개발자 매뉴얼 문서에서 *Volume 2: Instruction Set Reference, A-Z*를 참고한다.
 
+### 원자적 연산
+**[원자적 연산](https://en.wikipedia.org/wiki/Linearizability)**(atomic operation)이란, 타 스레드의 간섭이 불가하고 더 이상 쪼갤 수 없는 단위의 연산을 가리킨다. 간단한 CPU [명령어](#명령어)라도 다수의 기초적인 연산 작업이 동원되며, 그 예시로 [ADD](https://www.felixcloutier.com/x86/add) 명령어를 수행하기 위해 필요한 원자적 연산들을 단계대로 소개한다.<sup>[[참고](https://en.wikipedia.org/wiki/Instruction_cycle#Summary_of_stages[3])]</sup>
+
+<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">ADD 명령어의 연산 수행 단계</caption><colgroup><col style="width: 10%;"/><col style="width: 10%;"/><col style="width: 80%;"/></colgroup><thead><tr><th style="text-align: center;">순서</th><th style="text-align: center;">단계</th><th style="text-align: center;">프로세서 작업</th></tr></thead><tbody><tr><td style="text-align: center;">1</td><td><a href="https://en.wikipedia.org/wiki/Instruction_cycle#Fetch_stage">Fetch</a></td><td>메모리로부터 명령어를 확보한다.</td></tr><tr><td style="text-align: center;">2</td><td><a href="https://en.wikipedia.org/wiki/Instruction_cycle#Decode_stage[6]">Decode</a></td><td>확보한 명령어를 해독하여 메모리 주소에 값을 더하는 명령인 걸 파악한다.</td></tr><tr><td style="text-align: center;">3</td><td>Read</td><td>메모리 주소의 현재 값을 읽는다.</td></tr><tr><td style="text-align: center;">4</td><td><a href="https://en.wikipedia.org/wiki/Instruction_cycle#Execute_stage">Execute</a></td><td>덧셈 연산을 수행한다.</td></tr><tr><td style="text-align: center;">5</td><td>Write</td><td>덧셈 연산의 결과값을 메모리 주소에 쓴다.</td></tr></tbody></table>
+
+일부 명령어들은 (x86의 경우) [LOCK](https://www.felixcloutier.com/x86/lock) 접두사와 함께 사용되어 원자적으로 연산될 수 있으며, [윈도우 OS](Windows.md)에서는 이를 [인터락 함수](Thread.md#인터락-함수)로서 제공한다.
+
 ## 프로세서 구조
 다음은 단일 코어 프로세서의 구조를 다이어그램으로 보여주며, 황색 바탕의 "Processor"는 실질적인 연산을 담당하는 물리적인 [프로세서 코어](#프로세서-코어)를 의미한다. 그리고 흑색과 적색 화살표는 각각 데이터와 제어 흐름 방향을 가리킨다.
 
