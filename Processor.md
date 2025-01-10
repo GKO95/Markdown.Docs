@@ -108,7 +108,15 @@ ALU는 기본적으로 opcode와 피연산자를 입력받고, 해당 opcode 작
 
 [윈도우 NT](Windows.md)는 만일을 대비해 x86 계열 프로세서가 제공하는 네 개의 계층 중에서 오로지 Ring 0 그리고 Ring 3만 사용한다:
 
-<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">윈도우 NT에서 사용하는 x86 프로세서 모드</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/보호_링#수퍼바이저_모드">커널 모드</a> (일명 <a href="Kernel.md#커널">슈퍼바이저</a> 모드)</th><th style="text-align: center;">사용자 모드</th></tr></thead><tbody><tr style="text-align: center;"><td>Ring 0</td><td>Ring 3</td></tr><tr><td>시스템에 민감한 영향을 줄 수 있는 입출력 동작이나 메모리 접근에 아무런 제약을 받지 않고 아키텍처의 모든 작업을 수행할 수 있다.</td><td>하드웨어 상호작용 및 커널 구성요소 접근에 대한 제한이 존재한다. 커널 함수가 필요하면 <a href="WinAPI.md#시스템-서비스">시스템 호출</a>을 통해 CPU를 커널 모드로 전환해야 한다.</td></tr><tr style="text-align: center;"><td><a href="Process.md#가상-주소-공간">가상 주소 공간</a>: 커널 공간</td><td><a href="Process.md#가상-주소-공간">가상 주소 공간</a>: 사용자 공간</td></tr><tr style="text-align: center;"><td><a href="Kernel.md#커널">커널</a> 및 <a href="Driver.md">드라이버</a></td><td>응용 프로그램의 <a href="Process.md">프로세스</a></td></tr></tbody></table>
+<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">윈도우 NT에서 사용하는 x86 프로세서 모드</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">
+
+#### [커널 모드](https://en.wikipedia.org/wiki/Protection_ring#Supervisor_mode)
+
+</th><th style="text-align: center;">
+
+#### 사용자 모드
+
+</th></tr></thead><tbody><tr style="text-align: center;"><td>Ring 0</td><td>Ring 3</td></tr><tr><td>시스템에 민감한 영향을 줄 수 있는 입출력 동작이나 메모리 접근에 아무런 제약을 받지 않고 아키텍처의 모든 작업을 수행할 수 있다.</td><td>하드웨어 상호작용 및 커널 구성요소 접근에 대한 제한이 존재한다. 커널 함수가 필요하면 <a href="WinAPI.md#시스템-서비스">시스템 호출</a>을 통해 CPU를 커널 모드로 전환해야 한다.</td></tr><tr style="text-align: center;"><td><a href="Process.md#가상-주소-공간">가상 주소 공간</a>: 커널 공간</td><td><a href="Process.md#가상-주소-공간">가상 주소 공간</a>: 사용자 공간</td></tr><tr style="text-align: center;"><td><a href="Kernel.md#커널">커널</a> 및 <a href="Driver.md">드라이버</a></td><td>응용 프로그램의 <a href="Process.md">프로세스</a></td></tr></tbody></table>
 
 커널 모드의 프로그램 오동작은 시스템 전체에 충돌을 일으켜 [블루스크린](BSOD.md)을 야기하는 원인이기 때문에 매우 신중하게 개발되어야 한다.
 
