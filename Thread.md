@@ -28,11 +28,23 @@ ADD [counter], 1
 
 결국 (정수 7이 아닌) 정수 6이 저장되어 의도한 바와 다른 결과가 나타났다.
 
+[윈도우 OS](Windows.md)의 동기화는 코드 성능을 향상시키기 위해 [FIFO](https://en.wikipedia.org/wiki/FIFO_(computing_and_electronics)) 순서로 이루어지지 않는다. 하지만 마이크로소프트는 동기화에 적용된 알고리즘을 공개하지 않으며, 이는 차후 알고리즘이 언제든지 변경될 수 있는 소지가 있기 때문이다. 프로그램이 동기화 알고리즘에 매우 의존하는 코드로 개발되었을 시 발생할 수 있는 불상사를 방지하는 조치이기도 하다.
+
 ## 임계 구역
-**[임계 구역](https://en.wikipedia.org/wiki/Critical_section)**(critical section)
+**[임계 구역](https://en.wikipedia.org/wiki/Critical_section)**(critical section)은 일부 코드 영역을 오로지 한 스레드씩만 [원자적](Processor.md#원자적-연산)으로 진입할 수 있도록 허용한다. [윈도우 OS](Windows.md)의 경우, [CRITICAL_SECTION](https://learn.microsoft.com/en-us/windows/win32/sync/critical-section-objects) 개체의 소유권 획득 여부를 기준으로 임계 구역에 진입한다. 단, 이는 동일한 프로세스의 스레드 간 동기화만으로 활용 범위가 제한된다.
+
+> 만일 단순한 연산에 동기화가 필요할 경우, 임계 구역을 지정하기 보다 [인터락 함수](#인터락-함수)를 활용하는 걸 권장한다.
+
+다음은 임계 구역 개체와 관련된 [Win32 API](WinAPI.md)를 일부 소개한다.
+
+* [InitializeCriticalSection](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-initializecriticalsection): 임계 구역 개체를 초기화한다.
+* [EnterCriticalSection](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-entercriticalsection): 임계 구역 개체의 소유권을 대기 및 확보한다.
+* [LeaveCriticalSection](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-leavecriticalsection): 임계 구역 개체의 소유권을 포기한다.
 
 ### 인터락 함수
-**[인터락 함수](https://learn.microsoft.com/en-us/windows/win32/sync/interlocked-variable-access)**(interlocked functions)
+**[인터락 함수](https://learn.microsoft.com/en-us/windows/win32/sync/interlocked-variable-access)**(interlocked functions)은 [Win32 API](WinAPI.md) 중에서 간단한 연산을 [원자적](Processor.md#원자적-연산)으로 실행하는 함수들을 일컫는다. 만일 x86 아키텍처일 경우, 이들은 대부분 [LOCK](https://www.felixcloutier.com/x86/lock) 접두사와 함께 실행될 수 있는 명령어로 구성되며, 아래는 일부 인터락 함수들을 소개한다.
+
+<table style="width: 90%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">인터락 함수의 x86 명령어 조합 및 설명</caption><colgroup><col style="width: 20%;"/><col style="width: 15%;"/><col style="width: 65%;"/></colgroup><thead><tr><th style="text-align: center;">인터락 함수</th><th style="text-align: center;">명령어</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td><a href="https://learn.microsoft.com/en-us/windows/win32/api/winnt/nf-winnt-interlockedexchange">InterLockedExchange</a></td><td><a href="https://www.felixcloutier.com/x86/xchg"><code>XCHG</code></a></td><td>32비트 변수를 지정한 값으로 변경한다.</td></tr><tr><td><a href="https://learn.microsoft.com/en-us/windows/win32/api/winnt/nf-winnt-interlockedexchangeadd">InterLockedCompareExchange</a></td><td><code>LOCK</code>+<a href="https://www.felixcloutier.com/x86/cmpxchg"><code>CMPXCHG</code></a></td><td>두 32비트 값을 비교한 결과에 따라 다른 32비트 값으로 변경 여부를 결정한다.</td></tr><tr><td><a href="https://learn.microsoft.com/en-us/windows/win32/api/winnt/nf-winnt-interlockedexchangeadd">InterLockedExchangeAdd</a></td><td><code>LOCK</code>+<a href="https://www.felixcloutier.com/x86/add"><code>ADD</code></a></td><td>두 32비트 값의 덧셈을 연산한다.</td></tr><tr><td><a href="https://learn.microsoft.com/en-us/windows/win32/api/winnt/nf-winnt-interlockedexchange">InterLockedIncrement</a></td><td><code>LOCK</code>+<a href="https://www.felixcloutier.com/x86/inc"><code>INC</code></a></td><td>32비트 변수의 값을 1만큼 증가시킨다.</td></tr><tr><td><a href="https://learn.microsoft.com/en-us/windows/win32/api/winnt/nf-winnt-interlockedxor">InterLockedXor</a></td><td><code>LOCK</code>+<a href="https://www.felixcloutier.com/x86/xor"><code>XOR</code></a></td><td>두 32비트 값의 <a href="https://en.wikipedia.org/wiki/Exclusive_or">베타적 논리합</a>을 연산한다.</td></tr></tbody></table>
 
 ## 스핀락
 **[스핀락](https://en.wikipedia.org/wiki/Spinlock)**(spinlock)
