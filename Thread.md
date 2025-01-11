@@ -49,6 +49,9 @@ ADD [counter], 1
 
 <table style="width: 90%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">인터락 함수의 x86 명령어 조합 및 설명</caption><colgroup><col style="width: 20%;"/><col style="width: 15%;"/><col style="width: 65%;"/></colgroup><thead><tr><th style="text-align: center;">인터락 함수</th><th style="text-align: center;">명령어</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td><a href="https://learn.microsoft.com/en-us/windows/win32/api/winnt/nf-winnt-interlockedexchange">InterLockedExchange</a></td><td><a href="https://www.felixcloutier.com/x86/xchg"><code>XCHG</code></a></td><td>32비트 변수를 지정한 값으로 변경한다.</td></tr><tr><td><a href="https://learn.microsoft.com/en-us/windows/win32/api/winnt/nf-winnt-interlockedexchangeadd">InterLockedCompareExchange</a></td><td><code>LOCK</code>+<a href="https://www.felixcloutier.com/x86/cmpxchg"><code>CMPXCHG</code></a></td><td>두 32비트 값을 비교한 결과에 따라 다른 32비트 값으로 변경 여부를 결정한다.</td></tr><tr><td><a href="https://learn.microsoft.com/en-us/windows/win32/api/winnt/nf-winnt-interlockedexchangeadd">InterLockedExchangeAdd</a></td><td><code>LOCK</code>+<a href="https://www.felixcloutier.com/x86/add"><code>ADD</code></a></td><td>두 32비트 값의 덧셈을 연산한다.</td></tr><tr><td><a href="https://learn.microsoft.com/en-us/windows/win32/api/winnt/nf-winnt-interlockedexchange">InterLockedIncrement</a></td><td><code>LOCK</code>+<a href="https://www.felixcloutier.com/x86/inc"><code>INC</code></a></td><td>32비트 변수의 값을 1만큼 증가시킨다.</td></tr><tr><td><a href="https://learn.microsoft.com/en-us/windows/win32/api/winnt/nf-winnt-interlockedxor">InterLockedXor</a></td><td><code>LOCK</code>+<a href="https://www.felixcloutier.com/x86/xor"><code>XOR</code></a></td><td>두 32비트 값의 <a href="https://en.wikipedia.org/wiki/Exclusive_or">베타적 논리합</a>을 연산한다.</td></tr></tbody></table>
 
+### 조건 변수
+**[조건 변수](https://learn.microsoft.com/en-us/windows/win32/sync/condition-variables)**(conditional variable)는 특정 조건을 충족할 때까지 스레드를 대기시킨다. 스레드가 소유한 [사용자 모드](Processor.md#사용자-모드) 동기화 개체(즉, [임계 구역](#임계-구역) 혹은 [SRW 락](#슬림-읽기쓰기-락))를 잠시 놓아두게 하고 조건이 발생할 때까지 대기시킨다. 재개한 스레드는 놓았던 임계 구역 (혹은 SRW 락)의 소유권을 다시 획득하고 공유 리소스를 접근 및 작업을 수행한다. CONDITION_VARIABLE [구조체](C.md#구조체)를 활용한 [원자적](Processor.md#원자적-연산)인 동기화 매커니즘이며 [사용자 모드](Processor.md#사용자-모드)의 개체이기 때문에 [프로세스](Process.md) 간 공유될 수 없다. 
+
 ## 스핀락
 **[스핀락](https://en.wikipedia.org/wiki/Spinlock)**(spinlock)은 스레드가 [락](https://en.wikipedia.org/wiki/Lock_(computer_science))을 소유할 때까지 반복적으로 획득 가능 여부를 확인하는 [루프](C.md#while-반복문), 즉 "스핀"을 활용하는 동기화 매커니즘이다. 락을 소유한 스레드는 루프로부터 탈출하여 공유 리소스에 접근하게 된다. [원자적](Processor.md#원자적-연산)이지 않고 [프로세서 시간](Processor.md#프로세서-시간)을 허비하기 때문에 [단일 코어](Processor.md#프로세서-코어) 시스템에서는 가급적 기피되어야 한다. 반면 다중 코어 시스템의 경우, 한 CPU 코어가 스핀을 돌더라도 나머지 여유 CPU 코어가 다른 작업을 수행하여 오히려 유용할 수 있다.
 
@@ -70,17 +73,23 @@ InterLockedExchange(&g_fResourceInUse, FALSE);
 * 비록 [InterLockedExchage](https://learn.microsoft.com/en-us/windows/win32/api/winnt/nf-winnt-interlockedexchange)란 [인터락 함수](#인터락-함수)가 동원되었지만, 이는 스핀락 자체가 원자적이라는 걸 의미하지 않는다.
 
 ## 슬림 읽기/쓰기 락
-**[슬림 읽기/쓰기 락](https://learn.microsoft.com/en-us/windows/win32/sync/slim-reader-writer--srw--locks)**(slim reader/writer lock), 간단히 **SRW 락**은 공유 리소스의 접근 사유를 *읽기* 및 *쓰기*로 구분한다. SRWLOCK [구조체](C.md#구조체)를 활용한 [원자적](Processor.md#원자적-연산)이지 않은 동기화 매커니즘이며 [프로세스](Process.md) 간 공유될 수 없다. [임계 구역](#임계-구역)보다 가볍고 빠르다는 장점이 있지만, 구조가 매우 간단하여 (즉, "슬림") 제약 사항이 존재한다.<sup>[[참고](https://devblogs.microsoft.com/oldnewthing/20220304-00/?p=106309)]</sup>
+**[슬림 읽기/쓰기 락](https://learn.microsoft.com/en-us/windows/win32/sync/slim-reader-writer--srw--locks)**(slim reader/writer lock), 간단히 **SRW 락**은 공유 리소스의 접근 사유를 *읽기* 및 *쓰기*로 구분한다. SRWLOCK [구조체](C.md#구조체)를 활용한 [원자적](Processor.md#원자적-연산)이지 않은 동기화 매커니즘이며 [프로세스](Process.md) 간 공유될 수 없다. [임계 구역](#임계-구역)보다 가볍고 빠르다는 장점이 있지만, 구조가 매우 간단(즉, "슬림")하여 제약 사항이 존재한다.<sup>[[참고](https://devblogs.microsoft.com/oldnewthing/20220304-00/?p=106309)]</sup>
 
 스레드가 리소스를 접근하려 할 때, 요청에 따라 SRW 락은 두 가지 모드를 제공한다:
 
 * **공유 모드**(shared mode)
 
-    다수의 스레드에 읽기 전용 접근을 부여하여, 공유 리소스의 읽기 작업을 [병행](https://en.wikipedia.org/wiki/Concurrency_(computer_science))으로 수행할 수 있도록 한다. 만일 읽기 작업이 쓰기 작업을 초과한다면, 이러한 병행성은 임계 구역에 비해 성능과 처리량이 향상한다. 관련 함수로는 [AcquireSRWLockShared](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-acquiresrwlockshared) 및 [ReleaseSRWLockShared](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-releasesrwlockshared) 등이 있다.
+    다수의 스레드에 읽기 전용 접근을 부여하여, 공유 리소스의 읽기 작업을 [병행](https://en.wikipedia.org/wiki/Concurrency_(computer_science))으로 수행할 수 있도록 한다. 만일 읽기 작업이 쓰기 작업을 초과한다면, 이러한 병행성은 임계 구역에 비해 성능과 처리량이 향상한다.
+    
+    * ([Try](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-tryacquiresrwlockshared))[AcquireSRWLockShared](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-acquiresrwlockshared)
+    * [ReleaseSRWLockShared](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-releasesrwlockshared)
 
 * **전용 모드**(exclusive mode)
 
-    단 한 개의 스레드씩만 읽기 및 쓰기 접근을 부여하여, 해당 모드로 공유 리소스를 처리하는 동안 아무런 스레드도 이를 접근할 수 없다. 관련 함수로는 [AcquireSRWLockExclusive](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-acquiresrwlockexclusive) 및 [ReleaseSRWLockExclusive](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-releasesrwlockexclusive) 등이 있다.
+    단 한 개의 스레드씩만 읽기 및 쓰기 접근을 부여하여, 해당 모드로 공유 리소스를 처리하는 동안 아무런 스레드도 이를 접근할 수 없다.
+    
+    * ([Try](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-tryacquiresrwlockexclusive))[AcquireSRWLockExclusive](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-acquiresrwlockexclusive)
+    * [ReleaseSRWLockExclusive](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-releasesrwlockexclusive)
 
 매우 간단한 구조를 가지고 있어 SRW 락의 상태 정보가 빈약하다. 즉, 이미 소유하고 있는 SRW 락의 모드를 공유에서 전용 (또는 그 반대)로 전환이 불가하다. 그리고 반복적인 SRW 락 획득은 [교착 상태](https://en.wikipedia.org/wiki/Deadlock_(computer_science))를 유발할 수 있기 때문에 주의해야 한다.
 
