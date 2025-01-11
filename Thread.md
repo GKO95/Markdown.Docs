@@ -31,7 +31,7 @@ ADD [counter], 1
 [윈도우 OS](Windows.md)의 동기화는 코드 성능을 향상시키기 위해 [FIFO](https://en.wikipedia.org/wiki/FIFO_(computing_and_electronics)) 순서로 이루어지지 않는다. 하지만 마이크로소프트는 동기화에 적용된 알고리즘을 공개하지 않으며, 이는 차후 알고리즘이 언제든지 변경될 수 있는 소지가 있기 때문이다. 프로그램이 동기화 알고리즘에 매우 의존하는 코드로 개발되었을 시 발생할 수 있는 불상사를 방지하는 조치이기도 하다.
 
 ### volatile 변수
-프로그래밍 중에서 "**[volatile](https://en.wikipedia.org/wiki/Volatile_(computer_programming))**(변덕스러운)" [변수](C.md#변수)란, 현재 해당 코드를 실행하고 있는 [스레드](#스레드)가 아닌 ([운영체제](https://en.wikipedia.org/wiki/Operating_system), [하드웨어](https://en.wikipedia.org/wiki/Computer_hardware), 동 시간대 실행 중인 타 스레드 등) 다른 요인으로부터 비동기적으로 값을 읽거나 변경될 수 있는 데이터를 취급한다. 선언된 volatile 변수는 [컴파일러](Programming.md#컴파일러)의 최적화에 제외되고, 변수의 값은 무조건 메모리 주소로부터 직접 불러오도록 한다.
+프로그래밍에서 "**[volatile](https://en.wikipedia.org/wiki/Volatile_(computer_programming))**(변덕스러운)" [변수](C.md#변수)란, 현재 해당 코드를 실행하고 있는 [스레드](#스레드)가 아닌 ([운영체제](https://en.wikipedia.org/wiki/Operating_system), [하드웨어](https://en.wikipedia.org/wiki/Computer_hardware), 동 시간대 실행 중인 타 스레드 등) 다른 요인으로부터 비동기적으로 값을 읽거나 변경될 수 있는 데이터를 취급한다. 선언된 volatile 변수는 [컴파일러](Programming.md#컴파일러)의 최적화에 제외되고, 변수의 값은 무조건 메모리 주소로부터 직접 불러오도록 한다.
 
 ## 임계 구역
 **[임계 구역](https://en.wikipedia.org/wiki/Critical_section)**(critical section)은 일부 코드 영역을 오로지 한 스레드씩만 [원자적](Processor.md#원자적-연산)으로 진입할 수 있도록 허용한다. [윈도우 OS](Windows.md)의 경우, [CRITICAL_SECTION](https://learn.microsoft.com/en-us/windows/win32/sync/critical-section-objects) 개체의 소유권 획득 여부를 기준으로 임계 구역에 진입한다. 단, 이는 동일한 프로세스의 스레드 간 동기화만으로 활용 범위가 제한된다.
@@ -68,6 +68,21 @@ InterLockedExchange(&g_fResourceInUse, FALSE);
 ```
 
 * 비록 [InterLockedExchage](https://learn.microsoft.com/en-us/windows/win32/api/winnt/nf-winnt-interlockedexchange)란 [인터락 함수](#인터락-함수)가 동원되었지만, 이는 스핀락 자체가 원자적이라는 걸 의미하지 않는다.
+
+## 슬림 읽기/쓰기 락
+**[슬림 읽기/쓰기 락](https://learn.microsoft.com/en-us/windows/win32/sync/slim-reader-writer--srw--locks)**(slim reader/writer lock), 간단히 **SRW 락**은 공유 리소스의 접근 사유를 *읽기* 및 *쓰기*로 구분한다. SRWLOCK [구조체](C.md#구조체)를 활용한 [원자적](Processor.md#원자적-연산)이지 않은 동기화 매커니즘이며 [프로세스](Process.md) 간 공유될 수 없다. [임계 구역](#임계-구역)보다 가볍고 빠르다는 장점이 있지만, 구조가 매우 간단하여 (즉, "슬림") 제약 사항이 존재한다.<sup>[[참고](https://devblogs.microsoft.com/oldnewthing/20220304-00/?p=106309)]</sup>
+
+스레드가 리소스를 접근하려 할 때, 요청에 따라 SRW 락은 두 가지 모드를 제공한다:
+
+* **공유 모드**(shared mode)
+
+    다수의 스레드에 읽기 전용 접근을 부여하여, 공유 리소스의 읽기 작업을 [병행](https://en.wikipedia.org/wiki/Concurrency_(computer_science))으로 수행할 수 있도록 한다. 만일 읽기 작업이 쓰기 작업을 초과한다면, 이러한 병행성은 임계 구역에 비해 성능과 처리량이 향상한다. 관련 함수로는 [AcquireSRWLockShared](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-acquiresrwlockshared) 및 [ReleaseSRWLockShared](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-releasesrwlockshared) 등이 있다.
+
+* **전용 모드**(exclusive mode)
+
+    단 한 개의 스레드씩만 읽기 및 쓰기 접근을 부여하여, 해당 모드로 공유 리소스를 처리하는 동안 아무런 스레드도 이를 접근할 수 없다. 관련 함수로는 [AcquireSRWLockExclusive](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-acquiresrwlockexclusive) 및 [ReleaseSRWLockExclusive](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-releasesrwlockexclusive) 등이 있다.
+
+매우 간단한 구조를 가지고 있어 SRW 락의 상태 정보가 빈약하다. 즉, 이미 소유하고 있는 SRW 락의 모드를 공유에서 전용 (또는 그 반대)로 전환이 불가하다. 그리고 반복적인 SRW 락 획득은 [교착 상태](https://en.wikipedia.org/wiki/Deadlock_(computer_science))를 유발할 수 있기 때문에 주의해야 한다.
 
 ## 동기화 개체
 **[동기화 개체](https://learn.microsoft.com/en-us/windows/win32/sync/synchronization-objects)**(synchronization object)
