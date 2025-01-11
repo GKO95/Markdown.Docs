@@ -30,6 +30,9 @@ ADD [counter], 1
 
 [윈도우 OS](Windows.md)의 동기화는 코드 성능을 향상시키기 위해 [FIFO](https://en.wikipedia.org/wiki/FIFO_(computing_and_electronics)) 순서로 이루어지지 않는다. 하지만 마이크로소프트는 동기화에 적용된 알고리즘을 공개하지 않으며, 이는 차후 알고리즘이 언제든지 변경될 수 있는 소지가 있기 때문이다. 프로그램이 동기화 알고리즘에 매우 의존하는 코드로 개발되었을 시 발생할 수 있는 불상사를 방지하는 조치이기도 하다.
 
+### volatile 변수
+프로그래밍 중에서 "**[volatile](https://en.wikipedia.org/wiki/Volatile_(computer_programming))**(변덕스러운)" [변수](C.md#변수)란, 현재 해당 코드를 실행하고 있는 [스레드](#스레드)가 아닌 ([운영체제](https://en.wikipedia.org/wiki/Operating_system), [하드웨어](https://en.wikipedia.org/wiki/Computer_hardware), 동 시간대 실행 중인 타 스레드 등) 다른 요인으로부터 비동기적으로 값을 읽거나 변경될 수 있는 데이터를 취급한다. 선언된 volatile 변수는 [컴파일러](Programming.md#컴파일러)의 최적화에 제외되고, 변수의 값은 무조건 메모리 주소로부터 직접 불러오도록 한다.
+
 ## 임계 구역
 **[임계 구역](https://en.wikipedia.org/wiki/Critical_section)**(critical section)은 일부 코드 영역을 오로지 한 스레드씩만 [원자적](Processor.md#원자적-연산)으로 진입할 수 있도록 허용한다. [윈도우 OS](Windows.md)의 경우, [CRITICAL_SECTION](https://learn.microsoft.com/en-us/windows/win32/sync/critical-section-objects) 개체의 소유권 획득 여부를 기준으로 임계 구역에 진입한다. 단, 이는 동일한 프로세스의 스레드 간 동기화만으로 활용 범위가 제한된다.
 
@@ -47,7 +50,24 @@ ADD [counter], 1
 <table style="width: 90%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">인터락 함수의 x86 명령어 조합 및 설명</caption><colgroup><col style="width: 20%;"/><col style="width: 15%;"/><col style="width: 65%;"/></colgroup><thead><tr><th style="text-align: center;">인터락 함수</th><th style="text-align: center;">명령어</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td><a href="https://learn.microsoft.com/en-us/windows/win32/api/winnt/nf-winnt-interlockedexchange">InterLockedExchange</a></td><td><a href="https://www.felixcloutier.com/x86/xchg"><code>XCHG</code></a></td><td>32비트 변수를 지정한 값으로 변경한다.</td></tr><tr><td><a href="https://learn.microsoft.com/en-us/windows/win32/api/winnt/nf-winnt-interlockedexchangeadd">InterLockedCompareExchange</a></td><td><code>LOCK</code>+<a href="https://www.felixcloutier.com/x86/cmpxchg"><code>CMPXCHG</code></a></td><td>두 32비트 값을 비교한 결과에 따라 다른 32비트 값으로 변경 여부를 결정한다.</td></tr><tr><td><a href="https://learn.microsoft.com/en-us/windows/win32/api/winnt/nf-winnt-interlockedexchangeadd">InterLockedExchangeAdd</a></td><td><code>LOCK</code>+<a href="https://www.felixcloutier.com/x86/add"><code>ADD</code></a></td><td>두 32비트 값의 덧셈을 연산한다.</td></tr><tr><td><a href="https://learn.microsoft.com/en-us/windows/win32/api/winnt/nf-winnt-interlockedexchange">InterLockedIncrement</a></td><td><code>LOCK</code>+<a href="https://www.felixcloutier.com/x86/inc"><code>INC</code></a></td><td>32비트 변수의 값을 1만큼 증가시킨다.</td></tr><tr><td><a href="https://learn.microsoft.com/en-us/windows/win32/api/winnt/nf-winnt-interlockedxor">InterLockedXor</a></td><td><code>LOCK</code>+<a href="https://www.felixcloutier.com/x86/xor"><code>XOR</code></a></td><td>두 32비트 값의 <a href="https://en.wikipedia.org/wiki/Exclusive_or">베타적 논리합</a>을 연산한다.</td></tr></tbody></table>
 
 ## 스핀락
-**[스핀락](https://en.wikipedia.org/wiki/Spinlock)**(spinlock)
+**[스핀락](https://en.wikipedia.org/wiki/Spinlock)**(spinlock)은 스레드가 [락](https://en.wikipedia.org/wiki/Lock_(computer_science))을 소유할 때까지 반복적으로 획득 가능 여부를 확인하는 [루프](C.md#while-반복문), 즉 "스핀"을 활용하는 동기화 매커니즘이다. 락을 소유한 스레드는 루프로부터 탈출하여 공유 리소스에 접근하게 된다. [원자적](Processor.md#원자적-연산)이지 않고 [프로세서 시간](Processor.md#프로세서-시간)을 허비하기 때문에 [단일 코어](Processor.md#프로세서-코어) 시스템에서는 가급적 기피되어야 한다. 반면 다중 코어 시스템의 경우, 한 CPU 코어가 스핀을 돌더라도 나머지 여유 CPU 코어가 다른 작업을 수행하여 오히려 유용할 수 있다.
+
+아래는 스핀락을 원리를 간단히 설명하기 위한 이론적 예시 코드이다.
+
+```c
+// Constantly checking for spinlock availability.
+while (InterLockedExchange(&g_fResourceInUse, TRUE) == TRUE) {
+    Sleep(0);
+}
+
+// Access to resource.
+...
+
+// End of access to resource; release spinlock.
+InterLockedExchange(&g_fResourceInUse, FALSE);
+```
+
+* 비록 [InterLockedExchage](https://learn.microsoft.com/en-us/windows/win32/api/winnt/nf-winnt-interlockedexchange)란 [인터락 함수](#인터락-함수)가 동원되었지만, 이는 스핀락 자체가 원자적이라는 걸 의미하지 않는다.
 
 ## 동기화 개체
 **[동기화 개체](https://learn.microsoft.com/en-us/windows/win32/sync/synchronization-objects)**(synchronization object)
