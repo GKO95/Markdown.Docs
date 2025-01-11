@@ -74,6 +74,8 @@ Object: ffff8602359300e0  Type: (ffff86022dace6c0) Event
         HandleCount: 1  PointerCount: 32769
 ```
 
+커널 개체는 signaled 및 nonsignaled 상태가 있으며, 각 유형의 개체마다 마이크로소프트에서 결정한 규칙에 따라 상태가 토글된다. 예를 들어, [프로세스](Process.md) 커널 개체는 항상 nonsignaled 상태로 생성되고 종료될 때 운영체제에 의해 자동적으로 signaled 상태로 변경된다. 
+
 ## 입출력 관리자
 **[입출력 관리자](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/windows-kernel-mode-i-o-manager)**(I/O manager)
 
