@@ -114,46 +114,39 @@ InterLockedExchange(&g_fResourceInUse, FALSE);
 재개한 스레드는 임계 구역 (혹은 SRW 락)의 소유권을 다시 획득하고 공유 리소스를 접근 및 작업을 수행한다.
 
 ## 대기 함수
-**[대기 함수](https://learn.microsoft.com/en-us/windows/win32/sync/wait-functions)**(wait functions)는 스레드 자신의 코드 실행을 막으며, 특정 기준을 충족할 때까지 반환하지 않는다. 그 동안 대기 함수를 호출한 스레드는 대기 상태에 진입하여 아무런 동작 없이 기다리게 된다. 만일 그 요건이 커널 개체일 경우, signaled 상태로 전환될 때 대기 함수가 반환한다. 단, 이미 요건이 충족된 상태에서 대기 함수를 호출하게 되면 스레드는 대기 상태로 전환되지 않는다. 아래는 대기 함수의 일부를 소개한다.
+**[대기 함수](https://learn.microsoft.com/en-us/windows/win32/sync/wait-functions)**(wait functions)는 [커널 개체](Kernel.md#커널-개체)가 signaled 될 때까지 함수를 호출한 스레드를 대기 상태로 전환시켜 실행을 막는다. 커널 개체가 signaled 되면 대기 함수는 반환하는데, 이로부터 기다리다 재개한 스레드는 "대기를 완료하였다"고 언급한다. 단, 대기 함수를 호출하였을 당시 이미 signaled 되었다면 스레드는 대기 상태로 전환되지 않는다. 아래는 대표적인 두 가지 대기 함수를 소개한다.
 
 * [WaitForSingleObject](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-waitforsingleobject)
 * [WaitForMultipleObjects](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-waitformultipleobjects)
-* 기타 등등
 
-성공적인 대기 부작용(successful wait side effect)
+특히 WaitForMultipleObjects 함수는 [원자성](Processor.md#원자적-연산)이 접목되어 "성공적인 대기 부작용(successful wait side-effect)"에 의해 발생할 수 있는 [교착 상태](https://en.wikipedia.org/wiki/Deadlock_(computer_science))를 방지할 수 있다.
 
-그 중에서 WaitForMultipleObjects가 유용한 점은 모든 작업이 [원자적](Processor.md#원자적-연산)이기 때문에 잠재적 [교착 상태](https://en.wikipedia.org/wiki/Deadlock_(computer_science))를 방지할 수 있다:
+> 예를 들어, 스레드 A의 WaitForMultipleObjects 함수가 모든 개체의 신호 상태가 signaled인 걸 확인하였다. 대기 함수는 종료하면서 개체들을 nonsignaled 상태로 초기화를 시도하지만, 스레드 B 또한 동일한 개체들의 신호 여부를 확인하는 중이다. 스레드 A는 결국 스레드 B의 검사를 마칠 때까지 기다린다.
 
-1. 스레드 A의 WaitForMultipleObjects 함수가 모든 개체가 signaled 되었는지 확인하고 반환하면서 개체들을 nonsignaled 상태로 리셋하려고 한다.
-1. 하지만 스레드 B 또한 동일한 개체들을 확인하고 있다면, 스레드 B의 확인이 마칠 때까지 스레드 A는 상태를 nonsignaled로 리셋할 수 없다.
+대기 함수에는 아무런 커널 개체를 활용할 수 있지만, 다음은 윈도우 OS가 제공하는 스레드 동기화에 특화된 커널 개체들을 소개한다.
 
 ### 이벤트 개체
-**[이벤트 개체](https://learn.microsoft.com/en-us/windows/win32/sync/event-objects)**(event object)는 [SetEvent](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-setevent) 함수를 통해 명시적으로 signaled 상태로 설정할 수 있는 동기화 개체이다. 이벤트 개체는 다음과 같이 두 유형이 존재한다.
+**[이벤트 개체](https://learn.microsoft.com/en-us/windows/win32/sync/event-objects)**(event objects)는 [SetEvent](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-setevent) 함수를 호출하여 signaled 상태로 설정하는 동기화 커널 개체이다.
 
-* Manul-reset event: [ResetEvent](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-resetevent) 함수를 명시적으로 호출하지 않는 이상 signaled 상태를 계속 유지한다.
-* Auto-reset event: signaled 상태를 유지하다가 대기 중인 스레드가 재개될 때 시스템이 자동적으로 nonsignaled 상태로 복원시킨다. 대기 중인 스레드가 없을 때, 이벤트 개체는 signaled 상태를 유지한다. 한편, 대기 중인 스레드가 두 개 이상일 경우, 재개할 대기 스레드는 선택되는데 FIFO 순서가 아니다.
-
-### 뮤텍스 개체
-**[뮤텍스 개체](https://learn.microsoft.com/en-us/windows/win32/sync/mutex-objects)**(mutex object)는 아무런 스레드에 의해 소유되지 않을 시 signaled 상태가 되고, 소유되었을 때 nonsignaled 상태가 된다. 다시 말해, 뮤텍스는 스레드의 개체 소유 여부에 따라 상태가 결정된다. 오로지 한 개의 스레드씩만 뮤텍스 개체를 소유할 수 있다.
-
-> 뮤텍스는 공유 리소스를 "mutually exclusive"하게 접근한다는 점에서 비롯된 용어이다.
-
-단, 뮤텍스 개체를 소유할 스레드는 FIFO 순서로 소유하지 않는다. 만일 스레드가 뮤텍스 개체를 놓아주지 않은 채 종료하였다면, 뮤텍스는 유기되었다고 간주된다. 그러면 뮤텍스를 대기하던 스레드는 유기된 뮤텍스 개체 소유권을 획득하지만, 대기 함수는 WAIT_ABANDONED을 반환한다. 유기된 뮤텍스 개체는 오류가 발생하였으며 뮤텍스로 보호된 리소스는 알려지지 않은 상태에 있음을 의미한다.
-
-### 세마포어 개체
-**[세마포어 개체](https://learn.microsoft.com/en-us/windows/win32/sync/semaphore-objects)**(semaphore object)는 0부터 지정된 최대치까지 카운트를 유지하는 동기화 개체이다. 여기서 언급한 카운트는 세마포어 개체 획득이 가능한 큐 슬롯을 의미한다. 즉, 세마포어의 목적은 제한된 개수의 스레드만이 병행하여 실행될 수 있도록 하고, 나머지는 대기 함수에 의해 기다리도록 만든다. 그러므로 세마포어 개체가 0에 달하면 세마포어는 nonsignaled이 되어 대기 함수로부터 기다리게 만들고, 그 외에는 signaled 상태로 스레드의 대기를 마치고 실행하도록 한다.
-
-* 스레드가 세마포어 개체에 의한 대기를 마쳤을 시, 카운트는 감소한다.
-* 스레드가 [ReleaseSemaphore](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-releasesemaphore)를 호출하면 카운트를 증가한다.
-
-세마포어의 카운트는 절대로 0보다 작을 수 없고 최대치보다 클 수 없다.
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">이벤트 개체 유형</caption><colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup><thead><tr><th style="text-align: center;">이벤트 개체</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td>Manul-reset event</td><td><a href="https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-resetevent">ResetEvent</a> 함수를 명시적으로 호출하지 않는 이상 signaled 상태를 계속 유지한다.</td></tr><tr><td>Auto-reset event</td><td>Signaled 상태를 유지하다 스레드가 대기를 완료할 시 자동적으로 nonsignaled 상태로 복원한다.<ul><li>대기 중인 스레드가 없을 경우, 이벤트 개체는 signaled 상태를 유지한다.</li><li>대기 중인 스레드가 두 개 이상일 경우, 대기를 완료할 스레드는 선택되지만 FIFO 순서는 아니다.</li></ul></td></tr></tbody></table>
 
 ### 대기 가능한 타이머 개체
-**[대기 가능한 타이머 개체](https://learn.microsoft.com/en-us/windows/win32/sync/waitable-timer-objects)**(waitable timer object)는 지정된 시간에 도달할 때 signaled 상태로 설정되는 동기화 개체이다. 대기 가능한 타이머 개체는 다음과 같이 두 유형이 존재하며, 둘 다 주기적으로 실행되는 타이머로 설정할 수 있다.
+**[대기 가능한 타이머 개체](https://learn.microsoft.com/en-us/windows/win32/sync/waitable-timer-objects)**(waitable timer objects)는 지정된 시간에 도달할 때 signaled 상태로 설정되는 동기화 커널 개체이다.
 
-* Manual-reset timer: [SetWaitableTimer](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-setwaitabletimer) 함수를 명시적으로 호출하지 않는 이상 signaled 상태를 계속 유지한다.
-* Synchronization timer: 대기 가능한 타이거 개체로부터 기다리고 있는 스레드가 대기를 완료(즉, 재개)할 때까지 signaled 상태를 계속 유지한다.
-* Periodic timer: 특정 시간이 만료될 때마다 다시 시작되는 타이머이며, 이는 타이머가 리셋되거나 취소될 때까지 반복된다.
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">대기 가능한 타이머 개체 유형</caption><colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup><thead><tr><th style="text-align: center;">타이머 개체</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td>Manul-reset timer</td><td><a href="https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-setwaitabletimer">SetWaitableTimer</a> 함수를 명시적으로 호출하지 않는 이상 signaled 상태를 계속 유지한다.</td></tr><tr><td>Synchronization timer</td><td>타이머가 지정된 시간에 도달하여도 스레드가 대기를 완료할 때까지 signaled 상태를 유지한다.</td></tr><tr><td>Periodic timer</td><td>특정 시간이 만료될 때마다 타이머가 다시 시작되는데, 이는 초기화 또는 취소할 때까지 반복된다.<ul><li>Periodic timer는 위의 두 타이머 유형과 함께 접목될 수 있다.</li></ul></td></tr></tbody></table>
+
+### 세마포어 개체
+**[세마포어 개체](https://learn.microsoft.com/en-us/windows/win32/sync/semaphore-objects)**(semaphore objects)는 0부터 지정한 최대치 이내에 (빈 큐 슬롯 개수를 의미하는) 카운트를 유지하는 동기화 커널 개체이다. 다시 말해, 세마포어 목적은 제한된 개수의 스레드만 병행으로 실행될 수 있게 허용하고, 나머지는 대기 함수에 의해 기다리도록 한다. 카운트는 절대로 0보다 작을 수 없고 최대치를 초과할 수 없다.
+
+1. 카운트 감소 조건: 스레드가 대기 함수로부터 대기를 완료하였을, 즉 코드 실행을 재개할 때이다.
+1. 카운트 증가 조건: 스레드가 [ReleaseSemaphore](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-releasesemaphore)를 호출할 때이다.
+
+카운트가 0에 도달하면 세마포어는 nonsignaled 되어 스레드를 대기 함수로부터 기다리게 한다. 반면, 카운트가 0이 아니면 세마포어는 signaled 되어 스레드는 대기 함수를 기다리지 않거나 대기를 완료하여 코드 실행을 재개한다.
+
+### 뮤텍스 개체
+**[뮤텍스 개체](https://learn.microsoft.com/en-us/windows/win32/sync/mutex-objects)**(mutex objects)는 스레드로부터 소유되었는지 여부에 따라 신호 상태가 결정되는 동기화 커널 개체이다; 뮤텍스 커널의 소유권을 획득한 스레드가 있을 시 nonsignaled, 그렇지 않을 시에는 signaled 상태가 된다. 단, 뮤텍스 개체의 소유권은 FIFO 순서로 획득되지 않는다.
+
+스레드가 소유권을 놓아주지 않은 채 종료하였다면, 뮤텍스 개체는 유기(abandoned)되었다고 부른다. 유기된 뮤텍스는 대기 중인 다른 스레드가 소유권을 획득하지만 WAIT_ABANDONED이 대기 함수로부터 반환된다. 특히 유기된 뮤텍스는 이전 스레드에서 오류가 발생하였을 가능성을 시사하며, 뮤텍스로부터 보호된 리소스 상태는 불명확하기 때문에 유의해서 처리되어야 한다.
 
 # 스레드 생명주기
 본 장은 [C](C.md) 언어로 개발된 [윈도우](Windows.md) 어플리케이션을 위주로 설명한다. 즉, [Win32 API](WinAPI.md) 이외에 [C 런타임 라이브러리](C.md#c-런타임-라이브러리)(CRT)가 함께 언급되어 개념을 설명한다.
