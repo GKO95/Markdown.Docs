@@ -77,9 +77,7 @@ x86 시스템의 경우, 시스템 부팅 단계에서 [APIC](https://ko.wikiped
 ### 커널 개체
 **[커널 개체](https://learn.microsoft.com/en-us/windows/win32/sysinfo/kernel-objects)**(kernel object)는 NT 커널 Executive의 다양한 서브시스템이 다루는 리소스 유형들을 접근할 수 있도록 [개체 관리자](#개체-관리자)에서 관리하는 정적 [구조체](C.md#구조체)의 런타임 [인스턴스](C.md#사용자-정의-자료형)이다. [프로세스](Process.md) 및 [스레드](Thread.md) 등을 포함한 모든 리소스가 생성되면 대응하는 커널 개체를 함께 생성된다. [사용자 모드](Processor.md#사용자-모드)에서 커널 개체를 사용하려면 [핸들](Process.md#핸들)을 통해 간접적으로 참조해야 한다.
 
-
-
-커널 개체는 signaled 및 nonsignaled 상태가 있으며, 각 유형의 개체마다 마이크로소프트에서 결정한 규칙에 따라 상태가 토글된다. 예를 들어, [프로세스](Process.md) 커널 개체는 항상 nonsignaled 상태로 생성되고 종료될 때 운영체제에 의해 자동적으로 signaled 상태로 변경된다. 
+* 커널 개체는 두 가지 신호 상태가 있으며, *signaled* 그리고 *nonsignaled*로 나뉘어진다. 각 객체 유형마다 신호 상태의 토글 조건이 이미 정해져 있다. 예를 들어, [프로세스](Process.md) 커널 개체는 nonsignaled 상태로 생성되고 종료될 때 signaled 상태로 변경된다.
 
 ### 참조 카운트
 개체 관리자는 커널 개체가 생성될 때 **[참조 카운트](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/life-cycle-of-an-object#object-reference-count)**(혹은 **[포인터](C.md#포인터) 카운트**)를 1로 설정하며, 해당 카운트가 0으로 감소하면 더 이상 참조되지 않는 걸로 간주하여 제거한다. 개체 관리자에서 관리하는 참조 카운트가 실제로 참조한 개수와 일치하도록 신경써야 하며, 그렇지 않을 시 다음 문제가 발생한다.
