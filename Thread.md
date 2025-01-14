@@ -7,8 +7,16 @@
 ## 스레드 컨텍스트
 **스레드 컨텍스트**(thread context)
 
+## 비동기 프로시저 호출
+**[비동기 프로시저저 호출](https://learn.microsoft.com/en-us/windows/win32/sync/asynchronous-procedure-calls)**(asynchronous procedure call; APC)은 특정 [스레드 컨텍스트](#스레드-컨텍스트)에서 [비동기식](https://en.wikipedia.org/wiki/Asynchrony_(computer_programming))으로 실행되는 [함수](C.md#함수)이다. 각 [스레드](#스레드)마다 APC가 대기하면 시스템에서 [소프트웨어 인터럽트](Processor.md#인터럽트)를 일으키는 [큐](https://en.wikipedia.org/wiki/Queue_(abstract_data_type))를 갖는다. 그리고 해당 스레드가 [스케줄링](Processor.md#스케줄링)될 때 대기 중인 APC 함수는 순서대로 실행된다.
+
+* [시스템](Kernel.md) 및 [어플리케이션](Process.md)에 의해 생성된 APC를 각각 [*커널 모드 APC*](Processor.md#커널-모드) 그리고 [*사용자 모드 APC*](Processor.md#사용자-모드)라고 부른다.
+
 ## 스레드 로컬 스토리지
 **[스레드 로컬 스토리지](https://en.wikipedia.org/wiki/Thread-local_storage)**(thread local storage; TLS)
+
+# 스레드 풀
+**[스레드 풀](https://learn.microsoft.com/en-us/windows/win32/procthread/thread-pools)**(thread pools)
 
 # 스레드 동기화
 **[스레드 동기화](https://en.wikipedia.org/wiki/Synchronization_(computer_science))**(thread synchronization)는 두 개 이상의 [스레드](#스레드)가 동시에 [공유 리소스](https://en.wikipedia.org/wiki/Shared_resource)를 접근하지 못하도록 보장하는 매커니즘을 일컫는다. 대체로 한 스레드가 리소스를 접근하는 동안 나머지는 대기하는 방식으로 구현된다. 만일 스레드 간 동기화가 적절히 조치되지 않았다면 개별 스레드가 정상적으로 코드를 실행하여도 의도치 않은 결과를 초래할 수 있다.
