@@ -1,5 +1,5 @@
 # 리눅스용 윈도우 서브시스템
-리눅스용 윈도우 서브시스템(Windows Subsystem for Linux), 일명 [WSL](https://ko.wikipedia.org/wiki/리눅스용_윈도우_하위_시스템)은 아래에 서술된 기존 [POSIX](https://ko.wikipedia.org/wiki/POSIX) [환경 서브시스템](Subsystem.md)이 가진 기술적 문제들을 극복하기 위해 새롭게 설계된 서브시스템이다.
+**[리눅스용 윈도우 서브시스템](https://learn.microsoft.com/en-us/windows/wsl/)**(Windows Subsystem for Linux), 일명 [WSL](https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux)은 아래에 서술된 기존 [POSIX](https://ko.wikipedia.org/wiki/POSIX) [환경 서브시스템](Subsystem.md)이 가진 기술적 문제들을 극복하기 위해 새롭게 설계된 서브시스템이다.
 
 1. 어플리케이션이 POSIX 서브시스템에서 실행되어야 하는 걸 윈도우가 인지하기 위해 [PE 포맷](https://ko.wikipedia.org/wiki/PE_포맷)으로 새롭게 빌드되어야 한다.
 2. 타 운영체제 프로그램을 윈도우 서브시스템으로 [래핑](https://ko.wikipedia.org/wiki/래퍼_라이브러리)(wrapping)하는 방식을 택하였으나, 알아채기 힘든 호환성 결함이 야기될 수 있다.
