@@ -1,7 +1,7 @@
 # 부팅
 > *참고: [Booting process of Windows NT - Wikipedia](https://en.wikipedia.org/wiki/Booting_process_of_Windows_NT)*
 
-**[부팅](https://en.wikipedia.org/wiki/Booting)**(booting)은 하드웨어 (예. 전원 버튼) 또는 소프트웨어 명령으로 컴퓨터를 켜는 절차이다. 부팅 초기에 전력을 공급받은 컴퓨터의 [메모리](Memory.md)가 [휘발성](https://ko.wikipedia.org/wiki/휘발성_메모리)이기 때문에 아무런 소프트웨어가 로드되지 않은 상태이다. 그러므로 시스템 하드웨어의 [펌웨어](https://en.wikipedia.org/wiki/Firmware) 또는 타 [프로세서](Processor.md)의 도움으로 컴퓨터를 구동하기 위한 프로그램 이미지를 메모리에 주입시키는 작업이 필요하다.
+**[부팅](https://en.wikipedia.org/wiki/Booting)**(booting)은 하드웨어 (예. 전원 버튼) 또는 소프트웨어 명령으로 컴퓨터를 켜는 절차이다. 부팅 초기에 전력을 공급받은 컴퓨터의 [메모리](Memory.md)가 [휘발성](https://en.wikipedia.org/wiki/Volatile_memory)이기 때문에 아무런 소프트웨어가 로드되지 않은 상태이다. 그러므로 시스템 하드웨어의 [펌웨어](https://en.wikipedia.org/wiki/Firmware) 또는 타 [프로세서](Processor.md)의 도움으로 컴퓨터를 구동하기 위한 프로그램 이미지를 메모리에 주입시키는 작업이 필요하다.
 
 아래는 시스템이 부팅되는 과정을 두 규격, [UEFI](#uefi)와 [BIOS](#bios)에 대하여 순차적으로 보여주는 도표이다.
 
@@ -18,7 +18,7 @@
 ROM에 저장된 UEFI 혹은 BIOS 펌웨어가 실행되면 가장 먼저 [POST](#시동-자체-시험)를 진행하고, 검사를 통과하면 [부트로더](#부트로더)가 [운영체제](https://en.wikipedia.org/wiki/Operating_system)를 로드 및 실행한다.
 
 ### 시동 자체 시험
-**[시동 자체 시험](https://ko.wikipedia.org/wiki/시동_자체_시험)**(Power-on self-test; POST)은 컴퓨터나 타 디지털 전자 장치가 전원을 공급받는 즉시 실행된 ([UEFI](#uefi) 혹은 [BIOS](#bios)) 펌웨어에서 하드웨어 초기화 및 상태를 진단하는 절차이다. 흔히 [메인보드](https://ko.wikipedia.org/wiki/메인보드) 제조사 또는 OEM 로고가 표시되는 화면에 해당한다. POST 진단 결과는 디스플레이 화면에 출력되거나 별도의 진단 도구로부터 확인할 수 있도록 저장된다. 만일 화면 출력 기능에 문제가 있을 경우를 대비하여 LED 또는 경고음을 통해 오류 코드를 알릴 수 있는 장치가 마련되어 있다.
+**[시동 자체 시험](https://en.wikipedia.org/wiki/Power-on_self-test)**(Power-on self-test; POST)은 컴퓨터나 타 디지털 전자 장치가 전원을 공급받는 즉시 실행된 ([UEFI](#uefi) 혹은 [BIOS](#bios)) 펌웨어에서 하드웨어 초기화 및 상태를 진단하는 절차이다. 흔히 [메인보드](https://en.wikipedia.org/wiki/Motherboard) 제조사 또는 OEM 로고가 표시되는 화면에 해당한다. POST 진단 결과는 디스플레이 화면에 출력되거나 별도의 진단 도구로부터 확인할 수 있도록 저장된다. 만일 화면 출력 기능에 문제가 있을 경우를 대비하여 LED 또는 경고음을 통해 오류 코드를 알릴 수 있는 장치가 마련되어 있다.
 
 ## 부트로더
 **[부트로더](https://en.wikipedia.org/wiki/Bootloader)**(bootloader), 일명 **[부트스트랩](#부트스트랩) 로더**(bootstrap loader)는 컴퓨터 부팅 과정 중에서 설치된 운영체제의 [커널](Kernel.md)을 불러와 실행하는 프로그램이다. 만일 여럿 부팅 선택지 메뉴를 제공한다면 흔히 **부트 관리자**(boot manager)라고 부르며, 선택된 별개의 OS 부트로더를 실행하는 [연쇄 로딩](https://en.wikipedia.org/wiki/Chain_loading)을 구현한다.
@@ -28,14 +28,14 @@ ROM에 저장된 UEFI 혹은 BIOS 펌웨어가 실행되면 가장 먼저 [POST]
 * [GNU GRUB](https://en.wikipedia.org/wiki/GNU_GRUB): GNU 프로젝트의 일환으로 UNIX 기반의 운영체제를 위한 부트로더이다.
 
 ### 부트스트랩
-**[부트스트랩](https://ko.wikipedia.org/wiki/부트스트랩_(컴퓨팅))**(bootstrap)은 아무런 외부 도움을 받지 않고 자체적으로 실행하는 절차를 가리킨다. 부트스트랩의 어원은 다음과 같다:
+**[부트스트랩](https://en.wikipedia.org/wiki/Bootstrapping)**(bootstrap)은 아무런 외부 도움을 받지 않고 자체적으로 실행하는 절차를 가리킨다. 부트스트랩의 어원은 다음과 같다:
 
 > 미국 관용구 "[pull yourself up by your bootstraps](https://en.wiktionary.org/wiki/pull_oneself_up_by_one%27s_bootstraps)," 즉 *스스로를 부트스트랩을 당겨 들어올린다*라는 표현이 있는데 사실상 물리적으로 불가능하다. 하지만 현재는 "아무런 도움없이 어려움을 극복하고 성취하다"라는 의미로 변질되면서, 부트스트랩이란 용어가 이러한 의미를 함축하게 되었다.
 
 컴퓨터에 전력이 공급되는 시점부터 운영체제가 로드될 때까지 자력으로 해내는 부트스트랩 과정을 일명 [부팅](#부팅)(booting)이라 부르게 된 것이다.
 
 # BIOS
-**[BIOS](https://en.wikipedia.org/wiki/BIOS)**(Basic Input/Output System)는 [부팅](#부팅) 과정에 하드웨어를 초기화 및 진단하고, [디스크](Storage.md)에 저장된 [부트로더](#부트로더)를 [메모리](Memory.md)에 로드하여 [운영체제](https://en.wikipedia.org/wiki/Operating_system)의 [커널](Kernel.md)을 실행시키는 [메인보드](https://en.wikipedia.org/wiki/Motherboard) [펌웨어](https://en.wikipedia.org/wiki/Firmware)이다. [IBM](https://en.wikipedia.org/wiki/IBM)에서 개발한 전매 소프트웨어였으나, [역설계](https://ko.wikipedia.org/wiki/역공학)를 성공한 이후 호환 PC 기종이 대거 생산되며 [사실상 표준](https://en.wikipedia.org/wiki/De_facto_standard)이 되었다. 새로운 [UEFI](#uefi)의 등장으로, 이를 구분하기 위해 "레거시" BIOS라고 흔히 언급된다.
+**[BIOS](https://en.wikipedia.org/wiki/BIOS)**(Basic Input/Output System)는 [부팅](#부팅) 과정에 하드웨어를 초기화 및 진단하고, [디스크](Storage.md)에 저장된 [부트로더](#부트로더)를 [메모리](Memory.md)에 로드하여 [운영체제](https://en.wikipedia.org/wiki/Operating_system)의 [커널](Kernel.md)을 실행시키는 [메인보드](https://en.wikipedia.org/wiki/Motherboard) [펌웨어](https://en.wikipedia.org/wiki/Firmware)이다. [IBM](https://en.wikipedia.org/wiki/IBM)에서 개발한 전매 소프트웨어였으나, [역설계](https://en.wikipedia.org/wiki/Reverse_engineering)를 성공한 이후 호환 PC 기종이 대거 생산되며 [사실상 표준](https://en.wikipedia.org/wiki/De_facto_standard)이 되었다. 새로운 [UEFI](#uefi)의 등장으로, 이를 구분하기 위해 "레거시" BIOS라고 흔히 언급된다.
 
 BIOS가 부트 장치를 탐색하는 과정은 다음과 같다.
 
