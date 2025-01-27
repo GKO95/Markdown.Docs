@@ -1,7 +1,7 @@
 # C++
-[C++](https://learn.microsoft.com/en-us/cpp/cpp/)는 본래 [클래스](#클래스)를 지원하는 [C 언어](C.md)의 확장판으로 시작된 고급 범용 프로그래밍 언어로, 현재는 그 외에도 [함수](#함수)를 더 유연하게 사용할 수 있거나 [템플릿](#템플릿) 등 다양한 기능을 지원한다. 이러한 유래로 C++는 C 언어와 상당한 [호환성](https://en.wikipedia.org/wiki/Compatibility_of_C_and_C%2B%2B)을 자랑하지만, 오랜 역사를 거쳐온 탓에 엄연히 서로 다른 언어이다. C++는 현재 [데스크탑](https://ko.wikipedia.org/wiki/응용_소프트웨어)이나 [서버](https://ko.wikipedia.org/wiki/서버), 또는 [운영체제](Windows.md)와 같은 [임베디드](https://en.wikipedia.org/wiki/Embedded_software) 분야에서도 활약하고 있다.
+**[C++](https://learn.microsoft.com/en-us/cpp/cpp/)**는 본래 [클래스](#클래스)를 지원하는 [C 언어](C.md)의 확장판으로 시작된 고급 범용 프로그래밍 언어로, 현재는 그 외에도 [함수](#함수)를 더 유연하게 사용할 수 있거나 [템플릿](#템플릿) 등 다양한 기능을 지원한다. 이러한 유래로 C++는 C 언어와 상당한 [호환성](https://en.wikipedia.org/wiki/Compatibility_of_C_and_C%2B%2B)을 자랑하지만, 오랜 역사를 거쳐온 탓에 엄연히 서로 다른 언어이다. C++는 현재 [데스크탑](https://en.wikipedia.org/wiki/Application_software)이나 [서버](https://en.wikipedia.org/wiki/Server_(computing)), 또는 [운영체제](Windows.md)와 같은 [임베디드](https://en.wikipedia.org/wiki/Embedded_software) 분야에서도 활약하고 있다.
 
-C++ 언어에 필요한 컴파일러는 흔히 소스 코드 편집, 프로그램 빌드, 그리고 디버깅 기능을 제공하는 [통합 개발 환경](https://ko.wikipedia.org/wiki/통합_개발_환경)(integrated development environment; IDE)을 설치하면 대체로 권장되는 [컴파일러](#컴파일러)가 함께 설치된다.
+C++ 언어에 필요한 컴파일러는 흔히 소스 코드 편집, 프로그램 빌드, 그리고 디버깅 기능을 제공하는 [통합 개발 환경](https://en.wikipedia.org/wiki/Integrated_development_environment)(integrated development environment; IDE)을 설치하면 대체로 권장되는 [컴파일러](#컴파일러)가 함께 설치된다.
 
 > [비주얼 스튜디오 코드](https://code.visualstudio.com/)(Visual Studio Code; VS Code)는 엄연히 말해 "텍스트 편집기"이며, 아래의 IDE를 사용할 것을 권장한다.
 
@@ -14,9 +14,9 @@ C++ 언어는 [컴파일 언어](Programming.md#컴파일러)(compiled language)
 
 컴파일러는 개발사와 목적에 따라 다양한 종류가 존재하지만, 전부 동일한 ISO 표준에 따라 동작하므로 일반적인 경우에는 어떤 컴파일러를 사용하던 무관하다. 아래는 대표적인 C++ 언어 컴파일러들을 나열한다.
 
-* [Microsoft Visual C++](https://ko.wikipedia.org/wiki/마이크로소프트_비주얼_C++) (일명 MSVC): 마이크로소프트
-* [GNU C Compiler](https://ko.wikipedia.org/wiki/GNU_C_컴파일러) (일명 GCC): GNU 프로젝트
-* [Clang](https://ko.wikipedia.org/wiki/클랭): LLVM Developer Group, 애플
+* [Microsoft Visual C++](https://en.wikipedia.org/wiki/Microsoft_Visual_C++) (일명 MSVC): 마이크로소프트
+* [GNU C Compiler](https://en.wikipedia.org/wiki/GNU_Compiler_Collection) (일명 GCC): GNU 프로젝트
+* [Clang](https://en.wikipedia.org/wiki/Clang): LLVM Developer Group, 애플
 
 ## 프로젝트
 다음은 비주얼 스튜디오 2022을 위주로 C++ 프로젝트 구축에 대하여 설명한다.
@@ -29,7 +29,7 @@ C++ 언어는 [컴파일 언어](Programming.md#컴파일러)(compiled language)
 * `int main() { ... }`: C++ 언어가 시작되는 함수, 일명 [진입점](#진입점)이다
 
 # 구문
-[구문](https://ko.wikipedia.org/wiki/구문_(프로그래밍_언어))(syntax)은 프로그래밍 언어에서 문자 및 기호들의 조합이 올바른 문장 또는 표현식을 구성하였는지 정의하는 규칙이다. 각 프로그래밍 언어마다 규정하는 구문이 다르며, 이를 준수하지 않을 시 해당 프로그램은 빌드되지 않거나, 실행이 되어도 오류 및 의도치 않은 동작을 수행한다.
+**[구문](https://en.wikipedia.org/wiki/Syntax_(programming_languages))**(syntax)은 프로그래밍 언어에서 문자 및 기호들의 조합이 올바른 문장 또는 표현식을 구성하였는지 정의하는 규칙이다. 각 프로그래밍 언어마다 규정하는 구문이 다르며, 이를 준수하지 않을 시 해당 프로그램은 빌드되지 않거나, 실행이 되어도 오류 및 의도치 않은 동작을 수행한다.
 
 다음은 C++ 언어에서 구문에 관여하는 요소들을 소개한다:
 
@@ -53,7 +53,7 @@ C++ 언어는 [컴파일 언어](Programming.md#컴파일러)(compiled language)
 
 * **[문장](https://en.wikipedia.org/wiki/Statement_(computer_science))(statement)**
     
-    실질적으로 무언가를 실행하는 구문적 존재를 가리킨다: 흔히 하나 이상의 표현식으로 구성되지만, [`break`](#break-문) 및 [`continue`](#continue-문)와 같이 독립적으로 사용되는 문장도 있다. 러스트 프로그래밍 언어는 [세미콜론](https://ko.wikipedia.org/wiki/새줄_문자)(semicolon) `;`을 기준으로 문장을 분별한다. 
+    실질적으로 무언가를 실행하는 구문적 존재를 가리킨다: 흔히 하나 이상의 표현식으로 구성되지만, [`break`](#break-문) 및 [`continue`](#continue-문)와 같이 독립적으로 사용되는 문장도 있다. 러스트 프로그래밍 언어는 [세미콜론](https://en.wikipedia.org/wiki/Newline)(semicolon) `;`을 기준으로 문장을 분별한다. 
 
     ```cpp
     int variable = 2 + 3;      // 숫자 5를 "variable" 변수에 초기화
@@ -72,15 +72,15 @@ C++ 언어는 [컴파일 언어](Programming.md#컴파일러)(compiled language)
     ```
 
 ### 식별자
-[식별자](https://learn.microsoft.com/en-us/cpp/cpp/identifiers-cpp)(identifier)는 프로그램을 구성하는 데이터들을 구별하기 위해 사용되는 명칭이다. 즉, 식별자는 개발자가 데이터에 직접 붙여준 이름이다. C++에서 식별자를 선정하는데 아래의 규칙을 지켜야 한다.
+**[식별자](https://learn.microsoft.com/en-us/cpp/cpp/identifiers-cpp)**(identifier)는 프로그램을 구성하는 데이터들을 구별하기 위해 사용되는 명칭이다. 즉, 식별자는 개발자가 데이터에 직접 붙여준 이름이다. C++에서 식별자를 선정하는데 아래의 규칙을 지켜야 한다.
 
 1. 알파벳, 숫자, 밑줄 `_`만 허용 (그 외 특수문자 및 공백 사용 불가)
 2. 식별자의 첫 문자는 숫자가 될 수 없음
 3. 대소문자 구분 필수
-4. [예약어](https://ko.wikipedia.org/wiki/예약어) 금지
+4. [예약어](https://en.wikipedia.org/wiki/Reserved_word) 금지
 
 ### 주석
-[주석](https://learn.microsoft.com/en-us/cpp/cpp/comments-cpp)(comment)은 프로그램의 소스 코드로 취급하지 않아 실행되지 않는 영역이다. 흔히 코드에 대한 간단한 정보를 기입하기 위해 사용되는 데 C++ 언어에는 한줄 주석 그리고 블록 주석이 존재한다.
+**[주석](https://learn.microsoft.com/en-us/cpp/cpp/comments-cpp)**(comment)은 프로그램의 소스 코드로 취급하지 않아 실행되지 않는 영역이다. 흔히 코드에 대한 간단한 정보를 기입하기 위해 사용되는 데 C++ 언어에는 한줄 주석 그리고 블록 주석이 존재한다.
 
 <table style="table-layout: fixed; width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C++ 주석 종류</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">한줄 주석</th><th style="text-align: center;">블록 주석</th></tr></thead><tbody><tr><td colspan="2">주석은 컴파일 직전에 <a href="#전처리기">전처리기</a>에 의해 소스 코드에 제거된다. 즉, 실행 파일 안에는 주석의 어떠한 정보도 저장되지 않는다.</td></tr><tr style="vertical-align: top; overflow-wrap: break-word;"><td>
 
@@ -98,13 +98,13 @@ C++ 언어는 [컴파일 언어](Programming.md#컴파일러)(compiled language)
 </td></tr></tbody></table>
 
 ## 자료형
-[자료형](https://en.wikipedia.org/wiki/Data_type)(data type)은 데이터를 어떻게 표현할 지 결정하는 요소이며, C++에서는 다음과 같이 존재한다.
+**[자료형](https://en.wikipedia.org/wiki/Data_type)**(data type)은 데이터를 어떻게 표현할 지 결정하는 요소이며, C++에서는 다음과 같이 존재한다.
 
 <table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://learn.microsoft.com/en-us/cpp/cpp/fundamental-types-cpp">C++ 자료형</a></caption><colgroup><col style="width: 15%;"/><col style="width: 15%;"/><col style="width: 15%;"/><col/></colgroup><thead><tr><th style="text-align: center;">키워드</th><th style="text-align: center;">자료형</th><th style="text-align: center;">크기 (바이트)</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>char</code></td><td style="text-align: center;">문자</td><td style="text-align: center;">1</td><td>단일 ANSI 문자</td></tr><tr><td style="text-align: center;"><code>short</code></td><td style="text-align: center;">정수</td><td style="text-align: center;">2</td><td>가장 작은 정수 자료형</td></tr><tr><td style="text-align: center;"><code>int</code></td><td style="text-align: center;">정수</td><td style="text-align: center;">2 <sub>(최소)</sub></td><td>워드 크기의 기본 정수 자료형; <code>short</code>보다 작아서는 안되며, 32비트 시스템 이후로는 4바이트가 일반화되었다.</td></tr><tr><td style="text-align: center;"><code>long</code></td><td style="text-align: center;">정수</td><td style="text-align: center;">4 <sub>(최소)</sub></td><td>정수 자료형 <code>int</code>보다 작아서는 안되며, 4바이트와 8바이트 중 어느 크기를 채택하였는지 컴파일러마다 다르다.</td></tr><tr><td style="text-align: center;"><code>float</code></td><td style="text-align: center;">부동소수점</td><td style="text-align: center;">4</td><td>32비트 단정밀도 실수</td></tr><tr><td style="text-align: center;"><code>double</code></td><td style="text-align: center;">부동소수점</td><td style="text-align: center;">8</td><td>64비트 배정밀도 실수</td></tr><tr><td style="text-align: center;"><code>bool</code></td><td style="text-align: center;">논리형</td><td style="text-align: center;">1</td><td>참(<code>true</code>; 영 외의 정수) 혹은 거짓(<code>false</code>; 0)</td></tr><tr><td style="text-align: center;"><code>void</code></td><td style="text-align: center;">보이드</td><td style="text-align: center;">1</td><td>불특정 자료형</td></tr><tr><td style="text-align: center;"><code>auto</code></td><td style="text-align: center;">자동</td><td style="text-align: center;">N/A</td><td>컴파일러에 의해 적절한 자료형으로 자동 선택된다. 복잡한 자료형을 간략히 정의하는데 매우 유용하다.</td></tr></tbody/></table>
 
-> [바이트](https://ko.wikipedia.org/wiki/바이트)(byte)란, 컴퓨터에서 메모리에 저장하는 가장 기본적인 단위이다. 자료형마다 크기가 정해진 이유는 효율적인 메모리 관리 차원도 있으나 CPU 연산과도 깊은 연관성을 갖는다. 한 바이트는 여덟 개의 [비트](https://ko.wikipedia.org/wiki/비트_(단위))(bit)로 구성된다.
+> [바이트](https://en.wikipedia.org/wiki/Byte)(byte)란, 컴퓨터에서 메모리에 저장하는 가장 기본적인 단위이다. 자료형마다 크기가 정해진 이유는 효율적인 메모리 관리 차원도 있으나 CPU 연산과도 깊은 연관성을 갖는다. 한 바이트는 여덟 개의 [비트](https://en.wikipedia.org/wiki/Bit)(bit)로 구성된다.
 
-`unsigned` 키워드는 자료형 중에서 [최상위 비트](https://ko.wikipedia.org/wiki/최상위_비트)를 정수의 [부호](https://ko.wikipedia.org/wiki/Signed와_unsigned)를 결정하는 요소로 사용하지 않도록 한다. 아래의 16비트 정수형인 `short`는 원래 최상위 비트를 제외한 나머지 15개의 비트로 정수를 표현한다. `unsigned` 키워드를 사용하면 음의 정수를 나타낼 수 없지만, 16개의 비트로 양의 정수를 더 많이 표현할 수 있다.
+`unsigned` 키워드는 자료형 중에서 [최상위 비트](https://en.wikipedia.org/wiki/Bit_numbering#Most_significant_bit)를 정수의 [부호](https://en.wikipedia.org/wiki/Signedness)를 결정하는 요소로 사용하지 않도록 한다. 아래의 16비트 정수형인 `short`는 원래 최상위 비트를 제외한 나머지 15개의 비트로 정수를 표현한다. `unsigned` 키워드를 사용하면 음의 정수를 나타낼 수 없지만, 16개의 비트로 양의 정수를 더 많이 표현할 수 있다.
 
 ```cpp
 short             // 표현 가능 범위: -32768 ~ +32767
@@ -112,7 +112,7 @@ unsigned short    // 표현 가능 범위:     +0 ~ +65535
 ```
 
 ### 자료형 변환
-자료형 변환(type casting)은 데이터를 다른 자료형으로 바꾸는 작업이며, 불가피하게 데이터가 손실될 수 있으므로 유의하도록 한다.
+**자료형 변환**(type casting)은 데이터를 다른 자료형으로 바꾸는 작업이며, 불가피하게 데이터가 손실될 수 있으므로 유의하도록 한다.
 
 * **암시적 자료형 변환**(implicit type casting)
 
@@ -162,7 +162,7 @@ unsigned short    // 표현 가능 범위:     +0 ~ +65535
     </td></tr></tbody></table>
 
 ### `sizeof` 연산자
-[`sizeof`](https://en.cppreference.com/w/cpp/language/sizeof) 연산자는 데이터나 자료형의 메모리에 할당된 바이트 크기를 반환한다.
+**[`sizeof`](https://en.cppreference.com/w/cpp/language/sizeof)** 연산자는 데이터나 자료형의 메모리에 할당된 바이트 크기를 반환한다.
 
 ```cpp
 sizeof(int);      // 크기: 4바이트
@@ -170,7 +170,7 @@ sizeof(char);     // 크기: 1바이트
 ```
 
 ## 변수
-변수(variable)는 데이터를 지정된 [자료형](#자료형)으로 저장하는 메모리 공간이다. 아래 코드는 `variable` [식별자](#식별자)를 정수형 변수로 "정의(definition)"하여 메모리 공간을 확보한 다음 상수 3을 할당한다. 여기서 변수로의 최초 할당을 "초기화(initialization)"라고 부르며, 변수를 정의한 이후에 별도로 이루어질 수 있다.
+**변수**(variable)는 데이터를 지정된 [자료형](#자료형)으로 저장하는 메모리 공간이다. 아래 코드는 `variable` [식별자](#식별자)를 정수형 변수로 "정의(definition)"하여 메모리 공간을 확보한 다음 상수 3을 할당한다. 여기서 변수로의 최초 할당을 "초기화(initialization)"라고 부르며, 변수를 정의한 이후에 별도로 이루어질 수 있다.
 
 <table style="width: 95%; margin-left: auto; margin-right: auto;"><caption>C++의 변수 정의 및 초기화</caption><colgroup><col style="width: 50%;"/></col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">변수 정의 및 초기화 (일괄식)</th><th style="text-align: center;">변수 정의 및 초기화 (개별식)</th></tr></thead><tbody><tr style="vertical-align: top;"><td>
 
@@ -240,7 +240,7 @@ char variable = 75;    // ASCII에 의해 문자 'K'가 저장
 거의 모든 프로그래밍 언어는 할당 기호를 기준으로 왼쪽에는 피할당자(변수), 오른쪽에는 피할당자로 전달하려는 표현식(값 혹은 데이터)이 위치한다. 반대로 놓여질 경우, 오류가 발생하거나 원치 않는 결과가 도출될 수 있다.
 
 ## 네임스페이스
-[네임스페이스](https://en.wikipedia.org/wiki/Namespace)(namespace)는 식별자의 유일성을 보장하기 위한 [영역범위](https://learn.microsoft.com/en-us/cpp/cpp/scope-visual-cpp)(scope)를 설정하여 데이터를 분류 공간이다. `namespace` 키워드를 통해 네임스페이스를 지정하고 블록 안에 변수, 함수, 클래스 등의 데이터들이 선언될 수 있다. 네임스페이스 안에 선언된 데이터들은 범위지정 연산자(scope resolution operator) `::`를 통해 호출이 가능하다.
+**[네임스페이스](https://en.wikipedia.org/wiki/Namespace)**(namespace)는 식별자의 유일성을 보장하기 위한 [영역범위](https://learn.microsoft.com/en-us/cpp/cpp/scope-visual-cpp)(scope)를 설정하여 데이터를 분류 공간이다. `namespace` 키워드를 통해 네임스페이스를 지정하고 블록 안에 변수, 함수, 클래스 등의 데이터들이 선언될 수 있다. 네임스페이스 안에 선언된 데이터들은 범위지정 연산자(scope resolution operator) `::`를 통해 호출이 가능하다.
 
 ```cpp
 // 네임스페이스 및 변수 선언
@@ -264,7 +264,7 @@ namespace1::variable = 3;
     ```
 
 ### `using` 키워드
-`using` 키워드는 네임스페이스 내의 데이터를 간편하게 접근할 수 있도록 한다. 즉, 네임스페이스를 별도로 명시하지 않아도 데이터 호출이 가능하게 한다. 하지만 무분별한 남용은 컴파일러가 어느 네임스페이스의 데이터를 호출하는 것인지 구별하지 못하게 하여 오류가 발생할 위험이 높다.
+**`using` 키워드**는 네임스페이스 내의 데이터를 간편하게 접근할 수 있도록 한다. 즉, 네임스페이스를 별도로 명시하지 않아도 데이터 호출이 가능하게 한다. 하지만 무분별한 남용은 컴파일러가 어느 네임스페이스의 데이터를 호출하는 것인지 구별하지 못하게 하여 오류가 발생할 위험이 높다.
 
 <table style="width: 95%; margin-left: auto; margin-right: auto;"><caption>네임스페이스의 <code>using</code> 키워드 활용</caption><colgroup><col style="width: 50%;"/></col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/language/namespace#Using-directives"><code>using</code> 지시문</a> (using-directive)</th><th style="text-align: center;"><a href="hhttps://en.cppreference.com/w/cpp/language/namespace#Using-declarations"><code>using</code> 선언</a> (using-declaration)</th></tr></thead><tbody><tr><td>스크립트 파일에서 해당 네임스페이스 전체를 생략한다.</td><td>네임스페이스 내의 개별 데이터를 선택적으로 간략화시킨다.</td></tr><tr><td>
 
@@ -281,7 +281,7 @@ std::cout << "Hello World!" << endl;
 </td></tr></tbody></table>
 
 ## 연산자
-[연산자](https://en.wikipedia.org/wiki/Operator_(computer_programming))(operator)는 피연산 데이터를 조작할 수 있는 가장 간단한 형태의 연산 요소이다. 연산자는 피연산자의 접두부, 접미부, 혹은 두 데이터 사이에 위치시켜 사용한다. 가독성을 위해 데이터와 연산자 사이에 공백을 넣어도 연산에는 아무런 영향을 주지 않는다. 다음은 [C/C++ 연산자](https://ko.wikipedia.org/wiki/C와_C++의_연산자)들을 간략히 소개한다.
+**[연산자](https://en.wikipedia.org/wiki/Operator_(computer_programming))**(operator)는 피연산 데이터를 조작할 수 있는 가장 간단한 형태의 연산 요소이다. 연산자는 피연산자의 접두부, 접미부, 혹은 두 데이터 사이에 위치시켜 사용한다. 가독성을 위해 데이터와 연산자 사이에 공백을 넣어도 연산에는 아무런 영향을 주지 않는다. 다음은 [C/C++ 연산자](https://en.wikipedia.org/wiki/Operators_in_C_and_C++)들을 간략히 소개한다.
 
 ### 산술 연산자
 <table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://en.cppreference.com/w/cpp/language/operator_arithmetic">산술 연산자</a>(arithmetic operators)</caption><colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">산술</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>+</code></td><td style="text-align: center;">덧셈</td><td>좌측과 우측 피연산자의 값을 더하여 반환한다.</td></tr><tr><td style="text-align: center;"><code>-</code></td><td style="text-align: center;">뺄셈</td><td>좌측 피연산자에서 우측 피연산자를 뺀 값을 반환한다.</td></tr><tr><td style="text-align: center;"><code>*</code></td><td style="text-align: center;">덧셈</td><td>좌측 피연산자를 우측 피연산자의 값만큼 곱하여, 즉 반복 덧셈하여 반환한다.</td></tr><tr><td style="text-align: center;"><code>/</code></td><td style="text-align: center;">나눗셈</td><td>좌측 피연산자에서 우측 피연산자를 나눈 <a href="https://en.wikipedia.org/wiki/Quotient">몫</a>을 반환한다.</td></tr><tr><td style="text-align: center;"><code>%</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Modular_arithmetic">모듈러</a></td><td>좌측 피연산자에서 우측 피연산자를 나눈 <a href="https://en.wikipedia.org/wiki/Remainder">나머지</a>를 반환한다.</td></tr></tbody></table>
@@ -304,7 +304,7 @@ x = y--;  // 동일: { x = y; y = y - 1; }
 </td></tr></tbody></table>
 
 ### 비트 연산자
-<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://en.wikipedia.org/wiki/Bitwise_operations_in_C">비트 연산자</a>(bitwise operators)</caption><colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">비트연산</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>&</code></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/비트_연산#AND">AND</a></td><td>두 피연산자의 각 비트를 비교하여 모두 1이면 1을, 아니면 0을 계산하여 반환한다.</td></tr><tr><td style="text-align: center;"><code>|</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operation#OR">OR</a></td><td>두 피연산자의 각 비트를 비교하여 하나라도 1이 있으면 1을, 아니면 0을 계산하여 반환한다.</td></tr><tr><td style="text-align: center;"><code>^</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operation#XOR">XOR</a></td><td>두 피연산자의 각 비트를 비교하여 값이 같으면 0을, 다르면 1을 계산하여 반환한다.</td></tr><tr><td style="text-align: center;"><code>~</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operation#NOT">NOT</a></td><td>피연산자의 각 비트마다 반전시킨 값을 반환한다.</td></tr><tr><td style="text-align: center;"><code>&lt;&lt;</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operations_in_C#Left_shift_%3C%3C">좌향 시프트</a></td><td>피연산자(左)의 비트를 전반적으로 일정 값(右)만큼 왼쪽으로 이동시킨다.</td></tr><tr><td style="text-align: center;"><code>&gt;&gt;</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operations_in_C#Right_shift_%3E%3E">우향 시프트</a></td><td>피연산자(左)의 비트를 전반적으로 일정 값(右)만큼 오른쪽으로 이동시킨다.</td></tr></tbody></table>
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://en.wikipedia.org/wiki/Bitwise_operations_in_C">비트 연산자</a>(bitwise operators)</caption><colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">비트연산</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>&</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operation#AND">AND</a></td><td>두 피연산자의 각 비트를 비교하여 모두 1이면 1을, 아니면 0을 계산하여 반환한다.</td></tr><tr><td style="text-align: center;"><code>|</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operation#OR">OR</a></td><td>두 피연산자의 각 비트를 비교하여 하나라도 1이 있으면 1을, 아니면 0을 계산하여 반환한다.</td></tr><tr><td style="text-align: center;"><code>^</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operation#XOR">XOR</a></td><td>두 피연산자의 각 비트를 비교하여 값이 같으면 0을, 다르면 1을 계산하여 반환한다.</td></tr><tr><td style="text-align: center;"><code>~</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operation#NOT">NOT</a></td><td>피연산자의 각 비트마다 반전시킨 값을 반환한다.</td></tr><tr><td style="text-align: center;"><code>&lt;&lt;</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operations_in_C#Left_shift_%3C%3C">좌향 시프트</a></td><td>피연산자(左)의 비트를 전반적으로 일정 값(右)만큼 왼쪽으로 이동시킨다.</td></tr><tr><td style="text-align: center;"><code>&gt;&gt;</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operations_in_C#Right_shift_%3E%3E">우향 시프트</a></td><td>피연산자(左)의 비트를 전반적으로 일정 값(右)만큼 오른쪽으로 이동시킨다.</td></tr></tbody></table>
 
 ### 할당 연산자
 단순 할당 연산자를 산술 및 비트 연산자와 조합하여 코드를 더욱 간결하게 작성할 수 있으며, 아래는 다양한 할당 연산자 중 일부만 보여준다.
@@ -342,9 +342,9 @@ x <<= y;  // 동일: x = x << y;
 <table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://en.cppreference.com/w/cpp/language/operator_logical">논리 연산자</a>(logical operators)</caption><colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/><col style="width: "/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">논리</th><th style="text-align: center;">설명 </th></tr></thead><tbody><tr><td style="text-align: center;"><code>&&</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Logical_conjunction">논리곱</a></td><td>좌측 그리고 우측 <a href="https://en.wikipedia.org/wiki/Proposition">명제</a>(피연산자)가 모두 참이면 <code>true</code>를 반환한다.</td></tr><tr><td style="text-align: center;"><code>||</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Logical_disjunction">논리합</a></td><td>좌측 또는 우측 명제(피연산자)가 하나라도 참이면 <code>true</code>를 반환한다.</td></tr><tr><td style="text-align: center;"><code>!</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Negation">부정</a></td><td>명제(피연산자)가 참이면 거짓으로, 혹은 그 반대로 반전된 값을 반환한다.</td></tr></tbody></table>
 
 ## 탈출 문자
-[탈출 문자](https://en.wikipedia.org/wiki/Escape_character)(escape character)는 백슬래시 기호 `\`를 사용하며, [문자열](#문자열)로부터 탈출하여 텍스트 데이터 내에서 특정 연산을 수행하도록 한다. 예시에서 `\n` 탈출 문자를 사용하여 문자열 줄바꿈을 구현한 것을 보여주었다.
+**[탈출 문자](https://en.wikipedia.org/wiki/Escape_character)**(escape character)는 백슬래시 기호 `\`를 사용하며, [문자열](#문자열)로부터 탈출하여 텍스트 데이터 내에서 특정 연산을 수행하도록 한다. 예시에서 `\n` 탈출 문자를 사용하여 문자열 줄바꿈을 구현한 것을 보여주었다.
 
-> 한편, C++ 표준 라이브러리는 [줄바꿈 조작자](https://en.cppreference.com/w/cpp/io/manip/endl)(new-line manipulator) `std::endl`를 통해 자체적으로 텍스트 [줄바꿈](https://ko.wikipedia.org/wiki/새줄_문자)을 지원한다.
+> 한편, C++ 표준 라이브러리는 [줄바꿈 조작자](https://en.cppreference.com/w/cpp/io/manip/endl)(new-line manipulator) `std::endl`를 통해 자체적으로 텍스트 [줄바꿈](https://en.wikipedia.org/wiki/Newline)을 지원한다.
 
 <table style="table-layout: fixed; width: 90%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C++ 텍스트 줄바꿈 구현 방법</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">탈출 문자</th><th style="text-align: center;">줄바꿈 조작자</th></tr></thead><tbody><tr style="vertical-align: top; overflow-wrap: break-word;"><td>
 
@@ -384,7 +384,7 @@ std::cout << static_cast<char>(variable);
 
 여기서 `std::cin` 및 `std::cout`은 각각 터미널 대상의 입출력 전역 스트림이며, 파일 스트림 객체로 지정하였다면 해당 파일로 입출력이 처리된다.
 
-> [스트림](https://ko.wikipedia.org/wiki/스트림_(컴퓨팅))(stream)이란 사전적 의미로 "물이 흐르는 개울"을 의미한다. 즉, 컴퓨터 통신 용어에서 스트림은 데이터가 흐르는 길을 의미한다.
+> [스트림](https://en.wikipedia.org/wiki/Stream_(computing))(stream)이란 사전적 의미로 "물이 흐르는 개울"을 의미한다. 즉, 컴퓨터 통신 용어에서 스트림은 데이터가 흐르는 길을 의미한다.
 
 ## 파일 관리
 C++ 언어는 파일 입출력 스트림을 제공하는 [`fstream`](https://en.cppreference.com/w/cpp/header/fstream) 헤더에서 제공하는 [클래스](#클래스)를 통해 파일을 열고 닫을 수 있다.
@@ -409,16 +409,16 @@ C++ 언어의 파일 스트림은 입출력 양방향을 지원하지만, 열었
 
 더 이상 사용하지 않는 파일은 스트림 객체의 [`close()`](https://en.cppreference.com/w/cpp/io/basic_ofstream/close) 메소드로 닫아 리소스 낭비를 줄이는데 기여할 수 있다. [예외](#예외-처리)가 발생하여도 정상적으로 파일을 닫을 수 있도록 예외 처리문이나 `EOF`(End-of-File) 또는 [`is_open()`](https://en.cppreference.com/w/cpp/io/basic_ofstream/is_open) 메소드를 활용한 조건문을 사용할 것을 권장한다.
 
-> [EOF](https://ko.wikipedia.org/wiki/파일_끝)란, End-of-File의 약자로 파일의 끝에 도달하였으면 트리거되는 데이터이다.
+> [EOF](https://en.wikipedia.org/wiki/End-of-file)란, End-of-File의 약자로 파일의 끝에 도달하였으면 트리거되는 데이터이다.
 
 # 제어문
-제어문(control statement)은 코드 실행을 제어하는 문장을 가리키며, 프로그래밍에 있어 기초적이면서 가장 흔히 사용되는 코드 유형 중 하나이다. 제어문을 크게 세 분류로 나누면 [조건문](#조건문), [반복문](#반복문), 그리고 [이동문](#이동문)이 존재한다.
+**제어문**(control statement)은 코드 실행을 제어하는 문장을 가리키며, 프로그래밍에 있어 기초적이면서 가장 흔히 사용되는 코드 유형 중 하나이다. 제어문을 크게 세 분류로 나누면 [조건문](#조건문), [반복문](#반복문), 그리고 [이동문](#이동문)이 존재한다.
 
 ## 조건문
-조건문(conditional statement)은 주어진 조건의 논리에 따라서 코드 실행 여부를 결정하는 제어문이다:
+**조건문**(conditional statement)은 주어진 조건의 논리에 따라서 코드 실행 여부를 결정하는 제어문이다:
 
 ### `if` 조건문
-[`if`](https://en.cppreference.com/w/cpp/language/if) 조건문은 조건 혹은 논리가 참일 경우 코드를 실행하며, 거짓일 경우에는 코드를 실행하지 않는다.
+**[`if`](https://en.cppreference.com/w/cpp/language/if)** 조건문은 조건 혹은 논리가 참일 경우 코드를 실행하며, 거짓일 경우에는 코드를 실행하지 않는다.
 
 ```cpp
 if (condition) {
@@ -459,14 +459,14 @@ if (condition) statement;
     ```
 
 ### 조건 연산자
-[조건 연산자](https://en.cppreference.com/w/c/language/operator_other#Conditional_operator)(ternary operator) `?:`는 세 가지 인수만을 사용하여 조건문을 아래와 같이 간략하게 표현한다. 조건 연산자는 가독성을 감소시키므로 과용해서는 안되지만 변수 할당에 유용하다.
+**[조건 연산자](https://en.cppreference.com/w/c/language/operator_other#Conditional_operator)**(ternary operator) `?:`는 세 가지 인수만을 사용하여 조건문을 아래와 같이 간략하게 표현한다. 조건 연산자는 가독성을 감소시키므로 과용해서는 안되지만 변수 할당에 유용하다.
 
 ```cpp
 condition ? true_return : false_return;
 ```
 
 ### `switch` 조건문
-[`switch`](https://en.cppreference.com/w/cpp/language/switch) 조건문은 전달받은 인자를 `case`의 상수와 동일한지 비교하여 논리가 참일 경우 해당 지점부터 코드를 실행하며, 거짓일 경우에는 다음 `case`로 넘어간다. 선택사항으로 `default` 키워드를 통해 어떠한 `case` 조건에도 부합하지 않으면 실행될 지점을 지정한다.
+**[`switch`](https://en.cppreference.com/w/cpp/language/switch)** 조건문은 전달받은 인자를 `case`의 상수와 동일한지 비교하여 논리가 참일 경우 해당 지점부터 코드를 실행하며, 거짓일 경우에는 다음 `case`로 넘어간다. 선택사항으로 `default` 키워드를 통해 어떠한 `case` 조건에도 부합하지 않으면 실행될 지점을 지정한다.
 
 ```cpp
 switch (argument) {
@@ -514,10 +514,10 @@ Statement 4
 ```
 
 ## 반복문
-반복문(loop statement)은 주어진 조건의 논리에 따라서 코드를 얼마나 반복적으로 실행할 지 결정하는 제어문이다:
+**반복문**(loop statement)은 주어진 조건의 논리에 따라서 코드를 얼마나 반복적으로 실행할 지 결정하는 제어문이다:
 
 ### `while` 반복문
-[`while`](https://en.cppreference.com/w/cpp/language/while) 반복문은 조건 혹은 논리가 참일 동안 코드를 반복적으로 실행하며, 거짓일 경우에는 반복문을 종료한다.
+**[`while`](https://en.cppreference.com/w/cpp/language/while)** 반복문은 조건 혹은 논리가 참일 동안 코드를 반복적으로 실행하며, 거짓일 경우에는 반복문을 종료한다.
 
 ```cpp
 while (condition) {
@@ -539,7 +539,7 @@ while (condition) statement;
     ```
 
 ### `for` 반복문
-[`for`](https://en.cppreference.com/w/cpp/language/for) 반복문은 조건 혹은 논리가 참일 동안 코드를 반복적으로 실행하며, 거짓일 경우에는 반복문을 종료한다. `for` 반복문은 조건 평가 외에도 지역 변수를 초기화 및 증감할 수 있는 인자가 있다.
+**[`for`](https://en.cppreference.com/w/cpp/language/for)** 반복문은 조건 혹은 논리가 참일 동안 코드를 반복적으로 실행하며, 거짓일 경우에는 반복문을 종료한다. `for` 반복문은 조건 평가 외에도 지역 변수를 초기화 및 증감할 수 있는 인자가 있다.
 
 ```cpp
 for (initialize; condition; increment) {
@@ -564,16 +564,16 @@ for (initialize; condition; increment) statement;
     ```
 
 ## 이동문
-이동문(jump statement)은 아무런 조건이 필요없이 코드 실행 지점을 이동시키는 제어문이다:
+**이동문**(jump statement)은 아무런 조건이 필요없이 코드 실행 지점을 이동시키는 제어문이다:
 
 ### `break` 탈출문
-[`break`](https://en.cppreference.com/w/cpp/language/break) 탈출문은 (1) 반복문을 조기 종료시키거나, (2) `switch` 조건문에서 경우에 따라 실행되어야 할 코드를 구분짓기 위해 사용된다.
+**[`break`](https://en.cppreference.com/w/cpp/language/break)** 탈출문은 (1) 반복문을 조기 종료시키거나, (2) `switch` 조건문에서 경우에 따라 실행되어야 할 코드를 구분짓기 위해 사용된다.
 
 ### `continue` 연속문
-[`continue`](https://en.cppreference.com/w/cpp/language/continue) 연속문은 반복문을 종료하지 않은 채 나머지 실행 코드를 전부 무시하고 반복문의 조건부로 되돌아간다.
+**[`continue`](https://en.cppreference.com/w/cpp/language/continue)** 연속문은 반복문을 종료하지 않은 채 나머지 실행 코드를 전부 무시하고 반복문의 조건부로 되돌아간다.
 
 ### `goto` 이동문
-[`goto`](hhttps://en.cppreference.com/w/cpp/language/goto) 이동문은 다른 문장으로써는 절대로 접근이 불가한 코드에 도달할 수 있도록 한다 (일명 제어 전달; control transfer). `goto` 키워드에 명시된 [레이블](https://en.cppreference.com/w/cpp/language/statements#Labels)로 제어를 전달하나, 이 둘은 반드시 동일한 [함수](#함수) 내에 위치해야 한다. 레이블은 `goto` 문 이전이나 이후에 위치하여도 무관하다.
+**[`goto`](hhttps://en.cppreference.com/w/cpp/language/goto)** 이동문은 다른 문장으로써는 절대로 접근이 불가한 코드에 도달할 수 있도록 한다 (일명 제어 전달; control transfer). `goto` 키워드에 명시된 [레이블](https://en.cppreference.com/w/cpp/language/statements#Labels)로 제어를 전달하나, 이 둘은 반드시 동일한 [함수](#함수) 내에 위치해야 한다. 레이블은 `goto` 문 이전이나 이후에 위치하여도 무관하다.
 
 ```cpp
 int main() {
@@ -588,10 +588,10 @@ label:
 }
 ```
 
-단, `goto` 이동문을 사용할 때에는 매우 조심해야 하며 무리한 남용은 [스파게티 코드](https://ko.wikipedia.org/wiki/스파게티_코드)의 원인이 된다.
+단, `goto` 이동문을 사용할 때에는 매우 조심해야 하며 무리한 남용은 [스파게티 코드](https://en.wikipedia.org/wiki/Spaghetti_code)의 원인이 된다.
 
 ### `return` 반환문
-[`return`](https://en.cppreference.com/w/cpp/language/return) 반환문은 [함수](#함수)를 종료하면서 지정된 자료형으로 데이터를 반환한다. 하단에 코드가 남아 있음에도 불구하고 반환문이 실행되면 함수는 즉시 종료된다.
+**[`return`](https://en.cppreference.com/w/cpp/language/return)** 반환문은 [함수](#함수)를 종료하면서 지정된 자료형으로 데이터를 반환한다. 하단에 코드가 남아 있음에도 불구하고 반환문이 실행되면 함수는 즉시 종료된다.
 
 ```cpp
 // return 반환문이 있는 사용자 정의 함수
@@ -608,9 +608,9 @@ Hello World!
 ```
 
 # 컨테이너
-C++ 언어는 여러 데이터를 하나의 변수로 저장하는 공간인 [컨테이너](https://en.cppreference.com/w/cpp/container)(container)를 기본적으로 [표준 라이브러리](https://ko.wikipedia.org/wiki/C++_표준_라이브러리)로부터 제공한다. 아래는 C++ 컨테이너 유형에 대하여 간략하게 소개한다.
+C++ 언어는 여러 데이터를 하나의 변수로 저장하는 공간인 [컨테이너](https://en.cppreference.com/w/cpp/container)(container)를 기본적으로 [표준 라이브러리](https://en.wikipedia.org/wiki/C++_Standard_Library)로부터 제공한다. 아래는 C++ 컨테이너 유형에 대하여 간략하게 소개한다.
 
-<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C++ 컨테이너 유형</caption><colgroup><col style="width: 25%;"/><col style="width: 75%;"/></colgroup><thead><tr><th style="text-align: center;">유형</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Sequence_container_(C++)">시퀀스 컨테이너</a><br/>(sequence)</td><td>저장된 다수의 데이터, 일명 요소가 순번을 가져 순차적인 호출이 가능하다.</td></tr><tr><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Associative_containers">연관 컨테이너</a><br/>(associative)</td><td>키(key)와 값(value)이 하나씩 서로 연관 및 정돈된 자료구조로 탐색에 적합하다.</td></tr><tr><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Unordered_associative_containers_(C++))(unordered associative containers">비정돈 연관 컨테이너</a><br/>(unordered associative)</td><td>키와 값이 하나씩 서로 연관되었으나 정돈되지 않은, 즉 <a href="https://ko.wikipedia.org/wiki/해시_테이블">해시</a> 자료구조의 컨테이너이다.</td></tr></tbody></table>
+<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C++ 컨테이너 유형</caption><colgroup><col style="width: 25%;"/><col style="width: 75%;"/></colgroup><thead><tr><th style="text-align: center;">유형</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Sequence_container_(C++)">시퀀스 컨테이너</a><br/>(sequence)</td><td>저장된 다수의 데이터, 일명 요소가 순번을 가져 순차적인 호출이 가능하다.</td></tr><tr><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Associative_containers">연관 컨테이너</a><br/>(associative)</td><td>키(key)와 값(value)이 하나씩 서로 연관 및 정돈된 자료구조로 탐색에 적합하다.</td></tr><tr><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Unordered_associative_containers_(C++))(unordered associative containers">비정돈 연관 컨테이너</a><br/>(unordered associative)</td><td>키와 값이 하나씩 서로 연관되었으나 정돈되지 않은, 즉 <a href="https://en.wikipedia.org/wiki/Hash_table">해시</a> 자료구조의 컨테이너이다.</td></tr></tbody></table>
 
 ## 배열
 [배열](https://en.cppreference.com/w/cpp/language/array)(array)은 동일한 자료형의 데이터를 일련의 순서로 담는 [시퀀스 컨테이너](https://en.wikipedia.org/wiki/Sequence_container_(C++))이다. 전통적인 C 형식의 배열은 식별자 뒤에 대괄호 `[]`가 위치하여 배열이 담을 수 있는 데이터 용량 크기를 [정수 리터럴](https://en.cppreference.com/w/cpp/language/integer_literal)이나 [상수](#변수)로 지정한다. 배열의 데이터 초기화는 중괄호 `{}` 내에 항목을 순서대로 쉼표로 나누어 나열한다. 만일 배열 용량을 지정하지 않으면 데이터 개수만큼 크기가 정해지며, 아래는 배열을 정의하는 두 방식을 보여준다.
@@ -717,7 +717,7 @@ char* ptr = "World!";    // 포인터를 활용한 문자열 표현 방법
 <table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C 언어의 문자열 함수</caption><colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup><thead><tr><th style="text-align: center;">함수</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/string/byte/strcat"><code>strcat</code></a></td><td>배열의 문자열에 다른 배열의 문자열을 덧붙인다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/string/byte/strcpy"><code>strcpy</code></a></td><td>배열의 문자열을 다른 배열로 복사한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/string/byte/strlen"><code>strlen</code></a></td><td>널 문자를 제외한 문자열 길이를 반환한다.</td></tr></tbody></table>
 
 ### 문자열 자료형
-C++ 표준 라이브러리는 [`iostream`](#파일-입출력) (구체적으로 [`string`](https://en.cppreference.com/w/cpp/header/string)) 헤더로부터 자체적으로 문자열 자료형 [`std::string`](https://en.cppreference.com/w/cpp/string/basic_string)을 제공한다. 문자열 자료형은 매우 편리하지만, [윈도우 API](WinAPI.md) 또는 [POSIX](https://ko.wikipedia.org/wiki/POSIX) 등에서는 불가피하게 C 형식 문자열을 사용해야 할 경우가 흔히 발생한다.
+C++ 표준 라이브러리는 [`iostream`](#파일-입출력) (구체적으로 [`string`](https://en.cppreference.com/w/cpp/header/string)) 헤더로부터 자체적으로 문자열 자료형 [`std::string`](https://en.cppreference.com/w/cpp/string/basic_string)을 제공한다. 문자열 자료형은 매우 편리하지만, [윈도우 API](WinAPI.md) 또는 [POSIX](https://en.wikipedia.org/wiki/POSIX) 등에서는 불가피하게 C 형식 문자열을 사용해야 할 경우가 흔히 발생한다.
 
 > 문자열 자료형은 흔히 문자열 [객체](#클래스)(string object)라고도 부른다.
 
@@ -845,7 +845,7 @@ void function(int *arg) {
 배열 자체를 호출하면 배열의 첫 번째 요소의 메모리 주소를 가져오기 때문에 가능하다. 특히 배열의 각 요소가 할당된 메모리 주소는 연쇄적이므로, 바로 옆 (`int` 정수형이면 +4) 메모리 주소에는 배열의 다음 요소가 저장된 메모리 공간이다.
 
 ### 함수 오버로딩
-[함수 오버로딩](https://ko.wikipedia.org/wiki/함수_오버로드)(function overloading)은 동일한 식별자 및 반환 자료형을 갖는 함수를 전달받은 인자의 자료형 및 개수에 따라 달리 동작할 수 있도록 지원한다. 원하는 자료형 및 개수의 매개변수 조합을 가진 함수를 추가 정의하여 오버로딩을 구현할 수 있다.
+[함수 오버로딩](https://en.wikipedia.org/wiki/Function_overloading)(function overloading)은 동일한 식별자 및 반환 자료형을 갖는 함수를 전달받은 인자의 자료형 및 개수에 따라 달리 동작할 수 있도록 지원한다. 원하는 자료형 및 개수의 매개변수 조합을 가진 함수를 추가 정의하여 오버로딩을 구현할 수 있다.
 
 ```cpp
 // 오버로딩된 함수의 프로토타입
@@ -867,7 +867,7 @@ float function(float arg1, float arg2) {
 ```
 
 ## 진입점
-[진입점](https://ko.wikipedia.org/wiki/엔트리_포인트)(entry point)는 프로그램이 시작되는 부분을 의미하며, C++ 언어의 경우 [`main()`](https://en.cppreference.com/w/cpp/language/main_function) 함수에서부터 코드가 실행된다. 진입점은 프로토타입이 존재하지 않으며, 유일해야 하므로 복수의 `main()` 함수가 존재하거나 찾지 못하면 요류가 발생하여 컴파일이 불가하다.
+[진입점](https://en.wikipedia.org/wiki/Entry_point)(entry point)는 프로그램이 시작되는 부분을 의미하며, C++ 언어의 경우 [`main()`](https://en.cppreference.com/w/cpp/language/main_function) 함수에서부터 코드가 실행된다. 진입점은 프로토타입이 존재하지 않으며, 유일해야 하므로 복수의 `main()` 함수가 존재하거나 찾지 못하면 요류가 발생하여 컴파일이 불가하다.
 
 ```cpp
 // C++ 언어 진입점: main()
@@ -887,7 +887,7 @@ C/C++ 언어 표준에 의하면 `main()` 함수는 반드시 `int` 정수형을
 * **`argv`**: 전달인자 데이터 배열(argument vector); 매개변수 정의는 `char *argv[]`로 대체 가능하다.
 
 ## 콜백 함수
-[콜백 함수](https://ko.wikipedia.org/wiki/콜백)(callback function)는 인자로 전달되는 함수이다. 여기서 콜백이란, 전달인자로 전달된 함수가 다른 함수에서 언젠가 다시 호출(call back)되어 실행된다는 의미에서 붙여진 용어이다. 콜백 함수를 전달받는 함수, 일명 호출 함수(calling function)는 블록 내에서 매개변수 호출을 통해 콜백 함수를 실행한다.
+[콜백 함수](https://en.wikipedia.org/wiki/Callback_(computer_programming))(callback function)는 인자로 전달되는 함수이다. 여기서 콜백이란, 전달인자로 전달된 함수가 다른 함수에서 언젠가 다시 호출(call back)되어 실행된다는 의미에서 붙여진 용어이다. 콜백 함수를 전달받는 함수, 일명 호출 함수(calling function)는 블록 내에서 매개변수 호출을 통해 콜백 함수를 실행한다.
 
 아래는 콜백 함수의 예시이며, 이에 대한 자세한 원리는 차후 [함수 포인터](#함수-포인터)에서 설명한다.
 
@@ -922,7 +922,7 @@ std::cout << calling(callback, 1);
 
 > 여기서 `ret`은 람다 표현식의 반환 자료형을 의미하며, 명시되지 않을 경우에는 `auto`로 간주한다.
 
-[캡처 조항](https://en.cppreference.com/w/cpp/language/lambda#Lambda_capture)(capture clause)은 매개변수 이외에 유효범위 내에 선언된 변수를 람다 표현식으로 전달할 수 있는 수단을 제공한다. 유효범위 내의 변수를 캡처 조항에 명시하지 않고 람다 표현식에 호출하면 [MSVC](https://ko.wikipedia.org/wiki/마이크로소프트_비주얼_C++)의 경우에 [C3493](https://learn.microsoft.com/en-us/cpp/error-messages/compiler-errors-2/compiler-error-c3493) 오류가 발생한다. 다음은 캡처 조항을 활용하는 예시와 함께 코드에 대하여 설명한다.
+[캡처 조항](https://en.cppreference.com/w/cpp/language/lambda#Lambda_capture)(capture clause)은 매개변수 이외에 유효범위 내에 선언된 변수를 람다 표현식으로 전달할 수 있는 수단을 제공한다. 유효범위 내의 변수를 캡처 조항에 명시하지 않고 람다 표현식에 호출하면 [MSVC](https://en.wikipedia.org/wiki/Microsoft_Visual_C++)의 경우에 [C3493](https://learn.microsoft.com/en-us/cpp/error-messages/compiler-errors-2/compiler-error-c3493) 오류가 발생한다. 다음은 캡처 조항을 활용하는 예시와 함께 코드에 대하여 설명한다.
 
 <table style="width: 100%; margin-left: auto; margin-right: auto;"><caption>C++ 람다 표현식의 캡처 조항 예시</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">명시적 캡처</th><th style="text-align: center;">암시적 캡처</th></tr></thead><tbody><tr><td>캡쳐 조항에 유효범위 내에 위치한 변수를 선택적으로 기입할 때, 변수 앞에 <code>&</code> 기호 여부에 따라 "값에 의한" 혹은 "<a href="#참조">참조</a>에 의한" 캡처가 구분된다.</td><td>유효범위의 변수를 기본적으로 "값에 의한" <code>[=]</code> 혹은 "참조에 의한" <code>[&]</code> 캡처하여, 개별적으로 변수를 명시하여 별도 캡처 조항을 지정할 수 있다.</td></tr><tr style="vertical-align: top;"><td>
 
@@ -975,7 +975,7 @@ lambda();
 ## 인라인 함수
 [인라인 함수](https://en.cppreference.com/w/cpp/language/inline)(inline function)는 인라인 확장에 사용될 `inline` 키워드로 지정된 함수이다.
 
-> [인라인 확장](https://ko.wikipedia.org/wiki/인라인_확장)(inline expansion)은 컴파일 과정에서 함수 [호출지](https://en.wikipedia.org/wiki/Call_site)(call site)를 함수 코드로 치환하는 최적화 기법이다. 
+> [인라인 확장](https://en.wikipedia.org/wiki/Inline_expansion)(inline expansion)은 컴파일 과정에서 함수 [호출지](https://en.wikipedia.org/wiki/Call_site)(call site)를 함수 코드로 치환하는 최적화 기법이다. 
 
 프로그램 실행 (즉, 런타임) 도중에 함수를 호출하는데 소모되는 시간이 없으므로 속도가 소폭 향상되는 효과가 있으나, 과도한 사용은 프로그램 크기가 커지고 RAM 메모리를 더 많이 사용하는 단점으로 작용한다. 그러므로 인라인은 코드가 작지만 자주 사용되는 함수에 가장 적합하다.
 
@@ -1003,7 +1003,7 @@ int main() {
 </td></tr></tbody></table>
 
 ## 재귀 함수
-[재귀 함수](https://ko.wikipedia.org/wiki/재귀_(컴퓨터_과학))(recursive function)는 스스로를 호출하는 함수이다. 재귀 함수는 반드시 스스로를 호출하는 반복으로부터 탈출하는 기저 조건(base case)이 필요하다. 기저 조건이 없으면 무한 재귀가 발생하는데 프로그램 실행에 기여하는 [메모리](#스택-영역)가 부족하여 충돌이 발생한다.
+[재귀 함수](https://en.wikipedia.org/wiki/Recursion_(computer_science))(recursive function)는 스스로를 호출하는 함수이다. 재귀 함수는 반드시 스스로를 호출하는 반복으로부터 탈출하는 기저 조건(base case)이 필요하다. 기저 조건이 없으면 무한 재귀가 발생하는데 프로그램 실행에 기여하는 [메모리](#스택-영역)가 부족하여 충돌이 발생한다.
 
 ```cpp
 // 예제: 펙토리얼 "!"
@@ -1030,7 +1030,7 @@ int *ptr = &variable;
 
 * **[lvalue](https://learn.microsoft.com/en-us/cpp/c-language/l-value-and-r-value-expressions)**: 접근 가능한 메모리 주소를 할당받은 데이터로 변수, [함수](#함수) 등이 해당한다.
 * **[rvalue](https://learn.microsoft.com/en-us/cpp/cpp/lvalues-and-rvalues-visual-cpp)**
-    * *prvalue*: 접근 가능한 메모리 주소를 할당받지 아니한 데이터로 정수 및 문자열 [리터럴](https://ko.wikipedia.org/wiki/리터럴) 등이 해당한다.
+    * *prvalue*: 접근 가능한 메모리 주소를 할당받지 아니한 데이터로 정수 및 문자열 [리터럴](https://en.wikipedia.org/wiki/Literal_(computer_programming)) 등이 해당한다.
     * *xrvalue*: 메모리 주소를 할당받았지만 더 이상 접근이 불가한 데이터이다.
 
 > lvalue와 rvalue는 각각 할당 기호 `=`의 좌측(left)과 우측(right)에 위치한, 즉 데이터를 저장하는 피할당자와 값을 전달하는 표현식 관계이다.
@@ -1120,7 +1120,7 @@ int main() {
 ```
 
 ## 참조
-[참조](https://en.cppreference.com/w/cpp/language/reference)(reference)는 메모리 주소를 저장하지만, 초기화 이루 메모리 주소 변동이 불가한 상수 포인터에 대응한다. 참조는 단순히 [네임 바인딩](https://ko.wikipedia.org/wiki/네임_바인딩)(name binding)된 변수이다: 자체적으로 할당된 메모리를 갖지 않는 대신에 참조하는 데이터가 할당된 메모리를 그대로 사용하며, 종속된 블록 영역범위를 벗어나면 참조만이 자연스레 사라진다. 이러한 특징에 의해 참조는 보다 안전한 포인터 하위호환으로 사용된다.
+[참조](https://en.cppreference.com/w/cpp/language/reference)(reference)는 메모리 주소를 저장하지만, 초기화 이루 메모리 주소 변동이 불가한 상수 포인터에 대응한다. 참조는 단순히 [네임 바인딩](https://en.wikipedia.org/wiki/Name_binding)(name binding)된 변수이다: 자체적으로 할당된 메모리를 갖지 않는 대신에 참조하는 데이터가 할당된 메모리를 그대로 사용하며, 종속된 블록 영역범위를 벗어나면 참조만이 자연스레 사라진다. 이러한 특징에 의해 참조는 보다 안전한 포인터 하위호환으로 사용된다.
 
 C++ 언어는 [lvalue](#포인터)와 [rvalue](#포인터)에 따른 두 가지 유형의 참조를 지원한다:
 
@@ -1161,7 +1161,7 @@ std::cout << ref;
 </td></tr></tbody></table>
 
 ## 엔디언
-[엔디언](https://ko.wikipedia.org/wiki/엔디언)(endianess)이란 컴퓨터가 메모리로부터 데이터를 표현하기 위해 바이트 단위의 정보를 어떻게 정렬할 것인지를 가리킨다. 특히 포인터가 메모리 주소를 접근 및 호출하기 때문에 엔디언의 기본적인 개념 이해는 필요하다고 본다.
+**[엔디언](https://en.wikipedia.org/wiki/Endianness)**(endianess)이란 컴퓨터가 메모리로부터 데이터를 표현하기 위해 바이트 단위의 정보를 어떻게 정렬할 것인지를 가리킨다. 특히 포인터가 메모리 주소를 접근 및 호출하기 때문에 엔디언의 기본적인 개념 이해는 필요하다고 본다.
 
 엔디언이 C++ 언어 프로그래밍에 어떠한 영향을 주는지 설명하기 위해, 아래 예시는 십진수 정수를 십육진수로 변환 및 메모리 주소를 출력하였다.
 
@@ -1225,11 +1225,11 @@ for (int index = 0; index < sizeof(variable); index++) {
 비록 숫자를 읽을 때에는 빅 엔디언이 익숙하겠지만, 컴퓨터 메모리에서는 리틀 엔디언으로 데이터를 저장한다는 점을 명시하도록 한다.
 
 # 동적 할당
-소스 코드에서 정의된 [변수](#변수)와 [함수](#함수)들은 [메모리](Memory.md)의 [스택](https://ko.wikipedia.org/wiki/%EC%8A%A4%ED%83%9D)(stack) 영역에서 [레지스터](Processor.md)에 의한 푸쉬(push)와 팝(pop)이 빠른 속도로 이루어지면서 [프로세스](Process.md)가 실행된다. 하지만 스택 구조의 특성상 메모리 데이터를 저장하기에 부적합하며, 특히 블록 내에 정의된 변수를 외부에서 사용할 수 없는 점도 스택에 의한 현상이다. 이러한 한계점을 극복하기 위한 기술이 바로 프로세스 [런타임](https://ko.wikipedia.org/wiki/런타임) 도중에 메모리를 확보하는 "[동적 할당](https://ko.wikipedia.org/wiki/C_동적_메모리_할당)(dynamic allocation)"이다. 만일 [배열](#배열)을 변수에 정의하였다면, 프로세스 실행 당시에 애초부터 이를 고려하여 스택상 메모리가 미리 확보된 점과 상반되는 동작이다.
+소스 코드에서 정의된 [변수](#변수)와 [함수](#함수)들은 [메모리](Memory.md)의 [스택](https://en.wikipedia.org/wiki/Stack_(abstract_data_type))(stack) 영역에서 [레지스터](Processor.md)에 의한 푸쉬(push)와 팝(pop)이 빠른 속도로 이루어지면서 [프로세스](Process.md)가 실행된다. 하지만 스택 구조의 특성상 메모리 데이터를 저장하기에 부적합하며, 특히 블록 내에 정의된 변수를 외부에서 사용할 수 없는 점도 스택에 의한 현상이다. 이러한 한계점을 극복하기 위한 기술이 바로 프로세스 [런타임](https://en.wikipedia.org/wiki/Execution_(computing)#Runtime) 도중에 메모리를 확보하는 "[동적 할당](https://en.wikipedia.org/wiki/C_dynamic_memory_allocation)(dynamic allocation)"이다. 만일 [배열](#배열)을 변수에 정의하였다면, 프로세스 실행 당시에 애초부터 이를 고려하여 스택상 메모리가 미리 확보된 점과 상반되는 동작이다.
 
 동적 할당은 [힙](https://en.wikipedia.org/wiki/Memory_management#HEAP)(heap) 영역에 메모리를 할당하여, 스택의 영향을 전혀 받지 않은 채 데이터를 저장할 수 있다.
 
-> 힙 영역은 [힙 자료구조](https://ko.wikipedia.org/wiki/힙_(자료_구조))와 전혀 상관이 없으며, 사전적으로 "(데이터) 더미"를 뜻하는 순수히 물리 메모리의 주소공간 영역을 지칭하는 용어이다.
+> 힙 영역은 [힙 자료구조](https://en.wikipedia.org/wiki/Heap_(data_structure))와 전혀 상관이 없으며, 사전적으로 "(데이터) 더미"를 뜻하는 순수히 메모리의 주소공간 영역을 지칭하는 용어이다.
 
 개발자는 원하는 데이터를 저장할 힙 영역의 메모리를 할당받아 사용할 수 있지만, 반면 사용하지 않게 된다면 개발자가 직접 할당받은 메모리를 해제하여 시스템에 반환해야 한다. 이러한 작업이 충분히 이루어지지 않는다면 메모리 누수(memory leak)가 발생하여 리소스 고갈로 프로세스 충돌을 야기한다.
 
@@ -1249,11 +1249,11 @@ delete[] arr;
 
 C++ 언어는 여전히 전통적인 [C 형식 동적 메모리 할당](C.md#동적-할당)이 가능하지만, 되도록 C++ 언어에 최적화된 `new` 및 `delete` 표현식을 사용할 것을 권장한다.
 
-* **[메모리 누수](https://ko.wikipedia.org/wiki/메모리_누수)(memory leak)**
+* **[메모리 누수](https://en.wikipedia.org/wiki/Memory_leak)(memory leak)**
 
     더 이상 사용되지 않는 동적 할당된 메모리가 계속 잔여하여, 프로세스의 [가상 주소 공간](Process.md#가상-주소-공간)에 할당할 수 있는 메모리 리소스가 점차 줄어드는 현상이다. 가상 주소 공간에 더 이상 할당받을 수 있는 메모리가 없으면 프로세스 충돌이 발생하여 종료된다.
 
-* **[허상 포인터](https://ko.wikipedia.org/wiki/허상_포인터)(dangling pointer)**
+* **[허상 포인터](https://en.wikipedia.org/wiki/Dangling_pointer)(dangling pointer)**
 
     *[NTSTATUS](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/596a1078-e883-4972-9bbc-49e60bebca55) [0xC0000005](https://learn.microsoft.com/en-us/shows/inside/c0000005) STATUS_ACCESS_VIOLATION 참고*
 
@@ -1284,7 +1284,7 @@ std::cout << variable.at(2);
 
 > 클래스 내에 정의된 메소드는 사실상 [인라인 함수](#인라인-함수)이며, 자세한 내용은 [맴버 선언](#맴버-선언)을 참고한다.
 
-객체화에 의해 클래스에 정의된 맴버들은 [캡슐화](https://ko.wikipedia.org/wiki/캡슐화)(encapsulation)되어 다음 특징을 갖는다:
+객체화에 의해 클래스에 정의된 맴버들은 [캡슐화](https://en.wikipedia.org/wiki/Encapsulation_(computer_programming))(encapsulation)되어 다음 특징을 갖는다:
 
 1. 변수와 함수가 하나의 객체로 결합된다.
 1. 우연치 않은 수정을 방지하기 위해 변수 및 함수에 대한 직접적인 접근을 외부로부터 제한할 수 있다.
@@ -1437,8 +1437,6 @@ struct CLASS {
 ### 정적 맴버
 [정적 맴버](https://en.cppreference.com/w/cpp/language/static)(static member)는 클래스로부터 생성된 객체의 개수와 무관하게 오로지 하나의 데이터만 존재하여 공유되는 `static` 키워드로 명시된 맴버이다. 해당 유형의 맴버는 객체화가 필요없이 클래스로부터 직접 호출이 가능하다.
 
-> 파이썬 프로그래밍 언어와 비교하자면 [클래스 속성 및 메소드](/docs/ko.Python/#클래스-속성-및-메소드)에 대응한다.
-
 일반 맴버와 달리, 정적 맴버는 클래스 내에서 선언만 되고 외부에서 별도로 정의되어야 한다:
 
 <table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">정적 맴버의 선언과 정의</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">정적 필드</th><th style="text-align: center;">정적 메소드</th></tr></thead><tbody><tr style="vertical-align: top;"><td>
@@ -1531,7 +1529,7 @@ int function(CLASS &obj, int arg) {
 ```
 
 ## `this` 포인터
-[`this`](https://en.cppreference.com/w/cpp/language/this) 포인터는 (클래스가 아닌) 객체가 자신의 메모리 주소를 반환하는데 사용된다. 즉, 객체는 `this` 포인터를 통해 [비정적](#변수)(non-static) 맴버들을 명시적으로 호출할 수 있으며, 객체 내부적으로 사용되는 [클래스 포인터](#클래스-포인터)로 간주할 수 있다. 흔히 맴버를 매개변수나 지역변수와 구분짓는데 유용하게 활용된다.
+**[`this`](https://en.cppreference.com/w/cpp/language/this)** 포인터는 (클래스가 아닌) 객체가 자신의 메모리 주소를 반환하는데 사용된다. 즉, 객체는 `this` 포인터를 통해 [비정적](#변수)(non-static) 맴버들을 명시적으로 호출할 수 있으며, 객체 내부적으로 사용되는 [클래스 포인터](#클래스-포인터)로 간주할 수 있다. 흔히 맴버를 매개변수나 지역변수와 구분짓는데 유용하게 활용된다.
 
 ```cpp
 struct CLASS {
@@ -1549,7 +1547,7 @@ struct CLASS {
 ```
 
 ## 상속
-[상속](https://en.cppreference.com/w/cpp/language/derived_class)(inheritance)은 기반 클래스(base class)의 맴버 데이터 및 함수를 파생 클래스(derived class)에게 전달하는 행위이다. 파생 클래스가 상속 받을 기반 클래스의 맴버들은 [접근 지정자](#접근-지정자)로부터 접근 권한을 설정할 수 있다.
+**[상속](https://en.cppreference.com/w/cpp/language/derived_class)**(inheritance)은 기반 클래스(base class)의 맴버 데이터 및 함수를 파생 클래스(derived class)에게 전달하는 행위이다. 파생 클래스가 상속 받을 기반 클래스의 맴버들은 [접근 지정자](#접근-지정자)로부터 접근 권한을 설정할 수 있다.
 
 * `public`: 기반 클래스 맴버들의 접근 지정자가 파생 클래스에서도 유지된다 (`stuct` 및 `union` 키워드의 기본 접근 지정자이다).
 * `private`: 기반 클래스 맴버들은 접근 지정자가 파생 클래스에서 `private`으로 전환된다 (`class` 키워드의 기본 접근 지정자이다).
@@ -1621,7 +1619,7 @@ int main() {
 </td></tr></tbody></table>
 
 ## 다형성
-[다형성](https://ko.wikipedia.org/wiki/다형성_(컴퓨터_과학))(polymorphism)은 "여러가지의 형태를 가진"이란 사전적 의미를 가지며, 프로그래밍 언어에서는 상황과 용도에 따라 달리 동작하는 것을 가리킨다.
+**[다형성](https://en.wikipedia.org/wiki/Polymorphism_(computer_science))**(polymorphism)은 "여러가지의 형태를 가진"이란 사전적 의미를 가지며, 프로그래밍 언어에서는 상황과 용도에 따라 달리 동작하는 것을 가리킨다.
 
 <table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C++ 언어의 다형성 유형</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">컴파일타임 다형성(compile-time polymorphism)</th><th style="text-align: center;">런타임 다형성(runtime polymorphism)</th></tr></thead><tbody><tr style="vertical-align: top; text-align: center;"><td>컴파일 시 이루어지는 다형성<br/>(일명 정적 다형성; static polymorphism)</td><td>프로그램 실행 시 이루어지는 다형성<br/>(일명 동적 다형성; dynamic polymorphism)</td></tr><tr style="vertical-align: top; text-align: center;"><td>예시: <a href="#연산자-오버로딩">연산자 오버로딩</a></td><td>예시: <a href="#함수-오버로딩">함수 오버로딩</a>, <a href="#함수-오버라이딩">함수 오버라이딩</a></td></tr></tbody></table>
 
@@ -1707,9 +1705,9 @@ public:
 # 사용자 정의 자료형
 C++ 언어는 `int`, `float`, 또는 `char` 등의 기존 [자료형](#자료형)을 활용하여 특정 목적을 위한 커스텀 자료형을 제작할 수 있으며, 이를 사용자 정의 자료형(user-defined data type)이라고 부른다. 새로운 자료형을 창조하는 게 아닌, 효율적인 데이터 관리를 위해 기존 자료형들을 활용한 혹은 취합한 자료형이다.
 
-[클래스](#클래스)가 해당하지만, 본 장은 객체지향 기능들이 결여되고 필드 맴버만으로 구성된 [레코드](https://ko.wikipedia.org/wiki/레코드_(컴퓨터_과학))(record)를 지칭하는 [PDS](https://ko.wikipedia.org/wiki/POD_(데이터_구조))(passive data structure 혹은 plain old data, POD; 수동형 자료구조) 관점에서 소개한다.
+[클래스](#클래스)가 해당하지만, 본 장은 객체지향 기능들이 결여되고 필드 맴버만으로 구성된 [레코드](https://en.wikipedia.org/wiki/Record_(computer_science))(record)를 지칭하는 [PDS](https://en.wikipedia.org/wiki/Passive_data_structure)(passive data structure 혹은 plain old data, POD; 수동형 자료구조) 관점에서 소개한다.
 
-> C++ 언어에서 PDS 클래스 자료형을 별도로 다루는 이유는 C 언어의 [사용자 정의 자료형](/docs/ko.C#사용자-정의-자료형)과 호환되기 때문이다.
+> C++ 언어에서 PDS 클래스 자료형을 별도로 다루는 이유는 C 언어의 [사용자 정의 자료형](C.md#사용자-정의-자료형)과 호환되기 때문이다.
 
 * 사용자 정의 [소멸자](#소멸자)가 없다.
 * 사용자 정의 [복사 할당 연산자](https://en.cppreference.com/w/cpp/language/copy_assignment) `operator=`가 없다.
@@ -2079,7 +2077,7 @@ aliasName<int>(1, 3)
 ```
 
 # 예외 처리
-[예외](https://ko.wikipedia.org/wiki/예외_처리)(exception)는 [런타임](https://ko.wikipedia.org/wiki/런타임) 도중에 잘못된 데이터 처리나 적절하지 않은 알고리즘 등에 의해 프로그램상 실행 불가한 코드 오류이다. C++ 언어의 구문적 문제가 아닌 관계로 정상적으로 빌드되지만, 예외를 마주하게 되면 [프로세스](Process.md)는 충돌하여 즉시 종료된다. 그러므로 예외 처리(exception handling)란, 프로세스가 오류를 처음으로 마주한 순간인 [1차 시도 예외](ProcDump.md#예외-처리)(1<sup>st</sup> chance exception)에서 유연하게 대처하여 종료되는 것을 방지하고 안정적으로 실행을 유지하는 게 주목표이다.
+[예외](https://en.wikipedia.org/wiki/Exception_handling)(exception)는 [런타임](https://en.wikipedia.org/wiki/Execution_(computing)#Runtime) 도중에 잘못된 데이터 처리나 적절하지 않은 알고리즘 등에 의해 프로그램상 실행 불가한 코드 오류이다. C++ 언어의 구문적 문제가 아닌 관계로 정상적으로 빌드되지만, 예외를 마주하게 되면 [프로세스](Process.md)는 충돌하여 즉시 종료된다. 그러므로 예외 처리(exception handling)란, 프로세스가 오류를 처음으로 마주한 순간인 [1차 시도 예외](ProcDump.md#예외-처리)(1<sup>st</sup> chance exception)에서 유연하게 대처하여 종료되는 것을 방지하고 안정적으로 실행을 유지하는 게 주목표이다.
 
 ### 표준 오류 스트림
 [파일 입출력](#파일-입출력) 장에서 `cin` 및 `cout` 객체와 함께 표준 입력과 출력 스트림을 소개하였다. C++ 언어는 오류 내용을 전달을 목적의 `cerr` "표준 오류(standard error)" 스트림 객체를 제공한다. 이렇게 나뉘어진 스트림은 프로그램으로부터 파일 혹은 장치로 데이터가 전송되는데 선택적 제어를 가능케 한다.
@@ -2273,7 +2271,7 @@ printf("%d", variable);
 ```
 
 # 링커
-[링커](https://ko.wikipedia.org/wiki/링커_(컴퓨팅))(linker) 혹은 링크 편집기(link editor)는 소스 코드를 구성하는 각 .cpp 확장자 파일마다 기계어로 컴파일된 [오브젝트 파일](https://ko.wikipedia.org/wiki/목적_파일)들을 하나의 완전한 프로그램으로 동작할 수 있도록 서로 연동시키는 도구이다. C++ 언어의 [빌드](https://ko.wikipedia.org/wiki/소프트웨어_빌드) 과정은 결국 "[전처리기](#전처리기) → [컴파일러](#컴파일러) → 링커" 순서로 진행되는 작업을 함축한다. 링커를 통해 소스 코드는 외부 스크립트 또는 [라이브러리](#라이브러리)에 정의된 데이터나 코드를 불러와 활용할 수 있다.
+[링커](https://en.wikipedia.org/wiki/Linker_(computing))(linker) 혹은 링크 편집기(link editor)는 소스 코드를 구성하는 각 .cpp 확장자 파일마다 기계어로 컴파일된 [오브젝트 파일](https://en.wikipedia.org/wiki/Object_code)들을 하나의 완전한 프로그램으로 동작할 수 있도록 서로 연동시키는 도구이다. C++ 언어의 [빌드](https://en.wikipedia.org/wiki/Software_build) 과정은 결국 "[전처리기](#전처리기) → [컴파일러](#컴파일러) → 링커" 순서로 진행되는 작업을 함축한다. 링커를 통해 소스 코드는 외부 스크립트 또는 [라이브러리](#라이브러리)에 정의된 데이터나 코드를 불러와 활용할 수 있다.
 
 ## 포함 지시문
 [포함 지시문](https://en.cppreference.com/w/cpp/preprocessor/include)(inclusive directive) `#include`는 전처리기 지시문 중 하나로 대표적으로 [`iostream`](#파일-입출력)와 같은 [헤더 파일](#헤더-파일)을 불러오기 위해 사용된다. `#include` 지시문의 역할은 헤더 파일에 작성된 코드 전체를 해당 위치에 삽입하여 함수 프로토타입과 전역 및 [`extern`](#extern-키워드) 변수를 선언한다. 소스 코드에 데이터와 함수가 정의되었다면, 헤더 파일은 데이터와 함수를 선언하는 목적으로 사용된다.
@@ -2333,7 +2331,7 @@ void func(int x, float y) {
 ```
 
 ### 헤더 파일
-[헤더 파일](https://ko.wikipedia.org/wiki/헤더_파일)(header file)은 데이터 및 기능의 존재를 알리는 역할을 하는 .hpp 확장자 파일이며, 링커로부터 오브젝트 파일들을 연동하기 위해 필요한 핵심 요소이다. 다른 스크립트 파일 또는 라이브러리에 정의된 데이터와 코드를 헤더 파일로 통해 다른 스크립트에서도 사용할 수 있도록 한다. 헤더 파일을 불러오는 방식은 두 가지가 존재한다:
+[헤더 파일](https://en.wikipedia.org/wiki/Include_directive#Header_file)(header file)은 데이터 및 기능의 존재를 알리는 역할을 하는 .hpp 확장자 파일이며, 링커로부터 오브젝트 파일들을 연동하기 위해 필요한 핵심 요소이다. 다른 스크립트 파일 또는 라이브러리에 정의된 데이터와 코드를 헤더 파일로 통해 다른 스크립트에서도 사용할 수 있도록 한다. 헤더 파일을 불러오는 방식은 두 가지가 존재한다:
 
 ```cpp
 #include <iostream>
@@ -2350,7 +2348,7 @@ void func(int x, float y) {
     
     현재 소스 파일이 위치한 경로를 위주로 헤더 파일을 찾는다. 만일 찾지 못하였을 시, `#include <header>`와 같이 지정된 경로에서 헤더 파일을 재탐색한다. 일반적으로 사용자 정의 헤더 파일에 사용된다.
 
-아래는 프로그래밍 언어에서 흔히 사용되는 데이터와 기능들은 바로 사용할 수 있도록 미리 컴파일된 [표준 라이브러리](https://ko.wikipedia.org/wiki/C_표준_라이브러리)를 불러오는 헤더 파일 일부를 나열한다.
+아래는 프로그래밍 언어에서 흔히 사용되는 데이터와 기능들은 바로 사용할 수 있도록 미리 컴파일된 [표준 라이브러리](https://en.wikipedia.org/wiki/C_standard_library)를 불러오는 헤더 파일 일부를 나열한다.
 
 <table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C++ 표준 라이브러리의 헤더 파일</caption><colgroup><col style="width: 18%;"/><col style="width: 12%;"/><col style="70%;"/></colgroup><thead><tr><th style="text-align: center;">유형</th><th style="text-align: center;">헤더 파일</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="#파일-입출력">표준 입출력</a></td><td style="text-align: center;"><code>iostream</code></td><td>표준 입출력 관련 데이터를 제공한다: <code>cin</code>, <code>cout</code> 등</td></tr><tr><td style="text-align: center;"><a href="#파일-입출력">파일 입출력</a></td><td style="text-align: center;"><code>fstream</code></td><td>파일 입출력 관련 데이터 및 기능을 제공하며, <code>iostream</code> 헤더를 포함한다.</td></tr><tr><td style="text-align: center;"><a href="#문자열-자료형">문자열</a></td><td style="text-align: center;"><code>string</code></td><td>문자열 관련 데이터 및 기능을 제공한다: <code>string</code> 자료형 등</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/header/chrono">날짜 및 시간</a></td><td style="text-align: center;"><code>chrono</code></td><td>날짜 및 시간과 관련된 함수를 제공한다.</td></tr></tbody></table>
 
@@ -2406,17 +2404,17 @@ int main() {
 한편, 함수 [프로토타입](#함수)는 원래부터 정의가 아닌 (또 다른 이름인 "전방선언"에서도 알 수 있듯이) 선언이므로 `extern` 키워드가 필요하지 않는다.
 
 ## 라이브러리
-[라이브러리](https://ko.wikipedia.org/wiki/라이브러리_(컴퓨팅))(library)는 변수나 함수 등을 제공하지만, 소스 코드 형태가 아닌 이미 컴파일 및 링크된 완전한 형태의 이진 파일이다. 라이브러리에 연동된 헤더 파일이 있어 `#include` 포함 지시문으로 불러와 사용할 수 있다. 즉, 라이브러리 관점에서 헤더 파일은 [API](https://ko.wikipedia.org/wiki/API)를 제공하는 역할을 한다. 라이브러리로 컴파일을 하면 파일 용량이 줄어들고 배포하기 편리하며, 또한 소스 코드 유출을 방지할 수 있다.
+[라이브러리](https://en.wikipedia.org/wiki/Library_(computing))(library)는 변수나 함수 등을 제공하지만, 소스 코드 형태가 아닌 이미 컴파일 및 링크된 완전한 형태의 이진 파일이다. 라이브러리에 연동된 헤더 파일이 있어 `#include` 포함 지시문으로 불러와 사용할 수 있다. 즉, 라이브러리 관점에서 헤더 파일은 [API](https://en.wikipedia.org/wiki/API)를 제공하는 역할을 한다. 라이브러리로 컴파일을 하면 파일 용량이 줄어들고 배포하기 편리하며, 또한 소스 코드 유출을 방지할 수 있다.
 
 ![비주얼 스튜디오 라이브러리 컴파일 설정](./images/visual_studio_library.png)
 
 라이브러리는 크게 두 종류로 나뉘어진다:
 
-* **[정적 라이브러리](https://ko.wikipedia.org/wiki/정적_라이브러리)(static library)**
+* **[정적 라이브러리](https://en.wikipedia.org/wiki/Static_library)(static library)**
 
     소스 코드를 컴파일하면 라이브러리도 함께 프로그램의 일부로 융합되어 외부 환경에 대한 의존도를 상당히 낮출 수 있다. 다만, 프로그램 용량이 커지고 업데이트된 라이브러리를 적용하려면 소스 코드를 새로 컴파일해야 하는 단점이 있다. 윈도우 NT에서 .lib 확장자를 가진다(유닉스의 경우 .a).
 
-* **[동적 라이브러리](https://ko.wikipedia.org/wiki/동적_링커)(dynamic library)**
+* **[동적 라이브러리](https://en.wikipedia.org/wiki/Dynamic_linker)(dynamic library)**
 
     소스 코드를 컴파일하여도 라이브러리는 프로그램 일부로 융합되지 않아 프로그램 용량이 획기적으로 줄어들고 라이브러리 업데이트가 매우 편리하다. 하지만 컴파일된 프로그램이 라이브러리를 찾지 못하면 실행이 불가하거나 정상적으로 동작하지 않으며, VCRUNTIME140.dll을 찾을 수 없다는 오류창이 대표적인 예시이다. 윈도우 NT에서 .dll 확장자를 가진다(유닉스의 경우 .so).
 
