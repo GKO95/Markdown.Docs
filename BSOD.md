@@ -184,7 +184,7 @@ WriteBitmapDump: page written = 52505, MB per sec = 41.
 ## 페이징 파일
 > *참고: [How to determine the appropriate page file size for 64-bit versions of Windows - Windows Client | Microsoft Learn](https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/how-to-determine-the-appropriate-page-file-size-for-64-bit-versions-of-windows)*
 
-**[페이징 파일](Memory.md#페이징-파일)**(paging file)은 HDD나 SSD와 같은 디스크 저장공간에 상주하여 물리 메모리를 보조하며, BSOD가 발생할 덤프를 저장하는 공간으로도 활용된다. 즉, 페이징 파일에 충분한 공간이 확보되지 않을 경우에 덤프 수집이 실패할 수 있다. 페이징 파일이 크게 설정할 수 있으나 그만큼 저장공간의 여유가 줄어드는 점에 유의해야 하기 때문에, 아래는 필자가 각 덤프 종류마다 추천하는 페이징 파일 크기이다.
+**[페이징 파일](Memory.md#페이징-파일)**(paging file)은 HDD나 SSD와 같은 디스크 저장공간에 상주하여 [RAM](Memory.md)을 보조하며, BSOD가 발생할 덤프를 저장하는 공간으로도 활용된다. 즉, 페이징 파일에 충분한 공간이 확보되지 않을 경우에 덤프 수집이 실패할 수 있다. 페이징 파일이 크게 설정할 수 있으나 그만큼 저장공간의 여유가 줄어드는 점에 유의해야 하기 때문에, 아래는 필자가 각 덤프 종류마다 추천하는 페이징 파일 크기이다.
 
 * **[전체 메모리 덤프](Dump.md#커널-모드-덤프)**: RAM 크기 + 257 MB  (잠재적 [보조 덤프 정보](Dump.md#보조-덤프-정보) & 덤프 헤더 고려) 이상
 * **[커널](Dump.md#커널-모드-덤프), [활성](Dump.md#커널-모드-덤프), [작은](Dump.md#커널-모드-덤프), 그리고 [자동 메모리 덤프](Dump.md#커널-모드-덤프)**: 시스템이 관리하는 크기
@@ -236,7 +236,7 @@ Memory Management 레지스트리 키에서 설정할 수 있는 값들은 알�
 * 드라이버 파일이 복사되어 로드된 게 아니므로 예시의 dump_stornvme.sys 드라이버는 파일로 존재하지 않고 단순히 메타데이터만 표시된 것이다. 스토리지 관련 드라이버에 문제가 발생한 경우에 혹여나 가해지는 손상을 방지하기 위한 조치이며, 시스템 충돌이 발생할 때에만 로드된다.
 
 ## 시스템 충돌
-시스템 내부적으로 오류나 문제가 발생하면 [`KeBugCheckEx()`](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-kebugcheckex) 루틴이 호출되고 파란색 화면이 나타나며 모든 작업이 중지된다. 당시 [물리 메모리](Memory.md)에 들어있는 데이터를 디스크의 페이징 파일로 옮기는, 즉 덤핑(dumping)을 진행하는데 일반적인 파일 입출력과 다른 스토리지 스택을 거쳐 저장한다. 화면에 나타난 백분율(%)이 바로 얼마나 덤핑 진행률을 나타낸다.
+시스템 내부적으로 오류나 문제가 발생하면 [`KeBugCheckEx()`](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-kebugcheckex) 루틴이 호출되고 파란색 화면이 나타나며 모든 작업이 중지된다. 당시 [RAM](Memory.md)에 들어있는 데이터를 디스크의 페이징 파일로 옮기는, 즉 덤핑(dumping)을 진행하는데 일반적인 파일 입출력과 다른 스토리지 스택을 거쳐 저장한다. 화면에 나타난 백분율(%)이 바로 얼마나 덤핑 진행률을 나타낸다.
 
 ![일반 파일 시스템과 충돌 덤프의 입출력 경로 비교](https://crashdmp.files.wordpress.com/2013/02/new_chart.png)
 
