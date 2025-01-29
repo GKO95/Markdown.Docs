@@ -85,7 +85,42 @@ RAM과 페이징 파일 간 데이터가 이동하는 [페이징](https://en.wik
 
 * [성능 카운터](Perfmon.md#성능-카운터): `\Process(*)\Working Set` 또는 `\Process(*)\Working Set - Private`
 
+# 메모리 맵 파일
+> *참고: [File Mapping - Win32 apps | Microsoft Learn](https://learn.microsoft.com/en-us/windows/win32/memory/file-mapping)*
+
+**[메모리 맵 파일](https://en.wikipedia.org/wiki/Memory-mapped_file)**(memory-mapped file)은 파일과 바이트 대 바이트 상관관계를 맺은 [가상 메모리](#가상-메모리)를 가리킨다. 프로그램은 메모리 매핑된 파일을
+
+![디스크의 파일, 파일 매핑 개체, 그리고 파일일 뷰의 관계도](https://learn.microsoft.com/en-us/windows/win32/memory/images/fmap.png)
+
+Win32의 경우 [CreateFileMapping](https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-createfilemappinga) 함수를 제공한다.
+
+
+메모리에 매핑하고 싶은 디스크상 파일은 아무런 파일이 될 수 있으며, 또는 시스템 페이징 파일이 될 수 있다. 파일 매핑 개체는 파일 전체 혹은 일부만을 구성할 수 있다. 개체는 디스크 상 파일에 의해 보조된다; 즉, 파일 매핑 개체가 페이징 아웃될 시 변경된 사항들은 파일에 적용된다. 그리고 파일 매핑 개체 페이지가 다시 페이징 인될 시 변경이 저장된 파일을 다시 불러온다.
+
+> (개인 의견) 개체가 페이징이 된다고 파일 콘텐츠를 함께 가져가는 게 아닌 걸 설명하는 걸로 보임. 개체는 단순히 파일과의 매핑 정보를 제공하고, 실제 콘텐츠 내용을 담고 있는 게 아님을 문맥상 추정됨.
+
+The file on disk can be any file that you want to map into memory, or it can be the system page file. The file mapping object can consist of all or only part of the file. It is backed by the file on disk. This means that when the system swaps out pages of the file mapping object, any changes made to the file mapping object are written to the file. When the pages of the file mapping object are swapped back in, they are restored from the file.
+
+
+[파일](FileSystem.md)과 바이트 단위로 일대일 매핑된 [가상 메모리](#가상-메모리)를 가리킨다. 파일과 메모리 주소 간 상관관계가 형성될 시, 프로그램은 메모리 매핑된 파일 영역을 마치 주기억장치인 마냥 취급할 수 있다.
+
+프로세스를 실행할 때, 운영체제는 실행 이미지 및 관련 모듈을 메모리 맵 파일을 활용하여 메모리로 불러온다.
+
+Perhaps the most common use for a memory-mapped file is the process loader in most modern operating systems (including Windows and Unix-like systems.) When a process is started, the operating system uses a memory mapped file to bring the executable file, along with any loadable modules, into memory for execution. Most memory-mapping systems use a technique called demand paging, where the file is loaded into physical memory in subsets (one page each), and only when that page is actually referenced.[13] In the specific case of executable files, this permits the OS to selectively load only those portions of a process image that actually need to execute.
+
+
+이미지 및 데이터 파일을 불러올 때, 내용물 전체를 물리 메모리로 가져오게 된다면 
+
+열려고 하는 파일을 RAM으로 복사하기보다, 해당 파일의 디스크 영역을 페이징 파일로 할당하여 가상 메모리에 매핑되는 게 성능 효율적이다.
+
+
+메모리 매핑은 [페이징 파일](#페이징-파일)을 완전히 우회할 뿐만 아니라
+
+A possible benefit of memory-mapped files is a "[lazy loading](https://en.wikipedia.org/wiki/Lazy_loading)", thus using small amounts of RAM even for a very large file. Trying to load the entire contents of a file that is significantly larger than the amount of memory available can cause severe thrashing as the operating system reads from disk into memory and simultaneously writes pages from memory back to disk. Memory-mapping may not only bypass the page file completely, but also allow smaller page-sized sections to be loaded as data is being edited, similarly to [demand paging](https://en.wikipedia.org/wiki/Demand_paging) used for programs.
+
 # 메모리 풀
+> *참고: [Pushing the Limits of Windows: Paged and Nonpaged Pool | Microsoft Learn](https://learn.microsoft.com/en-us/archive/blogs/markrussinovich/pushing-the-limits-of-windows-paged-and-nonpaged-pool)*
+
 윈도우 NT 운영체제에서 [메모리 풀](https://learn.microsoft.com/en-us/windows/win32/memory/memory-pools)(memory pools)은 [커널](Kernel.md) 및 [드라이버](Driver.md)에서 시스템 공간에 할당되고 관리되는 커널 [힙](https://en.wikipedia.org/wiki/Memory_management#Manual_memory_management) 메모리이다.
 
 <table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="text-align: center;">커널 메모리 풀 유형</capation><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">페이징 풀 (paged pool)</th><th style="text-align: center;">비페이징 풀 (nonpaged pool)</th></tr></thead><tbody><tr style="text-align: center;"><td>페이징 파일로 이동될 수 있는 커널 메모리이다.</td><td>페이징 파일로 이동될 수 없는 커널 메모리이다.</td></tr></tbody></table>
@@ -101,6 +136,72 @@ RAM과 페이징 파일 간 데이터가 이동하는 [페이징](https://en.wik
 ### Driver Locked 메모리
 [운영체제 구성요소](Windows.md#운영체제-구성요소) 또는 장치 드라이버에서 직접적으로 관리되는 페이징될 수 없는 메모리 영역이다. 문맥상 비페이징 풀과 유사하지만, 중요한 데이터의 빠른 접근성을 위해 장치 드라이버에 특별히 최적화되어 상대적으로 빠른 대신 더 많은 리소스가 요구된다. [하이퍼-V](HyperV.md) 또는 [VMware](https://www.vmware.com/)와 같은 하이퍼바이저의 가상 머신에 배정한 RAM 메모리가 호스트 머신에서는 Driver Locked 메모리로 할당된다.
 
-# 같이 보기
-* [Pushing the Limits of Windows: Physical Memory](https://techcommunity.microsoft.com/t5/windows-blog-archive/pushing-the-limits-of-windows-physical-memory/ba-p/723674)
-* [Pushing the Limits of Windows: Paged and Nonpaged Pool](https://techcommunity.microsoft.com/t5/windows-blog-archive/pushing-the-limits-of-windows-paged-and-nonpaged-pool/ba-p/723789)
+# 데이터 정렬
+**[데이터 정렬](https://en.wikipedia.org/wiki/Data_structure_alignment)**(data alignment)은 컴퓨터의 [프로세서](Processor.md)가 접근할 데이터를 [메모리](#메모리)에서 어떻게 배치하여 정렬시킬 건지 방법을 제시한다. 프로세서가 데이터 접근 시 하드웨어 성능 효율을 높이기 위해 "자연스럽게 정렬(naturally aligned)"시키는 게 데이터 정렬의 목적이다; $n$-바이트 자료형의 데이터가 $n$-바이트 배수 간격의 메모리 주소에 할당되었을 때 정렬이 자연스럽다고 설명한다.
+
+아래는 데이터 정렬의 반영 사례를 보여주기 위한 [C 언어](C.md)의 [구조체](C.md#구조체) 예시이다.
+
+```c
+struct STRUCTURE {
+    char  field1;
+    int   field2;
+};
+
+printf("%d", sizeof(struct STRUCTURE));
+```
+```
+8
+```
+
+대체적으로 자료형마다 지정된 정렬 크기는 해당 자료형 크기와 일치하는 편이다: `char`은 1바이트 정렬, `short`는 2바이트 정렬, `int` 및 `float`는 4바이트 정렬이다. 다양한 자료형 맴버들로 구성될 수 있는 구조체의 경우, 메모리 공간 절약보다 접근 효율이 우선시되기 때문에 맴버 자료형이 갖는 가장 큰 정렬 크기의 배수만큼 메모리를 할당받아 맴버들을 정의된 순서대로 정렬시킨다.
+
+* 위의 예시에서 1바이트의 `char`과 4바이트의 `int`를 합산하면 총 5바이트가 계산된다. 하지만 가장 큰 자료형인 `int`에 따라 4바이트 정렬되었기 때문에, 실제로 할당받은 메모리 크기는 총 8바이트이다.
+
+다음은 몇 가지 경우에 따라 데이터 구조 정렬이 어떻게 이루어진 것인지 설명한다:
+
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">맴버 구성에 따른 데이터 구조 정렬 비교</caption><colgroup><col style="width: 33.3%;"/><col style="width: 33.4%;"/><col style="width: 33.3%;"/></colgroup><thead><tr><th style="text-align: center;">8바이트: <code>char</code>-<code>int</code> 구조</th><th style="text-align: center;">8바이트: <code>char</code>-<code>short</code>-<code>int</code> 구조</th><th style="text-align: center;">12바이트: <code>char</code>-<code>int</code>-<code>short</code> 구조</th></tr></thead><tbody><tr style="vertical-align: top;"><td>
+
+```c
+struct STRUCTURE {
+// ------ Addr: 0x00000000
+    char  field1;       // +1
+//  char  Padding1[3];  // +3
+// ------ Addr: 0x00000004
+    int   field2;       // +4
+// ------ Addr: 0x00000008
+};
+```
+</td><td>
+
+```c
+struct STRUCTURE {
+// ------ Addr: 0x00000000
+    char  field1;       // +1
+//  char  Padding1[1];  // +1
+    short field2;       // +2
+// ------ Addr: 0x00000004
+    int   field3;       // +4
+// ------ Addr: 0x00000008
+};
+```
+</td><td>
+
+```c
+struct STRUCTURE {
+// ------ Addr: 0x00000000
+    char  field1;       // +1
+//  char  Padding1[3];  // +3
+// ------ Addr: 0x00000004
+    int   field2;       // +4
+// ------ Addr: 0x00000008
+    short field3;       // +2
+//  char  Padding2[2];  // +2
+// ------ Addr: 0x0000000C
+};
+```
+</td></tr><tr style="vertical-align: top;"><td>정렬에 의해 맴버 간 여분이 발생하면 메모리의 연속성을 위해 패딩으로 메워진다.</td><td>구조체 자체의 정렬을 위해, 구조체 크기는 정렬 크기의 배수이어야 한다. 맨 마지막 맴버의 자료형 크기가 정렬 크기에 미치지 못하면 나머지를 패딩으로 채운다.</td><td>비록 <code>short</code> 자료형이 2바이트 정렬인 관계로 <code>char</code> 자료형 맴버 사이에 1바이트 패딩이 메워지지만, <code>int</code> 자료형에 의한 4바이트 크기의 정렬 경계 내에 두 맴버를 모두 담아낼 수 있기 때문이다.</td></tr></tbody></table>
+
+[x86](https://en.wikipedia.org/wiki/X86) [아키텍처](https://en.wikipedia.org/wiki/Instruction_set_architecture)는 CPU 하드웨어가 자체적으로 데이터 정렬 문제를 교정하지만, [`EFLAG` 레지스터](Assembly.md#플래그-레지스터)에서 AC (Alignment Check) 플래그를 활성화하면 17h [인터럽트](Processor.md#인터럽트)를 일으킨다. 해당 인터럽트는 [Windows OS](Windows.md)로 전달되면 예외 코드 0x80000002 STATUS_DATATYPE_MISALIGNMENT로 나타난다.<sup>[[참고](https://archive.md/VZWAf)]</sup>
+
+* [리눅스](https://en.wikipedia.org/wiki/Linux)의 경우, 두 개의 [캐시 라인](Processor.md#cpu-캐시)을 거쳐 처리하는 도중에 외부 간섭을 방지하기 위한 조치로 "[split lock](https://lwn.net/Articles/790464/)"이란 [원자적 연산](Processor.md#원자적-연산)을 동원한다.
+* 단종된 [Itanium](https://en.wikipedia.org/wiki/Itanium) 아키텍처는 데이터 정렬 문제를 스스로 교정할 수 없어 [SetErrorMode](https://learn.microsoft.com/en-us/windows/win32/api/errhandlingapi/nf-errhandlingapi-seterrormode) 함수로 프로그램 설정이 매우 중요한 과제였다.
