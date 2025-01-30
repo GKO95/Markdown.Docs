@@ -206,15 +206,21 @@ struct STRUCTURE {
 64비트 프로세서의 [워드](https://en.wikipedia.org/wiki/Word_(computer_architecture))가 8바이트이기 때문에, 32비트 페이징에 불과하고 인덱스의 엔트리는 8바이트 간격으로 구분되어 있음을 유의한다.
 
 ### 32비트 페이징, 4 KB 페이지, PAE 비활성
+아래는 [PAE](#물리-주소-확장)가 비활성화된 4 KB 페이지의 32비트 컴퓨팅 시스템에서 주소 변환 과정을 다이어그램으로 보여준다.
+
 ![No PAE, 4 KB pages](https://upload.wikimedia.org/wikipedia/commons/8/8e/X86_Paging_4K.svg)
 
 ### 32비트 페이징, 4 MB 페이지, PAE 비활성
+아래는 [PAE](#물리-주소-확장)가 비활성화된 4 MB 페이지의 32비트 컴퓨팅 시스템에서 주소 변환 과정을 다이어그램으로 보여준다.
+
 ![No PAE, 4 MB pages](https://upload.wikimedia.org/wikipedia/commons/d/d9/X86_Paging_4M.svg)
 
 ### 32비트 페이징, 4 KB 페이지, PAE 활성
+아래는 [PAE](#물리-주소-확장)가 활성화된 4 KB 페이지의 32비트 컴퓨팅 시스템에서 주소 변환 과정을 다이어그램으로 보여준다.
+
 ![With PAE; 4 KB pages](https://upload.wikimedia.org/wikipedia/commons/0/0d/X86_Paging_PAE_4K.svg)
 
-이번 예시는 System 프로세스로부터 커널 충돌을 야기한 스택에서 nt!KeBugCheckEx 코드가 실제 물리 메모리의 어느 주소에 위치하는지 확인한다. 그 전에 먼저 PAE가 활성화가 된 시스템이란 걸 아래와 같이 검증한다.
+본 부문은 [System](Process.md#시스템-프로세스)(PID 4) 프로세스로부터 [BSOD](BSOD.md)를 야기한 충돌 스택에서 nt!KeBugCheckEx 코드가 실제 RAM의 어느 물리 주소에 위치하는지 확인한다. 먼저 프로세서에 PAE 활성화 여부를 아래와 같이 검증한다.
 
 ```
 0: kd> .formats cr0
@@ -292,9 +298,9 @@ Evaluate expression:
   Double:  -1.#QNAN
 ```
 
-System 프로세스의 메모리 주소 변환에 필요한 Page Directory를 가리키는 포인터 테이블은 CR3 레지스터(혹은 DirBase)가 반환한 `0x001a8000` 물리 메모리 주소에 위치한다. 주소 변환에 있어 다음 페이지로 진입할 포인터를 가리키는 인덱스들은 다음과 같으며, 유도 과정도 함께 소개한다.
+System 프로세스의 메모리 주소 변환에 필요한 Page Directory를 가리키는 포인터 테이블은 CR3 레지스터(혹은 DirBase)가 반환한 `0x001a8000` 물리 메모리 주소에 위치한다. 페이지 테이블에 따라 세 단계의 변환 과정을 순서대로 인덱스 및 엔트리를 함께 보여준다.
 
-<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">레벨에 따른 페이지 테이블의 인덱스 및 엔트리 (4 KB w/ PAE)</caption><colgroup><col style="width: 10%;"/><col style="width: 20%;"/><col style="width: 25%;"/><col style="width: 15%;"/><col style="width: 30%;"/></colgroup><thead><tr><th rowspan="2" style="text-align: center;">레벨</th><th rowspan="2" style="text-align: center;">테이블</th><th colspan="2" style="text-align: center; border-bottom-style: none;">인덱스</th><th rowspan="2" style="text-align: center;">엔트리 / 데이터</th></tr><tr><th style="text-align: center;">이진수</th><th style="text-align: center;">십육진수</th></tr></thead><tbody><tr><td style="text-align: center;">3</td><td>Page Dir.Pointer Table</td><td style="text-align: center;"><code>10</code></td><td style="text-align: center;"><code>0x002</code></td><td><code>001ab001</code></td></tr><tr><td style="text-align: center;">2</td><td>Page Directory</td><td style="text-align: center;"><code>000001 101</code></td><td style="text-align: center;"><code>0x00D</code></td><td><code>01b09063</code></td></tr><tr><td style="text-align: center;">1</td><td>Page Table</td><td style="text-align: center;"><code>11110 1110</code></td><td style="text-align: center;"><code>0x1EE</code></td><td><code>02fde121</code></td></tr><tr><td style="text-align: center;">0</td><td>Page</td><td style="text-align: center;"><code>1111 01001100</code></td><td style="text-align: center;"><code>0xF4C</code></td><td><code>55</code> (BYTE)</td></tr></tbody></table>
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">레벨에 따른 페이지 테이블의 인덱스 및 엔트리 (4 KB w/ PAE)</caption><colgroup><col style="width: 10%;"/><col style="width: 20%;"/><col style="width: 25%;"/><col style="width: 15%;"/><col style="width: 30%;"/></colgroup><thead><tr><th rowspan="2" style="text-align: center;">레벨</th><th rowspan="2" style="text-align: center;">테이블</th><th colspan="2" style="text-align: center; border-bottom-style: none;">인덱스</th><th rowspan="2" style="text-align: center;">엔트리 / 데이터</th></tr><tr><th style="text-align: center;">이진수</th><th style="text-align: center;">십육진수</th></tr></thead><tbody><tr><td style="text-align: center;">3</td><td>Page Dir.Pointer Table</td><td style="text-align: center;"><code>10</code></td><td style="text-align: center;"><code>0x002</code></td><td><code>001ab001</code></td></tr><tr><td style="text-align: center;">2</td><td>Page Directory</td><td style="text-align: center;"><code>000001 101</code></td><td style="text-align: center;"><code>0x00D</code></td><td><code>01b09063</code></td></tr><tr><td style="text-align: center;">1</td><td>Page Table</td><td style="text-align: center;"><code>11110 1110</code></td><td style="text-align: center;"><code>0x1EE</code></td><td><code>02fde121</code></td></tr><tr><td style="text-align: center;">-</td><td>Page</td><td style="text-align: center;"><code>1111 01001100</code></td><td style="text-align: center;"><code>0xF4C</code></td><td><code>55</code> (BYTE)</td></tr></tbody></table>
 
 ```windbg
 0: kd> !pte nt!KeBugCheckEx
@@ -321,9 +327,11 @@ nt!KeBugCheckEx:
 ```
 
 ### 32비트 페이징, 2 MB 페이지, PAE 활성
+아래는 [PAE](#물리-주소-확장)가 활성화된 2 MB 페이지의 32비트 컴퓨팅 시스템에서 주소 변환 과정을 다이어그램으로 보여준다.
+
 ![With PAE; 2 MB pages](https://upload.wikimedia.org/wikipedia/commons/0/05/X86_Paging_PAE_2M.svg)
 
-이번 예시는 System 프로세스로부터 커널 충돌을 야기한 스택에서 nt!KeBugCheckEx 코드가 실제 물리 메모리의 어느 주소에 위치하는지 확인한다. 그 전에 먼저 PAE가 활성화가 된 시스템이란 걸 아래와 같이 검증한다.
+본 부문은 [System](Process.md#시스템-프로세스)(PID 4) 프로세스로부터 [BSOD](BSOD.md)를 야기한 충돌 스택에서 nt!KeBugCheckEx 코드가 실제 RAM의 어느 물리 주소에 위치하는지 확인한다. 먼저 프로세서에 PAE 활성화 여부를 아래와 같이 검증한다.
 
 ```
 0: kd> .formats cr0
@@ -399,9 +407,9 @@ Evaluate expression:
   Double:  -1.#QNAN
 ```
 
-System 프로세스의 메모리 주소 변환에 필요한 Page Directory를 가리키는 포인터 테이블은 CR3 레지스터(혹은 DirBase)가 반환한 `0x001a8000` 물리 메모리 주소에 위치한다. 주소 변환에 있어 다음 페이지로 진입할 포인터를 가리키는 인덱스들은 다음과 같으며, 유도 과정도 함께 소개한다.
+System 프로세스의 메모리 주소 변환에 필요한 Page Directory를 가리키는 포인터 테이블은 CR3 레지스터(혹은 DirBase)가 반환한 `0x001a8000` 물리 메모리 주소에 위치한다. 페이지 테이블에 따라 두 단계의 변환 과정을 순서대로 인덱스 및 엔트리를 함께 보여준다.
 
-<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">레벨에 따른 페이지 테이블의 인덱스 및 엔트리 (2 MB w/ PAE)</caption><colgroup><col style="width: 10%;"/><col style="width: 20%;"/><col style="width: 25%;"/><col style="width: 15%;"/><col style="width: 30%;"/></colgroup><thead><tr><th rowspan="2" style="text-align: center;">레벨</th><th rowspan="2" style="text-align: center;">테이블</th><th colspan="2" style="text-align: center; border-bottom-style: none;">인덱스</th><th rowspan="2" style="text-align: center;">엔트리 / 데이터</th></tr><tr><th style="text-align: center;">이진수</th><th style="text-align: center;">십육진수</th></tr></thead><tbody><tr><td style="text-align: center;">2</td><td>Page Dir.Pointer Table</td><td style="text-align: center;"><code>10</code></td><td style="text-align: center;"><code>0x002</code></td><td><code>001ab001</code></td></tr><tr><td style="text-align: center;">1</td><td>Page Directory</td><td style="text-align: center;"><code>000010 100</code></td><td style="text-align: center;"><code>0x014</code></td><td><code>01b09063</code></td></tr><tr><td style="text-align: center;">0</td><td>Page</td><td style="text-align: center;"><code>10111 11101111 01001100</code></td><td style="text-align: center;"><code>0x17EF4C</code></td><td><code>55</code> (BYTE)</td></tr></tbody></table>
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">레벨에 따른 페이지 테이블의 인덱스 및 엔트리 (2 MB w/ PAE)</caption><colgroup><col style="width: 10%;"/><col style="width: 20%;"/><col style="width: 25%;"/><col style="width: 15%;"/><col style="width: 30%;"/></colgroup><thead><tr><th rowspan="2" style="text-align: center;">레벨</th><th rowspan="2" style="text-align: center;">테이블</th><th colspan="2" style="text-align: center; border-bottom-style: none;">인덱스</th><th rowspan="2" style="text-align: center;">엔트리 / 데이터</th></tr><tr><th style="text-align: center;">이진수</th><th style="text-align: center;">십육진수</th></tr></thead><tbody><tr><td style="text-align: center;">2</td><td>Page Dir.Pointer Table</td><td style="text-align: center;"><code>10</code></td><td style="text-align: center;"><code>0x002</code></td><td><code>001ab001</code></td></tr><tr><td style="text-align: center;">1</td><td>Page Directory</td><td style="text-align: center;"><code>000010 100</code></td><td style="text-align: center;"><code>0x014</code></td><td><code>01b09063</code></td></tr><tr><td style="text-align: center;">-</td><td>Page</td><td style="text-align: center;"><code>10111 11101111 01001100</code></td><td style="text-align: center;"><code>0x17EF4C</code></td><td><code>55</code> (BYTE)</td></tr></tbody></table>
 
 ```windbg
 0: kd> !pte nt!KeBugCheckEx
@@ -427,7 +435,7 @@ nt!KeBugCheckEx:
 ## x86-64 페이지 테이블
 
 ### 64비트 페이징, 4 KB 페이지
-이번 예시는 System 프로세스로부터 커널 충돌을 야기한 스택에서 KERNEL32!BaseThreadInitThunk 코드가 실제 물리 메모리의 어느 주소에 위치하는지 확인한다. 아래는 가상 메모리 주소로부터 물리 메모리 주소로 변환하기 위해 필요한 정보들을 살펴본다.
+본 부문은 [System](Process.md#시스템-프로세스)(PID 4) 프로세스로부터 [BSOD](BSOD.md)를 야기한 충돌 스택에서 KERNEL32!BaseThreadInitThunk 코드가 실제 RAM의 어느 물리 주소에 위치하는지 확인한다. 아래는 가상 메모리 주소로부터 물리 메모리 주소로 변환하기 위해 필요한 정보를 살펴본다.
 
 ```windbg
 0: kd> !mex.crash
@@ -501,9 +509,9 @@ Evaluate expression:
   Double:  6.95299e-310
 ```
 
-System 프로세스의 메모리 주소 변환에 필요한 PML4를 가리키는 포인터 테이블은 CR3 레지스터(혹은 DirBase)가 반환한 `0x0000000018573000` 물리 메모리 주소에 위치한다. 주소 변환에 있어 다음 페이지로 진입할 포인터를 가리키는 인덱스들은 다음과 같으며, 유도 과정도 함께 소개한다.
+System 프로세스의 메모리 주소 변환에 필요한 PML4를 가리키는 포인터 테이블은 CR3 레지스터(혹은 DirBase)가 반환한 `0x0000000018573000` 물리 메모리 주소에 위치한다. 페이지 테이블에 따라 네 단계의 변환 과정을 순서대로 인덱스 및 엔트리를 함께 보여준다.
 
-<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">레벨에 따른 페이지 테이블의 인덱스 및 엔트리 (4 KB 페이지)</caption><colgroup><col style="width: 10%;"/><col style="width: 20%;"/><col style="width: 25%;"/><col style="width: 15%;"/><col style="width: 30%;"/></colgroup><thead><tr><th rowspan="2" style="text-align: center;">레벨</th><th rowspan="2" style="text-align: center;">테이블</th><th colspan="2" style="text-align: center; border-bottom-style: none;">인덱스</th><th rowspan="2" style="text-align: center;">엔트리 / 데이터</th></tr><tr><th style="text-align: center;">이진수</th><th style="text-align: center;">십육진수</th></tr></thead><tbody><tr><td style="text-align: center;">4</td><td>PML4</td><td style="text-align: center;"><code>01111111 1</code></td><td style="text-align: center;"><code>0x0FF</code></td><td><code>0a000000`1857f867</code></td></tr><tr><td style="text-align: center;">3</td><td>Page Dir.Pointer Table</td><td style="text-align: center;"><code>1111110 01</code></td><td style="text-align: center;"><code>0x1F9</code></td><td><code>0a000000`18582867</code></td></tr><tr><td style="text-align: center;">2</td><td>Page Directory</td><td style="text-align: center;"><code>000111 000</code></td><td style="text-align: center;"><code>0x038</code></td><td><code>0a000000`185c8867</code></td></tr><tr><td style="text-align: center;">1</td><td>Page Table</td><td style="text-align: center;"><code>00001 0111</code></td><td style="text-align: center;"><code>0x017</code></td><td><code>01000000`0174a025</code></td></tr><tr><td style="text-align: center;">0</td><td>Page</td><td style="text-align: center;"><code>0011 01000100</code></td><td style="text-align: center;"><code>0x344</code></td><td><code>c88b</code> (WORD)</td></tr></tbody></table>
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">레벨에 따른 페이지 테이블의 인덱스 및 엔트리 (4 KB 페이지)</caption><colgroup><col style="width: 10%;"/><col style="width: 20%;"/><col style="width: 25%;"/><col style="width: 15%;"/><col style="width: 30%;"/></colgroup><thead><tr><th rowspan="2" style="text-align: center;">레벨</th><th rowspan="2" style="text-align: center;">테이블</th><th colspan="2" style="text-align: center; border-bottom-style: none;">인덱스</th><th rowspan="2" style="text-align: center;">엔트리 / 데이터</th></tr><tr><th style="text-align: center;">이진수</th><th style="text-align: center;">십육진수</th></tr></thead><tbody><tr><td style="text-align: center;">4</td><td>PML4</td><td style="text-align: center;"><code>01111111 1</code></td><td style="text-align: center;"><code>0x0FF</code></td><td><code>0a000000`1857f867</code></td></tr><tr><td style="text-align: center;">3</td><td>Page Dir.Pointer Table</td><td style="text-align: center;"><code>1111110 01</code></td><td style="text-align: center;"><code>0x1F9</code></td><td><code>0a000000`18582867</code></td></tr><tr><td style="text-align: center;">2</td><td>Page Directory</td><td style="text-align: center;"><code>000111 000</code></td><td style="text-align: center;"><code>0x038</code></td><td><code>0a000000`185c8867</code></td></tr><tr><td style="text-align: center;">1</td><td>Page Table</td><td style="text-align: center;"><code>00001 0111</code></td><td style="text-align: center;"><code>0x017</code></td><td><code>01000000`0174a025</code></td></tr><tr><td style="text-align: center;">-</td><td>Page</td><td style="text-align: center;"><code>0011 01000100</code></td><td style="text-align: center;"><code>0x344</code></td><td><code>c88b</code> (WORD)</td></tr></tbody></table>
 
 ```windbg
 0: kd> !pte KERNEL32!BaseThreadInitThunk+0x14
@@ -533,7 +541,7 @@ KERNEL32!BaseThreadInitThunk+0x14:
 ```
 
 ### 64비트 페이징, 2 MB 페이지
-이번 예시는 System 프로세스로부터 커널 충돌을 야기한 스택에서 nt!KeBugCheckEx 코드가 실제 물리 메모리의 어느 주소에 위치하는지 확인한다. 아래는 가상 메모리 주소로부터 물리 메모리 주소로 변환하기 위해 필요한 정보들을 살펴본다.
+본 부문은 [System](Process.md#시스템-프로세스)(PID 4) 프로세스로부터 [BSOD](BSOD.md)를 야기한 충돌 스택에서 nt!KeBugCheckEx 코드가 실제 RAM의 어느 물리 주소에 위치하는지 확인한다. 아래는 가상 메모리 주소로부터 물리 메모리 주소로 변환하기 위해 필요한 정보를 살펴본다.
 
 ```windbg
 0: kd> !mex.crash
@@ -607,9 +615,9 @@ Evaluate expression:
   Double:  -1.#QNAN
 ```
 
-System 프로세스의 메모리 주소 변환에 필요한 PML4를 가리키는 포인터 테이블은 CR3 레지스터(혹은 DirBase)가 반환한 `0x0000000018573000` 물리 메모리 주소에 위치한다. 주소 변환에 있어 다음 페이지로 진입할 포인터를 가리키는 인덱스들은 다음과 같으며, 유도 과정도 함께 소개한다.
+System 프로세스의 메모리 주소 변환에 필요한 PML4를 가리키는 포인터 테이블은 CR3 레지스터(혹은 DirBase)가 반환한 `0x0000000018573000` 물리 메모리 주소에 위치한다. 페이지 테이블에 따라 세 단계의 변환 과정을 순서대로 인덱스 및 엔트리를 함께 보여준다.
 
-<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">레벨에 따른 페이지 테이블의 인덱스 및 엔트리 (2 MB 페이지)</caption><colgroup><col style="width: 10%;"/><col style="width: 20%;"/><col style="width: 25%;"/><col style="width: 15%;"/><col style="width: 30%;"/></colgroup><thead><tr><th rowspan="2" style="text-align: center;">레벨</th><th rowspan="2" style="text-align: center;">테이블</th><th colspan="2" style="text-align: center; border-bottom-style: none;">인덱스</th><th rowspan="2" style="text-align: center;">엔트리 / 데이터</th></tr><tr><th style="text-align: center;">이진수</th><th style="text-align: center;">십육진수</th></tr></thead><tbody><tr><td style="text-align: center;">3</td><td>PML4</td><td style="text-align: center;"><code>11111000 0</code></td><td style="text-align: center;"><code>0x1F0</code></td><td><code>00000000`04709063</code></td></tr><tr><td style="text-align: center;">2</td><td>Page Dir.Pointer Table</td><td style="text-align: center;"><code>0000000 00</code></td><td style="text-align: center;"><code>0x000</code></td><td><code>00000000`0460a063</code></td></tr><tr><td style="text-align: center;">1</td><td>Page Directory</td><td style="text-align: center;"><code>000011 000</code></td><td style="text-align: center;"><code>0x018</code></td><td><code>0a000000`02a001a1</code></td></tr><tr><td style="text-align: center;">0</td><td>Page</td><td style="text-align: center;"><code>11111 11010101 10110000</code></td><td style="text-align: center;"><code>0x1FD5B0</code></td><td><code>48894c2408</code> (5-Byte)</td></tr></tbody></table>
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">레벨에 따른 페이지 테이블의 인덱스 및 엔트리 (2 MB 페이지)</caption><colgroup><col style="width: 10%;"/><col style="width: 20%;"/><col style="width: 25%;"/><col style="width: 15%;"/><col style="width: 30%;"/></colgroup><thead><tr><th rowspan="2" style="text-align: center;">레벨</th><th rowspan="2" style="text-align: center;">테이블</th><th colspan="2" style="text-align: center; border-bottom-style: none;">인덱스</th><th rowspan="2" style="text-align: center;">엔트리 / 데이터</th></tr><tr><th style="text-align: center;">이진수</th><th style="text-align: center;">십육진수</th></tr></thead><tbody><tr><td style="text-align: center;">3</td><td>PML4</td><td style="text-align: center;"><code>11111000 0</code></td><td style="text-align: center;"><code>0x1F0</code></td><td><code>00000000`04709063</code></td></tr><tr><td style="text-align: center;">2</td><td>Page Dir.Pointer Table</td><td style="text-align: center;"><code>0000000 00</code></td><td style="text-align: center;"><code>0x000</code></td><td><code>00000000`0460a063</code></td></tr><tr><td style="text-align: center;">1</td><td>Page Directory</td><td style="text-align: center;"><code>000011 000</code></td><td style="text-align: center;"><code>0x018</code></td><td><code>0a000000`02a001a1</code></td></tr><tr><td style="text-align: center;">-</td><td>Page</td><td style="text-align: center;"><code>11111 11010101 10110000</code></td><td style="text-align: center;"><code>0x1FD5B0</code></td><td><code>48894c2408</code> (5-Byte)</td></tr></tbody></table>
 
 ```windbg
 0: kd> !pte nt!KeBugCheckEx
