@@ -100,36 +100,6 @@ To help protect the allocation of RAM, the [AllocateUserPhysicalPages](https://l
 # 메모리 맵 파일
 > *참고: [File Mapping - Win32 apps | Microsoft Learn](https://learn.microsoft.com/en-us/windows/win32/memory/file-mapping)*
 
-**[메모리 맵 파일](https://en.wikipedia.org/wiki/Memory-mapped_file)**(memory-mapped file)은 파일과 바이트 대 바이트 상관관계를 맺은 [가상 메모리](#가상-메모리)를 가리킨다. 프로그램은 메모리 매핑된 파일을
-
-![디스크의 파일, 파일 매핑 개체, 그리고 파일일 뷰의 관계도](https://learn.microsoft.com/en-us/windows/win32/memory/images/fmap.png)
-
-Win32의 경우 [CreateFileMapping](https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-createfilemappinga) 함수를 제공한다.
-
-
-메모리에 매핑하고 싶은 디스크상 파일은 아무런 파일이 될 수 있으며, 또는 시스템 페이징 파일이 될 수 있다. 파일 매핑 개체는 파일 전체 혹은 일부만을 구성할 수 있다. 개체는 디스크 상 파일에 의해 보조된다; 즉, 파일 매핑 개체가 페이징 아웃될 시 변경된 사항들은 파일에 적용된다. 그리고 파일 매핑 개체 페이지가 다시 페이징 인될 시 변경이 저장된 파일을 다시 불러온다.
-
-> (개인 의견) 개체가 페이징이 된다고 파일 콘텐츠를 함께 가져가는 게 아닌 걸 설명하는 걸로 보임. 개체는 단순히 파일과의 매핑 정보를 제공하고, 실제 콘텐츠 내용을 담고 있는 게 아님을 문맥상 추정됨.
-
-The file on disk can be any file that you want to map into memory, or it can be the system page file. The file mapping object can consist of all or only part of the file. It is backed by the file on disk. This means that when the system swaps out pages of the file mapping object, any changes made to the file mapping object are written to the file. When the pages of the file mapping object are swapped back in, they are restored from the file.
-
-
-[파일](FileSystem.md)과 바이트 단위로 일대일 매핑된 [가상 메모리](#가상-메모리)를 가리킨다. 파일과 메모리 주소 간 상관관계가 형성될 시, 프로그램은 메모리 매핑된 파일 영역을 마치 주기억장치인 마냥 취급할 수 있다.
-
-프로세스를 실행할 때, 운영체제는 실행 이미지 및 관련 모듈을 메모리 맵 파일을 활용하여 메모리로 불러온다.
-
-Perhaps the most common use for a memory-mapped file is the process loader in most modern operating systems (including Windows and Unix-like systems.) When a process is started, the operating system uses a memory mapped file to bring the executable file, along with any loadable modules, into memory for execution. Most memory-mapping systems use a technique called demand paging, where the file is loaded into physical memory in subsets (one page each), and only when that page is actually referenced.[13] In the specific case of executable files, this permits the OS to selectively load only those portions of a process image that actually need to execute.
-
-
-이미지 및 데이터 파일을 불러올 때, 내용물 전체를 물리 메모리로 가져오게 된다면 
-
-열려고 하는 파일을 RAM으로 복사하기보다, 해당 파일의 디스크 영역을 페이징 파일로 할당하여 가상 메모리에 매핑되는 게 성능 효율적이다.
-
-
-메모리 매핑은 [페이징 파일](#페이징-파일)을 완전히 우회할 뿐만 아니라
-
-A possible benefit of memory-mapped files is a "[lazy loading](https://en.wikipedia.org/wiki/Lazy_loading)", thus using small amounts of RAM even for a very large file. Trying to load the entire contents of a file that is significantly larger than the amount of memory available can cause severe thrashing as the operating system reads from disk into memory and simultaneously writes pages from memory back to disk. Memory-mapping may not only bypass the page file completely, but also allow smaller page-sized sections to be loaded as data is being edited, similarly to [demand paging](https://en.wikipedia.org/wiki/Demand_paging) used for programs.
-
 # 메모리 풀
 > *참고: [Pushing the Limits of Windows: Paged and Nonpaged Pool | Microsoft Learn](https://learn.microsoft.com/en-us/archive/blogs/markrussinovich/pushing-the-limits-of-windows-paged-and-nonpaged-pool)*
 
