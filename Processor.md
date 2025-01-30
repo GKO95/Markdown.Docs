@@ -140,7 +140,10 @@ ALU는 기본적으로 opcode와 피연산자를 입력받고, 해당 opcode 작
 ## 컨텍스트 교환
 > *참고: [Context Switching - OSDev Wiki](https://wiki.osdev.org/Context_Switching)*
 
-**[컨텍스트](https://en.wikipedia.org/wiki/Context_(computing))**(context; 문맥)은 프로세스 및 스레드가 중단된 시점으로부터 작업을 재개하기 위해 필요한 정보들이다: [스택](https://ko.wikipedia.org/wiki/콜_스택), [레지스터](https://ko.wikipedia.org/wiki/프로세서_레지스터) 등이 해당한다. 
+**[컨텍스트](https://en.wikipedia.org/wiki/Context_(computing))**(context; 문맥)은 프로세스 및 스레드가 중단된 시점으로부터 작업을 재개하기 위해 필요한 정보들이다: [스택](https://ko.wikipedia.org/wiki/콜_스택), [레지스터](https://ko.wikipedia.org/wiki/프로세서_레지스터) 등이 해당한다.
+
+* [프로세스 컨텍스트](Process.md#프로세스-컨텍스트)
+* [스레드 컨텍스트](Thread.md#스레드-컨텍스트)
 
 **[컨텍스트 교환](https://en.wikipedia.org/wiki/Context_switch)**(context switch)은 실행 중인 프로세스 및 스레드를 나중에 재개할 수 있도록 컨텍스트를 저장하여 대기시키고, 처리되어야 할 컨텍스트를 불러와 실행하는 절차를 가리킨다. 스케줄링과 함께 멀티태스킹을 가능하게 만드는 핵심 기능이다. 그러나 컨텍스트 교환이 너무 빈번하게 일어나면 성능 저하의 요인으로 작용할 수 있다. 프로세스보다 스레드의 컨텍스트 데이터가 더 작은 관계로, 멀티프로세스보다 멀티스레드의 컨텍스트 교환 작업이 더 빨리 이루어진다.
 
