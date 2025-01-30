@@ -85,17 +85,19 @@ RAM과 페이징 파일 간 데이터가 이동하는 [페이징](https://en.wik
 
 * [성능 카운터](Perfmon.md#성능-카운터): `\Process(*)\Working Set` 또는 `\Process(*)\Working Set - Private`
 
-## 주소 창 확장
-**[주소 창 확장](https://learn.microsoft.com/en-us/windows/win32/memory/address-windowing-extensions)**(address windowing extensions; AWE)은 Windows OS에서 제공하는 메모리 확장 기능으로, 32비트 운영체제 당시 2 GB로 제한된 사용자 주소 공간에서 프로그램이 4 GB 이상의 RAM을 활용할 수 있도록 한다.
+## 주소 윈도잉 확장
+**[주소 윈도잉 확장](https://learn.microsoft.com/en-us/windows/win32/memory/address-windowing-extensions)**(address windowing extensions; AWE)은 [가상 메모리](#가상-메모리)를 RAM에 상주하는 비페이징 메모리에 매핑, 즉 "[윈도잉](https://en.wikipedia.org/wiki/Windowing)(windowing)"하여 사용할 수 있도록 제공된 [Win32 API](WinAPI.md) 집합이다. AWE는 아래 두 가지 성능적인 특징을 지녀 데이터 처리 비중이 높은 프로그램(대표적으로 [SQL](https://en.wikipedia.org/wiki/SQL))에서 자주 활용된다.
 
-* Allow applications to allocate RAM that is never swapped by the operating system to or from disk.
-* Allow an application to access more RAM than fits within the process’ address space.
+* 페이징될 수 없는 메모리를 RAM에 할당하여 [페이지 부재](#페이지-부재)로 인한 [오버헤드](https://en.wikipedia.org/wiki/Overhead_(computing))를 원천적으로 방지한다.
+* 가상 메모리 테이블을 리매핑하여 [프로세스 주소 공간](Process.md#가상-주소-공간)보다 큰 RAM의 물리 메모리를 접근할 수 있다.
 
-64비트 윈도우에서는 32비트보다 훨씬 큰 가상 주소 공간을 제공하기 때문에 페이징은 더 이상 문제가 되지 않으나, 혹여나 모를 페이징을 방지하고 훨씬 빠른 메모리 접근을 위해 SQL 등에서 여전히 사용되고 있다.
+AWE의 구현 방식을 간단히 설명하면 순서와 같다:
 
-Only the owning process can use the allocated RAM pages; AWE does not allow the RAM pages to be mapped into another process’ address space. Therefore, you cannot share RAM blocks between processes.
+1. [VirtualAlloc](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualalloc) 함수에 MEM_PHYSICAL 플래그를 추가하여 가상 메모리의 페이지를 예약한다.
+1. [AllocateUserPhysicalPages](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-allocateuserphysicalpages) 함수로 사용할 RAM의 페이지 프레임을 미리 할당받아 확보한다.
+1. [MapUserPhysicalPages](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-mapuserphysicalpages) 함수로 가상 메모리의 페이지와 RAM의 페이지 프레임을 매핑한다.
 
-To help protect the allocation of RAM, the [AllocateUserPhysicalPages](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-allocateuserphysicalpages) function requires the caller to have the Lock Pages In Memory user right granted and enabled, or the function fails.
+오로지 윈도잉한 프로세스만 해당 RAM 페이지 프레임에 접근할 수 있기 때문에, 그 외 프로세스와 공유 불가하다. 그리고 RAM에 물리 메모리 할당을 남용하는 걸 방지하는 차원에서, AWE 활용 프로그램을 실행할 사용자는 반드시 "메모리에 페이지 잠금(Lock Pages In Memory)" 권한을 획득해야 한다.
 
 # 메모리 맵 파일
 > *참고: [File Mapping - Win32 apps | Microsoft Learn](https://learn.microsoft.com/en-us/windows/win32/memory/file-mapping)*
