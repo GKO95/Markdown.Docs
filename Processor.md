@@ -140,7 +140,7 @@ ALU는 기본적으로 opcode와 피연산자를 입력받고, 해당 opcode 작
 ## 컨텍스트 교환
 > *참고: [Context Switching - OSDev Wiki](https://wiki.osdev.org/Context_Switching)*
 
-**[컨텍스트](https://en.wikipedia.org/wiki/Context_(computing))**(context; 문맥)은 프로세스 및 스레드가 중단된 시점으로부터 작업을 재개하기 위해 필요한 정보들이다: [스택](https://ko.wikipedia.org/wiki/콜_스택), [레지스터](https://ko.wikipedia.org/wiki/프로세서_레지스터) 등이 해당한다.
+**[컨텍스트](https://en.wikipedia.org/wiki/Context_(computing))**(context; 문맥)은 프로세스 및 스레드가 중단된 시점으로부터 작업을 재개하기 위해 필요한 정보들이다: [스택](https://ko.wikipedia.org/wiki/콜_스택), [레지스터](Assembly.md#레지스터) 등이 해당한다.
 
 * [프로세스 컨텍스트](Process.md#프로세스-컨텍스트)
 * [스레드 컨텍스트](Thread.md#스레드-컨텍스트)
