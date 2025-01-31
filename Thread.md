@@ -5,17 +5,25 @@
 프로세스가 생성되면 코드 실행을 위해 기본적으로 한 개의 스레드가 함께 생성되는데, 이를 **기본 스레드**(primary thread)라고 부른다. 기본 스레드는 프로그램을 본격적으로 시작하는 [진입 함수](C.md#진입점)를 실행하기 때문에, 정상적인 기본 스레드의 종료는 결과적으로 프로세스 종료를 초래한다.
 
 ## 호출 스택
-**[호출 스택](https://en.wikipedia.org/wiki/Call_stack)**(call stack; 간단히 "**스택**")은 각 [스레드](#스레드)마다 실행 중인 프로그램의 [함수](C.md#함수) 및 관련 정보를 저장하는 [스택](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)) 데이터 구조이다. 스택의 핵심 목적은 실행한 함수가 반환되었을 때 어느 코드에서 재개되어야 하는지 추적할 수 있다. 그러므로 스택에 저장되는 대표적인 정보는 다음과 같다:
+**[호출 스택](https://en.wikipedia.org/wiki/Call_stack)**(call stack; 간단히 "**스택**")은 각 [스레드](#스레드)마다 실행 중인 프로그램의 [함수](C.md#함수)와 관련된 정보를 저장하는 [스택](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)) 데이터 구조이다. 스택의 핵심 목적은 실행한 함수가 반환되었을 때 어느 코드에서 재개되어야 하는지 추적할 수 있다. 그리고 각 함수를 중심으로 연관된 데이터들의 묶음을 **스택 프레임**(stack frame)이라 부르며, 호출 스택에 쌓인 함수만큼 스택 프레임이 존재한다.
+
+아래는 상향하는 호출 스택의 레이아웃이며, 다음 순서대로 예시의 *DrawLine* 함수와 연관된 데이터가 호출 스택에 푸쉬된다.
 
 ![호출 스택 레이아웃](https://upload.wikimedia.org/wikipedia/commons/d/d3/Call_stack_layout.svg)
 
-* 로컬 데이터 스토리지 (예를 들어, [지역 변수](C.md#변수) 등)
-* 호출할 함수의 매개변수로 전달할 인자
-* (호출한 함수가 반환 시) 귀환 주소
+<table style="width: 90%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">스택 프레임의 구성 및 설명</caption><colgroup><col style="width: 15%;"/><col style="width: 15%;"/><col style="width: 80%;"/></colgroup><thead><tr><th style="text-align: center;">스택 프레임</th><th style="text-align: center;">데이터</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td rowspan="3" style="text-align: center;"><i>DrawLine</i> 함수</td><td>1. 함수 매개변수</td><td><i>DrawLine</i> 함수가 호출한 <i>DrawSquare</i> 함수로부터 전달받은 매개변수의 인자(들)</td></tr><tr><td>2. 귀환 주소</td><td><i>DrawLine</i> 함수가 종료하면 <i>DrawSquare</i> 함수의 어느 코드에서 재개되어야 할 지 가리키는 <a href="C.md#포인터">포인터</a></td></tr><tr><td>3. 로컬 스토리지</td><td><i>DrawLine</i> 함수 내에 정의된 <a href="C.md#변수">지역 변수</a> 등</td></tr></tbody></table>
 
-그리고 스택에 호출된 한 함수로부터 비롯된 이와 같은 정보들의 묶음을 **스택 프레임**(stack frame)이라고 부른다. 즉, 각 스택 프레임마다 아직 반환되지 않고 실행 중인 함수를 의미한다.
+위의 레이아웃 표기된 추가 내용에 부연 설명은 다음과 같다.
 
-기본적으로 컴파일된 프로그램의 호출 스택은 1 MB (총 256개의 4 KB 페이지)로 크기가 제한된다.
+* 스택 포인터: *호출 스택의 최상위 주소를 가리키며, 데이터가 스택에 푸쉬 혹은 팝이 되면 함께 변동된다.*
+* 프레임 포인터: *스택 프레임에 해당하는 함수가 반환될 시, 스택 포인터가 되돌아올 메모리 주소를 가리킨다.*
+
+스택 포인터는 CPU의 [SP 레지스터](Assembly.md#포인터-레지스터)에 의해 추적된다. 만일 *DrawLine* 함수의 반환으로 프레임 포인터로 되돌아올 시, 단 한번의 팝 연산으로 [IP 레지스터](Assembly.md#명령어-포인터-레지스터)는 귀환 주소를 획득하여 *DrawSquare* 함수의 코드 실행을 재개할 수 있다. 다만, 자세한 스택 레이아웃은 아키텍처별 [호출 규약](Assembly.md#호출-규약)을 살펴보도록 한다.
+
+### 스택 오버플로우
+**[스택 오버플로우](https://en.wikipedia.org/wiki/Stack_overflow)**(stack overflow)는 스택 포인터가 정해진 스택 경계를 벗어날 때 발생하는 예외이다. 기본적으로 컴파일된 프로그램의 스택 크기는 1 MB로 제한되며, 이는 4 KB 페이지 256개와 일치한다.
+
+* NTSTATUS 0xC00000FD STATUS_STACK_OVERFLOW "A new guard page for the stack cannot be created."
 
 ## 스레드 컨텍스트
 **스레드 컨텍스트**(thread context)
