@@ -13,6 +13,8 @@
 
 <table style="width: 90%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">스택 프레임의 구성 및 설명</caption><colgroup><col style="width: 15%;"/><col style="width: 15%;"/><col style="width: 80%;"/></colgroup><thead><tr><th style="text-align: center;">스택 프레임</th><th style="text-align: center;">데이터</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td rowspan="3" style="text-align: center;"><i>DrawLine</i> 함수</td><td>1. 함수 매개변수</td><td><i>DrawLine</i> 함수가 호출한 <i>DrawSquare</i> 함수로부터 전달받은 매개변수의 인자(들)</td></tr><tr><td>2. 귀환 주소</td><td><i>DrawLine</i> 함수가 종료하면 <i>DrawSquare</i> 함수의 어느 코드에서 재개되어야 할 지 가리키는 <a href="C.md#포인터">포인터</a></td></tr><tr><td>3. 로컬 스토리지</td><td><i>DrawLine</i> 함수 내에 정의된 <a href="C.md#변수">지역 변수</a> 등</td></tr></tbody></table>
 
+<sup>_† 실제 메모리상 호출 스택은 (위의 테이블처럼) 최상단 주소에서부터 시작하여 아래로 내려가며 쌓이는 하향 스택이다._</sup>
+
 위의 레이아웃 표기된 추가 내용에 부연 설명은 다음과 같다.
 
 * 스택 포인터: *호출 스택의 최상위 주소를 가리키며, 데이터가 스택에 푸쉬 혹은 팝이 되면 함께 변동된다.*
@@ -21,9 +23,13 @@
 스택 포인터는 CPU의 [SP 레지스터](Assembly.md#포인터-레지스터)에 의해 추적된다. 만일 *DrawLine* 함수의 반환으로 프레임 포인터로 되돌아올 시, 단 한번의 팝 연산으로 [IP 레지스터](Assembly.md#명령어-포인터-레지스터)는 귀환 주소를 획득하여 *DrawSquare* 함수의 코드 실행을 재개할 수 있다. 다만, 자세한 스택 레이아웃은 아키텍처별 [호출 규약](Assembly.md#호출-규약)을 살펴보도록 한다.
 
 ### 스택 오버플로우
-**[스택 오버플로우](https://en.wikipedia.org/wiki/Stack_overflow)**(stack overflow)는 스택 포인터가 정해진 스택 경계를 벗어날 때 발생하는 예외이다. 기본적으로 컴파일된 프로그램의 스택 크기는 1 MB로 제한되며, 이는 4 KB 페이지 256개와 일치한다.
+**[스택 오버플로우](https://en.wikipedia.org/wiki/Stack_overflow)**(stack overflow)는 스택 포인터가 정해진 스택 경계를 벗어날 때 발생하는 [예외](C.md#예외-처리)이다. 기본적으로 컴파일된 프로그램의 스택 크기는 1 MB로 제한되며, 이는 4 KB 페이지 256개와 일치한다. 컴파일 옵션에서 스택의 크기를 임의로 변경할 시, 실행 파일의 [PE 포맷](https://en.wikipedia.org/wiki/Portable_Executable) 헤더에 정보가 저장된다. 그리고 [프로세스](Process.md)가 실행 파일을 [가상 주소 공간](Process.md#가상-주소-공간)으로 불러오면 PE 헤더에 저장된 스택 크기만큼 [가상 메모리](Memory.md#가상-메모리)를 [예약](Memory.md#페이지)하여 [스레드](#스레드)의 스택 영역으로 제공한다.
 
-* NTSTATUS 0xC00000FD STATUS_STACK_OVERFLOW "A new guard page for the stack cannot be created."
+[Windows OS](Windows.md)는 스택 오버플로우를 아래와 같이 설명한다.
+
+> [NTSTATUS](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/596a1078-e883-4972-9bbc-49e60bebca55) 0xC00000FD STATUS_STACK_OVERFLOW *"A new guard page for the stack cannot be created."*
+
+만일 1 MB의 가상 메모리가 PAGE_READWRITE [보호 권한](Memory.md#페이지)으로 예약되었을 시, 스택이 시작하는 최상단 페이지와 바로 밑 주소의 [가드 페이지](Memory.md#가드-페이지)(guard page)가 최초로 커밋된다. 성장하는 스택 자료 구조가 가드 페이즈를 침범하게 되면, 알림을 받은 운영체제는 새로운 가드 페이지를 그 다음 페이지에 커밋한다.
 
 ## 스레드 컨텍스트
 **스레드 컨텍스트**(thread context)
