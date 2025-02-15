@@ -36,7 +36,7 @@
 ## 페이지
 **[페이지](https://en.wikipedia.org/wiki/Page_(computer_memory))**(page)는 운영체제에서 관리하는 가장 작은 단위의 가상 메모리 조각이다 ([x86](https://en.wikipedia.org/wiki/X86) [아키텍처](https://en.wikipedia.org/wiki/Instruction_set_architecture)의 경우 4 [KB](https://en.wikipedia.org/wiki/Kilobyte)). 페이지와 일대일 매핑된 RAM의 주소 영역을 **[페이지 프레임](https://en.wikipedia.org/wiki/Page_(computer_memory))**(page frame; 일명 프레임)이라고 부른다. 페이지는 가상 메모리의 가용 여부를 결정하는 세 가지 [상태](https://learn.microsoft.com/en-us/windows/win32/memory/page-state)로 분류된다.
 
-<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">가상 메모리의 페이지 상태</caption><colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup><thead><tr><th style="text-align: center;">상태</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;">여유<br/>(Free)</td><td>사용되고 있지 않는 가상 주소 공간의 페이지이다.</td></tr><tr><td style="text-align: center;">예약됨<br/>(Reserved)</td><td>가상 메모리로 사용 중이지만, 아직 물리 메모리가 할당되지 않은 가상 주소 공간의 페이지이다. 즉, 예약된 페이지는 시스템의 메모리 성능에 기여를 하지 않는다.<ul><li><i>가상 메모리는 할당 입도(allocation granularity) 경계의 첫 주소를 시작으로 페이지를 예약받는다.</i></li></ul></td></tr><tr><td style="text-align: center;"><a href="https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/introduction-to-the-page-file#system-committed-memory">커밋됨</a><br/>(Committed)</td><td>가상 메모리로 사용 중이면서 물리 메모리가 할당된 가상 주소 공간의 페이지이다. 커밋된 페이지는 시스템의 메모리 성능에 실질적으로 기여한다. 다만, 예약된 페이지 영역 전체를 할당하지 않아도 된다.<ul><li><i>커밋된 페이지에 최초의 R/W 시도가 있기 전까지 할당된 물리 메모리에 매핑되지 않는다.</i></li></ul></td></tr></tbody></table>
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">가상 메모리의 페이지 상태</caption><colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup><thead><tr><th style="text-align: center;">상태</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;">여유<br/>(Free)</td><td>사용되고 있지 않는 가상 주소 공간의 페이지이다.</td></tr><tr><td style="text-align: center;">예약됨<br/>(Reserved)</td><td>가상 메모리로 사용 중이지만, 아직 물리 메모리가 할당되지 않은 가상 주소 공간의 페이지이다. 즉, 예약된 페이지는 시스템의 메모리 성능에 기여를 하지 않는다.<ul><li><i>가상 메모리는 할당 입도(allocation granularity) 경계의 첫 주소를 시작으로 페이지를 예약받는다.</i></li></ul></td></tr><tr><td style="text-align: center;"><a href="https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/introduction-to-the-page-file#system-committed-memory">커밋됨</a><br/>(Committed)</td><td>가상 메모리로 사용 중이면서 물리 메모리가 할당된 가상 주소 공간의 페이지이다. 커밋된 페이지는 시스템의 메모리 성능에 실질적으로 기여한다. 다만, 예약된 페이지 영역 전체를 할당하지 않아도 된다.<ul><li><i>커밋된 페이지에 최초의 R/W 시도가 있기 전까지 할당된 물리 메모리에 매핑되지 않는다.</i></li><li><i>RAM의 성능 효율과 시스템 안정성을 위해, 가급적 페이징 파일에 커밋하여 RAM으로 가져온다.</i></li></ul></td></tr></tbody></table>
 
 <sup>_† [x86](https://en.wikipedia.org/wiki/X86) [아키텍처](https://en.wikipedia.org/wiki/Instruction_set_architecture)는 페이지 크기를 4 KB (0000'1000h), 그리고 할당 입도 경계 간격을 64 KB (0001'0000h)로 구분한다. 반면, 단종된 [IA-64](https://en.wikipedia.org/wiki/Itanium) 아키텍처는 페이지 크기를 8 KB로 정의한다._</sup>
 
@@ -44,11 +44,9 @@
 
 다음은 페이지 읽기, 쓰기, 그리고 실행 가능 여부를 결정하는 보호 속성들을 소개한다.
 
-<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">가상 메모리의 페이지 보호 속성</caption><colgroup><col style="width: 30%;"/><col style="width: 10%;"/><col style="width: 10%;"/><col style="width: 10%;"/><col style="width: 40%;"/></colgroup><thead><tr><th style="text-align: center;">보호 속성</th><th style="text-align: center;">읽기</th><th style="text-align: center;">쓰기</th><th style="text-align: center;">실행</th><th style="text-align: center;">부연 설명</th></tr></thead><tbody><tr><td><code>PAGE_NOACCESS</code></td><td style="text-align: center;">❌</td><td style="text-align: center;">❌</td><td style="text-align: center;">❌</td><td>어떠한 접근 행위라도 <a href="https://en.wikipedia.org/wiki/Segmentation_fault">예외</a>를 일으킨다.</td></tr><tr><td><code>PAGE_READONLY</code></td><td style="text-align: center;">✔️</td><td style="text-align: center;">❌</td><td style="text-align: center;">❌</td><td rowspan="4">-</td></tr><tr><td><code>PAGE_READWRITE</code></td><td style="text-align: center;">✔️</td><td style="text-align: center;">✔️</td><td style="text-align: center;">❌</td></tr><tr><td><code>PAGE_EXECUTE</code></td><td style="text-align: center;">❌</td><td style="text-align: center;">❌</td><td style="text-align: center;">✔️</td></tr><tr><td><code>PAGE_EXECUTE_READ</code></td><td style="text-align: center;">✔️</td><td style="text-align: center;">❌</td><td style="text-align: center;">✔️</td></tr><tr><td><code>PAGE_EXECUTE_READWRITE</code></td><td style="text-align: center;">✔️</td><td style="text-align: center;">✔️</td><td style="text-align: center;">✔️</td><td>어떠한 접근 행위라도 <a href="https://en.wikipedia.org/wiki/Segmentation_fault">예외</a>를 일으키지 않는다.</td></tr><tr><td><code>PAGE_WRITECOPY</code></td><td style="text-align: center;">✔️</td><td style="text-align: center;">✔️</td><td style="text-align: center;">❌</td><td rowspan="2"><a href="https://en.wikipedia.org/wiki/Copy-on-write">Copy-on-write</a>로 페이지 데이터를 변경할 시 <a href="Process.md">프로세스</a> 전용 메모리에 페이지 복사본을 제공한다.</td></tr><tr><td><code>PAGE_EXECUTE_WRITECOPY</code></td><td style="text-align: center;">✔️</td><td style="text-align: center;">✔️</td><td style="text-align: center;">✔️</td></tr></tbody></table>
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">가상 메모리의 페이지 보호 속성</caption><colgroup><col style="width: 30%;"/><col style="width: 10%;"/><col style="width: 10%;"/><col style="width: 10%;"/><col style="width: 40%;"/></colgroup><thead><tr><th style="text-align: center;">보호 속성</th><th style="text-align: center;">읽기</th><th style="text-align: center;">쓰기</th><th style="text-align: center;">실행</th><th style="text-align: center;">부연 설명</th></tr></thead><tbody><tr><td><code>PAGE_NOACCESS</code></td><td style="text-align: center;">❌</td><td style="text-align: center;">❌</td><td style="text-align: center;">❌</td><td>어떠한 접근 행위라도 <a href="https://en.wikipedia.org/wiki/Segmentation_fault">예외</a>를 일으킨다.</td></tr><tr><td><code>PAGE_READONLY</code></td><td style="text-align: center;">✔️</td><td style="text-align: center;">❌</td><td style="text-align: center;">❌</td><td rowspan="4">-</td></tr><tr><td><code>PAGE_READWRITE</code></td><td style="text-align: center;">✔️</td><td style="text-align: center;">✔️</td><td style="text-align: center;">❌</td></tr><tr><td><code>PAGE_EXECUTE</code></td><td style="text-align: center;">❌</td><td style="text-align: center;">❌</td><td style="text-align: center;">✔️</td></tr><tr><td><code>PAGE_EXECUTE_READ</code></td><td style="text-align: center;">✔️</td><td style="text-align: center;">❌</td><td style="text-align: center;">✔️</td></tr><tr><td><code>PAGE_EXECUTE_READWRITE</code></td><td style="text-align: center;">✔️</td><td style="text-align: center;">✔️</td><td style="text-align: center;">✔️</td><td>어떠한 접근 행위라도 <a href="https://en.wikipedia.org/wiki/Segmentation_fault">예외</a>를 일으키지 않는다.</td></tr><tr><td><code>PAGE_WRITECOPY</code></td><td style="text-align: center;">✔️</td><td style="text-align: center;">✔️</td><td style="text-align: center;">❌</td><td rowspan="2"><a href="#copy-on-write">Copy-on-write</a>로 페이지 데이터를 변경할 시 <a href="Process.md">프로세스</a> 전용 메모리에 페이지 복사본을 제공한다.</td></tr><tr><td><code>PAGE_EXECUTE_WRITECOPY</code></td><td style="text-align: center;">✔️</td><td style="text-align: center;">✔️</td><td style="text-align: center;">✔️</td></tr></tbody></table>
 
 <sup>_† 참고: [Memory Protection Constants (WinNT.h) - Win32 apps | Microsoft Learn](https://learn.microsoft.com/en-us/windows/win32/memory/memory-protection-constants)_</sup>
-
-> [**Copy-on-write**](https://learn.microsoft.com/en-us/windows/win32/memory/memory-protection) 보호는 공유 리소스를 관리하는 기법 중 하나이다. 어느 한 프로세스가 공유 리소스를 편집하려고 시도할 경우, 시스템은 해당 프로세스의 [VAS](Process.md#가상-주소-공간)에 한하여 페이지 복사본을 제공하고 변경 사항을 적용한다. 나머지 프로세스들은 아무런 영향을 받지 않으므로 메모리도 절약할 수 있다.
 
 Windows OS는 [데이터 실행 방지](https://learn.microsoft.com/en-us/windows/win32/memory/data-execution-prevention)(Data Execution Prevention; DEP)를 활성화할 경우, 코드 실행이 의도된 메모리 영역에 `PAGE_EXECUTE_*` 보호 속성을 적용하는 등 멀웨어로부터 유해한 코드나 데이터를 삽입하는 행위를 방지한다.
 
@@ -60,6 +58,7 @@ Windows OS는 [데이터 실행 방지](https://learn.microsoft.com/en-us/window
 **[페이징 파일](https://learn.microsoft.com/en-us/windows/client-management/introduction-page-file)**(paging file)은 [HDD](https://en.wikipedia.org/wiki/Hard_disk_drive)나 [SSD](https://en.wikipedia.org/wiki/Solid-state_drive)와 같은 [저장 장치](Storage.md)에 상주하는 pagefile.sys 파일이며, RAM을 보조하는 일종의 물리 메모리이다. 하드웨어 기술 향상으로 옛 컴퓨터에 비해 RAM의 용량은 대폭 증가하였으나, 운영체제는 여전히 다음 페이징 파일 기능을 활발히 사용한다:
 
 1. RAM에 여유 공간 확보가 필요하면 사용 빈도가 가장 낮은 [작업 집합](#작업-집합)을 페이징 파일로 이동시킨다.
+1. 커밋한 [페이지](#페이지)는 RAM의 성능 효율 및 시스템 안정성을 위해 가능한 페이징 파일에 할당하여 불러온다.
 1. [블루스크린](BSOD.md)이 발생하면 [메모리 덤프](Dump.md#커널-모드-덤프)를 ([파일 시스템](FileSystem.md) 거치지 않고) 직접 페이징 파일로 수집한다.
 
 RAM과 페이징 파일 간 데이터가 이동하는 [페이징](https://en.wikipedia.org/wiki/Memory_paging) 기법에 대하여 간랸히 설명한다.
@@ -77,6 +76,11 @@ RAM과 페이징 파일 간 데이터가 이동하는 [페이징](https://en.wik
 
 윈도우 OS는 기본적으로 "모든 드라이브에 대한 페이징 파일 크기 자동 관리"하도록 설정되었다; Windows가 설치된 C 드라이브만 *시스템이 관리하는 크기*이고 나머지는 *페이징 파일 없음*과 동일하다.
 
+### 작업 집합
+**[작업 집합](https://en.wikipedia.org/wiki/Working_set)**(working set)은 커밋된 가상 메모리 중 RAM에 할당된 [페이지](#페이지)들을 일컫는다. 작업 관리자의 메모리 성능 지표에서 "사용 중" 메모리는 시스템 전반의 작업 집합을 의미한다. Windows OS는 작업 집합이 일정 비율에 도달하여 RAM의 여유 메모리 확보가 필요할 경우, 오랜 기간 동안 사용되지 않은 페이지를 [페이징 파일](#페이징-파일)로 [트리밍](https://techcommunity.microsoft.com/blog/askperf/prf-memory-management-working-set-trimming/373758)(trimming)한다.
+
+* [성능 카운터](Perfmon.md#성능-카운터): `\Process(*)\Working Set` 또는 `\Process(*)\Working Set - Private`
+
 ### 페이지 부재
 **[페이지 부재](https://en.wikipedia.org/wiki/Page_fault)**(page fault)는 접근하려는 가상 메모리의 페이지가 RAM에 상주하지 않아 물리 메모리 주소로 찾아갈 수 없을 시 발생하는 [예외](C.md#예외-처리)이다. 다만, 운영체제의 메모리 관리 과정에서 흔히 일어나는 매우 자연스러운 현상이기 때문에 일반적으로는 문제로 간주되지 않는다.
 
@@ -84,27 +88,54 @@ RAM과 페이징 파일 간 데이터가 이동하는 [페이징](https://en.wik
 
 그러나 RAM 용량에 비해 너무 많은 페이지가 커밋되었을 경우, [페이징](#페이징-파일) 및 페이지 부재가 과도하게 발생하는 [스래싱](https://en.wikipedia.org/wiki/Thrashing_(computer_science))(thrashing) 현상이 일어난다. [커널 모드](Processor.md#커널-모드)의 메모리 관리를 수행하는 작업 횟수가 방대해진 탓에 실질적인 [사용자 모드](Processor.md#사용자-모드)의 [프로세스](Process.md) 작업이 뒷전으로 미루어진 성능 저하를 초래한다.
 
-## 작업 집합
-**[작업 집합](https://en.wikipedia.org/wiki/Working_set)**(working set)은 커밋된 가상 메모리 중 RAM에 할당된 [페이지](#페이지)들을 일컫는다. 작업 관리자의 메모리 성능 지표에서 "사용 중" 메모리는 시스템 전반의 작업 집합을 의미한다. Windows OS는 작업 집합이 일정 비율에 도달하여 RAM의 여유 메모리 확보가 필요할 경우, 오랜 기간 동안 사용되지 않은 페이지를 [페이징 파일](#페이징-파일)로 [트리밍](https://techcommunity.microsoft.com/blog/askperf/prf-memory-management-working-set-trimming/373758)(trimming)한다.
-
-* [성능 카운터](Perfmon.md#성능-카운터): `\Process(*)\Working Set` 또는 `\Process(*)\Working Set - Private`
+## Copy-on-write
+**[Copy-on-write](https://learn.microsoft.com/en-us/windows/win32/memory/memory-protection)**(일명 COW) 보호는 공유 리소스를 관리하는 기법 중 하나이다. 어느 한 프로세스가 공유 리소스를 편집하려고 시도할 경우, 시스템은 해당 프로세스의 [VAS](Process.md#가상-주소-공간)에 한하여 페이지 복사본을 제공하고 변경 사항을 적용한다. 나머지 프로세스들은 아무런 영향을 받지 않으므로 메모리도 절약할 수 있다.
 
 ## 주소 윈도잉 확장
-**[주소 윈도잉 확장](https://learn.microsoft.com/en-us/windows/win32/memory/address-windowing-extensions)**(address windowing extensions; AWE)은 [가상 메모리](#가상-메모리)를 RAM에 상주하는 비페이징 메모리에 매핑, 즉 "[윈도잉](https://en.wikipedia.org/wiki/Windowing)(windowing)"하여 사용할 수 있도록 제공된 [Win32 API](WinAPI.md) 집합이다. AWE는 아래 두 가지 성능적인 특징을 지녀 데이터 처리 비중이 높은 프로그램(대표적으로 [SQL](https://en.wikipedia.org/wiki/SQL))에서 자주 활용된다.
+**[주소 윈도잉 확장](https://learn.microsoft.com/en-us/windows/win32/memory/address-windowing-extensions)**(address windowing extensions; AWE)은 [가상 메모리](#가상-메모리)를 RAM에 상주하는 비페이징 메모리에 매핑, 즉 "[윈도잉](https://en.wikipedia.org/wiki/Windowing)(windowing)"하여 사용할 수 있도록 제공된 [Win32 API](WinAPI.md) 집합이다. AWE는 아래 두 가지 성능적 특징으로 데이터 처리 비중이 높은 프로그램(대표적으로 [SQL](https://en.wikipedia.org/wiki/SQL))에서 자주 활용된다.
 
 * 페이징될 수 없는 메모리를 RAM에 할당하여 [페이지 부재](#페이지-부재)로 인한 [오버헤드](https://en.wikipedia.org/wiki/Overhead_(computing))를 원천적으로 방지한다.
 * 가상 메모리 테이블을 리매핑하여 [프로세스 주소 공간](Process.md#가상-주소-공간)보다 큰 RAM의 물리 메모리를 접근할 수 있다.
 
 AWE의 구현 방식을 간단히 설명하면 순서와 같다:
 
-1. [VirtualAlloc](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualalloc) 함수에 MEM_PHYSICAL 플래그를 추가하여 가상 메모리의 페이지를 예약한다.
-1. [AllocateUserPhysicalPages](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-allocateuserphysicalpages) 함수로 사용할 RAM의 페이지 프레임을 미리 할당받아 확보한다.
-1. [MapUserPhysicalPages](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-mapuserphysicalpages) 함수로 가상 메모리의 페이지와 RAM의 페이지 프레임을 매핑한다.
+<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">핸들 테이블을 묘사한 예시</caption><colgroup><col style="width: 10%;"/><col style="width: 25%;"/><col/></colgroup><thead><tr><th style="text-align: center;">순서</th><th style="text-align: center;">Win32 함수</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;">1</td><td><a href="https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualalloc">VirtualAlloc</a></td><td>MEM_PHYSICAL 플래그를 추가하여 가상 메모리의 페이지를 예약한다.</td></tr><tr><td style="text-align: center;">2</td><td><a href="https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-allocateuserphysicalpages">AllocateUserPhysicalPages</a></td><td>사용할 RAM의 페이지 프레임을 미리 할당받아 확보한다.</td></tr><tr><td style="text-align: center;">3</td><td><a href="https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-mapuserphysicalpages">MapUserPhysicalPages</a></td><td>가상 메모리의 페이지와 RAM의 페이지 프레임을 매핑한다.</td></tr></tbody></table>
 
-오로지 윈도잉한 프로세스만 해당 RAM 페이지 프레임에 접근할 수 있기 때문에, 그 외 프로세스와 공유 불가하다. 그리고 RAM에 물리 메모리 할당을 남용하는 걸 방지하는 차원에서, AWE 활용 프로그램을 실행할 사용자는 반드시 "메모리에 페이지 잠금(Lock Pages In Memory)" 권한을 획득해야 한다.
+<sup>_† RAM에 페이지 프레임 할당 남용을 방지하기 위해, 사용자는 AWE 활용 프로그램을 실행하기 전에 반드시 "메모리에 페이지 잠금(Lock Pages In Memory)" 권한을 획득해야 한다._</sup>
+
+오로지 윈도잉한 프로세스만 해당 RAM 페이지 프레임에 접근할 수 있기 때문에, 그 외 프로세스와 공유 불가하다.
 
 # 메모리 맵 파일
 > *참고: [File Mapping - Win32 apps | Microsoft Learn](https://learn.microsoft.com/en-us/windows/win32/memory/file-mapping)*
+
+**[메모리 맵 파일](https://en.wikipedia.org/wiki/Memory-mapped_file)**(memory-mapped file)은 파일과 바이트 대 바이트 상관관계를 맺은 [가상 메모리](#가상-메모리)를 가리킨다. 가상 메모리가 커밋될 때 [페이징 파일](#페이징-파일)로 할당되는 거와 달리, 메모리 맵 파일은 [페이지](#페이지)를 [디스크](Storage.md#디스크)상 지정된 [파일](FileSystem.md)에 직접 할당한다. 단, 이는 메모리 매핑된 파일이 마치 [RAM](https://en.wikipedia.org/wiki/Random-access_memory)처럼 활용될 수 있음을 의미하지 않는다; 기술의 본질은 [파일 입출력](FileSystem.md#파일-입출력)이며, 파일에 커밋된 페이지 또한 마찬가지로 RAM에 상주해야 [프로세서](Processor.md)가 접근할 수 있다.
+
+다음은 위에서 소개한 메모리 맵 파일의 특징에 의해 나타나는 성질을 나열한다:
+
+1. 파일을 매번 읽거나 쓰기 위해 필요한 [시스템 호출](WinAPI.md#시스템-서비스) 횟수를 획기적으로 줄여 [오버헤드](https://en.wikipedia.org/wiki/Overhead_(computing))로 인한 성능 저하를 감소시킨다.
+1. 이미 메모리 매핑된 파일을 불러올 경우, 기존 파일 매핑을 그대로 활용하기 때문에 가상 메모리를 더 이상 예약하지 않아 RAM을 절약한다.
+1. [프로세스](Process.md) 간 데이터를 공유하는 매커니즘(RPC, COM, 윈도우 메시지, 클립보드, [메일슬롯](Process.md#메일슬롯), [파이프](Process.md#파이프), 소켓 등)은 전부 메모리 매핑 파일에 기반한다.
+
+Windows OS에서의 메모리 맵 파일은 아래 그림과 같이 구성 및 구현된다.
+
+![디스크의 파일, 파일 매핑 개체, 그리고 파일일 뷰의 관계도](https://learn.microsoft.com/en-us/windows/win32/memory/images/fmap.png)
+
+* [파일](FileSystem.md)
+* [파일 매핑 개체](#파일-매핑-개체)
+* [파일 뷰](#파일-뷰)
+
+### 파일 매핑 개체
+**[파일 매핑 개체](https://learn.microsoft.com/en-us/windows/win32/memory/creating-a-file-mapping-object)**(file mapping object)는 파일과 물리 메모리를 서로 매핑하는, [CreateFileMapping](https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-createfilemappinga) 함수에 의해 생성되는 [커널 개체](Kernel.md#커널-개체)이다. ([페이징 파일](#페이징-파일)을 포함한) 어느 파일이라도 가능하며, 파일 전체 혹은 일부만 메모리로 매핑시킬 수 있다. 즉, 파일에 매핑할 물리 메모리의 크기 또한 지정할 수 있다. 페이지의 보호 속성이 PAGE_READWRITE 처럼 쓰기 권한을 가지면 기존 파일보다 크게 설정하는 게 허용된다.
+
+물리 메모리가 할당된 파일 매핑 개체의 페이지도 페이징될 수 있다:
+
+1. 페이징 아웃 시, 변경 사항은 매핑된 파일에 저장된다.
+1. 페이징 인 시, 저장된 변경 사항을 매핑된 파일로부터 다시 불러온다.
+
+해당 커널 개체는 "파일과 물리 메모리를 매핑"하는 역할에 불과하며, 프로세스에서 이를 접근하려면 [파일 뷰](#파일-뷰)가 필요하다.
+
+### 파일 뷰
+**[파일 뷰](https://learn.microsoft.com/en-us/windows/win32/memory/creating-a-file-view)**(file view)는 커널 개체인 [파일 매핑](#파일-매핑-개체)을 [프로세스](Process.md)에서 접근할 수 있도록 지원하며, [MapViewOfFile](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-mapviewoffile) 함수는 파일 매핑의 어디서부터 얼만큼 파일 뷰가 접근할지 오프셋 및 크기를 지정한다. 단, 오프셋은 할당 입도의 배수이여야 한다. 파일 뷰는 [커널 개체](Kernel.md#커널-개체)가 아니다; Win32 함수는 [핸들](Process.md#핸들)이 아닌 [포인터](C.md#포인터)를 반환한다. 파일 뷰는 타 프로세스에게 상속되거나 전달될 수 없으며, 해당 파일 매핑로 접근이 필요하면 파일 뷰를 새로 생성해야 한다.
 
 # 메모리 풀
 > *참고: [Pushing the Limits of Windows: Paged and Nonpaged Pool | Microsoft Learn](https://learn.microsoft.com/en-us/archive/blogs/markrussinovich/pushing-the-limits-of-windows-paged-and-nonpaged-pool)*
