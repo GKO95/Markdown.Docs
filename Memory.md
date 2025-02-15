@@ -3,7 +3,7 @@
 
 본문에서 사용되는 메모리 용어들을 다음과 같이 정리한다.
 
-* **[가상 메모리](#가상-메모리)**: *(하드웨어와 독립적으로) [운영체제](https://en.wikipedia.org/wiki/Operating_system)로부터 표현된 메모리이며, 프로세서에 의해 처리될 수 있으려면 "물리 메모리"가 반드시 필요하다.*
+* **[가상 메모리](#가상-메모리)**: *(하드웨어와 독립적으로) [운영체제](https://en.wikipedia.org/wiki/Operating_system)로부터 표현된 메모리이며, 프로세서에 의해 처리되려면 "물리 메모리"가 반드시 필요하다.*
     * **물리 메모리**: *가상 메모리를 담을 수 있는 하드웨어 실체가 있는 메모리이며, [RAM](https://en.wikipedia.org/wiki/Random-access_memory) 및 [페이징 파일](#페이징-파일)이 해당한다.*
 * **[보조 메모리](Storage.md)**: *데이터를 오래 저장할 수 있는 [비휘발성](https://en.wikipedia.org/wiki/Non-volatile_random-access_memory) 메모리이며, [HDD](Storage.md#디스크) 및 [SSD](https://ko.wikipedia.org/wiki/솔리드_스테이트_드라이브) 등의 저장 장치가 해당한다.*
 
