@@ -21,7 +21,7 @@ AD 환경에서 PDC가 그룹 정책을 배포할 때, GPC와 GPT가 도메인�
 
 다음은 AD 환경에서 GPO가 사용자 및 컴퓨터에 적용되는 과정을 소개한다.
 
-![GPO 처리 순서도](https://stealthbits.com/wp-content/uploads/2019/04/image-33.png)
+![GPO 처리 순서도](https://blog.netwrix.com/wp-content/uploads/2022/10/Restore-GPO-3.png)
 
 사용자가 로그인을 하거나 컴퓨터가 부팅할 시, 사용자와 컴퓨터에 적용될 GPO 목록을 AD로부터 전달받기 위해 [LDAP](https://en.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol) 쿼리를 전송한다. 쿼리는 AD 계층 내 사용자 또는 컴퓨터의 위치(예를 들어, 도메인, OU 등)를 기반하며, 아래는 ftp.contoso.com 도메인에 속한 사용자의 LDAP 쿼리 요청 예시이다.
 
