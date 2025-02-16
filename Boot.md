@@ -1,7 +1,7 @@
 # 부팅
 > *참고: [Booting process of Windows NT - Wikipedia](https://en.wikipedia.org/wiki/Booting_process_of_Windows_NT)*
 
-**[부팅](https://en.wikipedia.org/wiki/Booting)**(booting)은 하드웨어 (예. 전원 버튼) 또는 소프트웨어 명령으로 컴퓨터를 켜는 절차이다. 부팅 초기에 전력을 공급받은 컴퓨터의 [메모리](Memory.md)가 [휘발성](https://en.wikipedia.org/wiki/Volatile_memory)이기 때문에 아무런 소프트웨어가 로드되지 않은 상태이다. 그러므로 시스템 하드웨어의 [펌웨어](https://en.wikipedia.org/wiki/Firmware) 또는 타 [프로세서](Processor.md)의 도움으로 컴퓨터를 구동하기 위한 프로그램 이미지를 메모리에 주입시키는 작업이 필요하다.
+**[부팅](https://en.wikipedia.org/wiki/Booting)**(booting)은 하드웨어 또는 소프트웨어 상호작용으로 컴퓨터를 켜는 절차이다. 부팅 초기에 전력을 공급받은 컴퓨터의 [메모리](Memory.md)가 [휘발성](https://en.wikipedia.org/wiki/Volatile_memory)이기 때문에 아무런 소프트웨어가 로드되지 않은 상태이다. 그러므로 시스템 하드웨어의 [펌웨어](https://en.wikipedia.org/wiki/Firmware) 또는 타 [프로세서](Processor.md)의 도움으로 컴퓨터를 구동하기 위한 프로그램 이미지를 메모리에 주입시키는 작업이 필요하다.
 
 아래는 시스템이 부팅되는 과정을 두 규격, [UEFI](#uefi)와 [BIOS](#bios)에 대하여 순차적으로 보여주는 도표이다.
 
@@ -21,10 +21,10 @@ ROM에 저장된 UEFI 혹은 BIOS 펌웨어가 실행되면 가장 먼저 [POST]
 **[시동 자체 시험](https://en.wikipedia.org/wiki/Power-on_self-test)**(Power-on self-test; POST)은 컴퓨터나 타 디지털 전자 장치가 전원을 공급받는 즉시 실행된 ([UEFI](#uefi) 혹은 [BIOS](#bios)) 펌웨어에서 하드웨어 초기화 및 상태를 진단하는 절차이다. 흔히 [메인보드](https://en.wikipedia.org/wiki/Motherboard) 제조사 또는 OEM 로고가 표시되는 화면에 해당한다. POST 진단 결과는 디스플레이 화면에 출력되거나 별도의 진단 도구로부터 확인할 수 있도록 저장된다. 만일 화면 출력 기능에 문제가 있을 경우를 대비하여 LED 또는 경고음을 통해 오류 코드를 알릴 수 있는 장치가 마련되어 있다.
 
 ## 부트로더
-**[부트로더](https://en.wikipedia.org/wiki/Bootloader)**(bootloader), 일명 **[부트스트랩](#부트스트랩) 로더**(bootstrap loader)는 컴퓨터 부팅 과정 중에서 설치된 운영체제의 [커널](Kernel.md)을 불러와 실행하는 프로그램이다. 만일 여럿 부팅 선택지 메뉴를 제공한다면 흔히 **부트 관리자**(boot manager)라고 부르며, 선택된 별개의 OS 부트로더를 실행하는 [연쇄 로딩](https://en.wikipedia.org/wiki/Chain_loading)을 구현한다.
+**[부트로더](https://en.wikipedia.org/wiki/Bootloader)**(bootloader), 일명 **[부트스트랩](#부트스트랩) 로더**(bootstrap loader)는 컴퓨터 부팅 과정 중에서 설치된 운영체제의 [커널](Kernel.md)을 불러와 실행하는 프로그램이다. 만일 여럿 부팅 선택지 메뉴를 제공한다면 흔히 **부팅 관리자**(boot manager)라고 부르며, 선택된 별개의 OS 부트로더를 실행하는 [연쇄 로딩](https://en.wikipedia.org/wiki/Chain_loading)을 구현한다.
 
-* [윈도우 부트 관리자](#윈도우-부트-관리자): 일명 [`BOOTMGR`](#bios)(혹은 [`bootmgfw.efi`](#uefi))는 비스타 이상의 [윈도우 NT](Windows.md)를 위한 부트 관리자이다.
-    * *[Winload.exe](https://en.wikipedia.org/wiki/Windows_Boot_Manager#winload.exe): 커널 및 드라이버를 로드하는 윈도우 OS 부트로더이다; UEFI에서는 Winload.efi가 해당한다.*
+* [윈도우 부트 관리자](#윈도우-부팅-관리자): 일명 [`BOOTMGR`](#bios)(혹은 [`bootmgfw.efi`](#uefi))는 비스타 이상의 [윈도우 NT](Windows.md)를 위한 부팅 관리자이다.
+    * *[Winload.exe](#윈도우-운영체제-로더): 커널 및 드라이버를 로드하는 윈도우 OS 부트로더이다; UEFI에서는 Winload.efi가 해당한다.*
 * [GNU GRUB](https://en.wikipedia.org/wiki/GNU_GRUB): GNU 프로젝트의 일환으로 UNIX 기반의 운영체제를 위한 부트로더이다.
 
 ### 부트스트랩
@@ -96,15 +96,34 @@ UEFI가 부트 장치를 탐색하는 과정은 다음과 같다.
 **[EFI 시스템 파티션](https://en.wikipedia.org/wiki/EFI_system_partition)**(EFI system partition; ESP)은 부팅될 때 UEFI 펌웨어가 불러올 파일들이 위치한 [데이터 저장 매체](Storage.md)의 파티션이다. GUID `C12A7328-F81F-11D2-BA4B-00A0C93EC93B`로 식별되며 [FAT](https://en.wikipedia.org/wiki/File_Allocation_Table) [파일 시스템](https://en.wikipedia.org/wiki/File_system)에 기반할 것을 UEFI는 규정한다. ESP 안에는 다음과 같은 데이터 및 파일이 저장되어 있다.
 
 * [UEFI 어플리케이션](https://en.wikipedia.org/wiki/UEFI#Applications)
-    * [OS](https://en.wikipedia.org/wiki/Operating_system) [부트로더](#부트로더): *윈도우 NT의 경우 [`bootmgfw.efi`](#윈도우-부트-관리자) 및 `winload.efi` 해당*
-    * [UEFI 셸](https://en.wikipedia.org/wiki/UEFI#UEFI_shell): *[x86-64](https://en.wikipedia.org/wiki/X86-64) 아키텍처는 `SHELLX64.efi`*
+    * [부트로더](#부트로더): *윈도우 NT의 경우 [bootmgfw.efi](#윈도우-부트-관리자), winload.efi, winresume.efi 등이 해당*
+    * [UEFI 셸](https://en.wikipedia.org/wiki/UEFI#UEFI_shell): *[x86-64](https://en.wikipedia.org/wiki/X86-64) 아키텍처는 SHELLX64.efi*
 * [장치 드라이버](Driver.md): *부팅 시 UEFI 펌웨어가 사용할 [컴퓨터 하드웨어](https://en.wikipedia.org/wiki/Computer_hardware) 대상*
 * 데이터 파일
-    * [Boot Configuration Data](https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/boot-options-in-windows#boot-configuration-data)(일명 BCD)
+    * [Boot Configuration Data](#부팅-구성-데이터)(일명 BCD)
     * 오류 로그
 
 ### 호환성 지원 모듈
 **[호환성 지원 모듈](https://en.wikipedia.org/wiki/UEFI#CSM_booting)**(Compatibility Support Module; CSM)은 UEFI 펌웨어가 MBR 파티션의 디스크로부터 레거시 BIOS 모드로 부팅하는 걸 지원하는 하위호환이다. GPT가 LBA 0를 활용하지 않는 점을 이용하여 레거시 BIOS 기반의 시스템 부팅이 가능하였으며, 이를 *BIOS-GPT*라고 불렀다. 하지만 2020년부터 인텔은 더 이상 CSM을 지원하지 않는다고 발표하였다.
 
-# 윈도우 부트 관리자
-**[윈도우 부트 관리자](https://en.wikipedia.org/wiki/Windows_Boot_Manager)**(Windows Boot Manager), 또는 간략히 **부트 관리자**는 [윈도우 NT](Windows.md)의 [부트로더](#부트로더)이다.
+# 윈도우 부팅 관리자
+**[윈도우 부팅 관리자](https://en.wikipedia.org/wiki/Windows_Boot_Manager)**(Windows Boot Manager), 또는 간략히 **부트 관리자**는 [마이크로소프트](https://aka.ms/microsoft)가 제공하는 [윈도우 NT](Windows.md)의 [부트로더](#부트로더) 중 하나이다.
+
+![윈도우 부팅 관리자](https://upload.wikimedia.org/wikipedia/commons/a/a3/Windows_11_RE_Boot_menu.png)
+
+본 부트로더의 핵심은 [BCD](#부팅-구성-데이터)에 저장된 부팅 설정 정보에 따라 다음으로 [연쇄 로딩](https://en.wikipedia.org/wiki/Chain_loading)할 [OS 부트로더](#윈도우-운영체제-로더)를 호출한다. 즉, 아직 [Windows OS](Windows.md)를 로드하는 과정이 아니지만 어느 [운영체제](https://en.wikipedia.org/wiki/Operating_system)를 부팅할 건지 결정하는 징검다리 역할을 한다.
+
+<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">구격별 부팅 관리자 및 OS 부트로더</caption><colgroup><col style="width: 10%;"/><col style="width: 30%;"/><col style="width: 30%;"/><col style="width: 30%;"/></colgroup><thead><tr><th style="text-align: center;">규격</th><th style="text-align: center;">부트 관리자</th><th style="text-align: center;"><a href="#윈도우-운영체제-로더">OS 부트로더</a></th><th style="text-align: center;">OS 부트로더 (<a href="#">최대 절전</a>)</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="#bios"><b>BIOS</b></a></td><td style="text-align: center;">BOOTMGR</td><td style="text-align: center;">winload.exe</td><td style="text-align: center;">winresume.exe</td></tr><tr><td style="text-align: center;"><a href="#uefi"><b>UEFI</b></a></td><td style="text-align: center;">bootmgfw.efi</td><td style="text-align: center;">winload.efi</td><td style="text-align: center;">winresume.efi</td></tr></tbody></table>
+
+<sup>_† Winresume.exe는 [하이버네이션](#하이버네이션)에 진입한 시스템을 다시 깨우는데, 이는 마치 컴퓨터를 다시 켜는 행위와 마찬가지이기 때문에 동원되는 특수한 OS 부트로더이다._</sup>
+
+## 부팅 구성 데이터
+> *참고: [Boot Options Identifiers - Windows drivers | Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/boot-options-identifiers)*
+
+**[부팅 구성 데이터](https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/boot-options-in-windows#boot-configuration-data)**(boot configuration data; BCD)
+
+## 윈도우 운영체제 로더
+**[윈도우 운영체제 로더](https://en.wikipedia.org/wiki/Windows_Boot_Manager#winload.exe)**(Windows operating system loader)는 [부팅 관리자](#윈도우-부팅-관리자)에 의해 연쇄적으로 실행되는 [OS 부트로더](#부트로더)이며, 윈도우 OS [커널](Kernel.md) 및 부팅 시 실행되어야 할 [드라이버](Driver.md)를 불러온다. 단, 필요한 모든 리소스를 불러올 때까지 커널 및 드라이버는 아직 초기화된 상태가 아님을 주의한다.
+
+### 하이버네이션
+**[하이버네이션](https://en.wikipedia.org/wiki/Hibernation_(computing))**(hibernation), 일명 [**최대 절전 모드**](https://support.microsoft.com/windows/2941d165-7d0a-a5e8-c5ad-8c972e8e6eff)
