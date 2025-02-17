@@ -50,9 +50,7 @@
 
 Windows OS는 [데이터 실행 방지](https://learn.microsoft.com/en-us/windows/win32/memory/data-execution-prevention)(Data Execution Prevention; DEP)를 활성화할 경우, 코드 실행이 의도된 메모리 영역에 `PAGE_EXECUTE_*` 보호 속성을 적용하는 등 멀웨어로부터 유해한 코드나 데이터를 삽입하는 행위를 방지한다.
 
-* #### 가드 페이지
-
-    [가드 페이지](https://learn.microsoft.com/en-us/windows/win32/memory/creating-guard-pages)(guard page)는 메모리 접근 시 단발성 알람을 제공하는 특수한 페이지이다. 대용량 동적 자료 구조의 성장 모니터링이 필요한 응용 프로그램에 매우 유용하다. 대표적인 활용 사례로 운영체제는 가드 페이지를 [호출 스택](Thread.md#호출-스택)에 활용하여 [스택 오버플로우](Thread.md#스택-오버플로우)를 감시한다.
+* **[가드 페이지](https://learn.microsoft.com/en-us/windows/win32/memory/creating-guard-pages)**(guard page)는 메모리 접근 시 단발성 알람을 제공하는 특수한 페이지이다. 대용량 동적 자료 구조의 성장 모니터링이 필요한 응용 프로그램에 매우 유용하다. 대표적인 활용 사례로 운영체제는 가드 페이지를 [호출 스택](Thread.md#호출-스택)에 활용하여 [스택 오버플로우](Thread.md#스택-오버플로우)를 감시한다.
 
 ### 페이징 파일
 **[페이징 파일](https://learn.microsoft.com/en-us/windows/client-management/introduction-page-file)**(paging file)은 [HDD](https://en.wikipedia.org/wiki/Hard_disk_drive)나 [SSD](https://en.wikipedia.org/wiki/Solid-state_drive)와 같은 [저장 장치](Storage.md)에 상주하는 pagefile.sys 파일이며, RAM을 보조하는 일종의 물리 메모리이다. 하드웨어 기술 향상으로 옛 컴퓨터에 비해 RAM의 용량은 대폭 증가하였으나, 운영체제는 여전히 다음 페이징 파일 기능을 활발히 사용한다:
