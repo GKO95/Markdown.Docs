@@ -113,14 +113,19 @@ UEFI가 부트 장치를 탐색하는 과정은 다음과 같다.
 
 본 부트로더의 핵심은 [BCD](#부팅-구성-데이터)에 저장된 부팅 설정 정보에 따라 다음으로 [연쇄 로딩](https://en.wikipedia.org/wiki/Chain_loading)할 [OS 부트로더](#윈도우-운영체제-로더)를 호출한다. 즉, 아직 [Windows OS](Windows.md)를 로드하는 과정이 아니지만 어느 [운영체제](https://en.wikipedia.org/wiki/Operating_system)를 부팅할 건지 결정하는 징검다리 역할을 한다.
 
-<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">구격별 부팅 관리자 및 OS 부트로더</caption><colgroup><col style="width: 10%;"/><col style="width: 30%;"/><col style="width: 30%;"/><col style="width: 30%;"/></colgroup><thead><tr><th style="text-align: center;">규격</th><th style="text-align: center;">부트 관리자</th><th style="text-align: center;"><a href="#윈도우-운영체제-로더">OS 부트로더</a></th><th style="text-align: center;">OS 부트로더 (<a href="#">최대 절전</a>)</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="#bios"><b>BIOS</b></a></td><td style="text-align: center;">BOOTMGR</td><td style="text-align: center;">winload.exe</td><td style="text-align: center;">winresume.exe</td></tr><tr><td style="text-align: center;"><a href="#uefi"><b>UEFI</b></a></td><td style="text-align: center;">bootmgfw.efi</td><td style="text-align: center;">winload.efi</td><td style="text-align: center;">winresume.efi</td></tr></tbody></table>
+<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">구격별 부팅 관리자 및 OS 부트로더</caption><colgroup><col style="width: 10%;"/><col style="width: 30%;"/><col style="width: 30%;"/><col style="width: 30%;"/></colgroup><thead><tr><th style="text-align: center;">규격</th><th style="text-align: center;">부트 관리자</th><th style="text-align: center;"><a href="#윈도우-운영체제-로더">OS 부트로더</a></th><th style="text-align: center;">OS 부트로더 (<a href="#">최대 절전</a>)</th></tr></thead><tbody><tr><td rowspan="2" style="text-align: center;"><a href="#bios"><b>BIOS</b></a></td><td colspan="2" style="text-align: center;"><a href="https://en.wikipedia.org/wiki/NTLDR">NTLDR</a>&nbsp;<sub>(~Windows XP)</sub></td><td style="text-align: center;">-</td></tr><tr><td style="text-align: center;">BOOTMGR</td><td style="text-align: center;">winload.exe</td><td style="text-align: center;">winresume.exe</td></tr><tr><td style="text-align: center;"><a href="#uefi"><b>UEFI</b></a></td><td style="text-align: center;">bootmgfw.efi</td><td style="text-align: center;">winload.efi</td><td style="text-align: center;">winresume.efi</td></tr></tbody></table>
 
 <sup>_† Winresume.exe는 [하이버네이션](#하이버네이션)에 진입한 시스템을 다시 깨우는데, 이는 마치 컴퓨터를 다시 켜는 행위와 마찬가지이기 때문에 동원되는 특수한 OS 부트로더이다._</sup>
 
 ## 부팅 구성 데이터
-> *참고: [Boot Options Identifiers - Windows drivers | Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/boot-options-identifiers)*
+**[부팅 구성 데이터](https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/boot-options-in-windows#boot-configuration-data)**(boot configuration data; BCD)는 부팅 가능한 OS 목록 및 관련 설정을 포함한 운영체제 부팅 구성 정보들이 저장된 [레지스트리 하이브](Registry.md#레지스트리-하이브)이다. 어느 [Windows OS](Windows.md)에서든 부팅 환경 데이터를 취급할 수 있는 펌웨어 독립적인 매커니즘을 제공하며, [UEFI](#uefi)를 본격적으로 지원하는 [Windows Vista](https://en.wikipedia.org/wiki/Windows_Vista)부터 도입되었다.
 
-**[부팅 구성 데이터](https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/boot-options-in-windows#boot-configuration-data)**(boot configuration data; BCD)
+> [Windows XP](https://en.wikipedia.org/wiki/Windows_XP)까지 BIOS의 NTLDR 부트로더는 [boot.ini](https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/overview-of-the-boot-ini-file) 텍스트 파일, 그리고 EFI 1.10의 부트로더 펌웨어는 [NVRAM](https://en.wikipedia.org/wiki/Non-volatile_random-access_memory)에 부팅 구성 정보를 저장하였다.
+
+다음은 BCD를 변경할 수 있는 도구들을 소개한다.
+
+* [MSConfig](https://support.microsoft.com/en-us/windows/system-configuration-tools-in-windows-f8a49657-b038-43b8-82d3-28bea0c5666b): 제한적이지만 간단한 부팅 옵션을 설정할 수 있다.
+* [BCDEdit](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/bcdedit): BCD를 관리하는 대표적인 명령어 기반 도구이다.<sup>[[1](https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/boot-options-identifiers)]</sup><sup>[[2](https://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/bitlocker/bcd-settings-and-bitlocker)]</sup>
 
 ## 윈도우 운영체제 로더
 **[윈도우 운영체제 로더](https://en.wikipedia.org/wiki/Windows_Boot_Manager#winload.exe)**(Windows operating system loader)는 [부팅 관리자](#윈도우-부팅-관리자)에 의해 연쇄적으로 실행되는 [OS 부트로더](#부트로더)이며, 윈도우 OS [커널](Kernel.md) 및 부팅 시 실행되어야 할 [드라이버](Driver.md)를 불러온다. 단, 필요한 모든 리소스를 불러올 때까지 커널 및 드라이버는 아직 초기화된 상태가 아님을 주의한다.
