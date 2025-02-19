@@ -128,7 +128,14 @@ UEFI가 부트 장치를 탐색하는 과정은 다음과 같다.
 * [BCDEdit](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/bcdedit): BCD를 관리하는 대표적인 명령어 기반 도구이다.<sup>[[1](https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/boot-options-identifiers)]</sup><sup>[[2](https://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/bitlocker/bcd-settings-and-bitlocker)]</sup>
 
 ## 윈도우 운영체제 로더
-**[윈도우 운영체제 로더](https://en.wikipedia.org/wiki/Windows_Boot_Manager#winload.exe)**(Windows operating system loader)는 [부팅 관리자](#윈도우-부팅-관리자)에 의해 연쇄적으로 실행되는 [OS 부트로더](#부트로더)이며, 윈도우 OS [커널](Kernel.md) 및 부팅 시 실행되어야 할 [드라이버](Driver.md)를 불러온다. 단, 필요한 모든 리소스를 불러올 때까지 커널 및 드라이버는 아직 초기화된 상태가 아님을 주의한다.
+**[윈도우 운영체제 로더](https://en.wikipedia.org/wiki/Windows_Boot_Manager#winload.exe)**(Windows operating system loader; winload)는 [부팅 관리자](#윈도우-부팅-관리자)에 의해 연쇄적으로 호출되어 Windows OS의 본격 실행을 준비하는 [OS 부트로더](#부트로더)이다. Winload는 다음 리소스들을 불러오되, 아직까지 이들을 초기화 혹은 실행시키지 않는다.
+
+1. [Ntoskrnl.exe](Kernel.md#nt-커널)
+1. [HAL.dll](Kernel.md#하드웨어-추상-계층)
+1. [레지스트리](Registry.md)
+1. [장치 드라이버](Driver.md) <sub>*([SERVICE_BOOT_START](Service.md#서비스-제어-관리자) 한정)*</sub>
+
+Winload가 위의 리소스를 전부 불러오면 ntoskrnl.exe를 실행 및 제어권을 양도한다. 그리고 커널은 불러온 장치 드라이버를 초기화하고 Windows OS를 시작하는 절차를 밟는다.
 
 ### 하이버네이션
 **[하이버네이션](https://en.wikipedia.org/wiki/Hibernation_(computing))**(hibernation), 일명 [**최대 절전 모드**](https://support.microsoft.com/windows/2941d165-7d0a-a5e8-c5ad-8c972e8e6eff)
