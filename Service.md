@@ -13,10 +13,10 @@
 1. 조기 실행 맬웨어 방지(Early Launch Antimalware; ELAM)
 2. 이진 서명
 
-서비스 제어 관리자는 보호된 서비스를 시작하기 전에 자격 유효성을 검증하며, 비보호 프로세스 및 관리자 권한으로도 보호된 서비스를 중지할 수 없다.
+서비스 제어 관리자는 보호된 서비스를 시작하기 전에 자격 유효성을 검증하며, 비보호 프로세스 및 관리자 권한으로도 보호된 서비스를 중지할 수 없다. 이러한 매커니즘은 멀웨어의 공격으로부터 보호되어야 할 백신 서비스 프로그램을 위해 제공된다.<sup>[[출처](https://learn.microsoft.com/en-us/windows/win32/services/protecting-anti-malware-services-)]</sup>
 
 ## 서비스 제어 관리자
-**[서비스 제어 관리자](https://ko.wikipedia.org/wiki/서비스_제어_관리자)**(Service Control Manager; SCM), 일명 [`services.exe`](https://www.file.net/process/services.exe.html) 프로그램은 [윈도우](Windows.md)에서 서비스를 구동 및 관리하는 프로세스이다. 시스템이 [부팅](Boot.md)되어 운영체제가 초기화되는 과정에서 실행되는 프로세스이며, 등록된 서비스들은 아래 [레지스트리 키](Registry.md)에서 찾아볼 수 있다.<sup>[<a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree">참고</a>]</sup>
+**[서비스 제어 관리자](https://en.wikipedia.org/wiki/Service_Control_Manager)**(Service Control Manager; SCM), 일명 [services.exe](https://www.file.net/process/services.exe.html) 프로그램은 [윈도우](Windows.md)에서 서비스를 구동 및 관리하는 프로세스이다. 시스템이 [부팅](Boot.md)되어 운영체제가 초기화되는 과정에서 실행되는 프로세스이며, 등록된 서비스들은 아래 [레지스트리 키](Registry.md)에서 찾아볼 수 있다.<sup>[<a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree">참고</a>]</sup>
 
 ```terminal
 HKLM\SYSTEM\CurrentControlSet\Services
@@ -24,7 +24,7 @@ HKLM\SYSTEM\CurrentControlSet\Services
 
 각 서비스마다 하위 레지스트리 키가 개별 존재하며, 설정할 수 있는 값들은 알파벳 순서대로 나열한다:
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">Services의 하위 서비스 레지스트리 키 구성</caption><colgroup><col style="width: 15%;"/><col style="width: 15%;"/><col style="width: 70%;"/></colgroup><thead><tr><th style="text-align: center;">레지스트리 값</th><th style="text-align: center;">종류</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td><code>DependOnService</code></td><td style="text-align: center;">REG_MULTI_SZ</td><td>실행하기 전에 먼저 실행되어야 할 서비스 혹은 그룹을 지정한다.</td></tr><tr><td><code>DisplayName</code></td><td style="text-align: center;">REG_SZ</td><td>사용자가 식별할 수 있도록 표시될 서비스 이름을 기입한다.</ul></td></tr><tr><td><code>ErrorControl</code></td><td style="text-align: center;">REG_DWORD</td><td>서비스 시작 실패 시 간주할 오류 심각도와 조치를 설정한다.<br/><ul><li>0x0: 오류를 무시하고 서비스 시작 작업을 재개한다.</li><li>0x1: 오류를 이벤트 로그에 기록하고 서비스 시작 작업을 재개한다.</li><li>0x2: 오류를 이벤트 로그에 기록하며, 시스템 재부팅 이후 LKG 구성에서 실행을 재개한다.</li><li>0x3: 오류를 이벤트 로그에 기록하며, 시스템 재부팅 이후 LKG 구성에서 실행을 중단한다.</li></ul></td></tr><tr><td><code>ImagePath</code></td><td style="text-align: center;">REG_EXPAND_SZ</td><td>서비스를 실행하는 바이너리 파일의 전체 경로를 가리키며, 전달 인자 기입을 허용한다.</td></tr><tr><td><code>Start</code></td><td style="text-align: center;">REG_DWORD</td><td>서비스 실행 시점을 설정한다.<br/><ul><li>0x0: [<a href="Driver.md#장치-드라이버">장치 드라이버</a> 전용] 시스템이 부팅될 때 <a href="Boot.md#부트로더">부트로더</a>에 의해 실행</li><li>0x1: [장치 드라이버 전용] 시스템이 초기화될 때 IoInitSystem 루틴에 의해 실행</li><li>0x2: SCM에 의해 시스템이 시작될 때 자동으로 실행</li><li>0x3: SCM에 의해 프로세스가 <a href="https://learn.microsoft.com/en-us/windows/win32/api/winsvc/nf-winsvc-startservicew">StartService</a> 함수를 호출할 때 실행</li><li>0x4: 서비스 실행 비활성</li></ul></td></tr><tr><td><code>Type</code></td><td style="text-align: center;">REG_DWORD</td><td>서비스 유형을 설정한다.<br/><ul><li>0x1: 드라이버 서비스</li><li>0x2: <a href="FileSystem.md">파일 시스템</a> 드라이버 서비스</li><li>0x10: 단독 프로세스로 실행되는 서비스</li><li>0x20: 타 서비스와 프로세스를 공유하여 실행되는 서비스</li></ul></td></tr></tbody></table>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">Services의 하위 서비스 레지스트리 키 구성</caption><colgroup><col style="width: 15%;"/><col style="width: 15%;"/><col style="width: 70%;"/></colgroup><thead><tr><th style="text-align: center;">레지스트리 값</th><th style="text-align: center;">종류</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td><code>DependOnService</code></td><td style="text-align: center;">REG_MULTI_SZ</td><td>실행하기 전에 먼저 실행되어야 할 서비스 혹은 그룹을 지정한다.</td></tr><tr><td><code>DisplayName</code></td><td style="text-align: center;">REG_SZ</td><td>사용자가 식별할 수 있도록 표시될 서비스 이름을 기입한다.</ul></td></tr><tr><td><code>ErrorControl</code></td><td style="text-align: center;">REG_DWORD</td><td>서비스 시작 실패 시 간주할 오류 심각도와 조치를 설정한다.<br/><ul><li>0x0: 오류를 무시하고 서비스 시작 작업을 재개한다.</li><li>0x1: 오류를 이벤트 로그에 기록하고 서비스 시작 작업을 재개한다.</li><li>0x2: 오류를 이벤트 로그에 기록하며, 시스템 재부팅 이후 LKG 구성에서 실행을 재개한다.</li><li>0x3: 오류를 이벤트 로그에 기록하며, 시스템 재부팅 이후 LKG 구성에서 실행을 중단한다.</li></ul></td></tr><tr><td><code>ImagePath</code></td><td style="text-align: center;">REG_EXPAND_SZ</td><td>서비스를 실행하는 바이너리 파일의 전체 경로를 가리키며, 전달 인자 기입을 허용한다.</td></tr><tr><td><code>Start</code></td><td style="text-align: center;">REG_DWORD</td><td>서비스 실행 시점을 설정한다.<br/><ul><li>0x0: [<a href="Driver.md#장치-드라이버">장치 드라이버</a> 전용] 시스템이 부팅될 때 <a href="Boot.md#윈도우-운영체제-로더">OS 부트로더</a>에 의해 실행</li><li>0x1: [장치 드라이버 전용] 시스템이 초기화될 때 IoInitSystem 루틴에 의해 실행</li><li>0x2: SCM에 의해 시스템이 시작될 때 자동으로 실행</li><li>0x3: SCM에 의해 프로세스가 <a href="https://learn.microsoft.com/en-us/windows/win32/api/winsvc/nf-winsvc-startservicew">StartService</a> 함수를 호출할 때 실행</li><li>0x4: 서비스 실행 비활성</li></ul></td></tr><tr><td><code>Type</code></td><td style="text-align: center;">REG_DWORD</td><td>서비스 유형을 설정한다.<br/><ul><li>0x1: 드라이버 서비스</li><li>0x2: <a href="FileSystem.md">파일 시스템</a> 드라이버 서비스</li><li>0x10: 단독 프로세스로 실행되는 서비스</li><li>0x20: 타 서비스와 프로세스를 공유하여 실행되는 서비스</li></ul></td></tr></tbody></table>
 
 <sup>_† 참고: [QUERY_SERVICE_CONFIGW structure (winsvc.h) - Win32 apps | Microsoft Learn](https://learn.microsoft.com/en-us/windows/win32/api/winsvc/ns-winsvc-query_service_configw)_</sup>
 
@@ -32,10 +32,10 @@ HKLM\SYSTEM\CurrentControlSet\Services
 
 서비스 제어 관리자는 GUI가 없는 프로그램이다. 만일 서비스를 직접 실행 및 중단해야 하는 등의 작업이 필요할 시, 서비스와 상호작용에 필연적인 API를 활용한 아래 프로세스를 사용할 수 있다.
 
-* `services.msc`: [마이크로소프트 관리 콘솔](https://ko.wikipedia.org/wiki/마이크로소프트_관리_콘솔)을 통해 서비스 제어 관리자 데이터베이스에 등록된 서비스를 GUI로 확인하고 제어한다.
-* [`sc.exe`](https://www.file.net/process/sc.exe.html): 서비스 제어 관리자가 서비스를 관리하기 위해 필요한 데이터를 [생성](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sc-create), [설정](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sc-config), [제거](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sc-delete), 그리고 [탐색](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sc-query)하는 명령어 기반 프로세스이다.
+* services.msc: [마이크로소프트 관리 콘솔](https://ko.wikipedia.org/wiki/마이크로소프트_관리_콘솔)을 통해 서비스 제어 관리자 데이터베이스에 등록된 서비스를 GUI로 확인하고 제어한다.
+* [sc.exe](https://www.file.net/process/sc.exe.html): 서비스 제어 관리자가 서비스를 관리하기 위해 필요한 데이터를 [생성](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sc-create), [설정](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sc-config), [제거](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sc-delete), 그리고 [탐색](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sc-query)하는 명령어 기반 프로세스이다.
 
-그 외에도 [파워셸](PowerShell.md), 작업 관리자, MSConfig.exe 등을 사용할 수 있다.
+그 외에도 [PowerShell](PowerShell.md), [작업 관리자](TaskMgr.md), [MSConfig](https://support.microsoft.com/en-us/windows/system-configuration-tools-in-windows-f8a49657-b038-43b8-82d3-28bea0c5666b) 등을 사용할 수 있다.
 
 # 서비스 호스트
 > *참고: [Service Host - Win32 apps | Microsoft Laern](https://learn.microsoft.com/en-us/windows/win32/wsw/service-host)*
@@ -51,7 +51,7 @@ HKLM\SYSTEM\CurrentControlSet\Services
 ![DLL 형태의 "Winmgmt" 서비스의 <code>ImagePath</code> 레지스트리 값](./images/svchost_winmgmt_imagepath.png)
 
 * `-k`: svchost.exe 중에서 어느 서비스 호스트 그룹으로 지정할 지 결정한다.
-* `-p`: DynamicCodePolicy, BinarySignaturePolicy, 및 ExtensionPolicy 정책을 강행한다.
+* `-p`: DynamicCodePolicy, BinarySignaturePolicy, 및 ExtensionPolicy 정책을 강행한다.<sup>[[참고](https://nasbench.medium.com/demystifying-the-svchost-exe-process-and-its-command-line-options-508e9114e747)]</sup>
 
 위의 `-k` 플래그가 설정된 서비스는 해당 서비스 호스트 그룹에 자신의 정보를 제공한다. 아래의 레지스트리 키에는 다양한 svchost.exe 호스트 그룹 목록 있는데, 각 레지스트리 값에는 탑재되는 서비스가 나열되어 있다.
 
@@ -72,4 +72,3 @@ HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Svchost
 
 # 참조
 * [Protecting anti-malware services - Win32 apps &#124; Microsoft Learn](https://learn.microsoft.com/en-us/windows/win32/services/protecting-anti-malware-services-)
-* [Demystifying the "SVCHOST.EXE" Process and Its Command Line Options &#124; by Nasreddine Bencherchali &#124; Medium](https://nasbench.medium.com/demystifying-the-svchost-exe-process-and-its-command-line-options-508e9114e747)
