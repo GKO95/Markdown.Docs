@@ -128,14 +128,20 @@ UEFI가 부트 장치를 탐색하는 과정은 다음과 같다.
 * [BCDEdit](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/bcdedit): BCD를 관리하는 대표적인 명령어 기반 도구이다.<sup>[[1](https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/boot-options-identifiers)]</sup><sup>[[2](https://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/bitlocker/bcd-settings-and-bitlocker)]</sup>
 
 ## 윈도우 운영체제 로더
-**[윈도우 운영체제 로더](https://en.wikipedia.org/wiki/Windows_Boot_Manager#winload.exe)**(Windows operating system loader; winload)는 [부팅 관리자](#윈도우-부팅-관리자)에 의해 연쇄적으로 호출되어 Windows OS의 본격 실행을 준비하는 [OS 부트로더](#부트로더)이다. Winload는 다음 리소스들을 불러오되, 아직까지 이들을 초기화 혹은 실행시키지 않는다.
+**[윈도우 운영체제 로더](https://en.wikipedia.org/wiki/Windows_Boot_Manager#winload.exe)**(Windows operating system loader; winload)는 [부팅 관리자](#윈도우-부팅-관리자)에 의해 연쇄적으로 호출되어 Windows OS의 본격 실행을 준비하는 [OS 부트로더](#부트로더)이다. Winload.exe는 다음 리소스들을 불러오되, 아직까지 이들을 초기화 혹은 실행시키지 않는다.
 
 1. [Ntoskrnl.exe](Kernel.md#nt-커널)
 1. [HAL.dll](Kernel.md#하드웨어-추상-계층)
 1. [레지스트리](Registry.md)
 1. [장치 드라이버](Driver.md) <sub>*([SERVICE_BOOT_START](Service.md#서비스-제어-관리자) 한정)*</sub>
 
-Winload가 위의 리소스를 전부 불러오면 ntoskrnl.exe를 실행 및 제어권을 양도한다. 그리고 커널은 불러온 장치 드라이버를 초기화하고 Windows OS를 시작하는 절차를 밟는다.
+Winload.exe가 위의 리소스를 전부 불러오면 ntoskrnl.exe를 실행 및 제어권을 양도한다. 커널은 로드된 SERVICE_BOOT_START 드라이버를 먼저 초기화한 다음, 레지스트리로부터 SERVICE_SYSTEM_START 시작 유형에 해당하는 드라이버들을 탐색하여 로드 및 초기화한다.
 
 ### 하이버네이션
 **[하이버네이션](https://en.wikipedia.org/wiki/Hibernation_(computing))**(hibernation), 일명 [**최대 절전 모드**](https://support.microsoft.com/windows/2941d165-7d0a-a5e8-c5ad-8c972e8e6eff)
+
+# 시스템 종료
+**[시스템 종료](https://learn.microsoft.com/en-us/windows/win32/shutdown/system-shutdown)**(system shutdown)는 실행 중인 프로세스 및 활성화된 사용자 세션, 그리고 결과적으로 Windows NT 커널까지 종료하는 과정을 일컫는다. 시스템을 종료에 사용될 [Win32](WinAPI.md) 함수는 상황에 따라 두 가지로 구분된다.
+
+1. [ExitWindowsEx](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-exitwindowsex): 상호작용 가능한 사용자일 경우이며 로그오프 과정을 함께 포함한다.
+1. [InitiateSystemShutdownEx](https://learn.microsoft.com/en-us/windows/win32/api/winreg/nf-winreg-initiatesystemshutdownexw): 상호작용 불가한 사용자, 즉 로그오프가 절차상 불가하여 ExitWindowsEx 함수를 사용할 수 없는 경우가 해당한다.
