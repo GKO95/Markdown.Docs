@@ -214,11 +214,11 @@ Memory Management 레지스트리 키에서 설정할 수 있는 값들은 알�
 # BSOD 원리
 본 내용은 [윈도우](Windows.md) [OS](https://ko.wikipedia.org/wiki/운영체제)에서 [BSOD](#블루스크린)가 나타나 [메모리 덤프](Dump.md#커널-모드-덤프)가 생성되는 원리를 세 가진 단계로 나누어 설명한다. 자세한 내용은 [Mark Russinovich](https://en.wikipedia.org/wiki/Mark_Russinovich)([Sysinternals](Sysinternals.md) 공동 창시자)를 포함한 [마이크로소프트](https://www.microsoft.com/) 엔지니어들이 저자로 참여한 [*Windows Internals*](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) 도서를 읽어볼 것을 권장한다.
 
-1. **[설정 초기화](#설정-초기화)**: 부팅 시 덤프를 수집할 수 있도록 [CrashControl](#bsod-설정)에 설정된 항목들을 시스템에 적용하는 단계
-1. **[시스템 충돌](#시스템-충돌)**: 시스템 충돌이 발생할 때 RAM에 담겨진 데이터를 [페이징 파일](#페이징-파일)로 수집하는 단계
-1. **[덤프 생성](#덤프-생성)**: 충돌 이후 재부팅 과정에서 페이징 파일을 .dmp [덤프 파일](Dump.md#커널-모드-덤프)로 변환하는 단계
+1. **[설정 초기화](#1단계-설정-초기화)**: 부팅 시 덤프를 수집할 수 있도록 [CrashControl](#bsod-설정)에 설정된 항목들을 시스템에 적용하는 단계
+1. **[시스템 충돌](#2단계-시스템-충돌)**: 시스템 충돌이 발생할 때 RAM에 담겨진 데이터를 [페이징 파일](#페이징-파일)로 수집하는 단계
+1. **[덤프 생성](#3단계-덤프-생성)**: 충돌 이후 재부팅 과정에서 페이징 파일을 .dmp [덤프 파일](Dump.md#커널-모드-덤프)로 변환하는 단계
 
-## 설정 초기화
+## 1단계: 설정 초기화
 [세션 관리자](Process.md#세션-관리자)(smss.exe)는 시스템이 부팅되는 시점에 [입출력 관리자](Kernel.md#입출력-관리자)를 통해 [CrashControl](#bsod-설정) 레지스트리 키의 값들을 읽는다. 이들을 토대로 BSOD가 발생할 경우 어떠한 동작을 취할 것인지, 덤프는 어떻게 수집할 것인지 등의 설정을 시스템에 적용한다. 다른 의미로 해석하자면 CrashControl 레지스트리 키의 변경 사항을 시스템에 적용하려면 반드시 재부팅을 해야 한다.
 
 아래는 [프로세스 모니터](Procmon.md)로 수집된 시스템 부팅 과정에서 smss.exe가 CrashControl의 값들을 탐색하는 작업을 보여준다.
@@ -235,7 +235,7 @@ Memory Management 레지스트리 키에서 설정할 수 있는 값들은 알�
 
 * 드라이버 파일이 복사되어 로드된 게 아니므로 예시의 dump_stornvme.sys 드라이버는 파일로 존재하지 않고 단순히 메타데이터만 표시된 것이다. 스토리지 관련 드라이버에 문제가 발생한 경우에 혹여나 가해지는 손상을 방지하기 위한 조치이며, 시스템 충돌이 발생할 때에만 로드된다.
 
-## 시스템 충돌
+## 2단계: 시스템 충돌
 시스템 내부적으로 오류나 문제가 발생하면 [`KeBugCheckEx()`](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-kebugcheckex) 루틴이 호출되고 파란색 화면이 나타나며 모든 작업이 중지된다. 당시 [RAM](Memory.md)에 들어있는 데이터를 디스크의 페이징 파일로 옮기는, 즉 덤핑(dumping)을 진행하는데 일반적인 파일 입출력과 다른 스토리지 스택을 거쳐 저장한다. 화면에 나타난 백분율(%)이 바로 얼마나 덤핑 진행률을 나타낸다.
 
 ![일반 파일 시스템과 충돌 덤프의 입출력 경로 비교](https://crashdmp.files.wordpress.com/2013/02/new_chart.png)
@@ -252,7 +252,7 @@ Memory Management 레지스트리 키에서 설정할 수 있는 값들은 알�
 
 BSOD 화면에서 덤프 수집이 100% 완료되었으면 시스템을 강제 종료하여도 된다. 다만, 현 시점에서 분석에 사용되는 .dmp 덤프 파일이 아직 존재하지 않는다.
 
-## 덤프 생성
+## 3단계: 덤프 생성
 [시스템 충돌](#시스템-충돌) 이후 재부팅이 될 때 smss.exe는 [Memory Management](#페이징-파일) 레지스트리 키의 `ExistingPageFiles`에 나열된 페이징 파일들을 확인한다. 만일 헤더 정보에 `PAGEDUMP`(혹은 `PAGEDU64`)가 기입된 페이징 파일이 발견되면 덤핑에 사용된 것으로 인식한다. Smss.exe는 덤프를 저장하기에 여유 공간이 충분한지 [볼륨 정보를 확인](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/ntddk/nf-ntddk-zwqueryvolumeinformationfile)한 다음, 페이징 파일을 헤더에 기록된 덤프 파일의 크기만큼 축소시킨다.
 
 [CrashControl](#bsod-설정) 레지스트리 키에 설정된 덤프 저장 경로와 덤핑에 사용된 페이징 파일이 동일한 볼륨에 위치한지 여부에 따라 덤프 생성 절차가 달라진다.
