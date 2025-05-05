@@ -38,7 +38,7 @@
 
 * **[POSIX](https://en.wikipedia.org/wiki/Windows_Services_for_UNIX)** (지원 종료: ~ 윈도우 XP)
 
-    윈도우 7 얼티밋 및 엔터프라이즈, 그리고 윈도우 서버 2008 R2 한정으로 SUA(Subsystem for UNIX-based Application)라는 개선된 POSIX 서브시스템이 잠시동안 지원하였다. 단, 윈도우 10부터 등장한 [WSL](WSL.md)은 POSIX 서브시스템을 계승하였으나 기존 서브시스템과 전혀 다른 새로운 기술이 적용되었다.
+    윈도우 7 얼티밋 및 엔터프라이즈, 그리고 윈도우 서버 2008 R2 한정으로 SUA(Subsystem for UNIX-based Application)라는 개선된 POSIX 서브시스템이 잠시동안 지원하였다. 단, 윈도우 10부터 등장한 [WSL](#리눅스용-윈도우-서브시스템)은 POSIX 서브시스템을 계승하였으나 기존 서브시스템과 전혀 다른 새로운 기술이 적용되었다.
 
 * **[OS/2](https://en.wikipedia.org/wiki/OS/2)** (지원 종료: ~ 윈도우 2000)
 
@@ -83,3 +83,17 @@
 [네이티브 이미지](https://en.wikipedia.org/wiki/Native_(computing)#Applications)(native image)는 어떠한 환경 서브시스템에도 종속되지 않은 실행 프로그램을 가리킨다. 다시 말해, [윈도우 서브시스템](#윈도우-서브시스템)의 kernel32.dll 혹은 User32.dll 등을 필요하지 않으며 ntdll.dll에서 제공하는 네이티브 API를 곧바로 호출한다. 네이티브 API는 대체로 문서화되어 있지 않으므로, 네이티브 이미지는 일반적으로 마이크로소프트에서 빌드한 프로그램이다.
 
 네이티브 이미지의 대표적인 예시는 바로 윈도우에서 가장 최초로 실행되는 [프로세스](Process.md)인 smss.exe 세션 관리자이다. 부팅 과정 중 초반에는 윈도우 서브시스템이 실행되지 않았기 때문에 일부 프로세스는 네이티브 이미지로 설계되어야 할 필요가 있다.
+
+## 리눅스용 윈도우 서브시스템
+**[리눅스용 윈도우 서브시스템](https://learn.microsoft.com/en-us/windows/wsl/)**(Windows Subsystem for Linux), 일명 [WSL](https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux)은 아래에 서술된 기존 [POSIX](https://en.wikipedia.org/wiki/POSIX) [환경 서브시스템](#환경-서브시스템)이 가진 기술적 문제들을 극복하기 위해 새롭게 설계된 서브시스템이다.
+
+1. 어플리케이션이 POSIX 서브시스템에서 실행되어야 하는 걸 윈도우가 인지하기 위해 [PE 포맷](https://en.wikipedia.org/wiki/Portable_Executable)으로 새롭게 빌드되어야 한다.
+2. 타 운영체제 프로그램을 윈도우 서브시스템으로 [래핑](https://en.wikipedia.org/wiki/Wrapper_library)(wrapping)하는 방식을 택하였으나, 알아채기 힘든 호환성 결함이 야기될 수 있다.
+
+[윈도우 10](Windows.md) 모바일 운영체제에서 안드로이드 앱을 실행할 수 있도록 추진된 [아스토리아 프로젝트](https://en.wikipedia.org/wiki/Windows_10_Mobile#Project_Astoria)(이후 Windows Subsystem for Android로 소개)를 발판으로 POSIX/UNIX가 아닌 "순수" [리눅스](https://en.wikipedia.org/wiki/Linux) 어플리케이션을 지원하고자 [우분투](https://en.wikipedia.org/wiki/Ubuntu)(Ubuntu) 배포판을 개발한 [캐노니컬](https://en.wikipedia.org/wiki/Canonical_(company))과 합작한 결과물이다.
+
+![WSL2로 설치된 <a href="https://en.wikipedia.org/wiki/Debian">데비안</a> 배포판의 터미널과 파일 탐색기](./images/wsl_terminal_debian.png)
+
+WSL은 두 종류의 아키텍처 설계가 있어 각각 장단점을 가진다. 자세한 내용은 [마이크로소프트 문서](https://learn.microsoft.com/en-us/windows/wsl/compare-versions)를 참고한다.
+
+<table style="table-layout: fixed; width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">WSL 버전 비교</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">WSL1</th><th style="text-align: center;">WSL2</th></tr></thead><tbody style="text-align: center;"><tr><td>리눅스 시스템 서비스를 처리할 Pico 제공자(Pico provider)란 특수한 커널 모드 드라이버를 사용하지만, 완전한 호환성을 제공하지 못한다.</td><td>경량화된 가상머신을 사용하여 완전한 리눅스 커널 및 GUI 지원이 가능하나, 윈도우 NTFS 접근에는 다소 성능 저하가 나타난다.</td></tr></tbody></table>
