@@ -52,7 +52,7 @@ Winsta0은 세 가지의 데스크탑을 가지며 오로지 하나만 활성화
 
 > 입력 데스크탑은 사용자가 그 외 데스크탑과 상호작용이 불가하기 때문에, UAC 프롬프트 중에는 Default 데스크탑의 리소스 접근을 차단하는 역할을 한다.
 
-윈도우 스테이션의 상호작용 여부에 따라 Default 데스크탑 힙 크기가 달라진다. 아래 [윈도우 서브시스템](Subsystem.md#윈도우-서브시스템)의 레지스트리 값에는 SharedSection을 확인할 수 있다.
+윈도우 스테이션의 상호작용 여부에 따라 Default 데스크탑 힙 크기가 달라진다. 아래 [윈도우 서브시스템](Windows.md#윈도우-서브시스템)의 레지스트리 값에는 SharedSection을 확인할 수 있다.
 
 * `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Subsystems\Windows`
 
