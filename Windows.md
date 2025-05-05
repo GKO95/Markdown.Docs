@@ -1,7 +1,7 @@
 # 윈도우 NT
 **[윈도우 NT](https://en.wikipedia.org/wiki/Windows_NT)**(Windows NT)는 [마이크로소프트](https://www.microsoft.com/)에서 개발한 [윈도우](https://en.wikipedia.org/wiki/Microsoft_Windows)(Windows) 계열 중 하나이며, 전세계적으로 가장 널리 사용되고 있는 현역 [운영체제](https://en.wikipedia.org/wiki/Operating_system)(operating system; OS)이다. 본래 NT는 기존 운영체제인 [MS-DOS](https://en.wikipedia.org/wiki/MS-DOS)를 대체할 "신기술(New Technology)"을 염두하여 붙인 이름이지만, 현재는 아무런 의미가 없는 제품군 명칭으로 자리잡았다. 이름은 다소 생소할 수 있으나 사실상 배포되고 있는 거의 모든 윈도우 제품이 윈도우 NT 계열에 해당한다.
 
-다음은 2023년 3월 21일 기준에 작성된 윈도우 NT 제품 목록이다.
+다음은 2025년 5월 5일 기준에 작성된 윈도우 NT 제품 목록이다.
 
 <table style="margin-bottom: 16px; table-layout: fixed; width: 100%; margin-left: auto; margin-right: auto;">
 <thead><tr><th colspan="7" style="text-align: center;">윈도우 NT 클라이언트 (2000년 ~ 현재)</th></tr></thead>
