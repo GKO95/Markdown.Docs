@@ -181,6 +181,9 @@ Dumping physical memory to disk:  0%
 WriteBitmapDump: page written = 52505, MB per sec = 41.
 ```
 
+### KDbgCtrl
+[**KDbgCtrl**](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/using-kdbgctrl), 일명 "커널 디버깅 제어" 프로그램은 [Windows SDK](https://aka.ms/windowssdk) 일환으로 본래 타깃 머신에서 [커널 디버깅 연결](WinDbg.md#커널-모드-디버깅)을 제어하기 위한 도구이다. 그러나 충돌 덤프 I/O의 드라이버 스택을 새로 고치는 효과가 있어 덤프 설정을 재부팅 없이 적용하는 데 활용될 수 있다. 단, 해당 도구는 윈도우 [드라이버](Driver.md) 개발 및 디버깅을 위해 Windows SDK에서 제공한 것이기 때문에 이로 인해 부작용이 발생할 수 있음을 충분히 인지해야 하며, 가장 안전한 방법을 택해야 할 경우 시스템을 재부팅하도록 한다.
+
 ## 페이징 파일
 > *참고: [How to determine the appropriate page file size for 64-bit versions of Windows - Windows Client | Microsoft Learn](https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/how-to-determine-the-appropriate-page-file-size-for-64-bit-versions-of-windows)*
 
