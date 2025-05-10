@@ -1,10 +1,8 @@
 # 윈도우 API
-[윈도우 API](https://ko.wikipedia.org/wiki/윈도우_API)(간단히 WinAPI)는 [사용자 모드](Processor.md#권한-수준)에서 [윈도우](Windows.md)가 제공하는 기능들을 활용할 수 있도록 하는 [어플리케이션 프로그래밍 인터페이스](https://ko.wikipedia.org/wiki/API)(application programming interface; API)이다. 개발자는 [마이크로소프트](https://www.microsoft.com/) [공식 문서](https://learn.microsoft.com/en-us/windows/win32/)를 참고하여 윈도우가 제공하는 리소스를 적극적으로 활용할 수 있다. WinAPI는 [C](C.md) 프로그래밍 언어로 작성되었으나 타 프로그래밍 언어를 통해서도 사용이 가능하다.
-
-아직 [16비트](https://ko.wikipedia.org/wiki/16비트) 시스템이 대중화된 시기에 [32비트](https://ko.wikipedia.org/wiki/32비트) 윈도우 운영체제를 지원하는 API라는 것을 명시하기 위해 Win32라고 불렀다. 그러나 [64비트](https://ko.wikipedia.org/wiki/64비트)의 [x64](https://ko.wikipedia.org/wiki/X86-64) 및 [ARM64](https://ko.wikipedia.org/wiki/ARM_아키텍처)도 지원하면서 특정 아키텍처에 종속되지 않는 명칭으로 변경되었다.
+**[윈도우 API](https://en.wikipedia.org/wiki/Windows_API)**, 일명 **WinAPI**는 [사용자 모드](Processor.md#사용자-모드)의 [어플리케이션](https://en.wikipedia.org/wiki/Computer_program)이 시스템 리소스를 활용할 수 있도록 [Windows OS](Windows.md)에서 제공하는 [프로그래밍 인터페이스](https://en.wikipedia.org/wiki/API)이다. **Win32 API**라른 이름으로도 널리 알려져 있으며, 아직 ([MS-DOS](https://en.wikipedia.org/wiki/MS-DOS) 및 [Windows 9x](https://en.wikipedia.org/wiki/Windows_9x) 등) [16비트](https://en.wikipedia.org/wiki/16-bit_computing) 시스템이 대중화된 당시에 새로운 아키텍처를 지닌 [32비트](https://en.wikipedia.org/wiki/32-bit_computing) 시스템을 위해 설계된 API라는 걸 명시하였다. 현재는 [x86-64](https://en.wikipedia.org/wiki/X86-64) 및 [ARM64](https://en.wikipedia.org/wiki/ARM_architecture_family) 계열도 지원을 확장하며 [아키텍처](https://en.wikipedia.org/wiki/Computer_architecture)에 종속되지 않는 명칭으로 변경되었다. C 프로그래밍 언어로 제작되었기 때문에 저급 프로그래밍 언어의 특성에 따라 타 프로그래밍 언어에서도 WinAPI를 활용할 수 있다.
 
 ## 시스템 서비스
-[시스템 서비스](https://ko.wikipedia.org/wiki/시스템_호출)(system services)는 [윈도우 커널](Kernel.md#nt-커널)에서 제공하는 기능을 [사용자 모드](Processor.md#권한-수준)에서 호출하는 일련의 절차를 가리킨다. 사용자 모드 프로세스는 [보호 링](Processor.md#권한-수준) 구조에 의해 커널 함수, 일명 [루틴](https://ko.wikipedia.org/wiki/함수_(컴퓨터_과학))(routine)을 직접 접근할 수 없으므로 `Ntdll.dll`에 내포된 진입점을 통해 [`Ntoskrnl.exe`](Kernel.md#nt-커널) 커널 이미지에 정의된 루틴을 호출하게 된다.
+**[시스템 서비스](https://en.wikipedia.org/wiki/System_call)**(system services)는 [윈도우 커널](Kernel.md#nt-커널)에서 제공하는 기능을 [사용자 모드](Processor.md#권한-수준)에서 호출하는 일련의 절차를 가리킨다. 사용자 모드 프로세스는 [보호 링](Processor.md#권한-수준) 구조에 의해 커널 함수, 일명 [루틴](https://ko.wikipedia.org/wiki/함수_(컴퓨터_과학))(routine)을 직접 접근할 수 없으므로 `Ntdll.dll`에 내포된 진입점을 통해 [`Ntoskrnl.exe`](Kernel.md#nt-커널) 커널 이미지에 정의된 루틴을 호출하게 된다.
 
 다음은 윈도우 API 중에서 `CreateFileW` 함수를 호출할 때의 시스템 서비스가 진행되는 과정을 순서대로 나열한다.
 
