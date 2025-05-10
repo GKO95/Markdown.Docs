@@ -7,13 +7,13 @@
 ## 호출 스택
 **[호출 스택](https://en.wikipedia.org/wiki/Call_stack)**(call stack; 간단히 "**스택**")은 각 [스레드](#스레드)마다 실행 중인 프로그램의 [함수](C.md#함수)와 관련된 정보를 저장하는 [스택](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)) 데이터 구조이다. 스택의 핵심 목적은 실행한 함수가 반환되었을 때 어느 코드에서 재개되어야 하는지 추적한다. 그리고 각 함수를 중심으로 연관된 데이터들의 묶음을 **스택 프레임**(stack frame)이라 부르며, 호출된 함수의 개수만큼 스택 프레임이 존재한다.
 
-아래는 상향하는 호출 스택의 레이아웃이며, 다음 순서대로 예시의 *DrawLine* 함수와 연관된 데이터가 호출 스택에 푸쉬된다.
+아래는 상향(↑)하는 호출 스택의 레이아웃이며, 다음 순서대로 예시의 *DrawLine* 함수와 연관된 데이터가 호출 스택에 푸쉬된다.
 
 ![호출 스택 레이아웃](https://upload.wikimedia.org/wikipedia/commons/d/d3/Call_stack_layout.svg)
 
 <table style="width: 90%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">스택 프레임의 구성 및 설명</caption><colgroup><col style="width: 15%;"/><col style="width: 15%;"/><col style="width: 80%;"/></colgroup><thead><tr><th style="text-align: center;">스택 프레임</th><th style="text-align: center;">데이터</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td rowspan="3" style="text-align: center;"><i>DrawLine</i> 함수</td><td>1. 함수 매개변수</td><td><i>DrawLine</i> 함수가 호출한 <i>DrawSquare</i> 함수로부터 전달받은 매개변수의 인자(들)</td></tr><tr><td>2. 귀환 주소</td><td><i>DrawLine</i> 함수가 종료하면 <i>DrawSquare</i> 함수의 어느 코드에서 재개되어야 할 지 가리키는 <a href="C.md#포인터">포인터</a></td></tr><tr><td>3. 로컬 스토리지</td><td><i>DrawLine</i> 함수 내에 정의된 <a href="C.md#변수">지역 변수</a> 등</td></tr></tbody></table>
 
-<sup>_† 실제 메모리상 호출 스택은 (위의 테이블처럼) 최상단 주소에서부터 시작하여 아래로 내려가며 쌓이는 하향 스택이다._</sup>
+<sup>_† 실제 메모리상 호출 스택은 (위의 테이블처럼) 최상단 주소에서부터 시작하여 아래로 내려가며 쌓이는 하향(↓) 스택이다._</sup>
 
 위의 레이아웃 표기된 추가 내용에 부연 설명은 다음과 같다.
 
