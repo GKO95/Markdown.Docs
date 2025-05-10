@@ -27,7 +27,7 @@
 
 **[가상 메모리](https://en.wikipedia.org/wiki/Virtual_memory)**(virtual memory)는 일종의 [메모리 관리](https://en.wikipedia.org/wiki/Memory_management_(operating_systems)) 기술이며, 하드웨어 매체의 실체와 무관하게 [운영체제](https://en.wikipedia.org/wiki/Operating_system)에 의해 표현된 "가상"의 메모리이다.<sup>[[참고](https://learn.microsoft.com/en-us/windows/win32/memory/virtual-memory-functions)]</sup> ([커널](Kernel.md)을 포함한) 모든 프로그램들은 가상 메모리에서 실행되며, 각 프로세스마다 주어진 [가상 주소 공간](Process.md#가상-주소-공간)에 메모리를 할당받는다. 가상 주소 공간에 할당된 가상 메모리의 주소는 프로세서에 내장된 [MMU](#메모리-관리-장치)에 의해 RAM의 물리 메모리 주소로 변환되어 접근된다.
 
-가상 메모리를 활용한 시스템은 다음과 같은 이점을 지닌다:
+가상 메모리를 활용한 시스템은 다음과 같은 이점을 지닌다:<sup>[[참고](https://learn.microsoft.com/en-us/windows/win32/memory/virtual-memory-functions)]</sup>
 
 1. 메모리 체계(예를 들어, 공유 메모리 등)를 커널에서 관리하기 때문에 프로그램 개발의 편리
 1. [페이징](#페이징-파일) 기술을 통해 기존 RAM의 물리적 제약보다 더 많은 주소 공간 확보
@@ -91,8 +91,19 @@ RAM과 페이징 파일 간 데이터가 이동하는 [페이징](https://en.wik
 
 **[힙](https://en.wikipedia.org/wiki/Memory_management#HEAP)**(heap)은 [프로세스](Process.md)의 [사용자 공간](Process.md#가상-주소-공간)에 해당하는 [가상 메모리](#가상-메모리) 영역 중 하나이며, 여러 작은 [메모리 블록](#메모리-블록)들을 취급하는데 특화되어 있다; [페이지](#페이지)의 할당 입도와 경계 간격을 전혀 신경쓰지 않고 힙 관리자(heap manager)에 메모리 블록의 할당과 해제를 전적으로 맡긴다. 그러나 메모리 블록의 할당 및 해제는 다른 메모리 유형에 비해 오버헤드가 있으며, 더 이상 물리 메모리상 커밋 여부를 직접 제어할 수 없다.
 
+[프로세스](Process.md)는 초기화 과정에 시스템에 의해 한 개의 "기본 힙(default heap)"을 생성하여 다음 데이터 및 메모리 블록을 취급한다:
+
+* CRT [malloc](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/malloc) 및 C++ [`new`](https://learn.microsoft.com/en-us/cpp/cpp/new-operator-cpp) 연산자 등의 동적 할당
+* ANSI에서 유니코드 변환하기 위한 임시 버퍼
+* 컴파일된 이미지 설정
+* 프로세스 실행 명령
+* 환경 변수
+* 기타 등등
+
+위와 같이 프로세스 실행에 필연적이기 때문에 프로세스가 종료될 때까지 제거될 수 없다. 일반적으로 1 MB 용량으로 시작하여, 부족하다면 시스템은 해당 프로세스의 기본 힙 영역을 확장시킨다. 한편, DLL은 프로세스가 아니므로 기본 힙을 가지지 않지만 Win32의 [HeapCreate](https://learn.microsoft.com/en-us/windows/win32/api/heapapi/nf-heapapi-heapcreate) 함수를 통해 추가 힙 영역을 생성할 수 있다.
+
 ## 주소 윈도잉 확장
-**[주소 윈도잉 확장](https://learn.microsoft.com/en-us/windows/win32/memory/address-windowing-extensions)**(address windowing extensions; AWE)은 [가상 메모리](#가상-메모리)를 RAM에 상주하는 비페이징 메모리에 매핑, 즉 "[윈도잉](https://en.wikipedia.org/wiki/Windowing)(windowing)"하여 사용할 수 있도록 제공된 [Win32 API](WinAPI.md) 집합이다. AWE는 아래 두 가지 성능적 특징으로 데이터 처리 비중이 높은 프로그램(대표적으로 [SQL](https://en.wikipedia.org/wiki/SQL))에서 자주 활용된다.
+**[주소 윈도잉 확장](https://learn.microsoft.com/en-us/windows/win32/memory/address-windowing-extensions)**(address windowing extensions; AWE)은 [가상 메모리](#가상-메모리)를 RAM에 상주하는 비페이징 메모리에 매핑, 즉 "[윈도잉](https://en.wikipedia.org/wiki/Windowing)(windowing)"하여 사용할 수 있도록 제공된 [Win32 API](WinAPI.md) 집합이다. AWE는 아래 두 가지 성능적 특징으로 데이터 처리 비중이 높은 프로그램(대표적으로 [SQL](SQL.md))에서 자주 활용된다.
 
 * 페이징될 수 없는 메모리를 RAM에 할당하여 [페이지 부재](#페이지-부재)로 인한 [오버헤드](https://en.wikipedia.org/wiki/Overhead_(computing))를 원천적으로 방지한다.
 * 가상 메모리 테이블을 리매핑하여 [프로세스 주소 공간](Process.md#가상-주소-공간)보다 큰 RAM의 물리 메모리를 접근할 수 있다.
