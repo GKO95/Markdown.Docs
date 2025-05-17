@@ -65,7 +65,7 @@
 
 <sup>_† 참고: [/ENTRY (Entry-Point Symbol) | Microsoft Learn](https://learn.microsoft.com/en-us/cpp/build/reference/entry-entry-point-symbol)<br/>†† 참고: [How does the linker decide whether to call WinMain or wWinMain? - The Old New Thing](https://devblogs.microsoft.com/oldnewthing/20241004-00/?p=110338)_</sup>
 
-그러므로 CreateProcess 함수는 이후 [기본 스레드](Thread.md#기본-스레드) 커널 개체를 생성하여 위에서 소개한 시작 함수를 본격적으로 실행한다. 이 과정에서 생성된 프로세스 및 기본 스레드 [핸들](#핸들)은 각각 [PROCESS_INFORMATION](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/ns-processthreadsapi-process_information) 구조체의 `hProcess`와 `hThread` 필드에 할당된다. 비록 방금 생성된 프로세스이지만 핸들의 참조 카운트가 두 개로 확인된 이유가 이러한 동작 원리에 의한 것이다.
+그러므로 CreateProcess 함수는 이후 [기본 스레드](Thread.md#스레드) 커널 개체를 생성하여 위에서 소개한 시작 함수를 본격적으로 실행한다. 이 과정에서 생성된 프로세스 및 기본 스레드 [핸들](#핸들)은 각각 [PROCESS_INFORMATION](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/ns-processthreadsapi-process_information) 구조체의 `hProcess`와 `hThread` 필드에 할당된다. 비록 방금 생성된 프로세스이지만 핸들의 참조 카운트가 두 개로 확인된 이유가 이러한 동작 원리에 의한 것이다.
 
 * 프로세스 및 기본 스레드가 생성된 다음, 추가 [스레드](Thread.md)의 생성 및 종료 과정은 [*스레드 생명주기*](Thread.md#스레드-생명주기) 내용을 참고하도록 한다.
 
