@@ -18,7 +18,7 @@
 
 <table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">ADD 명령어의 연산 수행 단계</caption><colgroup><col style="width: 10%;"/><col style="width: 10%;"/><col style="width: 80%;"/></colgroup><thead><tr><th style="text-align: center;">순서</th><th style="text-align: center;">단계</th><th style="text-align: center;">프로세서 작업</th></tr></thead><tbody><tr><td style="text-align: center;">1</td><td><a href="https://en.wikipedia.org/wiki/Instruction_cycle#Fetch_stage">Fetch</a></td><td>메모리로부터 명령어를 확보한다.</td></tr><tr><td style="text-align: center;">2</td><td><a href="https://en.wikipedia.org/wiki/Instruction_cycle#Decode_stage[6]">Decode</a></td><td>확보한 명령어를 해독하여 메모리 주소에 값을 더하는 명령인 걸 파악한다.</td></tr><tr><td style="text-align: center;">3</td><td>Read</td><td>메모리 주소의 현재 값을 읽는다.</td></tr><tr><td style="text-align: center;">4</td><td><a href="https://en.wikipedia.org/wiki/Instruction_cycle#Execute_stage">Execute</a></td><td>덧셈 연산을 수행한다.</td></tr><tr><td style="text-align: center;">5</td><td>Write</td><td>덧셈 연산의 결과값을 메모리 주소에 쓴다.</td></tr></tbody></table>
 
-일부 명령어들은 (x86의 경우) [LOCK](https://www.felixcloutier.com/x86/lock) 접두사와 함께 사용되어 원자적으로 연산될 수 있으며, [윈도우 OS](Windows.md)에서는 이를 [인터락 함수](Thread.md#인터락-함수)로서 제공한다.
+일부 명령어들은 (x86의 경우) [LOCK](https://www.felixcloutier.com/x86/lock) 접두사와 함께 사용되어 원자적으로 연산될 수 있으며, [윈도우 OS](Windows.md)에서는 이를 [인터락 함수](Synchronization.md#인터락-함수)로서 제공한다.
 
 ## 프로세서 구조
 다음은 단일 코어 프로세서의 구조를 다이어그램으로 보여주며, 황색 바탕의 "Processor"는 실질적인 연산을 담당하는 물리적인 [프로세서 코어](#프로세서-코어)를 의미한다. 그리고 흑색과 적색 화살표는 각각 데이터와 제어 흐름 방향을 가리킨다.

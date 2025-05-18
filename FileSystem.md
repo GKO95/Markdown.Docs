@@ -18,7 +18,7 @@
 윈도우 OS는 비동기 입출력 작업의 완료를 알리는 네 가지 방법을 제공한다.
 
 * [Device Kernel Object](Driver.md#디바이스-개체)
-* [Event Kernel Object](Thread.md#이벤트-개체)
+* [Event Kernel Object](Synchronization.md#이벤트-개체)
 * [Alertable I/O](#알림-가능한-입출력)
 * [I/O Completion Port](#입출력-완료-포트)
 
@@ -38,7 +38,7 @@
 
 이로부터 스레드가 알림 가능한 상태로 진입할 시, 커널은 먼저 해당 스레드의 APC 큐를 확인한다. 만일 APC 큐가 비었을 경우, 커널은 다음 두 사건이 일어날 때까지 스레드 실행을 중단한다.
 
-1. [대기 함수](Thread.md#대기-함수)가 기다리는 [커널 개체](Kernel.md#커널-개체)가 *signaled* 상태로 진입
+1. [대기 함수](Synchronization.md#대기-함수)가 기다리는 [커널 개체](Kernel.md#커널-개체)가 *signaled* 상태로 진입
 1. 스레드의 APC 큐에 콜백 함수가 대기
 
 APC 큐에 대기 중인 완료 루틴이 있다면 커널은 이를 대기열에서 꺼내 스레드로 전송한다. 그리고 스레드는 큐로부터 수신받은 콜백 함수를 실행한다. 이러한 과정을 반복하여 APC 큐의 나머지 콜백 함수를 처리하되, 비동기 입출력의 특성에 따라 FIFO 순서를 보장하지 않는다. 마침내 모든 완료 루틴을 처리하여 큐가 비었을 때, 스레드는 자신을 알림 가능한 상태로 만든 함수로부터 반환한다.
@@ -56,6 +56,6 @@ APC 큐에 대기 중인 완료 루틴이 있다면 커널은 이를 대기열�
 
 [CreateIoCompletionPort](https://learn.microsoft.com/en-us/windows/win32/fileio/createiocompletionport) 함수로부터 생성된 입출력 완료 포트는 총 다섯 개의 제각각 역할을 지닌 자료 구조로 구성된다:
 
-<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">입출력 완료 포트의 구조</caption><colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup><thead><tr><th style="text-align: center;">자료 구조</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: left;">Device List</td><td>입출력 완료 포트에 관여한 장치(혹은 파일)들의 <a href="Process.md#핸들">핸들</a> 리스트이다.</td></tr><tr><td style="text-align: left;">I/O Completion Queue</td><td>입출력 요청을 완료한 커널 모드 스레드가 전달한 입출력 완료 패킷을 FIFO 순서대로 담는 대기열이다.<ul><li>시스템은 우선 해당 장치(혹은 파일)가 포트 관여 여부를 검사한 다음 패킷을 큐에 대기시킨다.</li><li>한편, <a href="https://learn.microsoft.com/en-us/windows/win32/fileio/postqueuedcompletionstatus">PostQueuedCompletionStatus</a> 함수는 포트에 직접 입출력 완료 패킷을 큐에 대기시킨다.</li></ul></td></tr><tr><td style="text-align: left;">Waiting Thread Queue</td><td>I/O Completion Queue의 패킷을 처리할 준비가 된, 즉 <a href="https://learn.microsoft.com/en-us/windows/win32/api/ioapiset/nf-ioapiset-getqueuedcompletionstatus">GetQueuedCompletionStatus</a> 함수를 호출하여 대기 중인 스레드의 ID를 담는 LIFO 대기열이다. <ul><li>LIFO 순서는 가장 최근에 실행된 스레드를 활용하여 성능 및 메모리 효율을 높인다.</li></ul></td></tr><tr><td style="text-align: left;">Released Thread List</td><td>대기 상태에서부터 깨어난 스레드들의 ID를 담는 리스트이다. 이를 통해 입출력 완료 포트는 깨어난 스레드를 기억하고 실행 여부를 예의주시한다.</td></tr><tr><td style="text-align: left;">Paused Thread List</td><td>(<a href="Thread.md#대기-함수">대기 함수</a> 등에 의해) 대개 상태에 놓인 스레드들의 ID를 담는 리스트이다.</td></tr></tbody></table>
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">입출력 완료 포트의 구조</caption><colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup><thead><tr><th style="text-align: center;">자료 구조</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: left;">Device List</td><td>입출력 완료 포트에 관여한 장치(혹은 파일)들의 <a href="Process.md#핸들">핸들</a> 리스트이다.</td></tr><tr><td style="text-align: left;">I/O Completion Queue</td><td>입출력 요청을 완료한 커널 모드 스레드가 전달한 입출력 완료 패킷을 FIFO 순서대로 담는 대기열이다.<ul><li>시스템은 우선 해당 장치(혹은 파일)가 포트 관여 여부를 검사한 다음 패킷을 큐에 대기시킨다.</li><li>한편, <a href="https://learn.microsoft.com/en-us/windows/win32/fileio/postqueuedcompletionstatus">PostQueuedCompletionStatus</a> 함수는 포트에 직접 입출력 완료 패킷을 큐에 대기시킨다.</li></ul></td></tr><tr><td style="text-align: left;">Waiting Thread Queue</td><td>I/O Completion Queue의 패킷을 처리할 준비가 된, 즉 <a href="https://learn.microsoft.com/en-us/windows/win32/api/ioapiset/nf-ioapiset-getqueuedcompletionstatus">GetQueuedCompletionStatus</a> 함수를 호출하여 대기 중인 스레드의 ID를 담는 LIFO 대기열이다. <ul><li>LIFO 순서는 가장 최근에 실행된 스레드를 활용하여 성능 및 메모리 효율을 높인다.</li></ul></td></tr><tr><td style="text-align: left;">Released Thread List</td><td>대기 상태에서부터 깨어난 스레드들의 ID를 담는 리스트이다. 이를 통해 입출력 완료 포트는 깨어난 스레드를 기억하고 실행 여부를 예의주시한다.</td></tr><tr><td style="text-align: left;">Paused Thread List</td><td>(<a href="Synchronization.md#대기-함수">대기 함수</a> 등에 의해) 대개 상태에 놓인 스레드들의 ID를 담는 리스트이다.</td></tr></tbody></table>
 
 입출력 완료 포트가 생성되면 CreateIoCompletionPort 함수는 해당 포트의 핸들을 반환한다. 즉, 입출력 완료 포트는 이를 생성한 [프로세스](Process.md)에 한정되어 타 프로세스와 공유될 수 없다. 반면, 동일 프로세스의 스레드 간에 공유될 수 있어 스레드 간 통신(inter-thread communication)에도 활용된다.
