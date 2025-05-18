@@ -1,5 +1,5 @@
 # 스레드 동기화
-**[스레드 동기화](https://en.wikipedia.org/wiki/Synchronization_(computer_science))**(thread synchronization)는 두 개 이상의 [스레드](#스레드)가 동시에 [공유 리소스](https://en.wikipedia.org/wiki/Shared_resource)를 접근하지 못하도록 보장하는 매커니즘을 일컫는다. 대체로 한 스레드가 리소스를 접근하는 동안 나머지는 대기하는 방식으로 구현된다. 만일 스레드 간 동기화가 적절히 조치되지 않았다면 개별 스레드가 정상적으로 코드를 실행하여도 의도치 않은 결과를 초래할 수 있다.
+**[스레드 동기화](https://en.wikipedia.org/wiki/Synchronization_(computer_science))**(thread synchronization)는 두 개 이상의 [스레드](Thread.md)가 동시에 [공유 리소스](https://en.wikipedia.org/wiki/Shared_resource)를 접근하지 못하도록 보장하는 매커니즘을 일컫는다. 대체로 한 스레드가 리소스를 접근하는 동안 나머지는 대기하는 방식으로 구현된다. 만일 스레드 간 동기화가 적절히 조치되지 않았다면 개별 스레드가 정상적으로 코드를 실행하여도 의도치 않은 결과를 초래할 수 있다.
 
 아래는 스레드 동기화의 필요성을 설명하기 위해, A와 B란 두 개의 스레드는 다음 코드를 수행한다고 가정한다.
 
@@ -35,7 +35,7 @@ ADD [counter], 1
     * [Semaphore Objects](#세마포어-개체)
     * [Mutex Objects](#뮤텍스-개체)
 
-윈도우 OS는 코드 성능을 향상시키기 위해 절대 [FIFO](https://en.wikipedia.org/wiki/FIFO_(computing_and_electronics)) 순서로 동기화하지 않는다; 먼저 기다렸다고 그 다음 순서로 접근할 수 있다는 걸 보장하지 않는다. 하지만 [마이크로소프트](https://aka.ms/microsoft)는 동기화 알고리즘을 공개하지 않는다. 차후 알고리즘이 언제든지 변경될 수 있으며, 알고리즘에 너무 의존하는 코드 개발을 방지한다.
+윈도우 OS는 코드 성능을 향상시키기 위해 절대 [FIFO](https://en.wikipedia.org/wiki/FIFO_(computing_and_electronics)) 순서로 동기화하지 않는다; 먼저 기다렸다고 그 다음 순서로 접근할 수 있다는 걸 보장하지 않는다. 하지만 [마이크로소프트](https://www.microsoft.com/)는 동기화 알고리즘을 공개하지 않는다. 차후 알고리즘이 언제든지 변경될 수 있으며, 알고리즘에 너무 의존하는 코드 개발을 방지한다.
 
 ## 인터락 함수
 **[인터락 함수](https://learn.microsoft.com/en-us/windows/win32/sync/interlocked-variable-access)**(interlocked functions)는 [Win32 API](WinAPI.md) 중에서 간단한 연산을 [원자적](Processor.md#원자적-연산)으로 실행하는 함수들을 일컫는다. 만일 [x86](https://en.wikipedia.org/wiki/X86) 아키텍처일 경우, 이들은 대부분 [LOCK](https://www.felixcloutier.com/x86/lock) 접두사와 함께 실행될 수 있는 명령어로 구성되며, 아래는 일부 인터락 함수들을 소개한다.
