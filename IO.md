@@ -3,22 +3,16 @@
 
 ![동기 및 비동기 입출력](https://learn.microsoft.com/en-us/windows/win32/fileio/images/fig2bedit.png)
 
-1. **동기 입출력**(synchronous I/O)
+<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">입출력 동기화의 두 유형</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">동기 입출력</th><th style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Asynchronous_I/O">비동기 입출력</a></th></tr></thead><tbody><tr style="text-align: center;"><td>Synchronous I/O</td><td>Asynchoronous I/O (aka. <i><a href="#overlapped-구조체">Overlapped I/O</a></i>)</td></tr><tr><td>입력을 요청한 <a href="Processor.md#사용자-모드">사용자 모드</a> 스레드는 <a href="Processor.md#커널-모드">커널 모드</a>에서 요청 처리를 완료할 때까지 대기 상태에 진입하여 기다린다.</td><td>입력을 요청한 <a href="Processor.md#사용자-모드">사용자 모드</a> 스레드는 <a href="Processor.md#커널-모드">커널 모드</a>에서 요청 처리를 진행하는 동안 다른 작업을 처리할 수 있다.</td></tr><tr><td><i>N/A</i>&nbsp;<sub>(동기 입출력은 작업이 완료될 때까지 기다려야 하기 때문에, 완료 여부를 알려야 할 필요가 없다)</sub></td><td>비동기 입출력 작업의 완료를 알리는 방법들을 나열한다:
 
-    입력을 요청한 [사용자 모드](Processor.md#사용자-모드) 스레드는 [커널 모드](Processor.md#커널-모드)에서 요청 처리를 완료할 때까지 대기 상태에 진입하여 기다린다.
+* [장치 커널 개체](Driver.md#디바이스-개체)
+* [이벤트 커널 개체](Synchronization.md#이벤트-개체)
+* [알림 가능한 I/O](#알림-가능한-입출력)
+* [입출력 완료 포트](#입출력-완료-포트)
 
-1. **[비동기 입출력](https://en.wikipedia.org/wiki/Asynchronous_I/O)**(asynchoronous I/O)
+</td></tr></tbody></table>
 
-    > [윈도우 OS](Windows.md)의 [Win32 API](WinAPI.md)에서는 이를 [`OVERLAPPED`](#overlapped-구조체) 구조체로부터 구현하여 *overlapped* 입출력이라고도 칭한다.
-
-    입력을 요청한 [사용자 모드](Processor.md#사용자-모드) 스레드는 [커널 모드](Processor.md#커널-모드)에서 요청 처리를 진행하는 동안 다른 작업을 처리할 수 있다. 요청을 완료한 커널 모드 스레드는 *singaled* 되어 알리고, 사용자 모드 스레드는 해당 입출력 완료에 대한 추가적인 조치를 취한다. 단, 성능 향상에 도움이 된다면 비동기 입출력은 반드시 FIFO 방식에 따라 처리하지 않는다.
-
-윈도우 OS는 비동기 입출력 작업의 완료를 알리는 네 가지 방법을 제공한다.
-
-* [Device Kernel Object](Driver.md#디바이스-개체)
-* [Event Kernel Object](Synchronization.md#이벤트-개체)
-* [Alertable I/O](#알림-가능한-입출력)
-* [I/O Completion Port](#입출력-완료-포트)
+비동기 입출력 요청을 완료한 커널 모드 [스레드](Thread.md)는 *signaled* 되어 알리고, 사용자 모드 스레드는 해당 입출력 완료에 대한 추가적인 조치를 취한다. 단, 성능 향상에 도움이 된다면 비동기 입출력은 반드시 FIFO 방식에 따라 처리하지 않는다.
 
 ### OVERLAPPED 구조체
 [OVERLAPPED](https://learn.microsoft.com/en-us/windows/win32/api/minwinbase/ns-minwinbase-overlapped)는 비동기 입출력에 필요한 정보를 담는 [구조체](C.md#구조체)이다.
