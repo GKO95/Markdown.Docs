@@ -39,7 +39,12 @@
 스택 오버플로우 예외는 두 번째로 낮은 주소의 가드 페이지가 침범되었을 때 발생한다. 최하단 페이지는 가드 페이지로 커밋될 수 없기 때문에, 더 이상의 가드 페이지가 생성될 수 없어 예외를 프로그램에게 전달한다. 만일 해당 예외가 발생하여도 적절한 조치가 이루어지면 프로그램은 무사히 재개될 수 있다. 그러나 예외 처리가 되어도 호출 스택이 최하단 페이지까지 침범하게 될 경우, [윈도우 오류 보고](WER.md) [서비스](Service.md)에 의해 프로세스 전체가 종료된다.
 
 ## 비동기 프로시저 호출
-**[비동기 프로시저저 호출](https://learn.microsoft.com/en-us/windows/win32/sync/asynchronous-procedure-calls)**(asynchronous procedure call; APC)은 [스레드 컨텍스트](#스레드-컨텍스트)로 전환될 때 [비동기식](https://en.wikipedia.org/wiki/Asynchrony_(computer_programming))으로 실행될 [콜백 함수](C.md#콜백-함수)들을 가리킨다. 각 스레드마다 전용 [큐](https://en.wikipedia.org/wiki/Queue_(abstract_data_type))를 가지고 있어, APC 함수가 대기할 경우 [소프트웨어 인터럽트](Processor.md#인터럽트)를 일으켜 다음에  [스케줄링](Processor.md#스케줄링)될 때 이들을 순서대로 실행시킨다. [시스템](Kernel.md)에 의해 생성된 APC를 *커널 모드 APC*, 그리고 어플리케이션에 의해 생성되면 *사용자 모드 APC*라고 부른다.
+**[비동기 프로시저저 호출](https://learn.microsoft.com/en-us/windows/win32/sync/asynchronous-procedure-calls)**(asynchronous procedure call; APC)은 특정 [스레드](#스레드)의 [컨텍스트](#스레드-컨텍스트)에서 [비동기식](https://en.wikipedia.org/wiki/Asynchrony_(computer_programming))으로 실행될 [콜백 함수](C.md#콜백-함수)들을 가리킨다. 각 스레드마다 전용 [큐](https://en.wikipedia.org/wiki/Queue_(abstract_data_type))를 가지고 있으며, APC 함수가 큐잉되면 [소프트웨어 인터럽트](Processor.md#인터럽트)를 일으켜 대기 중인 완료 루틴이 존재함을 알린다. 대기 중인 APC 함수들은 해당 스레드가 [알림 가능한](IO.md#알림-가능한-입출력)(alertable) 상태로 전환하여 [스케줄링](Processor.md#스케줄링)될 때 순차대로 실행된다.
+
+* 커널 모드 APC: [시스템](Kernel.md)에 의해 생성된 APC
+* 사용자 모드 APC: 어플리케이션에 의해 생성된 APC
+
+[마이크로소프트](https://www.microsoft.com/)는 애초 APC를 *[알림 가능한 입출력](IO.md#알림-가능한-입출력)* 매커니즘을 구현하기 위해 설계하여, 해당 문서로 이동하여 내용을 읽어보는 걸 권장한다.
 
 # 스레드 풀
 > 본 장은 [Windows Vista](Windows.md)부터 소개된 최신 [스레드 풀 API](https://learn.microsoft.com/en-us/windows/win32/procthread/thread-pool-api) 위주로 소개하며, 이전 윈도우 OS의 [옛 스레드 풀 API](https://learn.microsoft.com/en-us/windows/win32/procthread/thread-pooling) 내용과 혼돈하지 않도록 유의한다.
