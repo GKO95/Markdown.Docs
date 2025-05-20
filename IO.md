@@ -55,7 +55,7 @@
 입출력 완료 포트가 생성되면 CreateIoCompletionPort 함수는 해당 포트의 핸들을 반환한다. 즉, 입출력 완료 포트는 이를 생성한 [프로세스](Process.md)에 한정되어 타 프로세스와 공유될 수 없다. 반면, 동일 프로세스의 스레드 간에 공유될 수 있어 스레드 간 통신(inter-thread communication)에도 활용된다.
 
 ### 입출력 완료 패킷
-**입출력 완료 패킷**(I/O completion packet)은 [비동기 입출력](#비동기-입출력) 작업이 완료되면 이를 지정된 입출력 완료 포트로 전송하여 완료 여부를 알리는 데이터 구조이다. 아래는 입출력 완료 패킷의 구성을 소개하기 위한 유사(pseudo) [구조체](C.md#구조체) 정의이다.
+**입출력 완료 패킷**(I/O completion packet)은 [비동기 입출력](#비동기-입출력) 작업이 완료되면 이를 지정된 입출력 완료 포트로 전송하여 완료 여부를 알리는 데이터 구조이다. 아래는 입출력 완료 패킷의 구성을 소개하기 위한 [유사코드](https://en.wikipedia.org/wiki/Pseudocode)이다.
 
 ```c
 typedef struct _IO_COMPLETION_PACKET {
