@@ -18,9 +18,17 @@
 [OVERLAPPED](https://learn.microsoft.com/en-us/windows/win32/api/minwinbase/ns-minwinbase-overlapped)는 비동기 입출력에 필요한 정보를 담는 [구조체](C.md#구조체)이다.
 
 ## 알림 가능한 입출력
-**[알림 가능한 입출력](https://learn.microsoft.com/en-us/windows/win32/fileio/alertable-i-o)**(alertable I/O)은 사용자 모드 스레드가 오로지 "알림 가능한(alertable)" 상태일 때 [APC](Thread.md#비동기-프로시저-호출)로 대기 중인 비동기 입출력을 처리하는 매커니즘이다. 비동기식의 [ReadFileEx](https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-readfileex) 및 [WriteFileEx](https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-writefileex) 등의 함수는 [콜백 함수](C.md#콜백-함수), 일명 완료 루틴(completion routine) 포인터를 매개변수로 전달 받아 APC 큐에 대기시킨다.
+**[알림 가능한 입출력](https://learn.microsoft.com/en-us/windows/win32/fileio/alertable-i-o)**(alertable I/O)은 [사용자 모드](Processor.md#사용자-모드)의 [스레드](Thread.md)가 오로지 "알림 가능한" 상태일 때 [APC](Thread.md#비동기-프로시저-호출)를 활용하여 큐에 대기 중인 [콜백 함수](C.md#콜백-함수)(일명 완료 루틴)를 비동기식으로 처리하는 매커니즘이다. 다음은 알림 가능한 입출력에 활용되는 Win32 API 목록을 소개한다.
 
-스레드를 알림 가능한 상태로 전환하는 함수는 아래와 같이 한정된다:
+<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">알림 가능한 입출력 관련 Win32 API</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">APC 함수 대기열 큐잉</th><th style="text-align: center;">알림 가능한 상태 전환</th></tr></thead><tbody><tr><td>APC 함수가 큐잉되면 <a href="Processor.md#인터럽트">소프트웨어 인터럽트</a>를 일으켜 대기 중인 완료 루틴이 존재함을 알린다.</td><td>만일 APC 큐가 비었을 시, (1) 대기 대상의 <a href="Synchronization.md#대기-함수">커널 개체</a>가 <i>signaled</i> 되거나 (2) APC가 큐잉될 때까지 스레드 실행이 중단된다.</td></tr><tr><td>
+
+* [QueueUserAPC](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-queueuserapc)
+* [ReadFileEx](https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-readfileex)
+* [WriteFileEx](https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-writefileex)
+* [SetWaitableTimer](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-setwaitabletimer)
+* [SetWaitableTimerEx](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-setwaitabletimerex)
+
+</td><td>
 
 * [SleepEx](https://learn.microsoft.com/en-us/windows/desktop/api/synchapi/nf-synchapi-sleepex)
 * [WaitForSingleObjectEx](https://learn.microsoft.com/en-us/windows/desktop/api/synchapi/nf-synchapi-waitforsingleobjectex)
@@ -28,14 +36,14 @@
 * [SignalObjectAndWait](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-signalobjectandwait)
 * [MsgWaitForMultipleObjectsEx](https://learn.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-msgwaitformultipleobjectsex)
 
-이로부터 스레드가 알림 가능한 상태로 진입할 시, 커널은 먼저 해당 스레드의 APC 큐를 확인한다. 만일 APC 큐가 비었을 경우, 커널은 다음 두 사건이 일어날 때까지 스레드 실행을 중단한다.
+</td></tr></tbody></table>
 
-1. [대기 함수](Synchronization.md#대기-함수)가 기다리는 [커널 개체](Kernel.md#커널-개체)가 *signaled* 상태로 진입
-1. 스레드의 APC 큐에 콜백 함수가 대기
+커널은 APC 큐에 대기 중인 완료 루틴을 꺼내어 스레드로 전송하여 콜백 함수를 실행한다. 만일 추가로 대기 중인 APC 함수가 있을 경우, 스레드는 이를 FIFO 순서대로 처리한다.<sup>[[출처](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-queueuserapc#remarks)]</sup> 그러나 알림 가능한 입출력 매커니즘은 다음 두 가지의 치명적인 단점을 가진다:
 
-APC 큐에 대기 중인 완료 루틴이 있다면 커널은 이를 대기열에서 꺼내 스레드로 전송한다. 그리고 스레드는 큐로부터 수신받은 콜백 함수를 실행한다. 이러한 과정을 반복하여 APC 큐의 나머지 콜백 함수를 처리하되, 비동기 입출력의 특성에 따라 FIFO 순서를 보장하지 않는다. 마침내 모든 완료 루틴을 처리하여 큐가 비었을 때, 스레드는 자신을 알림 가능한 상태로 만든 함수로부터 반환한다.
+1. 완료 루틴이 콜백 함수로 실행되는 점에서 코드 구현에 상당한 제약을 지닌다.
+1. 비동기 입출력을 요청한 스레드가 또한 완료 루틴을 처리해야 한다.
 
-알림 가능한 입출력은 두 가지 치명적인 단점을 지닌다: (1) 콜백 함수를 활용한다는 점에서 코드 구현에 상당한 제약이 있으며, (2) 입출력을 요청한 스레드가 또한 완료 루틴을 처리해야 한다. 추후 마이크로소프트는 해당 매커니즘이 갖는 문제를 "[입출력 완료 포트](#입출력-완료-포트)"란 대안을 소개하였다.
+추후 마이크로소프트는 알림 가능한 입출력의 문제점을 보완한 "[입출력 완료 포트](#입출력-완료-포트)"를 소개하였다.
 
 ## 입출력 완료 포트
 **[입출력 완료 포트](https://learn.microsoft.com/en-us/windows/win32/fileio/i-o-completion-ports)**(I/O completion ports)는 [스레드 풀](Thread.md#스레드-풀)을 활용하여 다수의 비동기 입출력 요청을  처리할 수 있는 매커니즘이다. 미리 할당된 스레드 풀을 사용함으로써, 매번 입출력 요청을 처리할 때마다 스레드를 생성하는 방식보다 효율적인 [병행성](https://en.wikipedia.org/wiki/Concurrency_(computer_science))을 보장한다. 본래 장치 입출력을 위해 설계되었지만, 파일을 포함한 비동기 입출력을 지원하는 [커널 개체](Kernel.md#커널-개체)도 사용 가능하다.
