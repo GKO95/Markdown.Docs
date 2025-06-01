@@ -70,26 +70,6 @@ C 언어는 [컴파일러](Programming.md#컴파일러)를 통해 영문으로 �
 3. 대소문자 구분 필수
 4. [예약어](https://en.wikipedia.org/wiki/Reserved_word) 금지
 
-### 주석
-[주석](https://learn.microsoft.com/en-us/cpp/c-language/c-comments)(comment)은 프로그램의 소스 코드로 취급하지 않아 실행되지 않는 영역이다. 흔히 코드에 대한 간단한 정보를 기입하기 위해 사용되는 데 C 언어에는 한줄 주석 그리고 블록 주석이 존재한다.
-
-<table style="table-layout: fixed; width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C 언어 주석 종류</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">한줄 주석</th><th style="text-align: center;">블록 주석</th></tr></thead><tbody><tr><td colspan="2">주석은 컴파일 직전에 <a href="#전처리기">전처리기</a>에 의해 소스 코드에 제거된다. 즉, 실행 파일 안에는 주석의 어떠한 정보도 저장되지 않는다.</td></tr><tr style="vertical-align: top; overflow-wrap: break-word;"><td>
-
-```c
-// 한줄 주석: 코드 한 줄을 차지하는 주석이다.
-```
-</td><td>
-
-```c
-/*
-블록 주석:
-코드 여러 줄을 차지하는 주석이다.
-*/
-```
-</td></tr>
-</tbody>
-</table>
-
 ## 자료형
 [자료형](https://en.wikipedia.org/wiki/Data_type)(data type)은 데이터를 어떻게 표현할 지 결정하는 요소이며, C 언어에서는 다음과 같이 존재한다. 단, 본 문서는 ANSI C 언어를 기준으로 소개하므로, 이후 C99부터 소개된 일부 자료형(`bool`, `long long` 등)은 목록에 제외되었다.
 
@@ -124,14 +104,6 @@ unsigned short    // 표현 가능 범위:     +0 ~ +65535
     float num1 = 314.159;
     short num2 = (unsigned char)num1;    // num2 저장값: 58
     ```
-
-### `sizeof` 연산자
-[`sizeof`](https://en.cppreference.com/w/c/language/sizeof) 연산자는 데이터나 자료형의 메모리에 할당된 바이트 크기를 반환한다.
-
-```c
-sizeof(int);      // 크기: 4바이트
-sizeof(char);     // 크기: 1바이트
-```
 
 ## 변수
 변수(variable)는 데이터를 지정된 [자료형](#자료형)으로 저장하는 메모리 공간이다. 아래 코드는 `variable` [식별자](#식별자)를 정수형 변수로 "정의(definition)"하여 메모리 공간을 확보한 다음 상수 3을 할당한다. 여기서 변수로의 최초 할당을 "초기화(initialization)"라고 부르며, 변수를 정의한 이후에 별도로 이루어질 수 있다. 초기화가 누락되면 변수에 가공되지 않은 메모리가 연동되어 잠재적 위험을 초래할 수 있기 때문에 일반적으로 C 언어 컴파일러는 이를 오류로 치부한다.
@@ -201,78 +173,6 @@ char variable = 75;    // ASCII에 의해 문자 'K'가 저장
 
 거의 모든 프로그래밍 언어는 할당 기호를 기준으로 왼쪽에는 피할당자(변수), 오른쪽에는 피할당자로 전달하려는 표현식(값 혹은 데이터)이 위치한다. 반대로 놓여질 경우, 오류가 발생하거나 원치 않는 결과가 도출될 수 있다.
 
-## 연산자
-[연산자](https://en.wikipedia.org/wiki/Operator_(computer_programming))(operator)는 피연산 데이터를 조작할 수 있는 가장 간단한 형태의 연산 요소이다. 연산자는 피연산자의 접두부, 접미부, 혹은 두 데이터 사이에 위치시켜 사용한다. 가독성을 위해 데이터와 연산자 사이에 공백을 넣어도 연산에는 아무런 영향을 주지 않는다. 다음은 [C/C++ 연산자](https://en.wikipedia.org/wiki/Operators_in_C_and_C++)들을 간략히 소개한다.
-
-### 산술 연산자
-<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://en.cppreference.com/w/cpp/language/operator_arithmetic">산술 연산자</a>(arithmetic operators)</caption><colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">산술</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>+</code></td><td style="text-align: center;">덧셈</td><td>좌측과 우측 피연산자의 값을 더하여 반환한다.</td></tr><tr><td style="text-align: center;"><code>-</code></td><td style="text-align: center;">뺄셈</td><td>좌측 피연산자에서 우측 피연산자를 뺀 값을 반환한다.</td></tr><tr><td style="text-align: center;"><code>*</code></td><td style="text-align: center;">덧셈</td><td>좌측 피연산자를 우측 피연산자의 값만큼 곱하여, 즉 반복 덧셈하여 반환한다.</td></tr><tr><td style="text-align: center;"><code>/</code></td><td style="text-align: center;">나눗셈</td><td>좌측 피연산자에서 우측 피연산자를 나눈 <a href="https://en.wikipedia.org/wiki/Quotient">몫</a>을 반환한다.</td></tr><tr><td style="text-align: center;"><code>%</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Modular_arithmetic">모듈러</a></td><td>좌측 피연산자에서 우측 피연산자를 나눈 <a href="https://en.wikipedia.org/wiki/Remainder">나머지</a>를 반환한다.</td></tr></tbody></table>
-
-### 증감 연산자
-[증가 연산자](https://en.cppreference.com/w/cpp/language/operator_incdec)(increment operator) `++` 및 [감소 연산자](https://en.cppreference.com/w/cpp/language/operator_incdec)(decrement operator) `--`는 데이터를 1만큼 증가 혹은 감소하는데 간략하게 한 줄로 표현한다.
-
-<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">증감 연산자의 위치에 따른 비교</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">접두부</th><th style="text-align: center;">접미부</th></tr></thead><tbody><tr><td>피연산자를 1만큼 증가/감소시킨 다음에 표현식을 평가한다.</td><td>표현식을 평가한 다음에 피연산자를 1만큼 증가/감소시킨다.</td></tr><tr><td>
-
-```c
-x = ++y;  // 동일: { y = y + 1; x = y; }
-x = --y;  // 동일: { y = y - 1; x = y; }
-```
-</td><td>
-
-```c
-x = y++;  // 동일: { x = y; y = y + 1; }
-x = y--;  // 동일: { x = y; y = y - 1; }
-```
-</td></tr></tbody></table>
-
-### 비트 연산자
-<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://en.wikipedia.org/wiki/Bitwise_operations_in_C">비트 연산자</a>(bitwise operators)</caption><colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">비트연산</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>&</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operation#AND">AND</a></td><td>두 피연산자의 각 비트를 비교하여 모두 1이면 1을, 아니면 0을 계산하여 반환한다.</td></tr><tr><td style="text-align: center;"><code>|</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operation#OR">OR</a></td><td>두 피연산자의 각 비트를 비교하여 하나라도 1이 있으면 1을, 아니면 0을 계산하여 반환한다.</td></tr><tr><td style="text-align: center;"><code>^</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operation#XOR">XOR</a></td><td>두 피연산자의 각 비트를 비교하여 값이 같으면 0을, 다르면 1을 계산하여 반환한다.</td></tr><tr><td style="text-align: center;"><code>~</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operation#NOT">NOT</a></td><td>피연산자의 각 비트마다 반전시킨 값을 반환한다.</td></tr><tr><td style="text-align: center;"><code>&lt;&lt;</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operations_in_C#Left_shift_%3C%3C">좌향 시프트</a></td><td>피연산자(左)의 비트를 전반적으로 일정 값(右)만큼 왼쪽으로 이동시킨다.</td></tr><tr><td style="text-align: center;"><code>&gt;&gt;</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operations_in_C#Right_shift_%3E%3E">우향 시프트</a></td><td>피연산자(左)의 비트를 전반적으로 일정 값(右)만큼 오른쪽으로 이동시킨다.</td></tr></tbody></table>
-
-### 할당 연산자
-단순 할당 연산자를 산술 및 비트 연산자와 조합하여 코드를 더욱 간결하게 작성할 수 있으며, 아래는 다양한 할당 연산자 중 일부만 보여준다.
-
-<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://en.cppreference.com/w/cpp/language/operator_assignment">할당 연산자</a>(assignment operators)</caption><colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">할당</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>=</code></td><td style="text-align: center;">단순 할당</td><td>피연산자(右)가 <a href="#변수">변수</a>와 같은 피할당자(左)로 할당된 값을 반환한다.</td></tr><tr><td style="text-align: center;"><code>+=</code></td><td style="text-align: center;">덧셈 대입</td><td>
-
-```c
-x += y;  // 동일: x = x + y;
-```
-</td></tr><tr><td style="text-align: center;"><code>*=</code></td><td style="text-align: center;">곱셈 대입</td><td>
-
-```c
-x *= y;  // 동일: x = x * y;
-```
-</td></tr><tr><td style="text-align: center;"><code>&=</code></td><td style="text-align: center;">AND 대입</td><td>
-
-```c
-x &= y;  // 동일: x = x & y;
-```
-</td></tr><tr><td style="text-align: center;"><code>&lt;&lt;=</code></td><td style="text-align: center;">좌향 시프트 대입</td><td>
-
-```c
-x <<= y;  // 동일: x = x << y;
-```
-</td></tr></tbody></table>
-
-### 비교 연산자
-아래 비교 연산자의 설명은 참을 반환할 조건을 소개하며, 그 외에는 모두 0을 반환한다.
-
-<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://en.cppreference.com/w/cpp/language/operator_comparison">비교 연산자</a>(relational operators)</caption><colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">관계</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>&gt;</code></td><td style="text-align: center;">초과</td><td>좌측 피연산자가 우측 피연산자보다 크면 1을 반환한다.</td></tr><tr><td style="text-align: center;"><code>&lt;</code></td><td style="text-align: center;">미만</td><td>좌측 피연산자가 우측 피연산자보다 작으면 1을 반환한다.</td></tr><tr><td style="text-align: center;"><code>&gt;=</code></td><td style="text-align: center;">이상</td><td>좌측 피연산자가 우측 피연산자보다 크거나 같으면 1을 반환한다.</td></tr><tr><td style="text-align: center;"><code>&lt;=</code></td><td style="text-align: center;">이하</td><td>좌측 피연산자가 우측 피연산자보다 작거나 같으면 1을 반환한다.</td></tr><tr><td style="text-align: center;"><code>==</code></td><td style="text-align: center;">동일</td><td>두 피연산자의 값이 같으면 1을 반환한다.</td></tr><tr><td style="text-align: center;"><code>!=</code></td><td style="text-align: center;">상이</td><td>두 피연산자의 값이 같지 않으면 1을 반환한다.</td></tr></tbody></table>
-
-### 논리 연산자
-(논리 부정을 제외한) 아래 논리 연산자의 설명은 참을 반환할 조건을 소개하며, 그 외에는 모두 0을 반환한다.
-
-<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://en.cppreference.com/w/cpp/language/operator_logical">논리 연산자</a>(logical operators)</caption><colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/><col style="width: "/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">논리</th><th style="text-align: center;">설명 </th></tr></thead><tbody><tr><td style="text-align: center;"><code>&&</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Logical_conjunction">논리곱</a></td><td>좌측 그리고 우측 <a href="https://en.wikipedia.org/wiki/Proposition">명제</a>(피연산자)가 모두 참이면 1을 반환한다.</td></tr><tr><td style="text-align: center;"><code>||</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Logical_disjunction">논리합</a></td><td>좌측 또는 우측 명제(피연산자)가 하나라도 참이면 1을 반환한다.</td></tr><tr><td style="text-align: center;"><code>!</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Negation">부정</a></td><td>명제(피연산자)가 참이면 거짓으로, 혹은 그 반대로 반전된 값을 반환한다.</td></tr></tbody></table>
-
-## 탈출 문자
-[탈출 문자](https://en.wikipedia.org/wiki/Escape_character)(escape character)는 백슬래시 기호 `\`를 사용하며, [문자열](#문자열)로부터 탈출하여 텍스트 데이터 내에서 특정 연산을 수행하도록 한다. 예시에서 `\n` 탈출 문자를 사용하여 문자열 줄바꿈을 구현한 것을 보여주었다.
-
-```c
-printf("Hello,\nWorld!");
-```
-```terminal
-Hello,
-World!
-```
-
 # 파일 입출력
 C 언어의 [파일 입출력](https://en.wikipedia.org/wiki/C_file_input/output)(일명 I/O)은 [`stdio.h`](https://en.cppreference.com/w/cpp/header/cstdio) 헤더로부터 관련 함수들을 호출할 수 있으며, 단순 파일뿐만 아니라 터미널로부터 텍스트를 입력받거나 출력할 때에도 관여한다. C 언어의 파일 입출력은 다른 프로그래밍 언어에 비해 신경써야 할 부분이 많아 별도의 장을 마련하여 소개한다.
 
@@ -337,7 +237,7 @@ FILE* fptr = fopen("filename.txt", mode);
 
 fclose(fptr);
 ```
-</td><td style="text-align: center;"><code>"r"</code></td><td>읽기 모드</td><td style="text-align: center;">❌</td></tr><tr><td style="text-align: center;"><code>"w"</code></td><td>덮어쓰기 모드</td><td style="text-align: center;">⭕</td></tr><tr><td style="text-align: center;"><code>"a"</code></td><td>덧붙이기 모드</td><td style="text-align: center;">⭕</td></tr><tr><td style="text-align: center;"><code>"r+"</code></td><td>읽기 + 쓰기 모드</td><td style="text-align: center;">❌</td></tr><tr><td style="text-align: center;"><code>"w+"</code></td><td>읽기 + 덮어쓰기 모드</td><td style="text-align: center;">⭕</td></tr><tr><td style="text-align: center;"><code>"a+"</code></td><td>읽기 + 덧붙이기 모드</td><td style="text-align: center;">⭕</td></tr></tbody></table>
+</td><td style="text-align: center;"><code>"r"</code></td><td>읽기 모드</td><td style="text-align: center;">❌</td></tr><tr><td style="text-align: center;"><code>"w"</code></td><td>덮어쓰기 모드</td><td style="text-align: center;">✔️</td></tr><tr><td style="text-align: center;"><code>"a"</code></td><td>덧붙이기 모드</td><td style="text-align: center;">✔️</td></tr><tr><td style="text-align: center;"><code>"r+"</code></td><td>읽기 + 쓰기 모드</td><td style="text-align: center;">❌</td></tr><tr><td style="text-align: center;"><code>"w+"</code></td><td>읽기 + 덮어쓰기 모드</td><td style="text-align: center;">✔️</td></tr><tr><td style="text-align: center;"><code>"a+"</code></td><td>읽기 + 덧붙이기 모드</td><td style="text-align: center;">✔️</td></tr></tbody></table>
 
 [`fopen()`](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/fopen-wfopen) 함수는 파일을 성공적으로 열었을 때 파일 스트림 객체를 가리키는 `FILE` [자료형](#구조체) [포인터](#포인터)를 반환한다. 해당 포인터를 `fprintf()` 및 `fscanf()` 입출력 함수의 스트림으로 전달하면 파일을 작성하거나 읽어올 수 있다.
 
@@ -485,50 +385,6 @@ for (initialize; condition; increment) statement;
 ```
 
 `for` 반복문의 우선 `initialize`에서 반복문 지역 변수를 정의하거나 외부 변수를 불러와 반복문을 위한 초기값을 할당한 다음 `condition`에서 조건을 평가한다. 논리가 참이면 코드를 반복적으로 실행하며, 거짓일 경우에는 반복문을 종료한다. 블록 내의 코드가 마무리되었거나 `continue` 문을 마주하면 `increment`에서 변수를 증감하고, `condition`으로 돌아가 절차를 반복한다.
-
-## 이동문
-이동문(jump statement)은 아무런 조건이 필요없이 코드 실행 지점을 이동시키는 제어문이다:
-
-### `break` 탈출문
-[`break`](https://en.cppreference.com/w/cpp/language/break) 탈출문은 (1) 반복문을 조기 종료시키거나, (2) `switch` 조건문에서 경우에 따라 실행되어야 할 코드를 구분짓기 위해 사용된다.
-
-### `continue` 연속문
-[`continue`](https://en.cppreference.com/w/cpp/language/continue) 연속문은 반복문을 종료하지 않은 채 나머지 실행 코드를 전부 무시하고 반복문의 조건부로 되돌아간다.
-
-### `goto` 이동문
-[`goto`](https://en.cppreference.com/w/c/language/goto) 이동문은 다른 문장으로써는 절대로 접근이 불가한 코드에 도달할 수 있도록 한다 (일명 제어 전달; control transfer). `goto` 키워드에 명시된 [레이블](https://en.cppreference.com/w/cpp/language/statements#Labels)로 제어를 전달하나, 이 둘은 반드시 동일한 [함수](#함수) 내에 위치해야 한다. 레이블은 `goto` 문 이전이나 이후에 위치하여도 무관하다.
-
-```c
-int main() {
-    
-    // 제어 전달: "label"로 이동
-    goto label;    
-
-    // "label" 레이블
-label:
-    statements;
-
-}
-```
-
-단, `goto` 이동문을 사용할 때에는 매우 조심해야 하며 무리한 남용은 [스파게티 코드](https://en.wikipedia.org/wiki/Spaghetti_code)의 원인이 된다.
-
-### `return` 반환문
-[`return`](https://en.cppreference.com/w/cpp/language/return) 반환문은 [함수](#함수)를 종료하면서 지정된 자료형으로 데이터를 반환한다. 하단에 코드가 남아 있음에도 불구하고 반환문이 실행되면 함수는 즉시 종료된다.
-
-```c
-// return 반환문이 있는 사용자 정의 함수
-int function() {
-    printf("Hello World!\n");
-    return 1 + 2;
-}
-    
-printf("%d\n", function());
-```
-```terminal
-Hello World!
-3
-```
 
 # 배열
 [배열](https://en.cppreference.com/w/cpp/language/array)(array)은 동일한 자료형의 데이터를 일련의 순서로 담는 저장공간이다. 식별자 뒤에는 대괄호 `[]`가 위치하여 배열이 담을 수 있는 데이터 용량 크기를 [정수 리터럴](https://en.cppreference.com/w/cpp/language/integer_literal)이나 [상수](#변수)로 지정한다. 배열의 데이터 초기화는 중괄호 `{}` 내에 항목을 순서대로 쉼표로 나누어 나열한다. 만일 배열 용량을 지정하지 않으면 데이터 개수만큼 크기가 정해지며, 아래는 배열을 정의하는 두 방식을 보여준다.
