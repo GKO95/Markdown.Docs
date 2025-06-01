@@ -3,11 +3,12 @@
 
 [**C 프로그래밍 언어**](https://learn.microsoft.com/en-us/cpp/c-language/)는 [UNIX](https://en.wikipedia.org/wiki/Unix) 컴퓨터의 소프트웨어 제작을 위해 개발된 [B 언어](https://en.wikipedia.org/wiki/B_(programming_language))의 후속작이다. 현재 C 언어는 가장 널리 사용되고 있는 프로그래밍 언어로 [C++](Cpp.md), [C#](Csharp.md), [파이썬](Python.md), 자바 등 여러 프로그래밍 언어에 영향을 주었다. C 언어는 다른 프로그래밍 언어에 비해 매우 빠른 처리 속도와 훌륭한 호환성을 가지고 있어 [응용 프로그램](https://en.wikipedia.org/wiki/Application_software) 및 [펌웨어](https://en.wikipedia.org/wiki/Firmware) 개발에 여전히 활용되고 있다.
 
-C 언어의 소스 코드 편집 외에도 프로그램 빌드 및 [디버깅](https://en.wikipedia.org/wiki/Debugging) 등의 기능을 제공하는 [통합 개발 환경](https://en.wikipedia.org/wiki/Integrated_development_environment)(일명 IDE) 일부를 소개한다.
+C 언어는 [컴파일러](Programming.md#컴파일러)를 통해 영문으로 작성된 코드를 컴퓨터가 직접 수행할 수 있는 기계어로 변환한 [이진 파일](https://en.wikipedia.org/wiki/Binary_file)이 생성되는 컴파일러 언어이다. [국제 표준화 기구](https://www.iso.org/home.html)(ISO)의 표준에 따라 C 언어가 동작할 것을 규정하여, 서로 다른 컴파일러 간에도 [이식](https://en.wikipedia.org/wiki/Porting) 호환을 지원한다. 아래는 대표적인 C 언어 컴파일러들을 나열한다.
 
-* [비주얼 스튜디오](https://visualstudio.microsoft.com/) <sub>([Windows](Windows.md), [macOS](https://en.wikipedia.org/wiki/MacOS))</sub>
-* [엑스코드](https://developer.apple.com/xcode/) <sub>([macOS](https://en.wikipedia.org/wiki/MacOS))</sub>
-* [CLion](https://www.jetbrains.com/clion/) <sub>([Windows](Windows.md), [macOS](https://en.wikipedia.org/wiki/MacOS), [Linux](https://en.wikipedia.org/wiki/Linux))</sub>
+* [Microsoft Visual C++](https://en.wikipedia.org/wiki/Microsoft_Visual_C++) (일명 MSVC)
+    * [C 런타임 라이브러리](#c-런타임-라이브러리)
+* [GNU C Compiler](https://en.wikipedia.org/wiki/GNU_Compiler_Collection) (일명 GCC)
+* [Clang](https://en.wikipedia.org/wiki/Clang)
 
 ### C 표준 라이브러리
 **[C 표준 라이브러리](https://en.wikipedia.org/wiki/C_standard_library)**(C standard library)는 국제 표준의 ANSI C에서 명시한 [표준 라이브러리](https://en.wikipedia.org/wiki/Standard_library)이며, [매크로](#매크로-정의) 및 [자료형](#자료형) 정의, 그리고 ([문자열 조작](#문자열), [입출력 처리](#파일-입출력), [메모리 관리](#동적-할당) 등) 특정 작업을 위한 함수들을 제공한다. 다양한 [운영체제](https://en.wikipedia.org/wiki/Operating_system) 또는 C 컴파일러에서 표준 라이브러리를 제공하고, [헤더 파일](#헤더-파일)로 불러와 활용할 수 있다.
@@ -17,45 +18,6 @@ C 언어의 소스 코드 편집 외에도 프로그램 빌드 및 [디버깅](h
 <sup>_† 참고: [C Standard Library header files - cppreference.com](https://en.cppreference.com/w/c/header)_</sup>
 
 동 시간대 기획된 또 다른 표준 라이브러리인 [C POSIX 라이브러리](https://en.wikipedia.org/wiki/C_POSIX_library)는 [POSIX](https://en.wikipedia.org/wiki/POSIX) 시스템 대상의 규격이며, 본 문서는 ISO 표준 규격을 위주로 설명한다.
-
-## 컴파일러
-[**컴파일 언어**](Programming.md#컴파일러)에 해당하는 C 언어는 영문으로 작성된 코드를 [컴파일러](Programming.md#컴파일러)를 통해 컴퓨터가 직접 수행할 수 있는 기계어로 변환한 [이진 파일](https://en.wikipedia.org/wiki/Binary_file)을 생성한다. [국제 표준화 기구](https://www.iso.org/home.html)(ISO)의 표준에 따라 C 언어가 동작할 것을 규정하여, 서로 다른 컴파일러 간에도 [이식](https://en.wikipedia.org/wiki/Porting) 호환을 지원한다. 아래는 대표적인 C 언어 컴파일러들을 나열한다.
-
-* [Microsoft Visual C++](https://en.wikipedia.org/wiki/Microsoft_Visual_C++) (일명 MSVC)
-    * [C Runtime Library](#c-런타임-라이브러리)
-* [GNU C Compiler](https://en.wikipedia.org/wiki/GNU_Compiler_Collection) (일명 GCC)
-* [Clang](https://en.wikipedia.org/wiki/Clang)
-
-### C 런타임 라이브러리
-**[C 런타임 라이브러리](https://en.wikipedia.org/wiki/Microsoft_Windows_library_files#CRT)**(C runtime library), 일명 **CRT**는 [윈도우 OS](Windows.md) 환경에 특화된 [C 표준 라이브러리](#c-표준-라이브러리)와 관련 데이터 및 기능을 제공하는 [Microsoft Visual C++](#컴파일러)의 일환이다. ANSI C에서 [프로세스](Process.md)를 종료하는데 제시한 [exit](https://en.cppreference.com/w/c/program/exit) 함수의 경우, CRT는 윈도우 OS가 제공하는 [Win32 API](WinAPI.md)의 [ExitProcess](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-exitprocess) 함수를 활용한 [exit](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/exit-exit-exit) 함수를 소개한다.
-
-* *Universal C Runtime Library (UCRT)* : 비주얼 스튜디오 2015부터 소개된 C 표준 라이브러리<sup>(1)</sup>, POSIX 확장<sup>(2)</sup> 및 마이크로소프트 전용<sup>(3)</sup>의 [함수](#함수), [매크로](#매크로-정의), 그리고 [전역 변수](#변수)를 통합 제공하는 새롭게 소개된 CRT이다. [Windows 10](Windows.md)부터 UCRT는 시스템 컴포넌트로 추가되었으며, 비주얼 스튜디오를 설치하면 UCRT를 활용할 수 있도록 [Windows SDK](https://aka.ms/windowssdk)의 일부가 함께 설치된다.
-
-    * *VCRuntime Library* : (UCRT에서 제외된) 컴파일러에 특화된 구성들을 위주로 제공하는 별개의 CRT이다.
-
-## 프로젝트
-다음은 비주얼 스튜디오 2022을 위주로 C 언어 프로젝트 구축에 대하여 설명한다.
-
-![비주얼 스튜디오 C 언어 프로그래밍 화면](./images/visual_studio_c.png)
-
-비주얼 스튜디오는 C 언어를 위한 별도 프로젝트 생성 옵션이 존재하지 않는다. 대안으로 [C++](Cpp.md)에서 빈 프로젝트(Empty Project)를 생성한 다음, 소스 코드를 .c 확장자로 직접 추가할 수 있다. MSVC 컴파일러는 C++를 주요 대상으로 설계된 컴파일러이지만 C 언어도 함께 지원한다.
-
-아래는 C 언어 프로그램을 실행하는 가장 기초적인 코드와 함께 코드에 대한 설명이다.
-
-* `#include <stdio.h>`: Stdio.h [헤더 파일](#헤더-파일)로부터 C 표준 입출력 라이브러리를 [불러오며](#포함-지시문), 터미널에 텍스트를 출력하는 [`printf()`](#파일-입출력) [함수](#함수) 등을 제공한다.
-* `int main() { ... }`: C 언어가 시작되는 함수, 일명 [진입점](#진입점)이다.
-* `return 0;`: 함수를 종료하며 0 값을 반환하는 데, 이는 `EXIT_SUCCESS`에 대응하며 성공적으로 프로그램이 종료되었음을 의미한다.
-
-### CRT 보안 강화 함수
-> *출처: [Security Features in the CRT | Microsoft Learn](https://learn.microsoft.com/en-us/cpp/c-runtime-library/security-features-in-the-crt)*
-
-비주얼 스튜디오 2015 이후부터 `_s` 접미사가 붙은 안정성이 강화된 새로운 CRT 함수들이 소개되며(예를 들어 [`printf_s`](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/printf-s-printf-s-l-wprintf-s-wprintf-s-l), [`strcpy_s`](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/strcpy-s-wcscpy-s-mbscpy-s) 등), 기존의 옛 CRT 함수들을 사용하려 할 시 [C4996](https://learn.microsoft.com/en-us/cpp/error-messages/compiler-warnings/compiler-warning-level-3-c4996) 컴파일러 경고가 나타난다. 하지만 옛 CRT의 활용이 권장되지 않을 뿐, 사라진 게 아니므로 경고를 무시하려면 아래와 같이 매크로를 소스 코드 또는 프로젝트에 정의한다.
-
-```c
-#define _CRT_SECURE_NO_WARNINGS
-```
-
-![비주얼 스튜디오 프로젝트에 <code>CRT_SECURE_NO_WARNINGS</code> 매크로 설정](./images/visual_studio_crt_warnings.png)
 
 # 구문
 [구문](https://en.wikipedia.org/wiki/Syntax_(programming_languages))(syntax)은 프로그래밍 언어에서 문자 및 기호들의 조합이 올바른 문장 또는 표현식을 구성하였는지 정의하는 규칙이다. 각 프로그래밍 언어마다 규정하는 구문이 다르며, 이를 준수하지 않을 시 해당 프로그램은 빌드되지 않거나, 실행이 되어도 오류 및 의도치 않은 동작을 수행한다.
@@ -1592,3 +1554,68 @@ int main() {
     소스 코드를 컴파일하여도 라이브러리는 프로그램 일부로 융합되지 않아 프로그램 용량이 획기적으로 줄어들고 라이브러리 업데이트가 매우 편리하다. 하지만 컴파일된 프로그램이 라이브러리를 찾지 못하면 실행이 불가하거나 정상적으로 동작하지 않으며, VCRUNTIME140.dll을 찾을 수 없다는 오류창이 대표적인 예시이다. 윈도우 NT에서 .dll 확장자를 가진다(유닉스의 경우 .so).
 
 비주얼 스튜디오에서 C 언어로 라이브러리를 빌드하려면 위의 그림과 같이 프로젝트 속성에서 구성 유형을 정적 혹은 동적 라이브러리로 변경한다. 소스 코드에서 데이터와 함수를 정의하되, `main()`은 [진입점](#진입점)이 아닌 일반 함수로 동작하는 점에 유의한다. 정의된 변수나 함수를 접근할 수 있도록 헤더 파일에 선언하여 컴파일하면 라이브러리가 완성된다.
+
+# C 런타임 라이브러리
+**[C 런타임 라이브러리](https://en.wikipedia.org/wiki/Microsoft_Windows_library_files#CRT)**(C runtime library), 일명 **CRT**는 [윈도우 OS](Windows.md) 환경에 특화된 [C 표준 라이브러리](#c-표준-라이브러리)와 관련 데이터 및 기능을 제공하는 [Microsoft Visual C++](#컴파일러)의 일환이다. ANSI C에서 [프로세스](Process.md)를 종료하는데 제시한 [exit](https://en.cppreference.com/w/c/program/exit) 함수의 경우, CRT는 윈도우 OS가 제공하는 [Win32 API](WinAPI.md)의 [ExitProcess](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-exitprocess) 함수를 활용한 [exit](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/exit-exit-exit) 함수를 소개한다.
+
+* *Universal C Runtime Library (UCRT)* : 비주얼 스튜디오 2015부터 소개된 C 표준 라이브러리<sup>(1)</sup>, POSIX 확장<sup>(2)</sup> 및 마이크로소프트 전용<sup>(3)</sup>의 [함수](#함수), [매크로](#매크로-정의), 그리고 [전역 변수](#변수)를 통합 제공하는 새롭게 소개된 CRT이다. [Windows 10](Windows.md)부터 UCRT는 시스템 컴포넌트로 추가되었으며, 비주얼 스튜디오를 설치하면 UCRT를 활용할 수 있도록 [Windows SDK](https://aka.ms/windowssdk)의 일부가 함께 설치된다.
+
+    * *VCRuntime Library* : (UCRT에서 제외된) 컴파일러에 특화된 구성들을 위주로 제공하는 별개의 CRT이다.
+
+### 보안 강화 CRT 함수
+
+비주얼 스튜디오 2015부터 보안이 취약한 옛 CRT 함수 코드를 사용하면 [C4996](https://learn.microsoft.com/en-us/cpp/error-messages/compiler-warnings/compiler-warning-level-3-c4996) 경고로 컴파일이 실패하며, 대신 접미사 `_s`가 붙은 [보안 강화된 CRT 함수](https://learn.microsoft.com/cpp/c-runtime-library/security-enhanced-versions-of-crt-functions)를 권고한다. 이는 옛 CRT 함수가 사라진 게 아니므로 아래 매크로를 추가하면 경고를 무시하고 사용할 수 있다.<sup>[[출처](https://learn.microsoft.com/en-us/cpp/c-runtime-library/security-features-in-the-crt)]</sup>
+
+```c
+#define _CRT_SECURE_NO_WARNINGS
+```
+
+![비주얼 스튜디오 프로젝트에 <code>CRT_SECURE_NO_WARNINGS</code> 매크로 설정](./images/visual_studio_crt_warnings.png)
+
+## 프로세스 생명주기
+본 장은 [C](C.md) 언어로 개발된 [윈도우](Windows.md) 어플리케이션을 위주로 설명한다. 즉, [Win32 API](WinAPI.md) 이외에 [C 런타임 라이브러리](C.md#c-런타임-라이브러리)(CRT)가 함께 언급되어 개념을 설명한다.
+
+### 프로세스 생성
+[CreateProcess](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-createprocessw) 함수는 [Win32 API](WinAPI.md), 즉 [윈도우 OS](Windows.md)에서 자체적으로 제공하는 [프로세스](#프로세스) 생성 함수이다. 해당 함수는 가장 먼저 프로세스 [커널 개체](Kernel.md#커널-개체), 그 다음 [가상 주소 공간](#가상-주소-공간)을 생성한다. 확보된 가상 주소 공간에 프로그램 실행에 필요한 이미지와 관련 모듈들을 로드한다. 프로그램 이미지에는 시작 함수(startup function)가 내재되어 [진입 함수](C.md#진입점) 실행 외에도 CRT에서 필요한 [메모리](Memory.md) 할당 및 [객체](Cpp.md#클래스) 생성 등을 사전에 작업한다.
+
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">어플리케이션 유형에 따라 <a href="https://en.wikipedia.org/wiki/Microsoft_Visual_C++">MSVC</a> <a href="https://en.wikipedia.org/wiki/Linker_(computing)">링커</a>가 지정하는 프로그램 시작 함수</caption><colgroup><col style="width: 30%;"/><col style="width: 70%;"/></colgroup><thead><tr><th style="text-align: center;">시작 함수</th><th style="text-align: center;">기본 대상</th></tr></thead><tbody><tr><td style="text-align: center;"><code>mainCRTStartup</code><br/>(혹은 <code>wmainCRTStartup</code>)</td><td><a href="https://learn.microsoft.com/en-us/cpp/build/reference/subsystem-specify-subsystem">/SUBSYSTEM:CONSOLE</a>를 사용하는, 즉 <a href="https://en.wikipedia.org/wiki/Command-line_interface">CLI</a> 어플리케이션<ul><li><code>main</code> (혹은 <code>wmain</code>) 함수를 진입점으로 호출한다.</li></ul></td></tr><tr><td style="text-align: center;"><code>WinMainCRTStartup</code><br/>(혹은 <code>wWinMainCRTStartup</code>)</td><td><a href="https://learn.microsoft.com/en-us/cpp/build/reference/subsystem-specify-subsystem">/SUBSYSTEM:WINDOWS</a>를 사용하는, 즉 <a href="https://en.wikipedia.org/wiki/Graphical_user_interface">GUI</a> 어플리케이션<ul><li><code>__stdcall</code>로 정의된 <code>WinMain</code> (혹은 <code>wWinMain</code>) 함수를 진입점으로 호출한다.</li></ul></td></tr></tbody></table>
+
+<sup>_† 참고: [/ENTRY (Entry-Point Symbol) | Microsoft Learn](https://learn.microsoft.com/en-us/cpp/build/reference/entry-entry-point-symbol)<br/>†† 참고: [How does the linker decide whether to call WinMain or wWinMain? - The Old New Thing](https://devblogs.microsoft.com/oldnewthing/20241004-00/?p=110338)_</sup>
+
+그러므로 CreateProcess 함수는 이후 [기본 스레드](Thread.md#스레드) 커널 개체를 생성하여 위에서 소개한 시작 함수를 본격적으로 실행한다. 이 과정에서 생성된 프로세스 및 기본 스레드 [핸들](#핸들)은 각각 [PROCESS_INFORMATION](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/ns-processthreadsapi-process_information) 구조체의 `hProcess`와 `hThread` 필드에 할당된다. 비록 방금 생성된 프로세스이지만 핸들의 참조 카운트가 두 개로 확인된 이유가 이러한 동작 원리에 의한 것이다.
+
+* 프로세스 및 기본 스레드가 생성된 다음, 추가 [스레드](Thread.md)의 생성 및 종료 과정은 [*스레드 생명주기*](Thread.md#스레드-생명주기) 내용을 참고하도록 한다.
+
+### 프로세스 종료
+CRT 구조상 _tWinMain 혹은 _tmain 진입점 함수가 종료하여 반환한 상태 코드는 `nMainRetVal` 변수로 전달된다. 그리고 이를 인자로 전달받은 CRT의 [exit](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/exit-exit-exit) 함수는 생성된 [객체](Cpp.md#클래스) 소멸 및 할당된 [메모리](Memory.md) 해제를 진행한 다음, 마무리로 Win32의 [ExitProcess](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-exitprocess) 함수를 호출하여 프로세스를 종료한다. 이때 프로세스 커널 개체의 참조 카운트가 차감되어, 만일 카운트가 0에 달하면 개체는 OS에 의해 자동 소멸된다. 하지만 모종의 이유로 참조 카운트가 1 이상의 경우, 프로세스가 종료되었지만 커널 개체가 소멸될 수 없어 잔여하는 [좀비 프로세스](https://en.wikipedia.org/wiki/Zombie_process)가 되어버린다.
+
+프로세스를 종료하는 가장 올바른 방법은 진입 함수를 실행하는 기본 스레드가 [반환문](C.md#return-반환문)을 호출하여 종료되는 것이다. 그 외에 프로세스를 종료하는 방법이 몇 가지 존재하며 이들의 문제점을 함께 설명한다.
+
+1. *기본 스레드에서 Win32의 [ExitThread](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-exitthread) 함수 호출* : 아직 실행 중인 스레드가 있을 경우, 어플리케이션은 더 이상 동작하지 않을지언정 종료되지 않는다.
+
+1. *한 스레드에서 Win32의 ExitProcess 함수 호출* : 나머지 스레드들을 Win32의 [TerminateThread](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-terminatethread)로 강제 종료하는 것과 마찬가지로, CRT 객체 및 메모리를 정리하는 과정 등을 건너뛴다. 단, CRT에서 처리하지 못한 종료된 프로세스의 시스템 리소스는 결국 운영 체제에서 자체적으로 정리한다.
+
+1. *타 프로세스에서 Win32의 [TerminateProcess](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-terminateprocess) 함수 호출* : (이하 동문)
+
+
+## 스레드 생명주기
+본 장은 [C](C.md) 언어로 개발된 [윈도우](Windows.md) 어플리케이션을 위주로 설명한다. 즉, [Win32 API](WinAPI.md) 이외에 [C 런타임 라이브러리](C.md#c-런타임-라이브러리)(CRT)가 함께 언급되어 개념을 설명한다.
+
+### 스레드 생성
+본래 [C 표준 라이브러리](https://en.wikipedia.org/wiki/C_standard_library)는 단일 스레드 프로그램을 위해 설계되어 다중 스레딩을 지원하는 매커니즘이 결여된다. [C 런타임 라이브러리](C.md#c-런타임-라이브러리)(일명 CRT)는 이를 보완하기 위해 [스레드 컨텍스트](#스레드-컨텍스트)를 저장할 `_tiddata` [구조체](C.md#구조체)를 [TLS](#스레드-로컬-스토리지)에 초기화하여 제공한다. CRT의 [_beginthread](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/beginthread-beginthreadex) (혹은 [_beginthreadex](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/beginthread-beginthreadex)) 함수는  Win32의 [CreateThread](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-createthread)를 내포하는 동시에 `_tiddata` 구조체를 초기화하는 등 다중 스레딩에 필요한 추가 리소스를 확보한다.
+
+CreateThread가 실행되면 먼저 스레드 [커널 개체](Kernel.md#커널-개체)의 (대부분) 맴버들을 초기화하고 [스레드 스택](#스레드-스택)을 위한 [메모리](Memory.md) 영역을 할당한다. 스레드 스택의 최상단 주소에는 매개변수 `lpParameter` 및 `lpStartAddress` 인자를 순서대로 푸쉬하며, 다음은 이들 인자들이 무엇인지 소개한다.
+
+* `lpParameter`: 스레드로 전달할 변수의 포인터
+* `lpStartAddress`: 스레드가 실행할 프로그램 정의 함수의 포인터
+
+마지막으로 스레드 커널 개체의 맴버 중 컨텍스트 관련 맴버들을 초기화한다: (1) [SP](Assembly.md#포인터-레지스터)에는 스택상 `lpStartAddress` 인자가 위치한 포인터, 그리고 (2) [IP](Assembly.md#명령어-포인터-레지스터)에는 스레드를 시작할 [RtlUserThreadStart](https://learn.microsoft.com/en-us/previous-versions/windows/desktop/xperf/thread-start-functions) 함수의 포인터로 할당된다. 이대로 [스케줄링](Processor.md#스케줄링)되면 [프로세서](Processor.md#프로세서)는 스레드에 할애된 프로그램 정의 함수를 실행하게 된다.
+
+### 스레드 종료
+스레드를 종료하려면 대응하는 CRT의 [_endthread](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/endthread-endthreadex) (혹은 [_endthreadex](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/endthread-endthreadex)) 함수를 호출하거나, 또는 프로그램 정의 함수가 반환하여 종료될 시 자동적으로 호출된다. CRT 리소스 정리를 마친 다음, 내포된 Win32의 [ExitThread](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-exitthread) 함수 실행을 마지막으로 스택 메모리 해제 및 스레드 상태 코드를 반환한다. 이때 스레드 커널 개체의 참조 카운트가 차감되어, 만일 카운트가 0에 달하면 개체는 OS에 의해 자동 소멸된다.
+
+스레드를 종료하는 가장 올바른 방법은 프로그램 정의 함수가 [반환문](C.md#return-반환문) 혹은 CRT의 _endthread (혹은 _endthreadex) 함수를 호출하여 종료되는 것이다. 그 외에 스레드를 종료하는 방법이 몇 가지 존재하며 이들의 문제점을 함께 설명한다.
+
+1. *스레드에서 Win32의 [ExitThread](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-exitthread) 함수 호출* : 프로그램을 C/C++ 코드로 작성하고 있다면 리소스 정리를 위해 가급적 CRT 함수를 호출한다.
+
+1. *본 프로세스 (혹은 타 프로세스)에서 Win32의 [TerminateThread](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-terminatethread) 함수 호출* : 해당 스레드의 프로세스가 종료되지 않는 이상, 시스템은 스레드 스택을 제거하지 않는다. 이는 마이크로소프트의 의도된 설계로, 스레드 스택을 제거하면서 유발될 [메모리 접근 오류](https://en.wikipedia.org/wiki/Segmentation_fault)를 방지하는 차원의 조치이다.
