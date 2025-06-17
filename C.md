@@ -1,6 +1,4 @@
 # C
-> 본 문서는 1989년에 출판된 [ANSI C](https://en.wikipedia.org/wiki/ANSI_C) 표준을 기준으로 C 언어를 설명한다.
-
 [**C 프로그래밍 언어**](https://learn.microsoft.com/en-us/cpp/c-language/)는 [UNIX](https://en.wikipedia.org/wiki/Unix) 컴퓨터의 소프트웨어 제작을 위해 개발된 [B 언어](https://en.wikipedia.org/wiki/B_(programming_language))의 후속작이다. 현재 C 언어는 가장 널리 사용되고 있는 프로그래밍 언어로 [C++](Cpp.md), [C#](Csharp.md), [파이썬](Python.md), 자바 등 여러 프로그래밍 언어에 영향을 주었다. C 언어는 다른 프로그래밍 언어에 비해 매우 빠른 처리 속도와 훌륭한 호환성을 가지고 있어 [응용 프로그램](https://en.wikipedia.org/wiki/Application_software) 및 [펌웨어](https://en.wikipedia.org/wiki/Firmware) 개발에 여전히 활용되고 있다.
 
 C 언어는 [컴파일러](Programming.md#컴파일러)를 통해 영문으로 작성된 코드를 컴퓨터가 직접 수행할 수 있는 기계어로 변환한 [이진 파일](https://en.wikipedia.org/wiki/Binary_file)이 생성되는 컴파일러 언어이다. [국제 표준화 기구](https://www.iso.org/home.html)(ISO)의 표준에 따라 C 언어가 동작할 것을 규정하여, 서로 다른 컴파일러 간에도 [이식](https://en.wikipedia.org/wiki/Porting) 호환을 지원한다. 아래는 대표적인 C 언어 컴파일러들을 나열한다.
@@ -24,50 +22,42 @@ C 언어가 설계대로 동작하기 위해서는 올바른 문자 및 기호�
 
 다음은 C 언어에서 구문에 관여하는 요소들을 소개한다:
 
-* **[표현식](https://en.wikipedia.org/wiki/Expression_(computer_science))(expression)**
-    
-    값을 반환하는 구문적 존재를 가리킨다. 표현식에 대한 결과를 도출하는 것을 평가(evaluate)라고 부른다.
-    
-    ```c
-    2 + 3           // 숫자 5를 반환
-    2 < 3           // 논리 참을 반환
-    ```
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C 언어의 프로그래밍 구문 요소</caption><colgroup><col style="width: 10%;"/><col style="width: 35%;"/><col style="55%;"/></colgroup><thead><tr><th style="text-align: center;">구문 요소</th><th style="text-align: center;">설명</th><th style="text-align: center;">예시</th></tr></thead><tbody><tr><td style="text-align: center;"><b><a href="https://en.wikipedia.org/wiki/Expression_(computer_science)">표현식</a></b><br/>(expression)</td><td>값을 반환하는 구문적 존재를 가리킨다. 표현식에 대한 결과를 도출하는 것을 평가(evaluate)라고 부른다.</td><td>
 
-* **[토큰](https://learn.microsoft.com/en-us/cpp/c-language/c-tokens)(token)**
+```c
+2 + 3                  // 정수 5를 반환
+2 < 3                  // 논리 참을 반환
+```
 
-    표현식을 구성하는 가장 기본적인 요소이며, 대표적으로 [키워드](https://learn.microsoft.com/cpp/c-language/c-keywords)(keyword), [식별자](https://learn.microsoft.com/cpp/c-language/c-identifiers)(identifier), [상수](https://learn.microsoft.com/cpp/c-language/c-constants)(constant), [문자열 리터럴](https://learn.microsoft.com/cpp/c-language/c-string-literals)(string literal) 등이 있다.
+</td></tr><tr><td style="text-align: center;"><b><a href="https://learn.microsoft.com/en-us/cpp/c-language/c-tokens">토큰</a></b><br/>(token)</td><td>표현식을 구성하는 가장 기본적인 요소이며, 대표적으로 <a href="https://learn.microsoft.com/cpp/c-language/c-keywords">키워드</a>, <a href="https://learn.microsoft.com/cpp/c-language/c-identifiers">식별자</a>, <a href="https://learn.microsoft.com/cpp/c-language/c-constants">상수</a>, <a href="https://learn.microsoft.com/cpp/c-language/c-string-literals">문자열 리터럴</a> 등이 있다.</td><td>
 
-    ```c
-    variable        // 식별자
-    2               // 상수
-    ```
+```c
+variable               // 식별자
+2                      // 상수
+```
 
-* **[문장](https://en.wikipedia.org/wiki/Statement_(computer_science))(statement)**
-    
-    실질적으로 무언가를 실행하는 구문적 존재를 가리킨다: 흔히 하나 이상의 표현식으로 구성되지만, [`break`](#break-문) 및 [`continue`](#continue-문)와 같이 독립적으로 사용되는 문장도 있다. 러스트 프로그래밍 언어는 [세미콜론](https://en.wikipedia.org/wiki/Newline)(semicolon) `;`을 기준으로 문장을 분별한다. 
+</td></tr><tr><td style="text-align: center;"><b><a href="https://en.wikipedia.org/wiki/Statement_(computer_science)">문장</a></b><br/>(statement)</td><td>실질적으로 무언가를 실행하는 구문적 존재를 가리키며, <a href="https://en.wikipedia.org/wiki/Newline">세미콜론</a>을 기준으로 문장을 분별한다. 일반적으로 한 개 이상의 표현식으로 구성되지만, <code>break</code> 및 <code>continue</code> 등 독립적으로 사용되는 문장도 있다.</td><td>
 
-    ```c
-    int variable = 2 + 3;      // 숫자 5를 "variable" 변수에 초기화
-    if (2 < 3) statement;      // 논리가 참이면 "statement" 문장 실행
-    ```
+```c
+int variable = 2 + 3;  // "variable" 변수에 정수 5 초기화
+if (2 < 3) statement;  // 참일 경우 "statement" 문장 실행
+```
 
-* **[블록](https://en.wikipedia.org/wiki/Block_(programming))(block)**
+</td></tr><tr><td style="text-align: center;"><b><a href="https://en.wikipedia.org/wiki/Block_(programming)">블록</a></b><br/>(block)</td><td>한 개 이상의 문장들을 한꺼번에 관리할 수 있도록 묶어놓은 소스 코드상 그룹이며 한 쌍의 중괄호 <code>{}</code>로 표시된다. 블록 안에 또 다른 블록이 상주할 수 있으며, 이를 네스티드 블록(nested block)이라고 부른다.</td><td>
 
-    한 개 이상의 문장들을 한꺼번에 관리할 수 있도록 묶어놓은 소스 코드상 그룹이다. 블록 안에 또 다른 블록이 상주할 수 있으며, 이를 네스티드 블록(nested block)이라고 부른다. C 언어에서는 한 쌍의 중괄호 `{}`로 표시된다.
+```c
+{
+    int variable = 2 + 3;
+    if (2 < 3) statement;
+}
+```
 
-    ```c
-    {
-        int variable = 2 + 3;
-        if (2 < 3) statement;
-    }
-    ```
+</td></tr></tbody></table>
 
 ## 자료형
-**[자료형](https://en.wikipedia.org/wiki/Data_type)**(data type)은 데이터를 어떻게 표현할 지 결정하는 요소이며, C 언어에서는 다음과 같이 존재한다. 단, 본 문서는 ANSI C 언어를 기준으로 소개하므로, 이후 C99부터 소개된 일부 자료형(`bool`, `long long` 등)은 목록에 제외되었다.
+**[자료형](https://en.wikipedia.org/wiki/Data_type)**(data type)은 데이터를 어떻게 표현할 지 결정하는 요소이며, C 언어에서는 다음과 같이 존재한다. 단, 본 문서는 [ANSI C](https://en.wikipedia.org/wiki/ANSI_C) 언어를 기준으로 소개하므로, 이후 C99부터 소개된 일부 자료형(`bool`, `long long` 등)은 목록에 제외되었다.
 
 <table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://learn.microsoft.com/en-us/cpp/c-language/storage-of-basic-types">C 언어 자료형</a> (ANSI C 기준)</caption><colgroup><col style="width: 15%;"/><col style="width: 15%;"/><col style="width: 15%;"/><col/></colgroup><thead><tr><th style="text-align: center;">키워드</th><th style="text-align: center;">자료형</th><th style="text-align: center;">크기 (바이트)</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>char</code></td><td style="text-align: center;">문자</td><td style="text-align: center;">1</td><td>단일 ANSI 문자</td></tr><tr><td style="text-align: center;"><code>short</code></td><td style="text-align: center;">정수</td><td style="text-align: center;">2</td><td>가장 작은 정수 자료형</td></tr><tr><td style="text-align: center;"><code>int</code></td><td style="text-align: center;">정수</td><td style="text-align: center;">2 <sub>(최소)</sub></td><td>워드 크기의 기본 정수 자료형; <code>short</code>보다 작아서는 안되며, 32비트 시스템 이후로는 4바이트가 일반화되었다.</td></tr><tr><td style="text-align: center;"><code>long</code></td><td style="text-align: center;">정수</td><td style="text-align: center;">4 <sub>(최소)</td><td>정수 자료형 <code>int</code>보다 작아서는 안되며, 4바이트와 8바이트 중 어느 크기를 채택하였는지 컴파일러마다 다르다.</td></tr><tr><td style="text-align: center;"><code>float</code></td><td style="text-align: center;">부동소수점</td><td style="text-align: center;">4</td><td>32비트 단정밀도 실수</td></tr><tr><td style="text-align: center;"><code>double</code></td><td style="text-align: center;">부동소수점</td><td style="text-align: center;">8</td><td>64비트 배정밀도 실수</td></tr><tr><td style="text-align: center;"><code>void</code></td><td style="text-align: center;">보이드</td><td style="text-align: center;">1</td><td>불특정 자료형</td></tr></tbody/></table>
-
-> [바이트](https://en.wikipedia.org/wiki/Byte)(byte)란, 컴퓨터에서 메모리에 저장하는 가장 기본적인 단위이다. 자료형마다 크기가 정해진 이유는 효율적인 메모리 관리 차원도 있으나 CPU 연산과도 깊은 연관성을 갖는다. 한 바이트는 여덟 개의 [비트](https://en.wikipedia.org/wiki/Bit)(bit)로 구성된다.
 
 `unsigned` 키워드는 자료형 중에서 [최상위 비트](https://en.wikipedia.org/wiki/Bit_numbering#Most_significant_bit)를 정수의 [부호](https://en.wikipedia.org/wiki/Signedness)를 결정하는 요소로 사용하지 않도록 한다. 아래의 16비트 정수형인 `short`는 원래 최상위 비트를 제외한 나머지 15개의 비트로 정수를 표현한다. `unsigned` 키워드를 사용하면 음의 정수를 나타낼 수 없지만, 16개의 비트로 양의 정수를 더 많이 표현할 수 있다.
 
