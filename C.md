@@ -19,8 +19,8 @@ C 언어는 [컴파일러](Programming.md#컴파일러)를 통해 영문으로 �
 
 동 시간대 기획된 또 다른 표준 라이브러리인 [C POSIX 라이브러리](https://en.wikipedia.org/wiki/C_POSIX_library)는 [POSIX](https://en.wikipedia.org/wiki/POSIX) 시스템 대상의 규격이며, 본 문서는 ISO 표준 규격을 위주로 설명한다.
 
-# 구문
-[구문](https://en.wikipedia.org/wiki/Syntax_(programming_languages))(syntax)은 프로그래밍 언어에서 문자 및 기호들의 조합이 올바른 문장 또는 표현식을 구성하였는지 정의하는 규칙이다. 각 프로그래밍 언어마다 규정하는 구문이 다르며, 이를 준수하지 않을 시 해당 프로그램은 빌드되지 않거나, 실행이 되어도 오류 및 의도치 않은 동작을 수행한다.
+## 구문
+C 언어가 설계대로 동작하기 위해서는 올바른 문자 및 기호들의 조합을 정의하는 **[구문](https://en.wikipedia.org/wiki/Syntax_(programming_languages))**(syntax)에 따라 작성되어야 한다. 각 프로그래밍 언어마다 규정하는 구문이 다르며, 이를 준수하지 않을 시 해당 프로그램은 빌드되지 않거나, 실행이 되어도 오류 및 의도치 않은 동작을 수행한다.
 
 다음은 C 언어에서 구문에 관여하는 요소들을 소개한다:
 
@@ -35,7 +35,7 @@ C 언어는 [컴파일러](Programming.md#컴파일러)를 통해 영문으로 �
 
 * **[토큰](https://learn.microsoft.com/en-us/cpp/c-language/c-tokens)(token)**
 
-    표현식을 구성하는 가장 기본적인 요소이며, 대표적으로 [키워드](https://learn.microsoft.com/en-us/cpp/c-language/c-keywords)(keyword), [식별자](#식별자)(identifier), [상수](https://learn.microsoft.com/en-us/cpp/c-language/c-constants)(constant), [문자열 리터럴](https://learn.microsoft.com/en-us/cpp/c-language/c-string-literals)(string literal) 등이 있다.
+    표현식을 구성하는 가장 기본적인 요소이며, 대표적으로 [키워드](https://learn.microsoft.com/cpp/c-language/c-keywords)(keyword), [식별자](https://learn.microsoft.com/cpp/c-language/c-identifiers)(identifier), [상수](https://learn.microsoft.com/cpp/c-language/c-constants)(constant), [문자열 리터럴](https://learn.microsoft.com/cpp/c-language/c-string-literals)(string literal) 등이 있다.
 
     ```c
     variable        // 식별자
@@ -62,16 +62,8 @@ C 언어는 [컴파일러](Programming.md#컴파일러)를 통해 영문으로 �
     }
     ```
 
-### 식별자
-[식별자](https://learn.microsoft.com/en-us/cpp/c-language/c-identifiers)(identifier)는 프로그램을 구성하는 데이터들을 구별하기 위해 사용되는 명칭이다. 즉, 식별자는 개발자가 데이터에 직접 붙여준 이름이다. C 언어에서 식별자를 선정하는데 아래의 규칙을 지켜야 한다.
-
-1. 알파벳, 숫자, 밑줄 `_`만 허용 (그 외 특수문자 및 공백 사용 불가)
-2. 식별자의 첫 문자는 숫자가 될 수 없음
-3. 대소문자 구분 필수
-4. [예약어](https://en.wikipedia.org/wiki/Reserved_word) 금지
-
 ## 자료형
-[자료형](https://en.wikipedia.org/wiki/Data_type)(data type)은 데이터를 어떻게 표현할 지 결정하는 요소이며, C 언어에서는 다음과 같이 존재한다. 단, 본 문서는 ANSI C 언어를 기준으로 소개하므로, 이후 C99부터 소개된 일부 자료형(`bool`, `long long` 등)은 목록에 제외되었다.
+**[자료형](https://en.wikipedia.org/wiki/Data_type)**(data type)은 데이터를 어떻게 표현할 지 결정하는 요소이며, C 언어에서는 다음과 같이 존재한다. 단, 본 문서는 ANSI C 언어를 기준으로 소개하므로, 이후 C99부터 소개된 일부 자료형(`bool`, `long long` 등)은 목록에 제외되었다.
 
 <table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://learn.microsoft.com/en-us/cpp/c-language/storage-of-basic-types">C 언어 자료형</a> (ANSI C 기준)</caption><colgroup><col style="width: 15%;"/><col style="width: 15%;"/><col style="width: 15%;"/><col/></colgroup><thead><tr><th style="text-align: center;">키워드</th><th style="text-align: center;">자료형</th><th style="text-align: center;">크기 (바이트)</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>char</code></td><td style="text-align: center;">문자</td><td style="text-align: center;">1</td><td>단일 ANSI 문자</td></tr><tr><td style="text-align: center;"><code>short</code></td><td style="text-align: center;">정수</td><td style="text-align: center;">2</td><td>가장 작은 정수 자료형</td></tr><tr><td style="text-align: center;"><code>int</code></td><td style="text-align: center;">정수</td><td style="text-align: center;">2 <sub>(최소)</sub></td><td>워드 크기의 기본 정수 자료형; <code>short</code>보다 작아서는 안되며, 32비트 시스템 이후로는 4바이트가 일반화되었다.</td></tr><tr><td style="text-align: center;"><code>long</code></td><td style="text-align: center;">정수</td><td style="text-align: center;">4 <sub>(최소)</td><td>정수 자료형 <code>int</code>보다 작아서는 안되며, 4바이트와 8바이트 중 어느 크기를 채택하였는지 컴파일러마다 다르다.</td></tr><tr><td style="text-align: center;"><code>float</code></td><td style="text-align: center;">부동소수점</td><td style="text-align: center;">4</td><td>32비트 단정밀도 실수</td></tr><tr><td style="text-align: center;"><code>double</code></td><td style="text-align: center;">부동소수점</td><td style="text-align: center;">8</td><td>64비트 배정밀도 실수</td></tr><tr><td style="text-align: center;"><code>void</code></td><td style="text-align: center;">보이드</td><td style="text-align: center;">1</td><td>불특정 자료형</td></tr></tbody/></table>
 
@@ -84,8 +76,7 @@ short             // 표현 가능 범위: -32768 ~ +32767
 unsigned short    // 표현 가능 범위:     +0 ~ +65535
 ``` 
 
-### 자료형 변환
-자료형 변환(type casting)은 데이터를 다른 자료형으로 바꾸는 작업이며, 불가피하게 데이터가 손실될 수 있으므로 유의하도록 한다.
+데이터를 다른 자료형으로 변경하는 행위를 "자료형 변환"이라고 부르며, 불가피하게 데이터가 손실될 수 있으므로 유의하도록 한다.
 
 * **암시적 자료형 변환**(implicit type casting)
 
@@ -106,7 +97,7 @@ unsigned short    // 표현 가능 범위:     +0 ~ +65535
     ```
 
 ## 변수
-변수(variable)는 데이터를 지정된 [자료형](#자료형)으로 저장하는 메모리 공간이다. 아래 코드는 `variable` [식별자](#식별자)를 정수형 변수로 "정의(definition)"하여 메모리 공간을 확보한 다음 상수 3을 할당한다. 여기서 변수로의 최초 할당을 "초기화(initialization)"라고 부르며, 변수를 정의한 이후에 별도로 이루어질 수 있다. 초기화가 누락되면 변수에 가공되지 않은 메모리가 연동되어 잠재적 위험을 초래할 수 있기 때문에 일반적으로 C 언어 컴파일러는 이를 오류로 치부한다.
+**변수**(variable)는 데이터를 지정된 [자료형](#자료형)으로 저장하는 메모리 공간이다. 아래 코드는 `variable` [식별자](#식별자)를 정수형 변수로 "정의(definition)"하여 메모리 공간을 확보한 다음 상수 3을 할당한다. 여기서 변수로의 최초 할당을 "초기화(initialization)"라고 부르며, 변수를 정의한 이후에 별도로 이루어질 수 있다. 초기화가 누락되면 변수에 가공되지 않은 메모리가 연동되어 잠재적 위험을 초래할 수 있기 때문에 일반적으로 C 언어 컴파일러는 이를 오류로 치부한다.
 
 <table style="width: 95%; margin-left: auto; margin-right: auto;"><caption>C 언어의 변수 정의 및 초기화</caption><colgroup><col style="width: 50%;"/></col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">변수 정의 및 초기화 (일괄식)</th><th style="text-align: center;">변수 정의 및 초기화 (개별식)</th></tr></thead><tbody><tr style="vertical-align: top;"><td>
 
@@ -173,134 +164,18 @@ char variable = 75;    // ASCII에 의해 문자 'K'가 저장
 
 거의 모든 프로그래밍 언어는 할당 기호를 기준으로 왼쪽에는 피할당자(변수), 오른쪽에는 피할당자로 전달하려는 표현식(값 혹은 데이터)이 위치한다. 반대로 놓여질 경우, 오류가 발생하거나 원치 않는 결과가 도출될 수 있다.
 
-# 파일 입출력
-C 언어의 [파일 입출력](https://en.wikipedia.org/wiki/C_file_input/output)(일명 I/O)은 [`stdio.h`](https://en.cppreference.com/w/cpp/header/cstdio) 헤더로부터 관련 함수들을 호출할 수 있으며, 단순 파일뿐만 아니라 터미널로부터 텍스트를 입력받거나 출력할 때에도 관여한다. C 언어의 파일 입출력은 다른 프로그래밍 언어에 비해 신경써야 할 부분이 많아 별도의 장을 마련하여 소개한다.
-
-<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C 언어의 파일 출력 함수</caption><colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup><thead><tr><th style="text-align: center;">출력 함수</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/io/putchar"><code>putchar</code></a></td><td>문자(character) 하나를 터미널에 출력한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/io/puts"><code>puts</code></a></td><td>일련의 문자들, 일명 <a href="#문자열">문자열</a>을 터미널에 출력한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/io/c/fprintf"><code>printf</code></a></td><td><a href="#형식-지정자">형식 지정자</a>에 따라 데이터를 터미널에 출력한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/io/c/fprintf"><code>fprintf</code></a></td><td><a href="https://en.wikipedia.org/wiki/Stream_(computing)">스트림</a>을 지정할 수 있는 출력 함수이다; <code>printf</code>는 "표준 출력" 스트림의 <code>fprintf(<a href="https://en.wikipedia.org/wiki/Standard_streams#Standard_output_(stdout)">stdout</a>)</code>과 동일하다.
-
-```c
-fprintf(stdout, "Number: %f", 3.14159);
-// Number: 3.141590
-```
-</td></tr></tbody></table>
-
-<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C 언어의 파일 입력 함수</caption><colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup><thead><tr><th style="text-align: center;">입력 함수</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/io/getchar"><code>getchar</code></a></td><td>터미널로부터 문자(character) 하나를 입력받아 반환한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/io/gets"><code>gets</code></a></td><td>터미널로부터 입력받은 텍스트를 <a href="#문자열">문자열</a> 형태로 인자에 전달한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/io/c/fscanf"><code>scanf</code></a></td><td>터미널로부터 입력받은 텍스트를 <a href="#형식-지정자">형식 지정자</a>에 따른 자료형으로 변환하여 인자에 전달한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/io/c/fscanf"><code>fscanf</code></a></td><td><a href="https://en.wikipedia.org/wiki/Stream_(computing)">스트림</a>을 지정할 수 있는 입력 함수이다; <code>scanf</code>는 "표준 입력" 스트림의 <code>fscanf(<a href="https://en.wikipedia.org/wiki/Standard_streams#Standard_input_(stdin)">stdin</a>)</code>과 동일하다.
-
-```c
-char variable[32];
-fscanf(stdin, "%s", variable);
-```
-</td></tr></tbody></table>
-
-> [스트림](https://en.wikipedia.org/wiki/Stream_(computing))(stream)이란 사전적 의미로 "물이 흐르는 개울"을 의미한다. 즉, 컴퓨터 통신 용어에서 스트림은 데이터가 흐르는 길을 의미한다.
-
-여기서 `fscanf()` 입력 함수는 입력된 텍스트를 빈칸(띄어쓰기, [줄바꿈](https://en.wikipedia.org/wiki/Newline) 등) 및 형식 지정자가 수용할 수 있는 문자 개수를 기준으로 데이터를 나누어 변수에 전달한다. 만일 전달받을 변수의 개수가 입력보다 적을 시, 남은 입력은 다음 입력 함수에서 변수로 전달될 때까지 스트림 [버퍼](https://en.wikipedia.org/wiki/Data_buffer)에 잔여한다.
-
-## 형식 지정자
-형식 지정자(format specifier)는 입출력 함수가 데이터를 어떻게 받아들일 것인지 결정한다. 이는 자료형 이외에도 [출력 함수](https://learn.microsoft.com/en-us/cpp/c-runtime-library/format-specification-syntax-printf-and-wprintf-functions)의 경우에는 화면에 어떻게 표시할 지, 그리고 [입력 함수](https://learn.microsoft.com/en-us/cpp/c-runtime-library/format-specification-fields-scanf-and-wscanf-functions)의 경우에는 입력된 데이터를 어떻게 수용할 지 등에 대하여 서식을 지정한다. 본 부문은 형식 지정자에 대한 개략적인 예시만을 소개한다.
-
-<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">입출력 함수의 형식 지정자</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">입력 함수</th><th style="text-align: center;">출력 함수</th></tr></thead><tbody><tr><td>본래 데이터의 성질이나 값이 변한다.</td><td>본래 데이터는 그대로 유지되나, 어떻게 표시되는지만 달라진다.</td></tr><tr><td>
-
-```c
-int variable = 0;
-scanf("%c", &variable);
-```
-</td><td>
-
-```c
-int variable = 51;
-printf("%c", variable);
-```
-</td></tr><tr><td>
-
-```terminal
-INPUT: 3
-variable = 51 (char '3' equals to ASCII code 51)
-```
-</td><td>
-
-```terminal
-OUTPUT: 3
-variable = 51 (unchanged)
-```
-</td></tr></tbody></table>
-
-## 파일 관리
-C 언어에서 파일을 열고 닫기 위해서는 각각 `fopen()` 및 `fclose()` 함수를 사용한다.
-
-<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">파일 입출력 및 모드 옵션</caption><colgroup><col style="width: 50%;"/><col style="width: 10%;"/><col style="width: 25%;"/><col style="width: 15%;"/></colgroup><thead><tr><th style="text-align: center;">파일 관리 코드</th><th colspan="2" style="text-align: center;">파일 열기 옵션: <code>mode</code></th><th style="text-align: center;">부재시 생성 여부</th></tr></thead><tbody><tr><td rowspan="6">
-
-```c
-FILE* fptr = fopen("filename.txt", mode);
-
-    ...
-
-fclose(fptr);
-```
-</td><td style="text-align: center;"><code>"r"</code></td><td>읽기 모드</td><td style="text-align: center;">❌</td></tr><tr><td style="text-align: center;"><code>"w"</code></td><td>덮어쓰기 모드</td><td style="text-align: center;">✔️</td></tr><tr><td style="text-align: center;"><code>"a"</code></td><td>덧붙이기 모드</td><td style="text-align: center;">✔️</td></tr><tr><td style="text-align: center;"><code>"r+"</code></td><td>읽기 + 쓰기 모드</td><td style="text-align: center;">❌</td></tr><tr><td style="text-align: center;"><code>"w+"</code></td><td>읽기 + 덮어쓰기 모드</td><td style="text-align: center;">✔️</td></tr><tr><td style="text-align: center;"><code>"a+"</code></td><td>읽기 + 덧붙이기 모드</td><td style="text-align: center;">✔️</td></tr></tbody></table>
-
-[`fopen()`](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/fopen-wfopen) 함수는 파일을 성공적으로 열었을 때 파일 스트림 객체를 가리키는 `FILE` [자료형](#구조체) [포인터](#포인터)를 반환한다. 해당 포인터를 `fprintf()` 및 `fscanf()` 입출력 함수의 스트림으로 전달하면 파일을 작성하거나 읽어올 수 있다.
-
-더 이상 사용하지 않는 파일은 `fclose()` 함수로 닫아 리소스 낭비를 줄이는데 기여할 수 있다. [예외](#예외-처리)가 발생하여도 정상적으로 파일을 닫을 수 있도록 예외 처리문 혹은 `EOF`(End-of-File)를 활용한 조건문을 사용할 것을 권장한다.
-
-> [EOF](https://en.wikipedia.org/wiki/End-of-file)란, End-of-File의 약자로 파일의 끝에 도달하였으면 트리거되는 데이터이다.
-
-# 제어문
-제어문(control statement)은 코드 실행을 제어하는 문장을 가리키며, 프로그래밍에 있어 기초적이면서 가장 흔히 사용되는 코드 유형 중 하나이다. 제어문을 크게 세 분류로 나누면 [조건문](#조건문), [반복문](#반복문), 그리고 [이동문](#이동문)이 존재한다.
-
 ## 조건문
-조건문(conditional statement)은 주어진 조건의 논리에 따라서 코드 실행 여부를 결정하는 제어문이다:
-
-### `if` 조건문
-[`if`](https://en.cppreference.com/w/c/language/if) 조건문은 조건 혹은 논리가 참일 경우 코드를 실행하며, 거짓일 경우에는 코드를 실행하지 않는다.
-
-```c
-if (condition) {
-    statements;
-}
-
-// 간략화된 문장
-if (condition) statement;
-```
-
-* **`else` 조건문**
-
-    단독으로 사용될 수 없으며 반드시 `if` 조건문 이후에 사용되어야 한다. 조건부가 거짓으로 판정되면 실행할 코드를 포함한다.
-
-    ```c
-    if (condition) {
-        statements;
-    }
-    else {
-        statements; 
-    }
-    ```
-
-* **`else if` 조건문**
-
-    `else`와 `if` 조건문의 조합으로 이전 조건이 거짓일 때 새로운 조건을 제시한다.
-
-    ```c
-    if (condition) {
-        statements;
-    }
-    else if (condition) {
-        statements;
-    }
-    else {
-        statements;
-    }
-    ```
+**조건문**(conditional statement)은 주어진 조건의 논리에 따라서 코드 실행 여부를 결정하는 제어문이다:
 
 ### 조건 연산자
-[조건 연산자](https://en.cppreference.com/w/c/language/operator_other#Conditional_operator)(ternary operator) `?:`는 세 가지 인수만을 사용하여 조건문을 아래와 같이 간략하게 표현한다. 조건 연산자는 가독성을 감소시키므로 과용해서는 안되지만 변수 할당에 유용하다.
+**[조건 연산자](https://en.cppreference.com/w/c/language/operator_other#Conditional_operator)**(ternary operator) `?:`는 세 가지 인수만을 사용하여 조건문을 아래와 같이 간략하게 표현한다. 조건 연산자는 가독성을 감소시키므로 과용해서는 안되지만 변수 할당에 유용하다.
 
 ```c
 condition ? true_return : false_return;
 ```
 
 ### `switch` 조건문
-[`switch`](https://en.cppreference.com/w/c/language/switch) 조건문은 전달받은 인자를 `case`의 상수와 동일한지 비교하여 논리가 참일 경우 해당 지점부터 코드를 실행하며, 거짓일 경우에는 다음 `case`로 넘어간다. 선택사항으로 `default` 키워드를 통해 어떠한 `case` 조건에도 부합하지 않으면 실행될 지점을 지정한다.
+**[`switch`](https://en.cppreference.com/w/c/language/switch)** 조건문은 전달받은 인자를 `case`의 상수와 동일한지 비교하여 논리가 참일 경우 해당 지점부터 코드를 실행하며, 거짓일 경우에는 다음 `case`로 넘어간다. 선택사항으로 `default` 키워드를 통해 어떠한 `case` 조건에도 부합하지 않으면 실행될 지점을 지정한다.
 
 ```c
 switch (argument) {
@@ -348,32 +223,10 @@ Statement 4
 ```
 
 ## 반복문
-반복문(loop statement)은 주어진 조건의 논리에 따라서 코드를 얼마나 반복적으로 실행할 지 결정하는 제어문이다:
-
-### `while` 반복문
-[`while`](https://en.cppreference.com/w/c/language/while) 반복문은 조건 혹은 논리가 참일 동안 코드를 반복적으로 실행하며, 거짓일 경우에는 반복문을 종료한다.
-
-```c
-while (condition) {
-    statements;
-}
-
-// 간략화된 문장
-while (condition) statement;
-```
-
-* **[`do`](https://en.cppreference.com/w/c/language/do) 반복문**
-
-    코드를 우선 실행하고 조건 혹은 논리가 참일 경우 코드를 반복하며, 거짓일 경우에는 반복문을 종료한다.
-
-    ```c
-    do {
-        statements;
-    } while (condition);
-    ```
+**반복문**(loop statement)은 주어진 조건의 논리에 따라서 코드를 얼마나 반복적으로 실행할 지 결정하는 제어문이다:
 
 ### `for` 반복문
-[`for`](https://en.cppreference.com/w/c/language/for) 반복문은 조건 혹은 논리가 참일 동안 코드를 반복적으로 실행하며, 거짓일 경우에는 반복문을 종료한다. `for` 반복문은 조건 평가 외에도 지역 변수를 초기화 및 증감할 수 있는 인자가 있다.
+**[`for`](https://en.cppreference.com/w/c/language/for)** 반복문은 조건 혹은 논리가 참일 동안 코드를 반복적으로 실행하며, 거짓일 경우에는 반복문을 종료한다. `for` 반복문은 조건 평가 외에도 지역 변수를 초기화 및 증감할 수 있는 인자가 있다.
 
 ```c
 for (initialize; condition; increment) {
@@ -386,8 +239,101 @@ for (initialize; condition; increment) statement;
 
 `for` 반복문의 우선 `initialize`에서 반복문 지역 변수를 정의하거나 외부 변수를 불러와 반복문을 위한 초기값을 할당한 다음 `condition`에서 조건을 평가한다. 논리가 참이면 코드를 반복적으로 실행하며, 거짓일 경우에는 반복문을 종료한다. 블록 내의 코드가 마무리되었거나 `continue` 문을 마주하면 `increment`에서 변수를 증감하고, `condition`으로 돌아가 절차를 반복한다.
 
+## 이동문
+**이동문**(jump statement)은 아무런 조건이 필요없이 코드 실행 지점을 이동시키는 제어문이다:
+
+### `goto` 이동문
+**[`goto`](https://en.cppreference.com/w/c/language/goto.html)** 이동문은 다른 문장으로써는 절대로 접근이 불가한 코드에 도달할 수 있도록 한다 (일명 제어 전달; control transfer). `goto` 키워드에 명시된 [레이블](https://en.cppreference.com/w/c/language/statements.html#Labels)로 제어를 전달하나, 이 둘은 반드시 동일한 [함수](#함수) 내에 위치해야 한다. 레이블은 `goto` 문 이전이나 이후에 위치하여도 무관하다.
+
+```c
+int main() {
+    
+    // 제어 전달: "label"로 이동
+    goto label;    
+
+    // "label" 레이블
+label:
+    statements;
+
+}
+```
+
+단, `goto` 이동문을 사용할 때에는 매우 조심해야 하며 무리한 남용은 [스파게티 코드](https://en.wikipedia.org/wiki/Spaghetti_code)의 원인이 된다.
+
+# 파일 입출력
+C 언어의 **[파일 입출력](https://en.wikipedia.org/wiki/C_file_input/output)**(일명 I/O)은 [`stdio.h`](https://en.cppreference.com/w/cpp/header/cstdio) 헤더로부터 관련 함수들을 호출할 수 있으며, 단순 파일뿐만 아니라 터미널로부터 텍스트를 입력받거나 출력할 때에도 관여한다. C 언어의 파일 입출력은 다른 프로그래밍 언어에 비해 신경써야 할 부분이 많아 별도의 장을 마련하여 소개한다.
+
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C 언어의 파일 출력 함수</caption><colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup><thead><tr><th style="text-align: center;">출력 함수</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/io/putchar"><code>putchar</code></a></td><td>문자(character) 하나를 터미널에 출력한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/io/puts"><code>puts</code></a></td><td>일련의 문자들, 일명 <a href="#문자열">문자열</a>을 터미널에 출력한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/io/c/fprintf"><code>printf</code></a></td><td><a href="#형식-지정자">형식 지정자</a>에 따라 데이터를 터미널에 출력한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/io/c/fprintf"><code>fprintf</code></a></td><td><a href="https://en.wikipedia.org/wiki/Stream_(computing)">스트림</a>을 지정할 수 있는 출력 함수이다; <code>printf</code>는 "표준 출력" 스트림의 <code>fprintf(<a href="https://en.wikipedia.org/wiki/Standard_streams#Standard_output_(stdout)">stdout</a>)</code>과 동일하다.
+
+```c
+fprintf(stdout, "Number: %f", 3.14159);
+// Number: 3.141590
+```
+</td></tr></tbody></table>
+
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C 언어의 파일 입력 함수</caption><colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup><thead><tr><th style="text-align: center;">입력 함수</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/io/getchar"><code>getchar</code></a></td><td>터미널로부터 문자(character) 하나를 입력받아 반환한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/io/gets"><code>gets</code></a></td><td>터미널로부터 입력받은 텍스트를 <a href="#문자열">문자열</a> 형태로 인자에 전달한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/io/c/fscanf"><code>scanf</code></a></td><td>터미널로부터 입력받은 텍스트를 <a href="#형식-지정자">형식 지정자</a>에 따른 자료형으로 변환하여 인자에 전달한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/io/c/fscanf"><code>fscanf</code></a></td><td><a href="https://en.wikipedia.org/wiki/Stream_(computing)">스트림</a>을 지정할 수 있는 입력 함수이다; <code>scanf</code>는 "표준 입력" 스트림의 <code>fscanf(<a href="https://en.wikipedia.org/wiki/Standard_streams#Standard_input_(stdin)">stdin</a>)</code>과 동일하다.
+
+```c
+char variable[32];
+fscanf(stdin, "%s", variable);
+```
+</td></tr></tbody></table>
+
+> [스트림](https://en.wikipedia.org/wiki/Stream_(computing))(stream)이란 사전적 의미로 "물이 흐르는 개울"을 의미한다. 즉, 컴퓨터 통신 용어에서 스트림은 데이터가 흐르는 길을 의미한다.
+
+여기서 `fscanf()` 입력 함수는 입력된 텍스트를 빈칸(띄어쓰기, [줄바꿈](https://en.wikipedia.org/wiki/Newline) 등) 및 형식 지정자가 수용할 수 있는 문자 개수를 기준으로 데이터를 나누어 변수에 전달한다. 만일 전달받을 변수의 개수가 입력보다 적을 시, 남은 입력은 다음 입력 함수에서 변수로 전달될 때까지 스트림 [버퍼](https://en.wikipedia.org/wiki/Data_buffer)에 잔여한다.
+
+## 형식 지정자
+**형식 지정자**(format specifier)는 입출력 함수가 데이터를 어떻게 받아들일 것인지 결정한다. 이는 자료형 이외에도 [출력 함수](https://learn.microsoft.com/en-us/cpp/c-runtime-library/format-specification-syntax-printf-and-wprintf-functions)의 경우에는 화면에 어떻게 표시할 지, 그리고 [입력 함수](https://learn.microsoft.com/en-us/cpp/c-runtime-library/format-specification-fields-scanf-and-wscanf-functions)의 경우에는 입력된 데이터를 어떻게 수용할 지 등에 대하여 서식을 지정한다. 본 부문은 형식 지정자에 대한 개략적인 예시만을 소개한다.
+
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">입출력 함수의 형식 지정자</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">입력 함수</th><th style="text-align: center;">출력 함수</th></tr></thead><tbody><tr><td>본래 데이터의 성질이나 값이 변한다.</td><td>본래 데이터는 그대로 유지되나, 어떻게 표시되는지만 달라진다.</td></tr><tr><td>
+
+```c
+int variable = 0;
+scanf("%c", &variable);
+```
+</td><td>
+
+```c
+int variable = 51;
+printf("%c", variable);
+```
+</td></tr><tr><td>
+
+```terminal
+INPUT: 3
+variable = 51 (char '3' equals to ASCII code 51)
+```
+</td><td>
+
+```terminal
+OUTPUT: 3
+variable = 51 (unchanged)
+```
+</td></tr></tbody></table>
+
+## 파일 관리
+C 언어에서 파일을 열고 닫기 위해서는 각각 `fopen()` 및 `fclose()` 함수를 사용한다.
+
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">파일 입출력 및 모드 옵션</caption><colgroup><col style="width: 50%;"/><col style="width: 10%;"/><col style="width: 25%;"/><col style="width: 15%;"/></colgroup><thead><tr><th style="text-align: center;">파일 관리 코드</th><th colspan="2" style="text-align: center;">파일 열기 옵션: <code>mode</code></th><th style="text-align: center;">부재시 생성 여부</th></tr></thead><tbody><tr><td rowspan="6">
+
+```c
+FILE* fptr = fopen("filename.txt", mode);
+
+    ...
+
+fclose(fptr);
+```
+</td><td style="text-align: center;"><code>"r"</code></td><td>읽기 모드</td><td style="text-align: center;">❌</td></tr><tr><td style="text-align: center;"><code>"w"</code></td><td>덮어쓰기 모드</td><td style="text-align: center;">✔️</td></tr><tr><td style="text-align: center;"><code>"a"</code></td><td>덧붙이기 모드</td><td style="text-align: center;">✔️</td></tr><tr><td style="text-align: center;"><code>"r+"</code></td><td>읽기 + 쓰기 모드</td><td style="text-align: center;">❌</td></tr><tr><td style="text-align: center;"><code>"w+"</code></td><td>읽기 + 덮어쓰기 모드</td><td style="text-align: center;">✔️</td></tr><tr><td style="text-align: center;"><code>"a+"</code></td><td>읽기 + 덧붙이기 모드</td><td style="text-align: center;">✔️</td></tr></tbody></table>
+
+[`fopen()`](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/fopen-wfopen) 함수는 파일을 성공적으로 열었을 때 파일 스트림 객체를 가리키는 `FILE` [자료형](#구조체) [포인터](#포인터)를 반환한다. 해당 포인터를 `fprintf()` 및 `fscanf()` 입출력 함수의 스트림으로 전달하면 파일을 작성하거나 읽어올 수 있다.
+
+더 이상 사용하지 않는 파일은 `fclose()` 함수로 닫아 리소스 낭비를 줄이는데 기여할 수 있다. [예외](#예외-처리)가 발생하여도 정상적으로 파일을 닫을 수 있도록 예외 처리문 혹은 `EOF`(End-of-File)를 활용한 조건문을 사용할 것을 권장한다.
+
+> [EOF](https://en.wikipedia.org/wiki/End-of-file)란, End-of-File의 약자로 파일의 끝에 도달하였으면 트리거되는 데이터이다.
+
 # 배열
-[배열](https://en.cppreference.com/w/cpp/language/array)(array)은 동일한 자료형의 데이터를 일련의 순서로 담는 저장공간이다. 식별자 뒤에는 대괄호 `[]`가 위치하여 배열이 담을 수 있는 데이터 용량 크기를 [정수 리터럴](https://en.cppreference.com/w/cpp/language/integer_literal)이나 [상수](#변수)로 지정한다. 배열의 데이터 초기화는 중괄호 `{}` 내에 항목을 순서대로 쉼표로 나누어 나열한다. 만일 배열 용량을 지정하지 않으면 데이터 개수만큼 크기가 정해지며, 아래는 배열을 정의하는 두 방식을 보여준다.
+**[배열](https://en.cppreference.com/w/c/language/array.html)**(array)은 동일한 자료형의 데이터를 일련의 순서로 담는 저장공간이다. 식별자 뒤에는 대괄호 `[]`가 위치하여 배열이 담을 수 있는 데이터 용량 크기를 [정수 리터럴](https://en.cppreference.com/w/c/language/integer_constant.html)이나 [상수](#변수)로 지정한다. 배열의 데이터 초기화는 중괄호 `{}` 내에 항목을 순서대로 쉼표로 나누어 나열한다. 만일 배열 용량을 지정하지 않으면 데이터 개수만큼 크기가 정해지며, 아래는 배열을 정의하는 두 방식을 보여준다.
 
 <table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">배열 크기를 지정하는 여부에 따른 정의 방식</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">명시적 배열 크기</th><th style="text-align: center;">암묵적 배열 크기</th></tr></thead><tbody><tr><td>
 
@@ -456,7 +402,7 @@ printf("%d", sizeof(arr)/sizeof(int));    // 출력: 3 (= 배열의 크기)
 ```
 
 ## 문자열
-C 언어는 일련의 문자들, 일명 [문자열](https://en.cppreference.com/w/cpp/string/byte)(string)을 한 개 이상의 `char` 문자들과 널 문자 `\0`로 구성된 배열로 문자열을 표현한다.
+C 언어는 일련의 문자들, 일명 **[문자열](https://en.cppreference.com/w/c/string/byte.html)**(string)을 한 개 이상의 `char` 문자들과 널 문자 `\0`로 구성된 배열로 문자열을 표현한다.
 
 ```c
 // C 형식 문자열
@@ -469,7 +415,7 @@ char* ptr = "World!";    // 포인터를 활용한 문자열 표현 방법
 <table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C 언어의 문자열 함수</caption><colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup><thead><tr><th style="text-align: center;">함수</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/string/byte/strcat"><code>strcat</code></a></td><td>배열의 문자열에 다른 배열의 문자열을 덧붙인다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/string/byte/strcpy"><code>strcpy</code></a></td><td>배열의 문자열을 다른 배열로 복사한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/cpp/string/byte/strlen"><code>strlen</code></a></td><td>널 문자를 제외한 문자열 길이를 반환한다.</td></tr></tbody></table>
 
 # 함수
-[함수](https://learn.microsoft.com/en-us/cpp/c-language/overview-of-functions)(function)는 독립적인 코드 블록으로써 데이터를 처리하며, 재사용이 가능하고 호출 시 처리된 데이터를 보여주어 유동적인 프로그램 코딩을 가능하게 한다. 함수는 이름 뒤에 소괄호가 있는 `function()` 형식으로 구별된다.
+**[함수](https://learn.microsoft.com/en-us/cpp/c-language/overview-of-functions)**(function)는 독립적인 코드 블록으로써 데이터를 처리하며, 재사용이 가능하고 호출 시 처리된 데이터를 보여주어 유동적인 프로그램 코딩을 가능하게 한다. 함수는 이름 뒤에 소괄호가 있는 `function()` 형식으로 구별된다.
 
 ```c
 int variable[4] = {0, 3, 5, 9};
@@ -587,7 +533,7 @@ void function(int *arg) {
 배열 자체를 호출하면 배열의 첫 번째 요소의 메모리 주소를 가져오기 때문에 가능하다. 특히 배열의 각 요소가 할당된 메모리 주소는 연쇄적이므로, 바로 옆 (`int` 정수형이면 +4) 메모리 주소에는 배열의 다음 요소가 저장된 메모리 공간이다.
 
 ## 진입점
-[진입점](https://en.wikipedia.org/wiki/Entry_point)(entry point)는 프로그램이 시작되는 부분을 의미하며, C 언어의 경우 [`main()`](https://en.cppreference.com/w/cpp/language/main_function) 함수에서부터 코드가 실행된다. 진입점은 프로토타입이 존재하지 않으며, 유일해야 하므로 복수의 `main()` 함수가 존재하거나 찾지 못하면 요류가 발생하여 컴파일이 불가하다.
+**[진입점](https://en.wikipedia.org/wiki/Entry_point)**(entry point)는 프로그램이 시작되는 부분을 의미하며, C 언어의 경우 [`main()`](https://en.cppreference.com/w/c/language/main_function.html) 함수에서부터 코드가 실행된다. 진입점은 프로토타입이 존재하지 않으며, 유일해야 하므로 복수의 `main()` 함수가 존재하거나 찾지 못하면 요류가 발생하여 컴파일이 불가하다.
 
 ```c
 // C 언어 진입점: main()
@@ -607,7 +553,7 @@ C/C++ 언어 표준에 의하면 `main()` 함수는 반드시 `int` 정수형을
 * **`argv`**: 전달인자 데이터 배열(argument vector); 매개변수 정의는 `char *argv[]`로 대체 가능하다.
 
 ## 콜백 함수
-[콜백 함수](https://en.wikipedia.org/wiki/Callback_(computer_programming))(callback function)는 인자로 전달되는 함수이다. 여기서 콜백이란, 전달인자로 전달된 함수가 다른 함수에서 언젠가 다시 호출(call back)되어 실행된다는 의미에서 붙여진 용어이다. 콜백 함수를 전달받는 함수, 일명 호출 함수(calling function)는 블록 내에서 매개변수 호출을 통해 콜백 함수를 실행한다.
+**[콜백 함수](https://en.wikipedia.org/wiki/Callback_(computer_programming))**(callback function)는 인자로 전달되는 함수이다. 여기서 콜백이란, 전달인자로 전달된 함수가 다른 함수에서 언젠가 다시 호출(call back)되어 실행된다는 의미에서 붙여진 용어이다. 콜백 함수를 전달받는 함수, 일명 호출 함수(calling function)는 블록 내에서 매개변수 호출을 통해 콜백 함수를 실행한다.
 
 아래는 콜백 함수의 예시이며, 이에 대한 자세한 원리는 차후 [함수 포인터](#함수-포인터)에서 설명한다.
 
@@ -630,7 +576,7 @@ printf("%f", calling(callback, 1));
 ```
 
 ## 인라인 함수
-[인라인 함수](https://en.cppreference.com/w/c/language/inline)(inline function)는 인라인 확장에 사용될 `inline` 키워드로 지정된 함수이다.
+**[인라인 함수](https://en.cppreference.com/w/c/language/inline)**(inline function)는 인라인 확장에 사용될 `inline` 키워드로 지정된 함수이다.
 
 > [인라인 확장](https://en.wikipedia.org/wiki/Inline_expansion)(inline expansion)은 컴파일 과정에서 함수 [호출지](https://en.wikipedia.org/wiki/Call_site)(call site)를 함수 코드로 치환하는 최적화 기법이다. 
 
@@ -660,7 +606,7 @@ int main() {
 </td></tr></tbody></table>
 
 ## 재귀 함수
-[재귀 함수](https://en.wikipedia.org/wiki/Recursion_(computer_science))(recursive function)는 스스로를 호출하는 함수이다. 재귀 함수는 반드시 스스로를 호출하는 반복으로부터 탈출하는 기저 조건(base case)이 필요하다. 기저 조건이 없으면 무한 재귀가 발생하는데 프로그램 실행에 기여하는 [메모리](#스택-영역)가 부족하여 충돌이 발생한다.
+**[재귀 함수](https://en.wikipedia.org/wiki/Recursion_(computer_science))**(recursive function)는 스스로를 호출하는 함수이다. 재귀 함수는 반드시 스스로를 호출하는 반복으로부터 탈출하는 기저 조건(base case)이 필요하다. 기저 조건이 없으면 무한 재귀가 발생하는데 프로그램 실행에 기여하는 [메모리](#스택-영역)가 부족하여 충돌이 발생한다.
 
 ```c
 // 예제: 펙토리얼 "!"
@@ -674,7 +620,7 @@ int factorial(int arg) {
 ```
 
 # 포인터
-[포인터](https://en.cppreference.com/w/cpp/language/pointer)(pointer)는 정의된 데이터나 코드가 할당받은 [메모리](Memory.md)를 가리키는(가리키다; point) [변수](#변수) 혹은 주소(address)이다. 포인터가 가리키는 메모리 주소 안에는 해당 데이터나 코드가 저장되어 있는데, 이러한 메모리 주소를 통해 접근이 가능한 특징이 C 언어의 핵심이자 많은 코딩 입문자들을 기피하게 만든다. 포인터에 대한 이해를 위해 컴퓨터 구조, 특히 메모리와 관련된 개념이 함께 설명될 필요가 있다.
+**[포인터](https://en.cppreference.com/w/c/language/pointer.html)**(pointer)는 정의된 데이터나 코드가 할당받은 [메모리](Memory.md)를 가리키는(가리키다; point) [변수](#변수) 혹은 주소(address)이다. 포인터가 가리키는 메모리 주소 안에는 해당 데이터나 코드가 저장되어 있는데, 이러한 메모리 주소를 통해 접근이 가능한 특징이 C 언어의 핵심이자 많은 코딩 입문자들을 기피하게 만든다. 포인터에 대한 이해를 위해 컴퓨터 구조, 특히 메모리와 관련된 개념이 함께 설명될 필요가 있다.
 
 포인터를 선언할 때에는 변수와 마찬가지로 [자료형](#자료형)이 명시되어야 하지만, 자료형과 식별자 사이에 별표 `*`(영문: [asterisk](https://en.wikipedia.org/wiki/Asterisk))를 기입하여 포인터임을 알린다.
 
@@ -755,7 +701,7 @@ printf("%p\n%d\n", ptr, *ptr);
     ```
 
 ### 함수 포인터
-함수 포인터(function pointer)는 함수 자체를 가리키는 보이드 포인터이다. 배열 자체가 첫 번째 요소 메모리 주소를 가리키는 것과 동일한 맥락이다. 함수 포인터를 활용한 대표적인 예시로 [콜백 함수](#콜백-함수)가 있다. 함수 포인터의 선언은 아래와 같아야 하며, 이를 만족하지 않을 시 컴파일 오류가 발생한다.
+**함수 포인터**(function pointer)는 함수 자체를 가리키는 보이드 포인터이다. 배열 자체가 첫 번째 요소 메모리 주소를 가리키는 것과 동일한 맥락이다. 함수 포인터를 활용한 대표적인 예시로 [콜백 함수](#콜백-함수)가 있다. 함수 포인터의 선언은 아래와 같아야 하며, 이를 만족하지 않을 시 컴파일 오류가 발생한다.
 
 1. 포인터의 자료형은 함수의 자료형과 일치해야 한다. 
 1. 함수가 갖는 매개변수의 자료형과 개수가 동일해야 한다.
