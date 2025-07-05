@@ -63,7 +63,7 @@
 **[액티브 디렉토리 권한 관리 서비스](https://en.wikipedia.org/wiki/Active_Directory_Rights_Management_Services)**(Active Directory Rights Management Services; AD RMS) 윈도우 서버에 내장된 [정보 권한 관리](https://en.wikipedia.org/wiki/Information_rights_management) 소프트웨어이다.
 
 # 그룹 정책
-**[그룹 정책](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-policy/group-policy-overview)**(Group Policy)은 [윈도우 OS](Windows.md) 컴퓨터와 사용자들의 설정을 구성하고 관리한다. 일반 클라이언트 OS 뿐만 아니라 서버에 특화된 동작이나 보안 설정을 구성할 때에도 활용된다. 그룹 정책은 로컬 [파일 시스템](FileSystem.md)에서, 또는 [액티브 디렉토리 도메인 서비스](ADS.md#도메인-서비스)를 통해 편집할 수 있다.
+**[그룹 정책](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-policy/group-policy-overview)**(Group Policy)은 [윈도우 OS](Windows.md) 컴퓨터와 사용자들의 설정을 구성하고 관리한다. 일반 클라이언트 OS 뿐만 아니라 서버에 특화된 동작이나 보안 설정을 구성할 때에도 활용된다. 그룹 정책은 로컬 [파일 시스템](FileSystem.md)에서, 또는 [액티브 디렉토리 도메인 서비스](#도메인-서비스)를 통해 편집할 수 있다.
 
 * 컴퓨터 구성(Computer Configuration): 사용자 여부와 상관없이 시스템 전반에 영향을 미치는 정책들을 포함하며, 컴퓨터가 시작할 때 적용된다.
 * 사용자 구성(User Configuration): 동일한 시스템이라도 개별 사용자에 따라 달리 적용되는 정책들을 포함하며, 사용자의 로그온 때 적용된다.
@@ -93,7 +93,7 @@ AD 환경에서 PDC가 그룹 정책을 배포할 때, GPC와 GPT가 도메인�
 dn: CN=John Doe,OU=IC,OU=Developer,DC=ftp,DC=contoso,DC=com
 ```
 
-LDAP 쿼리를 전달받은 AD DC는 해당 사용자 및 컴퓨터가 상주한 사이트, 도메인, 그리고 OU에 링크된 GPO 목록으로 회신한다. GPO 목록은 다음 순서대로 취득 및 처리된다: 로컬, 사이트, [도메인](Domain.md), 그 다음 [조직 구성 단위](ADS.md#조직-구성-단위)(OU)이다. 네스티드 OU의 경우, 부모에서 자식 순서대로 GPO를 적용한다.
+LDAP 쿼리를 전달받은 AD DC는 해당 사용자 및 컴퓨터가 상주한 사이트, 도메인, 그리고 OU에 링크된 GPO 목록으로 회신한다. GPO 목록은 다음 순서대로 취득 및 처리된다: 로컬, 사이트, [도메인](Domain.md), 그 다음 [조직 구성 단위](#조직-구성-단위)(OU)이다. 네스티드 OU의 경우, 부모에서 자식 순서대로 GPO를 적용한다.
 
 * 상위 정책과 겹치는 부분이 있어도, 하위 정책의 적용을 강제(enforcement)시킬 수 있다.
 * 상위 정책이 적용되는 걸 방지하기 위해 상속(inheritance)을 차단할 수 있다.

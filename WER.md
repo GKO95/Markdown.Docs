@@ -8,7 +8,7 @@
 
 Watson 서버로 보고되는 WER 동작은 시스템 전반 혹은 사용자 한정으로 아래 경로에서 재부팅 없이 설정할 수 있다.
 
-* [그룹 정책](ADS.md#그룹-정책): *Computer* 또는 *User Configuration > Administrative Template > Windows Components > Windows Error Reporting*
+* [그룹 정책](AD.md#그룹-정책): *Computer* 또는 *User Configuration > Administrative Template > Windows Components > Windows Error Reporting*
 
 * [레지스트리](Registry.md) <sub>(사용자 한정: *HKEY_CURRENT_USER*)</sub>
 
