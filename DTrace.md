@@ -30,7 +30,7 @@ DTrace 엔진은 크게 두 프로그램으로 구성된다.
 한편, Traceext.sys는 Windows 커널의 확장 드라이버로 DTrace가 트레이싱을 하는 데 필요한 Windows 기능을 노출시킨다. [스택 추적](https://en.wikipedia.org/wiki/Stack_trace)이나 메모리 접근이 이루어질 때, 커널은 DTrace가 필요한 기능이나 정보를 트레이싱 확장 드라이버에 구현된 [콜아웃](https://learn.microsoft.com/windows-hardware/drivers/network/callout)을 통해 제공한다.
 
 ### DTrace 제공자
-트레이싱 탐사(probe) 대상에 따라 Windows DTrace는 총 네 가지의 제공자들을 구현한다.
+트레이싱 탐사(probe) 대상에 따라 Windows DTrace는 아래 제공자들을 구현한다.
 
 <table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">DTrace on Windows에 구현된 제공자 목록</caption><colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup><thead><tr><th style="text-align: center;">제공자</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://learn.microsoft.com/windows-hardware/drivers/devtest/dtrace#syscall--ntos-system-calls"><b>SYSCALL</b></a></td><td>사용자와 커널 모드 간 전환이 이루어지는 <a href="Kernel.md#nt-커널">NT 커널</a>의 <a href="WinAPI.md#시스템-서비스">시스템 호출</a>을 탐사한다.
 
@@ -56,7 +56,7 @@ dtrace -ln pid$target:ntdll:RtlAllocateHeap:entry -c notepad.exe
 
 <sup>_† 도표 안에 위치한 명령어는 각 제공자마다 탐사할 수 있는 시스템 호출, 함수, 혹은 ETW 목록을 나열한다._</sup>
 
-## D 프로그래밍 언어
+# D 프로그래밍 언어
 **D 프로그래밍 언어**는 DTrace의 트레이싱을 설계하는데 사용되는 [스크립트 언어](https://en.wikipedia.org/wiki/Scripting_language)이며, 스크립트 파일은 .d 확장자로 구분된다. 단, 동명의 "[D 프로그래밍 언어](https://en.wikipedia.org/wiki/D_(programming_language))"와 전혀 다른 존재이며 아무런 연관성이 없다. 다음은 D 프로그래밍 언어의 대표적인 특징들을 몇 가지 소개한다.
 
 * [대소문자를 구분한다](https://en.wikipedia.org/wiki/Case_sensitivity).
