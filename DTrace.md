@@ -61,3 +61,12 @@ dtrace -ln pid$target:ntdll:RtlAllocateHeap:entry -c notepad.exe
 
 * [대소문자를 구분한다](https://en.wikipedia.org/wiki/Case_sensitivity).
 * 조건문 및 반복문을 사용하지 않는다.
+* [C 언어](C.md)의 구문 + [AWK](https://en.wikipedia.org/wiki/AWK)의 [데이터 지향](https://en.wikipedia.org/wiki/Data-driven_programming) 프로그래밍
+
+다음은 DTrace의 가장 기본적인 형태이다.
+
+```
+provider:module:function:name /predicate/ {
+    action;
+}
+```
