@@ -37,22 +37,22 @@ DTrace 엔진은 크게 두 프로그램으로 구성된다.
 ```
 dtrace -ln syscall:::
 ```
-<ul><li>진입 탐사: <i>시스템 호출이 진입되기 직전에 트리거된다.</i></li><li>반환 탐사: <i>시스템 호출을 완료하여 사용자 모드로 되돌아가기 직전에 트리거된다.</i></li></ul></td></tr><tr><td style="text-align: center;"><a href="https://learn.microsoft.com/windows-hardware/drivers/devtest/dtrace#function-boundary-tracing-fbt"><b>FBT</b></a></td><td><i>Function Boundary Tracing</i>의 약자이며, <a href="Hypervisor.md#가상-보안-모드">VSM</a>가 활성화되어 있다면 NT 커널의 루틴의 진입과 반환을 탐사할 수 있다.
-
-```
-dtrace -ln fbt:nt::
-```
-<ul><li>SYSCALL 제공자와 달리 모듈의 함수를 탐사하기 때문에 <a href="Symbol.md">심볼</a> 설정이 필요하다.</i></li><li>다른 제공자와 마찬가지로, FBT는 오로지 지정한 함수만을 대상으로 탐사 효과가 발휘된다.</i></li></ul></td></tr><tr><td style="text-align: center;"><a href="https://learn.microsoft.com/windows-hardware/drivers/devtest/dtrace#pid"><b>PID</b></a></td><td>PID를 제시하여 <a href="Processor.md#사용자-모드">사용자 모드</a>의 <a href="Process.md">프로세스</a> 내부 코드를 트레이싱하며, 함수의 특정 오프셋을 지정할 수도 있다.
-
-```
-dtrace -ln pid$target:ntdll:RtlAllocateHeap:entry -c notepad.exe
-```
-<ul><li><code>$target</code>은 <code>-p</code> 혹은 <code>-c</code> 옵션으로 명시한 대상의 PID를 십진수로 확장하는 매크로이다.</i></li><li>DTrace 스크립트에 의해 실행되거나 이미 실행 중인 프로세스만 탐사될 수 있다.</i></li></ul></td></tr><tr><td style="text-align: center;"><a href="https://learn.microsoft.com/windows-hardware/drivers/devtest/dtrace#etw"><b>ETW</b></a></td><td><i><a href="ETW.md">Event Tracing for Windows</a></i>를 탐사하여 DTrace가 운영체제의 기존 트레이싱 체계를 활용할 수 있도록 한다.
+<ul><li>진입 탐사: <i>시스템 호출이 진입되기 직전에 트리거된다.</i></li><li>반환 탐사: <i>시스템 호출을 완료하여 사용자 모드로 되돌아가기 직전에 트리거된다.</i></li></ul></td></tr><tr><td style="text-align: center;"><a href="https://learn.microsoft.com/windows-hardware/drivers/devtest/dtrace#etw"><b>ETW</b></a></td><td><i><a href="ETW.md">Event Tracing for Windows</a></i>를 탐사하여 DTrace가 운영체제의 기존 트레이싱 체계를 활용할 수 있도록 한다.
 
 ```
 dtrace -ln etw:::
 ```
-</td></tr></tbody></table>
+</td></tr><tr><td style="text-align: center;"><a href="https://learn.microsoft.com/windows-hardware/drivers/devtest/dtrace#function-boundary-tracing-fbt"><b>FBT</b></a></td><td><i>Function Boundary Tracing</i>의 약자이며, <a href="Hypervisor.md#가상-보안-모드">VSM</a>가 활성화되어 있다면 NT 커널의 루틴의 진입과 반환을 탐사할 수 있다. 모듈의 함수를 탐사하기 때문에 <a href="Symbol.md">심볼</a> 설정이 필요할 수 있다.
+
+```
+dtrace -ln fbt:nt::
+```
+<ul><li>위의 예시 코드는 nt 모듈에서 탐사할 수 있는 모든 커널 루틴을 나열한다.</li></ul></td></tr><tr><td style="text-align: center;"><a href="https://learn.microsoft.com/windows-hardware/drivers/devtest/dtrace#pid"><b>PID</b></a></td><td>PID를 제시하여 <a href="Processor.md#사용자-모드">사용자 모드</a>의 <a href="Process.md">프로세스</a> 내부 코드를 트레이싱하며, 함수의 특정 오프셋을 지정할 수도 있다. DTrace 스크립트에 의해 실행되거나 이미 실행 중인 프로세스만 탐사될 수 있다.
+
+```
+dtrace -ln pid$target:ntdll:RtlAllocateHeap:entry -c notepad.exe
+```
+<ul><li><code>$target</code>은 <code>-p</code> 혹은 <code>-c</code>로부터 전달받은 PID를 확장하는 매크로이며, 탐사하려는 프로세스를 지정한다.</li><li>위의 예시 코드는 notepad.exe를 새로 실행하여 ntdll 모듈의 RtlAllocateHeap 함수의 진입 탐사를 살펴본다.</li></ul></td></tr></tbody></table>
 
 <sup>_† 도표 안에 위치한 명령어는 각 제공자마다 탐사할 수 있는 시스템 호출, 함수, 혹은 ETW 목록을 나열한다._</sup>
 
