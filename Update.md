@@ -76,7 +76,43 @@ fsutil hardlink list C:\Windows\explorer.exe
 
 운영체제 빌드가 22631.2861이지만, WinSxS에서 확인된 파일 버전은 [KB5032288](https://support.microsoft.com/en-us/topic/december-4-2023-kb5032288-os-builds-22621-2792-and-22631-2792-preview-538fbe4a-e9de-4312-85cd-d870444341d0) 12월 미리 보기 업데이트의 22621.2792로 확인되었다 (윈도우 11, 버전 23H2는 22H2와 공통된 운영체제 핵심 시스템 파일을 사용하기 때문에<sup>[<a href="https://support.microsoft.com/en-us/topic/windows-11-version-23h2-update-history-59875222-b990-4bd9-932f-91a5954de434">출처</a>]</sup> 빌드 번호 22621가 목격될 수 있다). KB5032288 이후로 파일 탐색기에 변경 사항이 없기 때문이며, WinSxS에서 파일을 최신 버전으로 유지하는 건 변함없다.
 
-# 전송 최적화
-**[전송 최적화](https://learn.microsoft.com/en-us/windows/deployment/do/)**(Delivery Optimzation; DO)는 상당한 크기의 파일이 패키지로 포함된 Windows 업데이트나 업그레이드를 다운로드 및 배포하기 위해 소모되는 네트워크 리소스 부담을 덜어내기 위해 다른 원천으로부터 가져올 수 있도록 한다. 즉, 전통적인 인터넷 다운로드(일명 "HTTP 원천") 외에 같은 네트워크에 연결된 다른 장치나 전용 캐시 서버로부터 받을 수 있는 선택지를 제공한다.
+# 윈도우 서버 업데이트 서비스
+> [Windows Server 2025](https://en.wikipedia.org/wiki/Windows_Server_2025)부터 WSUS은 [deprecated](https://techcommunity.microsoft.com/blog/windows-itpro-blog/deprecation-what-it-means-in-the-windows-lifecycle/4372457) 되어 배포는 아직 가능하지만, 추가 기능은 더 이상 제공하지 않을 것이며 대안 솔루션을 활용하기를 권장한다.
 
-> 심지어 여러 장치를 동원해 패키지 다운로드를 공동 부담하여 대역폭 사용을 줄일 수도 있지만, 이러한 [P2P](https://en.wikipedia.org/wiki/Peer-to-peer) 활용은 선택 사항이다.
+**[윈도우 서버 업데이트 서비스](https://learn.microsoft.com/windows-server/administration/windows-server-update-services/get-started/windows-server-update-services-wsus)**(Windows Server Update Services; WSUS)는 마이크로소프트 제품 업데이트를 동일 네트워크에 연결된 다른 Windows 컴퓨터에 배포를 전담하는 Windows 서버의 역할이다.
+
+# 전송 최적화
+**[전송 최적화](https://learn.microsoft.com/windows/deployment/do/)**(Delivery Optimzation; DO)는 상당한 크기의 마이크로소프트 콘텐츠를 인터넷의 [CDN](#콘텐츠-전송-네트워크)으로부터 다운로드 받는데 소모되는 네트워크 리소스 부담을 덜어내기 위한 기술 중 하나이다. 콘텐츠를 단순히 인터넷 다운로드(일명 "[HTTP](https://en.wikipedia.org/wiki/HTTP) sources")에 의존하는 게 아니라, 주변 장치 또는 [전용 캐시 서버](#microsoft-connected-cache)에 이미 캐싱된 구성 파일를 병행하여 다운로드하는 [P2P](https://en.wikipedia.org/wiki/Peer-to-peer) 기능을 지원한다. 전송 최적화는 기본적으로 활성화되어 있으며 DoSvc [서비스](Service.md) 프로그램이 관련 작업을 담당한다.
+
+다음은 전송 최적화가 지원하는 마이크로소프트의 다운로드 콘텐츠 유형들의 일부를 나열한다.
+
+* [Windows 업데이트](#윈도우-업데이트)
+* Microsoft Store 앱
+* [Microsoft 365](https://www.microsoft.com/microsoft-365) 앱 및 업데이트
+* [Edge 브라우저](https://www.microsoft.com/edge) 업데이트
+* [기타 등등](https://learn.microsoft.com/windows/deployment/do/waas-delivery-optimization#types-of-download-content-supported-by-delivery-optimization)
+
+### 콘텐츠 전송 네트워크
+**[콘텐츠 전송 네트워크](https://en.wikipedia.org/wiki/Content_delivery_network)**(content delivery network; CDN)는 [프록시 서버](https://en.wikipedia.org/wiki/Proxy_server)와 이들 [데이터 센터](https://en.wikipedia.org/wiki/Data_center)를 지리적으로 분산시킨 네트워크로, 최종 사용자들의 콘텐츠 접근 속도를 향상시키면서 고가용성을 구현한다.
+
+## DO 아키텍처
+> *참고: [Delivery Optimization workflow, privacy, security, and endpoints | Microsoft Learn](https://learn.microsoft.com/windows/deployment/do/delivery-optimization-workflow#download-request-workflow)*
+
+[윈도우 업데이트](#윈도우-업데이트) 등에 의해 콘텐츠 다운로드가 진행되기 전에, DoSvc가 실행 중인 Windows PC (일명 "DO 클라이언트")는 인터넷상 DO 클라우드 서비스로부터 콘텐츠 [메타데이터](https://en.wikipedia.org/wiki/Metadata)를 요청한다. 콘텐츠 메타데이터 안에는 이를 구성하는 각 파일들의 [SHA-256](https://en.wikipedia.org/wiki/SHA-2) 해시 블록을 담고 있다. SSL 채널로부터 획득한 해시로 메타데이터 파일의 진위가 검증되면 본격적인 콘텐츠 다운로드가 진행된다. 허나, 메타데이터 파일을 받아오지 못하거나 진위 검증에 실패하면 대비책으로 P2P가 허용되지 않는 [Simple 모드](#다운로드-모드)로 전환된다.
+
+메타데이터 파일의 검증 해시를 획득한 SSL 채널은 추후 P2P 전송에 활용되는데, 타 DO 클라이언트로 파일을 받아오면 메타데이터의 해시와 비교 검증한다. 유효하지 않는 파일이 전달되면 버려지지만, 만일 동일한 주변 장치로부터 잘못된 파일이 다수 전달되었다면 전송 최적화는 더 이상 해당 장치를 소스로 사용되지 못하도록 차단한다.
+
+콘텐츠 다운로드가 완료되면 전송 최적화는 수집한 조각들로 콘텐츠를 재구성하고, 전송 최적화를 호출한 서비스 (예를 들어, [윈도우 업데이트](#윈도우-업데이트))는 설치에 앞서 콘텐츠 전체를 확인하여 서명을 검증한다.
+
+### 다운로드 모드
+**[다운로드 모드](https://learn.microsoft.com/windows/deployment/do/waas-delivery-optimization-reference#download-mode)**(Download Mode)는 전송 최적화가 활성화된 DO 클라이언트가 콘텐츠를 어떻게 다운로드를 받을 지 설정한다.
+
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">전송 최적화의 다운로드 모드 옵션</caption><colgroup><col style="width: 15%;"/><col style="width: 10%;"/><col style="width: 75%;"/></colgroup><thead><tr><th style="text-align: center;">모드</th><th style="text-align: center;">설정 값</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;">HTTP Only</td><td style="text-align: center;">0</td><td>P2P 캐싱을 비활성화하고 콘텐츠를 오로지 원본 소스<sup>†</sup> 또는 <a href="#microsoft-connected-cache">Microsoft Connected Cache</a>에서만 HTTP로 다운로드를 허용한다.<ul><li><i>DO 클라우드 서비스는 P2P를 사용하지 않는 DO 클라이언트에 추가 메타데이터를 제공한다.</i></li></ul></td></tr><tr><td style="text-align: center;">LAN</td><td style="text-align: center;">1</td><td>(Default) 전송 최적화의 기본 설정이며, 같은 네트워크 안에서 주변 장치 간 공유를 허용한다.<ul><li><i>DO 클라우드 서비스는 동일한 공용 IP로 인터넷을 연결하는 DO 클라이언트 목록을 메타데이터에 첨부한다. 이를 기반으로 클라이언트는 개인 서브넷 IP를 통해 타 장치와 연결을 시도한다.</i></li></li></ul></td></tr><tr><td style="text-align: center;">Group</td><td style="text-align: center;">2</td><td><a href="AD.md#도메인-서비스">AD DS</a>의 <a href="Domain.md">도메인</a>이나 사이트에 의해 자동으로 선택된 그룹 안에서 DO 클라이언트들은 내부 서브넷을 거쳐 P2P 전송이 이루어진다; 대역폭 최적화를 원하는 기업이나 조직의 IT 환경에 권유된다.<ul><li><i>GroupID 옵션을 통해 AD 도메인 및 사이트로부터 독립적인 사용자 정의 그룹을 생성할 수 있다.</i></li></ul></td></tr><tr><td style="text-align: center;">Internet</td><td style="text-align: center;">3</td><td>LAN에 국한되지 않은 인터넷 상의 DO 클라이언트 간의 전송 최적화를 활성화한다.</td></tr><tr><td style="text-align: center;">Simple</td><td style="text-align: center;">99</td><td>P2P 캐싱을 비활성화하고 콘텐츠를 오로지 원본 소스<sup>†</sup> 또는 <a href="#microsoft-connected-cache">Microsoft Connected Cache</a>에서만 HTTP로 다운로드를 허용한다; DO 클라우드 서비스의 개입을 완전히 차단하여 폐쇄망 환경에 적합하다.<ul><li><i>DO 클라우드 서비스에 도달하지 못하거나, 콘텐츠 파일이 10 MB 미만이면 클라이언트의 전송 최적화는 자동으로 해당 모드로 전환한다.</i></li></ul></td></tr><tr><td style="text-align: center;">Bypass</td><td style="text-align: center;">100</td><td>(Deprecated) <s>전송 최적화를 거치지 않고 BITS를 콘텐츠를 다운로드한다.</s><ul><li><i>콘텐츠 다운로드 실패를 일으켜 Windows 11부터 해당 옵션을 더 이상 지원하지 않는다.</i></li></ul></td></tr></tbody></table>
+
+<sup>_† 여기서 "원본 소스(original source)"란, 캐싱되어 있는 게 아닌 콘텐츠 원본을 HTTP로 가져올 수 있는 [CDN](#콘텐츠-전송-네트워크) 및 [업데이트 관리자](#윈도우-서버-업데이트-서비스)가 해당한다._</sup>
+
+## Microsoft Connected Cache
+**[Microsoft Connected Cache](https://learn.microsoft.com/windows/deployment/do/waas-microsoft-connected-cache)**(일명 MCC)는 [전송 최적화](#전송-최적화)의 전용 캐싱 서버를 담당하는 솔루션으로 크게 두 가지 유형으로 나뉘어진다.
+
+* [Microsoft Connected Cache for Internet Service Providers](https://learn.microsoft.com/windows/deployment/do/mcc-isp-overview) (ISPs)
+* [Microsoft Connected Cache for Enterprise and Education](https://learn.microsoft.com/windows/deployment/do/mcc-ent-edu-overview)
