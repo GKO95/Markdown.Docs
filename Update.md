@@ -34,7 +34,7 @@ WaaS가 소개되기 이전에는 월별로 다양한 Windows 업데이트를 �
 
 * 윈도우 업데이트(Windows Update; WU)
 * [비즈니스용 윈도우 업데이트](https://learn.microsoft.com/en-us/windows/deployment/update/waas-manage-updates-wufb)(Windows Update for Business; WUfB)
-* 윈도우 서버 업데이트 서비스(Windows Server Update Services; WSUS)
+* [윈도우 서버 업데이트 서비스](#윈도우-서버-업데이트-서비스)(Windows Server Update Services; WSUS)
 * 시스템 센터 구성 관리자(System Center Configuration Manager; SCCM)
 * [인튠](https://learn.microsoft.com/en-us/mem/intune/fundamentals/what-is-intune)(Intune)
 
