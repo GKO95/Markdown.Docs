@@ -106,6 +106,9 @@ UEFI가 부트 장치를 탐색하는 과정은 다음과 같다.
 ### 호환성 지원 모듈
 **[호환성 지원 모듈](https://en.wikipedia.org/wiki/UEFI#CSM_booting)**(Compatibility Support Module; CSM)은 UEFI 펌웨어가 MBR 파티션의 디스크로부터 레거시 BIOS 모드로 부팅하는 걸 지원하는 하위호환이다. GPT가 LBA 0를 활용하지 않는 점을 이용하여 레거시 BIOS 기반의 시스템 부팅이 가능하였으며, 이를 *BIOS-GPT*라고 불렀다. 하지만 2020년부터 인텔은 더 이상 CSM을 지원하지 않는다고 발표하였다.
 
+## 보안 부팅
+**[보안 부팅](https://support.microsoft.com/windows/windows-11-and-secure-boot-a8ff1202-c0d9-42f5-940f-843abef64fad)**(secure boot)은 컴퓨터를 부팅할 때 멀웨어가 실행되는 걸 방지하도록 설계된 UEFI의 보안 기능이다.
+
 # 윈도우 부팅 관리자
 **[윈도우 부팅 관리자](https://en.wikipedia.org/wiki/Windows_Boot_Manager)**(Windows Boot Manager), 또는 간략히 **부트 관리자**는 [마이크로소프트](https://aka.ms/microsoft)가 제공하는 [윈도우 NT](Windows.md)의 [부트로더](#부트로더) 중 하나이다.
 
