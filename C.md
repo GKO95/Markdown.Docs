@@ -774,9 +774,7 @@ for (int index = 0; index < sizeof(variable); index++) {
 비록 숫자를 읽을 때에는 빅 엔디언이 익숙하겠지만, 컴퓨터 메모리에서는 리틀 엔디언으로 데이터를 저장한다는 점을 명시하도록 한다.
 
 # 동적 할당
-소스 코드에서 정의된 [변수](#변수)와 [함수](#함수)들은 [메모리](Memory.md)의 [스택](https://en.wikipedia.org/wiki/Stack_(abstract_data_type))(stack) 영역에서 [레지스터](Processor.md)에 의한 푸쉬(push)와 팝(pop)이 빠른 속도로 이루어지면서 [프로세스](Process.md)가 실행된다. 하지만 스택 구조의 특성상 메모리 데이터를 저장하기에 부적합하며, 특히 블록 내에 정의된 변수를 외부에서 사용할 수 없는 점도 스택에 의한 현상이다. 이러한 한계점을 극복하기 위한 기술이 바로 프로세스 [런타임](https://en.wikipedia.org/wiki/Execution_(computing)#Runtime) 도중에 메모리를 확보하는 "[동적 할당](https://en.wikipedia.org/wiki/C_dynamic_memory_allocation)(dynamic allocation)"이다. 만일 [배열](#배열)을 변수에 정의하였다면, 프로세스 실행 당시에 애초부터 이를 고려하여 스택상 메모리가 미리 확보된 점과 상반되는 동작이다.
-
-동적 할당은 [힙](https://en.wikipedia.org/wiki/Memory_management#HEAP)(heap) 영역에 메모리를 할당하여, 스택의 영향을 전혀 받지 않은 채 데이터를 저장할 수 있다.
+**[동적 할당](https://en.wikipedia.org/wiki/C_dynamic_memory_allocation)**(dynamic allocation)은 [프로세스](Process.md) [런타임](https://en.wikipedia.org/wiki/Execution_(computing)#Runtime) 도중에 메모리를 확보하는 행위이다. [배열](#배열)을 정의하였다면 [컴파일러](Programming.md#컴파일러)가 해당 코드를 인식하고 지정된 크기만큼 메모리를 호출 스택 안에 확보하도록 하드 코드를 컴파일하는 점에서 상반되는 동작이다. 호출 스택에 할당된 메모리는 접근성이 매우 빠르지만, 반면 스택이란 구조적인 특성으로 인해 데이터 저장 및 관리에 있어 상당한 제약을 지닌다. 동적 할당은 이를 극복하기 위해 프로세스의 [힙](Memory.md#힙) 영역을 활용하여 스택의 영향을 받지 않고 데이터를 취급할 수 있다.
 
 > 힙 영역은 [힙 자료구조](https://en.wikipedia.org/wiki/Heap_(data_structure))와 전혀 상관이 없으며, 사전적으로 "(데이터) 더미"를 뜻하는 순수히 메모리의 주소공간 영역을 지칭하는 용어이다.
 
