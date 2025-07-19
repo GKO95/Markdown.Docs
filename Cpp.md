@@ -115,14 +115,6 @@ unsigned short    // 표현 가능 범위:     +0 ~ +65535
     ```
     </td></tr></tbody></table>
 
-### `sizeof` 연산자
-**[`sizeof`](https://en.cppreference.com/w/cpp/language/sizeof)** 연산자는 데이터나 자료형의 메모리에 할당된 바이트 크기를 반환한다.
-
-```cpp
-sizeof(int);      // 크기: 4바이트
-sizeof(char);     // 크기: 1바이트
-```
-
 ## 변수
 **변수**(variable)는 데이터를 지정된 [자료형](#자료형)으로 저장하는 메모리 공간이다. 아래 코드는 `variable` [식별자](#식별자)를 정수형 변수로 "정의(definition)"하여 메모리 공간을 확보한 다음 상수 3을 할당한다. 여기서 변수로의 최초 할당을 "초기화(initialization)"라고 부르며, 변수를 정의한 이후에 별도로 이루어질 수 있다.
 
