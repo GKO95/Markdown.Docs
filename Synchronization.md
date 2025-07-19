@@ -18,7 +18,7 @@ ADD [counter], 1
 
 * **[사용자 모드](Processor.md#사용자-모드)**
 
-    *다른 [가상 주소 공간](Process.md#가상-주소-공간)을 가진 타 [프로세스](Process.md)와 함께 활용될 수 없는 등의 제약이 있으나, 성능적으로 매우 빠른 장점이 있다. 아래 "atomic" 태그는 [원자적](Processor.md#원자적-연산)으로 동기화하는 걸 의미한다.*
+    *다른 [가상 주소 공간](Process.md#가상-주소-공간)을 가진 타 [프로세스](Process.md)와 함께 활용될 수 없는 등의 제약이 있으나, 성능적으로 매우 빠른 장점이 있다. 아래 "atomic" 태그는 [원자성](Processor.md#원자성-연산)으로 동기화하는 걸 의미한다.*
 
     * [InterLocked Functions](#인터락-함수) (*atomic*)
     * [Spinlocks](#스핀락)
@@ -38,14 +38,14 @@ ADD [counter], 1
 윈도우 OS는 코드 성능을 향상시키기 위해 절대 [FIFO](https://en.wikipedia.org/wiki/FIFO_(computing_and_electronics)) 순서로 동기화하지 않는다; 먼저 기다렸다고 그 다음 순서로 접근할 수 있다는 걸 보장하지 않는다. 하지만 [마이크로소프트](https://www.microsoft.com/)는 동기화 알고리즘을 공개하지 않는다. 차후 알고리즘이 언제든지 변경될 수 있으며, 알고리즘에 너무 의존하는 코드 개발을 방지한다.
 
 ## 인터락 함수
-**[인터락 함수](https://learn.microsoft.com/en-us/windows/win32/sync/interlocked-variable-access)**(interlocked functions)는 [Win32 API](WinAPI.md) 중에서 간단한 연산을 [원자적](Processor.md#원자적-연산)으로 실행하는 함수들을 일컫는다. 만일 [x86](https://en.wikipedia.org/wiki/X86) 아키텍처일 경우, 이들은 대부분 [LOCK](https://www.felixcloutier.com/x86/lock) 접두사와 함께 실행될 수 있는 명령어로 구성되며, 아래는 일부 인터락 함수들을 소개한다.
+**[인터락 함수](https://learn.microsoft.com/en-us/windows/win32/sync/interlocked-variable-access)**(interlocked functions)는 [Win32 API](WinAPI.md) 중에서 간단한 연산을 [원자적](Processor.md#원자성-연산)으로 실행하는 함수들을 일컫는다. 만일 [x86](https://en.wikipedia.org/wiki/X86) 아키텍처일 경우, 이들은 대부분 [LOCK](https://www.felixcloutier.com/x86/lock) 접두사와 함께 실행될 수 있는 명령어로 구성되며, 아래는 일부 인터락 함수들을 소개한다.
 
 <table style="width: 90%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">인터락 함수의 x86 명령어 조합 및 설명</caption><colgroup><col style="width: 20%;"/><col style="width: 15%;"/><col style="width: 65%;"/></colgroup><thead><tr><th style="text-align: center;">인터락 함수</th><th style="text-align: center;">명령어</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td><a href="https://learn.microsoft.com/en-us/windows/win32/api/winnt/nf-winnt-interlockedexchange">InterLockedExchange</a></td><td><a href="https://www.felixcloutier.com/x86/xchg"><code>XCHG</code></a></td><td>32비트 변수를 지정한 값으로 변경한다.</td></tr><tr><td><a href="https://learn.microsoft.com/en-us/windows/win32/api/winnt/nf-winnt-interlockedexchangeadd">InterLockedCompareExchange</a></td><td><code>LOCK</code>+<a href="https://www.felixcloutier.com/x86/cmpxchg"><code>CMPXCHG</code></a></td><td>두 32비트 값을 비교한 결과에 따라 다른 32비트 값으로 변경 여부를 결정한다.</td></tr><tr><td><a href="https://learn.microsoft.com/en-us/windows/win32/api/winnt/nf-winnt-interlockedexchangeadd">InterLockedExchangeAdd</a></td><td><code>LOCK</code>+<a href="https://www.felixcloutier.com/x86/add"><code>ADD</code></a></td><td>두 32비트 값의 덧셈을 연산한다.</td></tr><tr><td><a href="https://learn.microsoft.com/en-us/windows/win32/api/winnt/nf-winnt-interlockedincrement">InterLockedIncrement</a></td><td><code>LOCK</code>+<a href="https://www.felixcloutier.com/x86/inc"><code>INC</code></a></td><td>32비트 변수의 값을 1만큼 증가시킨다.</td></tr><tr><td><a href="https://learn.microsoft.com/en-us/windows/win32/api/winnt/nf-winnt-interlockedxor">InterLockedXor</a></td><td><code>LOCK</code>+<a href="https://www.felixcloutier.com/x86/xor"><code>XOR</code></a></td><td>두 32비트 값의 <a href="https://en.wikipedia.org/wiki/Exclusive_or">베타적 논리합</a>을 연산한다.</td></tr></tbody></table>
 
 <sup>_† 참고 문헌: [How does InterlockedIncrement work internally? - The Old New Thing](https://devblogs.microsoft.com/oldnewthing/20130913-00/?p=3243)_</sup>
 
 ## 스핀락
-**[스핀락](https://en.wikipedia.org/wiki/Spinlock)**(spinlocks)은 스레드가 [락](https://en.wikipedia.org/wiki/Lock_(computer_science))을 소유할 때까지 반복적으로 획득 가능 여부를 확인하는 [루프](C.md#while-반복문), 즉 "스핀"을 활용하는 동기화 매커니즘이다. 락을 소유한 스레드는 루프로부터 탈출하여 공유 리소스에 접근하게 된다. [원자적](Processor.md#원자적-연산)이지 않고 [프로세서 시간](Processor.md#프로세서-시간)을 허비하기 때문에 [단일 코어](Processor.md#프로세서-코어) 시스템에서는 가급적 기피되어야 한다. 반면 다중 코어 시스템의 경우, 한 CPU 코어가 스핀을 돌더라도 나머지 여유 CPU 코어가 다른 작업을 수행하여 오히려 유용할 수 있다.
+**[스핀락](https://en.wikipedia.org/wiki/Spinlock)**(spinlocks)은 스레드가 [락](https://en.wikipedia.org/wiki/Lock_(computer_science))을 소유할 때까지 반복적으로 획득 가능 여부를 확인하는 [루프](C.md#while-반복문), 즉 "스핀"을 활용하는 동기화 매커니즘이다. 락을 소유한 스레드는 루프로부터 탈출하여 공유 리소스에 접근하게 된다. [원자적](Processor.md#원자성-연산)이지 않고 [프로세서 시간](Processor.md#프로세서-시간)을 허비하기 때문에 [단일 코어](Processor.md#프로세서-코어) 시스템에서는 가급적 기피되어야 한다. 반면 다중 코어 시스템의 경우, 한 CPU 코어가 스핀을 돌더라도 나머지 여유 CPU 코어가 다른 작업을 수행하여 오히려 유용할 수 있다.
 
 아래는 스핀락을 원리를 간단히 설명하기 위한 이론적 예시 코드이다.
 
@@ -62,10 +62,10 @@ while (InterLockedExchange(&g_fResourceInUse, TRUE) == TRUE) {
 InterLockedExchange(&g_fResourceInUse, FALSE);
 ```
 
-비록 [InterLockedExchage](https://learn.microsoft.com/en-us/windows/win32/api/winnt/nf-winnt-interlockedexchange)란 [인터락 함수](#인터락-함수)가 동원되었지만, 이는 스핀락 자체가 원자적이라는 걸 의미하지 않는다.
+비록 [InterLockedExchage](https://learn.microsoft.com/en-us/windows/win32/api/winnt/nf-winnt-interlockedexchange)란 [인터락 함수](#인터락-함수)가 동원되었지만, 이는 스핀락 자체가 원자성이라는 걸 의미하지 않는다.
 
 ## 임계 구역
-**[임계 구역](https://learn.microsoft.com/en-us/windows/win32/sync/critical-section-objects)**(critical sections)은 CRITICAL_SECTION [구조체](C.md#구조체) 인스턴스의 획득 여부를 기준으로 일부 코드 영역을 오로지 한 스레드씩만 [원자적](Processor.md#원자적-연산)으로 진입할 수 있도록 허용한다. 만일 단순한 연산에 동기화가 필요할 경우, 임계 구역을 지정하기 보다 [인터락 함수](#인터락-함수)를 활용하는 걸 권장한다.
+**[임계 구역](https://learn.microsoft.com/en-us/windows/win32/sync/critical-section-objects)**(critical sections)은 CRITICAL_SECTION [구조체](C.md#구조체) 인스턴스의 획득 여부를 기준으로 일부 코드 영역을 오로지 한 스레드씩만 [원자성](Processor.md#원자성-연산) 진입이 가능하도록 허용한다. 만일 단순한 연산에 동기화가 필요할 경우, 임계 구역을 지정하기 보다 [인터락 함수](#인터락-함수)를 활용하는 걸 권장한다.
 
 다음은 임계 구역 개체와 관련된 [Win32 API](WinAPI.md)를 일부 소개한다.
 
@@ -75,7 +75,7 @@ InterLockedExchange(&g_fResourceInUse, FALSE);
 * 기타 등등
 
 ## 슬림 읽기/쓰기 락
-**[슬림 읽기/쓰기 락](https://learn.microsoft.com/en-us/windows/win32/sync/slim-reader-writer--srw--locks)**(slim reader/writer lock), 간단히 **SRW 락**은 공유 리소스의 접근 사유를 *읽기* 및 *쓰기*로 구분한다. SRWLOCK [구조체](C.md#구조체)를 활용한 [원자적](Processor.md#원자적-연산)이지 않은 동기화 매커니즘이다. [임계 구역](#임계-구역)보다 가볍고 빠르다는 장점이 있지만, 구조가 매우 간단(즉, "슬림")하여 제약 사항이 존재한다.<sup>[[참고](https://devblogs.microsoft.com/oldnewthing/20220304-00/?p=106309)]</sup>
+**[슬림 읽기/쓰기 락](https://learn.microsoft.com/en-us/windows/win32/sync/slim-reader-writer--srw--locks)**(slim reader/writer lock), 간단히 **SRW 락**은 공유 리소스의 접근 사유를 *읽기* 및 *쓰기*로 구분한다. SRWLOCK [구조체](C.md#구조체)를 활용한 [원자적](Processor.md#원자성-연산)이지 않은 동기화 매커니즘이다. [임계 구역](#임계-구역)보다 가볍고 빠르다는 장점이 있지만, 구조가 매우 간단(즉, "슬림")하여 제약 사항이 존재한다.<sup>[[참고](https://devblogs.microsoft.com/oldnewthing/20220304-00/?p=106309)]</sup>
 
 스레드가 리소스를 접근하려 할 때, 요청에 따라 SRW 락은 두 가지 모드를 제공한다:
 
@@ -96,7 +96,7 @@ InterLockedExchange(&g_fResourceInUse, FALSE);
 매우 간단한 구조를 가지고 있어 SRW 락의 상태 정보가 빈약하다. 즉, 이미 소유하고 있는 SRW 락의 모드를 공유에서 전용 (또는 그 반대)로 전환이 불가하다. 그리고 반복적인 SRW 락 획득은 [교착 상태](https://en.wikipedia.org/wiki/Deadlock_(computer_science))를 유발할 수 있기 때문에 주의해야 한다.
 
 ## 조건 변수
-**[조건 변수](https://learn.microsoft.com/en-us/windows/win32/sync/condition-variables)**(conditional variables)는 CONDITION_VARIABLE [구조체](C.md#구조체)를 활용한 [원자적](Processor.md#원자적-연산)인 동기화 매커니즘이며, 특정 조건을 충족할 때까지 스레드를 대기시킨다. 아래 함수를 호출하여 스레드가 소유한 [임계 구역](#임계-구역) (혹은 [SRW 락](#슬림-읽기쓰기-락))을 잠시 내려놓게 하고 지정된 타이머가 만료하거나 재개 함수가 호출될 때까지 대기시킨다.
+**[조건 변수](https://learn.microsoft.com/en-us/windows/win32/sync/condition-variables)**(conditional variables)는 CONDITION_VARIABLE [구조체](C.md#구조체)를 활용한 [원자성](Processor.md#원자성-연산) 동기화 매커니즘이며, 특정 조건을 충족할 때까지 스레드를 대기시킨다. 아래 함수를 호출하여 스레드가 소유한 [임계 구역](#임계-구역) (혹은 [SRW 락](#슬림-읽기쓰기-락))을 잠시 내려놓게 하고 지정된 타이머가 만료하거나 재개 함수가 호출될 때까지 대기시킨다.
 
 * [SleepConditionVariableCS](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-sleepconditionvariablecs)
 * [SleepConditionVariableSRW](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-sleepconditionvariablesrw)
@@ -109,7 +109,7 @@ InterLockedExchange(&g_fResourceInUse, FALSE);
 * [WaitForSingleObject](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-waitforsingleobject)
 * [WaitForMultipleObjects](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-waitformultipleobjects)
 
-특히 WaitForMultipleObjects 함수는 [원자성](Processor.md#원자적-연산)이 접목되어 "성공적인 대기 부작용(successful wait side-effect)"에 의해 발생할 수 있는 [교착 상태](https://en.wikipedia.org/wiki/Deadlock_(computer_science))를 방지할 수 있다.
+특히 WaitForMultipleObjects 함수는 [원자성](Processor.md#원자성-연산)이 접목되어 "성공적인 대기 부작용(successful wait side-effect)"에 의해 발생할 수 있는 [교착 상태](https://en.wikipedia.org/wiki/Deadlock_(computer_science))를 방지할 수 있다.
 
 > 예를 들어, 스레드 A의 WaitForMultipleObjects 함수가 모든 개체의 신호 상태가 signaled인 걸 확인하였다. 대기 함수는 종료하면서 개체들을 nonsignaled 상태로 초기화를 시도하지만, 스레드 B 또한 동일한 개체들의 신호 여부를 확인하는 중이다. 스레드 A는 결국 스레드 B의 검사를 마칠 때까지 기다린다.
 

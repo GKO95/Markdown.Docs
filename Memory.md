@@ -237,4 +237,4 @@ struct STRUCTURE {
 [x86](https://en.wikipedia.org/wiki/X86) 아키텍처는 CPU 하드웨어가 자체적으로 데이터 정렬 문제를 교정하여 표면적으로 드러내지 않으나, 기본적으로 비활성화된 [EFLAG](Assembly.md#플래그-레지스터)의 AC (Alignment Check) 플래그를 설정하면 17h [인터럽트](Processor.md#인터럽트)를 일으켜 운영체제에 알린다. 반면, 단종된 [Itanium](https://en.wikipedia.org/wiki/Itanium) 아키텍처는 CPU에서 이를 스스로 교정할 수 없어 [SetErrorMode](https://learn.microsoft.com/en-us/windows/win32/api/errhandlingapi/nf-errhandlingapi-seterrormode) 함수 등을 사용하여 소프트웨어에서 조치되어야 한다.
 
 * [Windows OS](Windows.md)의 경우, 예외 코드 0x80000002 STATUS_DATATYPE_MISALIGNMENT로 나타난다.
-* [리눅스](https://en.wikipedia.org/wiki/Linux)의 경우, 두 개의 [캐시 라인](Processor.md#cpu-캐시)을 거쳐 처리하는 도중에 외부 간섭을 방지하기 위한 조치로 "[split lock](https://lwn.net/Articles/790464/)"이란 [원자적 연산](Processor.md#원자적-연산)을 동원한다.
+* [리눅스](https://en.wikipedia.org/wiki/Linux)의 경우, 두 개의 [캐시 라인](Processor.md#cpu-캐시)을 거쳐 처리하는 도중에 외부 간섭을 방지하기 위한 조치로 "[split lock](https://lwn.net/Articles/790464/)"이란 [원자성 연산](Processor.md#원자성-연산)을 동원한다.
