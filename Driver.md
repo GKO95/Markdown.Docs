@@ -1,8 +1,6 @@
 # 드라이버
 **[드라이버](https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/what-is-a-driver-)**(driver)는 시스템에 장착된 [하드웨어 장치](https://en.wikipedia.org/wiki/Computer_hardware)를 제어하거나 [커널](Kernel.md#커널) 서비스에 접근할 수 있는 [로드 가능한 모듈](https://ko.wikipedia.org/wiki/적재_가능_커널_모듈)(loadable kernel moduel; LKM)이다. 즉, 드라이버는 필요에 따라 언제든지 [메모리](Memory.md)에 로드 및 해제될 수 있다. 흔히 하드웨어 상호작용에 활용되기 때문에 일반적으로 [*장치 드라이버*](#장치-드라이버)를 지칭하는 경우가 대다수이지만, 그렇지 않고 단지 [운영체제](https://ko.wikipedia.org/wiki/운영체제) 커널에서만 접근이 가능한 데이터를 다루기 위한 [*소프트웨어 드라이버*](https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/what-is-a-driver-#software-drivers)도 존재한다.
 
-본 문서는 (레거시 NT 드라이버가 아닌) [WDM](#윈도우-드라이버-모델) 형식의 드라이버 모델을 위주로 설명한다.
-
 ### 드라이버 개체
 **[드라이버 개체](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-driver-objects)**(driver object)는 시스템에 설치되어 메모리에 로드된 각 드라이버를 나타내는 [DRIVER_OBJECT](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/ns-wdm-_driver_object) [구조체](C.md#구조체)이다. 마치 .exe 확장자의 프로그램 이미지를 실행하는 [프로세스](Process.md)와 동일한 개념이다. 커널의 [입출력 관리자](Kernel.md#입출력-관리자)가 관리하며, 드라이버의 [DriverEntry](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nc-wdm-driver_initialize) 루틴 호출 시 해당 드라이버 개체의 주소를 제공한다. 드라이버 개체 안에는 [표준 드라이버 루틴](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-standard-driver-routines)들의 [진입점](C.md#진입점)들이 저장되어 있다.
 
