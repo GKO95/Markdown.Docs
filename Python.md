@@ -46,39 +46,6 @@
     
     특히 [`pass`](https://docs.python.org/3/tutorial/controlflow.html#pass-statements) 혹은 `...` (일명 [ellipsis](https://ko.wikipedia.org/wiki/줄임표)) 키워드는 실행될 때 아무런 작업을 수행하지 않는 문장이다. 차후에 소개할 [조건문](#조건) 및 [반복문](#반복) 등에 아무런 코드를 작성하지 않으면 실행할 코드가 없다는 사유로 오류가 발생하는데, 이러한 상황에서 `pass` 키워드는 임시 코드로 사용된다.
 
-### 식별자
-[식별자](https://docs.python.org/3/reference/expressions.html#atom-identifiers)(identifier), 일명 네임(name)은 프로그램의 데이터들을 구별하기 위해 사용되는, 즉 프로그래머가 데이터에 직접 붙여준 이름이다. 파이썬에서 식별자 작명에는 다음 규칙을 준수해야 한다:
-
-1. 알파벳, 숫자, 밑줄 `_`만 허용 (그 외 특수문자 및 공백 사용 불가)
-2. 식별자의 첫 문자는 숫자가 될 수 없음
-3. 대소문자 구분 필수
-4. [예약어](https://ko.wikipedia.org/wiki/예약어) 금지
-
-### 주석
-[주석](https://peps.python.org/pep-0008/#comments)(comment)은 프로그램의 소스 코드로 취급하지 않아 실행되지 않는 영역이다. 흔히 코드에 대한 간단한 정보를 기입하기 위해 사용되는 데, 파이썬에는 두 가지의 주석이 존재한다.
-
-<table style="table-layout: fixed; width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">파이썬 주석 종류</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">블록 주석(block comment)</th><th style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Docstring">독스트링</a>(docstring)</th></tr></thead><tbody><tr><td>해시 기호 <code>#</code>로 표기되며 프로그램이 실행될 때 필터되는 주석이다.</td><td>세 쌍의 따옴표로 표기된 주석은 프로그램이 실행되는 <a href="https://ko.wikipedia.org/wiki/런타임">런타임</a>에도 유지된다.</td></tr><tr style="vertical-align: top; overflow-wrap: break-word;"><td>
-
-```python
-# 블록 주석:
-# 일반적인 주석에는 해시 기호가 권장된다.
-```
-</td><td>
-
-```python
-"""
-독스트링:
-정의된 데이터에 간랸한 설명을 기입한다.
-"""
-```
-</td></tr></tbody></table>
-
-일반 주석과 달리, 사용자가 정의한 데이터에 기입된 독스트링은 `__doc__`이란 특수한 변수에 저장되어 디버깅 과정에서도 정의된 데이터에 대한 설명을 확인할 수 있는 용도로 사용된다. 이를 기반으로 IDE 및 텍스트 편집기는 아래 사진처럼 데이터를 정의한 소스 코드를 찾아가지 않고서도 곧바로 내용을 살펴볼 수 있다.
-
-![VS Code에서의 독스트링 활용 예시](./images/python_docstring.png)
-
-> 독스트링이 적용될 수 있는 데이터는 공통적으로 정의될 수 있는 [함수](#함수), [클래스](#클래스), [모듈](#모듈) 등이 해당한다.
-
 ## 콘솔 입출력
 파이썬은 다음과 같이 콘솔에서 사용할 수 있는 텍스트 기반의 입력 및 출력 함수를 가진다:
 
