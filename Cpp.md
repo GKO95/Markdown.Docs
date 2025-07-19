@@ -1,108 +1,63 @@
 # C++
-**[C++](https://learn.microsoft.com/en-us/cpp/cpp/)**는 본래 [클래스](#클래스)를 지원하는 [C 언어](C.md)의 확장판으로 시작된 고급 범용 프로그래밍 언어로, 현재는 그 외에도 [함수](#함수)를 더 유연하게 사용할 수 있거나 [템플릿](#템플릿) 등 다양한 기능을 지원한다. 이러한 유래로 C++는 C 언어와 상당한 [호환성](https://en.wikipedia.org/wiki/Compatibility_of_C_and_C%2B%2B)을 자랑하지만, 오랜 역사를 거쳐온 탓에 엄연히 서로 다른 언어이다. C++는 현재 [데스크탑](https://en.wikipedia.org/wiki/Application_software)이나 [서버](https://en.wikipedia.org/wiki/Server_(computing)), 또는 [운영체제](Windows.md)와 같은 [임베디드](https://en.wikipedia.org/wiki/Embedded_software) 분야에서도 활약하고 있다.
+[**C++**](https://learn.microsoft.com/en-us/cpp/cpp/)의 시초는 [클래스](#클래스)가 지원되는 [C 언어](C.md) 확장판으로 시작된 고급 범용 프로그래밍 언어였으며, 현재는 그 외에도 [함수](#함수)를 더 유연하게 사용할 수 있거나 [템플릿](#템플릿) 등 다양한 기능을 지원한다. 이러한 유래로 C 언어와 상당한 [호환성](https://en.wikipedia.org/wiki/Compatibility_of_C_and_C%2B%2B)을 자랑하지만, 오랜 역사를 거쳐온 탓에 엄연히 서로 다른 언어이다. C++는 현재 [데스크탑](https://en.wikipedia.org/wiki/Application_software)이나 [서버](https://en.wikipedia.org/wiki/Server_(computing)), 또는 [운영체제](Windows.md)와 같은 [임베디드](https://en.wikipedia.org/wiki/Embedded_software) 분야에서도 활약하고 있다.
 
-C++ 언어에 필요한 컴파일러는 흔히 소스 코드 편집, 프로그램 빌드, 그리고 디버깅 기능을 제공하는 [통합 개발 환경](https://en.wikipedia.org/wiki/Integrated_development_environment)(integrated development environment; IDE)을 설치하면 대체로 권장되는 [컴파일러](#컴파일러)가 함께 설치된다.
+C++는 [컴파일러](Programming.md#컴파일러)를 통해 영문으로 작성된 코드를 컴퓨터가 직접 수행할 수 있는 기계어로 변환한 [이진 파일](https://en.wikipedia.org/wiki/Binary_file)이 생성되는 컴파일러 언어이다. [국제 표준화 기구](https://www.iso.org/home.html)(ISO)의 표준에 따라 C++가 동작할 것을 규정하여, 서로 다른 컴파일러 간에도 [이식](https://en.wikipedia.org/wiki/Porting) 호환을 지원한다. 아래는 대표적인 C++ 컴파일러들을 나열한다.
 
-> [비주얼 스튜디오 코드](https://code.visualstudio.com/)(Visual Studio Code; VS Code)는 엄연히 말해 "텍스트 편집기"이며, 아래의 IDE를 사용할 것을 권장한다.
+* [Microsoft Visual C++](https://en.wikipedia.org/wiki/Microsoft_Visual_C++) (일명 MSVC)
+    * [C 런타임 라이브러리](#c-런타임-라이브러리)
+* [GNU C Compiler](https://en.wikipedia.org/wiki/GNU_Compiler_Collection) (일명 GCC)
+* [Clang](https://en.wikipedia.org/wiki/Clang)
 
-* [비주얼 스튜디오](https://visualstudio.microsoft.com/) <sub>(윈도우, macOS)</sub>
-* [엑스코드](https://developer.apple.com/xcode/) <sub>(macOS)</sub>
-* [CLion](https://www.jetbrains.com/clion/) <sub>(윈도우, macOS, 리눅스)</sub>
+### C++ 표준 라이브러리
+**[C++ 표준 라이브러리](https://en.wikipedia.org/wiki/C%2B%2B_Standard_Library)**(C++ standard library)는 국제 표준의 C++에서 명시한 [표준 라이브러리](https://en.wikipedia.org/wiki/Standard_library)이며, [매크로](#매크로-정의) 및 [자료형](#자료형) 정의, 그리고 ([문자열 조작](#문자열), [입출력 처리](#파일-입출력), [메모리 관리](#동적-할당) 등) 특정 작업을 위한 함수들을 제공한다. 다양한 [운영체제](https://en.wikipedia.org/wiki/Operating_system) 또는 C++ 컴파일러에서 표준 라이브러리를 제공하고, [헤더 파일](#헤더-파일)로 불러와 활용할 수 있다.
 
-## 컴파일러
-C++ 언어는 [컴파일 언어](Programming.md#컴파일러)(compiled language)이다. C++ 컴파일러는 [국제 표준화 기구](https://www.iso.org/home.html)(International Organization for Standardization; ISO)에서 표준을 발표한 년도에 따라 버전이 나뉘어진다. 본격적으로 표준화된 버전은 C++98이지만, 본 문서는 다양한 기능들이 추가된 <span style="color: red;">*C++11 표준*</span>을 위주로 설명한다.
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C++ 표준 라이브러리의 헤더 파일</caption><colgroup><col style="width: 15%;"/><col style="width: 15%;"/><col style="70%;"/></colgroup><thead><tr><th style="text-align: center;">헤더 파일</th><th style="text-align: center;">기술</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td><code>&lt;iostream&gt;</code></td><td><a href="#파일-입출력">기본 입출력</a></td><td>일반적인 입출력 함수를 제공한다.</td></tr><tr><td><code>&lt;ctime&gt;</code></td><td><a href="https://en.wikipedia.org/wiki/C_date_and_time_functions">날짜 및 시간</a></td><td><a href="C.md#c-표준-라이브러리">C 표준 라이브러리</a>의 <code>time.h</code>와 관련되며, 날짜 및 시간과 관련된 함수를 제공한다.</td></tr><tr><td><code>&lt;cmath&gt;</code></td><td><a href="https://en.wikipedia.org/wiki/C_mathematical_functions">수식</a></td><td><a href="C.md#c-표준-라이브러리">C 표준 라이브러리</a>의 <code>math.h</code>와 관련되며, 수학적 함수를 제공한다.</td></tr></tbody></table>
 
-컴파일러는 개발사와 목적에 따라 다양한 종류가 존재하지만, 전부 동일한 ISO 표준에 따라 동작하므로 일반적인 경우에는 어떤 컴파일러를 사용하던 무관하다. 아래는 대표적인 C++ 언어 컴파일러들을 나열한다.
+<sup>_† 참고: [C++ Standard Library header files - cppreference.com](https://en.cppreference.com/w/cpp/header)_</sup>
 
-* [Microsoft Visual C++](https://en.wikipedia.org/wiki/Microsoft_Visual_C++) (일명 MSVC): 마이크로소프트
-* [GNU C Compiler](https://en.wikipedia.org/wiki/GNU_Compiler_Collection) (일명 GCC): GNU 프로젝트
-* [Clang](https://en.wikipedia.org/wiki/Clang): LLVM Developer Group, 애플
+그 중에서 [표준 템플릿 라이브러리](https://en.wikipedia.org/wiki/Standard_Template_Library)(Standard Template Library; STL)는 표준 라이브러리의 핵심으로 *[algorithms](https://en.wikipedia.org/wiki/Algorithm_(C++))*, *[containers](#컨테이너)*, *[functors](#함수)*, 그리고 *[iterators](https://en.wikipedia.org/wiki/Iterator)* 구성을 제공한다.
 
-## 프로젝트
-다음은 비주얼 스튜디오 2022을 위주로 C++ 프로젝트 구축에 대하여 설명한다.
+## 구문
+C++가 설계대로 동작하기 위해서는 올바른 문자 및 기호들의 조합을 정의하는 **[구문](https://en.wikipedia.org/wiki/Syntax_(programming_languages))**(syntax)에 따라 작성되어야 한다. 각 프로그래밍 언어마다 규정하는 구문이 다르며, 이를 준수하지 않을 시 해당 프로그램은 빌드되지 않거나, 실행이 되어도 오류 및 의도치 않은 동작을 수행한다.
 
-![비주얼 스튜디오 C++ 언어 프로그래밍 화면](./images/visual_studio_cpp.png)
+다음은 C++에서 구문에 관여하는 요소들을 소개한다:
 
-아래는 C++ 프로그램을 실행하는 가장 기초적인 코드와 함께 코드에 대한 설명이다.
-
-* `#include <iostream>`: Iostream [헤더 파일](#헤더-파일)로부터 C++ 표준 입출력 라이브러리를 [불러오며](#포함-지시문), 터미널에 텍스트를 출력하는 [`std::cout`](#파일-입출력) 등을 제공한다.
-* `int main() { ... }`: C++ 언어가 시작되는 함수, 일명 [진입점](#진입점)이다
-
-# 구문
-**[구문](https://en.wikipedia.org/wiki/Syntax_(programming_languages))**(syntax)은 프로그래밍 언어에서 문자 및 기호들의 조합이 올바른 문장 또는 표현식을 구성하였는지 정의하는 규칙이다. 각 프로그래밍 언어마다 규정하는 구문이 다르며, 이를 준수하지 않을 시 해당 프로그램은 빌드되지 않거나, 실행이 되어도 오류 및 의도치 않은 동작을 수행한다.
-
-다음은 C++ 언어에서 구문에 관여하는 요소들을 소개한다:
-
-* **[표현식](https://en.wikipedia.org/wiki/Expression_(computer_science))(expression)**
-    
-    값을 반환하는 구문적 존재를 가리킨다. 표현식에 대한 결과를 도출하는 것을 평가(evaluate)라고 부른다.
-    
-    ```cpp
-    2 + 3           // 숫자 5를 반환
-    2 < 3           // 논리 참을 반환
-    ```
-
-* **[토큰](https://learn.microsoft.com/en-us/cpp/cpp/character-sets)(token)**
-
-    표현식을 구성하는 가장 기본적인 요소이며, 대표적으로 [키워드](https://learn.microsoft.com/en-us/cpp/cpp/keywords-cpp)(keyword), [식별자](#식별자)(identifier), [숫자](https://learn.microsoft.com/en-us/cpp/cpp/numeric-boolean-and-pointer-literals-cpp) 및 [문자열 리터럴](https://learn.microsoft.com/en-us/cpp/cpp/string-and-character-literals-cpp)(literal) 등이 있다.
-
-    ```cpp
-    variable        // 식별자
-    2               // 정수 리터럴
-    ```
-
-* **[문장](https://en.wikipedia.org/wiki/Statement_(computer_science))(statement)**
-    
-    실질적으로 무언가를 실행하는 구문적 존재를 가리킨다: 흔히 하나 이상의 표현식으로 구성되지만, [`break`](#break-문) 및 [`continue`](#continue-문)와 같이 독립적으로 사용되는 문장도 있다. 러스트 프로그래밍 언어는 [세미콜론](https://en.wikipedia.org/wiki/Newline)(semicolon) `;`을 기준으로 문장을 분별한다. 
-
-    ```cpp
-    int variable = 2 + 3;      // 숫자 5를 "variable" 변수에 초기화
-    if (2 < 3) statement;      // 논리가 참이면 "statement" 문장 실행
-    ```
-
-* **[블록](https://en.wikipedia.org/wiki/Block_(programming))(block)**
-
-    한 개 이상의 문장들을 한꺼번에 관리할 수 있도록 묶어놓은 소스 코드상 그룹이다. 블록 안에 또 다른 블록이 상주할 수 있으며, 이를 네스티드 블록(nested block)이라고 부른다. C++에서는 한 쌍의 중괄호 `{}`로 표시된다.
-
-    ```cpp
-    {
-        int variable = 2 + 3;
-        if (2 < 3) statement;
-    }
-    ```
-
-### 식별자
-**[식별자](https://learn.microsoft.com/en-us/cpp/cpp/identifiers-cpp)**(identifier)는 프로그램을 구성하는 데이터들을 구별하기 위해 사용되는 명칭이다. 즉, 식별자는 개발자가 데이터에 직접 붙여준 이름이다. C++에서 식별자를 선정하는데 아래의 규칙을 지켜야 한다.
-
-1. 알파벳, 숫자, 밑줄 `_`만 허용 (그 외 특수문자 및 공백 사용 불가)
-2. 식별자의 첫 문자는 숫자가 될 수 없음
-3. 대소문자 구분 필수
-4. [예약어](https://en.wikipedia.org/wiki/Reserved_word) 금지
-
-### 주석
-**[주석](https://learn.microsoft.com/en-us/cpp/cpp/comments-cpp)**(comment)은 프로그램의 소스 코드로 취급하지 않아 실행되지 않는 영역이다. 흔히 코드에 대한 간단한 정보를 기입하기 위해 사용되는 데 C++ 언어에는 한줄 주석 그리고 블록 주석이 존재한다.
-
-<table style="table-layout: fixed; width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C++ 주석 종류</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">한줄 주석</th><th style="text-align: center;">블록 주석</th></tr></thead><tbody><tr><td colspan="2">주석은 컴파일 직전에 <a href="#전처리기">전처리기</a>에 의해 소스 코드에 제거된다. 즉, 실행 파일 안에는 주석의 어떠한 정보도 저장되지 않는다.</td></tr><tr style="vertical-align: top; overflow-wrap: break-word;"><td>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C 언어의 프로그래밍 구문 요소</caption><colgroup><col style="width: 10%;"/><col style="width: 35%;"/><col style="55%;"/></colgroup><thead><tr><th style="text-align: center;">구문 요소</th><th style="text-align: center;">설명</th><th style="text-align: center;">예시</th></tr></thead><tbody><tr><td style="text-align: center;"><b><a href="https://en.wikipedia.org/wiki/Expression_(computer_science)">표현식</a></b><br/>(expression)</td><td>값을 반환하는 구문적 존재를 가리킨다. 표현식에 대한 결과를 도출하는 것을 평가(evaluate)라고 부른다.</td><td>
 
 ```cpp
-// 한줄 주석: 코드 한 줄을 차지하는 주석이다.
+2 + 3                  // 정수 5를 반환
+2 < 3                  // 논리 참을 반환
 ```
-</td><td>
+
+</td></tr><tr><td style="text-align: center;"><b><a href="https://learn.microsoft.com/en-us/cpp/cpp/character-sets">토큰</a></b><br/>(token)</td><td>표현식을 구성하는 가장 기본적인 요소이며, 대표적으로 <a href="https://learn.microsoft.com/en-us/cpp/cpp/keywords-cpp">키워드</a>, <a href="https://learn.microsoft.com/en-us/cpp/cpp/identifiers-cpp">식별자</a>, <a href="https://learn.microsoft.com/en-us/cpp/cpp/numeric-boolean-and-pointer-literals-cpp">상수</a>, <a href="https://learn.microsoft.com/en-us/cpp/cpp/string-and-character-literals-cpp">문자열 리터럴</a> 등이 있다.</td><td>
 
 ```cpp
-/*
-블록 주석:
-코드 여러 줄을 차지하는 주석이다.
-*/
+variable               // 식별자
+2                      // 상수
 ```
+
+</td></tr><tr><td style="text-align: center;"><b><a href="https://en.wikipedia.org/wiki/Statement_(computer_science)">문장</a></b><br/>(statement)</td><td>실질적으로 무언가를 실행하는 구문적 존재를 가리키며, <a href="https://en.wikipedia.org/wiki/Newline">세미콜론</a>을 기준으로 문장을 분별한다. 일반적으로 한 개 이상의 표현식으로 구성되지만, <code>break</code> 및 <code>continue</code> 등 독립적으로 사용되는 문장도 있다.</td><td>
+
+```cpp
+int variable = 2 + 3;  // "variable" 변수에 정수 5 초기화
+if (2 < 3) statement;  // 참일 경우 "statement" 문장 실행
+```
+
+</td></tr><tr><td style="text-align: center;"><b><a href="https://en.wikipedia.org/wiki/Block_(programming)">블록</a></b><br/>(block)</td><td>한 개 이상의 문장들을 한꺼번에 관리할 수 있도록 묶어놓은 소스 코드상 그룹이며 한 쌍의 중괄호 <code>{}</code>로 표시된다. 블록 안에 또 다른 블록이 상주할 수 있으며, 이를 네스티드 블록(nested block)이라고 부른다.</td><td>
+
+```cpp
+{
+    int variable = 2 + 3;
+    if (2 < 3) statement;
+}
+```
+
 </td></tr></tbody></table>
 
 ## 자료형
 **[자료형](https://en.wikipedia.org/wiki/Data_type)**(data type)은 데이터를 어떻게 표현할 지 결정하는 요소이며, C++에서는 다음과 같이 존재한다.
 
-<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://learn.microsoft.com/en-us/cpp/cpp/fundamental-types-cpp">C++ 자료형</a></caption><colgroup><col style="width: 15%;"/><col style="width: 15%;"/><col style="width: 15%;"/><col/></colgroup><thead><tr><th style="text-align: center;">키워드</th><th style="text-align: center;">자료형</th><th style="text-align: center;">크기 (바이트)</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>char</code></td><td style="text-align: center;">문자</td><td style="text-align: center;">1</td><td>단일 ANSI 문자</td></tr><tr><td style="text-align: center;"><code>short</code></td><td style="text-align: center;">정수</td><td style="text-align: center;">2</td><td>가장 작은 정수 자료형</td></tr><tr><td style="text-align: center;"><code>int</code></td><td style="text-align: center;">정수</td><td style="text-align: center;">2 <sub>(최소)</sub></td><td>워드 크기의 기본 정수 자료형; <code>short</code>보다 작아서는 안되며, 32비트 시스템 이후로는 4바이트가 일반화되었다.</td></tr><tr><td style="text-align: center;"><code>long</code></td><td style="text-align: center;">정수</td><td style="text-align: center;">4 <sub>(최소)</sub></td><td>정수 자료형 <code>int</code>보다 작아서는 안되며, 4바이트와 8바이트 중 어느 크기를 채택하였는지 컴파일러마다 다르다.</td></tr><tr><td style="text-align: center;"><code>float</code></td><td style="text-align: center;">부동소수점</td><td style="text-align: center;">4</td><td>32비트 단정밀도 실수</td></tr><tr><td style="text-align: center;"><code>double</code></td><td style="text-align: center;">부동소수점</td><td style="text-align: center;">8</td><td>64비트 배정밀도 실수</td></tr><tr><td style="text-align: center;"><code>bool</code></td><td style="text-align: center;">논리형</td><td style="text-align: center;">1</td><td>참(<code>true</code>; 영 외의 정수) 혹은 거짓(<code>false</code>; 0)</td></tr><tr><td style="text-align: center;"><code>void</code></td><td style="text-align: center;">보이드</td><td style="text-align: center;">1</td><td>불특정 자료형</td></tr><tr><td style="text-align: center;"><code>auto</code></td><td style="text-align: center;">자동</td><td style="text-align: center;">N/A</td><td>컴파일러에 의해 적절한 자료형으로 자동 선택된다. 복잡한 자료형을 간략히 정의하는데 매우 유용하다.</td></tr></tbody/></table>
-
-> [바이트](https://en.wikipedia.org/wiki/Byte)(byte)란, 컴퓨터에서 메모리에 저장하는 가장 기본적인 단위이다. 자료형마다 크기가 정해진 이유는 효율적인 메모리 관리 차원도 있으나 CPU 연산과도 깊은 연관성을 갖는다. 한 바이트는 여덟 개의 [비트](https://en.wikipedia.org/wiki/Bit)(bit)로 구성된다.
+<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://learn.microsoft.com/en-us/cpp/cpp/fundamental-types-cpp">C++ 자료형</a> 목록</caption><colgroup><col style="width: 15%;"/><col style="width: 15%;"/><col style="width: 15%;"/><col/></colgroup><thead><tr><th style="text-align: center;">키워드</th><th style="text-align: center;">자료형</th><th style="text-align: center;">크기 (바이트)</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>char</code></td><td style="text-align: center;">문자</td><td style="text-align: center;">1</td><td>단일 ANSI 문자</td></tr><tr><td style="text-align: center;"><code>short</code></td><td style="text-align: center;">정수</td><td style="text-align: center;">2</td><td>가장 작은 정수 자료형</td></tr><tr><td style="text-align: center;"><code>int</code></td><td style="text-align: center;">정수</td><td style="text-align: center;">2 <sub>(최소)</sub></td><td>워드 크기의 기본 정수 자료형; <code>short</code>보다 작아서는 안되며, 32비트 시스템 이후로는 4바이트가 일반화되었다.</td></tr><tr><td style="text-align: center;"><code>long</code></td><td style="text-align: center;">정수</td><td style="text-align: center;">4 <sub>(최소)</sub></td><td>정수 자료형 <code>int</code>보다 작아서는 안되며, 4바이트와 8바이트 중 어느 크기를 채택하였는지 컴파일러마다 다르다.</td></tr><tr><td style="text-align: center;"><code>float</code></td><td style="text-align: center;">부동소수점</td><td style="text-align: center;">4</td><td>32비트 단정밀도 실수</td></tr><tr><td style="text-align: center;"><code>double</code></td><td style="text-align: center;">부동소수점</td><td style="text-align: center;">8</td><td>64비트 배정밀도 실수</td></tr><tr><td style="text-align: center;"><code>bool</code></td><td style="text-align: center;">논리형</td><td style="text-align: center;">1</td><td>참(<code>true</code>; 영 외의 정수) 혹은 거짓(<code>false</code>; 0)</td></tr><tr><td style="text-align: center;"><code>void</code></td><td style="text-align: center;">보이드</td><td style="text-align: center;">1</td><td>불특정 자료형</td></tr><tr><td style="text-align: center;"><code>auto</code></td><td style="text-align: center;">자동</td><td style="text-align: center;">N/A</td><td>컴파일러에 의해 적절한 자료형으로 자동 선택된다. 복잡한 자료형을 간략히 정의하는데 매우 유용하다.</td></tr></tbody/></table>
 
 `unsigned` 키워드는 자료형 중에서 [최상위 비트](https://en.wikipedia.org/wiki/Bit_numbering#Most_significant_bit)를 정수의 [부호](https://en.wikipedia.org/wiki/Signedness)를 결정하는 요소로 사용하지 않도록 한다. 아래의 16비트 정수형인 `short`는 원래 최상위 비트를 제외한 나머지 15개의 비트로 정수를 표현한다. `unsigned` 키워드를 사용하면 음의 정수를 나타낼 수 없지만, 16개의 비트로 양의 정수를 더 많이 표현할 수 있다.
 
@@ -111,8 +66,7 @@ short             // 표현 가능 범위: -32768 ~ +32767
 unsigned short    // 표현 가능 범위:     +0 ~ +65535
 ```
 
-### 자료형 변환
-**자료형 변환**(type casting)은 데이터를 다른 자료형으로 바꾸는 작업이며, 불가피하게 데이터가 손실될 수 있으므로 유의하도록 한다.
+데이터를 다른 자료형으로 변경하는 행위를 "자료형 변환"이라고 부르며, 불가피하게 데이터가 손실될 수 있으므로 유의하도록 한다.
 
 * **암시적 자료형 변환**(implicit type casting)
 
