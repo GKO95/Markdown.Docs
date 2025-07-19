@@ -87,7 +87,7 @@ unsigned short    // 표현 가능 범위:     +0 ~ +65535
     ```
 
 ## 변수
-**변수**(variable)는 데이터를 지정된 [자료형](#자료형)으로 저장하는 메모리 공간이다. 아래 코드는 `variable` [식별자](#식별자)를 정수형 변수로 "정의(definition)"하여 메모리 공간을 확보한 다음 상수 3을 할당한다. 여기서 변수로의 최초 할당을 "초기화(initialization)"라고 부르며, 변수를 정의한 이후에 별도로 이루어질 수 있다. 초기화가 누락되면 변수에 가공되지 않은 메모리가 연동되어 잠재적 위험을 초래할 수 있기 때문에 일반적으로 C 언어 컴파일러는 이를 오류로 치부한다.
+**변수**(variable)는 데이터를 지정된 [자료형](#자료형)으로 저장하는 메모리 공간이다. 아래 코드는 `variable` 식별자를 정수형 변수로 "정의(definition)"하여 메모리 공간을 확보한 다음 상수 3을 할당한다. 여기서 변수로의 최초 할당을 "초기화(initialization)"라고 부르며, 변수를 정의한 이후에 별도로 이루어질 수 있다. 초기화가 누락되면 변수에 가공되지 않은 메모리가 연동되어 잠재적 위험을 초래할 수 있기 때문에 일반적으로 C 언어 컴파일러는 이를 오류로 치부한다.
 
 <table style="width: 95%; margin-left: auto; margin-right: auto;"><caption>C 언어의 변수 정의 및 초기화</caption><colgroup><col style="width: 50%;"/></col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">변수 정의 및 초기화 (일괄식)</th><th style="text-align: center;">변수 정의 및 초기화 (개별식)</th></tr></thead><tbody><tr style="vertical-align: top;"><td>
 
@@ -778,7 +778,7 @@ for (int index = 0; index < sizeof(variable); index++) {
 
 > 힙 영역은 [힙 자료구조](https://en.wikipedia.org/wiki/Heap_(data_structure))와 전혀 상관이 없으며, 사전적으로 "(데이터) 더미"를 뜻하는 순수히 메모리의 주소공간 영역을 지칭하는 용어이다.
 
-[`stdlib.h`](https://en.cppreference.com/w/cpp/header/cstdlib) 헤더 파일을 통해 개발자가 원하는 만큼 메모리를 할당받아 사용할 수 있지만, 반면 사용하지 않게 된다면 개발자가 직접 할당받은 메모리를 해제(free)하여 시스템에 반환해야 한다. 이러한 작업이 충분히 이루어지지 않는다면 메모리 누수(memory leak)가 발생하여 리소스 고갈로 프로세스 충돌을 야기한다.
+[`stdlib.h`](https://en.cppreference.com/w/cpp/header/cstdlib) 헤더 파일을 통해 개발자가 원하는 만큼 메모리를 할당받아 사용할 수 있지만, 반면 사용하지 않게 된다면 개발자가 직접 할당받은 메모리를 해제(free)하여 시스템에 반환해야 한다. 이러한 작업이 충분히 이루어지지 않는다면 [메모리 누수](https://en.wikipedia.org/wiki/Memory_leak)(memory leak)가 발생하여 리소스 고갈로 프로세스 충돌을 야기한다.
 
 <table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C 언어의 동적 할당 함수</caption><colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup><thead><tr><th style="text-align: center;">함수</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/memory/malloc"><code>malloc</code></a></td><td>원하는 바이트 크기만큼 메모리 공간을 할당받는다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/memory/calloc"><code>calloc</code></a></td><td>원하는 바이트 크기만큼 메모리 공간을 지정한 횟수만큼 반복하여 할당 및 영값으로 초기화한다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/memory/realloc"><code>realloc</code></a></td><td>동적 할당받은 메모리를 새로운 크기로 재할당받는다.</td></tr><tr><td style="text-align: center;"><a href="https://en.cppreference.com/w/c/memory/free"><code>free</code></a></td><td>동적 할당받은 메모리를 해제한다.</td></tr></tbody></table>
 
@@ -790,14 +790,6 @@ ptr = realloc(ptr, 20);
 
 free(ptr);
 ```
-
-* **[메모리 누수](https://en.wikipedia.org/wiki/Memory_leak)(memory leak)**
-
-    더 이상 사용되지 않는 동적 할당된 메모리가 계속 잔여하여, 프로세스의 [가상 주소 공간](Process.md#가상-주소-공간)에 할당할 수 있는 메모리 리소스가 점차 줄어드는 현상이다. 가상 주소 공간에 더 이상 할당받을 수 있는 메모리가 없으면 프로세스 충돌이 발생하여 종료된다.
-
-* **[허상 포인터](https://en.wikipedia.org/wiki/Dangling_pointer)(dangling pointer)**
-
-    *[NTSTATUS](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/596a1078-e883-4972-9bbc-49e60bebca55) [0xC0000005](https://learn.microsoft.com/en-us/shows/inside/c0000005) STATUS_ACCESS_VIOLATION 참고*
 
 # 사용자 정의 자료형
 **사용자 정의 자료형**(user-defined data type)이란, `int`, `float`, 또는 `char` 등의 기존 C 언어의 [자료형](#자료형)을 활용하여 특정 목적을 위해 제작한 커스텀 자료형이다. 완전히 새로운 자료형을 창조하는 게 아니며, 사용자 정의 자료형으로부터 초기화된 데이터를 **인스턴스**(instance)라고 부른다.
