@@ -26,12 +26,14 @@
 ![C++ 프로그래밍 소스 코드, 그리고 x64 아키텍처 기계어로 컴파일된 이진 실행 파일](./images/programming_compiler_example.png)
 
 ### 링커
-**[링커](https://en.wikipedia.org/wiki/Linker_(computing))**(linker)는 아래 두 유형의 파일들을 연동시켜 하나의 최종 결과물로 통합하는 빌드 과정의 마지막 단계에 투입되는 도구이다.
+**[링커](https://en.wikipedia.org/wiki/Linker_(computing))**(linker)는 아래 두 유형의 파일들을 연동시켜 하나의 최종 결과물로 통합하는 도구이다.
 
 ![링커의 동작 원리 다이어그램](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Linker.svg/344px-Linker.svg.png)
 
 1. [오브젝트 파일](https://en.wikipedia.org/wiki/Object_file): 각 파일의 소스 코드가 컴파일된 [기계어](#기계어) 혹은 [바이트코드](#바이트코드)의 .obj 확장자 파일이다.
 1. [라이브러리 파일](DLL.md): 소스 코드가 특정 데이터나 기능의 필요로 참조하여 불러온 .lib 확장자 파일이다.
+
+컴파일 타임 이후, 빌드의 마지막 단계에 투입되며 이때를 [링크 타임](https://en.wikipedia.org/wiki/Link_time)이라고 부른다.
 
 ## 인터프리터
 **[인터프리터](https://en.wikipedia.org/wiki/Interpreter_(computing))**(interpreter)는 소스 코드를 [CPU](Processor.md)가 직접 수행할 수 있는 [기계어](#기계어)로 [컴파일](#컴파일러)하지 않고서도 곧바로 실행할 수 있도록 하는 소프트웨어이다. 이러한 특성은 소스 코드가 어떤 시스템에서도 동일하게 실행될 수 있는 [크로스 플랫폼](https://en.wikipedia.org/wiki/Cross-platform_software) 성질을 보여준다. 소스 코드로부터 수행되어야 할 동작을 인터프리터가 대신 실행하기 때문에 기계어로의 컴파일이 불필요하다.
