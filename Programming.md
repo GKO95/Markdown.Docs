@@ -4,19 +4,6 @@
 1. [컴파일러](#컴파일러)에 의해 다른 언어의 코드로 변환하여 실행하는 "**[컴파일 언어](https://en.wikipedia.org/wiki/Compiled_language)**"
 1. [인터프리터](#인터프리터)에 의해 CPU가 실행해야 한 작업을 안내하는 "**[인터프리트 언어](https://en.wikipedia.org/wiki/Interpreter_(computing))**"
 
-## 컴파일러
-**[컴파일러](https://en.wikipedia.org/wiki/Compiler)**(compiler)는 하나의 프로그래밍 언어를 다른 언어로 변환(일명 컴파일; compile)하는 언어 처리 소프트웨어이다.
-
-컴파일러를 사용하는 대표적인 [C](C.md)/[C++](Cpp.md) 프로그래밍 언어는 [CPU](Processor.md)가 직접적으로 수행할 수 있는 [기계어](#기계어)로 컴파일되다 보니, 흔히 [고급 프로그래밍 언어](https://en.wikipedia.org/wiki/High-level_programming_language)를 [저급 프로그래밍 언어](https://en.wikipedia.org/wiki/Low-level_programming_language)로 변환하는 국한적인 작업으로 오해한다. 하지만 [파이썬](Python.md) 및 자바 프로그래밍 언어는 [바이트코드](#바이트코드)라는 [중간 언어](https://en.wikipedia.org/wiki/Intermediate_representation)로 변환하는 컴파일러가 존재하며, 심지어 [타입스크립트](TypeScript.md) 프로그래밍 언어의 컴파일러는 [자바스크립트](JavaScript.md)라는 또 다른 고급 프로그래밍 언어로 변환한다.
-
->  프로그래밍 언어는 설계된 당시의 철학과 기술적 한계를 효율적으로 극복하기 위해 여러 기술들을 복합적으로 작용하면서 컴파일 언어와 [인터프리트 언어](#인터프리터)의 경계를 허물고 있다.
-
-<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">컴파일 작업 유형의 비교</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Ahead-of-time_compilation">AOT 컴파일</a></th><th style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Just-in-time_compilation">JIT 컴파일</a></th></tr></thead><tbody><tr><td style="text-align: center;">Ahead-of-time compilation</td><td style="text-align: center;">Just-in-time compilation</td></tr><tr><td>프로그램을 실행하기 전에 미리 다른 언어로 변환하는 컴파일 작업이다. 컴파일을 마친 프로그램은 추가 작업이 필요없이 실행되므로 속도가 매우 빠르다는 장점을 가진다. 다만, 변경된 소스 코드를 시험하기 위해서는 새로 컴파일해야 하는 불편함이 다소 존재한다.</td><td>프로그램을 실행하는 <a href="https://en.wikipedia.org/wiki/Execution_(computing)#Runtime">런타임</a> 도중에 다른 언어로 변환하는 컴파일 작업이다. 전통적인 AOT 컴파일의 빠른 실행 속도와 인터프리터의 유연함을 모두 지니지만, 동시에 두 기술의 <a href="https://en.wikipedia.org/wiki/Overhead_(computing)">오버헤드</a>가 중첩(즉, <a href="https://en.wikipedia.org/wiki/Compile_time">컴파일 타임</a> + <a href="https://en.wikipedia.org/wiki/Link_time">링크 타임</a> + 인터프리트 오버헤드)되는 단점도 공존한다.</td></tr><tr><td><ul><li>C/C++&nbsp;<sub>(소스 코드를 <a href="https://en.wikipedia.org/wiki/Object_code">오브젝트 파일</a>로 컴파일하고 <a href="https://en.wikipedia.org/wiki/Linker_(computing)">링커</a>로 연동시켜 <a href="https://en.wikipedia.org/wiki/Software_build">빌드</a>)</sub></li><li>Rust</li></ul></td><td><ul><li>C#</li><li>Java</li></ul></td></tr></tbody></table>
-
-아래는 C++ 프로그래밍 언어의 CPP 확장자 소스 코드(左)가 [MSVC](https://en.wikipedia.org/wiki/Microsoft_Visual_C++) 컴파일러에 의해 기계어로 구성된 EXE 실행 파일(右)로 컴파일 된 예시이다.
-
-![C++ 프로그래밍 소스 코드, 그리고 x64 아키텍처 기계어로 컴파일된 이진 실행 파일](./images/programming_compiler_example.png)
-
 ### 기계어
 **[기계어](https://en.wikipedia.org/wiki/Machine_code)**(maachine code)는 컴퓨터 [프로세서](Processor.md)(일명  CPU)의 연산 및 동작을 직접 제어할 수 있는 0과 1만으로 구성된 [이진 코드](https://en.wikipedia.org/wiki/Binary_code)이다. 비록 프로그래밍 언어는 영문으로 작성되지만, 컴퓨터가 작업을 수행하기 위해서는 결국 기계어로 변환되어야 한다. 만일 [어셈블리](Assembly.md)에 능통하면 기계어로 직접 프로그래밍이 가능하다. CPU에는 [x86](https://en.wikipedia.org/wiki/X86), [ARM](https://en.wikipedia.org/wiki/ARM_architecture_family) 등 다양한 [아키텍처](https://en.wikipedia.org/wiki/Instruction_set_architecture)가 있는데, 각각 연산 및 동작을 수행하기 위한 이진 코드가 설계상 이유로 서로 다르다. 예를 들어, 동일한 [윈도우 OS](Windows.md)라도 [x86-64](https://en.wikipedia.org/wiki/X86-64)의 [인텔 코어](https://en.wikipedia.org/wiki/Intel_Core) 및 [AMD 라이젠](https://en.wikipedia.org/wiki/Ryzen)에서 문제가 없던 프로그램이 [ARM64](https://en.wikipedia.org/wiki/AArch64)의 [퀄컴 스냅드래곤](https://en.wikipedia.org/wiki/Qualcomm_Snapdragon)에서는 실행 불가하다.
 
@@ -24,6 +11,27 @@
 **[바이트코드](https://en.wikipedia.org/wiki/Bytecode)**(bytecode)는 소스 코드에서 기계어로 변환하는데 징검다리 역할을 하는 [중간 언어](https://en.wikipedia.org/wiki/Intermediate_representation)이다. 수행할 연산 혹은 동작을 나타내는 [명령 코드](https://en.wikipedia.org/wiki/Opcode)(opcode)가 한 [바이트](https://en.wikipedia.org/wiki/Byte)(byte) 내에서 표현되기 때문에 바이트코드("바이트" + <sub>명령</sub>"코드")라는 명칭에서 유래되었다. [기계어](#기계어)와 유사하지만 바이트코드는 CPU 아키텍처에 의존하지 않고 소프트웨어에서 처리된다.
         
 > 바이트코드도 전부 동일한 건 아니다: [파이썬](Python.md)과 자바는 바이트코드를 생성하는 대표적인 언어이지만, 명령 코드와 인자 여부 등이 달라 서로 호환되지 않는다. 즉, 바이트코드는 이를 처리하는 소프트웨어에 의존한다.
+
+## 컴파일러
+**[컴파일러](https://en.wikipedia.org/wiki/Compiler)**(compiler)는 하나의 프로그래밍 언어를 다른 언어로 변환(일명 컴파일; compile)하는 언어 처리 소프트웨어이다.
+
+컴파일러를 사용하는 대표적인 [C](C.md)/[C++](Cpp.md) 프로그래밍 언어는 [CPU](Processor.md)가 직접적으로 수행할 수 있는 [기계어](#기계어)로 컴파일되다 보니, 흔히 [고급 프로그래밍 언어](https://en.wikipedia.org/wiki/High-level_programming_language)를 [저급 프로그래밍 언어](https://en.wikipedia.org/wiki/Low-level_programming_language)로 변환하는 국한적인 작업으로 오해한다. 하지만 [파이썬](Python.md) 및 자바 프로그래밍 언어는 [바이트코드](#바이트코드)라는 [중간 언어](https://en.wikipedia.org/wiki/Intermediate_representation)로 변환하는 컴파일러가 존재하며, 심지어 [타입스크립트](TypeScript.md) 프로그래밍 언어의 컴파일러는 [자바스크립트](JavaScript.md)라는 또 다른 고급 프로그래밍 언어로 변환한다.
+
+>  프로그래밍 언어는 설계된 당시의 철학과 기술적 한계를 효율적으로 극복하기 위해 여러 기술들을 복합적으로 작용하면서 컴파일 언어와 [인터프리트 언어](#인터프리터)의 경계를 허물고 있다.
+
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">컴파일 작업 유형의 비교</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Ahead-of-time_compilation">AOT 컴파일</a></th><th style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Just-in-time_compilation">JIT 컴파일</a></th></tr></thead><tbody><tr><td style="text-align: center;">Ahead-of-time compilation</td><td style="text-align: center;">Just-in-time compilation</td></tr><tr><td>프로그램을 실행하기 전에 미리 다른 언어로 변환하는 컴파일 작업이다. 컴파일을 마친 프로그램은 추가 작업이 필요없이 실행되므로 속도가 매우 빠르다는 장점을 가진다. 다만, 변경된 소스 코드를 시험하기 위해서는 새로 컴파일해야 하는 불편함이 다소 존재한다.</td><td>프로그램을 실행하는 <a href="https://en.wikipedia.org/wiki/Execution_(computing)#Runtime">런타임</a> 도중에 다른 언어로 변환하는 컴파일 작업이다. 전통적인 AOT 컴파일의 빠른 실행 속도와 인터프리터의 유연함을 모두 지니지만, 동시에 두 기술의 <a href="https://en.wikipedia.org/wiki/Overhead_(computing)">오버헤드</a>가 중첩(즉, <a href="https://en.wikipedia.org/wiki/Compile_time">컴파일 타임</a> + <a href="https://en.wikipedia.org/wiki/Link_time">링크 타임</a> + 인터프리트 오버헤드)되는 단점도 공존한다.</td></tr><tr><td><ul><li>C/C++&nbsp;<sub>(소스 코드를 <a href="https://en.wikipedia.org/wiki/Object_code">오브젝트 파일</a>로 컴파일하고 <a href="#링커">링커</a>로 연동시켜 <a href="https://en.wikipedia.org/wiki/Software_build">빌드</a>)</sub></li><li>Rust</li></ul></td><td><ul><li>C#</li><li>Java</li></ul></td></tr></tbody></table>
+
+아래는 C++ 프로그래밍 언어의 CPP 확장자 소스 코드(左)가 [MSVC](https://en.wikipedia.org/wiki/Microsoft_Visual_C++) 컴파일러에 의해 기계어로 구성된 EXE 실행 파일(右)로 컴파일 된 예시이다.
+
+![C++ 프로그래밍 소스 코드, 그리고 x64 아키텍처 기계어로 컴파일된 이진 실행 파일](./images/programming_compiler_example.png)
+
+### 링커
+**[링커](https://en.wikipedia.org/wiki/Linker_(computing))**(linker)는 아래 두 유형의 파일들을 연동시켜 하나의 최종 결과물로 통합하는 빌드 과정의 마지막 단계에 투입되는 도구이다.
+
+![링커의 동작 원리 다이어그램](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Linker.svg/344px-Linker.svg.png)
+
+1. [오브젝트 파일](https://en.wikipedia.org/wiki/Object_file): 각 파일의 소스 코드가 컴파일된 [기계어](#기계어) 혹은 [바이트코드](#바이트코드)의 .obj 확장자 파일이다.
+1. [라이브러리 파일](DLL.md): 소스 코드가 특정 데이터나 기능의 필요로 참조하여 불러온 .lib 확장자 파일이다.
 
 ## 인터프리터
 **[인터프리터](https://en.wikipedia.org/wiki/Interpreter_(computing))**(interpreter)는 소스 코드를 [CPU](Processor.md)가 직접 수행할 수 있는 [기계어](#기계어)로 [컴파일](#컴파일러)하지 않고서도 곧바로 실행할 수 있도록 하는 소프트웨어이다. 이러한 특성은 소스 코드가 어떤 시스템에서도 동일하게 실행될 수 있는 [크로스 플랫폼](https://en.wikipedia.org/wiki/Cross-platform_software) 성질을 보여준다. 소스 코드로부터 수행되어야 할 동작을 인터프리터가 대신 실행하기 때문에 기계어로의 컴파일이 불필요하다.
