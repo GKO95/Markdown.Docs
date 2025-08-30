@@ -12,7 +12,7 @@
 
 한편, DLL 모듈이 한 개 이상의 함수나 변수를 내보낸다면<sup>[[참고](https://learn.microsoft.com/cpp/build/exporting-from-a-dll)]</sup> 빌드 과정에서 [링커](Programming.md#링커)는 단일 .lib 파일을 함께 생성한다: 어떠한 코드도 정의되어 있지 않으며, 단순히 내보내진 함수 및 변수의 심볼 목록이 나열된 매우 작은 파일이다. 해당 DLL의 심볼을 참조하는 타 프로그램을 빌드할 시, 링커는 .lib 파일을 단순히 참조한 외부 심볼이 어느 DLL에 있는지 파악하는 단서로써 활용한다.
 
-## DLL 프로그래밍
+## DLL 불러오기
 DLL의 일부 동작 원리를 이해하기 위해서는 이에 대한 프로그래밍 관련 내용을 함께 살펴본다. [Visual Studio](https://visualstudio.microsoft.com/)의 일환인 [DUMPBIN](https://learn.microsoft.com/cpp/build/reference/dumpbin-reference) 도구는 실행 프로그램 및 DLL 파일의 정보를 보여주는 데 유용하기 때문에 활용해 보는 걸 적극 권장한다.
 
 아래는 Visual Studio 프로젝트에서 소스 코드를 DLL 모듈로 빌드하기 위해 필요한 설정을 보여준다.
@@ -21,5 +21,13 @@ DLL의 일부 동작 원리를 이해하기 위해서는 이에 대한 프로그
 
 다음 키워드로 선언된 변수, 함수 프로토타임, 그리고 C++ 클래스는 링커에 의해 다음과 같이 처리된다.
 
-* [`__declspec(dllexport)`](https://learn.microsoft.com/cpp/build/exporting-from-a-dll-using-declspec-dllexport) 키워드: 선언된 데이터의 심볼들은 [export 섹션](PE.md#export-섹션)에 나열된다.
-* [`__declspec(dllimport)`](https://learn.microsoft.com/cpp/build/importing-into-an-application-using-declspec-dllimport) 키워드: 선언된 데이터의 심볼들은 [import 섹션](PE.md#import-섹션)에 나열된다.
+* [`__declspec(dllexport)`](https://learn.microsoft.com/cpp/build/exporting-from-a-dll-using-declspec-dllexport) 키워드: 선언된 심볼들은 [Export 섹션](PE.md#export-섹션)에 나열된다.
+* [`__declspec(dllimport)`](https://learn.microsoft.com/cpp/build/importing-into-an-application-using-declspec-dllimport) 키워드: 선언된 심볼들은 [Import 섹션](PE.md#import-섹션)에 나열하지만 필수는 아니며, C 표준의 [`extern`](C.md#변수) 키워드만으로도 충분하다.
+
+[프로세스](Process.md)가 실행될 때, [로더](https://en.wikipedia.org/wiki/Loader_(computing))(loader)는 Import 섹션에서 명시된 필수 DLL 이미지 파일을 정해진 디렉토리 순서에 따라 탐색하여 [가상 주소 공간](Process.md#가상-주소-공간)으로 매핑한다.
+이후 불러올 심볼이 DLL에 존재하는지 확인하기 위해 매핑된 이미지의 Export 섹션을 검토하고, 특이 사항이 없다면 [Import Address Table](PE.md#import-섹션)의 RVA를 실제 가상 메모리 주소로 대체한다. 하지만 Export 섹션에서 심볼이 발견되지 않으면 0xC0000139 STATUS_ENTRYPOINT_NOT_FOUND 오류를 반환한다.
+
+> DLL을 불러오는 작업은 프로세스 초기화 작업에 이루어지기 때문에 런타임 성능에 영향을 주지 않지만, 로드할 DLL 개수가 많아지면 초기화 시간이 길어지게 만든다.
+
+### DLL 지연 로드
+**[DLL 지연 로드](https://learn.microsoft.com/en-us/cpp/build/reference/linker-support-for-delay-loaded-dlls)**(Delay Loading DLL)는 링크가 내재되어 있으나 해당 모듈의 심볼을 참조할 때까지 DLL을 아직 로드하지 않는 기술이다.
