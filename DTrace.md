@@ -9,8 +9,8 @@ DTrace가 지원되는 Windows에서 이를 활성화하려면 BCD를 설정해�
 bcdedit /set dtrace on
 ```
 
-* Windows 업그레이드로 빌드가 바뀌면 BCD의 DTrace 설정도 원래대로 초기화된다.
-* [BitLocker](BitLocker.md)를 사용하고 있다면 임시 중단(suspend)시켜 BCD 변경으로 인해 복구 키를 요구하는 걸 방지할 수 있다.
+* [Windows 업데이트](Update.md) (혹은 업그레이드)로 빌드가 바뀌면 BCD의 DTrace 설정도 원래대로 초기화된다.
+* [BitLocker](BitLocker.md)를 사용하고 있다면 일시 중단시켜 BCD 변경으로 인해 복구 키를 요구하는 걸 방지할 수 있다.
 
 ### 가상 머신의 DTrace 요건
 가상 머신에서 DTrace를 실행하려면 [네스티드 가상화](https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/user-guide/enable-nested-virtualization)를 활성화해야 한다. 아래는 관리자 권한의 [Windows PowerShell](PowerShell.md)에서 [Set-VMProcessor](https://learn.microsoft.com/en-us/powershell/module/hyper-v/set-vmprocessor) cmdlet으로 [Hyper-V](Hypervisor.md) VM의 가상 [프로세서](Processor.md)를 설정하는 명령이며, 여기서 `<VMName>`에는 DTrace를 실행할 가상 머신의 이름을 기입한다.
