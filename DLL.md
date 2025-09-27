@@ -30,4 +30,10 @@ DLL의 일부 동작 원리를 이해하기 위해서는 이에 대한 프로그
 > DLL을 불러오는 작업은 프로세스 초기화 작업에 이루어지기 때문에 런타임 성능에 영향을 주지 않지만, 로드할 DLL 개수가 많아지면 초기화 시간이 길어지게 만든다.
 
 ### DLL 지연 로드
-**[DLL 지연 로드](https://learn.microsoft.com/en-us/cpp/build/reference/linker-support-for-delay-loaded-dlls)**(Delay Loading DLL)는 링크가 내재되어 있으나 해당 모듈의 심볼을 참조할 때까지 DLL을 아직 로드하지 않는 기술이다.
+**[DLL 지연 로드](https://learn.microsoft.com/cpp/build/reference/understanding-the-helper-function)**(Delay Loading DLL)는 링크가 내재되어 있으나 해당 모듈의 심볼을 참조할 때까지 DLL을 아직 로드하지 않는 기술이다. 프로세스 초기화 과정에 다수의 DLL을 불러오는데 소요되는 시간을 분산시키는 등의 용도로 활용될 수 있다. 단, DLL 지연 로드에는 아래와 같이 제약이 존재한다.
+
+* 변수만 내보내는 DLL은 지연 로드가 불가하다.
+* Kernel32.dll은 모듈을 불러오기 위해 필요한 [LoadLibrary](https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-loadlibraryw) 및 [GetProcAddress](https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-getprocaddress) 함수를 제공하기 때문에 DLL 지연 로드가 불가하다.
+* DllMain 진입점 안에서 지연 로드되는 DLL의 함수를 호출하면 프로세스가 충돌할 수 있어 기피해야 한다.
+
+프로그램 개발자 관점에서 DLL 지연 로드의 구현에 대해 자세한 내용을 확인하려면 마이크로소프트 [기술 문서](https://learn.microsoft.com/cpp/build/reference/linker-support-for-delay-loaded-dlls)를 참고한다.
