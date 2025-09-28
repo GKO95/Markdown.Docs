@@ -67,7 +67,7 @@ File Type: DLL
     <sup>_† 순번 플래그가 설정되거나 PE32+의 경우 사용하지 않는 비트가 생기는데 이들은 모두 0으로 초기화된다._</sup>
 
 * Name: 본 Import Directory Table에 해당하는 DLL의 ASCII 문자열을 가리키는 32비트 RVA 포인터를 저장한다.
-* [Import Address Table](https://learn.microsoft.com/windows/win32/debug/pe-format#import-address-table): 구조와 내용물은 Import Lookup Table과 동일하지만, 해당 DLL 이미지가 [프로세스](Process.md)에 로드되어 바인딩이 될 때 (심볼의 상대적인 RVA는) [가상 주소 공간](Process.md#가상-주소-공간)에 대응하는 실제 "가상 메모리 주소"로 덮어씌어진다.
+* [Import Address Table](https://learn.microsoft.com/windows/win32/debug/pe-format#import-address-table): 구조와 내용물은 Import Lookup Table과 동일하지만, 해당 DLL 이미지가 [프로세스](Process.md)에 로드되어 바인딩이 될 때 (심볼의 상대적인 RVA는) [가상 주소 공간](Process.md#가상-주소-공간)에 대응하는 실제 "가상 메모리 주소 (일명 VA)"로 덮어씌어진다.
 
 DUMPBIN의 [/IMPORTS](https://learn.microsoft.com/cpp/build/reference/dash-exports) 옵션을 사용하면 위의 Import 섹션의 심볼들을 종합적으로 정리하여 아래와 같이 보여준다.
 
@@ -106,3 +106,6 @@ File Type: DLL
 
   Section contains the following delay load imports:
 ```
+
+## Relocation 섹션
+**[.reloc 섹션](https://learn.microsoft.com/windows/win32/debug/pe-format#the-reloc-section-image-only)**(base relocation section)은 이미지가 가상 주소 공간에서 선호되는 주소로 불러올 수 없을 때, 재배치된 현황을 각각 4 KB 크기의 [페이지](Memory.md#페이지)에 대응하는 블록으로 나누어 기록한 테이블이다. 비록 이미지의 기반 주소로부터 상대적 거리를 제시한 RVA가 있지만, [포인터](C.md#포인터)나 [정적 변수](C.md#변수)와 같이 절대 주소가 하드코딩된 경우에는 이러한 재배치 작업이 불가피하다.
