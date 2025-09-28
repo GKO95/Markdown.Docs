@@ -23,8 +23,7 @@ DLL의 일부 동작 원리를 이해하기 위해서는 이에 대한 프로그
 
 다음 키워드로 선언된 변수, 함수 프로토타임, 그리고 C++ 클래스는 링커에 의해 다음과 같이 처리된다.
 
-* [`__declspec(dllexport)`](https://learn.microsoft.com/cpp/build/exporting-from-a-dll-using-declspec-dllexport) 키워드: 선언된 심볼들은 [Export 섹션](PE.md#export-섹션)에 나열된다.
-* [`__declspec(dllimport)`](https://learn.microsoft.com/cpp/build/importing-into-an-application-using-declspec-dllimport) 키워드: 선언된 심볼들은 [Import 섹션](PE.md#import-섹션)에 나열하지만 필수는 아니며, C 표준의 [`extern`](C.md#변수) 키워드만으로도 충분하다.
+<table style="width: 75%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">심볼 내보내기 및 불러오기 키워드</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;"><a href="https://learn.microsoft.com/cpp/build/exporting-from-a-dll-using-declspec-dllexport"><code>__declspec(dllexport)</code></a></th><th style="text-align: center;"><a href="https://learn.microsoft.com/cpp/build/importing-into-an-application-using-declspec-dllimport"><code>__declspec(dllimport)</code></a></th></tr></thead><tbody><tr style="text-align: center;"><td>선언된 심볼들은 <a href="PE.md#export-섹션">Export 섹션</a>에 나열된다.</td><td>선언된 심볼들은 <a href="PE.md#import-섹션">Import 섹션</a>에 나열하지만 필수는 아니며, C 표준의 <a href="C.md#변수"><code>extern</code></a> 키워드만으로도 충분하다.</td></tr></tbody></table>
 
 [프로세스](Process.md)가 실행될 때, [로더](https://en.wikipedia.org/wiki/Loader_(computing))(loader)는 Import 섹션에서 명시된 필수 DLL 이미지 파일을 정해진 디렉토리 순서에 따라 탐색하여<sup>[[참고](https://learn.microsoft.com/windows/win32/dlls/dynamic-link-library-search-order)]</sup> [가상 주소 공간](Process.md#가상-주소-공간)으로 매핑한다.
 이후 불러올 심볼이 DLL에 존재하는지 확인하기 위해 매핑된 이미지의 Export 섹션을 검토하고, 특이 사항이 없다면 [Import Address Table](PE.md#import-섹션)의 RVA를 실제 가상 메모리 주소로 대체한다. 하지만 Export 섹션에서 심볼이 발견되지 않으면 0xC0000139 STATUS_ENTRYPOINT_NOT_FOUND 오류를 반환한다.
@@ -46,6 +45,15 @@ Windows OS에서 제공하는 몇몇 DLL은 특수한 취급을 받으며, 이�
     HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\KnownDLLs
 
 LoadLibrary 함수에 모듈명만 기입하면 일반적인 DLL 탐색 순서를 거치지만, 만일 .dll 확장자까지 함께 명시한다면 KnwonDLLs 레지스트리 키에 해당 모듈명과 일치하는 항목이 존재하는지 우선 살펴본다. 존재가 확인되면 DllDirectory에서 제시한 디렉토리 (기본값: %SystemRoot%\System32)에서 DLL 모듈을 불러온다.
+
+## 모듈 주소 재배치
+모든 DLL 모듈은 프로세스에 로드될 때, 가상 주소 공간로 매핑될 선호되는 로드 주소를 가지고 있다.
+
+<table style="width: 60%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">모듈 유형과 이미지 크기에 따른 기본 선호 로드 주소</caption><colgroup><col style="width: 20%;"/><col style="width: 40%;"/><col style="width: 40%;"/></colgroup><thead><tr><th style="text-align: center;">크기</th><th style="text-align: center;">EXE 모듈</th><th style="text-align: center;">DLL 모듈</th></tr></thead><tbody><tr><td style="text-align: center;">32비트</td><td>0x00400000</td><td>0x10000000</td></tr><tr><td style="text-align: center;">64비트</td><td>0x00000001`40000000</td><td>0x00000001`80000000</td></tr></tbody></table>
+
+만일 불러오는 DLL 간 선호 로드 주소가 겹치게 될 경우, 
+
+선호되는 로그 주소는 반드시 64 KB 크기의 [할당 입도](Memory.md#페이지)(allocation granularity) 경계의 시작 주소에 
 
 # 후킹
 **[후킹](https://en.wikipedia.org/wiki/Hooking)**(hooking)은 기존 프로그램의 [함수 호출](C.md#함수), 이벤트, 또는 메시지를 가로채어 본래 동작을 바꾸거나 변조시키는 기술이다.
