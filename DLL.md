@@ -1,4 +1,6 @@
 # 동적 링크 라이브러리
+> *참고: [Dynamic link library (DLL) - Windows Client | Microsoft Learn](https://learn.microsoft.com/troubleshoot/windows-client/setup-upgrade-and-drivers/dynamic-link-library)*
+
 **[동적 링크 라이브러리](https://en.wikipedia.org/wiki/Dynamic-link_library)**(dynamic-link library; DLL)는 [함수](C.md#함수), [클래스](Cpp.md#클래스), [변수](C.md#변수), 또는 아이콘과 같은 리소스를 담고 있는 [컴파일](Programming.md#컴파일러)된 .dll 확장자 [모듈](https://en.wikipedia.org/wiki/Modular_programming)이다. DLL을 참조한 프로그램은 [런타임](https://en.wikipedia.org/wiki/Execution_(computing)#Runtime) 도중에 모듈 이미지를 [프로세스](Process.md)의 [가상 주소 공간](Process.md#가상-주소-공간)에 [매핑](Memory.md#메모리-맵-파일)한다. 이러한 동작은 프로그램 이미지 크기를 상당히 줄일 수 있고 라이브러리 업데이트가 매우 편리한 장점을 지닌다.
 
 다음은 Windows NT에서 대표적인 DLL 일부를 나열 및 소개한다.
@@ -24,7 +26,7 @@ DLL의 일부 동작 원리를 이해하기 위해서는 이에 대한 프로그
 * [`__declspec(dllexport)`](https://learn.microsoft.com/cpp/build/exporting-from-a-dll-using-declspec-dllexport) 키워드: 선언된 심볼들은 [Export 섹션](PE.md#export-섹션)에 나열된다.
 * [`__declspec(dllimport)`](https://learn.microsoft.com/cpp/build/importing-into-an-application-using-declspec-dllimport) 키워드: 선언된 심볼들은 [Import 섹션](PE.md#import-섹션)에 나열하지만 필수는 아니며, C 표준의 [`extern`](C.md#변수) 키워드만으로도 충분하다.
 
-[프로세스](Process.md)가 실행될 때, [로더](https://en.wikipedia.org/wiki/Loader_(computing))(loader)는 Import 섹션에서 명시된 필수 DLL 이미지 파일을 정해진 디렉토리 순서에 따라 탐색하여 [가상 주소 공간](Process.md#가상-주소-공간)으로 매핑한다.
+[프로세스](Process.md)가 실행될 때, [로더](https://en.wikipedia.org/wiki/Loader_(computing))(loader)는 Import 섹션에서 명시된 필수 DLL 이미지 파일을 정해진 디렉토리 순서에 따라 탐색하여<sup>[[참고](https://learn.microsoft.com/windows/win32/dlls/dynamic-link-library-search-order)]</sup> [가상 주소 공간](Process.md#가상-주소-공간)으로 매핑한다.
 이후 불러올 심볼이 DLL에 존재하는지 확인하기 위해 매핑된 이미지의 Export 섹션을 검토하고, 특이 사항이 없다면 [Import Address Table](PE.md#import-섹션)의 RVA를 실제 가상 메모리 주소로 대체한다. 하지만 Export 섹션에서 심볼이 발견되지 않으면 0xC0000139 STATUS_ENTRYPOINT_NOT_FOUND 오류를 반환한다.
 
 > DLL을 불러오는 작업은 프로세스 초기화 작업에 이루어지기 때문에 런타임 성능에 영향을 주지 않지만, 로드할 DLL 개수가 많아지면 초기화 시간이 길어지게 만든다.
@@ -37,6 +39,13 @@ DLL의 일부 동작 원리를 이해하기 위해서는 이에 대한 프로그
 * DllMain 진입점 안에서 지연 로드되는 DLL의 함수를 호출하면 프로세스가 충돌할 수 있어 기피해야 한다.
 
 DLL의 지연 로드되는 과정에서 자체 제작한 코드를 수행하도록 [후킹](#후킹)을 지원하며, 자세한 내용을 확인하려면 마이크로소프트 [기술 문서](https://learn.microsoft.com/cpp/build/reference/understanding-the-helper-function)를 참고한다.
+
+## 알려진 DLL
+Windows OS에서 제공하는 몇몇 DLL은 특수한 취급을 받으며, 이들의 집합을 **[알려진 DLL](https://www.oreilly.com/library/view/windows-r-via-c-c/9780735639904/ch20s05.html)**(Known DLLs)이라고 부른다. 일반 DLL과 다른 점이 없으나 운영체제는 해당 DLL을 불러오려면 어느 디렉토리에 위치하는지 아래 레지스트리 키로부터 이미 파악하고 있어 (1) 탐색 시간을 줄이고 (2) 동명의 DLL을 잘못 불러오는 참사를 방지한다.
+
+    HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\KnownDLLs
+
+LoadLibrary 함수에 모듈명만 기입하면 일반적인 DLL 탐색 순서를 거치지만, 만일 .dll 확장자까지 함께 명시한다면 KnwonDLLs 레지스트리 키에 해당 모듈명과 일치하는 항목이 존재하는지 우선 살펴본다. 존재가 확인되면 DllDirectory에서 제시한 디렉토리 (기본값: %SystemRoot%\System32)에서 DLL 모듈을 불러온다.
 
 # 후킹
 **[후킹](https://en.wikipedia.org/wiki/Hooking)**(hooking)은 기존 프로그램의 [함수 호출](C.md#함수), 이벤트, 또는 메시지를 가로채어 본래 동작을 바꾸거나 변조시키는 기술이다.
