@@ -46,14 +46,19 @@ Windows OS에서 제공하는 몇몇 DLL은 특수한 취급을 받으며, 이�
 
 LoadLibrary 함수에 모듈명만 기입하면 일반적인 DLL 탐색 순서를 거치지만, 만일 .dll 확장자까지 함께 명시한다면 KnwonDLLs 레지스트리 키에 해당 모듈명과 일치하는 항목이 존재하는지 우선 살펴본다. 존재가 확인되면 DllDirectory에서 제시한 디렉토리 (기본값: %SystemRoot%\System32)에서 DLL 모듈을 불러온다.
 
-## 모듈 주소 재배치
+## DLL 주소 재배치
 모든 DLL 모듈은 프로세스에 로드될 때, 가상 주소 공간로 매핑될 선호되는 로드 주소를 가지고 있다.
 
 <table style="width: 60%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">모듈 유형과 이미지 크기에 따른 기본 선호 로드 주소</caption><colgroup><col style="width: 20%;"/><col style="width: 40%;"/><col style="width: 40%;"/></colgroup><thead><tr><th style="text-align: center;">크기</th><th style="text-align: center;">EXE 모듈</th><th style="text-align: center;">DLL 모듈</th></tr></thead><tbody><tr><td style="text-align: center;">32비트</td><td>0x00400000</td><td>0x10000000</td></tr><tr><td style="text-align: center;">64비트</td><td>0x00000001`40000000</td><td>0x00000001`80000000</td></tr></tbody></table>
 
-만일 불러오는 DLL 간 선호 로드 주소가 겹치게 될 경우, 
+<sup>_† DLL의 로드 주소는 반드시 64 KB 크기의 [할당 입도](Memory.md#페이지)(allocation granularity) 경계 시작 주소에 맞추어야 하며, 즉 0x00010000의 배수이어야 한다._</sup>
 
-선호되는 로그 주소는 반드시 64 KB 크기의 [할당 입도](Memory.md#페이지)(allocation granularity) 경계의 시작 주소에 
+만일 불러오는 DLL 간 선호 로드 주소가 겹치게 될 경우, [로더](https://en.wikipedia.org/wiki/Loader_(computing))는 나중에 불러온 DLL의 [Relocation 섹션](PE.md#relocation-섹션)을 [copy-on-write](Memory.md#copy-on-write) 기법으로 새로운 가상 메모리 주소로 변경한다. 다만, Relocation 섹션의 모든 항목을 살펴봐야 하기 때문에 초기화에 시간이 상당히 소요되고 COW에 의한 [페이징 파일](Memory.md#페이징-파일) 의존성이 강제되는 성능 저하가 유발될 수 있기 때문에 가급적 컴파일 때부터 이미지 로드 주소가 중복되지 않도록 선정할 필요가 있다.
+
+### 주소 공간 레이아웃 임의화
+> *참고: [/DYNAMICBASE (Use address space layout randomization) | Microsoft Learn](https://learn.microsoft.com/cpp/build/reference/dynamicbase-use-address-space-layout-randomization)*
+
+**[주소 공간 레이아웃 임의화](https://en.wikipedia.org/wiki/Address_space_layout_randomization)**(Address Space Layout Randomization), 일명 **ASLR**은 [컴퓨터 보안](https://en.wikipedia.org/wiki/Computer_security) 기법 중 하나로, 모듈에 정의된 로드 기반 주소를 악용하여 악성 코드를 대신 실행시키는 행위를 방지하기 위해 주소 공간의 핵심 데이터 영역을 무작위로 조정한다.
 
 # 후킹
 **[후킹](https://en.wikipedia.org/wiki/Hooking)**(hooking)은 기존 프로그램의 [함수 호출](C.md#함수), 이벤트, 또는 메시지를 가로채어 본래 동작을 바꾸거나 변조시키는 기술이다.
