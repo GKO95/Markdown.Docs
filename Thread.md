@@ -15,6 +15,10 @@
 
 ![TLS 동작 방식](https://learn.microsoft.com/windows/win32/procthread/images/tls.png)
 
+프로세스는 최소 TLS_MINIMUM_AVAILABLE 개수만큼의 비트 플래그(`FREE` 또는 `INUSE`)를 설정할 수 있는 데이터 구조를 가진다. 그리고 생성된 각 스레드는 기본적으로 TLS_MINIMUM_AVAILABLE 크기의 PVOID 자료형 배열이 할당되어 영값으로 초기화된다. 즉, 플래그 설정에 따라 해당 인덱스의 TLS 슬롯이 사용 중인지 여부를 판단할 수 있어 TLS를 관리하는 역할을 담당한다.
+
+<table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">동적 TLS에 활용되는 <a href="WinAPI.md">Win32 API</a></caption><colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup><thead><tr><th style="text-align: center;">Win32 API</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-tlsalloc">TlsAlloc</a></td><td>프로세스의 TLS 비트 구조 중에서 <code>FREE</code> 플래그를 탐색하여, 이를 <code>INUSE</code>로 변경하고 해당 인덱스를 반환한다. 이에 대응하는 TLS 슬롯은 이후 새로 생성될 스레드를 포함한 모든 스레드에서 사용이 가능하다. 그러기 위해 TlsAlloc 함수가 반환한 인덱스는 전역 변수로 저장하는 걸 권장하다.</td></tr><tr><td style="text-align: center;"><a href="https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-tlssetvalue">TlsSetValue</a></td><td>본 함수를 호출한 스레드의 TLS 슬롯에 데이터를 저장한다.</td></tr><tr><td style="text-align: center;"><a href="https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-tlsgetvalue">TlsGetValue</a></td><td>본 함수를 호출한 스레드의 TLS 슬롯에 저장된 데이터를 반환한다.</td></tr><tr><td style="text-align: center;"><a href="https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-tlsfree">TlsFree</a></td><td>더 이상 사용하지 않는 TLS 슬롯의 인덱스를 인자로 건네주면 <code>INUSE</code>를 <code>FREE</code> 플래그로 전환하고 모든 스레드의 해당 슬롯을 영값으로 초기화한다.</td></tr></tbody></table>
+
 ## 호출 스택
 **[호출 스택](https://en.wikipedia.org/wiki/Call_stack)**(call stack; 간단히 "**스택**")은 각 [스레드](#스레드)마다 실행 중인 프로그램의 [함수](C.md#함수)와 관련된 정보를 저장하는 [스택](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)) 데이터 구조이다. 스택의 핵심 목적은 실행한 함수가 반환되었을 때 어느 코드에서 재개되어야 하는지 추적한다. 그리고 각 함수를 중심으로 연관된 데이터들의 묶음을 **스택 프레임**(stack frame)이라 부르며, 호출된 함수의 개수만큼 스택 프레임이 존재한다.
 
