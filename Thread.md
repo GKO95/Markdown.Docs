@@ -7,7 +7,13 @@
 **스레드 컨텍스트**(thread context)
 
 ## 스레드 로컬 스토리지
-**[스레드 로컬 스토리지](https://en.wikipedia.org/wiki/Thread-local_storage)**(thread local storage; TLS)
+> *참고: [Thread Local Storage - Win32 apps | Microsoft Learn](https://learn.microsoft.com/windows/win32/procthread/thread-local-storage)*
+
+**[스레드 로컬 스토리지](https://en.wikipedia.org/wiki/Thread-local_storage)**(thread-local storage; TLS)는  프로세스의 "[스레드](#스레드)마다 국한된 [정적](C.md#변수) 혹은 [전역](C.md#변수) [버퍼](C.md#배열)"를 활용하는 [메모리 관리](Memory.md) 방법론이다; 스레드가 어떤 함수를 호출하여도 언제든지 자신의 TLS에 접근이 가능하지만, [스레드 컨텍스트](#스레드-컨텍스트)에 한정되기 때문에 다른 스레드의 TLS와 데이터가 동기화되지 않는다. 이미 프로세스 전반에 데이터를 공유하는 정적 및 전역 변수가 있지만, 경우에 따라 TLS가 더욱 효율적이고 유용하기도 한다.
+
+아래는 TLS의 동작 방식을 간단한 그림으로 보여준다:
+
+![TLS 동작 방식](https://learn.microsoft.com/windows/win32/procthread/images/tls.png)
 
 ## 호출 스택
 **[호출 스택](https://en.wikipedia.org/wiki/Call_stack)**(call stack; 간단히 "**스택**")은 각 [스레드](#스레드)마다 실행 중인 프로그램의 [함수](C.md#함수)와 관련된 정보를 저장하는 [스택](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)) 데이터 구조이다. 스택의 핵심 목적은 실행한 함수가 반환되었을 때 어느 코드에서 재개되어야 하는지 추적한다. 그리고 각 함수를 중심으로 연관된 데이터들의 묶음을 **스택 프레임**(stack frame)이라 부르며, 호출된 함수의 개수만큼 스택 프레임이 존재한다.
