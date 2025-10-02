@@ -60,5 +60,8 @@ LoadLibrary 함수에 모듈명만 기입하면 일반적인 DLL 탐색 순서�
 
 **[주소 공간 레이아웃 임의화](https://en.wikipedia.org/wiki/Address_space_layout_randomization)**(Address Space Layout Randomization), 일명 **ASLR**은 [컴퓨터 보안](https://en.wikipedia.org/wiki/Computer_security) 기법 중 하나로, 모듈에 정의된 로드 기반 주소를 악용하여 악성 코드를 대신 실행시키는 행위를 방지하기 위해 주소 공간의 핵심 데이터 영역을 무작위로 조정한다.
 
-# 후킹
+## DLL 삽입
+**[DLL 삽입](https://en.wikipedia.org/wiki/DLL_injection)**(DLL injection) 원하는 작업을 타 프로세스에서 수행시키기 위해 해당 코드가 담긴 DLL을 강제로 삽입시키는 기술이다.
+
+### 후킹
 **[후킹](https://en.wikipedia.org/wiki/Hooking)**(hooking)은 기존 프로그램의 [함수 호출](C.md#함수), 이벤트, 또는 메시지를 가로채어 본래 동작을 바꾸거나 변조시키는 기술이다.
