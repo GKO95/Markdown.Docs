@@ -22,8 +22,22 @@
 
 SSH 프로토콜은 세 가지의 구성 요소의 계층 구조를 이룬다.
 
-<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">SSH-2의 계층 구조</caption><colgroup><col style="width: 12%;"/><col style="width: 18%;"/><col style="width: 70%;"/></colgroup><thead><tr><th style="text-align: center;">계층</th><th style="text-align: center;">영문</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://www.ietf.org/rfc/rfc4253.txt">전송 계층</a></td><td style="text-align: center;">Transport layer</td><td>알고리즘 합의 및 키 교환(서버 인증 포함)을 제공하는 계층이다. 이로 인해 결과적으로 구축된 암호화된 통신 연결은 무결성, 기밀성, 그리고 선택적으로 압축성을 제공한다.</td></tr><tr><td style="text-align: center;"><a href="https://www.ietf.org/rfc/rfc4252.txt">사용자 인증 계층</a></td><td style="text-align: center;">User authentication layer</td><td>사용자를 인증하는 몇 가지 방법을 제공한다: 비밀번호, 공개키, 호스트 기반 인증 등이 존재한다. 전송 계층이 제공하는 서비스에 의존해 구축된 통신 연결상에서 운영된다.</td></tr><tr><td style="text-align: center;"><a href="https://www.ietf.org/rfc/rfc4254.txt">연결 계층</a></td><td style="text-align: center;">Connection layer</td><td>인증된 통신 연결상 존재하는 다수의 다양한 채널을 멀티플렉싱, 즉 채널들의 흐름을 제어하는 서비스를 제공한다. 그 외에도 로그인 세션의 <a href="https://en.wikipedia.org/wiki/Tunneling_protocol#Secure_Shell_tunneling">터널링</a>과 TCP <a href="https://en.wikipedia.org/wiki/Port_forwarding">포워딩</a>을 허용한다.</td></tr></tbody></table>
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">SSH-2의 계층 구조</caption><colgroup><col style="width: 12%;"/><col style="width: 18%;"/><col style="width: 70%;"/></colgroup><thead><tr><th style="text-align: center;">계층</th><th style="text-align: center;">영문</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="#연결-계층">연결 계층</a></td><td style="text-align: center;">Connection layer</td><td>...</td></tr><tr><td style="text-align: center;"><a href="#사용자-인증-계층">사용자 인증 계층</a></td><td style="text-align: center;">User authentication layer</td><td>...</td></tr><tr><td style="text-align: center;"><a href="#전송-계층">전송 계층</a></td><td style="text-align: center;">Transport layer</td><td>...</td></tr></tbody></table>
+
+<sup>_† SSH 아키텍처를 규정하는 RFC에는 [OSI](https://en.wikipedia.org/wiki/OSI_model) 및 [TCPIP](TCPIP.md) 모델처럼 계층에 번호를 부여하지 않으며, 위의 도표는 단순히 이해를 돕기 위한 차원이다._</sup>
 
 아래는 SSH-2의 보안 채널이 구축되는 과정을 순서대로 보여준다.<sup>[[출처](https://bytebytego.com/guides/guides/how-does-ssh-work/)]</sup>
 
 ![SSH-2의 클라이언트와 서버 간 세션 연결 과정](https://assets.bytebytego.com/diagrams/0224-how-does-ssh-work.png)
+
+## 전송 계층
+**[전송 계층](https://www.ietf.org/rfc/rfc4253.txt)**(transport layer)
+알고리즘 합의 및 키 교환(서버 인증 포함)을 제공하는 계층이다. 이로 인해 결과적으로 구축된 암호화된 통신 연결은 무결성, 기밀성, 그리고 선택적으로 압축성을 제공한다.
+
+## 사용자 인증 계층
+**[사용자 인증 계층](https://www.ietf.org/rfc/rfc4252.txt)**(user authentication layer)
+사용자를 인증하는 몇 가지 방법을 제공한다: 비밀번호, 공개키, 호스트 기반 인증 등이 존재한다. 전송 계층이 제공하는 서비스에 의존해 구축된 통신 연결상에서 운영된다.
+
+## 연결 계층
+**[연결 계층](https://www.ietf.org/rfc/rfc4254.txt)**(connection layer)
+인증된 통신 연결상 존재하는 다수의 다양한 채널을 멀티플렉싱, 즉 채널들의 흐름을 제어하는 서비스를 제공한다. 그 외에도 로그인 세션의 [터널링](https://en.wikipedia.org/wiki/Tunneling_protocol#Secure_Shell_tunneling)과 [TCP 포워딩](https://en.wikipedia.org/wiki/Port_forwarding)을 허용한다.
