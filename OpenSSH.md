@@ -22,7 +22,7 @@
 
 SSH 프로토콜은 세 가지의 구성 요소의 계층 구조를 이룬다.
 
-<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">SSH-2의 계층 구조</caption><colgroup><col style="width: 20%;"/><col style="width: 15%;"/><col style="width: 65%;"/></colgroup><thead><tr><th style="text-align: center;">계층<sup>†</sup></th><th style="text-align: center;"><a href="TCPIP.md">TCPIP</a> 해당</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td>[3] <a href="#연결-계층"><b>연결 계층</b></a></td><td style="text-align: center;"><a href="TCPIP.md#어플리케이션-계층">Application</a></td><td>인증된 클라이언트가 요청한 서비스마다 채널을 생성하여 작업을 수행한다.</td></tr><tr><td>[2] <a href="#사용자-인증-계층"><b>사용자 인증 계층</b></a></td><td style="text-align: center;"><a href="TCPIP.md#어플리케이션-계층">Application</a></td><td>구축된 암호화된 구축 채널에서 클라이언트가 서버로부터 인증을 시도한다.</td></tr><tr><td>[1] <a href="#전송-계층"><b>전송 계층</b></a></td><td style="text-align: center;"><a href="TCPIP.md#전송-계층">Transport</a></td><td>TCP 포트 22를 통해 클라이언트와 서버 간 암호화된 통신 구축을 마련한다. </td></tr></tbody></table>
+<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">SSH-2의 계층 구조</caption><colgroup><col style="width: 20%;"/><col style="width: 15%;"/><col style="width: 65%;"/></colgroup><thead><tr><th style="text-align: center;">계층<sup>†</sup></th><th style="text-align: center;"><a href="TCPIP.md">TCPIP</a> 해당</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td>[3] <a href="#연결-계층"><b>연결 계층</b></a></td><td style="text-align: center;"><a href="TCPIP.md#어플리케이션-계층">Application</a></td><td>인증된 클라이언트가 요청한 서비스마다 채널을 생성하여 작업을 수행한다.</td></tr><tr><td>[2] <a href="#사용자-인증-계층"><b>사용자 인증 계층</b></a></td><td style="text-align: center;"><a href="TCPIP.md#어플리케이션-계층">Application</a></td><td>구축된 암호화된 구축 채널에서 클라이언트가 서버로부터 인증을 시도한다.</td></tr><tr><td>[1] <a href="#전송-계층"><b>전송 계층</b></a></td><td style="text-align: center;"><a href="TCPIP.md#전송-계층">Transport</a></td><td><a href="TCPIP.md#전송-제어-프로토콜">TCP</a> <a href="https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers#Well-known_ports">포트 22</a>를 통해 클라이언트와 서버 간 암호화된 통신 구축을 마련한다. </td></tr></tbody></table>
 
 <sup>_† SSH 아키텍처를 규정하는 RFC에는 [OSI](https://en.wikipedia.org/wiki/OSI_model) 및 [TCPIP](TCPIP.md) 모델처럼 계층에 번호를 부여하지 않으며, 위의 도표는 단순히 이해를 돕기 위한 차원이다._</sup>
 
@@ -31,9 +31,37 @@ SSH 프로토콜은 세 가지의 구성 요소의 계층 구조를 이룬다.
 ![SSH-2의 클라이언트와 서버 간 세션 연결 과정](https://assets.bytebytego.com/diagrams/0224-how-does-ssh-work.png)
 
 ## 전송 계층
-**[전송 계층](https://www.ietf.org/rfc/rfc4253.txt)**(transport layer)
+**[전송 계층](https://www.ietf.org/rfc/rfc4253.txt)**(transport layer)은 클라이언트와 서버 간 SSH 통신을 위한 암호화된 채널을 구축하는 계층이다. 실질적인 SSH 통신이 이루어지기 전에 알고리즘 합의 및 키 교환 과정을 거쳐 연결의 무결성, 기밀성, 그리고 압축성을 제공한다. 대부분 [TCP](TCPIP.md#전송-제어-프로토콜)를 활용하며, 2001년에 [IANA](https://en.wikipedia.org/wiki/Internet_Assigned_Numbers_Authority)가 [포트](https://en.wikipedia.org/wiki/Port_(computer_networking)) 22를 SSH로 표준화하였다.
 
-알고리즘 합의 및 키 교환(서버 인증 포함)을 제공하는 계층이다. 이로 인해 결과적으로 구축된 암호화된 통신 연결은 무결성, 기밀성, 그리고 선택적으로 압축성을 제공한다.
+SSH 통신을 맺을 클라이언트와 서버는 프로토콜 및 소프트웨어 버전이 기입된 ID 문자열을 서로 주고 받아 호환성을 검사한다. 이후 다음 네 가지 항목을 대상으로 클라이언트가 선호하는 알고리즘을 서버에서 합의가 가능한지 여부를 살펴본다:
+
+* [KEX 알고리즘](#kex-알고리즘)
+* [호스트 키 알고리즘](#호스트-키-알고리즘)
+* Ciphers
+* MAC
+
+### KEX 알고리즘
+**KEX 알고리즘**(key exchange algorithm)은 SSH 클라이언트와 서버 간 암호화에 필요하나 오로지 그들만 알고 있는 [공유 비밀](https://en.wikipedia.org/wiki/Shared_secret) 키를 생성하기 위한 암호 키 교환 방법을 정의한다. SSH 알고리즘 합의를 마친 직후에 진행되며, [Diffie-Hellman 키 교환](https://en.wikipedia.org/wiki/Diffie-Hellman_key_exchange) 알고리즘이 대표적이다.
+
+> 본 문서는 Diffie-Hellman (DH) 키 교환 알고리즘이 공유 비밀 키를 어떻게 생성하는지 개념만 간단히 소개한다.
+
+![Diffie-Hellman 키 교환의 개념 및 예시](https://upload.wikimedia.org/wikipedia/commons/c/c8/DiffieHellman.png)
+
+1. 두 장치는 암호화 연산에서 공통된 파라미터를 사용할 것을 공개적으로 합의하지만, 각자 자신만의 개인 키 $a$, $b$ 를 가지고 있다.
+1. 개인 키 $a$를 소유하던 장치는 공통 파라미터와 조합하여 생성된 공개 키 $A$를 상대편으로 전달한다.
+1. 개인 키 $b$를 소유하던 장치는 공통 파라미터와 조합하여 생성된 공개 키 $B$를 상대편으로 전달한다.
+1. 개인 키 $a$를 소유하던 장치는 상대편이 전달한 공개 키 $B$와 조합하여 공유 비밀 키 $s$를 생성한다.
+1. 개인 키 $b$를 소유하던 장치는 상대편이 전달힌 공개 키 $A$와 조합하여 공유 비밀 키 $s$를 생성한다.
+
+결과적으로 SSH 클라이언트 및 서버는 개인 키를 한번도 노출시키지 않고 암복호화에 활용될 [대칭 키](https://en.wikipedia.org/wiki/Symmetric-key_algorithm) $s$를 두 장치에 모두 생성하였다. 또한, DH 알고리즘의 개인 및 공개 키는 [핸드셰이킹](https://en.wikipedia.org/wiki/Handshake_(computing)) 이후로 버려지기 때문에 [전반향 안정성](https://en.wikipedia.org/wiki/Forward_secrecy)(forward secrecy)을 보장한다.
+
+해당 SSH 프로토콜 및 소프트웨어에서 지원하는 KEX 알고리즘은 아래 명령으로 목록을 살펴볼 수 있다.
+
+```
+ssh -Q kex
+```
+
+### 호스트 키 알고리즘
 
 ## 사용자 인증 계층
 **[사용자 인증 계층](https://www.ietf.org/rfc/rfc4252.txt)**(user authentication layer)
