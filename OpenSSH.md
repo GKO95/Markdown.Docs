@@ -35,49 +35,39 @@ SSH 프로토콜은 세 가지의 구성 요소의 계층 구조를 이룬다.
 
 우선 클라이언트와 서버는 SSH 프로토콜 및 소프트웨어 버전이 기입된 ID 문자열을 교환하여 호환성을 검사한다. 이후 SSH_MSG_KEX_INIT 메시지의 전송을 시작으로 다음 네 가지 항목에 대하여 클라이언트가 선호하는 알고리즘을 서버에서 합의가 가능한지 여부를 살펴본다:
 
-* [KEX 알고리즘](#kex-알고리즘)
-* [호스트 키 알고리즘](#호스트-키-알고리즘)
+* [KEX 알고리즘](#키-교환)
+* [호스트 키 알고리즘](#키-교환)
 * Ciphers
 * MAC
 
-### KEX 알고리즘
-**KEX 알고리즘**(key exchange algorithm)은 SSH 클라이언트와 서버 간 암복호화에 필요하나 오로지 그들만 알고 있는 [공유 비밀](https://en.wikipedia.org/wiki/Shared_secret) [대칭 키](https://en.wikipedia.org/wiki/Symmetric-key_algorithm)를 생성하기 위한 암호 키 교환 방법을 정의한다. SSH 알고리즘 합의를 마친 직후에 진행되며, [Diffie-Hellman 키 교환](https://en.wikipedia.org/wiki/Diffie-Hellman_key_exchange) 알고리즘이 대표적이다.
+### 키 교환
+**키 교환**(key exchange), 일명 **KEX**는 전송 계층에서 이루어지는 SSH 핸드셰이크 중 하나이며, 다음 두 가지 중요한 작업을 수행한다.
 
-> 본 문서는 Diffie-Hellman (DH) 키 교환 알고리즘이 공유 비밀 키를 어떻게 생성하는지 개념만 간단히 소개한다.
+1. [공유 비밀](https://en.wikipedia.org/wiki/Shared_secret) [대칭 키](https://en.wikipedia.org/wiki/Symmetric-key_algorithm) 생성: *SSH 세션 통신의 암복호화에 사용될, 하지만 오로지 클라이언트와 서버만 아는 비밀을 만든다.*
+1. [해시](#해시) 생성 및 서명 검증: *SSH 세션의 고유성을 식별 및 일관성을 검증할 장치를 마련한다.*
+
+SSH 알고리즘 합의를 마친 직후에 진행되며, 본 문서는 대표적인 KEX 알고리즘인 [Diffie-Hellman 키 교환](https://en.wikipedia.org/wiki/Diffie-Hellman_key_exchange) 개념만 간단히 소개한다.
 
 ![Diffie-Hellman 키 교환의 개념 및 예시](https://upload.wikimedia.org/wikipedia/commons/c/c8/DiffieHellman.png)
 
-<table style="width: 90%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">SSH-2의 계층 구조</caption><colgroup><col style="width: 7%;"/><col style="width: 23%;"/><col style="width: 70%;"/></colgroup><thead><tr><th style="text-align: center;">순서</th><th style="text-align: center;">메시지</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;">1</a></td><td>SSH_MSG_KEXINIT</td><td>클라이언트와 서버는 암호화 연산에서 공통된 파라미터를 사용할 것을 공개적으로 합의하지만, 각자 무작위로 생성한 자신만의 KEX 개인 키 x, y를 가지고 있다.</td></tr><tr><td style="text-align: center;">2</b></a></td><td>SSH_MSG_KEXDH_INIT</td><td>클라이언트는 KEX 개인 키 x와 공통 파라미터를 조합하여 KEX 공개 키 e를 만들어 다음 항목들을 서버로 전달한다:<ul><li>클라이언트의 KEX 공개 키 e</li></ul></td></tr><tr><td style="text-align: center;">3</td><td>SSH_MSG_KEXDH_REPLY</td><td>서버는 KEX 개인 키 y와 공통 파라미터를 조합하여 KEX 공개 키 f를 만들어 다음 항목들을 클라이언트로 전달한다:<ul><li>서버의 KEX 공개 키 f</li><li>서버의 <a href="#호스트-키-알고리즘">호스트 공개 키</a> 및 인증서</li><li>해시 서명 <sub>(서버는 이미 KEX 공개 키 e와 f를 알고 있고, 심지어 공유 비밀 키 K까지 생성)</sub></li></ul></td></tr></tbody></table>
+<table style="width: 90%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">Deffie-Hellman (DH) 키 교환 과정</caption><colgroup><col style="width: 7%;"/><col style="width: 23%;"/><col style="width: 70%;"/></colgroup><thead><tr><th style="text-align: center;">순서</th><th style="text-align: center;">메시지</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;">1</a></td><td>SSH_MSG_KEXINIT</td><td>클라이언트와 서버는 암호화 연산에서 공통된 파라미터를 사용할 것을 공개적으로 합의하지만, 각자 무작위로 생성한 자신만의 KEX 개인 키 x, y를 가지고 있다.</td></tr><tr><td style="text-align: center;">2</b></a></td><td>SSH_MSG_KEXDH_INIT</td><td>클라이언트는 KEX 개인 키 x와 공통 파라미터를 조합하여 KEX 공개 키 e를 만들어 다음 항목들을 서버로 전달한다:<ul><li>클라이언트의 KEX 공개 키 e</li></ul></td></tr><tr><td style="text-align: center;">3</td><td>SSH_MSG_KEXDH_REPLY</td><td>서버는 KEX 개인 키 y와 공통 파라미터를 조합하여 KEX 공개 키 f를 만들어 다음 항목들을 클라이언트로 전달한다:<ul><li>서버의 KEX 공개 키 f</li><li>서버의 호스트 공개 키 및 인증서<sup>[<a href="https://learn.microsoft.com/windows-server/administration/openssh/openssh_keymanagement">참고</a>]</sup></li><li><a href="#해시">해시</a> 서명 <sub>(서버는 이미 KEX 공개 키 e와 f를 알고 있고, 심지어 공유 비밀 키 K까지 생성)</sub></li></ul></td></tr></tbody></table>
+
+SSH_MSG_KEXDH_REPLY 단계에서 SSH 호스트 공개 키를 전달받은 클라이언트는 해시 서명을 검증하여 SSH 세션 일관성을 확인할 수 있다. [중간자 공격](https://en.wikipedia.org/wiki/Man-in-the-middle_attack) 등으로 서명 검증을 실패하면 세션의 일관성 또한 문제가 있음을 의미하여 SSH 핸드셰이크는 즉시 종료된다. 다시 말해, 해시 서명은 클라이언트가 연결하려는 서버가 *정말로 해당 서버가 맞는지* 진정성을 검증하는 게 아니다.
+
+> 대신 클라이언트는 신뢰할 수 있는 서버의 공개 키를 known_hosts 파일에서 관리하며, 처음 접하는 서버의 경우 [TOFU](https://en.wikipedia.org/wiki/Trust_on_first_use) 모델을 따른다.
 
 위의 절차를 통해 SSH 서버와 클라이언트는 각각 자신의 KEX 개인 키 x, y를 노출시키지 않고서도 KEX 공개 키 e, f를 서로 교환하여 공유 비밀 K를 생성할 수 있게 된다. 또한, DH의 비대칭 키는 [핸드셰이킹](https://en.wikipedia.org/wiki/Handshake_(computing)) 이후로 버려지기 때문에 [전반향 안정성](https://en.wikipedia.org/wiki/Forward_secrecy)(forward secrecy)을 보장한다.
 
-### 호스트 키 알고리즘
-> *참고: [Key-Based Authentication in OpenSSH for Windows | Microsoft Learn](https://learn.microsoft.com/windows-server/administration/openssh/openssh_keymanagement)*
-
-**호스트 키 알고리즘**(host key algorithm)은 SSH 통신 연결을 위한 핸드셰이킹 도중에 서버가 스스로 누구인지를 알리는데 활용되는 알고리즘이다. 해당 알고리즘으로 서버는 자신이 소유하는 [비대칭](https://en.wikipedia.org/wiki/Public-key_cryptography) 호스트 개인 키를 사용해 해시를 서명한다. 그리고  SSH_MSG_KEXDH_REPLY 단계로 해시의 서명을 전달받은 클라이언트는 서버의 호스트 공개 키로 SSH 세션이 일관성을 유지하고 있음을 확인한다.
-
-여기서 해시(hash)란, SSH 핸드셰이크에 관여하는 아래 항목들을 조합하여 [일방향](https://en.wikipedia.org/wiki/One-way_function) [해시 함수](https://en.wikipedia.org/wiki/Hash_function)로 변환한 결과물이다.<sup>[[출처](https://www.rfc-editor.org/rfc/rfc4253.html#page-21)]</sup> 즉, 해당 SSH 세션의 고유성을 식별하는 "[지문](https://en.wikipedia.org/wiki/Public_key_fingerprint)(thumbprint)" 역할을 한다:
+### 해시
+**해시**(hash)는 SSH 핸드셰이크에 관여하는 아래 항목들을 조합하여 [일방향](https://en.wikipedia.org/wiki/One-way_function) [해시 함수](https://en.wikipedia.org/wiki/Hash_function)로 변환한 결과물이다.<sup>[[출처](https://www.rfc-editor.org/rfc/rfc4253.html#page-21)]</sup> 즉, 해당 SSH 세션의 고유성을 식별하는 "[지문](https://en.wikipedia.org/wiki/Public_key_fingerprint)(thumbprint)" 역할을 한다:
 
 * 클라이언트 및 서버의 ID 문자열
 * 클라이언트 및 서버의 SSH_MSG_KEXINIT [페이로드](https://en.wikipedia.org/wiki/Payload_(computing))
 * 호스트 공개 키
-* 클라이언트 및 서버의 [KEX 공개 키](#kex-알고리즘)
-* [공유 비밀 키](#kex-알고리즘)
+* 클라이언트 및 서버의 [KEX 공개 키](#키-교환)
+* [공유 비밀 키](#키-교환)
 
-예를 들어, KEX 알고리즘으로 diffie-hellman-group14-sha256이 합의되었다면 [SHA-256](https://en.wikipedia.org/wiki/SHA-2)으로 해싱된다. 단, 이는 해시 자체를 생성하는 알고리즘으로, 해시의 서명은 호스트 키 알고리즘에 따라 별도로 지정된다.
-
-[중간자 공격](https://en.wikipedia.org/wiki/Man-in-the-middle_attack) 등으로 서명 검증을 실패하면 세션의 일관성 또한 문제가 있음을 의미하여 SSH 핸드셰이크는 즉시 종료된다. 다시 말해, 해시 서명은 클라이언트가 연결하려는 서버가 *정말로 해당 서버가 맞는지* 진정성을 검증하는 게 아니다. 대신 클라이언트는 신뢰할 수 있는 서버의 공개 키를 known_hosts 파일에서 관리한다.
-
-만일 처음으로 접하는 서버일 경우 [TOFU](https://en.wikipedia.org/wiki/Trust_on_first_use)(즉, 최초 사용 시 신뢰) 모델에 따라 사용자가 연결을 승인할 때 공개 키를 known_host에 저장한다.
-
-```
-The authenticity of host Server1 (x.x.x.x)' can't be established.
-Are you sure you want to continue connecting (yes/no)?
-```
-
-### Ciphers
-
-### MAC
+예를 들어, KEX 알고리즘으로 diffie-hellman-group14-sha256이 합의되었다면 [SHA-256](https://en.wikipedia.org/wiki/SHA-2)으로 해싱된다. 단, 해시의 서명은 호스트 키 알고리즘에 따라 별도로 지정된다. 그리고 해시 서명은 호스트 개인 키로 변환되어 공개 키만으로 검증될 수 있다.
 
 ## 사용자 인증 계층
 **[사용자 인증 계층](https://www.ietf.org/rfc/rfc4252.txt)**(user authentication layer)
