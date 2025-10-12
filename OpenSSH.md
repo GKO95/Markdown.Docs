@@ -76,23 +76,30 @@ SSH 프로토콜은 각 세션마다 식별할 수 있는 고유의 해시를 �
 ### 서비스 요청
 SSH_MSG_NEWKEYS 메시지를 시작으로 암호화된 SSH 터널의 [전송 계층](#전송-계층) 위에는 다양한 작업, 일명 **서비스**(service)를 수행할 수 있도록 확정성을 제공한다. SSH 서비스는 SSH_MSG_SERVICE_REQUEST 메시지로 요청된다. 자체 제작이 가능하지만, 다음 두 명칭은 이미 아래 목적으로 예약되어 있다.<sup>[[출처](https://www.rfc-editor.org/rfc/rfc4253#section-10)]</sup>
 
-* [`ssh-userauth`](#사용자-인증-계층): 클라이언트(사용자)를 서버에 인증한다.
-* [`ssh-connection`](#연결-계층): SSH 터널이 다양한 채널을 관리할 수 있도록 구성한다.
+1. [`ssh-userauth`](#사용자-인증-계층): 클라이언트(사용자)를 서버에 인증한다.
+1. [`ssh-connection`](#연결-계층): SSH 터널이 다양한 채널을 관리할 수 있도록 구성한다.
 
 만일 서버가 서비스 요청을 거절한다면 적절한 SSH_MSG_DISCONNECT 메시지와 함께 SSH 터널을 반드시 종료해야 한다. 반면, 서비스를 지원할 시 SSH_MSG_SERVICE_ACCEPT 메시지로 응답한다.
 
 ## 사용자 인증 계층
 **[사용자 인증 계층](https://www.ietf.org/rfc/rfc4252.txt)**(user authentication layer)은 서버로 접속하려는 클라이언트가 인증된 사용자인지 확인하는 계층이다. 일반적으로 SSH 터널의 암호화가 본격화된 다음 곧바로 사용자 인증이 진행된다. 사용자 인증 방식에는 대표적으로 세 가지가 있다:
 
-1. [비밀번호](https://en.wikipedia.org/wiki/Password)
-1. [사용자 공개 키](https://learn.microsoft.com/windows-server/administration/openssh/openssh_keymanagement): 서버에 저장된 클라이언트의 공개 키를 활용해 개인 키의 서명을 검증하여 인증한다.
-1. [호스트 기반](https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Host-based_Authentication): 서버에 저장된 신뢰할 수 있는 클라이언트만이 비대칭 암호키 검증으로 인증될 수 있다.
+* [비밀번호](https://en.wikipedia.org/wiki/Password)
+* [사용자 공개 키](https://learn.microsoft.com/windows-server/administration/openssh/openssh_keymanagement): 서버에 저장된 클라이언트의 공개 키를 활용해 개인 키의 서명을 검증하여 인증한다.
+* [호스트 기반](https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Host-based_Authentication): 서버에 저장된 신뢰할 수 있는 클라이언트만이 비대칭 암호키 검증으로 인증될 수 있다.
 
 서버가 지원하는 인증 방식 목록을 전달받은 클라이언트는 그 중 자유롭게 선택하여 시도할 수 있다.
 
 <table style="width: 90%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">SSH 인증 메시지 코드</caption><colgroup><col style="width: 30%;"/><col style="width: 70%;"/></colgroup><thead><tr><th style="text-align: center;">메시지</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td>SSH_MSG_USERAUTH_REQUEST</td><td>SSH 인증은 반드시 해당 메시지로 요청되어야 하며, 인증 방식과 성공 시 수행할 서비스를 포함한다.</td></tr><tr><td>SSH_MSG_USERAUTH_FAILURE</td><td>서버가 인증을 거절할 때 전송된다.</td></tr><tr><td>SSH_MSG_USERAUTH_SUCCESS</td><td>서버가 인증을 수락할 때 전송되며, 단 한번만 발송되어야 하고 이후 인증 요청은 가급적 무시되어야 한다.</td></tr></tbody></table>
 
 ## 연결 계층
-**[연결 계층](https://www.ietf.org/rfc/rfc4254.txt)**(connection layer)
+**[연결 계층](https://www.ietf.org/rfc/rfc4254.txt)**(connection layer)은 사용자 인증을 마친 암호화된 SSH 터널에서 다양한 채널을 [멀티플렉싱](https://en.wikipedia.org/wiki/Multiplexing)하여 관리하는 계층이다. SSH에서 기본적으로 제공하는 채널 유형은 다음과 같이 존재한다.
 
-인증된 통신 연결상 존재하는 다수의 다양한 채널을 멀티플렉싱, 즉 채널들의 흐름을 제어하는 서비스를 제공한다. 그 외에도 로그인 세션의 [터널링](https://en.wikipedia.org/wiki/Tunneling_protocol#Secure_Shell_tunneling)과 [TCP 포워딩](https://en.wikipedia.org/wiki/Port_forwarding)을 허용한다.
+<table style="width: 90%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">SSH 채널의 유형 및 설명</caption><colgroup><col style="width: 15%;"/><col style="width: 25%;"><col style="width: 60%;"/></colgroup><thead><tr><th colspan="2" style="text-align: center;">채널</th></th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;">세션</td><td><code>session</code></td><td><a href="Shell.md">셸</a>, <a href="https://en.wikipedia.org/wiki/Application_software">어플리케이션</a>, 명령, 혹은 내장 <a href="Windows.md#환경-서브시스템">서브시스템</a> 등의 프로그램 원격 실행</td></tr><tr><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/X_Window_System">X11</a></td><td><code>x11</code></td><td>원격에서 실행 중인 <a href="https://en.wikipedia.org/wiki/Graphical_user_interface">GUI</a> 어플리케이션의 창을 로컬 시스템에 표시<sup>[<a href="https://en.wikipedia.org/wiki/X_Window_System#Remote_desktop">참고</a>]</sup></td></tr><tr><td rowspan="2" style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Port_forwarding">TCP/IP 포워딩</a>†</td><td><code>direct-tcpip</code></td><td>[원격 → 로컬] 타 사용자가 서버 포트 R 접근 시, SSH 서버에서 클라이언트의 포트 L로 연결하도록 안내</td></tr><tr><td><code>forwarded-tcpip</code></td><td>[로컬 → 원격] 클라이언트가 로컬 포트 L 접근 시, SSH 클라이언트에서 서버의 포트 R로 연결하도록 안내</td></tr></tbody></table>
+
+<sup>_† TCP/IP 포워딩은 방화벽 및 신뢰할 수 없는 네트워크에서 트래픽을 암호화된 SSH의 포트 22로 안내하여 서비스 접근 허용하기 위해 사용된다._</sup>
+
+채널에 대한 요청은 크게 두 가지로 나뉘어진다.
+
+* [전역 요청](https://www.rfc-editor.org/rfc/rfc4254.html#section-4)(global request): 채널과 무관하게 원격 단말 전반에 영향을 주는 요청이며, TCP/IP 포워딩이 이에 해당한다.
+* [채널별 요청](https://www.rfc-editor.org/rfc/rfc4254.html#section-5.4)(channel-specific request): 주어진 채널 내에서만 영향을 미치는 요청이며, 세션과 X11이 이에 해당한다.
