@@ -22,7 +22,7 @@ C 언어가 설계대로 동작하기 위해서는 올바른 문자 및 기호�
 
 다음은 C 언어에서 구문에 관여하는 요소들을 소개한다:
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C 언어의 프로그래밍 구문 요소</caption><colgroup><col style="width: 10%;"/><col style="width: 35%;"/><col style="55%;"/></colgroup><thead><tr><th style="text-align: center;">구문 요소</th><th style="text-align: center;">설명</th><th style="text-align: center;">예시</th></tr></thead><tbody><tr><td style="text-align: center;"><b><a href="https://en.wikipedia.org/wiki/Expression_(computer_science)">표현식</a></b><br/>(expression)</td><td>값을 반환하는 구문적 존재를 가리킨다. 표현식에 대한 결과를 도출하는 것을 평가(evaluate)라고 부른다.</td><td>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C 언어의 프로그래밍 구문 요소</caption><colgroup><col style="width: 10%;"/><col style="width: 35%;"/><col style="55%;"/></colgroup><thead><tr><th style="text-align: center;">구문 요소</th><th style="text-align: center;">설명</th><th style="text-align: center;">예시</th></tr></thead><tbody><tr><td style="text-align: center;"><b><a href="https://en.wikipedia.org/wiki/Expression_(computer_science)">표현식</a></b><br/>(expression)</td><td>값을 반환하는 구문적 존재를 가리킨다. 표현식에 대한 결과를 도출하는 것을 평가(evaluate)라고 부른다. 즉, 일련의 <a href="#연산자">연산자</a>와 피연산자 구성을 가리킨다.</td><td>
 
 ```c
 2 + 3                  // 정수 5를 반환
@@ -53,6 +53,17 @@ if (2 < 3) statement;  // 참일 경우 "statement" 문장 실행
 ```
 
 </td></tr></tbody></table>
+
+### 연산자
+**[연산자](https://en.cppreference.com/w/c/language/operators.html#Operators)**(operators)는 [표현식](https://en.cppreference.com/w/c/language/operators.html)을 구성하는 요소 중 하나로 피연산자를 연산하여 평가되도록 한다. 아래는 C 언어에서 지원하는 연산자 유형들의 목록이다.
+
+* [할당 연산자](https://en.cppreference.com/w/c/language/operator_assignment.html)
+* [증감 연산자](https://en.cppreference.com/w/c/language/operator_incdec.html)
+* [산술 연산자](https://en.cppreference.com/w/c/language/operator_arithmetic.html)
+* [논리 연산자](https://en.cppreference.com/w/c/language/operator_logical.html)
+* [비교 연산자](https://en.cppreference.com/w/c/language/operator_comparison.html)
+* [맴버 접근 연산자](https://en.cppreference.com/w/c/language/operator_member_access.html)
+* [기타 연산자](https://en.cppreference.com/w/c/language/operator_other.html)
 
 ## 자료형
 **[자료형](https://en.wikipedia.org/wiki/Data_type)**(data type)은 데이터를 어떻게 표현할 지 결정하는 요소이며, C 언어에서는 다음과 같이 존재한다. 단, 본 문서는 [ANSI C](https://en.wikipedia.org/wiki/ANSI_C) 언어를 기준으로 소개하므로, 이후 C99부터 소개된 일부 자료형(`bool`, `long long` 등)은 목록에 제외되었다.
@@ -154,17 +165,26 @@ char variable = 75;    // ASCII에 의해 문자 'K'가 저장
 
 거의 모든 프로그래밍 언어는 할당 기호를 기준으로 왼쪽에는 피할당자(변수), 오른쪽에는 피할당자로 전달하려는 표현식(값 혹은 데이터)이 위치한다. 반대로 놓여질 경우, 오류가 발생하거나 원치 않는 결과가 도출될 수 있다.
 
-## 조건문
-**조건문**(conditional statement)은 주어진 조건의 논리에 따라서 코드 실행 여부를 결정하는 제어문이다:
+## 제어문
+**제어문**(control statement)은 코드 실행을 제어하는 문장을 가리키며, 프로그래밍에 있어 기초적이면서 가장 흔히 사용되는 코드 유형 중 하나이다. 아래는 C 언어에서 지원하는 제어문으로, 부가 설명이 필요한 제어문의 경우 본 문서에 별도로 소개한다.
 
-### 조건 연산자
-**[조건 연산자](https://en.cppreference.com/w/c/language/operator_other#Conditional_operator)**(ternary operator) `?:`는 세 가지 인수만을 사용하여 조건문을 아래와 같이 간략하게 표현한다. 조건 연산자는 가독성을 감소시키므로 과용해서는 안되지만 변수 할당에 유용하다.
+* **[선택문](https://en.cppreference.com/w/c/language/statements.html#Selection_statements)**(selection statements)
+    1. [`if`](https://en.cppreference.com/w/c/language/if.html)
+    1. [`if`-`else`](https://en.cppreference.com/w/c/language/if.html)
+    1. [`switch`](#switch-선택문)
 
-```c
-condition ? true_return : false_return;
-```
+* **[반복문](https://en.cppreference.com/w/c/language/statements.html#Iteration_statements)**(iteration statements)
+    1. [`while`](https://en.cppreference.com/w/c/language/while.html)
+    1. [`do`-`while`](https://en.cppreference.com/w/c/language/do.html)
+    1. [`for`](#for-반복문)
 
-### `switch` 조건문
+* **[이동문](https://en.cppreference.com/w/c/language/statements.html#Jump_statements)**(jump statements)
+    1. [`break`](https://en.cppreference.com/w/c/language/break.html)
+    1. [`continue`](https://en.cppreference.com/w/c/language/continue.html)
+    1. [`return`](https://en.cppreference.com/w/c/language/return.html)
+    1. [`goto`](#goto-이동문)
+
+### `switch` 선택문
 **[`switch`](https://en.cppreference.com/w/c/language/switch)** 조건문은 전달받은 인자를 `case`의 상수와 동일한지 비교하여 논리가 참일 경우 해당 지점부터 코드를 실행하며, 거짓일 경우에는 다음 `case`로 넘어간다. 선택사항으로 `default` 키워드를 통해 어떠한 `case` 조건에도 부합하지 않으면 실행될 지점을 지정한다.
 
 ```c
@@ -212,9 +232,6 @@ Statement 3
 Statement 4
 ```
 
-## 반복문
-**반복문**(loop statement)은 주어진 조건의 논리에 따라서 코드를 얼마나 반복적으로 실행할 지 결정하는 제어문이다:
-
 ### `for` 반복문
 **[`for`](https://en.cppreference.com/w/c/language/for)** 반복문은 조건 혹은 논리가 참일 동안 코드를 반복적으로 실행하며, 거짓일 경우에는 반복문을 종료한다. `for` 반복문은 조건 평가 외에도 지역 변수를 초기화 및 증감할 수 있는 인자가 있다.
 
@@ -228,9 +245,6 @@ for (initialize; condition; increment) statement;
 ```
 
 `for` 반복문의 우선 `initialize`에서 반복문 지역 변수를 정의하거나 외부 변수를 불러와 반복문을 위한 초기값을 할당한 다음 `condition`에서 조건을 평가한다. 논리가 참이면 코드를 반복적으로 실행하며, 거짓일 경우에는 반복문을 종료한다. 블록 내의 코드가 마무리되었거나 `continue` 문을 마주하면 `increment`에서 변수를 증감하고, `condition`으로 돌아가 절차를 반복한다.
-
-## 이동문
-**이동문**(jump statement)은 아무런 조건이 필요없이 코드 실행 지점을 이동시키는 제어문이다:
 
 ### `goto` 이동문
 **[`goto`](https://en.cppreference.com/w/c/language/goto.html)** 이동문은 다른 문장으로써는 절대로 접근이 불가한 코드에 도달할 수 있도록 한다 (일명 제어 전달; control transfer). `goto` 키워드에 명시된 [레이블](https://en.cppreference.com/w/c/language/statements.html#Labels)로 제어를 전달하나, 이 둘은 반드시 동일한 [함수](#함수) 내에 위치해야 한다. 레이블은 `goto` 문 이전이나 이후에 위치하여도 무관하다.
