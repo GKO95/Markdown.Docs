@@ -1,7 +1,7 @@
 # 러스트
 > *출처: [The Rust Programming Language <sub>(영문)</sub>](https://doc.rust-lang.org/book/)*
 
-[러스트](https://www.rust-lang.org/)(Rust)는 성능과 보안이 매우 강조된 [정적 정형](https://en.wikipedia.org/wiki/Type_system#Static_type_checking) 프로그래밍 언어이며, 특히 자료형 및 메모리 관리 측에서 강점을 지닌다. 뿐만 아니라, 하드웨어 제어가 가능하다는 점에서 [펌웨어](https://ko.wikipedia.org/wiki/펌웨어) 개발에도 활용할 수 있다. 이러한 특성들에 의해 [C++](Cpp.md) 언어와 유사한 성능을 지닌 동시에 훌륭한 보안성이 보장되어 [마이크로소프트](https://www.microsoft.com/), [구글](https://www.google.com/), [아마존](https://www.amazon.com/) 등의 주요 IT 기업의 관심과 지원을 받고 있다.
+[Rust](https://www.rust-lang.org/)는 성능과 보안이 매우 강조된 [정적 정형](https://en.wikipedia.org/wiki/Type_system#Static_type_checking) 프로그래밍 언어이며, 특히 자료형 및 메모리 관리 측에서 강점을 지닌다. 뿐만 아니라, 하드웨어 제어가 가능하다는 점에서 [펌웨어](https://ko.wikipedia.org/wiki/펌웨어) 개발에도 활용할 수 있다. 이러한 특성들에 의해 [C++](Cpp.md) 언어와 유사한 성능을 지닌 동시에 훌륭한 보안성이 보장되어 [마이크로소프트](https://www.microsoft.com/), [구글](https://www.google.com/), [아마존](https://www.amazon.com/) 등의 주요 IT 기업의 관심과 지원을 받고 있다.
 
 ## 설치
 러스트 프로그래밍 언어를 실행하는 데 필요한 [툴체인](https://ko.wikipedia.org/wiki/툴체인)은 공식 홈페이지에서 rustup_init.exe를 [다운로드](https://www.rust-lang.org/tools/install) 받아 설치한다.
@@ -64,129 +64,37 @@
 cargo new <프로젝트명>
 ```
 
-# 구문
-[구문](https://ko.wikipedia.org/wiki/구문_(프로그래밍_언어))(syntax)은 프로그래밍 언어에서 문자 및 기호들의 조합이 올바른 문장 또는 표현식을 구성하였는지 정의하는 규칙이다. 각 프로그래밍 언어마다 규정하는 구문이 다르며, 이를 준수하지 않을 시 해당 프로그램은 빌드되지 않거나, 실행이 되어도 오류 및 의도치 않은 동작을 수행한다.
+## 표현식
+**[표현식](https://doc.rust-lang.org/reference/expressions.html)**(expressions)은 반드시 값을 도출하는 평가(evaluate)가 이루어지면, 이로 인한 부가적인 영향이 발생할 수 있는 구문적 존재이다. 기존 [C](C.md)/[C++](Cpp.md) 언어와 달리, Rust은 표현식 지향 (expression-oriented) 프로그래밍이며 표현식의 개념이 더 포괄적이다.
 
-다음은 러스트 프로그래밍 언어에서 구문에 관여하는 요소들을 소개한다:
+이해를 돕기 위해, 아래는 Rust의 표현식에 해당하는 항목들 중 일부를 나열한다.
 
-* **[표현식](https://en.wikipedia.org/wiki/Expression_(computer_science))(expression)**
-    
-    값을 반환하는 구문적 존재를 가리킨다. 표현식에 대한 결과를 도출하는 것을 평가(evaluate)라고 부른다.
-    
-    ```rust
-    2 + 3           // 숫자 5를 반환
-    2 < 3           // 논리 참을 반환
-    ```
+* [제어 흐름식](#제어-흐름식)
+* [연산 표현식](https://doc.rust-lang.org/reference/expressions/operator-expr.html): 간단히 "연산자"라고 부른다.
+* [블록 표현식](https://doc.rust-lang.org/reference/expressions/block-expr.html): 블록 `{}`은 [제어 흐름](#제어-흐름식) 및 익명의 [네임스페이스](#네임스페이스)의 영역을 나타낸다. 블록 내의 마지막 코드가 표현식이면 이는 블록의 반환값이 된다.<sup>[[출처](https://doc.rust-lang.org/rust-by-example/expression.html)]</sup>
+* ([메소드](https://doc.rust-lang.org/reference/expressions/method-call-expr.html)) [호출 표현식](https://doc.rust-lang.org/reference/expressions/call-expr.html): 예를 들어, println! 함수 호출도 표현식이다. 비록 평가된 값은 `()`이지만, 텍스트가 출력되는 영향이 동반되었다.
+* 기타 등등
 
-* **[토큰](https://doc.rust-lang.org/reference/tokens.html)(token)**
+### 문장
+**[문장](https://doc.rust-lang.org/reference/statements.html)**(statements)은 [블록 표현식](https://doc.rust-lang.org/reference/expressions/block-expr.html) `{}` 안을 구성하는 구문적 존재이며, 코드의 끝에 [세미콜론](https://en.wikipedia.org/wiki/Semicolon) 여부로 판별된다. 블록 안에 있어도  이는 C 언어의 "문장"과 메우 유사하지만, Rust는 오로지 다음 두 유형의 문장만이 존재한다.
 
-    표현식을 구성하는 가장 기본적인 요소이며, 대표적으로 [키워드](https://doc.rust-lang.org/reference/keywords.html)(keyword), [식별자](#식별자)(identifier)와 [리터럴](https://doc.rust-lang.org/reference/tokens.html#literals)(literal) 등이 있다.
-
-    ```rust
-    variable        // 식별자
-    2               // 정수 리터럴
-    ```
-
-* **[문장](https://en.wikipedia.org/wiki/Statement_(computer_science))(statement)**
-    
-    실질적으로 무언가를 실행하는 구문적 존재를 가리킨다: 흔히 하나 이상의 표현식으로 구성되지만, [`break`](#break-문) 및 [`continue`](#continue-문)와 같이 독립적으로 사용되는 문장도 있다. 러스트 프로그래밍 언어는 [세미콜론](https://ko.wikipedia.org/wiki/새줄_문자)(semicolon) `;`을 기준으로 문장을 분별한다. 
-
-    ```rust
-    let variable = 2 + 3;      // 숫자 5를 "variable" 변수에 초기화
-    if 2 < 3 { statement; }    // 논리가 참이면 "statement" 문장 실행
-    ```
-
-* **[블록](https://en.wikipedia.org/wiki/Block_(programming))(block)**
-
-    한 개 이상의 문장들을 한꺼번에 관리할 수 있도록 묶어놓은 소스 코드상 그룹이다. 블록 안에 또 다른 블록이 상주할 수 있으며, 이를 네스티드 블록(nested block)이라고 부른다. 러스트에서는 한 쌍의 중괄호 `{}`로 표시된다.
-
-    ```rust
-    {
-        let variable = 2 + 3;
-        if 2 < 3 { statement; }
-    }
-    ```
-
-### 식별자
-[식별자](https://doc.rust-lang.org/reference/identifiers.html)(identifier)는 프로그램을 구성하는 데이터들을 구별하기 위해 사용되는 명칭이다. 즉, 식별자는 개발자가 데이터에 직접 붙여준 이름이다. 러스트 프로그래밍 언어에서 식별자는 [유니코드 표준 부록 #31](https://www.unicode.org/reports/tr31/tr31-37.html)을 준수하며, 간단히 설명하면 다음과 같다.
-
-1. 알파벳, 숫자, 밑줄 `_`만 허용 (그 외 특수문자 및 공백 사용 불가)
-1. 식별자의 첫 문자는 숫자가 될 수 없음
-1. 대소문자 구분 필수
-1. [예약어](https://doc.rust-lang.org/book/appendix-01-keywords.html) 금지
-
-### 주석
-[주석](https://doc.rust-lang.org/reference/comments.html)(comment)은 프로그램의 소스 코드로 취급하지 않아 실행되지 않는 영역이다. 흔히 코드에 대한 간단한 정보를 기입하기 위해 사용되는 데, 크게 비문서 주석 그리고 문서 주석로 나뉘어진다.
-
-<table style="table-layout: fixed; width: 90%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">러스트 주석 종류</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">비문서 주석(non-doc comments)</th><th style="text-align: center;">문서 주석(doc comments)</th></tr></thead><tbody><tr><td>일반적인 <a href="C.md">C</a>/<a href="C.md">C++</a> 언어 형식의 <a href="C.md#주석">주석</a>과 동일하다.</td><td>문서 주석은 한줄(<code>///</code>) 그리고 블록(<code>/** */</code>)으로 입력할 수 있으며, 데이터에 대한 간략한 설명을 기입하는 데 사용된다.</td></tr><tr style="vertical-align: top; overflow-wrap: break-word;"><td>
+1. 선언문(declaration statement): `let` 키워드로 새로운 [변수](#변수)를 선언하거나 바인딩한다.
+1. 표현문(expression statement): 세미콜론에 의해 값이 반환되지 않은 표현식을 가리킨다. 마지막 표현문에 세미콜론을 생략하면 
 
 ```rust
-/*
-블록 주석:
-코드 여러 줄을 차지하는 주석이다.
-*/
-
-// 한줄 주석: 코드 한 줄을 차지하는 주석이다.
+fn main() {
+    let variable = 3;           // declaration statement
+    if 2 < 3 { expressions };   //  expression statement
+}
 ```
-</td><td>
 
-```rust
-/**
-블록 문서 주석:
-코드 여러 줄을 차지하는 주석이다.
-*/
+단, 블록 표현식 끝에 세미콜론을 붙이면 블록 자체가 값을 반환하지 않는다는 걸 의미하며, 불록 안의 표현식이 문장으로 전환되는 걸 의미하지 않는다.
 
-/// 한줄 문서 주석: 코드 한 줄을 차지하는 주석이다.
-```
-</td></tr></tbody></table>
-
-일반 주석과 달리, 사용자가 정의한 데이터에 기입된 문서 주석은 `doc`이란 특수한 속성에 저장되어 정의된 데이터에 대한 설명을 정의한 소스 코드를 찾아가지 않고서도 곧바로 내용을 살펴볼 수 있다.
-
-![VS Code에서의 문서 주석 활용 예시](./images/rust_doccomments.png)
-
-## 형식 데이터
-> *참고: [Formatted print - Rust By Example](https://doc.rust-lang.org/rust-by-example/hello/print.html)*
-
-다음은 지정된 형식에 따른 데이터 처리에 관여하는 러스트의 매크로들을 소개한다.
-
-* **콘솔 출력**
-
-    지정된 형식대로 텍스트를 콘솔에 나타나도록 출력하는 데 사용된다.
-
-    <table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">러스트의 출력 매크로</caption><colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup><thead><tr><th style="text-align: center;">출력 매크로</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/macro.print.html"><code>print!</code></a></td><td>주어진 형식 지정자에 따라 텍스트를 터미널에 출력한다.</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/macro.println.html"><code>println!</code></a></td><td>주어진 형식 지정자에 따라 텍스트를 터미널에 출력하며 <code>'\n'</code> 줄바꿈이 기본적으로 보장된다.
-    
-    ```rust
-    println!("Format: {:?}", 5);
-    ```
-    </td></tr></tbody></table>
-
-* **버퍼 입력**
-
-    지정된 형식대로 텍스트를 버퍼로 전달하도록 입력하는 데 사용된다. 유의할 점으로, 본 매크로는 콘솔창의 사용자 텍스트를 입력으로 받는 매크로가 절대 아니다. 핵심 입출력 기능 및 특성을 제공하는 [`std::io`](https://doc.rust-lang.org/std/io/)의 [`Write`](https://doc.rust-lang.org/std/io/trait.Write.html) 특성이 요구된다.
-
-    <table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">러스트의 입력 매크로</caption><colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup><thead><tr><th style="text-align: center;">입력 매크로</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/macro.write.html"><code>write!</code></a></td><td>주어진 형식 지정자 따른 텍스트를 터미널에 출력한다.</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/macro.writeln.html"><code>writeln!</code></a></td><td>주어진 형식 지정자 따른 텍스트를 터미널에 출력하며 <code>'\n'</code> 줄바꿈이 기본적으로 보장된다.
-
-    ```rust
-    use std::io::Write;
-    writeln!(&mut buffer, "Output: {:?}", 5);
-    ```
-    </td></tr></tbody></table>
-
-텍스트 안에 포함된 중괄호 `{}`에는 인자로 전달된 데이터가 삽입 및 서식된다. 특히 예시에 기입된 [`{:?}`](https://doc.rust-lang.org/std/fmt/trait.Debug.html)은 디버깅 목적으로 실사용에 적용하기 불안정하지만 프로그램 코드를 이해하는 데 도움을 준다. 자세한 내용은 [`std::fmt`](https://doc.rust-lang.org/std/fmt/index.html) 모듈을 참고하도록 한다.
-
-### 탈출 문자
-[탈출 문자](https://en.wikipedia.org/wiki/Escape_character)(escape character)는 백슬래시 기호 `\`를 사용하며, [문자열](#문자열)로부터 탈출하여 텍스트 데이터 내에서 특정 연산을 수행하도록 한다. 예시에서 `\n` 탈출 문자를 사용하여 문자열 줄바꿈을 구현한 것을 보여주었다.
-
-```rust
-println!("Hello,\nWorld!");
-```
-```terminal
-Hello,
-World!
-```
+### 토큰
+**[토큰](https://doc.rust-lang.org/reference/tokens.html)**(token)은 프로그래밍 문법을 구성하는 가장 기본적인 요소이며, 대표적으로 [키워드](https://doc.rust-lang.org/reference/keywords.html), [식별자](https://doc.rust-lang.org/reference/identifiers.html), [리터럴](https://doc.rust-lang.org/reference/tokens.html#literals) 등이 있다.
 
 ## 자료형
-[자료형](https://doc.rust-lang.org/book/ch03-02-data-types.html)(data type)은 데이터를 어떻게 표현할 지 결정하는 요소이며, 러스트에서는 다음과 같이 존재한다.
+**[자료형](https://doc.rust-lang.org/book/ch03-02-data-types.html)**(data type)은 데이터를 어떻게 표현할 지 결정하는 요소이며, 러스트에서는 다음과 같이 존재한다.
 
 <table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">러스트의 <a href="https://doc.rust-lang.org/stable/book/ch03-02-data-types.html#scalar-types">원시 스칼라 자료형</a></caption><colgroup><col style="width: 20%;"/><col style="width: 15%;"/><col style="width: 15%;"/><col/></colgroup><thead><tr><th style="text-align: center;">키워드</th><th style="text-align: center;">자료형</th><th style="text-align: center;">크기 (바이트)</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>i8</code><br/><i>(<a href="https://ko.wikipedia.org/wiki/Signed와_unsigned#unsigned_int">unsigned</a>: <code style="font-style: normal;">u8</code>)</i></td><td style="text-align: center;"><a href="https://doc.rust-lang.org/reference/types/numeric.html">숫자</a></td><td style="text-align: center;">1</td><td>1바이트 정수</td></tr><tr><td style="text-align: center;"><code>i16</code><br/><i>(unsigned: <code style="font-style: normal;">u16</code>)</i></td><td style="text-align: center;">숫자</td><td style="text-align: center;">2</td><td>2바이트 정수</td></tr><tr><td style="text-align: center;"><code>i32</code><br/><i>(unsigned: <code style="font-style: normal;">u32</code>)</i></td><td style="text-align: center;">숫자</td><td style="text-align: center;">4</td><td>4바이트 정수</td></tr><tr><td style="text-align: center;"><code>i64</code><br/><i>(unsigned: <code style="font-style: normal;">u64</code>)</i></td><td style="text-align: center;">숫자</td><td style="text-align: center;">8</td><td>8바이트 정수</td></tr><tr><td style="text-align: center;"><code>i128</code><br/><i>(unsigned: <code style="font-style: normal;">u128</code>)</i></td><td style="text-align: center;">숫자</td><td style="text-align: center;">16</td><td>16바이트 정수</td></tr><tr><td style="text-align: center;"><code>isize</code><br/><i>(unsigned: <code style="font-style: normal;">usize</code>)</i></td><td style="text-align: center;">숫자</td><td style="text-align: center;">16 <sub>(최소)</sub></td><td><a href="#포인터">포인터</a> 크기의 정수; 예를 들어 x86는 32비트, 그리고 x64는 64비트 정수로 계산된다.</td></tr><tr><td style="text-align: center;"><code>f32</code></td><td style="text-align: center;">숫자</td><td style="text-align: center;">4</td><td>32비트 <a href="https://en.wikipedia.org/wiki/Single-precision_floating-point_format">단정밀도 실수</a></td></tr><tr><td style="text-align: center;"><code>f64</code></td><td style="text-align: center;">숫자</td><td style="text-align: center;">8</td><td>64비트 <a href="https://en.wikipedia.org/wiki/Double-precision_floating-point_format">배정밀도 실수</a></td></tr><tr><td style="text-align: center;"><code>f128</code></td><td style="text-align: center;">숫자</td><td style="text-align: center;">16</td><td>128비트 <a href="https://en.wikipedia.org/wiki/Quadruple-precision_floating-point_format">4배정밀도 실수</a></td></tr><tr><td style="text-align: center;"><code>bool</code></td><td style="text-align: center;"><a href="https://doc.rust-lang.org/reference/types/boolean.html">논리</a></td><td style="text-align: center;">1</td><td>참(<code>true</code>; 1) 혹은 거짓(<code>false</code>; 0)</td></tr><tr><td style="text-align: center;"><code>char</code></td><td style="text-align: center;"><a href="https://doc.rust-lang.org/reference/types/textual.html">텍스트</a></td><td style="text-align: center;">4</td><td>단일 <a href="https://en.wikipedia.org/wiki/UTF-32">UTF-32</a> 문자: 0x0000-0xD7FF 또는 0xE000-0x10FFFF</td></tr></tbody/></table>
 
@@ -202,7 +110,7 @@ u16             // 표현 가능 범위:     +0 ~ +65535
 그 외의 자료형들은 차후 러스트 프로그래밍 언어에 대한 개념을 소개하면서 함께 설명할 예정이다.
 
 ### 자료형 변환
-[자료형 변환](https://doc.rust-lang.org/reference/expressions/operator-expr.html#type-cast-expressions)(type conversion)은 데이터를 다른 자료형으로 바꾸는 작업이며, 불가피하게 데이터가 손실될 수 있으므로 유의하도록 한다. 러스트는 일반적으로 [강제 변환](https://doc.rust-lang.org/reference/type-coercions.html)(coercion)이란 암시적 자료형 변환을 지원하지 않으며, 자동 변환은 오로지 특정 위치의 코드에서 제한된 자료형에만 국한된다.
+**[자료형 변환](https://doc.rust-lang.org/reference/expressions/operator-expr.html#type-cast-expressions)**(type conversion)은 데이터를 다른 자료형으로 바꾸는 작업이며, 불가피하게 데이터가 손실될 수 있으므로 유의하도록 한다. 러스트는 일반적으로 [강제 변환](https://doc.rust-lang.org/reference/type-coercions.html)(coercion)이란 암시적 자료형 변환을 지원하지 않으며, 자동 변환은 오로지 특정 위치의 코드에서 제한된 자료형에만 국한된다.
 
 * **[자료형 캐스팅](https://doc.rust-lang.org/reference/expressions/operator-expr.html#type-cast-expressions)**(type casting)
 
@@ -213,90 +121,8 @@ u16             // 표현 가능 범위:     +0 ~ +65535
     println!("The ascii value of the variable is {}", variable as u8);
     ```
 
-### `size_of` 함수
-[`size_of`](https://doc.rust-lang.org/std/mem/fn.size_of.html) [함수](#함수)는 자료형의 메모리 크기를 바이트로 반환한다. 정확한 설명은 "배열의 다음 요소 간 오프셋"을 반환하며, [데이터 정렬](C.md#데이터-구조-정렬)에 삽입된 패딩도 포함한다.
-
-* [`size_of_val`](https://doc.rust-lang.org/std/mem/fn.size_of_val.html): (자료형을 알 수 없는 경우) 참조된 값의 메모리 할당 크기를 동적으로 확인하여 반환한다.
-
-```rust
-std::mem::size_of::<char>();        // 크기: 4바이트
-
-let variable: u128 = 0;
-std::mem::size_of_val(&variable);   // 크기: 16바이트
-```
-
-## 변수
-[변수](https://doc.rust-lang.org/stable/book/ch03-01-variables-and-mutability.html)(variable)는 [네임 바인딩](https://en.wikipedia.org/wiki/Name_binding) 기법을 통해 지정된 [자료형](#자료형)의 데이터와 엮여 접근하는 데 사용되는 [식별자](#식별자)이며, 간단히 설명하자면 데이터에 이름을 붙인 것이다. 아래 코드는 `variable` 변수를 "선언(declaration)"한 다음 상수 3을 바인딩한다. 여기서 최초 바인딩을 "초기화(initialization)"라고 부르며, 초기화되지 않은 채 변수 호출은 허용되지 않지만 선언된 이후 나중에 바인딩될 수 있다.<sup>[<a href="https://doc.rust-lang.org/rust-by-example/variable_bindings/declare.html">출처</a>]</sup>
-
-<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption>러스트의 불변 및 가변 변수, 그리고 키워드 소개</caption><colgroup><col style="width: 50%;"/></col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">불변(immutable) 변수</th><th style="text-align: center;">가변(mutable) 변수</th></tr></thead><tbody><tr style="vertical-align: top;"><td>
-
-```rust
-let variable = 3;
-```
-</td><td>
-
-```rust
-let mut variable = 3;
-```
-</td></tr><tr><td>초기화 이후에 변수는 다른 값으로 변경될 수 없으며, 이는 러스트의 기본적인 특성 중 하나이다.</td><td>타 프로그래밍 언어처럼 초기화가 이루어진 이후에도 <a href="https://doc.rust-lang.org/reference/expressions/operator-expr.html#assignment-expressions">할당 표현식</a>을 통해 새로운 값을 전달 받을 수 있도록 선언된 변수이다.</td></tr><tr><td><ul><li><a href="https://doc.rust-lang.org/std/keyword.let.html"><code>let</code></a>: 현 코드 <a href="https://doc.rust-lang.org/rust-by-example/variable_bindings/scope.html">영역범위</a> 내에 새로운 변수를 소개하는 데 사용된다.</li><li><a href="https://doc.rust-lang.org/std/keyword.const.html"><code>const</code></a>: 어디서나 사용할 수 있는 불변의 전역 상수이며, 반드시 자료형과 함께 선언되어야 한다.</li><li><a href="https://doc.rust-lang.org/std/keyword.static.html"><code>static</code></a>: 메모리 주소를 나타내기 때문에, 이를 참조하면 데이터 변경이 가능하여 사실상 전역 변수로 사용된다.</li><ul></td><td><ul><li><a href="https://doc.rust-lang.org/std/keyword.mut.html"><code>mut</code></a>: 다른 데이터에 바인딩할 수 있는 가변 변수를 선언하는 목적으로도 활용되며, <code>let</code> 및 <code>static</code> 키워드와 함께 사용될 수 있다.</li><ul></td></tr></tbody></table>
-
-컴파일러는 데이터의 값과 사용처를 기반하여 변수의 자료형을 추론할 수 있으나, 다음과 같이 명시적으로 변수에 자료형을 지정할 수 있다.
-
-```rust
-let variable: u8 = 3;
-```
-
-거의 모든 프로그래밍 언어는 할당 기호를 기준으로 왼쪽에는 피할당자(변수), 오른쪽에는 피할당자로 전달하려는 표현식(값 혹은 데이터)이 위치한다. 반대로 놓여질 경우, 오류가 발생하거나 원치 않는 결과가 도출될 수 있다.
-
-## 연산자
-[연산자](https://en.wikipedia.org/wiki/Operator_(computer_programming))(operator)는 피연산 데이터를 조작할 수 있는 가장 간단한 형태의 연산 요소이다. 연산자는 피연산자의 접두부, 접미부, 혹은 두 데이터 사이에 위치시켜 사용한다. 가독성을 위해 데이터와 연산자 사이에 공백을 넣어도 연산에는 아무런 영향을 주지 않는다. 다음은 [러스트 연산자](https://doc.rust-lang.org/book/appendix-02-operators.html)들을 간략히 소개한다.
-
-### 산술 연산자
-<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://doc.rust-lang.org/reference/expressions/operator-expr.html#arithmetic-and-logical-binary-operators">산술 연산자</a>(arithmetic operators)</caption><colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">산술</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/ops/trait.Add.html"><code>+</code></a></td><td style="text-align: center;">덧셈</td><td>좌측과 우측 피연산자의 값을 더하여 반환한다.</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/ops/trait.Sub.html"><code>-</code></a></td><td style="text-align: center;">뺄셈</td><td>좌측 피연산자에서 우측 피연산자를 뺀 값을 반환한다.</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/ops/trait.Mul.html"><code>*</code></a></td><td style="text-align: center;">덧셈</td><td>좌측 피연산자를 우측 피연산자의 값만큼 곱하여, 즉 반복 덧셈하여 반환한다.</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/ops/trait.Div.html"><code>/</code></a></td><td style="text-align: center;">나눗셈</td><td>좌측 피연산자에서 우측 피연산자를 나눈 <a href="https://en.wikipedia.org/wiki/Quotient">몫</a>을 반환한다.</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/ops/trait.Rem.html"><code>%</code></a></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Modular_arithmetic">모듈러</a></td><td>좌측 피연산자에서 우측 피연산자를 나눈 <a href="https://en.wikipedia.org/wiki/Remainder">나머지</a>를 반환한다.</td></tr></tbody></table>
-
-### 비트 연산자
-<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://en.wikipedia.org/wiki/Bitwise_operation">비트 연산자</a>(bitwise operators)</caption><colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">비트연산</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/ops/trait.BitAnd.html"><code>&</code></a></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operation#AND">AND</a></td><td>두 피연산자의 각 비트를 비교하여 모두 1이면 1을, 아니면 0을 계산하여 반환한다.</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/ops/trait.BitOr.html"><code>|</code></a></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operation#OR">OR</a></td><td>두 피연산자의 각 비트를 비교하여 하나라도 1이 있으면 1을, 아니면 0을 계산하여 반환한다.</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/ops/trait.BitXor.html"><code>^</code></a></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operation#XOR">XOR</a></td><td>두 피연산자의 각 비트를 비교하여 값이 같으면 0을, 다르면 1을 계산하여 반환한다.</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/ops/trait.Not.html"><code>!</code></a></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operation#NOT">NOT</a></td><td>피연산자의 각 비트마다 반전시킨 값을 반환한다.</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/ops/trait.Shl.html"><code>&lt;&lt;</code></a></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operations_in_C#Left_shift_%3C%3C">좌향 시프트</a></td><td>피연산자(左)의 비트를 전반적으로 일정 값(右)만큼 왼쪽으로 이동시킨다.</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/ops/trait.Shr.html"><code>&gt;&gt;</code></a></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Bitwise_operations_in_C#Right_shift_%3E%3E">우향 시프트</a></td><td>피연산자(左)의 비트를 전반적으로 일정 값(右)만큼 오른쪽으로 이동시킨다.</td></tr></tbody></table>
-
-### 할당 연산자
-단순 할당 연산자를 산술 및 비트 연산자와 조합하여 코드를 더욱 간결하게 작성할 수 있으며, 아래는 다양한 할당 연산자 중 일부만 보여준다.
-
-<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://doc.rust-lang.org/reference/expressions/operator-expr.html#compound-assignment-expressions">할당 연산자</a>(assignment operators)</caption><colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">할당</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/reference/expressions/operator-expr.html#basic-assignments"><code>=</code></a></td><td style="text-align: center;">단순 할당</td><td>피연산자(右)가 <a href="#변수">변수</a>와 같은 피할당자(左)로 할당된 값을 반환한다.</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/ops/trait.AddAssign.html"><code>+=</code></a></td><td style="text-align: center;">덧셈 대입</td><td>
-
-```rust
-x += y;  // 동일: x = x + y;
-```
-</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/ops/trait.MulAssign.html"><code>*=</code></a></td><td style="text-align: center;">곱셈 대입</td><td>
-
-```rust
-x *= y;  // 동일: x = x * y;
-```
-</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/ops/trait.BitAndAssign.html"><code>&=</code></a></td><td style="text-align: center;">AND 대입</td><td>
-
-```rust
-x &= y;  // 동일: x = x & y;
-```
-</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/ops/trait.ShlAssign.html"><code>&lt;&lt;=</code></a></td><td style="text-align: center;">좌향 시프트 대입</td><td>
-
-```rust
-x <<= y;  // 동일: x = x << y;
-```
-</td></tr></tbody></table>
-
-### 비교 연산자
-아래 비교 연산자의 설명은 참을 반환할 조건을 소개하며, 그 외에는 모두 `false`를 반환한다.
-
-<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://doc.rust-lang.org/reference/expressions/operator-expr.html#comparison-operators">비교 연산자</a>(comparison operators)</caption><colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">관계</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><code>&gt;</code></td><td style="text-align: center;">초과</td><td>좌측 피연산자가 우측 피연산자보다 크면 <code>true</code>를 반환한다.</td></tr><tr><td style="text-align: center;"><code>&lt;</code></td><td style="text-align: center;">미만</td><td>좌측 피연산자가 우측 피연산자보다 작으면 <code>true</code>를 반환한다.</td></tr><tr><td style="text-align: center;"><code>&gt;=</code></td><td style="text-align: center;">이상</td><td>좌측 피연산자가 우측 피연산자보다 크거나 같으면 <code>true</code>를 반환한다.</td></tr><tr><td style="text-align: center;"><code>&lt;=</code></td><td style="text-align: center;">이하</td><td>좌측 피연산자가 우측 피연산자보다 작거나 같으면 <code>true</code>를 반환한다.</td></tr><tr><td style="text-align: center;"><code>==</code></td><td style="text-align: center;">동일</td><td>두 피연산자의 값이 같으면 <code>true</code>를 반환한다.</td></tr><tr><td style="text-align: center;"><code>!=</code></td><td style="text-align: center;">상이</td><td>두 피연산자의 값이 같지 않으면 <code>true</code>를 반환한다.</td></tr></tbody></table>
-
-### 논리 연산자
-(논리 부정을 제외한) 아래 논리 연산자의 설명은 참을 반환할 조건을 소개하며, 그 외에는 모두 `false`를 반환한다.
-
-<table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;"><a href="https://doc.rust-lang.org/reference/expressions/operator-expr.html#lazy-boolean-operators">논리 연산자</a>(logical operators)</caption><colgroup><col style="width: 10%;"/><col style="width: 15%;"/><col style="width: 75%;"/><col style="width: "/></colgroup><thead><tr><th style="text-align: center;">연산자</th><th style="text-align: center;">논리</th><th style="text-align: center;">설명 </th></tr></thead><tbody><tr><td style="text-align: center;"><code>&&</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Logical_conjunction">논리곱</a></td><td>좌측 그리고 우측 <a href="https://en.wikipedia.org/wiki/Proposition">명제</a>(피연산자)가 모두 참이면 <code>true</code>를 반환한다.</td></tr><tr><td style="text-align: center;"><code>||</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Logical_disjunction">논리합</a></td><td>좌측 또는 우측 명제(피연산자)가 하나라도 참이면 <code>true</code>를 반환한다.</td></tr><tr><td style="text-align: center;"><code>!</code></td><td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Negation">부정</a></td><td>명제(피연산자)가 참이면 거짓으로, 혹은 그 반대로 반전된 값을 반환한다.</td></tr></tbody></table>
-
-# 복합 자료형
-러스트 언어는 여러 데이터를 하나의 변수로 저장하는 [복합 자료형](https://doc.rust-lang.org/book/ch03-02-data-types.html#compound-types)(compound type)을 기본적으로 제공한다. 아래는 러스트의 대표적인 두 유형의 복합 자료형을 간략하게 소개한다.
-
-## 배열
-**[배열](https://doc.rust-lang.org/book/ch03-02-data-types.html#the-array-type)**(array)은 동일한 자료형의 데이터를 일련의 순서로 담는 복합 자료형이다. 배열을 선언할 때 자료형을 지정하는 구문에 대괄호 `[]`를 활용하여 데이터 유형 및 용량 크기를 ([정수 리터럴](https://doc.rust-lang.org/reference/tokens.html#numbers)이나 [상수](#변수)로) 기입하며, 한 번 정의된 크기는 변경이 불가하다.
+### 배열
+**[배열](https://doc.rust-lang.org/book/ch03-02-data-types.html#the-array-type)**(array)은 동일한 [자료형](#자료형)의 데이터를 일련의 순서로 담는 시퀀스 자료형이다. 배열을 선언할 때 자료형을 지정하는 구문에 대괄호 `[]`를 활용하여 데이터 유형 및 용량 크기를 ([정수 리터럴](https://doc.rust-lang.org/reference/tokens.html#numbers)이나 [상수](#변수)로) 기입하며, 한 번 정의된 크기는 변경이 불가하다.
 
 ```rust
 let arr : [u8 ; 3] = [value1, value2, value3];
@@ -330,8 +156,7 @@ arr[1] = value4;
 println!("{:?}", arr[1]);   // 출력: [value1, value4, value3]
 ```
 
-### 다차원 배열
-배열은 또 다른 배열을 요소로 가질 수 있으나, 자료형이 동일해야 하며 요소로 작용하는 배열들의 크기는 모두 같아야 하는 제약을 갖는다.
+배열은 또 다른 동일한 자료형과 크기의 배열들을 요소로 가질 수 있으며, 이를 다차원 배열이라고 부른다.
 
 ```rust
 let arr : [[u8; 3]; 2] = [[1, 2, 3],
@@ -341,8 +166,8 @@ println!("{}", arr[0][1]);  // 출력: 2
 println!("{}", arr[1][2]);  // 출력: 6
 ```
 
-## 튜플
-**[튜플](https://doc.rust-lang.org/book/ch03-02-data-types.html#the-tuple-type)**(tuple)은 다양한 자료형의 데이터를 일련의 순서로 담는 복합 자료형이다. 튜플을 선언할 때 자료형을 지정하는 구문에 소괄호 `()`를 활용하여 데이터 유형을 순서대로 기입하며, 한 번 정의된 튜플 크기와 자료형 순서는 변경이 불가하다.
+### 튜플
+**[튜플](https://doc.rust-lang.org/book/ch03-02-data-types.html#the-tuple-type)**(tuple)은 다양한 [자료형](#자료형)의 데이터를 일련의 순서로 담는 시퀀스 자료형이다. 튜플을 선언할 때 자료형을 지정하는 구문에 소괄호 `()`를 활용하여 데이터 유형을 순서대로 기입하며, 한 번 정의된 튜플 크기와 자료형 순서는 변경이 불가하다.
 
 ```rust
 let tuple : (i32, char, bool) = (3, 'A', true);
@@ -362,139 +187,105 @@ tuple.1 = 'B';
 println!("{:?}", tuple);    // 출력: (3, 'B', true)
 ```
 
-# 제어문
-제어문(control statement)은 코드 실행을 제어하는 문장을 가리키며, 프로그래밍에 있어 기초적이면서 가장 흔히 사용되는 코드 유형 중 하나이다. 제어문을 크게 세 분류로 나누면 [조건문](#조건문), [반복문](#반복문), 그리고 [이동문](#이동문)이 존재한다.
+## 변수
+**[변수](https://doc.rust-lang.org/stable/book/ch03-01-variables-and-mutability.html)**(variable)는 [네임 바인딩](https://en.wikipedia.org/wiki/Name_binding) 기법을 통해 지정된 [자료형](#자료형)의 데이터와 엮여 접근하는 데 사용되는 [식별자](#식별자)이며, 간단히 설명하자면 데이터에 이름을 붙인 것이다. 아래 코드는 `variable` 변수를 "선언(declaration)"한 다음 상수 3을 바인딩한다. 여기서 최초 바인딩을 "초기화(initialization)"라고 부르며, 초기화되지 않은 채 변수 호출은 허용되지 않지만 선언된 이후 나중에 바인딩될 수 있다.<sup>[<a href="https://doc.rust-lang.org/rust-by-example/variable_bindings/declare.html">출처</a>]</sup>
 
-## 조건문
-조건문(conditional statement)은 주어진 조건의 논리에 따라서 코드 실행 여부를 결정하는 제어문이다:
-
-### `if` 조건문
-[`if`](https://doc.rust-lang.org/reference/expressions/if-expr.html) 조건문은 조건 혹은 논리가 참일 경우 코드를 실행하며, 거짓일 경우에는 코드를 실행하지 않는다.
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption>러스트의 불변 및 가변 변수, 그리고 키워드 소개</caption><colgroup><col style="width: 50%;"/></col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">불변(immutable) 변수</th><th style="text-align: center;">가변(mutable) 변수</th></tr></thead><tbody><tr style="vertical-align: top;"><td>
 
 ```rust
-if condition {
-    statements;
-}
+let variable = 3;
+```
+</td><td>
+
+```rust
+let mut variable = 3;
+```
+</td></tr><tr><td>초기화 이후에 변수는 다른 값으로 변경될 수 없으며, 이는 러스트의 기본적인 특성 중 하나이다.</td><td>타 프로그래밍 언어처럼 초기화가 이루어진 이후에도 <a href="https://doc.rust-lang.org/reference/expressions/operator-expr.html#assignment-expressions">할당 표현식</a>을 통해 새로운 값을 전달 받을 수 있도록 선언된 변수이다.</td></tr><tr><td><ul><li><a href="https://doc.rust-lang.org/std/keyword.let.html"><code>let</code></a>: 현 코드 <a href="https://doc.rust-lang.org/rust-by-example/variable_bindings/scope.html">영역범위</a> 내에 새로운 변수를 소개하는 데 사용된다.</li><li><a href="https://doc.rust-lang.org/std/keyword.const.html"><code>const</code></a>: 어디서나 사용할 수 있는 불변의 전역 상수이며, 반드시 자료형과 함께 선언되어야 한다.</li><li><a href="https://doc.rust-lang.org/std/keyword.static.html"><code>static</code></a>: 메모리 주소를 나타내기 때문에, 이를 참조하면 데이터 변경이 가능하여 사실상 전역 변수로 사용된다.</li><ul></td><td><ul><li><a href="https://doc.rust-lang.org/std/keyword.mut.html"><code>mut</code></a>: 다른 데이터에 바인딩할 수 있는 가변 변수를 선언하는 목적으로도 활용되며, <code>let</code> 및 <code>static</code> 키워드와 함께 사용될 수 있다.</li><ul></td></tr></tbody></table>
+
+컴파일러는 데이터의 값과 사용처를 기반하여 변수의 자료형을 추론할 수 있으나, 다음과 같이 명시적으로 변수에 자료형을 지정할 수 있다.
+
+```rust
+let variable: u8 = 3;
 ```
 
-* **`else` 조건문**
+거의 모든 프로그래밍 언어는 할당 기호를 기준으로 왼쪽에는 피할당자(변수), 오른쪽에는 피할당자로 전달하려는 표현식(값 혹은 데이터)이 위치한다. 반대로 놓여질 경우, 오류가 발생하거나 원치 않는 결과가 도출될 수 있다.
 
-    단독으로 사용될 수 없으며 반드시 `if` 조건문 이후에 사용되어야 한다. 조건부가 거짓으로 판정되면 실행할 코드를 포함한다.
+### 네임스페이스
+**[네임스페이스](https://doc.rust-lang.org/reference/names/namespaces.html)**(namespace)는 선언된 식별자들 간 중복된 이름으로 충돌이 일어나는 걸 방지하기 위한 [영역](https://en.wikipedia.org/wiki/Scope_(computer_science))(scope)을 설정하여 데이터를 분류하는 논리 공간이다. 
 
-    ```rust
-    if condition {
-        statements;
-    }
-    else {
-        statements; 
-    }
-    ```
+## 제어 흐름식
+**[제어 흐름식](https://doc.rust-lang.org/book/ch03-05-control-flow.html)**(control flow expression)은 코드 실행을 제어하는 표현식을 가리키며, 프로그래밍에 있어 기초적이면서 가장 흔히 사용되는 코드 유형 중 하나이다. 아래는 Rust에서 지원하는 제어 흐름식으로, 부가 설명이 필요한 제어문의 경우 본 문서에 별도로 소개한다.
 
-* **`else if` 조건문**
+* [`if`](https://doc.rust-lang.org/reference/expressions/if-expr.html) <sub>(파생 패턴: [`if let`](https://doc.rust-lang.org/reference/expressions/if-expr.html#if-let-patterns))</sub>
+* [`match`](#match-표현식)
+* [`loop`](#loop-표현식)
+* [`while`](https://en.cppreference.com/w/c/language/while.html) <sub>(파생 패턴: [`while let`](https://en.cppreference.com/w/c/language/do.html))</sub>
+* [`for`](https://doc.rust-lang.org/reference/expressions/loop-expr.html#continue-expressions)
+* [`break`](https://doc.rust-lang.org/reference/expressions/loop-expr.html#break-expressions)
+* [`continue`](https://doc.rust-lang.org/reference/expressions/loop-expr.html#continue-expressions)
+* [`return`](https://doc.rust-lang.org/reference/expressions/return-expr.html)
 
-    `else`와 `if` 조건문의 조합으로 이전 조건이 거짓일 때 새로운 조건을 제시한다.
-
-    ```rust
-    if condition {
-        statements;
-    }
-    else if condition {
-        statements;
-    }
-    else {
-        statements;
-    }
-    ```
-
-### `match` 조건문
-[`match`](https://doc.rust-lang.org/reference/expressions/match-expr.html) 조건문은 전달받은 인자를 쉼표로 구분된 각 matcharm을 위에서부터 순서대로 패턴 일치 여부를 비교하여, 참일 경우 해당 지점부터 코드를 실행하고 거짓일 경우에는 순서로 넘어간다. 선택사항으로 마지막 `_` matcharm 가지는 어떠한 경우에도 부합하지 않으면 실행되는 패턴이다.
+### `match` 표현식
+[`match`](https://doc.rust-lang.org/reference/expressions/match-expr.html) 표현식은 전달받은 인자를 쉼표로 구분된 match arms들은 위에서부터 순서대로 [패턴 구문](https://doc.rust-lang.org/book/ch18-03-pattern-syntax.html)에 따른 일치 여부를 비교하여, 참일 경우 해당 지점부터 코드를 실행하고 거짓일 경우에는 순서로 넘어간다. 선택사항으로 마지막 `_` match arm은 어떠한 경우에도 부합하지 않을 때 실행되는 패턴이다.
 
 ```rust
 match argument {
-    matcharm => expression,
-    matcharm => expression,
+    match_arm => expression,
+    match_arm => expression,
     _ => expression
 }
 ```
 
-`match` 조건문은 타 프로그래밍 언어에서 소개되는 [`switch`](C.md#switch-조건문) 조건문과 유사하지만, 더 범용적인 "패턴 일치" 여부를 확인하는 점에서 차이가 존재한다. 파이썬 3.10부터 소개된 [`match`](Python.md#match-조건문) 조건문 또한 이와 동일한 방식으로 동작한다. 자세한 내용은 러스트의 [패턴 구문](https://doc.rust-lang.org/book/ch18-03-pattern-syntax.html)을 참고하도록 한다.
+* C/C++ 언어에서 소개되는 [`switch`](C.md#switch-선택문) 선택문과 유사하지만 더 범용적인 "패턴 일치" 여부를 확인하는 점에 차이가 있다.
 
-## 반복문
-반복문(loop statement)은 주어진 조건의 논리에 따라서 코드를 얼마나 반복적으로 실행할 지 결정하는 제어문이다:
-
-### `loop` 반복문
-[`loop`](https://doc.rust-lang.org/reference/expressions/loop-expr.html#infinite-loops) 반복문은 안에 정의된 코드를 무조건 반복적으로 실행한다.
+### `loop` 표현식
+[`loop`](https://doc.rust-lang.org/reference/expressions/loop-expr.html) 표현식은 블록 안에 정의된 코드를 무조건 반복 실행하며, 이를 중단하려면 `break` 표현식으로 탈출해야 한다.
 
 ```rust
 loop {
-    statements;
+    expressions
 }
 ```
 
-반복 실행을 중단하기 위해서는 [`break`](#break-탈출문) 탈출문이 필요하다. 비록 반복문으로 소개하였으나, 아래와 같이 탈출문을 활용한 값을 반환하는 표현식처럼 코드를 작성할 수 있다 (`loop` 반복문 한정).
+`loop` 표현식은 선택사항으로 [레이블](https://doc.rust-lang.org/reference/expressions/loop-expr.html#loop-labels)을 지닐 수 있으며, `break` 및 `continue` 표현식에 해당 레이블을 기입하여 어떤 반복 표현식이 대상인지 지정할 수 있다.
 
 ```rust
-let mut counter = 0;
-
-let variable = loop {
-    counter += 1;
-    if counter > 10 {
-        // counter = 11이 되면 진입되어 실행
-        break counter * 10;
+'outer: loop {
+    while true {
+        break 'outer;
     }
-};
-
-println!("{}", variable);
-```
-```
-110
-```
-
-### `while` 반복문
-[`while`](https://doc.rust-lang.org/reference/expressions/loop-expr.html#predicate-loops) 반복문은 조건 혹은 논리가 참일 동안 코드를 반복적으로 실행하며, 거짓일 경우에는 반복문을 종료한다.
-
-```rust
-while condition {
-    statements;
 }
 ```
 
-### `for` 반복문
-[`for`](https://doc.rust-lang.org/reference/expressions/loop-expr.html#iterator-loops) 반복문은 유효한 범위 내에서 코드를 반복적으로 실행하고, 범위의 모든 값이 반복되면 종료한다.
+## 형식 데이터
+> *참고: [Formatted print - Rust By Example](https://doc.rust-lang.org/rust-by-example/hello/print.html)*
 
-```rust
-for index in iterator {
-    statements;
-}
-```
+다음은 지정된 형식에 따른 데이터 처리에 관여하는 러스트의 매크로들을 소개한다.
 
-여기서 변수 `index`는 `iterable`에서 값을 얻고, 내부의 실행문은 더 이상 불러올 값이 없을 때까지 하나씩 반복한다. 흔히 반복문에 사용되는 `iterable` 데이터로 [배열](#배열), [문자열](#문자열) 등이 있다.
+* **콘솔 출력**
 
-## 이동문
-이동문(jump statement)은 아무런 조건이 필요없이 코드 실행 지점을 이동시키는 제어문이다:
+    지정된 형식대로 텍스트를 콘솔에 나타나도록 출력하는 데 사용된다.
 
-### `break` 탈출문
-[`break`](https://doc.rust-lang.org/reference/expressions/loop-expr.html#break-expressions) 탈출문은 (1) 반복문을 조기 종료시키거나, (2) `switch` 조건문에서 경우에 따라 실행되어야 할 코드를 구분짓기 위해 사용된다.
+    <table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">러스트의 출력 매크로</caption><colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup><thead><tr><th style="text-align: center;">출력 매크로</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/macro.print.html"><code>print!</code></a></td><td>주어진 형식 지정자에 따라 텍스트를 터미널에 출력한다.</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/macro.println.html"><code>println!</code></a></td><td>주어진 형식 지정자에 따라 텍스트를 터미널에 출력하며 <code>'\n'</code> 줄바꿈이 기본적으로 보장된다.
+    
+    ```rust
+    println!("Format: {:?}", 5);
+    ```
+    </td></tr></tbody></table>
 
-### `continue` 연속문
-[`continue`](https://doc.rust-lang.org/reference/expressions/loop-expr.html#continue-expressions) 연속문은 반복문을 종료하지 않은 채 나머지 실행 코드를 전부 무시하고 반복문의 조건부로 되돌아간다.
+* **버퍼 입력**
 
-### `return` 반환문
-[`return`](https://doc.rust-lang.org/reference/expressions/return-expr.html) 반환문은 [함수](#함수)를 종료하면서 지정된 자료형으로 데이터를 반환한다. 하단에 코드가 남아 있음에도 불구하고 반환문이 실행되면 함수는 즉시 종료된다.
+    지정된 형식대로 텍스트를 버퍼로 전달하도록 입력하는 데 사용된다. 유의할 점으로, 본 매크로는 콘솔창의 사용자 텍스트를 입력으로 받는 매크로가 절대 아니다. 핵심 입출력 기능 및 특성을 제공하는 [`std::io`](https://doc.rust-lang.org/std/io/)의 [`Write`](https://doc.rust-lang.org/std/io/trait.Write.html) 특성이 요구된다.
 
-```rust
-// return 반환문이 있는 사용자 정의 함수
-fn function() -> i32 {
-    println!("Hello World!");
-    return 1 + 2;
-}
+    <table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">러스트의 입력 매크로</caption><colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup><thead><tr><th style="text-align: center;">입력 매크로</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/macro.write.html"><code>write!</code></a></td><td>주어진 형식 지정자 따른 텍스트를 터미널에 출력한다.</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/macro.writeln.html"><code>writeln!</code></a></td><td>주어진 형식 지정자 따른 텍스트를 터미널에 출력하며 <code>'\n'</code> 줄바꿈이 기본적으로 보장된다.
 
-println!("{}", function());    
-```
-```terminal
-Hello World!
-3
-```
+    ```rust
+    use std::io::Write;
+    writeln!(&mut buffer, "Output: {:?}", 5);
+    ```
+    </td></tr></tbody></table>
+
+텍스트 안에 포함된 중괄호 `{}`에는 인자로 전달된 데이터가 삽입 및 서식된다. 특히 예시에 기입된 [`{:?}`](https://doc.rust-lang.org/std/fmt/trait.Debug.html)은 디버깅 목적으로 실사용에 적용하기 불안정하지만 프로그램 코드를 이해하는 데 도움을 준다. 자세한 내용은 [`std::fmt`](https://doc.rust-lang.org/std/fmt/index.html) 모듈을 참고하도록 한다.
 
 # 소유권
 > *참고: [What is Ownership? - The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)*
