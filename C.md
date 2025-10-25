@@ -22,7 +22,7 @@ C 언어가 설계대로 동작하기 위해서는 올바른 문자 및 기호�
 
 다음은 C 언어에서 구문에 관여하는 요소들을 소개한다:
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C 언어의 프로그래밍 구문 요소</caption><colgroup><col style="width: 10%;"/><col style="width: 35%;"/><col style="55%;"/></colgroup><thead><tr><th style="text-align: center;">구문 요소</th><th style="text-align: center;">설명</th><th style="text-align: center;">예시</th></tr></thead><tbody><tr><td style="text-align: center;"><b><a href="https://en.wikipedia.org/wiki/Expression_(computer_science)">표현식</a></b><br/>(expression)</td><td>값을 반환하는 구문적 존재를 가리킨다. 표현식에 대한 결과를 도출하는 것을 평가(evaluate)라고 부른다. 즉, 일련의 <a href="#연산자">연산자</a>와 피연산자 구성을 가리킨다.</td><td>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">C 언어의 프로그래밍 구문 요소</caption><colgroup><col style="width: 10%;"/><col style="width: 35%;"/><col style="55%;"/></colgroup><thead><tr><th style="text-align: center;">구문 요소</th><th style="text-align: center;">설명</th><th style="text-align: center;">예시</th></tr></thead><tbody><tr><td style="text-align: center;"><b><a href="https://en.wikipedia.org/wiki/Expression_(computer_science)">표현식</a></b><br/>(expression)</td><td>값을 반환하는 구문적 존재를 가리킨다. 표현식에 대한 결과를 도출하는 것을 평가(evaluate)라고 부른다. 즉, 일련의 <a href="https://en.cppreference.com/w/c/language/operators.html#Operators">연산자</a>와 피연산자 구성을 가리킨다.</td><td>
 
 ```c
 2 + 3                  // 정수 5를 반환
@@ -53,17 +53,6 @@ if (2 < 3) statement;  // 참일 경우 "statement" 문장 실행
 ```
 
 </td></tr></tbody></table>
-
-### 연산자
-**[연산자](https://en.cppreference.com/w/c/language/operators.html#Operators)**(operators)는 [표현식](https://en.cppreference.com/w/c/language/operators.html)을 구성하는 요소 중 하나로 피연산자를 연산하여 평가되도록 한다. 아래는 C 언어에서 지원하는 연산자 유형들의 목록이다.
-
-* [할당 연산자](https://en.cppreference.com/w/c/language/operator_assignment.html)
-* [증감 연산자](https://en.cppreference.com/w/c/language/operator_incdec.html)
-* [산술 연산자](https://en.cppreference.com/w/c/language/operator_arithmetic.html)
-* [논리 연산자](https://en.cppreference.com/w/c/language/operator_logical.html)
-* [비교 연산자](https://en.cppreference.com/w/c/language/operator_comparison.html)
-* [맴버 접근 연산자](https://en.cppreference.com/w/c/language/operator_member_access.html)
-* [기타 연산자](https://en.cppreference.com/w/c/language/operator_other.html)
 
 ## 자료형
 **[자료형](https://en.wikipedia.org/wiki/Data_type)**(data type)은 데이터를 어떻게 표현할 지 결정하는 요소이며, C 언어에서는 다음과 같이 존재한다. 단, 본 문서는 [ANSI C](https://en.wikipedia.org/wiki/ANSI_C) 언어를 기준으로 소개하므로, 이후 C99부터 소개된 일부 자료형(`bool`, `long long` 등)은 목록에 제외되었다.
