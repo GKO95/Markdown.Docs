@@ -334,7 +334,7 @@ s = String::from("ahoy");
 ### 데이터 복사 및 복제
 만일 소유권이 아닌 데이터 그 자체를 타 변수로 전달해야 할 경우, 힙 메모리 할당이 동반되는 [자료형](#자료형)인지 여부에 따라 두 가지 유형으로 나뉘어진다.
 
-<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">데이터의 복제 및 복사</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;"><a href="https://doc.rust-lang.org/std/marker/trait.Copy.html">복제</a>(Clone)</th><th style="text-align: center;"><a href="https://doc.rust-lang.org/std/marker/trait.Copy.html">복사</a>(Copy)</th></tr></thead><tbody><tr style="text-align: center;"><td>Deep copy</td><td>Shallow copy</td></tr><tr><td>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">데이터의 복제 및 복사</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;"><a href="https://doc.rust-lang.org/std/marker/trait.Copy.html">복제</a>(Clone)</th><th style="text-align: center;"><a href="https://doc.rust-lang.org/std/marker/trait.Copy.html">복사</a>(Copy)</th></tr></thead><tbody><tr style="text-align: center;"><td>Aka. Deep copy</td><td>Aka. Shallow copy</td></tr><tr><td>
 
 ```rust
 let s1 = String::from("hello");
@@ -353,6 +353,32 @@ println!("{var1}");  // OUTPUT: 3
 </td></tr><tr><td>힙 영역의 메모리 할당이 동반되는 자료형이 대상이며, <a href="https://doc.rust-lang.org/std/clone/trait.Clone.html#tymethod.clone"><code>.clone()</code></a> 메소드를 명시하여 동일한 데이터가 복제된 별개의 힙 메모리를 새로 할당한다.</td><td>스택 영역에 기반하는 자료형이 대상이며, 단순히 <a href="https://doc.rust-lang.org/reference/expressions/operator-expr.html#assignment-expressions">할당 연산자</a>를 사용하는 것만으로 암묵적인 고속의 비트단위 복사가 이루어진다.</td></tr></tbody></table>
 
 즉, 소유권에 대한 엄격한 관리는 [동적 할당](C.md#동적-할당)으로 생성된 힙 영역의 메모리가 집중 대상이다. 또한 shallow copy 대상의 자료형은 스택에 따라 함께 생성되고 소멸되기 때문에 Rust 프로그래밍 언어는 이들의 데이터 값을 간단히 복사할 수 있도록 허용한다.
+
+## 소유권 차용
+소유권을 전달받지 않은 채 잠시 동안만 해당 데이터를 접근하려면 참조에 의한 "차용(borrowing)"을 택할 수 있다. 여기서 참조(reference)란, C++의 [참조](Cpp.md#참조)와 마찬가지로 소유자가 있는 기존 데이터를 접근할 수 있는 타 식별자의 [변수](#변수)를 가리킨다. 단, 이미 참조하고 있는 변수는 다른 데이터를 참조할 수 없다.
+
+Rust 언어는 소유권 차용에 활용되는 참조를 두 가지로 분류한다.<sup>[[참고](https://rust-for-c-programmers.com/ch6/6_3_borrowing_access_without_ownership_transfer.html)]</sup>
+
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">소유권 차용의 참조 유형</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">불변 참조 <code>&T</code></th><th style="text-align: center;"><a href="https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html#mutable-references">가변 참조</a> <code>&mut T</code></th></tr></thead><tbody><tr style="text-align: center;"><td>Aka. 공유 참조(Shared<sup>†</sup> references) </td><td>Aka. 전용 참조(Exclusive<sup>†</sup> references)</td></tr><tr><td>
+
+```rust
+let s1 = String::from("hello");
+let r1 = &s1;
+```
+</td><td>
+
+```rust
+let s1 = String::from("hello");
+let r1 = &mut s1;
+```
+</td></tr><tr><td>참조한 데이터를 읽기 모드만으로 접근한다. 데이터의 불변이 보장되기 때문에 다수의 공유 참조가 동시에 접근하는 걸 허용한다.</td><td>참조한 데이터를 읽기 및 쓰기 모드로 접근한다. 데이터 편집이 이루어질 수 있기 때문에 오로지 한 개의 전용 참조만 접근을 허용한다.</td></tr></tbody></table>
+
+<sup>_† Shared 및 Exclusive 모드의 구분은 동기화에 활용되는 [SRW 락](Synchronization.md#슬림-읽기쓰기-락)에도 찾아볼 수 있으며 개념과 목적이 동일하여 참고할 수 있다._</sup>
+
+소유권을 차용하는데 있어 컴파일러는 코드가 다음 규칙을 준수하는지 확인한다:
+
+1. 참조는 데이터 원본보다 더 오래 존재할 수 없다. 즉, [허상](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html#dangling-references) 또는 [널 참조](https://en.wikipedia.org/wiki/Null_pointer)는 허용되지 않는다.
+1. 데이터는 한번에 공유 혹은 전용 참조 중 오로지 한 유형만이 접근을 허용할 수 있으며, 두 유형의 참조를 동시에 접근할 수 없다.
 
 # 함수
 **[함수](https://doc.rust-lang.org/reference/items/functions.html)**(functions)는 독립적인 코드 블록으로써 데이터를 처리하며, 재사용이 가능하고 호출 시 처리된 데이터를 보여주어 유동적인 프로그램 코딩을 가능하게 한다. 
