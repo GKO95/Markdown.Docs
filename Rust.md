@@ -64,6 +64,36 @@
 cargo new <프로젝트명>
 ```
 
+## 형식 데이터
+> *참고: [Formatted print - Rust By Example](https://doc.rust-lang.org/rust-by-example/hello/print.html)*
+
+다음은 지정된 형식에 따른 데이터 처리에 관여하는 Rust의 [매크로](#매크로)들을 소개한다.
+
+* **콘솔 출력**
+
+    지정된 형식대로 텍스트를 콘솔에 나타나도록 출력하는 데 사용된다.
+
+    <table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">러스트의 출력 매크로</caption><colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup><thead><tr><th style="text-align: center;">출력 매크로</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/macro.print.html"><code>print!</code></a></td><td>주어진 형식 지정자에 따라 텍스트를 터미널에 출력한다.</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/macro.println.html"><code>println!</code></a></td><td>주어진 형식 지정자에 따라 텍스트를 터미널에 출력하며 <code>'\n'</code> 줄바꿈이 기본적으로 보장된다.
+    
+    ```rust
+    println!("Format: {:?}", 5);
+    ```
+    </td></tr></tbody></table>
+
+* **버퍼 입력**
+
+    지정된 형식대로 텍스트를 버퍼로 전달하도록 입력하는 데 사용된다. 유의할 점으로, 본 매크로는 콘솔창의 사용자 텍스트를 입력으로 받는 매크로가 절대 아니다. 핵심 입출력 기능 및 특성을 제공하는 [`std::io`](https://doc.rust-lang.org/std/io/)의 [`Write`](https://doc.rust-lang.org/std/io/trait.Write.html) 특성이 요구된다.
+
+    <table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">러스트의 입력 매크로</caption><colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup><thead><tr><th style="text-align: center;">입력 매크로</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/macro.write.html"><code>write!</code></a></td><td>주어진 형식 지정자 따른 텍스트를 터미널에 출력한다.</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/macro.writeln.html"><code>writeln!</code></a></td><td>주어진 형식 지정자 따른 텍스트를 터미널에 출력하며 <code>'\n'</code> 줄바꿈이 기본적으로 보장된다.
+
+    ```rust
+    use std::io::Write;
+    writeln!(&mut buffer, "Output: {:?}", 5);
+    ```
+    </td></tr></tbody></table>
+
+텍스트 안에 포함된 중괄호 `{}`에는 인자로 전달된 데이터가 삽입 및 서식된다. 특히 예시에 기입된 [`{:?}`](https://doc.rust-lang.org/std/fmt/trait.Debug.html)은 디버깅 목적으로 실사용에 적용하기 불안정하지만 프로그램 코드를 이해하는 데 도움을 준다. 자세한 내용은 [`std::fmt`](https://doc.rust-lang.org/std/fmt/index.html) 모듈을 참고하도록 한다.
+
 ## 표현식
 **[표현식](https://doc.rust-lang.org/reference/expressions.html)**(expressions)은 반드시 값을 도출하는 평가(evaluate)가 이루어지면, 이로 인한 부가적인 영향이 발생할 수 있는 구문적 존재이다. 기존 [C](C.md)/[C++](Cpp.md) 언어와 달리, Rust은 표현식 지향 (expression-oriented) 프로그래밍이며 표현식의 개념이 더 포괄적이다.
 
@@ -71,7 +101,7 @@ cargo new <프로젝트명>
 
 * [제어 흐름식](#제어-흐름식)
 * [연산 표현식](https://doc.rust-lang.org/reference/expressions/operator-expr.html): 간단히 "연산자"라고 부른다.
-* [블록 표현식](https://doc.rust-lang.org/reference/expressions/block-expr.html): 블록 `{}`은 [제어 흐름](#제어-흐름식) 및 익명의 [네임스페이스](#네임스페이스)의 영역을 나타낸다. 블록 내의 마지막 코드가 표현식이면 이는 블록의 반환값이 된다.<sup>[[출처](https://doc.rust-lang.org/rust-by-example/expression.html)]</sup>
+* [블록 표현식](https://doc.rust-lang.org/reference/expressions/block-expr.html): 블록 `{}`은 [제어 흐름](#제어-흐름식) 및 익명의 [네임스페이스](#네임스페이스) 영역을 나타낸다. 블록 내의 마지막 코드가 표현식이면 이는 블록의 반환값이 된다.<sup>[[출처](https://doc.rust-lang.org/rust-by-example/expression.html)]</sup>
 * ([메소드](https://doc.rust-lang.org/reference/expressions/method-call-expr.html)) [호출 표현식](https://doc.rust-lang.org/reference/expressions/call-expr.html): 예를 들어, println! 함수 호출도 표현식이다. 비록 평가된 값은 `()`이지만, 텍스트가 출력되는 영향이 동반되었다.
 * 기타 등등
 
@@ -257,40 +287,18 @@ loop {
 }
 ```
 
-## 형식 데이터
-> *참고: [Formatted print - Rust By Example](https://doc.rust-lang.org/rust-by-example/hello/print.html)*
-
-다음은 지정된 형식에 따른 데이터 처리에 관여하는 러스트의 매크로들을 소개한다.
-
-* **콘솔 출력**
-
-    지정된 형식대로 텍스트를 콘솔에 나타나도록 출력하는 데 사용된다.
-
-    <table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">러스트의 출력 매크로</caption><colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup><thead><tr><th style="text-align: center;">출력 매크로</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/macro.print.html"><code>print!</code></a></td><td>주어진 형식 지정자에 따라 텍스트를 터미널에 출력한다.</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/macro.println.html"><code>println!</code></a></td><td>주어진 형식 지정자에 따라 텍스트를 터미널에 출력하며 <code>'\n'</code> 줄바꿈이 기본적으로 보장된다.
-    
-    ```rust
-    println!("Format: {:?}", 5);
-    ```
-    </td></tr></tbody></table>
-
-* **버퍼 입력**
-
-    지정된 형식대로 텍스트를 버퍼로 전달하도록 입력하는 데 사용된다. 유의할 점으로, 본 매크로는 콘솔창의 사용자 텍스트를 입력으로 받는 매크로가 절대 아니다. 핵심 입출력 기능 및 특성을 제공하는 [`std::io`](https://doc.rust-lang.org/std/io/)의 [`Write`](https://doc.rust-lang.org/std/io/trait.Write.html) 특성이 요구된다.
-
-    <table style="width: 85%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">러스트의 입력 매크로</caption><colgroup><col style="width: 15%;"/><col style="width: 85%;"/></colgroup><thead><tr><th style="text-align: center;">입력 매크로</th><th style="text-align: center;">설명</th></tr></thead><tbody><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/macro.write.html"><code>write!</code></a></td><td>주어진 형식 지정자 따른 텍스트를 터미널에 출력한다.</td></tr><tr><td style="text-align: center;"><a href="https://doc.rust-lang.org/std/macro.writeln.html"><code>writeln!</code></a></td><td>주어진 형식 지정자 따른 텍스트를 터미널에 출력하며 <code>'\n'</code> 줄바꿈이 기본적으로 보장된다.
-
-    ```rust
-    use std::io::Write;
-    writeln!(&mut buffer, "Output: {:?}", 5);
-    ```
-    </td></tr></tbody></table>
-
-텍스트 안에 포함된 중괄호 `{}`에는 인자로 전달된 데이터가 삽입 및 서식된다. 특히 예시에 기입된 [`{:?}`](https://doc.rust-lang.org/std/fmt/trait.Debug.html)은 디버깅 목적으로 실사용에 적용하기 불안정하지만 프로그램 코드를 이해하는 데 도움을 준다. 자세한 내용은 [`std::fmt`](https://doc.rust-lang.org/std/fmt/index.html) 모듈을 참고하도록 한다.
-
 # 소유권
 > *참고: [What is Ownership? - The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)*
 
-러스트 언어가 타 프로그래밍 언어에 비해 어려운 이유 중 하나는 바로 메모리 관리를 소유권(ownership)이란 새로운 개념을 도입하였기 때문이다. 본 장은 소유권의 개념과 동작을 소개한다.
+Rust 프로그래밍 언어는 안전한 메모리 관리를 위해 **소유권**(ownership)이란 새로운 개념을 도입하였다. 메모리 할당 및 해제를 개발자가 직접 명시하거나 혹은 더 이상 사용되지 않는 메모리를 GC가 주기적으로 탐색 및 수거하는 프로그래밍 언어와 차별화된 독특하지만 체계를 지닌다. 하지만 생소하면서 엄격한 모델이기 때문에 소유권만을 설명하는 장을 본 문서에서 제공한다.
+
+Rust는 소유권에 대한 다음 세 가지 규칙을 반드시 준수해야 하며,<sup>[[원본](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html#ownership-rules)]</sup> 컴파일러가 이를 위반한 코드를 발견할 시 컴파일을 진행하지 않는다.
+
+```
+1. Rust에서는 각 데이터마다 소유자가 존재한다.
+2. 한번에 한 존재만이 데이터의 소유자가 될 수 있다.
+3. 소유자가 영역을 벗어날 경우, 해당 데이터는 소멸된다.
+```
 
 # 모듈
 > *참고: [Defining Modules to Control Scope and Privacy - The Rust Programming Language](https://doc.rust-lang.org/book/ch07-02-defining-modules-to-control-scope-and-privacy.html)*
