@@ -300,6 +300,91 @@ Rust는 소유권에 대한 다음 세 가지 규칙을 반드시 준수해야 �
 3. 소유자가 영역을 벗어날 경우, 해당 데이터는 소멸된다.
 ```
 
+## 소유권 이동
+데이터를 새로운 변수로 [할당](https://doc.rust-lang.org/reference/expressions/operator-expr.html#assignment-expressions) (혹은 전달)하면 기존 [변수](#변수)는 소유권을 잃게 되어 "이동(moving)"하는 형태로 나타난다. 오로지 한 존재만이 데이터의 소유자가 될 수 있다는 규칙에 의한 동작으로, 소유권을 잃은 기존 변수는 더 이상 유효하지 않아 호출 시 컴파일 타임 오류를 유발한다.<sup>[[참고](https://rust-for-c-programmers.com/ch6/6_2_transferring_ownership_move_copy_and_clone.html)]</sup>
+
+### 소유권 이동으로 기존 변수의 무효화
+아래 예시 코드와 이에 따른 소유권이 이동하는 과정을 다이어그램으로 표현한다.
+
+```rust
+let s1 = String::from("hello");
+let s2 = s1;
+```
+
+![두 변수 간 데이터의 소유권 이동](https://doc.rust-lang.org/book/img/trpl04-04.svg)
+
+1. `s1` 변수에 저장된 String 자료형 데이터의 메타데이터를 `s2` 변수로 비트단위 복사한다.
+1. `s2` 변수에게 해당 String 자료형 데이터의 관리 및 해제할 책임이 이전된다.
+1. 기존 데이터의 소유권자인 `s1` 변수는 컴파일러에 의해 무효해진다.
+
+### 소유권 이동으로 기존 데이터의 소멸
+아래 예시 코드와 이에 따른 소유권이 이동하는 과정을 다이어그램으로 표현한다.
+
+```rust
+let mut s = String::from("hello");
+s = String::from("ahoy");
+```
+
+![소유권 이동에 따라 소유자를 잃은 데이터의 소멸](https://doc.rust-lang.org/book/img/trpl04-05.svg)
+
+1. `s` 변수는 기존 "hello" String 자료형 데이터의 소유자였으나, 할당 연산으로 "ahoy" String 자료형 데이터가 새로 주어진다.
+1. `s` 변수는 이제 "ahoy" String 자료형 데이터의 소유자가 된다.
+1. 소유자가 없어진 "hello" String 자료형 데이터는 [소멸](https://doc.rust-lang.org/reference/special-types-and-traits.html#drop)된다.
+
+### 데이터 복사 및 복제
+만일 소유권이 아닌 데이터 그 자체를 타 변수로 전달해야 할 경우, 힙 메모리 할당이 동반되는 [자료형](#자료형)인지 여부에 따라 두 가지 유형으로 나뉘어진다.
+
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">데이터의 복제 및 복사</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;"><a href="https://doc.rust-lang.org/std/marker/trait.Copy.html">복제</a>(Clone)</th><th style="text-align: center;"><a href="https://doc.rust-lang.org/std/marker/trait.Copy.html">복사</a>(Copy)</th></tr></thead><tbody><tr style="text-align: center;"><td>Deep copy</td><td>Shallow copy</td></tr><tr><td>
+
+```rust
+let s1 = String::from("hello");
+let s2 = s1.clone();
+
+println!("{s1}");   // OUTPUT: hello
+```
+</td><td>
+
+```rust
+let var1 = 3;
+let var2 = var1;
+
+println!("{var1}");  // OUTPUT: 3
+```
+</td></tr><tr><td>힙 영역의 메모리 할당이 동반되는 자료형이 대상이며, <a href="https://doc.rust-lang.org/std/clone/trait.Clone.html#tymethod.clone"><code>.clone()</code></a> 메소드를 명시하여 동일한 데이터가 복제된 별개의 힙 메모리를 새로 할당한다.</td><td>스택 영역에 기반하는 자료형이 대상이며, 단순히 <a href="https://doc.rust-lang.org/reference/expressions/operator-expr.html#assignment-expressions">할당 연산자</a>를 사용하는 것만으로 암묵적인 고속의 비트단위 복사가 이루어진다.</td></tr></tbody></table>
+
+즉, 소유권에 대한 엄격한 관리는 [동적 할당](C.md#동적-할당)으로 생성된 힙 영역의 메모리가 집중 대상이다. 또한 shallow copy 대상의 자료형은 스택에 따라 함께 생성되고 소멸되기 때문에 Rust 프로그래밍 언어는 이들의 데이터 값을 간단히 복사할 수 있도록 허용한다.
+
+# 함수
+**[함수](https://doc.rust-lang.org/reference/items/functions.html)**(functions)는 독립적인 코드 블록으로써 데이터를 처리하며, 재사용이 가능하고 호출 시 처리된 데이터를 보여주어 유동적인 프로그램 코딩을 가능하게 한다. 
+
+## 진입점
+> 본 문서의 대부분 예시에는 `main` 함수가 직접 언급되지 않았으나, 전역 변수와 함수 등을 제외한 코드들은 `main` 함수 내에서 작성되어야만 실행된다.
+
+**[진입점](https://en.wikipedia.org/wiki/Entry_point)**(entry point)는 프로그램이 시작되는 부분을 의미하며, Rust의 경우 [`main`](https://en.wikipedia.org/wiki/Entry_point#Rust) 함수에서부터 코드가 실행된다.
+
+```rust
+// Rust 언어 진입점: main
+fn main() {
+    println!("Hello, World!");
+}
+```
+
+Rust 1.26.0 버전부터 `main` 함수는 `Result`를 반환할 수 있게 되었다.
+
+```rust
+// Rust 1.26.0 버전에서 확장된 진입점
+fn main() -> Result<(), std::io::Error> {
+    println!("Hello, World1");
+
+    Ok(())
+}
+```
+
+Rust의 `main` 진입점은 C/C++의 [진입점](C.md#진입점)과 달리 프로그램 실행 시 전달된 명령을 인자로 받지 않으나, [`std::env::args`](https://doc.rust-lang.org/std/env/fn.args.html) 함수가 반환한 [`std::env::Args`](https://doc.rust-lang.org/std/env/struct.Args.html) 자료형을 문자열 벡터로 가공하여 활용할 수 있다.
+
+## 매크로
+**[매크로](https://doc.rust-lang.org/reference/macros.html)**(macros)
+
 # 모듈
 > *참고: [Defining Modules to Control Scope and Privacy - The Rust Programming Language](https://doc.rust-lang.org/book/ch07-02-defining-modules-to-control-scope-and-privacy.html)*
 
