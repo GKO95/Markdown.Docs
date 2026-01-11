@@ -1,44 +1,14 @@
 # WMI
-**[윈도우 관리 도구](https://learn.microsoft.com/windows/win32/wmisdk/wmi-start-page)**(Windows Management Instrumentation; WMI)는 [Windows](Windows.md) 운영체제에서 [WINMGMT](https://learn.microsoft.com/en-us/windows/win32/wmisdk/winmgmt) [서비스](Service.md)에 의해 동작하는 [마이크로소프트](https://www.microsoft.com) 버전의 [웹 기반 기업 관리](#웹-기반-기업-관리) 도구이다. WMI에 대한 정보는 `%WinDir%\System32\Wbem` 디렉토리에서 찾아볼 수 있다.
+**[윈도우 관리 도구](https://learn.microsoft.com/windows/win32/wmisdk/wmi-start-page)**(Windows Management Instrumentation; WMI)는 [Windows](Windows.md) 운영체제에서 [WINMGMT](https://learn.microsoft.com/en-us/windows/win32/wmisdk/winmgmt) [서비스](Service.md)에 의해 동작하는 [마이크로소프트](https://www.microsoft.com) 버전의 [웹 기반 기업 관리](https://en.wikipedia.org/wiki/Web-Based_Enterprise_Management), 일명 WBEM 도구이다. 여기서 WBEM이란, 컴퓨터들이 서로 다른 다양한 네트워크에 연결된 기업의 [분산 컴퓨팅](https://en.wikipedia.org/wiki/Distributed_computing) 환경에서 단일화된 [시스템 관리](https://en.wikipedia.org/wiki/Systems_management)를 제공하기 위한 표준 기술이다. WBEM은 [CIM](#일반-정보-모델) 및 [WS-MAN](#웹-서비스-관리) 표준들로부터 비롯되었다.
 
-## 웹 기반 기업 관리
-**[웹 기반 기업 관리](https://en.wikipedia.org/wiki/Web-Based_Enterprise_Management)**(Web-Based Enterprise Management), 일명 WBEM은 컴퓨터가 다른 네트워크에 위치하지만 하나의 시스템을 구성하는 [분산 컴퓨팅](https://en.wikipedia.org/wiki/Distributed_computing) 환경에서의 관리를 단일화하기 위한 [시스템 관리](https://en.wikipedia.org/wiki/Systems_management) 표준 기술로써 관리 정보를 접근한는 데 활용된다.
+비록 WBEM의 명칭 안에는 "웹 기반"이라고 명시되었으나 [사용자 인터페이스](https://en.wikipedia.org/wiki/User_interface) 표준을 규정하지 않으므로 [인터넷 브라우저](https://en.wikipedia.org/wiki/Browser_user_interface)가 아닌 프로그램을 사용할 수 있다. 다음은 Windows에서 WMI를 활용할 수 있는 도구들을 소개하고, 운영체제 빌드 번호를 가져오는 [WQL](https://learn.microsoft.com/windows/win32/wmisdk/wql-sql-for-wmi) 결과를 공유한다.
 
-> 비록 "웹 기반"이라고 명시되어 있으나, WBEM은 [사용자 인터페이스](https://en.wikipedia.org/wiki/User_interface) 표준을 규정하지 않으므로 [인터넷 브라우저](https://en.wikipedia.org/wiki/Browser_user_interface)가 아니더라도 [GUI](https://en.wikipedia.org/wiki/Graphical_user_interface) 혹은 [CLI](https://en.wikipedia.org/wiki/Command-line_interface) 등도 사용할 수 있다.
+* <s>[WMIC](https://learn.microsoft.com/windows/win32/wmisdk/wmic)(WMI command-line utility)</s>&nbsp;<sub>(deprecated)</sub>
+* [PowerShell](PowerShell.md)
+    * [Microsoft.PowerShell.Management](https://learn.microsoft.com/powershell/module/microsoft.powershell.management) 모듈에서 제공하는 WMI cmdlets
+    * [CimCmdlets](https://learn.microsoft.com/powershell/module/cimcmdlets) 모듈에서 제공하지만 Windows OS에서만 지원하는 상위호환의 CIM cmdlets
 
-WBEM은 아래에서 소개되는 [CIM](#일반-정보-모델) 및 [WS-MAN](#웹-서비스-관리) 표준들로부터 비롯되었다.
-
-### 일반 정보 모델
-**[일반 정보 모델](https://learn.microsoft.com/windows/win32/wmisdk/common-information-model)**(Common Information Model), 일명 CIM은 [데스크탑](https://en.wikipedia.org/wiki/Workstation), [네트워크 라우터](hhttps://en.wikipedia.org/wiki/Router_(computing)), [어플리케이션](https://en.wikipedia.org/wiki/Application_software) 등 기업의 IT 환경을 구성하여 운영되는 요소들을 일반적인 [객체 지향 데이터](https://en.wikipedia.org/wiki/Object_(computer_science))로 반영한 모델이다. 단순히 운영정보 교환에 그치지 않으며, 이들을 적극적으로 제어하고 관리할 수 있는 기능을 함께 제공한다. CIM의 공통 모델이 적용된 요소들은 하나의 IT 환경 관리 소프트웨어로도 복잡하거나 무거운 변환 작업 또는 정보의 손실 없이도 다양한 구성들과 상호작용이 가능하다.
-
-CIM 표준은 다음 내용들을 소개한다:
-
-* **[CIM 스키마](https://en.wikipedia.org/wiki/CIM_Schema)(CIM Schema)**
-
-    IT 환경 내에서 운영되는 장비, 하드웨어, 소프트웨어 등의 요소들을 정의한 [CIM 클래스](https://learn.microsoft.com/windows/win32/cimwin32prov/cim-wmi-provider)들의 집합체이다. CIM 클래스는 하드웨어 종류나 소프트웨어 유형마다 이들을 잘 반영하는 대표되는 데이터 모형을 제공하는, 즉 프로그래밍 언어의 [클래스](Csharp.md#클래스)와 동일한 개념이다. [운영체제](https://learn.microsoft.com/windows/win32/cimwin32prov/cim-operatingsystem), [프로세스](https://learn.microsoft.com/windows/win32/cimwin32prov/cim-process), [네트워크 어댑터](https://learn.microsoft.com/windows/win32/cimwin32prov/cim-networkadapter), [프린터](https://learn.microsoft.com/windows/win32/cimwin32prov/cim-printer), 심지어 [쿨링팬](https://learn.microsoft.com/windows/win32/cimwin32prov/cim-fan) 등도 CIM 클래스로 정의되며, 실제 장비나 프로그램들은 CIM 클래스로부터 객체화된 CIM 인스턴스(CIM instance)라고 부른다.
-
-    * *[Win32 스키마](https://learn.microsoft.com/windows/win32/cimwin32prov/win32-provider)*
-
-        CIM 스키마에서 파생되어 Win32 환경에 최적화된 클래스들을 제공한다. CIM과 Win32 스키마는 각각 `CIM_` 그리고 `Win32_` 접두사로 구분된다. 예를 들어 [Win32 운영체제 클래스](https://learn.microsoft.com/windows/win32/cimwin32prov/win32-operatingsystem)는 CIM 운영체제 클래스에서 파생되었으나, 빌드 번호 등의 윈도우 운영체제를 반영하는 속성들이 추가되었다.
-
-* **CIM 기반 구조 사양(CIM Infrastructure Specification)**
-
-    CIM 구조 및 개념을 정의한다: 다른 정보 모델(예를 들어 [SNMP](https://en.wikipedia.org/wiki/Simple_Network_Management_Protocol))하고 매핑되는 방법과 CIM 스키마가 정의된 언어가 무엇인지 등을 내포한다. CIM 구조는 객체 지향으로써 IT 환경의 구성요소와 이들의 관계성을 각각 CIM 클래스 및 [연관](https://en.wikipedia.org/wiki/Association_(object-oriented_programming))으로 나타내고, [상속](Csharp.md#상속)을 활용하여 파생 CIM 클래스 정의도 가능케 한다.
-
-### 웹 서비스 관리
-**[웹 서비스 관리](https://learn.microsoft.com/windows/win32/winrm/ws-management-protocol)**(Web Service-Management), 일명 WS-Management 혹은 WS-MAN은 서버, 장치, 어플리케이션 그리고 다양한 [웹 서비스](https://en.wikipedia.org/wiki/Web_service)를 관리하기 위한 [SOAP](https://en.wikipedia.org/wiki/SOAP)(Simple Object Access Protocol; 단순 객체 접근 프로토콜) 기반의 프로토콜이다. WS-MAN은 시스템이 IT 인프라를 거쳐 운영 정보를 접근 및 교환할 수 있도록 하는 일반적인 방법을 제시한다.
-
-## WQL
-**[WQL](https://learn.microsoft.com/windows/win32/wmisdk/wql-sql-for-wmi)**(WMI Query Language)란, [SQL](https://en.wikipedia.org/wiki/SQL)을 기반으로 한 WMI 버전의 쿼리 언어이다. 다음 도구를 통해 로컬 혹은 원격 시스템의 관리 정보 등을 불러올 수 있다.
-
-* [WMI 명령줄 유틸리티](https://learn.microsoft.com/windows/win32/wmisdk/wmic)(WMI command-line utility; WMIC); [윈도우 10](https://en.wikipedia.org/wiki/Windows_10), [버전 21H2](https://en.wikipedia.org/wiki/Windows_10,_version_21H1) 및 반기 채널 업데이트의 윈도우 서버부터 더이상 장려되지 않는다.
-* [파워셸](PowerShell.md)
-    * WMI cmdlet: [Microsoft.PowerShell.Management](https://learn.microsoft.com/powershell/module/microsoft.powershell.management) 모듈의 일부로 WMI에 대한 명령을 제공한다.
-    * CIM cmdlet: [CimCmdlets](https://learn.microsoft.com/powershell/module/cimcmdlets) 모듈에서 (WMI를 포함한) [CIM](#일반-정보-모델)을 지원하는 WMI cmdlet의 상위호환이다.
-
-아래 예시는 운영체제 빌드 번호를 확인하기 위해 CIM 서버, 즉 [winmgmt](#wmi) [서비스](Service.md)로부터 [Win32_OperatingSystem](https://learn.microsoft.com/windows/win32/cimwin32prov/win32-operatingsystem) [클래스](https://learn.microsoft.com/windows/win32/wmisdk/retrieving-a-class) 인스턴스를 반환받는 방법을 WMIC와 파워셸의 CimCmdlets 모듈을 사용하여 비교한다.
-
-<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">WMI 명령 유티릴티 비교</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">WMIC</th><th style="text-align: center;">파워셸 CimCmdlets</th></tr></thead><tbody><tr style="vertical-align: top;"><td>
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">WMI 명령 유티릴티 비교</caption><colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup><thead><tr><th style="text-align: center;">WMIC</th><th style="text-align: center;">PowerShell - CimCmdlets</th></tr></thead><tbody><tr style="vertical-align: top;"><td>
 
 ```terminal
 WMIC /OUTPUT:clipboard PATH Win32_OperatingSystem GET BuildNumber /VALUE
@@ -46,25 +16,38 @@ WMIC /OUTPUT:clipboard PATH Win32_OperatingSystem GET BuildNumber /VALUE
 </td><td>
 
 ```powershell
-Get-CimInstance -ClassName Win32_OperatingSystem | Select-Object BuildNumber
+Get-CimInstance -ClassName Win32_OperatingSystem -Property BuildNumber
 ```
 </td></tr><tr style="vertical-align: top;"><td>
 
 ```terminal
-BuildNumber=22621
+BuildNumber=26200
 ```
 </td><td>
 
 ```terminal
-BuildNumber
------------
-22621
+BuildNumber : 26200
 ```
 </td></tr></tbody></table>
 
-본 문서는 파워셸의 CimCmdlets 모듈을 활용한 명령을 위주로 WMI 상호작용 예시를 보여준다.
+<sup>_† 참고: [Retrieving a WMI Class - Win32 apps | Microsoft Learn](https://learn.microsoft.com/windows/win32/wmisdk/retrieving-a-class)_</sup>\
 
-### 성능 카운터
+Windows는 WMI와 관련된 데이터를 `%WinDir%\System32\Wbem` 디렉토리에서 취급한다.
+
+### 일반 정보 모델
+**[일반 정보 모델](https://learn.microsoft.com/windows/win32/wmisdk/common-information-model)**(Common Information Model), 일명 CIM은 [데스크탑](https://en.wikipedia.org/wiki/Workstation), [네트워크 어댑터](https://en.wikipedia.org/wiki/Network_interface_controller), [프로세스](Process.md) 등 기업의 IT 환경을 구성하여 운영되는 요소들을 일반적인 [객체 지향 데이터](https://en.wikipedia.org/wiki/Object_(computer_science))로 반영한 크로스 플랫폼 표준 모델이다. CIM은 [C++](Cpp.md) 언어와 무관하지만 IT 환경을 구성하는 요소들을 "[클래스](Cpp.md#클래스)"로 정의하여 각 실체마다 해당하는 클래스로부터 객체화하여 표현되고, 자식 클래스를 [파생](Cpp.md#상속)할 수 있는 점은 매우 유사하다: *[CIM_UnitaryComputerSystem](https://learn.microsoft.com/windows/win32/cimwin32prov/cim-unitarycomputersystem)*, *[CIM_NetworkAdapter](https://learn.microsoft.com/windows/win32/cimwin32prov/cim-networkadapter)*, *[CIM_Process](https://learn.microsoft.com/windows/win32/cimwin32prov/cim-process)* 등.
+
+CIM은 크게 세 가지 유형의 클래스로 나뉘어진다.
+
+<table style="width: 95%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">CIM의 세 가지 클래스 유형</caption><colgroup><col style="width: 33.3%;"/><col style="width: 33.4%;"/><col style="width: 33.3%;"/></colgroup><thead><tr><th style="text-align: center;">핵심 (Core)</th><th style="text-align: center;">공통 (Common)</th><th style="text-align: center;">확장 (Extended)</th></tr></thead><tbody><tr><td>모든 분야의 개체에 적용되어 관리되는 시스템을 분석 및 설명하는데 필요한 기초 용어들을 제공하는 클래스이다.</td><td>특정 분야의 개체에 적용되지만, 어느 한 구현이나 기술로부터 종속되지 않아 공통적으로 사용될 수 있는 클래스이다.</td><td>특정 기술에 종속된 공통 클래스를 가리키며, 대체로 UNIX 혹은 마이크로소프트 Win32 환경과 같은 플랫폼에만 적용될 수 있다.
+</td></tr><tr style="text-align: center;"><td><a href="https://learn.microsoft.com/windows/win32/wmisdk/--parameters">__PARAMETERS</a>, <a href="https://learn.microsoft.com/windows/win32/wmisdk/--systemsecurity">__SystemSecurity</a> 등</td><td><a href="https://learn.microsoft.com/windows/win32/cimwin32prov/cim-unitarycomputersystem">CIM_UnitaryComputerSystem</a> 등</td><td><a href="https://learn.microsoft.com/windows/desktop/CIMWin32Prov/win32-computersystem">Win32_ComputerSystem</a> 등</td></tr></tbody></table>
+
+위의 도표에서 WMI 클래스인 Win32_ComputerSystem는 CIM 공통 클래스인 CIM_UnitaryComputerSystem으로부터 파생되었다. 즉, WMI는 마이크로소프트의 Windows 운영체제를 설명하는 속성을 확장하여 CIM에 포함시킨 것이다. CIM 클래스들을 [CIM 스키마](https://en.wikipedia.org/wiki/CIM_Schema)에 미리 정의되어 있으며, 이를 부모로 둔 WMI은 [CIM 2.x 버전 스키마](https://dmtf.org/standards/cim/schemas)만을 지원한다.
+
+### 웹 서비스 관리
+**[웹 서비스 관리](https://learn.microsoft.com/windows/win32/winrm/ws-management-protocol)**(Web Service-Management), 일명 WS-Management 혹은 WS-MAN은 서버, 장치, 어플리케이션 그리고 다양한 [웹 서비스](https://en.wikipedia.org/wiki/Web_service)를 관리하기 위한 [SOAP](https://en.wikipedia.org/wiki/SOAP)(Simple Object Access Protocol; 단순 객체 접근 프로토콜) 기반의 프로토콜이다. WS-MAN은 시스템이 IT 인프라를 거쳐 운영 정보를 접근 및 교환할 수 있도록 하는 일반적인 방법을 제시한다.
+
+## 성능 카운터
 WMI는 [성능 카운터](Perfmon.md#성능-카운터)로부터 성능 데이터 수치를 가져올 수 있으며, [Win32_Perf](https://learn.microsoft.com/windows/win32/cimwin32prov/performance-counter-classes)로부터 기반한 두 개의 클래스를 소개한다.
 
 * [Win32_PerfRawData](https://learn.microsoft.com/windows/win32/cimwin32prov/win32-perfrawdata): 순수 비가공된 성능 데이터를 [성능 카운터 제공자](https://learn.microsoft.com/windows/win32/wmisdk/performance-counter-provider)로부터 제공받는다.
@@ -80,3 +63,8 @@ Name   PercentIdleTime PercentUserTime PercentPrivilegedTime
 ----   --------------- --------------- ---------------------
 _Total              83              10                     2
 ```
+
+# WMI 아키텍처
+> *출처: [WMI Architecture - Win32 apps | Microsoft Learn](https://learn.microsoft.com/windows/win32/wmisdk/wmi-architecture)*
+
+![WMI 아키텍처 다이어그램](https://learn.microsoft.com/en-us/windows/win32/wmisdk/images/wmi-architecture.png)
