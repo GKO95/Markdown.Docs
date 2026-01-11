@@ -68,3 +68,26 @@ _Total              83              10                     2
 > *출처: [WMI Architecture - Win32 apps | Microsoft Learn](https://learn.microsoft.com/windows/win32/wmisdk/wmi-architecture)*
 
 ![WMI 아키텍처 다이어그램](https://learn.microsoft.com/en-us/windows/win32/wmisdk/images/wmi-architecture.png)
+
+* [WMI consumers](#wmi-소비자)
+* [WMI infrastructure](#wmi-인프라구조)
+* [WMI providers](#wmi-공급자)
+
+## WMI 소비자
+**WMI 소비자**(WMI consumers)은 WMI를 활용하여 정보를 쿼리 또는 메소드 실행을 요청하는 어플리케이션으로, 일명 "관리 프로그램"이라고도 칭한다. 소비자는 [C](C.md)/[C++](Cpp.md) 또는 [.NET](Csharp.md#net) 프로그램이나 [스크립트](https://learn.microsoft.com/windows/win32/wmisdk/scripting-api-for-wmi)로 제작될 수 있으나, 최종적으로 [WMI COM API](https://learn.microsoft.com/en-us/windows/win32/wmisdk/com-api-for-wmi)를 통해 [WINMGMT](#wmi-인프라구조) 서비스와 접촉하게 된다.
+
+Windows에 기본적으로 내장된 WMI 영구 소비자는 다음 클래스로 구분된다:
+
+* [ActiveScriptEventConsumer](https://learn.microsoft.com/windows/win32/wmisdk/activescripteventconsumer)
+* CommandLineEventConsumer
+* LogFileEventConsumer
+* NTEventLogEventConsumer
+* SMTPEventConsumer
+
+## WMI 인프라구조
+[**WMI 인프라구조**](https://learn.microsoft.com/windows/win32/wmisdk/wmi-infrastructure)는 다음 두 핵심요소로 구성된다.
+
+1. WINMGMT 서비스
+1. WMI 리포지터리
+
+## WMI 공급자
