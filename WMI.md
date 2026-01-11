@@ -30,7 +30,7 @@ BuildNumber : 26200
 ```
 </td></tr></tbody></table>
 
-<sup>_† 참고: [Retrieving a WMI Class - Win32 apps | Microsoft Learn](https://learn.microsoft.com/windows/win32/wmisdk/retrieving-a-class)_</sup>\
+<sup>_† 참고: [Retrieving a WMI Class - Win32 apps | Microsoft Learn](https://learn.microsoft.com/windows/win32/wmisdk/retrieving-a-class)_</sup>
 
 Windows는 WMI와 관련된 데이터를 `%WinDir%\System32\Wbem` 디렉토리에서 취급한다.
 
