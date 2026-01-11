@@ -54,7 +54,7 @@ GPR 중에서 가장 기본적이면서 활발히 사용되는 `A`, `C`, `D`, �
 [배열](C.md#배열) 혹은 [문자열](C.md#문자열)의 메모리 주소를 다루며, 명칭 뒤에 [인덱스](C.md#배열)(index)를 의미하는 `I`가 있는 게 특징이다:
 
 * `SI` (Source Index): 배열 혹은 문자열의 원천 주소를 담는 레지스터이다.
-* `DI` (Destination Index): 배욜 혹은 문자열의 목적 주소를 담는 레지스터이다.
+* `DI` (Destination Index): 배열 혹은 문자열의 목적 주소를 담는 레지스터이다.
 
 <table style="width: 80%; margin-left: auto; margin-right: auto;"><caption style="caption-side: top;">x86-64 프로세서의 인덱스 레지스터 명칭</caption><colgroup><col style="width: 50%;"/><col style="width: 25%;"/><col style="width: 12.5%;"/><col style="width: 12.5%;"/></colgroup><thead><tr><th style="text-align: center;">64</th><th style="text-align: center;">32</th><th style="text-align: center;">16</th><th style="text-align: center;">8</th></tr></thead><tbody style="text-align: center;"><tr><td colspan="4"><code>R?I</code></td></tr><tr><td>-</td><td colspan="3"><code>E?I</code></td></tr><tr><td colspan="2">-</td><td colspan="2"><code>?I</code></td></tr><tr><td colspan="3">(64비트 모드에서만 지원)</td><td><code>?IL</code></td></tr></tbody><caption style="caption-side: bottom; text-align: left;"><i><sub>† 범용 레지스터처럼 16비트 레지스터를 상위 및 하위 8비트로 나누려는 데 의미를 두지 않았다.</sub></i></caption></table>
 
@@ -187,8 +187,8 @@ MNEMONIC    OPERAND     ; 명령어 집합을 표현하는 기초적인 문장 �
 
 다양한 명령어를 전부 다룰 수 없는 관계로 본 장에서는 부연 설명이 필요한 일부 명령어에 대해서만 소개하며, 만일 찾을 수 없다면 위의 링크로부터 다운로드한 소프트웨어 개발자 매뉴얼 문서에서 *Volume 2: Instruction Set Reference, A-Z*를 참고한다.
 
-## `call`
-[함수](#함수)를 호출하는 명령어이며, 다음에 수행할 명령어 주소를 계산한 다음 [EIP](#명령어-포인터-레지스터)(혹은 RIP) 레지스터에 저장 및 스택에 푸쉬한다. 스택에 푸쉬된 메모리 주소는 차후 호출된 함수 실행 이후 재개하기 위한 조치이다.
+## 호출 명령어
+**호출 명령어**는 [함수](#함수)를 호출하기 위한 명령어로 `call`이 대표적이다. 호출한 함수가 종료되면 기존 코드의 실행을 이어가기 위해 다음에 수행할 명령 주소를 함수 호출 전에 [IP](#명령어-포인터-레지스터) 레지스터에 저장 및 스택에 푸쉬한다.
 
 * Opcode E8: IP 레지스터에 저장된 (혹은 스택에 [푸쉬](#push)된) 명령어 주소로부터 호출 함수의 메모리 주소로 도달하기 위해 필요한 오프셋이 피연산자로 전달된다. 아래는 이해를 돕기 위한 예시를 보여준다.
 
@@ -196,8 +196,11 @@ MNEMONIC    OPERAND     ; 명령어 집합을 표현하는 기초적인 문장 �
     00D117F1 E8 BC FA FF FF       call        function (0D112B2h)  
     ```
 
-    `call` 명령어를 실행하는 당시, EIP에 저장된 다음 명령어 주소는 5바이트를 더한 00D117F6h이다. 여기에 FFFFFABCh를 더하면 아래와 같이 해당 함수로 이동하는 [분기 테이블](https://en.wikipedia.org/wiki/Branch_table)의 00D112B2h 주소가 계산된다.
+    `call` 명령어를 실행하는 당시, 다음 다섯 바이트의 00D117F6h 메모리 주소가 EIP에 저장된다. 여기에 FFFFFABCh를 더하면 아래와 같이 해당 함수로 이동하는 [분기 테이블](https://en.wikipedia.org/wiki/Branch_table)의 00D112B2h 주소가 계산된다.
 
     ```nasm
     00D112B2 E9 B9 04 00 00       jmp         function (0D11770h)  
     ```
+
+## 점프 명령어
+**점프 명령어**는 기존의 명령 스트림에 벗어난 다른 위치에서부터 코드를 실행시키는 명령어이며, [호출 명령어](#호출-명령어)와 달리 반환 정보를 기록하지 않는다.
