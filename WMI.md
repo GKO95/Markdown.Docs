@@ -69,25 +69,32 @@ _Total              83              10                     2
 
 ![WMI 아키텍처 다이어그램](https://learn.microsoft.com/en-us/windows/win32/wmisdk/images/wmi-architecture.png)
 
-* [WMI consumers](#wmi-소비자)
-* [WMI infrastructure](#wmi-인프라구조)
-* [WMI providers](#wmi-공급자)
+WMI 아키텍처를 구성하는 요소는 크게 세 가지로 구분된다.
+
+* [WMI 소비자](#wmi-소비자)
+* [WMI 인프라구조](#wmi-인프라구조)
+* [WMI 공급자](#wmi-공급자)
 
 ## WMI 소비자
-**WMI 소비자**(WMI consumers)은 WMI를 활용하여 정보를 쿼리 또는 메소드 실행을 요청하는 어플리케이션으로, 일명 "관리 프로그램"이라고도 칭한다. 소비자는 [C](C.md)/[C++](Cpp.md) 또는 [.NET](Csharp.md#net) 프로그램이나 [스크립트](https://learn.microsoft.com/windows/win32/wmisdk/scripting-api-for-wmi)로 제작될 수 있으나, 최종적으로 [WMI COM API](https://learn.microsoft.com/en-us/windows/win32/wmisdk/com-api-for-wmi)를 통해 [WINMGMT](#wmi-인프라구조) 서비스와 접촉하게 된다.
+**WMI 소비자**(WMI consumers)은 [WQL](https://learn.microsoft.com/windows/win32/wmisdk/wql-sql-for-wmi) 등을 활용하여 정보를 획득하거나 WMI 클래스에 정의된 메소드 실행을 요청하는 어플리케이션으로, 일명 "관리 프로그램"이라고도 칭한다. [C](C.md)/[C++](Cpp.md) 또는 [.NET](Csharp.md#net)으로 제작된 어플리케이션 및 [VBScript](https://learn.microsoft.com/windows/win32/wmisdk/scripting-api-for-wmi) 스크립트 모두 WMI 소비자가 될 수 있으며, 최종적으로 [WMI COM API](https://learn.microsoft.com/en-us/windows/win32/wmisdk/com-api-for-wmi)룰 통해 [WMI 인프라구조](#wmi-인프라구조)와 접촉한다. 대표적인 WMI 소비자로 [*PowerShell*](PowerShell.md)이 있으며 WMI를 활용할 수 있는 [cmdlets](https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_wmi_cmdlets)을 자체적으로 제공한다.
 
-Windows에 기본적으로 내장된 WMI 영구 소비자는 다음 클래스로 구분된다:
+### 영구 소비자
+**영구 소비자**(permanent consumer)란, 운영체제 내 특정 이벤트에 의해 트리거가 되는 WMI 소비자의 일종으로, [WMI 리포지터리](#wmi-리포지터리)에 등록되어 항시 실행되는 특징을 가진다. 이는 사용자나 프로그램의 필요에 따라 WQL로 쿼리를 요청하는 일반 WMI 소비자와 달리 [이벤트 기반 구조](https://en.wikipedia.org/wiki/Event-driven_architecture)에 따라 동작한다.
 
-* [ActiveScriptEventConsumer](https://learn.microsoft.com/windows/win32/wmisdk/activescripteventconsumer)
-* CommandLineEventConsumer
-* LogFileEventConsumer
-* NTEventLogEventConsumer
-* SMTPEventConsumer
+Windows는 영구 소비자 제작을 위한 다섯 가지 [표준 소비자 클래스](https://learn.microsoft.com/windows/win32/wmisdk/standard-consumer-classes) 유형을 제공한다.
+
+* [ActiveScriptEventConsumer](https://learn.microsoft.com/windows/win32/wmisdk/activescripteventconsumer): 스크립트 실행 <sup>[\[제작\]](https://learn.microsoft.com/windows/win32/wmisdk/running-a-script-based-on-an-event)</sup>
+* [LogFileEventConsumer](https://learn.microsoft.com/windows/win32/wmisdk/logfileeventconsumer): 로그 파일에 기록 <sup>[\[제작\]](https://learn.microsoft.com/windows/win32/wmisdk/writing-to-a-log-file-based-on-an-event)</sup>
+* [NTEventLogEventConsumer](https://learn.microsoft.com/windows/win32/wmisdk/nteventlogeventconsumer): Windows 이벤트 로그에 기록 <sup>[\[제작\]](https://learn.microsoft.com/windows/win32/wmisdk/logging-to-nt-event-log-based-on-an-event)</sup>
+* [SMTPEventConsumer](https://learn.microsoft.com/windows/win32/wmisdk/smtpeventconsumer): 이메일 전송 <sup>[\[제작\]](https://learn.microsoft.com/windows/win32/wmisdk/sending-e-mail-based-on-an-event)</sup>
+* [CommandLineEventConsumer](https://learn.microsoft.com/windows/win32/wmisdk/commandlineeventconsumer): 명령줄 기반으로 프로그램 실행 <sup>[\[제작\]](https://learn.microsoft.com/windows/win32/wmisdk/running-a-program-from-the-command-line-based-on-an-event)</sup>
 
 ## WMI 인프라구조
 [**WMI 인프라구조**](https://learn.microsoft.com/windows/win32/wmisdk/wmi-infrastructure)는 다음 두 핵심요소로 구성된다.
 
 1. WINMGMT 서비스
 1. WMI 리포지터리
+
+### WMI 리포지터리
 
 ## WMI 공급자
