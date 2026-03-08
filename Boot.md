@@ -23,7 +23,7 @@ ROM에 저장된 UEFI 혹은 BIOS 펌웨어가 실행되면 가장 먼저 [POST]
 ## 부트로더
 **[부트로더](https://en.wikipedia.org/wiki/Bootloader)**(bootloader), 일명 **[부트스트랩](#부트스트랩) 로더**(bootstrap loader)는 컴퓨터 부팅 과정 중에서 설치된 운영체제의 [커널](Kernel.md)을 불러와 실행하는 프로그램이다. 만일 여럿 부팅 선택지 메뉴를 제공한다면 흔히 **부팅 관리자**(boot manager)라고 부르며, 선택된 별개의 OS 부트로더를 실행하는 [연쇄 로딩](https://en.wikipedia.org/wiki/Chain_loading)을 구현한다.
 
-* [윈도우 부트 관리자](#윈도우-부팅-관리자): 일명 [`BOOTMGR`](#bios)(혹은 [`bootmgfw.efi`](#uefi))는 비스타 이상의 [윈도우 NT](Windows.md)를 위한 부팅 관리자이다.
+* [Windows 부팅 관리자](#windows-부팅-관리자): 일명 [`BOOTMGR`](#bios)(혹은 [`bootmgfw.efi`](#uefi))는 비스타 이상의 [윈도우 NT](Windows.md)를 위한 부팅 관리자이다.
     * *[Winload.exe](#윈도우-운영체제-로더): 커널 및 드라이버를 로드하는 윈도우 OS 부트로더이다; UEFI에서는 Winload.efi가 해당한다.*
 * [GNU GRUB](https://en.wikipedia.org/wiki/GNU_GRUB): GNU 프로젝트의 일환으로 UNIX 기반의 운영체제를 위한 부트로더이다.
 
@@ -96,23 +96,28 @@ UEFI가 부트 장치를 탐색하는 과정은 다음과 같다.
 **[EFI 시스템 파티션](https://en.wikipedia.org/wiki/EFI_system_partition)**(EFI system partition; ESP)은 부팅될 때 UEFI 펌웨어가 불러올 파일들이 위치한 [데이터 저장 매체](Storage.md)의 파티션이다. GUID `C12A7328-F81F-11D2-BA4B-00A0C93EC93B`로 식별되며 [FAT](https://en.wikipedia.org/wiki/File_Allocation_Table) [파일 시스템](https://en.wikipedia.org/wiki/File_system)에 기반할 것을 UEFI는 규정한다. ESP 안에는 다음과 같은 데이터 및 파일이 저장되어 있다.
 
 * [UEFI 어플리케이션](https://en.wikipedia.org/wiki/UEFI#Applications)
-    * [부트로더](#부트로더): *윈도우 NT의 경우 [bootmgfw.efi](#윈도우-부트-관리자), winload.efi, winresume.efi 등이 해당*
-    * [UEFI 셸](https://en.wikipedia.org/wiki/UEFI#UEFI_shell): *[x86-64](https://en.wikipedia.org/wiki/X86-64) 아키텍처는 SHELLX64.efi*
-* [장치 드라이버](Driver.md): *부팅 시 UEFI 펌웨어가 사용할 [컴퓨터 하드웨어](https://en.wikipedia.org/wiki/Computer_hardware) 대상*
+    * [부트로더](#부트로더): 윈도우 NT의 경우 [bootmgfw.efi](#윈도우-부트-관리자), winload.efi, winresume.efi 등이 해당
+    * [UEFI 셸](https://en.wikipedia.org/wiki/UEFI#UEFI_shell): [x86-64](https://en.wikipedia.org/wiki/X86-64) 아키텍처는 SHELLX64.efi
+* [장치 드라이버](Driver.md): 부팅 시 UEFI 펌웨어가 사용할 [컴퓨터 하드웨어](https://en.wikipedia.org/wiki/Computer_hardware) 대상
 * 데이터 파일
-    * [Boot Configuration Data](#부팅-구성-데이터)(일명 BCD)
+    * [Boot Configuration Data](#부팅-구성-데이터) (일명 BCD)
     * 오류 로그
 
 ### 호환성 지원 모듈
 **[호환성 지원 모듈](https://en.wikipedia.org/wiki/UEFI#CSM_booting)**(Compatibility Support Module; CSM)은 UEFI 펌웨어가 MBR 파티션의 디스크로부터 레거시 BIOS 모드로 부팅하는 걸 지원하는 하위호환이다. GPT가 LBA 0를 활용하지 않는 점을 이용하여 레거시 BIOS 기반의 시스템 부팅이 가능하였으며, 이를 *BIOS-GPT*라고 불렀다. 하지만 2020년부터 인텔은 더 이상 CSM을 지원하지 않는다고 발표하였다.
 
 ## 보안 부팅
-**[보안 부팅](https://support.microsoft.com/windows/windows-11-and-secure-boot-a8ff1202-c0d9-42f5-940f-843abef64fad)**(secure boot)은 컴퓨터를 부팅할 때 멀웨어가 실행되는 걸 방지하도록 설계된 UEFI의 보안 기능이다.
+**[보안 부팅](https://support.microsoft.com/windows/windows-11-and-secure-boot-a8ff1202-c0d9-42f5-940f-843abef64fad)**(secure boot)은 컴퓨터를 부팅할 때 신뢰할 수 없는 코드나 멀웨어 실행을 차단하도록 설계된 UEFI의 보안 정책이다. [Windows 부팅 관리자](#windows-부팅-관리자)와 같은 EFI 어플리케이션에 첨부된 [디지털 서명](https://uefi.org/specs/UEFI/2.11/32_Secure_Boot_and_Driver_Signing.html#digital-signatures)이 [인증서](Certificate.md)로 검증될 수 있다면 이는 신뢰할 수 있음을 의미하여 보안 부팅에서의 실행을 허용한다. [비대칭 암호](Certificate.md#공개-키-암호-방식)의 인증서 중에서 공개 키가 [NVRAM](https://en.wikipedia.org/wiki/Non-volatile_random-access_memory)의 DB & DBX에 저장되며, 이들은 각각 허용된 & 차단된 서명 데이터베이스를 가리킨다.
 
-# 윈도우 부팅 관리자
-**[윈도우 부팅 관리자](https://en.wikipedia.org/wiki/Windows_Boot_Manager)**(Windows Boot Manager), 또는 간략히 **부트 관리자**는 [마이크로소프트](https://aka.ms/microsoft)가 제공하는 [윈도우 NT](Windows.md)의 [부트로더](#부트로더) 중 하나이다.
+마이크로소프트는 Windows 부팅 관리자를 아래 인증서의 비밀 키로 서명하고, 이를 검증할 수 있는 공개 키를 배포한다.
 
-![윈도우 부팅 관리자](https://upload.wikimedia.org/wikipedia/commons/a/a3/Windows_11_RE_Boot_menu.png)
+* <s>Microsoft Windows Production PCA 2011</s> <sub>([2026년 6월 만료](https://support.microsoft.com/topic/windows-secure-boot-certificate-expiration-and-ca-updates-7ff40d33-95dc-4c3c-8725-a9b95457578e))</sub>
+* Windows UEFI CA 2023
+
+# Windows 부팅 관리자
+**[Windows 부팅 관리자](https://en.wikipedia.org/wiki/Windows_Boot_Manager)**(Windows Boot Manager), 또는 간략히 **부팅 관리자**는 [마이크로소프트](https://aka.ms/microsoft)가 제공하는 [윈도우 NT](Windows.md)의 [부트로더](#부트로더) 중 하나이다.
+
+![Windows 부팅 관리자](https://upload.wikimedia.org/wikipedia/commons/a/a3/Windows_11_RE_Boot_menu.png)
 
 본 부트로더의 핵심은 [BCD](#부팅-구성-데이터)에 저장된 부팅 설정 정보에 따라 다음으로 [연쇄 로딩](https://en.wikipedia.org/wiki/Chain_loading)할 [OS 부트로더](#윈도우-운영체제-로더)를 호출한다. 즉, 아직 [Windows OS](Windows.md)를 로드하는 과정이 아니지만 어느 [운영체제](https://en.wikipedia.org/wiki/Operating_system)를 부팅할 건지 결정하는 징검다리 역할을 한다.
 
@@ -131,7 +136,7 @@ UEFI가 부트 장치를 탐색하는 과정은 다음과 같다.
 * [BCDEdit](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/bcdedit): BCD를 관리하는 대표적인 명령어 기반 도구이다.<sup>[[1](https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/boot-options-identifiers)]</sup><sup>[[2](https://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/bitlocker/bcd-settings-and-bitlocker)]</sup>
 
 ## 윈도우 운영체제 로더
-**[윈도우 운영체제 로더](https://en.wikipedia.org/wiki/Windows_Boot_Manager#winload.exe)**(Windows operating system loader; winload)는 [부팅 관리자](#윈도우-부팅-관리자)에 의해 연쇄적으로 호출되어 Windows OS의 본격 실행을 준비하는 [OS 부트로더](#부트로더)이다. Winload.exe는 다음 리소스들을 불러오되, 아직까지 이들을 초기화 혹은 실행시키지 않는다.
+**[윈도우 운영체제 로더](https://en.wikipedia.org/wiki/Windows_Boot_Manager#winload.exe)**(Windows operating system loader; winload)는 [부팅 관리자](#windows-부팅-관리자)에 의해 연쇄적으로 호출되어 Windows OS의 본격 실행을 준비하는 [OS 부트로더](#부트로더)이다. Winload.exe는 다음 리소스들을 불러오되, 아직까지 이들을 초기화 혹은 실행시키지 않는다.
 
 1. [Ntoskrnl.exe](Kernel.md#nt-커널)
 1. [HAL.dll](Kernel.md#하드웨어-추상-계층)
