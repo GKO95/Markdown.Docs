@@ -114,6 +114,12 @@ UEFI가 부트 장치를 탐색하는 과정은 다음과 같다.
 * <s>Microsoft Windows Production PCA 2011</s> <sub>([2026년 6월 만료](https://support.microsoft.com/topic/windows-secure-boot-certificate-expiration-and-ca-updates-7ff40d33-95dc-4c3c-8725-a9b95457578e))</sub>
 * Windows UEFI CA 2023
 
+인증서의 존재 여부는 관리자 권한의 Windows PowerShell에서 [Get-SecureBootUEFI](https://learn.microsoft.com/powershell/module/secureboot/get-securebootuefi) cmdlet으로 확인할 수 있다.
+
+```powershell
+[System.Text.Encoding]::ASCII.GetString((Get-SecureBootUEFI db).bytes) -match 'Windows UEFI CA 2023'
+```
+
 # Windows 부팅 관리자
 **[Windows 부팅 관리자](https://en.wikipedia.org/wiki/Windows_Boot_Manager)**(Windows Boot Manager), 또는 간략히 **부팅 관리자**는 [마이크로소프트](https://aka.ms/microsoft)가 제공하는 [윈도우 NT](Windows.md)의 [부트로더](#부트로더) 중 하나이다.
 
