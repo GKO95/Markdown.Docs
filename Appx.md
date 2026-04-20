@@ -8,4 +8,4 @@
 * 패키지는 손상된 파일 설치 및 무단 변경을 방지하기 위한 서명을 포함한다.
 
 ### MSIX
-[**MSIX**](https://learn.microsoft.com/windows/msix/overview)는 전통적인 [Win32 데스크탑 어플리케이션](https://learn.microsoft.com/windows/win32/desktop-programming)도 함께 지원하는 APPX의 확장판으로 설치 파일인 [.msi](https://learn.microsoft.com/windows/win32/msi/windows-installer-portal) 확장자에서 이름을 딴 어플리케이션 패키징 형식이다. 즉, 기존 패키징 기술의 특징을 그대로 가지고 있는 동시에 지원하는 프로그램 유형도 많아져 APPX의 상위호환이다.
+[**MSIX**](https://learn.microsoft.com/windows/msix/overview)는 전통적인 [Win32 데스크탑 어플리케이션](https://learn.microsoft.com/windows/win32/desktop-programming)도 함께 지원하는 APPX의 확장판으로 [.msi](https://learn.microsoft.com/windows/win32/msi/windows-installer-portal) 설치 파일 확장자에서 명칭이 비롯된 .msix 혹은 .msixbundle 확장자의 어플리케이션 패키징 형식이다. 즉, 기존 패키징 기술의 특징을 그대로 가지고 있는 동시에 지원하는 프로그램 유형도 많아져 APPX의 상위호환이다.
